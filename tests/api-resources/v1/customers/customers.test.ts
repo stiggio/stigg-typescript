@@ -7,10 +7,10 @@ const client = new Stigg({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource v1', () => {
+describe('resource customers', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieveCustomer: only required params', async () => {
-    const responsePromise = client.v1.retrieveCustomer('refId', {
+  test.skip('getCustomer: only required params', async () => {
+    const responsePromise = client.v1.customers.getCustomer('refId', {
       'X-API-KEY': 'X-API-KEY',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
@@ -24,8 +24,8 @@ describe('resource v1', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieveCustomer: required and optional params', async () => {
-    const response = await client.v1.retrieveCustomer('refId', {
+  test.skip('getCustomer: required and optional params', async () => {
+    const response = await client.v1.customers.getCustomer('refId', {
       'X-API-KEY': 'X-API-KEY',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
