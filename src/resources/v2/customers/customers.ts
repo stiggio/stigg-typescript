@@ -2,11 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as SubCustomerAPI from './sub-customer';
-import {
-  SubCustomer,
-  SubCustomerGetSubCustomerParams,
-  SubCustomerGetSubCustomerResponse,
-} from './sub-customer';
+import { SubCustomer, SubCustomerRetrieveParams, SubCustomerRetrieveResponse } from './sub-customer';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -18,11 +14,11 @@ export class Customers extends APIResource {
   /**
    * Get a single customer by id
    */
-  getCustomer(
+  retrieve(
     refID: string,
-    params: CustomerGetCustomerParams,
+    params: CustomerRetrieveParams,
     options?: RequestOptions,
-  ): APIPromise<CustomerGetCustomerResponse> {
+  ): APIPromise<CustomerRetrieveResponse> {
     const { 'X-API-KEY': xAPIKey, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
     return this._client.get(path`/api/v1/customers/${refID}`, {
       ...options,
@@ -31,7 +27,7 @@ export class Customers extends APIResource {
   }
 }
 
-export interface CustomerGetCustomerResponse {
+export interface CustomerRetrieveResponse {
   /**
    * Unique identifier for the entity
    */
@@ -48,7 +44,7 @@ export interface CustomerGetCustomerResponse {
   name: string | null;
 }
 
-export interface CustomerGetCustomerParams {
+export interface CustomerRetrieveParams {
   /**
    * API Key
    */
@@ -61,13 +57,13 @@ Customers.SubCustomer = SubCustomer;
 
 export declare namespace Customers {
   export {
-    type CustomerGetCustomerResponse as CustomerGetCustomerResponse,
-    type CustomerGetCustomerParams as CustomerGetCustomerParams,
+    type CustomerRetrieveResponse as CustomerRetrieveResponse,
+    type CustomerRetrieveParams as CustomerRetrieveParams,
   };
 
   export {
     SubCustomer as SubCustomer,
-    type SubCustomerGetSubCustomerResponse as SubCustomerGetSubCustomerResponse,
-    type SubCustomerGetSubCustomerParams as SubCustomerGetSubCustomerParams,
+    type SubCustomerRetrieveResponse as SubCustomerRetrieveResponse,
+    type SubCustomerRetrieveParams as SubCustomerRetrieveParams,
   };
 }

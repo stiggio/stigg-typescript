@@ -10,11 +10,11 @@ export class SubCustomer extends APIResource {
   /**
    * Get a single customer by id
    */
-  getSubCustomer(
+  retrieve(
     refID: string,
-    params: SubCustomerGetSubCustomerParams,
+    params: SubCustomerRetrieveParams,
     options?: RequestOptions,
-  ): APIPromise<SubCustomerGetSubCustomerResponse> {
+  ): APIPromise<SubCustomerRetrieveResponse> {
     const { 'X-API-KEY': xAPIKey, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
     return this._client.get(path`/api/v1/customers/${refID}`, {
       ...options,
@@ -23,7 +23,7 @@ export class SubCustomer extends APIResource {
   }
 }
 
-export interface SubCustomerGetSubCustomerResponse {
+export interface SubCustomerRetrieveResponse {
   /**
    * Unique identifier for the entity
    */
@@ -40,7 +40,7 @@ export interface SubCustomerGetSubCustomerResponse {
   name: string | null;
 }
 
-export interface SubCustomerGetSubCustomerParams {
+export interface SubCustomerRetrieveParams {
   /**
    * API Key
    */
@@ -51,7 +51,7 @@ export interface SubCustomerGetSubCustomerParams {
 
 export declare namespace SubCustomer {
   export {
-    type SubCustomerGetSubCustomerResponse as SubCustomerGetSubCustomerResponse,
-    type SubCustomerGetSubCustomerParams as SubCustomerGetSubCustomerParams,
+    type SubCustomerRetrieveResponse as SubCustomerRetrieveResponse,
+    type SubCustomerRetrieveParams as SubCustomerRetrieveParams,
   };
 }

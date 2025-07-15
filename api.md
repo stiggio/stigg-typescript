@@ -4,21 +4,21 @@
 
 Types:
 
-- <code><a href="./src/resources/v1/customers/customers.ts">CustomerGetCustomerResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1/customers/{refId}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">getCustomer</a>(refID, { ...params }) -> CustomerGetCustomerResponse</code>
+- <code title="get /api/v1/customers/{refId}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieve</a>(refID, { ...params }) -> CustomerRetrieveResponse</code>
 
 ### SubCustomer
 
 Types:
 
-- <code><a href="./src/resources/v1/customers/sub-customer.ts">SubCustomerGetSubCustomerResponse</a></code>
+- <code><a href="./src/resources/v1/customers/sub-customer.ts">SubCustomerRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1/customers/{refId}">client.v1.customers.subCustomer.<a href="./src/resources/v1/customers/sub-customer.ts">getSubCustomer</a>(refID, { ...params }) -> SubCustomerGetSubCustomerResponse</code>
+- <code title="get /api/v1/customers/{refId}">client.v1.customers.subCustomer.<a href="./src/resources/v1/customers/sub-customer.ts">retrieve</a>(refID, { ...params }) -> SubCustomerRetrieveResponse</code>
 
 ## Permissions
 
@@ -36,21 +36,21 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v2/customers/customers.ts">CustomerGetCustomerResponse</a></code>
+- <code><a href="./src/resources/v2/customers/customers.ts">CustomerRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1/customers/{refId}">client.v2.customers.<a href="./src/resources/v2/customers/customers.ts">getCustomer</a>(refID, { ...params }) -> CustomerGetCustomerResponse</code>
+- <code title="get /api/v1/customers/{refId}">client.v2.customers.<a href="./src/resources/v2/customers/customers.ts">retrieve</a>(refID, { ...params }) -> CustomerRetrieveResponse</code>
 
 ### SubCustomer
 
 Types:
 
-- <code><a href="./src/resources/v2/customers/sub-customer.ts">SubCustomerGetSubCustomerResponse</a></code>
+- <code><a href="./src/resources/v2/customers/sub-customer.ts">SubCustomerRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1/customers/{refId}">client.v2.customers.subCustomer.<a href="./src/resources/v2/customers/sub-customer.ts">getSubCustomer</a>(refID, { ...params }) -> SubCustomerGetSubCustomerResponse</code>
+- <code title="get /api/v1/customers/{refId}">client.v2.customers.subCustomer.<a href="./src/resources/v2/customers/sub-customer.ts">retrieve</a>(refID, { ...params }) -> SubCustomerRetrieveResponse</code>
 
 ## Permissions
 

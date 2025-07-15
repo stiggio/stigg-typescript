@@ -9,8 +9,8 @@ const client = new Stigg({
 
 describe('resource customers', () => {
   // skipped: tests are disabled for the time being
-  test.skip('getCustomer: only required params', async () => {
-    const responsePromise = client.v1.customers.getCustomer('refId', {
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.v1.customers.retrieve('refId', {
       'X-API-KEY': 'X-API-KEY',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
@@ -24,8 +24,8 @@ describe('resource customers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('getCustomer: required and optional params', async () => {
-    const response = await client.v1.customers.getCustomer('refId', {
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.v1.customers.retrieve('refId', {
       'X-API-KEY': 'X-API-KEY',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
