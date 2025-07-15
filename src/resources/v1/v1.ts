@@ -4,7 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as PermissionsAPI from './permissions';
 import { PermissionCheckParams, PermissionCheckResponse, Permissions } from './permissions';
 import * as CustomersAPI from './customers/customers';
-import { CustomerGetCustomerParams, CustomerGetCustomerResponse, Customers } from './customers/customers';
+import { CustomerRetrieveParams, CustomerRetrieveResponse, Customers } from './customers/customers';
 
 export class V1 extends APIResource {
   customers: CustomersAPI.Customers = new CustomersAPI.Customers(this._client);
@@ -17,8 +17,8 @@ V1.Permissions = Permissions;
 export declare namespace V1 {
   export {
     Customers as Customers,
-    type CustomerGetCustomerResponse as CustomerGetCustomerResponse,
-    type CustomerGetCustomerParams as CustomerGetCustomerParams,
+    type CustomerRetrieveResponse as CustomerRetrieveResponse,
+    type CustomerRetrieveParams as CustomerRetrieveParams,
   };
 
   export {

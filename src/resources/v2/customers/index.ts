@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Customers, type CustomerGetCustomerResponse, type CustomerGetCustomerParams } from './customers';
+export { Customers, type CustomerRetrieveResponse, type CustomerRetrieveParams } from './customers';
 export {
   SubCustomer,
-  type SubCustomerGetSubCustomerResponse,
-  type SubCustomerGetSubCustomerParams,
+  type SubCustomerRetrieveResponse,
+  type SubCustomerRetrieveParams,
 } from './sub-customer';
