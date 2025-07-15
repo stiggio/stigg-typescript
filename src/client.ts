@@ -17,6 +17,7 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { V1 } from './resources/v1/v1';
+import { V2 } from './resources/v2/v2';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -721,10 +722,14 @@ export class Stigg {
   static toFile = Uploads.toFile;
 
   v1: API.V1 = new API.V1(this);
+  v2: API.V2 = new API.V2(this);
 }
 Stigg.V1 = V1;
+Stigg.V2 = V2;
 export declare namespace Stigg {
   export type RequestOptions = Opts.RequestOptions;
 
   export { V1 as V1 };
+
+  export { V2 as V2 };
 }
