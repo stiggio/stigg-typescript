@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource subCustomer', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.v1.customers.subCustomer.retrieve('refId', {
       'X-API-KEY': 'X-API-KEY',
@@ -23,7 +23,7 @@ describe('resource subCustomer', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.v1.customers.subCustomer.retrieve('refId', {
       'X-API-KEY': 'X-API-KEY',
