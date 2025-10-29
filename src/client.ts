@@ -375,7 +375,7 @@ export class Stigg {
     const response = await this.fetchWithTimeout(url, req, timeout, controller).catch(castToError);
     const headersTime = Date.now();
 
-    if (response instanceof Error) {
+    if (response instanceof globalThis.Error) {
       const retryMessage = `retrying, ${retriesRemaining} attempts remaining`;
       if (options.signal?.aborted) {
         throw new Errors.APIUserAbortError();
@@ -682,7 +682,7 @@ export class Stigg {
         // Preserve legacy string encoding behavior for now
         headers.values.has('content-type')) ||
       // `Blob` is superset of `File`
-      body instanceof Blob ||
+      ((globalThis as any).Blob && body instanceof (globalThis as any).Blob) ||
       // `FormData` -> `multipart/form-data`
       body instanceof FormData ||
       // `URLSearchParams` -> `application/x-www-form-urlencoded`
@@ -724,8 +724,10 @@ export class Stigg {
   v1: API.V1 = new API.V1(this);
   v2: API.V2 = new API.V2(this);
 }
+
 Stigg.V1 = V1;
 Stigg.V2 = V2;
+
 export declare namespace Stigg {
   export type RequestOptions = Opts.RequestOptions;
 

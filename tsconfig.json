@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "stigg/*": ["src/*"],
-      "stigg": ["src/index.ts"]
+      "stigg/*": ["./src/*"],
+      "stigg": ["./src/index.ts"]
     },
     "noEmit": true,
 
