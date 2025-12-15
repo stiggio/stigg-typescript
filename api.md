@@ -4,60 +4,21 @@
 
 Types:
 
-- <code><a href="./src/resources/v1/customers/customers.ts">CustomerRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1/customers/{refId}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieve</a>(refID, { ...params }) -> CustomerRetrieveResponse</code>
+- <code title="post /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">create</a>({ ...params }) -> CustomerResponse</code>
+- <code title="get /api/v1/customers/{id}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieve</a>(id) -> CustomerResponse</code>
+- <code title="patch /api/v1/customers/{id}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">update</a>(id, { ...params }) -> CustomerResponse</code>
+- <code title="get /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">list</a>({ ...params }) -> CustomerListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/customers/{id}/archive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">archive</a>(id) -> CustomerResponse</code>
+- <code title="post /api/v1/customers/{id}/unarchive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">unarchive</a>(id) -> CustomerResponse</code>
 
-### SubCustomer
-
-Types:
-
-- <code><a href="./src/resources/v1/customers/sub-customer.ts">SubCustomerRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1/customers/{refId}">client.v1.customers.subCustomer.<a href="./src/resources/v1/customers/sub-customer.ts">retrieve</a>(refID, { ...params }) -> SubCustomerRetrieveResponse</code>
-
-## Permissions
-
-Types:
-
-- <code><a href="./src/resources/v1/permissions.ts">PermissionCheckResponse</a></code>
+### PaymentMethod
 
 Methods:
 
-- <code title="post /api/v1/permissions/check">client.v1.permissions.<a href="./src/resources/v1/permissions.ts">check</a>({ ...params }) -> PermissionCheckResponse</code>
-
-# V2
-
-## Customers
-
-Types:
-
-- <code><a href="./src/resources/v2/customers/customers.ts">CustomerRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1/customers/{refId}">client.v2.customers.<a href="./src/resources/v2/customers/customers.ts">retrieve</a>(refID, { ...params }) -> CustomerRetrieveResponse</code>
-
-### SubCustomer
-
-Types:
-
-- <code><a href="./src/resources/v2/customers/sub-customer.ts">SubCustomerRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1/customers/{refId}">client.v2.customers.subCustomer.<a href="./src/resources/v2/customers/sub-customer.ts">retrieve</a>(refID, { ...params }) -> SubCustomerRetrieveResponse</code>
-
-## Permissions
-
-Types:
-
-- <code><a href="./src/resources/v2/permissions.ts">PermissionCheckResponse</a></code>
-
-Methods:
-
-- <code title="post /api/v1/permissions/check">client.v2.permissions.<a href="./src/resources/v2/permissions.ts">check</a>({ ...params }) -> PermissionCheckResponse</code>
+- <code title="post /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">attach</a>(id, { ...params }) -> CustomerResponse</code>
+- <code title="delete /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">detach</a>(id) -> CustomerResponse</code>
