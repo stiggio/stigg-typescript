@@ -29,12 +29,9 @@ const client = new Stigg({
   apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted
 });
 
-const response = await client.v1.permissions.check({
-  userId: 'REPLACE_ME',
-  resourcesAndActions: [{ action: 'read', resource: 'product' }],
-});
+const customerResponse = await client.v1.customers.retrieve('REPLACE_ME');
 
-console.log(response.permittedList);
+console.log(customerResponse.data);
 ```
 
 ### Request & Response types
@@ -49,11 +46,7 @@ const client = new Stigg({
   apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Stigg.V1.PermissionCheckParams = {
-  userId: 'REPLACE_ME',
-  resourcesAndActions: [{ action: 'read', resource: 'product' }],
-};
-const response: Stigg.V1.PermissionCheckResponse = await client.v1.permissions.check(params);
+const customerResponse: Stigg.V1.CustomerResponse = await client.v1.customers.retrieve('REPLACE_ME');
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -66,17 +59,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.v1.permissions
-  .check({ userId: 'REPLACE_ME', resourcesAndActions: [{ action: 'read', resource: 'product' }] })
-  .catch(async (err) => {
-    if (err instanceof Stigg.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+const customerResponse = await client.v1.customers.retrieve('REPLACE_ME').catch(async (err) => {
+  if (err instanceof Stigg.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
@@ -108,7 +99,7 @@ const client = new Stigg({
 });
 
 // Or, configure per-request:
-await client.v1.permissions.check({ userId: 'REPLACE_ME', resourcesAndActions: [{ action: 'read', resource: 'product' }] }, {
+await client.v1.customers.retrieve('REPLACE_ME', {
   maxRetries: 5,
 });
 ```
@@ -125,7 +116,7 @@ const client = new Stigg({
 });
 
 // Override per-request:
-await client.v1.permissions.check({ userId: 'REPLACE_ME', resourcesAndActions: [{ action: 'read', resource: 'product' }] }, {
+await client.v1.customers.retrieve('REPLACE_ME', {
   timeout: 5 * 1000,
 });
 ```
@@ -133,6 +124,37 @@ await client.v1.permissions.check({ userId: 'REPLACE_ME', resourcesAndActions: [
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the Stigg API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllCustomerListResponses(params) {
+  const allCustomerListResponses = [];
+  // Automatically fetches more pages as needed.
+  for await (const customerListResponse of client.v1.customers.list({ limit: 30 })) {
+    allCustomerListResponses.push(customerListResponse);
+  }
+  return allCustomerListResponses;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.v1.customers.list({ limit: 30 });
+for (const customerListResponse of page.data) {
+  console.log(customerListResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -148,17 +170,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Stigg();
 
-const response = await client.v1.permissions
-  .check({ userId: 'REPLACE_ME', resourcesAndActions: [{ action: 'read', resource: 'product' }] })
-  .asResponse();
+const response = await client.v1.customers.retrieve('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.v1.permissions
-  .check({ userId: 'REPLACE_ME', resourcesAndActions: [{ action: 'read', resource: 'product' }] })
+const { data: customerResponse, response: raw } = await client.v1.customers
+  .retrieve('REPLACE_ME')
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.permittedList);
+console.log(customerResponse.data);
 ```
 
 ### Logging
@@ -238,7 +258,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.v1.permissions.check({
+client.v1.customers.retrieve({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
