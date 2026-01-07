@@ -37,7 +37,13 @@ describe('resource customers', () => {
         cardLast4Digits: 'cardLast4Digits',
         type: 'CARD',
       },
-      integrations: [{ id: 'id', syncedEntityId: 'syncedEntityId', vendorIdentifier: 'AUTH0' }],
+      integrations: [
+        {
+          id: 'id',
+          syncedEntityId: 'syncedEntityId',
+          vendorIdentifier: 'AUTH0',
+        },
+      ],
       metadata: { foo: 'string' },
     });
   });

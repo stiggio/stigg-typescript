@@ -46,7 +46,9 @@ const client = new Stigg({
   apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted
 });
 
-const customerResponse: Stigg.V1.CustomerResponse = await client.v1.customers.retrieve('REPLACE_ME');
+const customerResponse: Stigg.V1.CustomerResponse = await client.v1.customers.retrieve(
+  'REPLACE_ME',
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
