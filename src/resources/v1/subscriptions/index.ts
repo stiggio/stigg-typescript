@@ -1,21 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Coupons,
-  type CouponCreateResponse,
-  type CouponRetrieveResponse,
-  type CouponListResponse,
-  type CouponCreateParams,
-  type CouponListParams,
-} from './coupons';
-export {
-  Customers,
-  type CustomerResponse,
-  type CustomerListResponse,
-  type CustomerCreateParams,
-  type CustomerUpdateParams,
-  type CustomerListParams,
-} from './customers/index';
+  FutureUpdate,
+  type FutureUpdateCancelPendingPaymentResponse,
+  type FutureUpdateCancelScheduleResponse,
+} from './future-update';
 export {
   Subscriptions,
   type SubscriptionCreateResponse,
@@ -31,11 +20,4 @@ export {
   type SubscriptionMigrateParams,
   type SubscriptionPreviewParams,
   type SubscriptionTransferParams,
-} from './subscriptions/index';
-export {
-  V1,
-  type V1CreateEventResponse,
-  type V1CreateUsageResponse,
-  type V1CreateEventParams,
-  type V1CreateUsageParams,
-} from './v1';
+} from './subscriptions';

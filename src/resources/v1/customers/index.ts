@@ -9,3 +9,11 @@ export {
   type CustomerListParams,
 } from './customers';
 export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
+export {
+  Promotional,
+  type PromotionalCreateResponse,
+  type PromotionalRevokeResponse,
+  type PromotionalCreateParams,
+  type PromotionalRevokeParams,
+} from './promotional';
+export { Usage, type UsageRetrieveResponse, type UsageRetrieveParams } from './usage';
