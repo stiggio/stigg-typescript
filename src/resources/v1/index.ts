@@ -7,5 +7,6 @@ export {
   type CustomerCreateParams,
   type CustomerUpdateParams,
   type CustomerListParams,
+  type CustomerListResponsesMyCursorIDPage,
 } from './customers/index';
 export { V1 } from './v1';

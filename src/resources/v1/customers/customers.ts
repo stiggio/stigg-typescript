@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
 import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -37,8 +38,11 @@ export class Customers extends APIResource {
   list(
     query: CustomerListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CustomerListResponse> {
-    return this._client.get('/api/v1/customers', { query, ...options });
+  ): PagePromise<CustomerListResponsesMyCursorIDPage, CustomerListResponse> {
+    return this._client.getAPIList('/api/v1/customers', MyCursorIDPage<CustomerListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -55,6 +59,8 @@ export class Customers extends APIResource {
     return this._client.post(path`/api/v1/customers/${id}/unarchive`, options);
   }
 }
+
+export type CustomerListResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResponse>;
 
 export interface CustomerResponse {
   data: CustomerResponse.Data;
@@ -169,119 +175,113 @@ export namespace CustomerResponse {
 }
 
 export interface CustomerListResponse {
-  data: Array<CustomerListResponse.Data>;
+  /**
+   * Timestamp of when the record was deleted
+   */
+  archivedAt: string | null;
+
+  /**
+   * Timestamp of when the record was created
+   */
+  createdAt: string;
+
+  /**
+   * Cursor ID for query pagination
+   */
+  cursor_id: string;
+
+  /**
+   * The email of the customer
+   */
+  email: string | null;
+
+  /**
+   * Customer slug
+   */
+  externalId: string;
+
+  /**
+   * The name of the customer
+   */
+  name: string | null;
+
+  /**
+   * Timestamp of when the record was last updated
+   */
+  updatedAt: string;
+
+  /**
+   * The default payment method details
+   */
+  defaultPaymentMethod?: CustomerListResponse.DefaultPaymentMethod | null;
+
+  /**
+   * List of integrations
+   */
+  integrations?: Array<CustomerListResponse.Integration>;
+
+  /**
+   * Additional metadata
+   */
+  metadata?: { [key: string]: string };
 }
 
 export namespace CustomerListResponse {
-  export interface Data {
+  /**
+   * The default payment method details
+   */
+  export interface DefaultPaymentMethod {
     /**
-     * Timestamp of when the record was deleted
+     * The default payment method id
      */
-    archivedAt: string | null;
+    billingId: string | null;
 
     /**
-     * Timestamp of when the record was created
+     * The expiration month of the default payment method
      */
-    createdAt: string;
+    cardExpiryMonth: number | null;
 
     /**
-     * Cursor ID for query pagination
+     * The expiration year of the default payment method
      */
-    cursorId: string;
+    cardExpiryYear: number | null;
 
     /**
-     * The email of the customer
+     * The last 4 digits of the default payment method
      */
-    email: string | null;
+    cardLast4Digits: string | null;
 
     /**
-     * Customer slug
+     * The default payment method type
      */
-    externalId: string;
-
-    /**
-     * The name of the customer
-     */
-    name: string | null;
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * The default payment method details
-     */
-    defaultPaymentMethod?: Data.DefaultPaymentMethod | null;
-
-    /**
-     * List of integrations
-     */
-    integrations?: Array<Data.Integration>;
-
-    /**
-     * Additional metadata
-     */
-    metadata?: { [key: string]: string };
+    type: 'CARD' | 'BANK' | 'CASH_APP';
   }
 
-  export namespace Data {
+  export interface Integration {
     /**
-     * The default payment method details
+     * Integration details
      */
-    export interface DefaultPaymentMethod {
-      /**
-       * The default payment method id
-       */
-      billingId: string | null;
+    id: string;
 
-      /**
-       * The expiration month of the default payment method
-       */
-      cardExpiryMonth: number | null;
+    /**
+     * Synced entity id
+     */
+    syncedEntityId: string | null;
 
-      /**
-       * The expiration year of the default payment method
-       */
-      cardExpiryYear: number | null;
-
-      /**
-       * The last 4 digits of the default payment method
-       */
-      cardLast4Digits: string | null;
-
-      /**
-       * The default payment method type
-       */
-      type: 'CARD' | 'BANK' | 'CASH_APP';
-    }
-
-    export interface Integration {
-      /**
-       * Integration details
-       */
-      id: string;
-
-      /**
-       * Synced entity id
-       */
-      syncedEntityId: string | null;
-
-      /**
-       * The vendor identifier of integration
-       */
-      vendorIdentifier:
-        | 'AUTH0'
-        | 'ZUORA'
-        | 'STRIPE'
-        | 'HUBSPOT'
-        | 'AWS_MARKETPLACE'
-        | 'SNOWFLAKE'
-        | 'SALESFORCE'
-        | 'BIG_QUERY'
-        | 'OPEN_FGA'
-        | 'APP_STORE';
-    }
+    /**
+     * The vendor identifier of integration
+     */
+    vendorIdentifier:
+      | 'AUTH0'
+      | 'ZUORA'
+      | 'STRIPE'
+      | 'HUBSPOT'
+      | 'AWS_MARKETPLACE'
+      | 'SNOWFLAKE'
+      | 'SALESFORCE'
+      | 'BIG_QUERY'
+      | 'OPEN_FGA'
+      | 'APP_STORE';
   }
 }
 
@@ -427,22 +427,7 @@ export namespace CustomerUpdateParams {
   }
 }
 
-export interface CustomerListParams {
-  /**
-   * Ending before this UUID for pagination
-   */
-  endingBefore?: string;
-
-  /**
-   * Items per page
-   */
-  limit?: number;
-
-  /**
-   * Starting after this UUID for pagination
-   */
-  startingAfter?: string;
-}
+export interface CustomerListParams extends MyCursorIDPageParams {}
 
 Customers.PaymentMethod = PaymentMethod;
 
@@ -450,6 +435,7 @@ export declare namespace Customers {
   export {
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
+    type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerCreateParams as CustomerCreateParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,

@@ -90,9 +90,9 @@ describe('resource customers', () => {
     await expect(
       client.v1.customers.list(
         {
-          endingBefore: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          ending_before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit: 1,
-          startingAfter: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          starting_after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         },
         { path: '/_stainless_unknown_path' },
       ),
