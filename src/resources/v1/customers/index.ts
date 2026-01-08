@@ -7,6 +7,5 @@ export {
   type CustomerCreateParams,
   type CustomerUpdateParams,
   type CustomerListParams,
-  type CustomerListResponsesMyCursorIDPage,
 } from './customers';
 export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
