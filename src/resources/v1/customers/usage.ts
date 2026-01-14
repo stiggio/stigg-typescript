@@ -114,7 +114,7 @@ export interface UsageRetrieveParams {
   endDate?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   groupBy?: string;
 
