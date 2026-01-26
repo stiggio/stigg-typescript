@@ -31,7 +31,7 @@ export interface FutureUpdateCancelPendingPaymentResponse {
 export namespace FutureUpdateCancelPendingPaymentResponse {
   export interface Data {
     /**
-     * external id of the canceled future update subscription
+     * Subscription ID
      */
     id: string;
   }
@@ -44,7 +44,7 @@ export interface FutureUpdateCancelScheduleResponse {
 export namespace FutureUpdateCancelScheduleResponse {
   export interface Data {
     /**
-     * external id of the canceled future update subscription
+     * Subscription ID
      */
     id: string;
   }
