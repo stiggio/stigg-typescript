@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'stigg/core/api-promise';
+import { APIPromise } from '@stigg/typescript/core/api-promise';
 
 import util from 'node:util';
-import Stigg from 'stigg';
-import { APIUserAbortError } from 'stigg';
+import Stigg from '@stigg/typescript';
+import { APIUserAbortError } from '@stigg/typescript';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "stigg/*": ["./dist/src/*"],
-      "stigg": ["./dist/src/index.ts"]
+      "@stigg/typescript/*": ["./dist/src/*"],
+      "@stigg/typescript": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
