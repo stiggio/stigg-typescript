@@ -24,6 +24,7 @@ describe('resource customers', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.customers.create({
       id: 'id',
+      couponId: 'couponId',
       defaultPaymentMethod: {
         billingId: 'billingId',
         cardExpiryMonth: 0,

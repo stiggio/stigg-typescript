@@ -95,6 +95,11 @@ export namespace CustomerResponse {
     updatedAt: string;
 
     /**
+     * Customer level coupon
+     */
+    couponId?: string | null;
+
+    /**
      * The default payment method details
      */
     defaultPaymentMethod?: Data.DefaultPaymentMethod | null;
@@ -212,6 +217,11 @@ export namespace CustomerListResponse {
     updatedAt: string;
 
     /**
+     * Customer level coupon
+     */
+    couponId?: string | null;
+
+    /**
      * The default payment method details
      */
     defaultPaymentMethod?: Data.DefaultPaymentMethod | null;
@@ -304,6 +314,11 @@ export interface CustomerCreateParams {
   id: string;
 
   /**
+   * Customer level coupon
+   */
+  couponId?: string | null;
+
+  /**
    * The default payment method details
    */
   defaultPaymentMethod?: CustomerCreateParams.DefaultPaymentMethod | null;
@@ -389,6 +404,11 @@ export namespace CustomerCreateParams {
 }
 
 export interface CustomerUpdateParams {
+  /**
+   * Customer level coupon
+   */
+  couponId?: string | null;
+
   /**
    * The email of the customer
    */
