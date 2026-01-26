@@ -3,14 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
-import * as PromotionalAPI from './promotional';
-import {
-  Promotional,
-  PromotionalCreateParams,
-  PromotionalCreateResponse,
-  PromotionalRevokeParams,
-  PromotionalRevokeResponse,
-} from './promotional';
 import * as UsageAPI from './usage';
 import { Usage, UsageRetrieveParams, UsageRetrieveResponse } from './usage';
 import { APIPromise } from '../../../core/api-promise';
@@ -20,7 +12,6 @@ import { path } from '../../../internal/utils/path';
 export class Customers extends APIResource {
   paymentMethod: PaymentMethodAPI.PaymentMethod = new PaymentMethodAPI.PaymentMethod(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
-  promotional: PromotionalAPI.Promotional = new PromotionalAPI.Promotional(this._client);
 
   /**
    * Create a new Customer
@@ -478,7 +469,6 @@ export interface CustomerListParams {
 
 Customers.PaymentMethod = PaymentMethod;
 Customers.Usage = Usage;
-Customers.Promotional = Promotional;
 
 export declare namespace Customers {
   export {
@@ -495,13 +485,5 @@ export declare namespace Customers {
     Usage as Usage,
     type UsageRetrieveResponse as UsageRetrieveResponse,
     type UsageRetrieveParams as UsageRetrieveParams,
-  };
-
-  export {
-    Promotional as Promotional,
-    type PromotionalCreateResponse as PromotionalCreateResponse,
-    type PromotionalRevokeResponse as PromotionalRevokeResponse,
-    type PromotionalCreateParams as PromotionalCreateParams,
-    type PromotionalRevokeParams as PromotionalRevokeParams,
   };
 }
