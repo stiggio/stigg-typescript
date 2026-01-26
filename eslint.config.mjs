@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^stigg(/.*)?',
+              regex: '^@stigg/typescript(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

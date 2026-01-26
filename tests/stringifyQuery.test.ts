@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Stigg } from 'stigg';
+import { Stigg } from '@stigg/typescript';
 
 const { stringifyQuery } = Stigg.prototype as any;
 
