@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'stigg/internal/uploads';
-import { toFile } from 'stigg/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@stigg/typescript/internal/uploads';
+import { toFile } from '@stigg/typescript/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

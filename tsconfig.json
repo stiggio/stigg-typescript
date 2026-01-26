@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "stigg/*": ["./src/*"],
-      "stigg": ["./src/index.ts"]
+      "@stigg/typescript/*": ["./src/*"],
+      "@stigg/typescript": ["./src/index.ts"]
     },
     "noEmit": true,
 

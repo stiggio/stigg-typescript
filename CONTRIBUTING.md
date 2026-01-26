@@ -55,12 +55,12 @@ $ cd stigg-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link stigg
+$ yarn link @stigg/typescript
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global stigg
+$ pnpm link -—global @stigg/typescript
 ```
 
 ## Running tests
