@@ -43,18 +43,6 @@ Methods:
 
 - <code title="get /api/v1/customers/{customerId}/usage/features/{featureId}">client.v1.customers.usage.<a href="./src/resources/v1/customers/usage.ts">retrieve</a>(featureID, { ...params }) -> UsageRetrieveResponse</code>
 
-### Promotional
-
-Types:
-
-- <code><a href="./src/resources/v1/customers/promotional.ts">PromotionalCreateResponse</a></code>
-- <code><a href="./src/resources/v1/customers/promotional.ts">PromotionalRevokeResponse</a></code>
-
-Methods:
-
-- <code title="post /api/v1/customers/{customerId}/promotional">client.v1.customers.promotional.<a href="./src/resources/v1/customers/promotional.ts">create</a>(customerID, { ...params }) -> PromotionalCreateResponse</code>
-- <code title="delete /api/v1/customers/{customerId}/promotional/featureId/{featureId}">client.v1.customers.promotional.<a href="./src/resources/v1/customers/promotional.ts">revoke</a>(featureID, { ...params }) -> PromotionalRevokeResponse</code>
-
 ## Subscriptions
 
 Types:
