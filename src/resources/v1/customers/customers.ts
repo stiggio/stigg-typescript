@@ -75,6 +75,11 @@ export interface CustomerResponse {
 export namespace CustomerResponse {
   export interface Data {
     /**
+     * Customer slug
+     */
+    id: string;
+
+    /**
      * Timestamp of when the record was deleted
      */
     archivedAt: string | null;
@@ -83,21 +88,6 @@ export namespace CustomerResponse {
      * Timestamp of when the record was created
      */
     createdAt: string;
-
-    /**
-     * The email of the customer
-     */
-    email: string | null;
-
-    /**
-     * Customer slug
-     */
-    externalId: string;
-
-    /**
-     * The name of the customer
-     */
-    name: string | null;
 
     /**
      * Timestamp of when the record was last updated
@@ -110,6 +100,11 @@ export namespace CustomerResponse {
     defaultPaymentMethod?: Data.DefaultPaymentMethod | null;
 
     /**
+     * The email of the customer
+     */
+    email?: string | null;
+
+    /**
      * List of integrations
      */
     integrations?: Array<Data.Integration>;
@@ -118,6 +113,11 @@ export namespace CustomerResponse {
      * Additional metadata
      */
     metadata?: { [key: string]: string };
+
+    /**
+     * The name of the customer
+     */
+    name?: string | null;
   }
 
   export namespace Data {
@@ -187,6 +187,11 @@ export interface CustomerListResponse {
 export namespace CustomerListResponse {
   export interface Data {
     /**
+     * Customer slug
+     */
+    id: string;
+
+    /**
      * Timestamp of when the record was deleted
      */
     archivedAt: string | null;
@@ -202,21 +207,6 @@ export namespace CustomerListResponse {
     cursorId: string;
 
     /**
-     * The email of the customer
-     */
-    email: string | null;
-
-    /**
-     * Customer slug
-     */
-    externalId: string;
-
-    /**
-     * The name of the customer
-     */
-    name: string | null;
-
-    /**
      * Timestamp of when the record was last updated
      */
     updatedAt: string;
@@ -227,6 +217,11 @@ export namespace CustomerListResponse {
     defaultPaymentMethod?: Data.DefaultPaymentMethod | null;
 
     /**
+     * The email of the customer
+     */
+    email?: string | null;
+
+    /**
      * List of integrations
      */
     integrations?: Array<Data.Integration>;
@@ -235,6 +230,11 @@ export namespace CustomerListResponse {
      * Additional metadata
      */
     metadata?: { [key: string]: string };
+
+    /**
+     * The name of the customer
+     */
+    name?: string | null;
   }
 
   export namespace Data {
@@ -299,24 +299,19 @@ export namespace CustomerListResponse {
 
 export interface CustomerCreateParams {
   /**
-   * The email of the customer
-   */
-  email: string | null;
-
-  /**
    * Customer slug
    */
-  externalId: string;
-
-  /**
-   * The name of the customer
-   */
-  name: string | null;
+  id: string;
 
   /**
    * The default payment method details
    */
   defaultPaymentMethod?: CustomerCreateParams.DefaultPaymentMethod | null;
+
+  /**
+   * The email of the customer
+   */
+  email?: string | null;
 
   /**
    * List of integrations
@@ -327,6 +322,11 @@ export interface CustomerCreateParams {
    * Additional metadata
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * The name of the customer
+   */
+  name?: string | null;
 }
 
 export namespace CustomerCreateParams {
