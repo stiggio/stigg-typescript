@@ -118,6 +118,9 @@ export namespace SubscriptionCreateResponse {
 
   export namespace Data {
     export interface Subscription {
+      /**
+       * Subscription ID
+       */
       id: string;
 
       /**
@@ -236,6 +239,9 @@ export interface SubscriptionRetrieveResponse {
 
 export namespace SubscriptionRetrieveResponse {
   export interface Data {
+    /**
+     * Subscription ID
+     */
     id: string;
 
     /**
@@ -353,6 +359,9 @@ export interface SubscriptionListResponse {
 
 export namespace SubscriptionListResponse {
   export interface Data {
+    /**
+     * Subscription ID
+     */
     id: string;
 
     /**
@@ -475,6 +484,9 @@ export interface SubscriptionDelegateResponse {
 
 export namespace SubscriptionDelegateResponse {
   export interface Data {
+    /**
+     * Subscription ID
+     */
     id: string;
 
     /**
@@ -592,6 +604,9 @@ export interface SubscriptionMigrateResponse {
 
 export namespace SubscriptionMigrateResponse {
   export interface Data {
+    /**
+     * Subscription ID
+     */
     id: string;
 
     /**
@@ -873,6 +888,9 @@ export interface SubscriptionTransferResponse {
 
 export namespace SubscriptionTransferResponse {
   export interface Data {
+    /**
+     * Subscription ID
+     */
     id: string;
 
     /**

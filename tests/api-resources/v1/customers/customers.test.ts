@@ -10,11 +10,7 @@ const client = new Stigg({
 describe('resource customers', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.v1.customers.create({
-      email: 'dev@stainless.com',
-      externalId: 'externalId',
-      name: 'name',
-    });
+    const responsePromise = client.v1.customers.create({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,9 +23,7 @@ describe('resource customers', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.customers.create({
-      email: 'dev@stainless.com',
-      externalId: 'externalId',
-      name: 'name',
+      id: 'id',
       defaultPaymentMethod: {
         billingId: 'billingId',
         cardExpiryMonth: 0,
@@ -37,6 +31,7 @@ describe('resource customers', () => {
         cardLast4Digits: 'cardLast4Digits',
         type: 'CARD',
       },
+      email: 'dev@stainless.com',
       integrations: [
         {
           id: 'id',
@@ -45,6 +40,7 @@ describe('resource customers', () => {
         },
       ],
       metadata: { foo: 'string' },
+      name: 'name',
     });
   });
 
