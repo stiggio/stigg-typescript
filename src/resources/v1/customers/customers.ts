@@ -178,6 +178,11 @@ export namespace CustomerResponse {
 
 export interface CustomerListResponse {
   data: Array<CustomerListResponse.Data>;
+
+  /**
+   * Pagination information including cursors for navigation
+   */
+  pagination: CustomerListResponse.Pagination;
 }
 
 export namespace CustomerListResponse {
@@ -196,11 +201,6 @@ export namespace CustomerListResponse {
      * Timestamp of when the record was created
      */
     createdAt: string;
-
-    /**
-     * Cursor ID for query pagination
-     */
-    cursorId: string;
 
     /**
      * Timestamp of when the record was last updated
@@ -295,6 +295,22 @@ export namespace CustomerListResponse {
         | 'OPEN_FGA'
         | 'APP_STORE';
     }
+  }
+
+  /**
+   * Pagination information including cursors for navigation
+   */
+  export interface Pagination {
+    /**
+     * Cursor to fetch the next page (use with after parameter), null if no more pages
+     */
+    next: string | null;
+
+    /**
+     * Cursor to fetch the previous page (use with before parameter), null if no
+     * previous pages
+     */
+    prev: string | null;
   }
 }
 
@@ -452,19 +468,19 @@ export namespace CustomerUpdateParams {
 
 export interface CustomerListParams {
   /**
+   * Starting after this UUID for pagination
+   */
+  after?: string;
+
+  /**
    * Ending before this UUID for pagination
    */
-  endingBefore?: string;
+  before?: string;
 
   /**
    * Items per page
    */
   limit?: number;
-
-  /**
-   * Starting after this UUID for pagination
-   */
-  startingAfter?: string;
 }
 
 Customers.PaymentMethod = PaymentMethod;

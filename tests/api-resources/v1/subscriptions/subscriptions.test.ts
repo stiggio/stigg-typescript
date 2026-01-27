@@ -78,10 +78,10 @@ describe('resource subscriptions', () => {
     await expect(
       client.v1.subscriptions.list(
         {
+          after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           customerId: 'customerId',
-          endingBefore: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit: 1,
-          startingAfter: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           status: 'status',
         },
         { path: '/_stainless_unknown_path' },

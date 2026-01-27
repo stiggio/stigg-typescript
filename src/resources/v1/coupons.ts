@@ -441,6 +441,11 @@ export namespace CouponRetrieveResponse {
 
 export interface CouponListResponse {
   data: Array<CouponListResponse.Data>;
+
+  /**
+   * Pagination information including cursors for navigation
+   */
+  pagination: CouponListResponse.Pagination;
 }
 
 export namespace CouponListResponse {
@@ -469,11 +474,6 @@ export namespace CouponListResponse {
      * Timestamp of when the record was created
      */
     createdAt: string;
-
-    /**
-     * Cursor ID for query pagination
-     */
-    cursorId: string;
 
     /**
      * Description of the coupon
@@ -646,6 +646,22 @@ export namespace CouponListResponse {
         | null;
     }
   }
+
+  /**
+   * Pagination information including cursors for navigation
+   */
+  export interface Pagination {
+    /**
+     * Cursor to fetch the next page (use with after parameter), null if no more pages
+     */
+    next: string | null;
+
+    /**
+     * Cursor to fetch the previous page (use with before parameter), null if no
+     * previous pages
+     */
+    prev: string | null;
+  }
 }
 
 export interface CouponCreateParams {
@@ -817,19 +833,19 @@ export namespace CouponCreateParams {
 
 export interface CouponListParams {
   /**
+   * Starting after this UUID for pagination
+   */
+  after?: string;
+
+  /**
    * Ending before this UUID for pagination
    */
-  endingBefore?: string;
+  before?: string;
 
   /**
    * Items per page
    */
   limit?: number;
-
-  /**
-   * Starting after this UUID for pagination
-   */
-  startingAfter?: string;
 }
 
 export declare namespace Coupons {
