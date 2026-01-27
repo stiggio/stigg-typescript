@@ -109,21 +109,30 @@ export class PagePromise<
 
 export interface MyCursorIDPageResponse<Item> {
   data: Array<Item>;
+
+  pagination: MyCursorIDPageResponse.Pagination;
+}
+
+export namespace MyCursorIDPageResponse {
+  export interface Pagination {
+    next?: string;
+
+    prev?: string;
+  }
 }
 
 export interface MyCursorIDPageParams {
-  starting_after?: string;
+  after?: string;
 
-  ending_before?: string;
+  before?: string;
 
   limit?: number;
 }
 
-export class MyCursorIDPage<Item extends { cursor_id: string }>
-  extends AbstractPage<Item>
-  implements MyCursorIDPageResponse<Item>
-{
+export class MyCursorIDPage<Item> extends AbstractPage<Item> implements MyCursorIDPageResponse<Item> {
   data: Array<Item>;
+
+  pagination: MyCursorIDPageResponse.Pagination;
 
   constructor(
     client: Stigg,
@@ -134,6 +143,7 @@ export class MyCursorIDPage<Item extends { cursor_id: string }>
     super(client, response, body, options);
 
     this.data = body.data || [];
+    this.pagination = body.pagination || {};
   }
 
   getPaginatedItems(): Item[] {
@@ -141,14 +151,10 @@ export class MyCursorIDPage<Item extends { cursor_id: string }>
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const data = this.getPaginatedItems();
-
-    const isForwards = !(
-      typeof this.options.query === 'object' && 'ending_before' in (this.options.query || {})
-    );
-    if (isForwards) {
-      const cursorID = data[data.length - 1]?.cursor_id;
-      if (!cursorID) {
+    if ((this.options.query as Record<string, unknown>)?.['before']) {
+      // in reverse
+      const prev = this.pagination?.prev;
+      if (!prev) {
         return null;
       }
 
@@ -156,13 +162,13 @@ export class MyCursorIDPage<Item extends { cursor_id: string }>
         ...this.options,
         query: {
           ...maybeObj(this.options.query),
-          starting_after: cursorID,
+          before: prev,
         },
       };
     }
 
-    const cursorID = data[0]?.cursor_id;
-    if (!cursorID) {
+    const cursor = this.pagination?.next;
+    if (!cursor) {
       return null;
     }
 
@@ -170,7 +176,7 @@ export class MyCursorIDPage<Item extends { cursor_id: string }>
       ...this.options,
       query: {
         ...maybeObj(this.options.query),
-        ending_before: cursorID,
+        after: cursor,
       },
     };
   }

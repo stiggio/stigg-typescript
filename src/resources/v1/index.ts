@@ -7,6 +7,7 @@ export {
   type CouponListResponse,
   type CouponCreateParams,
   type CouponListParams,
+  type CouponListResponsesMyCursorIDPage,
 } from './coupons';
 export {
   Customers,
@@ -15,6 +16,7 @@ export {
   type CustomerCreateParams,
   type CustomerUpdateParams,
   type CustomerListParams,
+  type CustomerListResponsesMyCursorIDPage,
 } from './customers/index';
 export {
   Subscriptions,
@@ -31,6 +33,7 @@ export {
   type SubscriptionMigrateParams,
   type SubscriptionPreviewParams,
   type SubscriptionTransferParams,
+  type SubscriptionListResponsesMyCursorIDPage,
 } from './subscriptions/index';
 export {
   V1,
