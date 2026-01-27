@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2026-01-27)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** api update ([8134475](https://github.com/stiggio/stigg-typescript/commit/8134475fc047cd4d50bbabcf6b3fe40a0aecd72b))
+* **api:** api update ([86e029a](https://github.com/stiggio/stigg-typescript/commit/86e029acf9806f52eb7d2af773b28f2df24baf78))
+* **api:** api update ([e2e4460](https://github.com/stiggio/stigg-typescript/commit/e2e4460155cb48ced4332a6997c794ce1119872d))
+* **api:** improved cursor pagination ([3b1b0be](https://github.com/stiggio/stigg-typescript/commit/3b1b0bed293003cfd5fbb3a532425e03080d50c4))
+
 ## 0.1.0-alpha.1 (2026-01-27)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/stiggio/stigg-typescript/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
