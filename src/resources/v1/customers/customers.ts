@@ -6,6 +6,7 @@ import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
 import * as UsageAPI from './usage';
 import { Usage, UsageRetrieveParams, UsageRetrieveResponse } from './usage';
 import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -40,8 +41,11 @@ export class Customers extends APIResource {
   list(
     query: CustomerListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CustomerListResponse> {
-    return this._client.get('/api/v1/customers', { query, ...options });
+  ): PagePromise<CustomerListResponsesMyCursorIDPage, CustomerListResponse> {
+    return this._client.getAPIList('/api/v1/customers', MyCursorIDPage<CustomerListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -58,6 +62,8 @@ export class Customers extends APIResource {
     return this._client.post(path`/api/v1/customers/${id}/unarchive`, options);
   }
 }
+
+export type CustomerListResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResponse>;
 
 export interface CustomerResponse {
   data: CustomerResponse.Data;
@@ -177,140 +183,113 @@ export namespace CustomerResponse {
 }
 
 export interface CustomerListResponse {
-  data: Array<CustomerListResponse.Data>;
+  /**
+   * Customer slug
+   */
+  id: string;
 
   /**
-   * Pagination information including cursors for navigation
+   * Timestamp of when the record was deleted
    */
-  pagination: CustomerListResponse.Pagination;
+  archivedAt: string | null;
+
+  /**
+   * Timestamp of when the record was created
+   */
+  createdAt: string;
+
+  /**
+   * Timestamp of when the record was last updated
+   */
+  updatedAt: string;
+
+  /**
+   * Customer level coupon
+   */
+  couponId?: string | null;
+
+  /**
+   * The default payment method details
+   */
+  defaultPaymentMethod?: CustomerListResponse.DefaultPaymentMethod | null;
+
+  /**
+   * The email of the customer
+   */
+  email?: string | null;
+
+  /**
+   * List of integrations
+   */
+  integrations?: Array<CustomerListResponse.Integration>;
+
+  /**
+   * Additional metadata
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * The name of the customer
+   */
+  name?: string | null;
 }
 
 export namespace CustomerListResponse {
-  export interface Data {
+  /**
+   * The default payment method details
+   */
+  export interface DefaultPaymentMethod {
     /**
-     * Customer slug
+     * The default payment method id
+     */
+    billingId: string | null;
+
+    /**
+     * The expiration month of the default payment method
+     */
+    cardExpiryMonth: number | null;
+
+    /**
+     * The expiration year of the default payment method
+     */
+    cardExpiryYear: number | null;
+
+    /**
+     * The last 4 digits of the default payment method
+     */
+    cardLast4Digits: string | null;
+
+    /**
+     * The default payment method type
+     */
+    type: 'CARD' | 'BANK' | 'CASH_APP';
+  }
+
+  export interface Integration {
+    /**
+     * Integration details
      */
     id: string;
 
     /**
-     * Timestamp of when the record was deleted
+     * Synced entity id
      */
-    archivedAt: string | null;
+    syncedEntityId: string | null;
 
     /**
-     * Timestamp of when the record was created
+     * The vendor identifier of integration
      */
-    createdAt: string;
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * Customer level coupon
-     */
-    couponId?: string | null;
-
-    /**
-     * The default payment method details
-     */
-    defaultPaymentMethod?: Data.DefaultPaymentMethod | null;
-
-    /**
-     * The email of the customer
-     */
-    email?: string | null;
-
-    /**
-     * List of integrations
-     */
-    integrations?: Array<Data.Integration>;
-
-    /**
-     * Additional metadata
-     */
-    metadata?: { [key: string]: string };
-
-    /**
-     * The name of the customer
-     */
-    name?: string | null;
-  }
-
-  export namespace Data {
-    /**
-     * The default payment method details
-     */
-    export interface DefaultPaymentMethod {
-      /**
-       * The default payment method id
-       */
-      billingId: string | null;
-
-      /**
-       * The expiration month of the default payment method
-       */
-      cardExpiryMonth: number | null;
-
-      /**
-       * The expiration year of the default payment method
-       */
-      cardExpiryYear: number | null;
-
-      /**
-       * The last 4 digits of the default payment method
-       */
-      cardLast4Digits: string | null;
-
-      /**
-       * The default payment method type
-       */
-      type: 'CARD' | 'BANK' | 'CASH_APP';
-    }
-
-    export interface Integration {
-      /**
-       * Integration details
-       */
-      id: string;
-
-      /**
-       * Synced entity id
-       */
-      syncedEntityId: string | null;
-
-      /**
-       * The vendor identifier of integration
-       */
-      vendorIdentifier:
-        | 'AUTH0'
-        | 'ZUORA'
-        | 'STRIPE'
-        | 'HUBSPOT'
-        | 'AWS_MARKETPLACE'
-        | 'SNOWFLAKE'
-        | 'SALESFORCE'
-        | 'BIG_QUERY'
-        | 'OPEN_FGA'
-        | 'APP_STORE';
-    }
-  }
-
-  /**
-   * Pagination information including cursors for navigation
-   */
-  export interface Pagination {
-    /**
-     * Cursor to fetch the next page (use with after parameter), null if no more pages
-     */
-    next: string | null;
-
-    /**
-     * Cursor to fetch the previous page (use with before parameter), null if no
-     * previous pages
-     */
-    prev: string | null;
+    vendorIdentifier:
+      | 'AUTH0'
+      | 'ZUORA'
+      | 'STRIPE'
+      | 'HUBSPOT'
+      | 'AWS_MARKETPLACE'
+      | 'SNOWFLAKE'
+      | 'SALESFORCE'
+      | 'BIG_QUERY'
+      | 'OPEN_FGA'
+      | 'APP_STORE';
   }
 }
 
@@ -466,22 +445,7 @@ export namespace CustomerUpdateParams {
   }
 }
 
-export interface CustomerListParams {
-  /**
-   * Starting after this UUID for pagination
-   */
-  after?: string;
-
-  /**
-   * Ending before this UUID for pagination
-   */
-  before?: string;
-
-  /**
-   * Items per page
-   */
-  limit?: number;
-}
+export interface CustomerListParams extends MyCursorIDPageParams {}
 
 Customers.PaymentMethod = PaymentMethod;
 Customers.Usage = Usage;
@@ -490,6 +454,7 @@ export declare namespace Customers {
   export {
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
+    type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerCreateParams as CustomerCreateParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
