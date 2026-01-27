@@ -355,6 +355,11 @@ export namespace SubscriptionRetrieveResponse {
 
 export interface SubscriptionListResponse {
   data: Array<SubscriptionListResponse.Data>;
+
+  /**
+   * Pagination information including cursors for navigation
+   */
+  pagination: SubscriptionListResponse.Pagination;
 }
 
 export namespace SubscriptionListResponse {
@@ -373,11 +378,6 @@ export namespace SubscriptionListResponse {
      * Created at
      */
     createdAt: string;
-
-    /**
-     * Cursor ID for query pagination
-     */
-    cursorId: string;
 
     /**
      * Customer ID
@@ -475,6 +475,22 @@ export namespace SubscriptionListResponse {
      * Subscription trial end date
      */
     trialEndDate?: string | null;
+  }
+
+  /**
+   * Pagination information including cursors for navigation
+   */
+  export interface Pagination {
+    /**
+     * Cursor to fetch the next page (use with after parameter), null if no more pages
+     */
+    next: string | null;
+
+    /**
+     * Cursor to fetch the previous page (use with before parameter), null if no
+     * previous pages
+     */
+    prev: string | null;
   }
 }
 
@@ -1103,24 +1119,24 @@ export namespace SubscriptionCreateParams {
 
 export interface SubscriptionListParams {
   /**
+   * Starting after this UUID for pagination
+   */
+  after?: string;
+
+  /**
+   * Ending before this UUID for pagination
+   */
+  before?: string;
+
+  /**
    * Filter by customer ID
    */
   customerId?: string;
 
   /**
-   * Ending before this UUID for pagination
-   */
-  endingBefore?: string;
-
-  /**
    * Items per page
    */
   limit?: number;
-
-  /**
-   * Starting after this UUID for pagination
-   */
-  startingAfter?: string;
 
   /**
    * Filter by subscription status (comma-separated for multiple statuses, e.g.,
