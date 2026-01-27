@@ -1244,9 +1244,15 @@ export namespace SubscriptionPreviewParams {
 
     export namespace Discount {
       export interface AmountsOff {
+        /**
+         * The price amount
+         */
         amount: number;
 
-        currency?:
+        /**
+         * The price currency
+         */
+        currency:
           | 'usd'
           | 'aed'
           | 'all'

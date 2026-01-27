@@ -229,8 +229,7 @@ export namespace CouponCreateResponse {
         | 'ugx'
         | 'pyg'
         | 'xof'
-        | 'xpf'
-        | null;
+        | 'xpf';
     }
   }
 }
@@ -433,8 +432,7 @@ export namespace CouponRetrieveResponse {
         | 'ugx'
         | 'pyg'
         | 'xof'
-        | 'xpf'
-        | null;
+        | 'xpf';
     }
   }
 }
@@ -642,8 +640,7 @@ export namespace CouponListResponse {
         | 'ugx'
         | 'pyg'
         | 'xof'
-        | 'xpf'
-        | null;
+        | 'xpf';
     }
   }
 
