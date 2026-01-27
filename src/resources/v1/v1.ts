@@ -204,7 +204,7 @@ export namespace V1CreateUsageParams {
     /**
      * Additional dimensions for the usage report
      */
-    dimensions?: { [key: string]: string };
+    dimensions?: { [key: string]: string | number | boolean };
 
     /**
      * Resource id
