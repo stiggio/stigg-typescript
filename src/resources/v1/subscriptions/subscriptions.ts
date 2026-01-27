@@ -8,6 +8,7 @@ import {
   FutureUpdateCancelScheduleResponse,
 } from './future-update';
 import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -34,8 +35,11 @@ export class Subscriptions extends APIResource {
   list(
     query: SubscriptionListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<SubscriptionListResponse> {
-    return this._client.get('/api/v1/subscriptions', { query, ...options });
+  ): PagePromise<SubscriptionListResponsesMyCursorIDPage, SubscriptionListResponse> {
+    return this._client.getAPIList('/api/v1/subscriptions', MyCursorIDPage<SubscriptionListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -81,6 +85,8 @@ export class Subscriptions extends APIResource {
     return this._client.post(path`/api/v1/subscriptions/${id}/transfer`, { body, ...options });
   }
 }
+
+export type SubscriptionListResponsesMyCursorIDPage = MyCursorIDPage<SubscriptionListResponse>;
 
 export interface SubscriptionCreateResponse {
   data: SubscriptionCreateResponse.Data;
@@ -354,144 +360,117 @@ export namespace SubscriptionRetrieveResponse {
 }
 
 export interface SubscriptionListResponse {
-  data: Array<SubscriptionListResponse.Data>;
+  /**
+   * Subscription ID
+   */
+  id: string;
 
   /**
-   * Pagination information including cursors for navigation
+   * Billing ID
    */
-  pagination: SubscriptionListResponse.Pagination;
-}
-
-export namespace SubscriptionListResponse {
-  export interface Data {
-    /**
-     * Subscription ID
-     */
-    id: string;
-
-    /**
-     * Billing ID
-     */
-    billingId: string | null;
-
-    /**
-     * Created at
-     */
-    createdAt: string;
-
-    /**
-     * Customer ID
-     */
-    customerId: string;
-
-    /**
-     * Payment collection
-     */
-    paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED';
-
-    /**
-     * Plan ID
-     */
-    planId: string;
-
-    /**
-     * Pricing type
-     */
-    pricingType: 'FREE' | 'PAID' | 'CUSTOM';
-
-    /**
-     * Subscription start date
-     */
-    startDate: string;
-
-    /**
-     * Subscription status
-     */
-    status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED';
-
-    /**
-     * Subscription cancellation date
-     */
-    cancellationDate?: string | null;
-
-    /**
-     * Subscription cancel reason
-     */
-    cancelReason?:
-      | 'UPGRADE_OR_DOWNGRADE'
-      | 'CANCELLED_BY_BILLING'
-      | 'EXPIRED'
-      | 'DETACH_BILLING'
-      | 'TRIAL_ENDED'
-      | 'Immediate'
-      | 'TRIAL_CONVERTED'
-      | 'PENDING_PAYMENT_EXPIRED'
-      | 'ScheduledCancellation'
-      | 'CustomerArchived'
-      | 'AutoCancellationRule'
-      | null;
-
-    /**
-     * End of the current billing period
-     */
-    currentBillingPeriodEnd?: string | null;
-
-    /**
-     * Start of the current billing period
-     */
-    currentBillingPeriodStart?: string | null;
-
-    /**
-     * Subscription effective end date
-     */
-    effectiveEndDate?: string | null;
-
-    /**
-     * Subscription end date
-     */
-    endDate?: string | null;
-
-    /**
-     * Additional metadata for the subscription
-     */
-    metadata?: { [key: string]: string };
-
-    /**
-     * Paying customer ID for delegated billing
-     */
-    payingCustomerId?: string | null;
-
-    /**
-     * The method used to collect payments for a subscription
-     */
-    paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE' | null;
-
-    /**
-     * Resource ID
-     */
-    resourceId?: string | null;
-
-    /**
-     * Subscription trial end date
-     */
-    trialEndDate?: string | null;
-  }
+  billingId: string | null;
 
   /**
-   * Pagination information including cursors for navigation
+   * Created at
    */
-  export interface Pagination {
-    /**
-     * Cursor to fetch the next page (use with after parameter), null if no more pages
-     */
-    next: string | null;
+  createdAt: string;
 
-    /**
-     * Cursor to fetch the previous page (use with before parameter), null if no
-     * previous pages
-     */
-    prev: string | null;
-  }
+  /**
+   * Customer ID
+   */
+  customerId: string;
+
+  /**
+   * Payment collection
+   */
+  paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED';
+
+  /**
+   * Plan ID
+   */
+  planId: string;
+
+  /**
+   * Pricing type
+   */
+  pricingType: 'FREE' | 'PAID' | 'CUSTOM';
+
+  /**
+   * Subscription start date
+   */
+  startDate: string;
+
+  /**
+   * Subscription status
+   */
+  status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED';
+
+  /**
+   * Subscription cancellation date
+   */
+  cancellationDate?: string | null;
+
+  /**
+   * Subscription cancel reason
+   */
+  cancelReason?:
+    | 'UPGRADE_OR_DOWNGRADE'
+    | 'CANCELLED_BY_BILLING'
+    | 'EXPIRED'
+    | 'DETACH_BILLING'
+    | 'TRIAL_ENDED'
+    | 'Immediate'
+    | 'TRIAL_CONVERTED'
+    | 'PENDING_PAYMENT_EXPIRED'
+    | 'ScheduledCancellation'
+    | 'CustomerArchived'
+    | 'AutoCancellationRule'
+    | null;
+
+  /**
+   * End of the current billing period
+   */
+  currentBillingPeriodEnd?: string | null;
+
+  /**
+   * Start of the current billing period
+   */
+  currentBillingPeriodStart?: string | null;
+
+  /**
+   * Subscription effective end date
+   */
+  effectiveEndDate?: string | null;
+
+  /**
+   * Subscription end date
+   */
+  endDate?: string | null;
+
+  /**
+   * Additional metadata for the subscription
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * Paying customer ID for delegated billing
+   */
+  payingCustomerId?: string | null;
+
+  /**
+   * The method used to collect payments for a subscription
+   */
+  paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE' | null;
+
+  /**
+   * Resource ID
+   */
+  resourceId?: string | null;
+
+  /**
+   * Subscription trial end date
+   */
+  trialEndDate?: string | null;
 }
 
 export interface SubscriptionDelegateResponse {
@@ -1117,26 +1096,11 @@ export namespace SubscriptionCreateParams {
   }
 }
 
-export interface SubscriptionListParams {
-  /**
-   * Starting after this UUID for pagination
-   */
-  after?: string;
-
-  /**
-   * Ending before this UUID for pagination
-   */
-  before?: string;
-
+export interface SubscriptionListParams extends MyCursorIDPageParams {
   /**
    * Filter by customer ID
    */
   customerId?: string;
-
-  /**
-   * Items per page
-   */
-  limit?: number;
 
   /**
    * Filter by subscription status (comma-separated for multiple statuses, e.g.,
@@ -1244,15 +1208,9 @@ export namespace SubscriptionPreviewParams {
 
     export namespace Discount {
       export interface AmountsOff {
-        /**
-         * The price amount
-         */
         amount: number;
 
-        /**
-         * The price currency
-         */
-        currency:
+        currency?:
           | 'usd'
           | 'aed'
           | 'all'
@@ -1470,6 +1428,7 @@ export declare namespace Subscriptions {
     type SubscriptionMigrateResponse as SubscriptionMigrateResponse,
     type SubscriptionPreviewResponse as SubscriptionPreviewResponse,
     type SubscriptionTransferResponse as SubscriptionTransferResponse,
+    type SubscriptionListResponsesMyCursorIDPage as SubscriptionListResponsesMyCursorIDPage,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionListParams as SubscriptionListParams,
     type SubscriptionDelegateParams as SubscriptionDelegateParams,

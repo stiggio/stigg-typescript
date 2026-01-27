@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -26,10 +27,15 @@ export class Coupons extends APIResource {
   list(
     query: CouponListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CouponListResponse> {
-    return this._client.get('/api/v1/coupons', { query, ...options });
+  ): PagePromise<CouponListResponsesMyCursorIDPage, CouponListResponse> {
+    return this._client.getAPIList('/api/v1/coupons', MyCursorIDPage<CouponListResponse>, {
+      query,
+      ...options,
+    });
   }
 }
+
+export type CouponListResponsesMyCursorIDPage = MyCursorIDPage<CouponListResponse>;
 
 export interface CouponCreateResponse {
   data: CouponCreateResponse.Data;
@@ -229,7 +235,8 @@ export namespace CouponCreateResponse {
         | 'ugx'
         | 'pyg'
         | 'xof'
-        | 'xpf';
+        | 'xpf'
+        | null;
     }
   }
 }
@@ -432,232 +439,207 @@ export namespace CouponRetrieveResponse {
         | 'ugx'
         | 'pyg'
         | 'xof'
-        | 'xpf';
+        | 'xpf'
+        | null;
     }
   }
 }
 
 export interface CouponListResponse {
-  data: Array<CouponListResponse.Data>;
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
 
   /**
-   * Pagination information including cursors for navigation
+   * Fixed amount discounts in different currencies
    */
-  pagination: CouponListResponse.Pagination;
+  amountsOff: Array<CouponListResponse.AmountsOff> | null;
+
+  /**
+   * The unique identifier for the entity in the billing provider
+   */
+  billingId: string | null;
+
+  /**
+   * The URL to the entity in the billing provider
+   */
+  billingLinkUrl: string | null;
+
+  /**
+   * Timestamp of when the record was created
+   */
+  createdAt: string;
+
+  /**
+   * Description of the coupon
+   */
+  description: string | null;
+
+  /**
+   * Duration of the coupon validity in months
+   */
+  durationInMonths: number | null;
+
+  /**
+   * Name of the coupon
+   */
+  name: string;
+
+  /**
+   * Percentage discount off the original price
+   */
+  percentOff: number | null;
+
+  /**
+   * The source of the coupon
+   */
+  source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE' | null;
+
+  /**
+   * Current status of the coupon
+   */
+  status: 'ACTIVE' | 'ARCHIVED';
+
+  /**
+   * Type of the coupon (percentage or fixed amount)
+   */
+  type: 'FIXED' | 'PERCENTAGE';
+
+  /**
+   * Timestamp of when the record was last updated
+   */
+  updatedAt: string;
 }
 
 export namespace CouponListResponse {
-  export interface Data {
+  export interface AmountsOff {
     /**
-     * The unique identifier for the entity
+     * The price amount
      */
-    id: string;
-
-    /**
-     * Fixed amount discounts in different currencies
-     */
-    amountsOff: Array<Data.AmountsOff> | null;
+    amount: number;
 
     /**
-     * The unique identifier for the entity in the billing provider
+     * The price currency
      */
-    billingId: string | null;
-
-    /**
-     * The URL to the entity in the billing provider
-     */
-    billingLinkUrl: string | null;
-
-    /**
-     * Timestamp of when the record was created
-     */
-    createdAt: string;
-
-    /**
-     * Description of the coupon
-     */
-    description: string | null;
-
-    /**
-     * Duration of the coupon validity in months
-     */
-    durationInMonths: number | null;
-
-    /**
-     * Name of the coupon
-     */
-    name: string;
-
-    /**
-     * Percentage discount off the original price
-     */
-    percentOff: number | null;
-
-    /**
-     * The source of the coupon
-     */
-    source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE' | null;
-
-    /**
-     * Current status of the coupon
-     */
-    status: 'ACTIVE' | 'ARCHIVED';
-
-    /**
-     * Type of the coupon (percentage or fixed amount)
-     */
-    type: 'FIXED' | 'PERCENTAGE';
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt: string;
-  }
-
-  export namespace Data {
-    export interface AmountsOff {
-      /**
-       * The price amount
-       */
-      amount: number;
-
-      /**
-       * The price currency
-       */
-      currency:
-        | 'usd'
-        | 'aed'
-        | 'all'
-        | 'amd'
-        | 'ang'
-        | 'aud'
-        | 'awg'
-        | 'azn'
-        | 'bam'
-        | 'bbd'
-        | 'bdt'
-        | 'bgn'
-        | 'bif'
-        | 'bmd'
-        | 'bnd'
-        | 'bsd'
-        | 'bwp'
-        | 'byn'
-        | 'bzd'
-        | 'brl'
-        | 'cad'
-        | 'cdf'
-        | 'chf'
-        | 'cny'
-        | 'czk'
-        | 'dkk'
-        | 'dop'
-        | 'dzd'
-        | 'egp'
-        | 'etb'
-        | 'eur'
-        | 'fjd'
-        | 'gbp'
-        | 'gel'
-        | 'gip'
-        | 'gmd'
-        | 'gyd'
-        | 'hkd'
-        | 'hrk'
-        | 'htg'
-        | 'idr'
-        | 'ils'
-        | 'inr'
-        | 'isk'
-        | 'jmd'
-        | 'jpy'
-        | 'kes'
-        | 'kgs'
-        | 'khr'
-        | 'kmf'
-        | 'krw'
-        | 'kyd'
-        | 'kzt'
-        | 'lbp'
-        | 'lkr'
-        | 'lrd'
-        | 'lsl'
-        | 'mad'
-        | 'mdl'
-        | 'mga'
-        | 'mkd'
-        | 'mmk'
-        | 'mnt'
-        | 'mop'
-        | 'mro'
-        | 'mvr'
-        | 'mwk'
-        | 'mxn'
-        | 'myr'
-        | 'mzn'
-        | 'nad'
-        | 'ngn'
-        | 'nok'
-        | 'npr'
-        | 'nzd'
-        | 'pgk'
-        | 'php'
-        | 'pkr'
-        | 'pln'
-        | 'qar'
-        | 'ron'
-        | 'rsd'
-        | 'rub'
-        | 'rwf'
-        | 'sar'
-        | 'sbd'
-        | 'scr'
-        | 'sek'
-        | 'sgd'
-        | 'sle'
-        | 'sll'
-        | 'sos'
-        | 'szl'
-        | 'thb'
-        | 'tjs'
-        | 'top'
-        | 'try'
-        | 'ttd'
-        | 'tzs'
-        | 'uah'
-        | 'uzs'
-        | 'vnd'
-        | 'vuv'
-        | 'wst'
-        | 'xaf'
-        | 'xcd'
-        | 'yer'
-        | 'zar'
-        | 'zmw'
-        | 'clp'
-        | 'djf'
-        | 'gnf'
-        | 'ugx'
-        | 'pyg'
-        | 'xof'
-        | 'xpf';
-    }
-  }
-
-  /**
-   * Pagination information including cursors for navigation
-   */
-  export interface Pagination {
-    /**
-     * Cursor to fetch the next page (use with after parameter), null if no more pages
-     */
-    next: string | null;
-
-    /**
-     * Cursor to fetch the previous page (use with before parameter), null if no
-     * previous pages
-     */
-    prev: string | null;
+    currency:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf'
+      | null;
   }
 }
 
@@ -828,28 +810,14 @@ export namespace CouponCreateParams {
   }
 }
 
-export interface CouponListParams {
-  /**
-   * Starting after this UUID for pagination
-   */
-  after?: string;
-
-  /**
-   * Ending before this UUID for pagination
-   */
-  before?: string;
-
-  /**
-   * Items per page
-   */
-  limit?: number;
-}
+export interface CouponListParams extends MyCursorIDPageParams {}
 
 export declare namespace Coupons {
   export {
     type CouponCreateResponse as CouponCreateResponse,
     type CouponRetrieveResponse as CouponRetrieveResponse,
     type CouponListResponse as CouponListResponse,
+    type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
     type CouponListParams as CouponListParams,
   };

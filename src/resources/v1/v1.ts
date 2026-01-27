@@ -7,6 +7,7 @@ import {
   CouponCreateResponse,
   CouponListParams,
   CouponListResponse,
+  CouponListResponsesMyCursorIDPage,
   CouponRetrieveResponse,
   Coupons,
 } from './coupons';
@@ -15,6 +16,7 @@ import {
   CustomerCreateParams,
   CustomerListParams,
   CustomerListResponse,
+  CustomerListResponsesMyCursorIDPage,
   CustomerResponse,
   CustomerUpdateParams,
   Customers,
@@ -27,6 +29,7 @@ import {
   SubscriptionDelegateResponse,
   SubscriptionListParams,
   SubscriptionListResponse,
+  SubscriptionListResponsesMyCursorIDPage,
   SubscriptionMigrateParams,
   SubscriptionMigrateResponse,
   SubscriptionPreviewParams,
@@ -201,7 +204,7 @@ export namespace V1CreateUsageParams {
     /**
      * Additional dimensions for the usage report
      */
-    dimensions?: { [key: string]: string | number | boolean };
+    dimensions?: { [key: string]: string };
 
     /**
      * Resource id
@@ -231,6 +234,7 @@ export declare namespace V1 {
     Customers as Customers,
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
+    type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerCreateParams as CustomerCreateParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
@@ -245,6 +249,7 @@ export declare namespace V1 {
     type SubscriptionMigrateResponse as SubscriptionMigrateResponse,
     type SubscriptionPreviewResponse as SubscriptionPreviewResponse,
     type SubscriptionTransferResponse as SubscriptionTransferResponse,
+    type SubscriptionListResponsesMyCursorIDPage as SubscriptionListResponsesMyCursorIDPage,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionListParams as SubscriptionListParams,
     type SubscriptionDelegateParams as SubscriptionDelegateParams,
@@ -258,6 +263,7 @@ export declare namespace V1 {
     type CouponCreateResponse as CouponCreateResponse,
     type CouponRetrieveResponse as CouponRetrieveResponse,
     type CouponListResponse as CouponListResponse,
+    type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
     type CouponListParams as CouponListParams,
   };
