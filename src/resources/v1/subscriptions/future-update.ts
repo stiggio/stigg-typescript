@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class FutureUpdate extends APIResource {
   /**
-   * Perform cancel future update on a Subscription
+   * Cancel pending payment update
    */
   cancelPendingPayment(
     id: string,
@@ -17,13 +17,16 @@ export class FutureUpdate extends APIResource {
   }
 
   /**
-   * Perform cancel future update on a Subscription
+   * Cancel scheduled update
    */
   cancelSchedule(id: string, options?: RequestOptions): APIPromise<FutureUpdateCancelScheduleResponse> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/schedule`, options);
   }
 }
 
+/**
+ * Response object
+ */
 export interface FutureUpdateCancelPendingPaymentResponse {
   data: FutureUpdateCancelPendingPaymentResponse.Data;
 }
@@ -37,6 +40,9 @@ export namespace FutureUpdateCancelPendingPaymentResponse {
   }
 }
 
+/**
+ * Response object
+ */
 export interface FutureUpdateCancelScheduleResponse {
   data: FutureUpdateCancelScheduleResponse.Data;
 }

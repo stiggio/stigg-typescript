@@ -10,4 +10,4 @@ export {
   type CustomerListResponsesMyCursorIDPage,
 } from './customers';
 export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
-export { Usage, type UsageRetrieveResponse, type UsageRetrieveParams } from './usage';
+export { Usage } from './usage';

@@ -8,21 +8,21 @@ import { path } from '../../internal/utils/path';
 
 export class Coupons extends APIResource {
   /**
-   * Create a new Coupon
+   * Create coupon
    */
   create(body: CouponCreateParams, options?: RequestOptions): APIPromise<CouponCreateResponse> {
     return this._client.post('/api/v1/coupons', { body, ...options });
   }
 
   /**
-   * Get a single Coupon by id
+   * Get a single coupon by ID
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<CouponRetrieveResponse> {
     return this._client.get(path`/api/v1/coupons/${id}`, options);
   }
 
   /**
-   * Get a list of Coupons
+   * Get a list of coupons
    */
   list(
     query: CouponListParams | null | undefined = {},
@@ -37,11 +37,20 @@ export class Coupons extends APIResource {
 
 export type CouponListResponsesMyCursorIDPage = MyCursorIDPage<CouponListResponse>;
 
+/**
+ * Response object
+ */
 export interface CouponCreateResponse {
+  /**
+   * Discount instrument with percentage or fixed amount
+   */
   data: CouponCreateResponse.Data;
 }
 
 export namespace CouponCreateResponse {
+  /**
+   * Discount instrument with percentage or fixed amount
+   */
   export interface Data {
     /**
      * The unique identifier for the entity
@@ -110,6 +119,9 @@ export namespace CouponCreateResponse {
   }
 
   export namespace Data {
+    /**
+     * Monetary amount with currency
+     */
     export interface AmountsOff {
       /**
        * The price amount
@@ -240,11 +252,20 @@ export namespace CouponCreateResponse {
   }
 }
 
+/**
+ * Response object
+ */
 export interface CouponRetrieveResponse {
+  /**
+   * Discount instrument with percentage or fixed amount
+   */
   data: CouponRetrieveResponse.Data;
 }
 
 export namespace CouponRetrieveResponse {
+  /**
+   * Discount instrument with percentage or fixed amount
+   */
   export interface Data {
     /**
      * The unique identifier for the entity
@@ -313,6 +334,9 @@ export namespace CouponRetrieveResponse {
   }
 
   export namespace Data {
+    /**
+     * Monetary amount with currency
+     */
     export interface AmountsOff {
       /**
        * The price amount
@@ -443,6 +467,9 @@ export namespace CouponRetrieveResponse {
   }
 }
 
+/**
+ * Discount instrument with percentage or fixed amount
+ */
 export interface CouponListResponse {
   /**
    * The unique identifier for the entity
@@ -511,6 +538,9 @@ export interface CouponListResponse {
 }
 
 export namespace CouponListResponse {
+  /**
+   * Monetary amount with currency
+   */
   export interface AmountsOff {
     /**
      * The price amount
@@ -678,6 +708,9 @@ export interface CouponCreateParams {
 }
 
 export namespace CouponCreateParams {
+  /**
+   * Monetary amount with currency
+   */
   export interface AmountsOff {
     /**
      * The price amount

@@ -4,7 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
 import * as UsageAPI from './usage';
-import { Usage, UsageRetrieveParams, UsageRetrieveResponse } from './usage';
+import { Usage } from './usage';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -15,28 +15,28 @@ export class Customers extends APIResource {
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
 
   /**
-   * Create a new Customer
+   * Provision customer
    */
   create(body: CustomerCreateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post('/api/v1/customers', { body, ...options });
   }
 
   /**
-   * Get a single Customer by id
+   * Get a single customer by ID
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.get(path`/api/v1/customers/${id}`, options);
   }
 
   /**
-   * Update an existing Customer
+   * Update a customer
    */
   update(id: string, body: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.patch(path`/api/v1/customers/${id}`, { body, ...options });
   }
 
   /**
-   * Get a list of Customers
+   * Get a list of customers
    */
   list(
     query: CustomerListParams | null | undefined = {},
@@ -49,14 +49,14 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Perform archive on a Customer
+   * Archive customer
    */
   archive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/archive`, options);
   }
 
   /**
-   * Perform unarchive on a Customer
+   * Unarchive customer
    */
   unarchive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/unarchive`, options);
@@ -65,11 +65,20 @@ export class Customers extends APIResource {
 
 export type CustomerListResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResponse>;
 
+/**
+ * Response object
+ */
 export interface CustomerResponse {
+  /**
+   * A customer can be either an organization or an individual
+   */
   data: CustomerResponse.Data;
 }
 
 export namespace CustomerResponse {
+  /**
+   * A customer can be either an organization or an individual
+   */
   export interface Data {
     /**
      * Customer slug
@@ -153,6 +162,9 @@ export namespace CustomerResponse {
       type: 'CARD' | 'BANK' | 'CASH_APP';
     }
 
+    /**
+     * External billing or CRM integration link
+     */
     export interface Integration {
       /**
        * Integration details
@@ -182,6 +194,9 @@ export namespace CustomerResponse {
   }
 }
 
+/**
+ * A customer can be either an organization or an individual
+ */
 export interface CustomerListResponse {
   /**
    * Customer slug
@@ -265,6 +280,9 @@ export namespace CustomerListResponse {
     type: 'CARD' | 'BANK' | 'CASH_APP';
   }
 
+  /**
+   * External billing or CRM integration link
+   */
   export interface Integration {
     /**
      * Integration details
@@ -361,6 +379,9 @@ export namespace CustomerCreateParams {
     type: 'CARD' | 'BANK' | 'CASH_APP';
   }
 
+  /**
+   * External billing or CRM integration link
+   */
   export interface Integration {
     /**
      * Integration details
@@ -417,6 +438,9 @@ export interface CustomerUpdateParams {
 }
 
 export namespace CustomerUpdateParams {
+  /**
+   * External billing or CRM integration link
+   */
   export interface Integration {
     /**
      * Integration details
@@ -462,9 +486,5 @@ export declare namespace Customers {
 
   export { PaymentMethod as PaymentMethod, type PaymentMethodAttachParams as PaymentMethodAttachParams };
 
-  export {
-    Usage as Usage,
-    type UsageRetrieveResponse as UsageRetrieveResponse,
-    type UsageRetrieveParams as UsageRetrieveParams,
-  };
+  export { Usage as Usage };
 }
