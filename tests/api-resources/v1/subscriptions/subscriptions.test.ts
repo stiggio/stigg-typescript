@@ -26,8 +26,52 @@ describe('resource subscriptions', () => {
       customerId: 'customerId',
       planId: 'planId',
       id: 'id',
+      addons: [{ addonId: 'addonId', quantity: 1 }],
+      appliedCoupon: {
+        billingCouponId: 'billingCouponId',
+        configuration: { startDate: '2019-12-27T18:11:19.117Z' },
+        couponId: 'couponId',
+        discount: {
+          amountsOff: [{ amount: 0, currency: 'usd' }],
+          description: 'description',
+          durationInMonths: 1,
+          name: 'name',
+          percentOff: 1,
+        },
+        promotionCode: 'promotionCode',
+      },
       awaitPaymentConfirmation: true,
+      billingCountryCode: 'billingCountryCode',
+      billingId: 'billingId',
+      billingInformation: {
+        billingAddress: {
+          city: 'city',
+          country: 'country',
+          line1: 'line1',
+          line2: 'line2',
+          postalCode: 'postalCode',
+          state: 'state',
+        },
+        chargeOnBehalfOfAccount: 'chargeOnBehalfOfAccount',
+        integrationId: 'integrationId',
+        invoiceDaysUntilDue: 0,
+        isBackdated: true,
+        isInvoicePaid: true,
+        metadata: { foo: 'string' },
+        prorationBehavior: 'INVOICE_IMMEDIATELY',
+        taxIds: [{ type: 'type', value: 'value' }],
+        taxPercentage: 0,
+        taxRateIds: ['string'],
+      },
       billingPeriod: 'MONTHLY',
+      budget: { hasSoftLimit: true, limit: 0 },
+      charges: [
+        {
+          id: 'id',
+          quantity: 1,
+          type: 'FEATURE',
+        },
+      ],
       checkoutOptions: {
         cancelUrl: 'https://example.com',
         successUrl: 'https://example.com',
@@ -38,13 +82,66 @@ describe('resource subscriptions', () => {
         referenceId: 'referenceId',
       },
       metadata: { foo: 'string' },
+      minimumSpend: {
+        minimum: {
+          amount: 0,
+          billingCountryCode: 'billingCountryCode',
+          currency: 'usd',
+        },
+      },
       payingCustomerId: 'payingCustomerId',
+      paymentCollectionMethod: 'CHARGE',
+      priceOverrides: [
+        {
+          addonId: 'addonId',
+          baseCharge: true,
+          blockSize: 0,
+          creditGrantCadence: 'BEGINNING_OF_BILLING_PERIOD',
+          creditRate: {
+            amount: 1,
+            currencyId: 'currencyId',
+            costFormula: 'costFormula',
+          },
+          featureId: 'featureId',
+          price: {
+            amount: 0,
+            billingCountryCode: 'billingCountryCode',
+            currency: 'usd',
+          },
+          tiers: [
+            {
+              flatPrice: {
+                amount: 0,
+                billingCountryCode: 'billingCountryCode',
+                currency: 'usd',
+              },
+              unitPrice: {
+                amount: 0,
+                billingCountryCode: 'billingCountryCode',
+                currency: 'usd',
+              },
+              upTo: 0,
+            },
+          ],
+        },
+      ],
       resourceId: 'resourceId',
+      salesforceId: 'salesforceId',
+      scheduleStrategy: 'END_OF_BILLING_PERIOD',
+      startDate: '2019-12-27T18:11:19.117Z',
+      subscriptionEntitlements: [
+        {
+          featureId: 'featureId',
+          usageLimit: 0,
+          isGranted: true,
+        },
+      ],
       trialOverrideConfiguration: {
         isTrial: true,
         trialEndBehavior: 'CONVERT_TO_PAID',
         trialEndDate: '2019-12-27T18:11:19.117Z',
       },
+      unitQuantity: 1,
     });
   });
 
