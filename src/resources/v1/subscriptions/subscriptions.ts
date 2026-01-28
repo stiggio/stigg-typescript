@@ -16,21 +16,21 @@ export class Subscriptions extends APIResource {
   futureUpdate: FutureUpdateAPI.FutureUpdate = new FutureUpdateAPI.FutureUpdate(this._client);
 
   /**
-   * Create a new Subscription
+   * Provision subscription
    */
   create(body: SubscriptionCreateParams, options?: RequestOptions): APIPromise<SubscriptionCreateResponse> {
     return this._client.post('/api/v1/subscriptions', { body, ...options });
   }
 
   /**
-   * Get a single Subscription by id
+   * Get a single subscription by ID
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<SubscriptionRetrieveResponse> {
     return this._client.get(path`/api/v1/subscriptions/${id}`, options);
   }
 
   /**
-   * Get a list of Subscriptions
+   * Get a list of subscriptions
    */
   list(
     query: SubscriptionListParams | null | undefined = {},
@@ -43,7 +43,7 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Perform delegate on a Subscription
+   * Delegate subscription payment to customer
    */
   delegate(
     id: string,
@@ -54,7 +54,7 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Perform migrate to latest plan version on a Subscription
+   * Migrate subscription to latest plan version
    */
   migrate(
     id: string,
@@ -65,7 +65,7 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Create a new Subscription Preview
+   * Preview subscription
    */
   preview(
     body: SubscriptionPreviewParams,
@@ -75,7 +75,7 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Perform transfer to resource on a Subscription
+   * Transfer subscription to resource
    */
   transfer(
     id: string,
@@ -88,11 +88,20 @@ export class Subscriptions extends APIResource {
 
 export type SubscriptionListResponsesMyCursorIDPage = MyCursorIDPage<SubscriptionListResponse>;
 
+/**
+ * Response object
+ */
 export interface SubscriptionCreateResponse {
+  /**
+   * Provisioning result with status and subscription or checkout URL.
+   */
   data: SubscriptionCreateResponse.Data;
 }
 
 export namespace SubscriptionCreateResponse {
+  /**
+   * Provisioning result with status and subscription or checkout URL.
+   */
   export interface Data {
     /**
      * Unique identifier for the provisioned subscription
@@ -121,6 +130,9 @@ export namespace SubscriptionCreateResponse {
      */
     isScheduled?: boolean;
 
+    /**
+     * Created subscription (when status is SUCCESS)
+     */
     subscription?: Data.Subscription;
   }
 
@@ -163,10 +175,16 @@ export namespace SubscriptionCreateResponse {
 
     export namespace Entitlement {
       export interface Feature {
+        /**
+         * Feature ID
+         */
         refId: string;
       }
     }
 
+    /**
+     * Created subscription (when status is SUCCESS)
+     */
     export interface Subscription {
       /**
        * Subscription ID
@@ -281,8 +299,6 @@ export namespace SubscriptionCreateResponse {
        * Subscription trial end date
        */
       trialEndDate?: string | null;
-
-      unitQuantity?: number;
     }
 
     export namespace Subscription {
@@ -750,11 +766,20 @@ export namespace SubscriptionCreateResponse {
   }
 }
 
+/**
+ * Response object
+ */
 export interface SubscriptionRetrieveResponse {
+  /**
+   * Customer subscription to a plan
+   */
   data: SubscriptionRetrieveResponse.Data;
 }
 
 export namespace SubscriptionRetrieveResponse {
+  /**
+   * Customer subscription to a plan
+   */
   export interface Data {
     /**
      * Subscription ID
@@ -869,8 +894,6 @@ export namespace SubscriptionRetrieveResponse {
      * Subscription trial end date
      */
     trialEndDate?: string | null;
-
-    unitQuantity?: number;
   }
 
   export namespace Data {
@@ -895,6 +918,9 @@ export namespace SubscriptionRetrieveResponse {
   }
 }
 
+/**
+ * Customer subscription to a plan
+ */
 export interface SubscriptionListResponse {
   /**
    * Subscription ID
@@ -1009,8 +1035,6 @@ export interface SubscriptionListResponse {
    * Subscription trial end date
    */
   trialEndDate?: string | null;
-
-  unitQuantity?: number;
 }
 
 export namespace SubscriptionListResponse {
@@ -1034,11 +1058,20 @@ export namespace SubscriptionListResponse {
   }
 }
 
+/**
+ * Response object
+ */
 export interface SubscriptionDelegateResponse {
+  /**
+   * Customer subscription to a plan
+   */
   data: SubscriptionDelegateResponse.Data;
 }
 
 export namespace SubscriptionDelegateResponse {
+  /**
+   * Customer subscription to a plan
+   */
   export interface Data {
     /**
      * Subscription ID
@@ -1153,8 +1186,6 @@ export namespace SubscriptionDelegateResponse {
      * Subscription trial end date
      */
     trialEndDate?: string | null;
-
-    unitQuantity?: number;
   }
 
   export namespace Data {
@@ -1179,11 +1210,20 @@ export namespace SubscriptionDelegateResponse {
   }
 }
 
+/**
+ * Response object
+ */
 export interface SubscriptionMigrateResponse {
+  /**
+   * Customer subscription to a plan
+   */
   data: SubscriptionMigrateResponse.Data;
 }
 
 export namespace SubscriptionMigrateResponse {
+  /**
+   * Customer subscription to a plan
+   */
   export interface Data {
     /**
      * Subscription ID
@@ -1298,8 +1338,6 @@ export namespace SubscriptionMigrateResponse {
      * Subscription trial end date
      */
     trialEndDate?: string | null;
-
-    unitQuantity?: number;
   }
 
   export namespace Data {
@@ -1324,47 +1362,107 @@ export namespace SubscriptionMigrateResponse {
   }
 }
 
+/**
+ * Response object
+ */
 export interface SubscriptionPreviewResponse {
+  /**
+   * Pricing preview with invoices
+   */
   data: SubscriptionPreviewResponse.Data;
 }
 
 export namespace SubscriptionPreviewResponse {
+  /**
+   * Pricing preview with invoices
+   */
   export interface Data {
+    /**
+     * Invoice due immediately
+     */
     immediateInvoice: Data.ImmediateInvoice;
 
+    /**
+     * Billing period range
+     */
     billingPeriodRange?: Data.BillingPeriodRange;
 
+    /**
+     * Free items included
+     */
     freeItems?: Array<Data.FreeItem>;
 
+    /**
+     * Whether updates are scheduled
+     */
     hasScheduledUpdates?: boolean;
 
+    /**
+     * Whether this is a downgrade
+     */
     isPlanDowngrade?: boolean;
 
+    /**
+     * Recurring invoice preview
+     */
     recurringInvoice?: Data.RecurringInvoice;
   }
 
   export namespace Data {
+    /**
+     * Invoice due immediately
+     */
     export interface ImmediateInvoice {
+      /**
+       * Subtotal before discounts
+       */
       subTotal: number;
 
+      /**
+       * Invoice total
+       */
       total: number;
 
+      /**
+       * Billing period covered
+       */
       billingPeriodRange?: ImmediateInvoice.BillingPeriodRange;
 
+      /**
+       * Currency code
+       */
       currency?: string | null;
 
+      /**
+       * Total discount amount
+       */
       discount?: number;
 
+      /**
+       * Discount breakdown
+       */
       discountDetails?: ImmediateInvoice.DiscountDetails;
 
+      /**
+       * Applied discounts
+       */
       discounts?: Array<ImmediateInvoice.Discount>;
 
+      /**
+       * Line items
+       */
       lines?: Array<ImmediateInvoice.Line>;
 
+      /**
+       * Tax amount
+       */
       tax?: number;
     }
 
     export namespace ImmediateInvoice {
+      /**
+       * Billing period covered
+       */
       export interface BillingPeriodRange {
         /**
          * Billing period end date
@@ -1377,35 +1475,80 @@ export namespace SubscriptionPreviewResponse {
         start: string;
       }
 
+      /**
+       * Discount breakdown
+       */
       export interface DiscountDetails {
+        /**
+         * Promo code used
+         */
         code?: string;
 
+        /**
+         * Fixed discount amount
+         */
         fixedAmount?: number;
 
+        /**
+         * Percentage discount
+         */
         percentage?: number;
       }
 
+      /**
+       * Applied discount amount
+       */
       export interface Discount {
+        /**
+         * Discount amount
+         */
         amount: number;
 
+        /**
+         * Currency code
+         */
         currency: string;
 
+        /**
+         * Discount description
+         */
         description: string;
       }
 
+      /**
+       * Invoice line item
+       */
       export interface Line {
+        /**
+         * Currency code
+         */
         currency: string;
 
+        /**
+         * Line item description
+         */
         description: string;
 
+        /**
+         * Line subtotal
+         */
         subTotal: number;
 
+        /**
+         * Price per unit
+         */
         unitPrice: number;
 
+        /**
+         * Quantity
+         */
         quantity?: number;
       }
     }
 
+    /**
+     * Billing period range
+     */
     export interface BillingPeriodRange {
       /**
        * Billing period end date
@@ -1418,33 +1561,75 @@ export namespace SubscriptionPreviewResponse {
       start?: string;
     }
 
+    /**
+     * Free item in subscription
+     */
     export interface FreeItem {
+      /**
+       * Addon ID
+       */
       addonId: string;
 
+      /**
+       * Quantity
+       */
       quantity: number;
     }
 
+    /**
+     * Recurring invoice preview
+     */
     export interface RecurringInvoice {
+      /**
+       * Subtotal before discounts
+       */
       subTotal: number;
 
+      /**
+       * Invoice total
+       */
       total: number;
 
+      /**
+       * Billing period covered
+       */
       billingPeriodRange?: RecurringInvoice.BillingPeriodRange;
 
+      /**
+       * Currency code
+       */
       currency?: string | null;
 
+      /**
+       * Total discount amount
+       */
       discount?: number;
 
+      /**
+       * Discount breakdown
+       */
       discountDetails?: RecurringInvoice.DiscountDetails;
 
+      /**
+       * Applied discounts
+       */
       discounts?: Array<RecurringInvoice.Discount>;
 
+      /**
+       * Line items
+       */
       lines?: Array<RecurringInvoice.Line>;
 
+      /**
+       * Tax amount
+       */
       tax?: number;
     }
 
     export namespace RecurringInvoice {
+      /**
+       * Billing period covered
+       */
       export interface BillingPeriodRange {
         /**
          * Billing period end date
@@ -1457,42 +1642,93 @@ export namespace SubscriptionPreviewResponse {
         start: string;
       }
 
+      /**
+       * Discount breakdown
+       */
       export interface DiscountDetails {
+        /**
+         * Promo code used
+         */
         code?: string;
 
+        /**
+         * Fixed discount amount
+         */
         fixedAmount?: number;
 
+        /**
+         * Percentage discount
+         */
         percentage?: number;
       }
 
+      /**
+       * Applied discount amount
+       */
       export interface Discount {
+        /**
+         * Discount amount
+         */
         amount: number;
 
+        /**
+         * Currency code
+         */
         currency: string;
 
+        /**
+         * Discount description
+         */
         description: string;
       }
 
+      /**
+       * Invoice line item
+       */
       export interface Line {
+        /**
+         * Currency code
+         */
         currency: string;
 
+        /**
+         * Line item description
+         */
         description: string;
 
+        /**
+         * Line subtotal
+         */
         subTotal: number;
 
+        /**
+         * Price per unit
+         */
         unitPrice: number;
 
+        /**
+         * Quantity
+         */
         quantity?: number;
       }
     }
   }
 }
 
+/**
+ * Response object
+ */
 export interface SubscriptionTransferResponse {
+  /**
+   * Customer subscription to a plan
+   */
   data: SubscriptionTransferResponse.Data;
 }
 
 export namespace SubscriptionTransferResponse {
+  /**
+   * Customer subscription to a plan
+   */
   export interface Data {
     /**
      * Subscription ID
@@ -1607,8 +1843,6 @@ export namespace SubscriptionTransferResponse {
      * Subscription trial end date
      */
     trialEndDate?: string | null;
-
-    unitQuantity?: number;
   }
 
   export namespace Data {
@@ -1647,10 +1881,13 @@ export interface SubscriptionCreateParams {
   /**
    * Unique identifier for the subscription
    */
-  id?: string | null;
+  id?: string;
 
   addons?: Array<SubscriptionCreateParams.Addon>;
 
+  /**
+   * Coupon configuration
+   */
   appliedCoupon?: SubscriptionCreateParams.AppliedCoupon;
 
   /**
@@ -1670,12 +1907,18 @@ export interface SubscriptionCreateParams {
 
   billingInformation?: SubscriptionCreateParams.BillingInformation;
 
+  /**
+   * Billing period (MONTHLY or ANNUALLY)
+   */
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
 
   budget?: SubscriptionCreateParams.Budget | null;
 
   charges?: Array<SubscriptionCreateParams.Charge>;
 
+  /**
+   * Checkout page configuration for payment collection
+   */
   checkoutOptions?: SubscriptionCreateParams.CheckoutOptions;
 
   /**
@@ -1719,6 +1962,9 @@ export interface SubscriptionCreateParams {
 
   subscriptionEntitlements?: Array<SubscriptionCreateParams.SubscriptionEntitlement>;
 
+  /**
+   * Trial period override settings
+   */
   trialOverrideConfiguration?: SubscriptionCreateParams.TrialOverrideConfiguration;
 
   unitQuantity?: number;
@@ -1737,19 +1983,40 @@ export namespace SubscriptionCreateParams {
     quantity?: number;
   }
 
+  /**
+   * Coupon configuration
+   */
   export interface AppliedCoupon {
+    /**
+     * Billing provider coupon ID
+     */
     billingCouponId?: string;
 
+    /**
+     * Coupon timing configuration
+     */
     configuration?: AppliedCoupon.Configuration;
 
+    /**
+     * Stigg coupon ID
+     */
     couponId?: string;
 
+    /**
+     * Ad-hoc discount configuration
+     */
     discount?: AppliedCoupon.Discount;
 
+    /**
+     * Promotion code to apply
+     */
     promotionCode?: string;
   }
 
   export namespace AppliedCoupon {
+    /**
+     * Coupon timing configuration
+     */
     export interface Configuration {
       /**
        * Coupon start date
@@ -1757,23 +2024,47 @@ export namespace SubscriptionCreateParams {
       startDate?: string;
     }
 
+    /**
+     * Ad-hoc discount configuration
+     */
     export interface Discount {
+      /**
+       * Fixed amounts off by currency
+       */
       amountsOff?: Array<Discount.AmountsOff> | null;
 
+      /**
+       * Ad-hoc discount
+       */
       description?: string;
 
+      /**
+       * Duration in months
+       */
       durationInMonths?: number;
 
+      /**
+       * Discount name
+       */
       name?: string;
 
+      /**
+       * Percentage discount
+       */
       percentOff?: number;
     }
 
     export namespace Discount {
       export interface AmountsOff {
+        /**
+         * The price amount
+         */
         amount: number;
 
-        currency?:
+        /**
+         * The price currency
+         */
+        currency:
           | 'usd'
           | 'aed'
           | 'all'
@@ -1994,6 +2285,9 @@ export namespace SubscriptionCreateParams {
     limit: number;
   }
 
+  /**
+   * Charge item
+   */
   export interface Charge {
     /**
      * Charge ID
@@ -2011,6 +2305,9 @@ export namespace SubscriptionCreateParams {
     type: 'FEATURE' | 'CREDIT';
   }
 
+  /**
+   * Checkout page configuration for payment collection
+   */
   export interface CheckoutOptions {
     /**
      * URL to redirect to if checkout is canceled
@@ -2676,6 +2973,9 @@ export namespace SubscriptionCreateParams {
   }
 
   export interface SubscriptionEntitlement {
+    /**
+     * Feature ID
+     */
     featureId: string;
 
     usageLimit: number;
@@ -2683,6 +2983,9 @@ export namespace SubscriptionCreateParams {
     isGranted?: boolean;
   }
 
+  /**
+   * Trial period override settings
+   */
   export interface TrialOverrideConfiguration {
     /**
      * Whether the subscription should start with a trial period
@@ -2708,22 +3011,23 @@ export interface SubscriptionListParams extends MyCursorIDPageParams {
   customerId?: string;
 
   /**
-   * Filter by subscription status (comma-separated for multiple statuses, e.g.,
-   * ACTIVE,IN_TRIAL)
+   * Filter by status (comma-separated)
    */
   status?: string;
 }
 
 export interface SubscriptionDelegateParams {
   /**
-   * The customer ID to delegate the subscription to
+   * The unique identifier of the customer who will assume payment responsibility for
+   * this subscription. This customer must already exist in your Stigg account and
+   * have a valid payment method if the subscription requires payment.
    */
   targetCustomerId: string;
 }
 
 export interface SubscriptionMigrateParams {
   /**
-   * When to migrate the subscription: IMMEDIATE or END_OF_BILLING_PERIOD
+   * When to migrate (immediate or period end)
    */
   subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE';
 }
@@ -2739,24 +3043,54 @@ export interface SubscriptionPreviewParams {
    */
   planId: string;
 
+  /**
+   * Addons to include
+   */
   addons?: Array<SubscriptionPreviewParams.Addon>;
 
+  /**
+   * Coupon or discount to apply
+   */
   appliedCoupon?: SubscriptionPreviewParams.AppliedCoupon;
 
+  /**
+   * Billable features with quantities
+   */
   billableFeatures?: Array<SubscriptionPreviewParams.BillableFeature>;
 
+  /**
+   * ISO 3166-1 country code for localization
+   */
   billingCountryCode?: string;
 
+  /**
+   * Billing and tax configuration
+   */
   billingInformation?: SubscriptionPreviewParams.BillingInformation;
 
+  /**
+   * Billing period (MONTHLY or ANNUALLY)
+   */
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
 
+  /**
+   * One-time or recurring charges
+   */
   charges?: Array<SubscriptionPreviewParams.Charge>;
 
+  /**
+   * Paying customer ID for delegated billing
+   */
   payingCustomerId?: string;
 
+  /**
+   * Resource ID for multi-instance subscriptions
+   */
   resourceId?: string;
 
+  /**
+   * When to apply subscription changes
+   */
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
 
   /**
@@ -2764,34 +3098,67 @@ export interface SubscriptionPreviewParams {
    */
   startDate?: string;
 
+  /**
+   * Trial period override settings
+   */
   trialOverrideConfiguration?: SubscriptionPreviewParams.TrialOverrideConfiguration;
 
+  /**
+   * Unit quantity for per-unit pricing
+   */
   unitQuantity?: number;
 }
 
 export namespace SubscriptionPreviewParams {
+  /**
+   * Addon configuration
+   */
   export interface Addon {
     /**
      * Addon ID
      */
     addonId: string;
 
+    /**
+     * Number of addon instances
+     */
     quantity?: number;
   }
 
+  /**
+   * Coupon or discount to apply
+   */
   export interface AppliedCoupon {
+    /**
+     * Billing provider coupon ID
+     */
     billingCouponId?: string;
 
+    /**
+     * Coupon timing configuration
+     */
     configuration?: AppliedCoupon.Configuration;
 
+    /**
+     * Stigg coupon ID
+     */
     couponId?: string;
 
+    /**
+     * Ad-hoc discount configuration
+     */
     discount?: AppliedCoupon.Discount;
 
+    /**
+     * Promotion code to apply
+     */
     promotionCode?: string;
   }
 
   export namespace AppliedCoupon {
+    /**
+     * Coupon timing configuration
+     */
     export interface Configuration {
       /**
        * Coupon start date
@@ -2799,23 +3166,47 @@ export namespace SubscriptionPreviewParams {
       startDate?: string;
     }
 
+    /**
+     * Ad-hoc discount configuration
+     */
     export interface Discount {
+      /**
+       * Fixed amounts off by currency
+       */
       amountsOff?: Array<Discount.AmountsOff> | null;
 
+      /**
+       * Ad-hoc discount
+       */
       description?: string;
 
+      /**
+       * Duration in months
+       */
       durationInMonths?: number;
 
+      /**
+       * Discount name
+       */
       name?: string;
 
+      /**
+       * Percentage discount
+       */
       percentOff?: number;
     }
 
     export namespace Discount {
       export interface AmountsOff {
+        /**
+         * The price amount
+         */
         amount: number;
 
-        currency?:
+        /**
+         * The price currency
+         */
+        currency:
           | 'usd'
           | 'aed'
           | 'all'
@@ -2936,40 +3327,85 @@ export namespace SubscriptionPreviewParams {
     }
   }
 
+  /**
+   * Feature with quantity
+   */
   export interface BillableFeature {
     /**
      * Feature ID
      */
     featureId: string;
 
+    /**
+     * Quantity of feature units
+     */
     quantity: number;
   }
 
+  /**
+   * Billing and tax configuration
+   */
   export interface BillingInformation {
+    /**
+     * Billing address
+     */
     billingAddress?: BillingInformation.BillingAddress;
 
+    /**
+     * Connected account ID for platform billing
+     */
     chargeOnBehalfOfAccount?: string;
 
+    /**
+     * Billing integration ID
+     */
     integrationId?: string;
 
+    /**
+     * Days until invoice is due
+     */
     invoiceDaysUntilDue?: number;
 
+    /**
+     * Whether subscription is backdated
+     */
     isBackdated?: boolean;
 
+    /**
+     * Whether invoice is already paid
+     */
     isInvoicePaid?: boolean;
 
+    /**
+     * Additional billing metadata
+     */
     metadata?: unknown;
 
+    /**
+     * Proration behavior
+     */
     prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE';
 
+    /**
+     * Customer tax IDs
+     */
     taxIds?: Array<BillingInformation.TaxID>;
 
+    /**
+     * Tax percentage to apply
+     */
     taxPercentage?: number;
 
+    /**
+     * Tax rate IDs from billing provider
+     */
     taxRateIds?: Array<string>;
   }
 
   export namespace BillingInformation {
+    /**
+     * Billing address
+     */
     export interface BillingAddress {
       city?: string;
 
@@ -2984,13 +3420,25 @@ export namespace SubscriptionPreviewParams {
       state?: string;
     }
 
+    /**
+     * Tax exemption identifier
+     */
     export interface TaxID {
+      /**
+       * Tax exemption type (e.g., vat, gst)
+       */
       type: string;
 
+      /**
+       * Tax exemption identifier value
+       */
       value: string;
     }
   }
 
+  /**
+   * Charge item
+   */
   export interface Charge {
     /**
      * Charge ID
@@ -3008,9 +3456,18 @@ export namespace SubscriptionPreviewParams {
     type: 'FEATURE' | 'CREDIT';
   }
 
+  /**
+   * Trial period override settings
+   */
   export interface TrialOverrideConfiguration {
+    /**
+     * Whether to start as trial
+     */
     isTrial: boolean;
 
+    /**
+     * Behavior when trial ends
+     */
     trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION';
 
     /**
@@ -3022,8 +3479,7 @@ export namespace SubscriptionPreviewParams {
 
 export interface SubscriptionTransferParams {
   /**
-   * The resource ID to transfer the subscription to. The destination resource must
-   * belong to the same customer.
+   * Resource ID to transfer the subscription to
    */
   destinationResourceId: string;
 }

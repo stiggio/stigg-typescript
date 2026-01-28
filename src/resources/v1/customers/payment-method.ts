@@ -8,7 +8,7 @@ import { path } from '../../../internal/utils/path';
 
 export class PaymentMethod extends APIResource {
   /**
-   * Perform payment-method attachment on a Customer
+   * Attach payment method
    */
   attach(
     id: string,
@@ -19,7 +19,7 @@ export class PaymentMethod extends APIResource {
   }
 
   /**
-   * Perform payment-method detachment on a Customer
+   * Detach payment method
    */
   detach(id: string, options?: RequestOptions): APIPromise<CustomersAPI.CustomerResponse> {
     return this._client.delete(path`/api/v1/customers/${id}/payment-method`, options);
@@ -52,6 +52,9 @@ export interface PaymentMethodAttachParams {
     | 'OPEN_FGA'
     | 'APP_STORE';
 
+  /**
+   * Customers selected currency
+   */
   billingCurrency?:
     | 'usd'
     | 'aed'

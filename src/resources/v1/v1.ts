@@ -48,29 +48,46 @@ export class V1 extends APIResource {
   coupons: CouponsAPI.Coupons = new CouponsAPI.Coupons(this._client);
 
   /**
-   * Create events
+   * Report usage events
    */
   createEvent(body: V1CreateEventParams, options?: RequestOptions): APIPromise<V1CreateEventResponse> {
     return this._client.post('/api/v1/events', { body, ...options });
   }
 
   /**
-   * Create a new Usage
+   * Report usage measurements
    */
   createUsage(body: V1CreateUsageParams, options?: RequestOptions): APIPromise<V1CreateUsageResponse> {
     return this._client.post('/api/v1/usage', { body, ...options });
   }
 }
 
+/**
+ * Response object
+ */
 export interface V1CreateEventResponse {
+  /**
+   * Empty success response confirming that events were successfully ingested and
+   * queued for processing by Stigg's metering system.
+   */
   data: unknown;
 }
 
+/**
+ * Response containing reported usage measurements with current usage values,
+ * period information, and reset dates for each measurement.
+ */
 export interface V1CreateUsageResponse {
+  /**
+   * Array of usage measurements with current values and period info
+   */
   data: Array<V1CreateUsageResponse.Data>;
 }
 
 export namespace V1CreateUsageResponse {
+  /**
+   * Recorded usage with period info
+   */
   export interface Data {
     /**
      * Unique identifier for the entity
@@ -139,6 +156,9 @@ export interface V1CreateEventParams {
 }
 
 export namespace V1CreateEventParams {
+  /**
+   * Raw usage event
+   */
   export interface Event {
     /**
      * Customer id
@@ -180,6 +200,9 @@ export interface V1CreateUsageParams {
 }
 
 export namespace V1CreateUsageParams {
+  /**
+   * Single usage measurement
+   */
   export interface Usage {
     /**
      * Customer id

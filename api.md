@@ -35,14 +35,6 @@ Methods:
 
 ### Usage
 
-Types:
-
-- <code><a href="./src/resources/v1/customers/usage.ts">UsageRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1/customers/{customerId}/usage/features/{featureId}">client.v1.customers.usage.<a href="./src/resources/v1/customers/usage.ts">retrieve</a>(featureID, { ...params }) -> UsageRetrieveResponse</code>
-
 ## Subscriptions
 
 Types:
