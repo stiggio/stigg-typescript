@@ -9,43 +9,6 @@ const client = new Stigg({
 
 describe('resource customers', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.v1.customers.create({ id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.v1.customers.create({
-      id: 'id',
-      couponId: 'couponId',
-      defaultPaymentMethod: {
-        billingId: 'billingId',
-        cardExpiryMonth: 0,
-        cardExpiryYear: 0,
-        cardLast4Digits: 'cardLast4Digits',
-        type: 'CARD',
-      },
-      email: 'dev@stainless.com',
-      integrations: [
-        {
-          id: 'id',
-          syncedEntityId: 'syncedEntityId',
-          vendorIdentifier: 'AUTH0',
-        },
-      ],
-      metadata: { foo: 'string' },
-      name: 'name',
-    });
-  });
-
-  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.v1.customers.retrieve('x');
     const rawResponse = await responsePromise.asResponse();
@@ -106,6 +69,79 @@ describe('resource customers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('import: only required params', async () => {
+    const responsePromise = client.v1.customers.import({
+      customers: [
+        {
+          id: 'id',
+          email: 'dev@stainless.com',
+          name: 'name',
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('import: required and optional params', async () => {
+    const response = await client.v1.customers.import({
+      customers: [
+        {
+          id: 'id',
+          email: 'dev@stainless.com',
+          name: 'name',
+          metadata: { foo: 'string' },
+          paymentMethodId: 'paymentMethodId',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+        },
+      ],
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('provision: only required params', async () => {
+    const responsePromise = client.v1.customers.provision({ id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('provision: required and optional params', async () => {
+    const response = await client.v1.customers.provision({
+      id: 'id',
+      couponId: 'couponId',
+      defaultPaymentMethod: {
+        billingId: 'billingId',
+        cardExpiryMonth: 0,
+        cardExpiryYear: 0,
+        cardLast4Digits: 'cardLast4Digits',
+        type: 'CARD',
+      },
+      email: 'dev@stainless.com',
+      integrations: [
+        {
+          id: 'id',
+          syncedEntityId: 'syncedEntityId',
+          vendorIdentifier: 'AUTH0',
+        },
+      ],
+      metadata: { foo: 'string' },
+      name: 'name',
+    });
   });
 
   // Prism tests are disabled
