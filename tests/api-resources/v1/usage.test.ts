@@ -7,17 +7,12 @@ const client = new Stigg({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource v1', () => {
+describe('resource usage', () => {
   // Prism tests are disabled
-  test.skip('createEvent: only required params', async () => {
-    const responsePromise = client.v1.createEvent({
-      events: [
-        {
-          customerId: 'customerId',
-          eventName: 'x',
-          idempotencyKey: 'x',
-        },
-      ],
+  test.skip('history: only required params', async () => {
+    const responsePromise = client.v1.usage.history('featureId', {
+      customerId: 'customerId',
+      startDate: '2019-12-27T18:11:19.117Z',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,24 +24,19 @@ describe('resource v1', () => {
   });
 
   // Prism tests are disabled
-  test.skip('createEvent: required and optional params', async () => {
-    const response = await client.v1.createEvent({
-      events: [
-        {
-          customerId: 'customerId',
-          eventName: 'x',
-          idempotencyKey: 'x',
-          dimensions: { foo: 'string' },
-          resourceId: 'resourceId',
-          timestamp: '2019-12-27T18:11:19.117Z',
-        },
-      ],
+  test.skip('history: required and optional params', async () => {
+    const response = await client.v1.usage.history('featureId', {
+      customerId: 'customerId',
+      startDate: '2019-12-27T18:11:19.117Z',
+      endDate: '2019-12-27T18:11:19.117Z',
+      groupBy: 'groupBy',
+      resourceId: 'resourceId',
     });
   });
 
   // Prism tests are disabled
-  test.skip('createUsage: only required params', async () => {
-    const responsePromise = client.v1.createUsage({
+  test.skip('report: only required params', async () => {
+    const responsePromise = client.v1.usage.report({
       usages: [
         {
           customerId: 'customerId',
@@ -65,8 +55,8 @@ describe('resource v1', () => {
   });
 
   // Prism tests are disabled
-  test.skip('createUsage: required and optional params', async () => {
-    const response = await client.v1.createUsage({
+  test.skip('report: required and optional params', async () => {
+    const response = await client.v1.usage.report({
       usages: [
         {
           customerId: 'customerId',

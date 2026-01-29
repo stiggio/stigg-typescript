@@ -4,10 +4,18 @@ export {
   Customers,
   type CustomerResponse,
   type CustomerListResponse,
-  type CustomerCreateParams,
+  type CustomerImportResponse,
   type CustomerUpdateParams,
   type CustomerListParams,
+  type CustomerImportParams,
+  type CustomerProvisionParams,
   type CustomerListResponsesMyCursorIDPage,
 } from './customers';
 export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
-export { Usage } from './usage';
+export {
+  PromotionalEntitlements,
+  type PromotionalEntitlementGrantResponse,
+  type PromotionalEntitlementRevokeResponse,
+  type PromotionalEntitlementGrantParams,
+  type PromotionalEntitlementRevokeParams,
+} from './promotional-entitlements';

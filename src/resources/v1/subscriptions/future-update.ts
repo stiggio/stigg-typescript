@@ -9,17 +9,14 @@ export class FutureUpdate extends APIResource {
   /**
    * Cancel pending payment update
    */
-  cancelPendingPayment(
-    id: string,
-    options?: RequestOptions,
-  ): APIPromise<FutureUpdateCancelPendingPaymentResponse> {
+  cancelPendingPayment(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/pending-payment`, options);
   }
 
   /**
    * Cancel scheduled update
    */
-  cancelSchedule(id: string, options?: RequestOptions): APIPromise<FutureUpdateCancelScheduleResponse> {
+  cancelSchedule(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/schedule`, options);
   }
 }
@@ -27,27 +24,11 @@ export class FutureUpdate extends APIResource {
 /**
  * Response object
  */
-export interface FutureUpdateCancelPendingPaymentResponse {
-  data: FutureUpdateCancelPendingPaymentResponse.Data;
+export interface CancelSubscription {
+  data: CancelSubscription.Data;
 }
 
-export namespace FutureUpdateCancelPendingPaymentResponse {
-  export interface Data {
-    /**
-     * Subscription ID
-     */
-    id: string;
-  }
-}
-
-/**
- * Response object
- */
-export interface FutureUpdateCancelScheduleResponse {
-  data: FutureUpdateCancelScheduleResponse.Data;
-}
-
-export namespace FutureUpdateCancelScheduleResponse {
+export namespace CancelSubscription {
   export interface Data {
     /**
      * Subscription ID
@@ -57,8 +38,5 @@ export namespace FutureUpdateCancelScheduleResponse {
 }
 
 export declare namespace FutureUpdate {
-  export {
-    type FutureUpdateCancelPendingPaymentResponse as FutureUpdateCancelPendingPaymentResponse,
-    type FutureUpdateCancelScheduleResponse as FutureUpdateCancelScheduleResponse,
-  };
+  export { type CancelSubscription as CancelSubscription };
 }

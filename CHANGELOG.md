@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2026-01-29)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **api:** update stainless config ([c1c9e66](https://github.com/stiggio/stigg-typescript/commit/c1c9e66bf79510ca37cb3178105e0c1213d2b606))
+
 ## 0.1.0-alpha.3 (2026-01-28)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
