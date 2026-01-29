@@ -3,8 +3,14 @@
 import { APIResource } from '../../../core/resource';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
-import * as UsageAPI from './usage';
-import { Usage } from './usage';
+import * as PromotionalEntitlementsAPI from './promotional-entitlements';
+import {
+  PromotionalEntitlementGrantParams,
+  PromotionalEntitlementGrantResponse,
+  PromotionalEntitlementRevokeParams,
+  PromotionalEntitlementRevokeResponse,
+  PromotionalEntitlements,
+} from './promotional-entitlements';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -12,14 +18,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Customers extends APIResource {
   paymentMethod: PaymentMethodAPI.PaymentMethod = new PaymentMethodAPI.PaymentMethod(this._client);
-  usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
-
-  /**
-   * Provision customer
-   */
-  create(body: CustomerCreateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
-    return this._client.post('/api/v1/customers', { body, ...options });
-  }
+  promotionalEntitlements: PromotionalEntitlementsAPI.PromotionalEntitlements =
+    new PromotionalEntitlementsAPI.PromotionalEntitlements(this._client);
 
   /**
    * Get a single customer by ID
@@ -53,6 +53,20 @@ export class Customers extends APIResource {
    */
   archive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/archive`, options);
+  }
+
+  /**
+   * Bulk import customers
+   */
+  import(body: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
+    return this._client.post('/api/v1/customers/import', { body, ...options });
+  }
+
+  /**
+   * Provision customer
+   */
+  provision(body: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
+    return this._client.post('/api/v1/customers', { body, ...options });
   }
 
   /**
@@ -311,102 +325,25 @@ export namespace CustomerListResponse {
   }
 }
 
-export interface CustomerCreateParams {
+/**
+ * Response object
+ */
+export interface CustomerImportResponse {
   /**
-   * Customer slug
+   * List of newly created customer IDs from the import operation.
    */
-  id: string;
-
-  /**
-   * Customer level coupon
-   */
-  couponId?: string | null;
-
-  /**
-   * The default payment method details
-   */
-  defaultPaymentMethod?: CustomerCreateParams.DefaultPaymentMethod | null;
-
-  /**
-   * The email of the customer
-   */
-  email?: string | null;
-
-  /**
-   * List of integrations
-   */
-  integrations?: Array<CustomerCreateParams.Integration>;
-
-  /**
-   * Additional metadata
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * The name of the customer
-   */
-  name?: string | null;
+  data: CustomerImportResponse.Data;
 }
 
-export namespace CustomerCreateParams {
+export namespace CustomerImportResponse {
   /**
-   * The default payment method details
+   * List of newly created customer IDs from the import operation.
    */
-  export interface DefaultPaymentMethod {
+  export interface Data {
     /**
-     * The default payment method id
+     * Customer IDs created during import
      */
-    billingId: string | null;
-
-    /**
-     * The expiration month of the default payment method
-     */
-    cardExpiryMonth: number | null;
-
-    /**
-     * The expiration year of the default payment method
-     */
-    cardExpiryYear: number | null;
-
-    /**
-     * The last 4 digits of the default payment method
-     */
-    cardLast4Digits: string | null;
-
-    /**
-     * The default payment method type
-     */
-    type: 'CARD' | 'BANK' | 'CASH_APP';
-  }
-
-  /**
-   * External billing or CRM integration link
-   */
-  export interface Integration {
-    /**
-     * Integration details
-     */
-    id: string;
-
-    /**
-     * Synced entity id
-     */
-    syncedEntityId: string | null;
-
-    /**
-     * The vendor identifier of integration
-     */
-    vendorIdentifier:
-      | 'AUTH0'
-      | 'ZUORA'
-      | 'STRIPE'
-      | 'HUBSPOT'
-      | 'AWS_MARKETPLACE'
-      | 'SNOWFLAKE'
-      | 'SALESFORCE'
-      | 'BIG_QUERY'
-      | 'OPEN_FGA'
-      | 'APP_STORE';
+    newCustomers: Array<string>;
   }
 }
 
@@ -471,20 +408,168 @@ export namespace CustomerUpdateParams {
 
 export interface CustomerListParams extends MyCursorIDPageParams {}
 
+export interface CustomerImportParams {
+  /**
+   * List of customer objects to import
+   */
+  customers: Array<CustomerImportParams.Customer>;
+}
+
+export namespace CustomerImportParams {
+  export interface Customer {
+    /**
+     * Customer slug
+     */
+    id: string;
+
+    /**
+     * The email of the customer
+     */
+    email: string | null;
+
+    /**
+     * The name of the customer
+     */
+    name: string | null;
+
+    /**
+     * Additional metadata
+     */
+    metadata?: { [key: string]: string };
+
+    /**
+     * Billing provider payment method id
+     */
+    paymentMethodId?: string;
+
+    /**
+     * Timestamp of when the record was last updated
+     */
+    updatedAt?: string;
+  }
+}
+
+export interface CustomerProvisionParams {
+  /**
+   * Customer slug
+   */
+  id: string;
+
+  /**
+   * Customer level coupon
+   */
+  couponId?: string | null;
+
+  /**
+   * The default payment method details
+   */
+  defaultPaymentMethod?: CustomerProvisionParams.DefaultPaymentMethod | null;
+
+  /**
+   * The email of the customer
+   */
+  email?: string | null;
+
+  /**
+   * List of integrations
+   */
+  integrations?: Array<CustomerProvisionParams.Integration>;
+
+  /**
+   * Additional metadata
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * The name of the customer
+   */
+  name?: string | null;
+}
+
+export namespace CustomerProvisionParams {
+  /**
+   * The default payment method details
+   */
+  export interface DefaultPaymentMethod {
+    /**
+     * The default payment method id
+     */
+    billingId: string | null;
+
+    /**
+     * The expiration month of the default payment method
+     */
+    cardExpiryMonth: number | null;
+
+    /**
+     * The expiration year of the default payment method
+     */
+    cardExpiryYear: number | null;
+
+    /**
+     * The last 4 digits of the default payment method
+     */
+    cardLast4Digits: string | null;
+
+    /**
+     * The default payment method type
+     */
+    type: 'CARD' | 'BANK' | 'CASH_APP';
+  }
+
+  /**
+   * External billing or CRM integration link
+   */
+  export interface Integration {
+    /**
+     * Integration details
+     */
+    id: string;
+
+    /**
+     * Synced entity id
+     */
+    syncedEntityId: string | null;
+
+    /**
+     * The vendor identifier of integration
+     */
+    vendorIdentifier:
+      | 'AUTH0'
+      | 'ZUORA'
+      | 'STRIPE'
+      | 'HUBSPOT'
+      | 'AWS_MARKETPLACE'
+      | 'SNOWFLAKE'
+      | 'SALESFORCE'
+      | 'BIG_QUERY'
+      | 'OPEN_FGA'
+      | 'APP_STORE';
+  }
+}
+
 Customers.PaymentMethod = PaymentMethod;
-Customers.Usage = Usage;
+Customers.PromotionalEntitlements = PromotionalEntitlements;
 
 export declare namespace Customers {
   export {
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
+    type CustomerImportResponse as CustomerImportResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
-    type CustomerCreateParams as CustomerCreateParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
+    type CustomerImportParams as CustomerImportParams,
+    type CustomerProvisionParams as CustomerProvisionParams,
   };
 
   export { PaymentMethod as PaymentMethod, type PaymentMethodAttachParams as PaymentMethodAttachParams };
 
-  export { Usage as Usage };
+  export {
+    PromotionalEntitlements as PromotionalEntitlements,
+    type PromotionalEntitlementGrantResponse as PromotionalEntitlementGrantResponse,
+    type PromotionalEntitlementRevokeResponse as PromotionalEntitlementRevokeResponse,
+    type PromotionalEntitlementGrantParams as PromotionalEntitlementGrantParams,
+    type PromotionalEntitlementRevokeParams as PromotionalEntitlementRevokeParams,
+  };
 }

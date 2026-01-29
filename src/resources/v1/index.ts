@@ -2,8 +2,7 @@
 
 export {
   Coupons,
-  type CouponCreateResponse,
-  type CouponRetrieveResponse,
+  type Coupon,
   type CouponListResponse,
   type CouponCreateParams,
   type CouponListParams,
@@ -13,32 +12,37 @@ export {
   Customers,
   type CustomerResponse,
   type CustomerListResponse,
-  type CustomerCreateParams,
+  type CustomerImportResponse,
   type CustomerUpdateParams,
   type CustomerListParams,
+  type CustomerImportParams,
+  type CustomerProvisionParams,
   type CustomerListResponsesMyCursorIDPage,
 } from './customers/index';
+export { Events, type EventReportResponse, type EventReportParams } from './events';
 export {
   Subscriptions,
-  type SubscriptionCreateResponse,
-  type SubscriptionRetrieveResponse,
+  type Subscription,
   type SubscriptionListResponse,
-  type SubscriptionDelegateResponse,
-  type SubscriptionMigrateResponse,
+  type SubscriptionImportResponse,
   type SubscriptionPreviewResponse,
-  type SubscriptionTransferResponse,
-  type SubscriptionCreateParams,
+  type SubscriptionProvisionResponse,
+  type SubscriptionUpdateParams,
   type SubscriptionListParams,
+  type SubscriptionCancelParams,
   type SubscriptionDelegateParams,
+  type SubscriptionImportParams,
   type SubscriptionMigrateParams,
   type SubscriptionPreviewParams,
+  type SubscriptionProvisionParams,
   type SubscriptionTransferParams,
   type SubscriptionListResponsesMyCursorIDPage,
 } from './subscriptions/index';
 export {
-  V1,
-  type V1CreateEventResponse,
-  type V1CreateUsageResponse,
-  type V1CreateEventParams,
-  type V1CreateUsageParams,
-} from './v1';
+  Usage,
+  type UsageHistoryResponse,
+  type UsageReportResponse,
+  type UsageHistoryParams,
+  type UsageReportParams,
+} from './usage';
+export { V1 } from './v1';

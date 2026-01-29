@@ -18,13 +18,7 @@ import { AbstractPage, type MyCursorIDPageParams, MyCursorIDPageResponse } from 
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  V1,
-  V1CreateEventParams,
-  V1CreateEventResponse,
-  V1CreateUsageParams,
-  V1CreateUsageResponse,
-} from './resources/v1/v1';
+import { V1 } from './resources/v1/v1';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -755,11 +749,5 @@ export declare namespace Stigg {
     type MyCursorIDPageResponse as MyCursorIDPageResponse,
   };
 
-  export {
-    V1 as V1,
-    type V1CreateEventResponse as V1CreateEventResponse,
-    type V1CreateUsageResponse as V1CreateUsageResponse,
-    type V1CreateEventParams as V1CreateEventParams,
-    type V1CreateUsageParams as V1CreateUsageParams,
-  };
+  export { V1 as V1 };
 }
