@@ -777,7 +777,7 @@ export namespace SubscriptionProvisionResponse {
      */
     id: string;
 
-    entitlements: Array<Data.Entitlement>;
+    entitlements: Array<Data.UnionMember0 | Data.UnionMember1> | null;
 
     /**
      * Provision status: SUCCESS or PAYMENT_REQUIRED
@@ -785,69 +785,168 @@ export namespace SubscriptionProvisionResponse {
     status: 'SUCCESS' | 'PAYMENT_REQUIRED';
 
     /**
+     * Created subscription (when status is SUCCESS)
+     */
+    subscription: Data.Subscription | null;
+
+    /**
      * Checkout billing ID when payment is required
      */
-    checkoutBillingId?: string | null;
+    checkoutBillingId?: string;
 
     /**
      * URL to complete payment when PAYMENT_REQUIRED
      */
-    checkoutUrl?: string | null;
+    checkoutUrl?: string;
 
     /**
      * Whether the subscription is scheduled for future activation
      */
     isScheduled?: boolean;
-
-    /**
-     * Created subscription (when status is SUCCESS)
-     */
-    subscription?: Data.Subscription;
   }
 
   export namespace Data {
-    export interface Entitlement {
-      accessDeniedReason?: string | null;
+    export interface UnionMember0 {
+      accessDeniedReason:
+        | 'FeatureNotFound'
+        | 'CustomerNotFound'
+        | 'CustomerIsArchived'
+        | 'CustomerResourceNotFound'
+        | 'NoActiveSubscription'
+        | 'NoFeatureEntitlementInSubscription'
+        | 'RequestedUsageExceedingLimit'
+        | 'RequestedValuesMismatch'
+        | 'BudgetExceeded'
+        | 'Unknown'
+        | 'FeatureTypeMismatch'
+        | 'Revoked'
+        | 'InsufficientCredits'
+        | 'EntitlementNotFound'
+        | null;
+
+      isGranted: boolean;
+
+      type: 'FEATURE';
 
       currentUsage?: number;
 
       /**
-       * entitlement updated at
+       * Timestamp of the last update to the entitlement grant or configuration.
        */
-      entitlementUpdatedAt?: string | null;
+      entitlementUpdatedAt?: string;
 
-      feature?: Entitlement.Feature | null;
+      feature?: UnionMember0.Feature;
 
-      hasUnlimitedUsage?: boolean | null;
-
-      isGranted?: boolean;
+      hasUnlimitedUsage?: boolean;
 
       resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | null;
 
       usageLimit?: number | null;
 
       /**
-       * usage period anchor
+       * The anchor for calculating the usage period for metered entitlements with a
+       * reset period configured
        */
-      usagePeriodAnchor?: string | null;
+      usagePeriodAnchor?: string;
 
       /**
-       * usage period end
+       * The end date of the usage period for metered entitlements with a reset period
+       * configured
        */
-      usagePeriodEnd?: string | null;
+      usagePeriodEnd?: string;
 
       /**
-       * usage period start
+       * The start date of the usage period for metered entitlements with a reset period
+       * configured
        */
-      usagePeriodStart?: string | null;
+      usagePeriodStart?: string;
+
+      /**
+       * The next time the entitlement should be recalculated
+       */
+      validUntil?: string;
     }
 
-    export namespace Entitlement {
+    export namespace UnionMember0 {
       export interface Feature {
         /**
-         * Feature ID
+         * The human-readable name of the entitlement, shown in UI elements.
+         */
+        displayName: string;
+
+        /**
+         * The current status of the feature.
+         */
+        featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE';
+
+        /**
+         * The type of feature associated with the entitlement.
+         */
+        featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
+
+        /**
+         * The unique reference ID of the entitlement.
          */
         refId: string;
+      }
+    }
+
+    export interface UnionMember1 {
+      accessDeniedReason:
+        | 'FeatureNotFound'
+        | 'CustomerNotFound'
+        | 'CustomerIsArchived'
+        | 'CustomerResourceNotFound'
+        | 'NoActiveSubscription'
+        | 'NoFeatureEntitlementInSubscription'
+        | 'RequestedUsageExceedingLimit'
+        | 'RequestedValuesMismatch'
+        | 'BudgetExceeded'
+        | 'Unknown'
+        | 'FeatureTypeMismatch'
+        | 'Revoked'
+        | 'InsufficientCredits'
+        | 'EntitlementNotFound'
+        | null;
+
+      /**
+       * The currency associated with a credit entitlement.
+       */
+      currency: UnionMember1.Currency;
+
+      currentUsage: number;
+
+      isGranted: boolean;
+
+      type: 'CREDIT';
+
+      usageLimit: number;
+
+      /**
+       * Timestamp of the last update to the credit usage.
+       */
+      usageUpdatedAt: string;
+
+      /**
+       * Timestamp of the last update to the entitlement grant or configuration.
+       */
+      entitlementUpdatedAt?: string;
+
+      /**
+       * The next time the entitlement should be recalculated
+       */
+      validUntil?: string;
+    }
+
+    export namespace UnionMember1 {
+      /**
+       * The currency associated with a credit entitlement.
+       */
+      export interface Currency {
+        /**
+         * The unique identifier of the custom currency.
+         */
+        currencyId: string;
       }
     }
 
