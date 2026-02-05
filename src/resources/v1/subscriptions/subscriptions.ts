@@ -2181,6 +2181,11 @@ export interface SubscriptionImportParams {
    * List of subscription objects to import
    */
   subscriptions: Array<SubscriptionImportParams.Subscription>;
+
+  /**
+   * Integration ID to use for importing subscriptions
+   */
+  integrationId?: string | null;
 }
 
 export namespace SubscriptionImportParams {
