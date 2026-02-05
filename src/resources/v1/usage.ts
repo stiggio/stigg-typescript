@@ -7,7 +7,7 @@ import { path } from '../../internal/utils/path';
 
 export class Usage extends APIResource {
   /**
-   * Get usage history
+   * Retrieves historical usage data for a customer's metered feature over time.
    */
   history(
     featureID: string,
@@ -19,7 +19,8 @@ export class Usage extends APIResource {
   }
 
   /**
-   * Report usage measurements
+   * Reports usage measurements for metered features. The reported usage is used to
+   * track, limit, and bill customer consumption.
    */
   report(body: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
     return this._client.post('/api/v1/usage', { body, ...options });

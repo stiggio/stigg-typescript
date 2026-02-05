@@ -22,21 +22,23 @@ export class Customers extends APIResource {
     new PromotionalEntitlementsAPI.PromotionalEntitlements(this._client);
 
   /**
-   * Get a single customer by ID
+   * Retrieves a customer by their unique identifier, including billing information
+   * and subscription status.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.get(path`/api/v1/customers/${id}`, options);
   }
 
   /**
-   * Update a customer
+   * Updates an existing customer's properties such as name, email, and billing
+   * information.
    */
   update(id: string, body: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.patch(path`/api/v1/customers/${id}`, { body, ...options });
   }
 
   /**
-   * Get a list of customers
+   * Retrieves a paginated list of customers in the environment.
    */
   list(
     query: CustomerListParams | null | undefined = {},
@@ -49,28 +51,31 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Archive customer
+   * Archives a customer, preventing new subscriptions. Optionally cancels existing
+   * subscriptions.
    */
   archive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/archive`, options);
   }
 
   /**
-   * Bulk import customers
+   * Imports multiple customers in bulk. Used for migrating customer data from
+   * external systems.
    */
   import(body: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
     return this._client.post('/api/v1/customers/import', { body, ...options });
   }
 
   /**
-   * Provision customer
+   * Creates a new customer and optionally provisions an initial subscription in a
+   * single operation.
    */
   provision(body: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post('/api/v1/customers', { body, ...options });
   }
 
   /**
-   * Unarchive customer
+   * Restores an archived customer, allowing them to create new subscriptions again.
    */
   unarchive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/unarchive`, options);
