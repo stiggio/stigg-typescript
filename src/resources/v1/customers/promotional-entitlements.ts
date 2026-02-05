@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class PromotionalEntitlements extends APIResource {
   /**
-   * Create a promotional entitlements
+   * Grants promotional entitlements to a customer, providing feature access outside
+   * their subscription. Entitlements can be time-limited or permanent.
    */
   grant(
     customerID: string,
@@ -18,7 +19,8 @@ export class PromotionalEntitlements extends APIResource {
   }
 
   /**
-   * Revoke promotional entitlement
+   * Revokes a previously granted promotional entitlement from a customer for a
+   * specific feature.
    */
   revoke(
     featureID: string,

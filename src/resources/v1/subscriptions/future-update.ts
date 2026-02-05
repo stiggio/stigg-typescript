@@ -7,14 +7,15 @@ import { path } from '../../../internal/utils/path';
 
 export class FutureUpdate extends APIResource {
   /**
-   * Cancel pending payment update
+   * Cancels a subscription update that is pending payment completion.
    */
   cancelPendingPayment(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/pending-payment`, options);
   }
 
   /**
-   * Cancel scheduled update
+   * Cancels a scheduled subscription update, such as a future downgrade or plan
+   * change.
    */
   cancelSchedule(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/schedule`, options);

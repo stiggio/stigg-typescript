@@ -12,21 +12,24 @@ export class Subscriptions extends APIResource {
   futureUpdate: FutureUpdateAPI.FutureUpdate = new FutureUpdateAPI.FutureUpdate(this._client);
 
   /**
-   * Get a single subscription by ID
+   * Retrieves a subscription by its unique identifier, including plan details,
+   * billing period, status, and add-ons.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.get(path`/api/v1/subscriptions/${id}`, options);
   }
 
   /**
-   * Update a subscription
+   * Updates an active subscription's properties including billing period, add-ons,
+   * unit quantities, and discounts.
    */
   update(id: string, body: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.patch(path`/api/v1/subscriptions/${id}`, { body, ...options });
   }
 
   /**
-   * Get a list of subscriptions
+   * Retrieves a paginated list of subscriptions, with optional filters for customer,
+   * status, and plan.
    */
   list(
     query: SubscriptionListParams | null | undefined = {},
@@ -39,35 +42,40 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Cancel subscription
+   * Cancels an active subscription, either immediately or at a specified time such
+   * as end of billing period.
    */
   cancel(id: string, body: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/cancel`, { body, ...options });
   }
 
   /**
-   * Delegate subscription payment to customer
+   * Delegates the payment responsibility of a subscription to a different customer.
+   * The delegated customer will be billed for this subscription.
    */
   delegate(id: string, body: SubscriptionDelegateParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/delegate`, { body, ...options });
   }
 
   /**
-   * Bulk import subscriptions
+   * Imports multiple subscriptions in bulk. Used for migrating subscription data
+   * from external systems.
    */
   import(body: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
     return this._client.post('/api/v1/subscriptions/import', { body, ...options });
   }
 
   /**
-   * Migrate subscription to latest plan version
+   * Migrates a subscription to the latest published version of its plan or add-ons.
+   * Handles prorated charges or credits automatically.
    */
   migrate(id: string, body: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/migrate`, { body, ...options });
   }
 
   /**
-   * Preview subscription
+   * Previews the pricing impact of creating or updating a subscription without
+   * making changes. Returns estimated costs, taxes, and proration details.
    */
   preview(
     body: SubscriptionPreviewParams,
@@ -77,7 +85,8 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Provision subscription
+   * Creates a new subscription for an existing customer. When payment is required
+   * and no payment method exists, returns a checkout URL.
    */
   provision(
     body: SubscriptionProvisionParams,
@@ -87,7 +96,8 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Transfer subscription to resource
+   * Transfers a subscription to a different resource ID. Used for multi-resource
+   * products where subscriptions apply to specific entities like websites or apps.
    */
   transfer(id: string, body: SubscriptionTransferParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/transfer`, { body, ...options });
