@@ -787,7 +787,7 @@ export namespace SubscriptionProvisionResponse {
      */
     id: string;
 
-    entitlements: Array<Data.SubscriptionFeatureEntitlement | Data.SubscriptionCreditEntitlement> | null;
+    entitlements: Array<Data.UnionMember0 | Data.UnionMember1> | null;
 
     /**
      * Provision status: SUCCESS or PAYMENT_REQUIRED
@@ -816,7 +816,7 @@ export namespace SubscriptionProvisionResponse {
   }
 
   export namespace Data {
-    export interface SubscriptionFeatureEntitlement {
+    export interface UnionMember0 {
       accessDeniedReason:
         | 'FeatureNotFound'
         | 'CustomerNotFound'
@@ -845,7 +845,7 @@ export namespace SubscriptionProvisionResponse {
        */
       entitlementUpdatedAt?: string;
 
-      feature?: SubscriptionFeatureEntitlement.Feature;
+      feature?: UnionMember0.Feature;
 
       hasUnlimitedUsage?: boolean;
 
@@ -877,7 +877,7 @@ export namespace SubscriptionProvisionResponse {
       validUntil?: string;
     }
 
-    export namespace SubscriptionFeatureEntitlement {
+    export namespace UnionMember0 {
       export interface Feature {
         /**
          * The human-readable name of the entitlement, shown in UI elements.
@@ -901,7 +901,7 @@ export namespace SubscriptionProvisionResponse {
       }
     }
 
-    export interface SubscriptionCreditEntitlement {
+    export interface UnionMember1 {
       accessDeniedReason:
         | 'FeatureNotFound'
         | 'CustomerNotFound'
@@ -922,7 +922,7 @@ export namespace SubscriptionProvisionResponse {
       /**
        * The currency associated with a credit entitlement.
        */
-      currency: SubscriptionCreditEntitlement.Currency;
+      currency: UnionMember1.Currency;
 
       currentUsage: number;
 
@@ -948,7 +948,7 @@ export namespace SubscriptionProvisionResponse {
       validUntil?: string;
     }
 
-    export namespace SubscriptionCreditEntitlement {
+    export namespace UnionMember1 {
       /**
        * The currency associated with a credit entitlement.
        */
