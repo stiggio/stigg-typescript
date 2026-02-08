@@ -12,6 +12,13 @@ import {
 } from './coupons';
 import * as EventsAPI from './events';
 import { EventReportParams, EventReportResponse, Events } from './events';
+import * as ProductsAPI from './products';
+import {
+  ProductListProductsParams,
+  ProductListProductsResponse,
+  ProductListProductsResponsesMyCursorIDPage,
+  Products,
+} from './products';
 import * as UsageAPI from './usage';
 import {
   Usage,
@@ -25,6 +32,9 @@ import {
   CustomerImportParams,
   CustomerImportResponse,
   CustomerListParams,
+  CustomerListResourcesParams,
+  CustomerListResourcesResponse,
+  CustomerListResourcesResponsesMyCursorIDPage,
   CustomerListResponse,
   CustomerListResponsesMyCursorIDPage,
   CustomerProvisionParams,
@@ -58,6 +68,7 @@ export class V1 extends APIResource {
   coupons: CouponsAPI.Coupons = new CouponsAPI.Coupons(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
+  products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
 }
 
 V1.Customers = Customers;
@@ -65,6 +76,7 @@ V1.Subscriptions = Subscriptions;
 V1.Coupons = Coupons;
 V1.Events = Events;
 V1.Usage = Usage;
+V1.Products = Products;
 
 export declare namespace V1 {
   export {
@@ -72,10 +84,13 @@ export declare namespace V1 {
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
     type CustomerImportResponse as CustomerImportResponse,
+    type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
+    type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
     type CustomerImportParams as CustomerImportParams,
+    type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
   };
 
@@ -119,5 +134,12 @@ export declare namespace V1 {
     type UsageReportResponse as UsageReportResponse,
     type UsageHistoryParams as UsageHistoryParams,
     type UsageReportParams as UsageReportParams,
+  };
+
+  export {
+    Products as Products,
+    type ProductListProductsResponse as ProductListProductsResponse,
+    type ProductListProductsResponsesMyCursorIDPage as ProductListProductsResponsesMyCursorIDPage,
+    type ProductListProductsParams as ProductListProductsParams,
   };
 }
