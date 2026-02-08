@@ -13,13 +13,22 @@ export {
   type CustomerResponse,
   type CustomerListResponse,
   type CustomerImportResponse,
+  type CustomerListResourcesResponse,
   type CustomerUpdateParams,
   type CustomerListParams,
   type CustomerImportParams,
+  type CustomerListResourcesParams,
   type CustomerProvisionParams,
   type CustomerListResponsesMyCursorIDPage,
+  type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
 export { Events, type EventReportResponse, type EventReportParams } from './events';
+export {
+  Products,
+  type ProductListProductsResponse,
+  type ProductListProductsParams,
+  type ProductListProductsResponsesMyCursorIDPage,
+} from './products';
 export {
   Subscriptions,
   type Subscription,

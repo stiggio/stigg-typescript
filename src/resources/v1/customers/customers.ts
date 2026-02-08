@@ -67,6 +67,21 @@ export class Customers extends APIResource {
   }
 
   /**
+   * Get a list of customerresources
+   */
+  listResources(
+    id: string,
+    query: CustomerListResourcesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CustomerListResourcesResponsesMyCursorIDPage, CustomerListResourcesResponse> {
+    return this._client.getAPIList(
+      path`/api/v1/customers/${id}/resources`,
+      MyCursorIDPage<CustomerListResourcesResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
    * Creates a new customer and optionally provisions an initial subscription in a
    * single operation.
    */
@@ -83,6 +98,8 @@ export class Customers extends APIResource {
 }
 
 export type CustomerListResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResponse>;
+
+export type CustomerListResourcesResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResourcesResponse>;
 
 /**
  * Response object
@@ -352,6 +369,26 @@ export namespace CustomerImportResponse {
   }
 }
 
+/**
+ * Resource object that belongs to a customer
+ */
+export interface CustomerListResourcesResponse {
+  /**
+   * Resource slug
+   */
+  id: string;
+
+  /**
+   * Timestamp of when the record was created
+   */
+  createdAt: string;
+
+  /**
+   * Timestamp of when the record was last updated
+   */
+  updatedAt: string;
+}
+
 export interface CustomerUpdateParams {
   /**
    * Customer level coupon
@@ -453,6 +490,8 @@ export namespace CustomerImportParams {
     updatedAt?: string;
   }
 }
+
+export interface CustomerListResourcesParams extends MyCursorIDPageParams {}
 
 export interface CustomerProvisionParams {
   /**
@@ -561,10 +600,13 @@ export declare namespace Customers {
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
     type CustomerImportResponse as CustomerImportResponse,
+    type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
+    type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
     type CustomerImportParams as CustomerImportParams,
+    type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
   };
 
