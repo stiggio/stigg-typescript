@@ -6,7 +6,8 @@ import { RequestOptions } from '../../internal/request-options';
 
 export class Events extends APIResource {
   /**
-   * Report usage events
+   * Reports raw usage events for event-based metering. Events are ingested
+   * asynchronously and aggregated into usage totals.
    */
   report(body: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
     return this._client.post('/api/v1/events', { body, ...options });

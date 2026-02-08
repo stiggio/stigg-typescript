@@ -8,21 +8,22 @@ import { path } from '../../internal/utils/path';
 
 export class Coupons extends APIResource {
   /**
-   * Create coupon
+   * Creates a new discount coupon with percentage or fixed amount off, applicable to
+   * customer subscriptions.
    */
   create(body: CouponCreateParams, options?: RequestOptions): APIPromise<Coupon> {
     return this._client.post('/api/v1/coupons', { body, ...options });
   }
 
   /**
-   * Get a single coupon by ID
+   * Retrieves a coupon by its unique identifier.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Coupon> {
     return this._client.get(path`/api/v1/coupons/${id}`, options);
   }
 
   /**
-   * Get a list of coupons
+   * Retrieves a paginated list of coupons in the environment.
    */
   list(
     query: CouponListParams | null | undefined = {},

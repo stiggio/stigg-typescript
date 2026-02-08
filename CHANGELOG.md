@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2026-02-08)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** api update ([37a1b67](https://github.com/stiggio/stigg-typescript/commit/37a1b67750e685df4faf6c27328d7298089b1257))
+* **api:** api update ([8951b7b](https://github.com/stiggio/stigg-typescript/commit/8951b7bf135a8254e5a53576ec9ef69aff4b22d5))
+* **api:** api update ([70381e3](https://github.com/stiggio/stigg-typescript/commit/70381e36226669df1e78f537ecec6a82387149af))
+* **api:** manual updates ([6d41016](https://github.com/stiggio/stigg-typescript/commit/6d41016adcdc3d543cda35174bdd07b647b7a940))
+* **api:** manual updates ([18e731c](https://github.com/stiggio/stigg-typescript/commit/18e731c2408ee437c3cbc138208b829cef697646))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([2a35609](https://github.com/stiggio/stigg-typescript/commit/2a35609541af137208a0f80c17239a0512839332))
+* **client:** avoid removing abort listener too early ([e392dde](https://github.com/stiggio/stigg-typescript/commit/e392dde7d989ebc61c04ac6605c8fefe8f9a605f))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([43d4528](https://github.com/stiggio/stigg-typescript/commit/43d4528c0507b29dfafd0e2763ef0326cc77c868))
+* **client:** restructure abort controller binding ([6e5585d](https://github.com/stiggio/stigg-typescript/commit/6e5585d479f7a88fd45d7747c17f3a0d77c0b6ee))
+* **internal:** fix pagination internals not accepting option promises ([ca6a9b9](https://github.com/stiggio/stigg-typescript/commit/ca6a9b9770072de182b7110e69f5fcae05669d88))
+
 ## 0.1.0-alpha.4 (2026-01-29)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)

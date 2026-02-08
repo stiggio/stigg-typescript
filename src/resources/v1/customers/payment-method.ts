@@ -8,7 +8,8 @@ import { path } from '../../../internal/utils/path';
 
 export class PaymentMethod extends APIResource {
   /**
-   * Attach payment method
+   * Attaches a payment method to a customer for billing. Required for paid
+   * subscriptions when integrated with a billing provider.
    */
   attach(
     id: string,
@@ -19,7 +20,8 @@ export class PaymentMethod extends APIResource {
   }
 
   /**
-   * Detach payment method
+   * Removes the payment method from a customer. Ensure active paid subscriptions
+   * have an alternative payment method.
    */
   detach(id: string, options?: RequestOptions): APIPromise<CustomersAPI.CustomerResponse> {
     return this._client.delete(path`/api/v1/customers/${id}/payment-method`, options);

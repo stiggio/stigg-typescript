@@ -12,21 +12,24 @@ export class Subscriptions extends APIResource {
   futureUpdate: FutureUpdateAPI.FutureUpdate = new FutureUpdateAPI.FutureUpdate(this._client);
 
   /**
-   * Get a single subscription by ID
+   * Retrieves a subscription by its unique identifier, including plan details,
+   * billing period, status, and add-ons.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.get(path`/api/v1/subscriptions/${id}`, options);
   }
 
   /**
-   * Update a subscription
+   * Updates an active subscription's properties including billing period, add-ons,
+   * unit quantities, and discounts.
    */
   update(id: string, body: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.patch(path`/api/v1/subscriptions/${id}`, { body, ...options });
   }
 
   /**
-   * Get a list of subscriptions
+   * Retrieves a paginated list of subscriptions, with optional filters for customer,
+   * status, and plan.
    */
   list(
     query: SubscriptionListParams | null | undefined = {},
@@ -39,35 +42,40 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Cancel subscription
+   * Cancels an active subscription, either immediately or at a specified time such
+   * as end of billing period.
    */
   cancel(id: string, body: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/cancel`, { body, ...options });
   }
 
   /**
-   * Delegate subscription payment to customer
+   * Delegates the payment responsibility of a subscription to a different customer.
+   * The delegated customer will be billed for this subscription.
    */
   delegate(id: string, body: SubscriptionDelegateParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/delegate`, { body, ...options });
   }
 
   /**
-   * Bulk import subscriptions
+   * Imports multiple subscriptions in bulk. Used for migrating subscription data
+   * from external systems.
    */
   import(body: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
     return this._client.post('/api/v1/subscriptions/import', { body, ...options });
   }
 
   /**
-   * Migrate subscription to latest plan version
+   * Migrates a subscription to the latest published version of its plan or add-ons.
+   * Handles prorated charges or credits automatically.
    */
   migrate(id: string, body: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/migrate`, { body, ...options });
   }
 
   /**
-   * Preview subscription
+   * Previews the pricing impact of creating or updating a subscription without
+   * making changes. Returns estimated costs, taxes, and proration details.
    */
   preview(
     body: SubscriptionPreviewParams,
@@ -77,7 +85,8 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Provision subscription
+   * Creates a new subscription for an existing customer. When payment is required
+   * and no payment method exists, returns a checkout URL.
    */
   provision(
     body: SubscriptionProvisionParams,
@@ -87,7 +96,8 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Transfer subscription to resource
+   * Transfers a subscription to a different resource ID. Used for multi-resource
+   * products where subscriptions apply to specific entities like websites or apps.
    */
   transfer(id: string, body: SubscriptionTransferParams, options?: RequestOptions): APIPromise<Subscription> {
     return this._client.post(path`/api/v1/subscriptions/${id}/transfer`, { body, ...options });
@@ -777,7 +787,7 @@ export namespace SubscriptionProvisionResponse {
      */
     id: string;
 
-    entitlements: Array<Data.Entitlement>;
+    entitlements: Array<Data.SubscriptionFeatureEntitlement | Data.SubscriptionCreditEntitlement> | null;
 
     /**
      * Provision status: SUCCESS or PAYMENT_REQUIRED
@@ -785,69 +795,168 @@ export namespace SubscriptionProvisionResponse {
     status: 'SUCCESS' | 'PAYMENT_REQUIRED';
 
     /**
+     * Created subscription (when status is SUCCESS)
+     */
+    subscription: Data.Subscription | null;
+
+    /**
      * Checkout billing ID when payment is required
      */
-    checkoutBillingId?: string | null;
+    checkoutBillingId?: string;
 
     /**
      * URL to complete payment when PAYMENT_REQUIRED
      */
-    checkoutUrl?: string | null;
+    checkoutUrl?: string;
 
     /**
      * Whether the subscription is scheduled for future activation
      */
     isScheduled?: boolean;
-
-    /**
-     * Created subscription (when status is SUCCESS)
-     */
-    subscription?: Data.Subscription;
   }
 
   export namespace Data {
-    export interface Entitlement {
-      accessDeniedReason?: string | null;
+    export interface SubscriptionFeatureEntitlement {
+      accessDeniedReason:
+        | 'FeatureNotFound'
+        | 'CustomerNotFound'
+        | 'CustomerIsArchived'
+        | 'CustomerResourceNotFound'
+        | 'NoActiveSubscription'
+        | 'NoFeatureEntitlementInSubscription'
+        | 'RequestedUsageExceedingLimit'
+        | 'RequestedValuesMismatch'
+        | 'BudgetExceeded'
+        | 'Unknown'
+        | 'FeatureTypeMismatch'
+        | 'Revoked'
+        | 'InsufficientCredits'
+        | 'EntitlementNotFound'
+        | null;
+
+      isGranted: boolean;
+
+      type: 'FEATURE';
 
       currentUsage?: number;
 
       /**
-       * entitlement updated at
+       * Timestamp of the last update to the entitlement grant or configuration.
        */
-      entitlementUpdatedAt?: string | null;
+      entitlementUpdatedAt?: string;
 
-      feature?: Entitlement.Feature | null;
+      feature?: SubscriptionFeatureEntitlement.Feature;
 
-      hasUnlimitedUsage?: boolean | null;
-
-      isGranted?: boolean;
+      hasUnlimitedUsage?: boolean;
 
       resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | null;
 
       usageLimit?: number | null;
 
       /**
-       * usage period anchor
+       * The anchor for calculating the usage period for metered entitlements with a
+       * reset period configured
        */
-      usagePeriodAnchor?: string | null;
+      usagePeriodAnchor?: string;
 
       /**
-       * usage period end
+       * The end date of the usage period for metered entitlements with a reset period
+       * configured
        */
-      usagePeriodEnd?: string | null;
+      usagePeriodEnd?: string;
 
       /**
-       * usage period start
+       * The start date of the usage period for metered entitlements with a reset period
+       * configured
        */
-      usagePeriodStart?: string | null;
+      usagePeriodStart?: string;
+
+      /**
+       * The next time the entitlement should be recalculated
+       */
+      validUntil?: string;
     }
 
-    export namespace Entitlement {
+    export namespace SubscriptionFeatureEntitlement {
       export interface Feature {
         /**
-         * Feature ID
+         * The human-readable name of the entitlement, shown in UI elements.
+         */
+        displayName: string;
+
+        /**
+         * The current status of the feature.
+         */
+        featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE';
+
+        /**
+         * The type of feature associated with the entitlement.
+         */
+        featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
+
+        /**
+         * The unique reference ID of the entitlement.
          */
         refId: string;
+      }
+    }
+
+    export interface SubscriptionCreditEntitlement {
+      accessDeniedReason:
+        | 'FeatureNotFound'
+        | 'CustomerNotFound'
+        | 'CustomerIsArchived'
+        | 'CustomerResourceNotFound'
+        | 'NoActiveSubscription'
+        | 'NoFeatureEntitlementInSubscription'
+        | 'RequestedUsageExceedingLimit'
+        | 'RequestedValuesMismatch'
+        | 'BudgetExceeded'
+        | 'Unknown'
+        | 'FeatureTypeMismatch'
+        | 'Revoked'
+        | 'InsufficientCredits'
+        | 'EntitlementNotFound'
+        | null;
+
+      /**
+       * The currency associated with a credit entitlement.
+       */
+      currency: SubscriptionCreditEntitlement.Currency;
+
+      currentUsage: number;
+
+      isGranted: boolean;
+
+      type: 'CREDIT';
+
+      usageLimit: number;
+
+      /**
+       * Timestamp of the last update to the credit usage.
+       */
+      usageUpdatedAt: string;
+
+      /**
+       * Timestamp of the last update to the entitlement grant or configuration.
+       */
+      entitlementUpdatedAt?: string;
+
+      /**
+       * The next time the entitlement should be recalculated
+       */
+      validUntil?: string;
+    }
+
+    export namespace SubscriptionCreditEntitlement {
+      /**
+       * The currency associated with a credit entitlement.
+       */
+      export interface Currency {
+        /**
+         * The unique identifier of the custom currency.
+         */
+        currencyId: string;
       }
     }
 
@@ -2082,6 +2191,11 @@ export interface SubscriptionImportParams {
    * List of subscription objects to import
    */
   subscriptions: Array<SubscriptionImportParams.Subscription>;
+
+  /**
+   * Integration ID to use for importing subscriptions
+   */
+  integrationId?: string | null;
 }
 
 export namespace SubscriptionImportParams {
