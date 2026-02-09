@@ -1969,9 +1969,24 @@ export namespace SubscriptionUpdateParams {
 
   export interface PriceOverride {
     /**
+     * Addon ID
+     */
+    addonId?: string;
+
+    /**
+     * Whether this is a base charge override
+     */
+    baseCharge?: boolean;
+
+    /**
+     * The corresponding custom currency id of the recurring credits price
+     */
+    currencyId?: string;
+
+    /**
      * Feature ID
      */
-    featureId: string;
+    featureId?: string;
 
     price?: PriceOverride.Price;
   }
