@@ -64,6 +64,49 @@ export interface ProductListProductsResponse {
    * Timestamp of when the record was last updated
    */
   updatedAt: string;
+
+  /**
+   * Product behavior settings for subscription lifecycle management.
+   */
+  productSettings?: ProductListProductsResponse.ProductSettings;
+}
+
+export namespace ProductListProductsResponse {
+  /**
+   * Product behavior settings for subscription lifecycle management.
+   */
+  export interface ProductSettings {
+    /**
+     * Time when the subscription will be cancelled
+     */
+    subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE';
+
+    /**
+     * Setup for the end of the subscription
+     */
+    subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION';
+
+    /**
+     * Setup for the start of the subscription
+     */
+    subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN';
+
+    /**
+     * ID of the plan to downgrade to at the end of the billing period
+     */
+    downgradePlanId?: string | null;
+
+    /**
+     * Indicates if the subscription should be prorated at the end of the billing
+     * period
+     */
+    prorateAtEndOfBillingPeriod?: boolean | null;
+
+    /**
+     * ID of the plan to start the subscription with
+     */
+    subscriptionStartPlanId?: string | null;
+  }
 }
 
 export interface ProductListProductsParams extends MyCursorIDPageParams {}
