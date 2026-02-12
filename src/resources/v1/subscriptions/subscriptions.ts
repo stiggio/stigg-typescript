@@ -943,6 +943,11 @@ export namespace SubscriptionProvisionResponse {
       entitlementUpdatedAt?: string;
 
       /**
+       * The end date of the current billing period for recurring credit grants.
+       */
+      usagePeriodEnd?: string;
+
+      /**
        * The next time the entitlement should be recalculated
        */
       validUntil?: string;
