@@ -109,7 +109,49 @@ export namespace ProductListProductsResponse {
   }
 }
 
-export interface ProductListProductsParams extends MyCursorIDPageParams {}
+export interface ProductListProductsParams extends MyCursorIDPageParams {
+  /**
+   * Filter by entity ID
+   */
+  id?: string;
+
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  createdAt?: ProductListProductsParams.CreatedAt;
+
+  /**
+   * Filter by product status. Supports comma-separated values for multiple statuses
+   */
+  status?: string;
+}
+
+export namespace ProductListProductsParams {
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  export interface CreatedAt {
+    /**
+     * Greater than the specified createdAt value
+     */
+    gt?: string;
+
+    /**
+     * Greater than or equal to the specified createdAt value
+     */
+    gte?: string;
+
+    /**
+     * Less than the specified createdAt value
+     */
+    lt?: string;
+
+    /**
+     * Less than or equal to the specified createdAt value
+     */
+    lte?: string;
+  }
+}
 
 export declare namespace Products {
   export {

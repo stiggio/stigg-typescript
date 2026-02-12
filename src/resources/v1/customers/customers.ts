@@ -448,7 +448,49 @@ export namespace CustomerUpdateParams {
   }
 }
 
-export interface CustomerListParams extends MyCursorIDPageParams {}
+export interface CustomerListParams extends MyCursorIDPageParams {
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  createdAt?: CustomerListParams.CreatedAt;
+
+  /**
+   * Filter by exact customer email address
+   */
+  email?: string;
+
+  /**
+   * Filter by exact customer name
+   */
+  name?: string;
+}
+
+export namespace CustomerListParams {
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  export interface CreatedAt {
+    /**
+     * Greater than the specified createdAt value
+     */
+    gt?: string;
+
+    /**
+     * Greater than or equal to the specified createdAt value
+     */
+    gte?: string;
+
+    /**
+     * Less than the specified createdAt value
+     */
+    lt?: string;
+
+    /**
+     * Less than or equal to the specified createdAt value
+     */
+    lte?: string;
+  }
+}
 
 export interface CustomerImportParams {
   /**
