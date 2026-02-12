@@ -2160,14 +2160,62 @@ export namespace SubscriptionUpdateParams {
 
 export interface SubscriptionListParams extends MyCursorIDPageParams {
   /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  createdAt?: SubscriptionListParams.CreatedAt;
+
+  /**
    * Filter by customer ID
    */
   customerId?: string;
 
   /**
-   * Filter by status (comma-separated)
+   * Filter by plan ID
+   */
+  planId?: string;
+
+  /**
+   * Filter by pricing type. Supports comma-separated values for multiple types
+   */
+  pricingType?: string;
+
+  /**
+   * Filter by resource ID
+   */
+  resourceId?: string;
+
+  /**
+   * Filter by subscription status. Supports comma-separated values for multiple
+   * statuses
    */
   status?: string;
+}
+
+export namespace SubscriptionListParams {
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  export interface CreatedAt {
+    /**
+     * Greater than the specified createdAt value
+     */
+    gt?: string;
+
+    /**
+     * Greater than or equal to the specified createdAt value
+     */
+    gte?: string;
+
+    /**
+     * Less than the specified createdAt value
+     */
+    lt?: string;
+
+    /**
+     * Less than or equal to the specified createdAt value
+     */
+    lte?: string;
+  }
 }
 
 export interface SubscriptionCancelParams {
