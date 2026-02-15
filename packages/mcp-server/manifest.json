@@ -1,0 +1,41 @@
+{
+  "dxt_version": "0.2",
+  "name": "@stigg/typescript-mcp",
+  "version": "0.1.0-alpha.5",
+  "description": "The official MCP Server for the Stigg API",
+  "author": {
+    "name": "Stigg"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stiggio/stigg-typescript.git"
+  },
+  "homepage": "https://github.com/stiggio/stigg-typescript/tree/main/packages/mcp-server#readme",
+  "server": {
+    "type": "node",
+    "entry_point": "index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/index.js"],
+      "env": {
+        "STIGG_API_KEY": "${user_config.STIGG_API_KEY}"
+      }
+    }
+  },
+  "user_config": {
+    "STIGG_API_KEY": {
+      "title": "api_key",
+      "description": "",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "tools": [],
+  "tools_generated": true,
+  "compatibility": {
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "keywords": ["api"]
+}
