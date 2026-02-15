@@ -39,14 +39,14 @@ For clients with a configuration JSON, it might look something like this:
 If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
 in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJuYW1lIjoiQHN0aWdnL3R5cGVzY3JpcHQtbWNwIiwidHJhbnNwb3J0IjoiaHR0cCIsInVybCI6Imh0dHBzOi8vc3RpZ2ctbWNwLnN0bG1jcC5jb20iLCJoZWFkZXJzIjp7IlgtQVBJLUtFWSI6Ik15IEFQSSBLZXkifX0)
 
 ### VS Code
 
 If you use MCP, you can install the MCP server by clicking the link below. You will need to set your environment variables
 in VS Code's `mcp.json`, which can be found via Command Palette > MCP: Open User Configuration.
 
-[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)
+[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fstigg-mcp.stlmcp.com%22%2C%22headers%22%3A%7B%22X-API-KEY%22%3A%22My%20API%20Key%22%7D%7D)
 
 ### Claude Code
 
@@ -54,7 +54,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add stigg_typescript_mcp_api --env STIGG_API_KEY="My API Key" -- npx -y @stigg/typescript-mcp
+claude mcp add stigg_typescript_mcp_api --header "X-API-KEY: My API Key" --transport http https://stigg-mcp.stlmcp.com
 ```
 
 ## Code Mode
