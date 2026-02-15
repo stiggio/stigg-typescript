@@ -52,7 +52,15 @@ describe('resource customers', () => {
         {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          createdAt: {
+            gt: '2019-12-27T18:11:19.117Z',
+            gte: '2019-12-27T18:11:19.117Z',
+            lt: '2019-12-27T18:11:19.117Z',
+            lte: '2019-12-27T18:11:19.117Z',
+          },
+          email: 'email',
           limit: 1,
+          name: 'name',
         },
         { path: '/_stainless_unknown_path' },
       ),

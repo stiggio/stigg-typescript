@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.6 (2026-02-15)
+
+Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
+
+### Features
+
+* **api:** api update ([d41ae3a](https://github.com/stiggio/stigg-typescript/commit/d41ae3aefe5bd1643da96a211c3b0830d118fb7f))
+* **api:** api update ([6a44c80](https://github.com/stiggio/stigg-typescript/commit/6a44c80d1666a54aeb13cd63b3aa81fc2c701771))
+* **api:** api update ([3dc1a6f](https://github.com/stiggio/stigg-typescript/commit/3dc1a6f233db6cec6421f234dcc42fa053d522c0))
+* **api:** api update ([5f3a051](https://github.com/stiggio/stigg-typescript/commit/5f3a05145bc6a95c2dade1dfb1ab08d42b3d041f))
+* **api:** api update ([278b7e2](https://github.com/stiggio/stigg-typescript/commit/278b7e2a11a56ebb28fd49fc5c4d374dee762a37))
+
+
+### Chores
+
+* configure new SDK language ([f13f50a](https://github.com/stiggio/stigg-typescript/commit/f13f50aeb8a1ee97a508716129057bf287f4d7bb))
+* **internal:** avoid type checking errors with ts-reset ([6d2c1c2](https://github.com/stiggio/stigg-typescript/commit/6d2c1c257bb18e29a3b431ba7993b038f2c913d1))
+* **internal:** configure MCP Server hosting ([4ac2625](https://github.com/stiggio/stigg-typescript/commit/4ac2625f32c269765ab8df22099343bfb2bc4d07))
+
 ## 0.1.0-alpha.5 (2026-02-08)
 
 Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)

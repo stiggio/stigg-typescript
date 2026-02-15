@@ -1,0 +1,10 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { IncomingMessage } from 'node:http';
+import { ClientOptions } from '@stigg/typescript';
+
+export const parseAuthHeaders = (req: IncomingMessage, required?: boolean): Partial<ClientOptions> => {
+  const apiKey =
+    Array.isArray(req.headers['x-api-key']) ? req.headers['x-api-key'][0] : req.headers['x-api-key'];
+  return { apiKey };
+};

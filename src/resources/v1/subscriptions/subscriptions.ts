@@ -787,7 +787,7 @@ export namespace SubscriptionProvisionResponse {
      */
     id: string;
 
-    entitlements: Array<Data.SubscriptionFeatureEntitlement | Data.SubscriptionCreditEntitlement> | null;
+    entitlements: Array<Data.UnionMember0 | Data.UnionMember1> | null;
 
     /**
      * Provision status: SUCCESS or PAYMENT_REQUIRED
@@ -816,7 +816,7 @@ export namespace SubscriptionProvisionResponse {
   }
 
   export namespace Data {
-    export interface SubscriptionFeatureEntitlement {
+    export interface UnionMember0 {
       accessDeniedReason:
         | 'FeatureNotFound'
         | 'CustomerNotFound'
@@ -845,7 +845,7 @@ export namespace SubscriptionProvisionResponse {
        */
       entitlementUpdatedAt?: string;
 
-      feature?: SubscriptionFeatureEntitlement.Feature;
+      feature?: UnionMember0.Feature;
 
       hasUnlimitedUsage?: boolean;
 
@@ -877,7 +877,7 @@ export namespace SubscriptionProvisionResponse {
       validUntil?: string;
     }
 
-    export namespace SubscriptionFeatureEntitlement {
+    export namespace UnionMember0 {
       export interface Feature {
         /**
          * The human-readable name of the entitlement, shown in UI elements.
@@ -901,7 +901,7 @@ export namespace SubscriptionProvisionResponse {
       }
     }
 
-    export interface SubscriptionCreditEntitlement {
+    export interface UnionMember1 {
       accessDeniedReason:
         | 'FeatureNotFound'
         | 'CustomerNotFound'
@@ -922,7 +922,7 @@ export namespace SubscriptionProvisionResponse {
       /**
        * The currency associated with a credit entitlement.
        */
-      currency: SubscriptionCreditEntitlement.Currency;
+      currency: UnionMember1.Currency;
 
       currentUsage: number;
 
@@ -943,12 +943,17 @@ export namespace SubscriptionProvisionResponse {
       entitlementUpdatedAt?: string;
 
       /**
+       * The end date of the current billing period for recurring credit grants.
+       */
+      usagePeriodEnd?: string;
+
+      /**
        * The next time the entitlement should be recalculated
        */
       validUntil?: string;
     }
 
-    export namespace SubscriptionCreditEntitlement {
+    export namespace UnionMember1 {
       /**
        * The currency associated with a credit entitlement.
        */
@@ -1969,9 +1974,24 @@ export namespace SubscriptionUpdateParams {
 
   export interface PriceOverride {
     /**
+     * Addon ID
+     */
+    addonId?: string;
+
+    /**
+     * Whether this is a base charge override
+     */
+    baseCharge?: boolean;
+
+    /**
+     * The corresponding custom currency id of the recurring credits price
+     */
+    currencyId?: string;
+
+    /**
      * Feature ID
      */
-    featureId: string;
+    featureId?: string;
 
     price?: PriceOverride.Price;
   }
@@ -2145,14 +2165,62 @@ export namespace SubscriptionUpdateParams {
 
 export interface SubscriptionListParams extends MyCursorIDPageParams {
   /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  createdAt?: SubscriptionListParams.CreatedAt;
+
+  /**
    * Filter by customer ID
    */
   customerId?: string;
 
   /**
-   * Filter by status (comma-separated)
+   * Filter by plan ID
+   */
+  planId?: string;
+
+  /**
+   * Filter by pricing type. Supports comma-separated values for multiple types
+   */
+  pricingType?: string;
+
+  /**
+   * Filter by resource ID
+   */
+  resourceId?: string;
+
+  /**
+   * Filter by subscription status. Supports comma-separated values for multiple
+   * statuses
    */
   status?: string;
+}
+
+export namespace SubscriptionListParams {
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  export interface CreatedAt {
+    /**
+     * Greater than the specified createdAt value
+     */
+    gt?: string;
+
+    /**
+     * Greater than or equal to the specified createdAt value
+     */
+    gte?: string;
+
+    /**
+     * Less than the specified createdAt value
+     */
+    lt?: string;
+
+    /**
+     * Less than or equal to the specified createdAt value
+     */
+    lte?: string;
+  }
 }
 
 export interface SubscriptionCancelParams {
