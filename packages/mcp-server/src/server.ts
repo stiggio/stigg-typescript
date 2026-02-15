@@ -56,7 +56,7 @@ export const newMcpServer = async () =>
   new McpServer(
     {
       name: 'stigg_typescript_api',
-      version: '0.1.0-alpha.5',
+      version: '0.1.0-alpha.6',
     },
     {
       instructions: await getInstructions(),
