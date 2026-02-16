@@ -15,6 +15,7 @@ describe('resource coupons', () => {
       amountsOff: [{ amount: 0, currency: 'usd' }],
       description: 'description',
       durationInMonths: 1,
+      metadata: { foo: 'string' },
       name: 'name',
       percentOff: 1,
     });
@@ -34,9 +35,9 @@ describe('resource coupons', () => {
       amountsOff: [{ amount: 0, currency: 'usd' }],
       description: 'description',
       durationInMonths: 1,
+      metadata: { foo: 'string' },
       name: 'name',
       percentOff: 1,
-      additionalMetaData: {},
     });
   });
 
