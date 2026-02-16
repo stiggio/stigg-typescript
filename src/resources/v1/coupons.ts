@@ -478,6 +478,11 @@ export interface CouponCreateParams {
   durationInMonths: number | null;
 
   /**
+   * Metadata associated with the entity
+   */
+  metadata: { [key: string]: string } | null;
+
+  /**
    * Name of the coupon
    */
   name: string;
@@ -486,11 +491,6 @@ export interface CouponCreateParams {
    * Percentage discount off the original price
    */
   percentOff: number | null;
-
-  /**
-   * Metadata associated with the entity
-   */
-  additionalMetaData?: unknown;
 }
 
 export namespace CouponCreateParams {
