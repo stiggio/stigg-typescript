@@ -4,13 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
 import * as PromotionalEntitlementsAPI from './promotional-entitlements';
-import {
-  PromotionalEntitlementGrantParams,
-  PromotionalEntitlementGrantResponse,
-  PromotionalEntitlementRevokeParams,
-  PromotionalEntitlementRevokeResponse,
-  PromotionalEntitlements,
-} from './promotional-entitlements';
+import { PromotionalEntitlements } from './promotional-entitlements';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -654,11 +648,5 @@ export declare namespace Customers {
 
   export { PaymentMethod as PaymentMethod, type PaymentMethodAttachParams as PaymentMethodAttachParams };
 
-  export {
-    PromotionalEntitlements as PromotionalEntitlements,
-    type PromotionalEntitlementGrantResponse as PromotionalEntitlementGrantResponse,
-    type PromotionalEntitlementRevokeResponse as PromotionalEntitlementRevokeResponse,
-    type PromotionalEntitlementGrantParams as PromotionalEntitlementGrantParams,
-    type PromotionalEntitlementRevokeParams as PromotionalEntitlementRevokeParams,
-  };
+  export { PromotionalEntitlements as PromotionalEntitlements };
 }

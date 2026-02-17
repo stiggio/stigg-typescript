@@ -79,7 +79,7 @@ describe('resource addons', () => {
           },
           limit: 1,
           productId: 'productId',
-          status: 'DRAFT',
+          status: 'status',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -29,16 +29,6 @@ Methods:
 
 ### PromotionalEntitlements
 
-Types:
-
-- <code><a href="./src/resources/v1/customers/promotional-entitlements.ts">PromotionalEntitlementGrantResponse</a></code>
-- <code><a href="./src/resources/v1/customers/promotional-entitlements.ts">PromotionalEntitlementRevokeResponse</a></code>
-
-Methods:
-
-- <code title="post /api/v1/customers/{customerId}/promotional">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">grant</a>(customerID, { ...params }) -> PromotionalEntitlementGrantResponse</code>
-- <code title="delete /api/v1/customers/{customerId}/promotional/{featureId}">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">revoke</a>(featureID, { ...params }) -> PromotionalEntitlementRevokeResponse</code>
-
 ## Subscriptions
 
 Types:

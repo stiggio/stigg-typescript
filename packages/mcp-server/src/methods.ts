@@ -71,18 +71,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/payment-method',
   },
   {
-    clientCallName: 'client.v1.customers.promotionalEntitlements.grant',
-    fullyQualifiedName: 'v1.customers.promotionalEntitlements.grant',
-    httpMethod: 'post',
-    httpPath: '/api/v1/customers/{customerId}/promotional',
-  },
-  {
-    clientCallName: 'client.v1.customers.promotionalEntitlements.revoke',
-    fullyQualifiedName: 'v1.customers.promotionalEntitlements.revoke',
-    httpMethod: 'delete',
-    httpPath: '/api/v1/customers/{customerId}/promotional/{featureId}',
-  },
-  {
     clientCallName: 'client.v1.subscriptions.retrieve',
     fullyQualifiedName: 'v1.subscriptions.retrieve',
     httpMethod: 'get',
