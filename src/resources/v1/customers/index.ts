@@ -15,3 +15,13 @@ export {
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers';
 export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
+export {
+  PromotionalEntitlements,
+  type PromotionalEntitlementCreateResponse,
+  type PromotionalEntitlementListResponse,
+  type PromotionalEntitlementRevokeResponse,
+  type PromotionalEntitlementCreateParams,
+  type PromotionalEntitlementListParams,
+  type PromotionalEntitlementRevokeParams,
+  type PromotionalEntitlementListResponsesMyCursorIDPage,
+} from './promotional-entitlements';

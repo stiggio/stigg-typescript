@@ -27,6 +27,20 @@ Methods:
 - <code title="post /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">attach</a>(id, { ...params }) -> CustomerResponse</code>
 - <code title="delete /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">detach</a>(id) -> CustomerResponse</code>
 
+### PromotionalEntitlements
+
+Types:
+
+- <code><a href="./src/resources/v1/customers/promotional-entitlements.ts">PromotionalEntitlementCreateResponse</a></code>
+- <code><a href="./src/resources/v1/customers/promotional-entitlements.ts">PromotionalEntitlementListResponse</a></code>
+- <code><a href="./src/resources/v1/customers/promotional-entitlements.ts">PromotionalEntitlementRevokeResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/customers/{id}/promotional-entitlements">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">create</a>(id, { ...params }) -> PromotionalEntitlementCreateResponse</code>
+- <code title="get /api/v1/customers/{id}/promotional-entitlements">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">list</a>(id, { ...params }) -> PromotionalEntitlementListResponsesMyCursorIDPage</code>
+- <code title="delete /api/v1/customers/{id}/promotional-entitlements/{featureId}">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">revoke</a>(featureID, { ...params }) -> PromotionalEntitlementRevokeResponse</code>
+
 ## Subscriptions
 
 Types:
