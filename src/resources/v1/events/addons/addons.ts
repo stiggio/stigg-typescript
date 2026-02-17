@@ -642,7 +642,7 @@ export interface AddonListAddonsParams extends MyCursorIDPageParams {
   /**
    * Filter by addon status. Supports comma-separated values for multiple statuses
    */
-  status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+  status?: string;
 }
 
 export namespace AddonListAddonsParams {
