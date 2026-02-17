@@ -7,10 +7,10 @@ const client = new Stigg({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource products', () => {
+describe('resource features', () => {
   // Prism tests are disabled
-  test.skip('archiveProduct', async () => {
-    const responsePromise = client.v1.products.archiveProduct('x');
+  test.skip('archiveFeature', async () => {
+    const responsePromise = client.v1.events.features.archiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,31 +21,46 @@ describe('resource products', () => {
   });
 
   // Prism tests are disabled
-  test.skip('createProduct: only required params', async () => {
-    const responsePromise = client.v1.products.createProduct({ id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('createProduct: required and optional params', async () => {
-    const response = await client.v1.products.createProduct({
+  test.skip('createFeature: only required params', async () => {
+    const responsePromise = client.v1.events.features.createFeature({
       id: 'id',
-      description: 'description',
       displayName: 'displayName',
+      featureType: 'BOOLEAN',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('createFeature: required and optional params', async () => {
+    const response = await client.v1.events.features.createFeature({
+      id: 'id',
+      displayName: 'displayName',
+      featureType: 'BOOLEAN',
+      description: 'description',
+      enumConfiguration: [{ displayName: 'displayName', value: 'value' }],
+      featureStatus: 'NEW',
+      featureUnits: 'featureUnits',
+      featureUnitsPlural: 'featureUnitsPlural',
       metadata: { foo: 'string' },
-      multipleSubscriptions: true,
+      meterType: 'None',
+      unitTransformation: {
+        divide: 0,
+        featureUnits: 'featureUnits',
+        featureUnitsPlural: 'featureUnitsPlural',
+        round: 'UP',
+      },
     });
   });
 
   // Prism tests are disabled
-  test.skip('duplicateProduct: only required params', async () => {
-    const responsePromise = client.v1.products.duplicateProduct('x', { body_id: 'id' });
+  test.skip('listFeatures', async () => {
+    const responsePromise = client.v1.events.features.listFeatures();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,31 +71,10 @@ describe('resource products', () => {
   });
 
   // Prism tests are disabled
-  test.skip('duplicateProduct: required and optional params', async () => {
-    const response = await client.v1.products.duplicateProduct('x', {
-      body_id: 'id',
-      description: 'description',
-      displayName: 'displayName',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('listProducts', async () => {
-    const responsePromise = client.v1.products.listProducts();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('listProducts: request options and params are passed correctly', async () => {
+  test.skip('listFeatures: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.products.listProducts(
+      client.v1.events.features.listFeatures(
         {
           id: 'id',
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -91,7 +85,9 @@ describe('resource products', () => {
             lt: '2019-12-27T18:11:19.117Z',
             lte: '2019-12-27T18:11:19.117Z',
           },
+          featureType: 'featureType',
           limit: 1,
+          meterType: 'meterType',
           status: 'status',
         },
         { path: '/_stainless_unknown_path' },
@@ -100,8 +96,8 @@ describe('resource products', () => {
   });
 
   // Prism tests are disabled
-  test.skip('unarchiveProduct', async () => {
-    const responsePromise = client.v1.products.unarchiveProduct('x');
+  test.skip('retrieveFeature', async () => {
+    const responsePromise = client.v1.events.features.retrieveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,8 +108,20 @@ describe('resource products', () => {
   });
 
   // Prism tests are disabled
-  test.skip('updateProduct', async () => {
-    const responsePromise = client.v1.products.updateProduct('x', {});
+  test.skip('unarchiveFeature', async () => {
+    const responsePromise = client.v1.events.features.unarchiveFeature('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('updateFeature', async () => {
+    const responsePromise = client.v1.events.features.updateFeature('x', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
