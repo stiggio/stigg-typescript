@@ -3,8 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
-import * as PromotionalEntitlementsAPI from './promotional-entitlements';
-import { PromotionalEntitlements } from './promotional-entitlements';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -12,8 +10,6 @@ import { path } from '../../../internal/utils/path';
 
 export class Customers extends APIResource {
   paymentMethod: PaymentMethodAPI.PaymentMethod = new PaymentMethodAPI.PaymentMethod(this._client);
-  promotionalEntitlements: PromotionalEntitlementsAPI.PromotionalEntitlements =
-    new PromotionalEntitlementsAPI.PromotionalEntitlements(this._client);
 
   /**
    * Retrieves a customer by their unique identifier, including billing information
@@ -629,7 +625,6 @@ export namespace CustomerProvisionParams {
 }
 
 Customers.PaymentMethod = PaymentMethod;
-Customers.PromotionalEntitlements = PromotionalEntitlements;
 
 export declare namespace Customers {
   export {
@@ -647,6 +642,4 @@ export declare namespace Customers {
   };
 
   export { PaymentMethod as PaymentMethod, type PaymentMethodAttachParams as PaymentMethodAttachParams };
-
-  export { PromotionalEntitlements as PromotionalEntitlements };
 }
