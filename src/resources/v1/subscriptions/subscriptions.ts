@@ -3,6 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as FutureUpdateAPI from './future-update';
 import { CancelSubscription, FutureUpdate } from './future-update';
+import * as InvoiceAPI from './invoice';
+import { Invoice, InvoiceMarkAsPaidResponse } from './invoice';
+import * as UsageAPI from './usage';
+import { Usage, UsageChargeUsageParams, UsageChargeUsageResponse, UsageSyncUsageResponse } from './usage';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -10,6 +14,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Subscriptions extends APIResource {
   futureUpdate: FutureUpdateAPI.FutureUpdate = new FutureUpdateAPI.FutureUpdate(this._client);
+  usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
+  invoice: InvoiceAPI.Invoice = new InvoiceAPI.Invoice(this._client);
 
   /**
    * Retrieves a subscription by its unique identifier, including plan details,
@@ -3907,6 +3913,8 @@ export interface SubscriptionTransferParams {
 }
 
 Subscriptions.FutureUpdate = FutureUpdate;
+Subscriptions.Usage = Usage;
+Subscriptions.Invoice = Invoice;
 
 export declare namespace Subscriptions {
   export {
@@ -3928,4 +3936,13 @@ export declare namespace Subscriptions {
   };
 
   export { FutureUpdate as FutureUpdate, type CancelSubscription as CancelSubscription };
+
+  export {
+    Usage as Usage,
+    type UsageChargeUsageResponse as UsageChargeUsageResponse,
+    type UsageSyncUsageResponse as UsageSyncUsageResponse,
+    type UsageChargeUsageParams as UsageChargeUsageParams,
+  };
+
+  export { Invoice as Invoice, type InvoiceMarkAsPaidResponse as InvoiceMarkAsPaidResponse };
 }

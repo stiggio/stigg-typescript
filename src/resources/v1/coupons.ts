@@ -34,6 +34,20 @@ export class Coupons extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Archives a coupon, preventing it from being applied to new subscriptions.
+   */
+  archiveCoupon(id: string, options?: RequestOptions): APIPromise<Coupon> {
+    return this._client.post(path`/api/v1/coupons/${id}/archive`, options);
+  }
+
+  /**
+   * Updates an existing coupon's properties such as name, description, and metadata.
+   */
+  updateCoupon(id: string, body: CouponUpdateCouponParams, options?: RequestOptions): APIPromise<Coupon> {
+    return this._client.patch(path`/api/v1/coupons/${id}`, { body, ...options });
+  }
 }
 
 export type CouponListResponsesMyCursorIDPage = MyCursorIDPage<CouponListResponse>;
@@ -675,6 +689,23 @@ export namespace CouponListParams {
   }
 }
 
+export interface CouponUpdateCouponParams {
+  /**
+   * Description of the coupon
+   */
+  description?: string | null;
+
+  /**
+   * Metadata associated with the entity
+   */
+  metadata?: { [key: string]: string } | null;
+
+  /**
+   * Name of the coupon
+   */
+  name?: string;
+}
+
 export declare namespace Coupons {
   export {
     type Coupon as Coupon,
@@ -682,5 +713,6 @@ export declare namespace Coupons {
     type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
     type CouponListParams as CouponListParams,
+    type CouponUpdateCouponParams as CouponUpdateCouponParams,
   };
 }

@@ -88,4 +88,28 @@ describe('resource coupons', () => {
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
   });
+
+  // Prism tests are disabled
+  test.skip('archiveCoupon', async () => {
+    const responsePromise = client.v1.coupons.archiveCoupon('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('updateCoupon', async () => {
+    const responsePromise = client.v1.coupons.updateCoupon('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });

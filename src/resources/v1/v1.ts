@@ -8,15 +8,22 @@ import {
   CouponListParams,
   CouponListResponse,
   CouponListResponsesMyCursorIDPage,
+  CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
-import * as EventsAPI from './events';
-import { EventReportParams, EventReportResponse, Events } from './events';
 import * as ProductsAPI from './products';
 import {
+  ProductArchiveProductResponse,
+  ProductCreateProductParams,
+  ProductCreateProductResponse,
+  ProductDuplicateProductParams,
+  ProductDuplicateProductResponse,
   ProductListProductsParams,
   ProductListProductsResponse,
   ProductListProductsResponsesMyCursorIDPage,
+  ProductUnarchiveProductResponse,
+  ProductUpdateProductParams,
+  ProductUpdateProductResponse,
   Products,
 } from './products';
 import * as UsageAPI from './usage';
@@ -42,6 +49,8 @@ import {
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
+import * as EventsAPI from './events/events';
+import { EventReportParams, EventReportResponse, Events } from './events/events';
 import * as SubscriptionsAPI from './subscriptions/subscriptions';
 import {
   Subscription,
@@ -120,6 +129,7 @@ export declare namespace V1 {
     type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
     type CouponListParams as CouponListParams,
+    type CouponUpdateCouponParams as CouponUpdateCouponParams,
   };
 
   export {
@@ -138,8 +148,16 @@ export declare namespace V1 {
 
   export {
     Products as Products,
+    type ProductArchiveProductResponse as ProductArchiveProductResponse,
+    type ProductCreateProductResponse as ProductCreateProductResponse,
+    type ProductDuplicateProductResponse as ProductDuplicateProductResponse,
     type ProductListProductsResponse as ProductListProductsResponse,
+    type ProductUnarchiveProductResponse as ProductUnarchiveProductResponse,
+    type ProductUpdateProductResponse as ProductUpdateProductResponse,
     type ProductListProductsResponsesMyCursorIDPage as ProductListProductsResponsesMyCursorIDPage,
+    type ProductCreateProductParams as ProductCreateProductParams,
+    type ProductDuplicateProductParams as ProductDuplicateProductParams,
     type ProductListProductsParams as ProductListProductsParams,
+    type ProductUpdateProductParams as ProductUpdateProductParams,
   };
 }

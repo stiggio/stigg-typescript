@@ -6,6 +6,7 @@ export {
   type CouponListResponse,
   type CouponCreateParams,
   type CouponListParams,
+  type CouponUpdateCouponParams,
   type CouponListResponsesMyCursorIDPage,
 } from './coupons';
 export {
@@ -22,11 +23,19 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events';
+export { Events, type EventReportResponse, type EventReportParams } from './events/index';
 export {
   Products,
+  type ProductArchiveProductResponse,
+  type ProductCreateProductResponse,
+  type ProductDuplicateProductResponse,
   type ProductListProductsResponse,
+  type ProductUnarchiveProductResponse,
+  type ProductUpdateProductResponse,
+  type ProductCreateProductParams,
+  type ProductDuplicateProductParams,
   type ProductListProductsParams,
+  type ProductUpdateProductParams,
   type ProductListProductsResponsesMyCursorIDPage,
 } from './products';
 export {
