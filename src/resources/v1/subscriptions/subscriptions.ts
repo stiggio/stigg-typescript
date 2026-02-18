@@ -6,7 +6,7 @@ import { CancelSubscription, FutureUpdate } from './future-update';
 import * as InvoiceAPI from './invoice';
 import { Invoice, InvoiceMarkAsPaidResponse } from './invoice';
 import * as UsageAPI from './usage';
-import { Usage, UsageChargeUsageParams, UsageChargeUsageResponse, UsageSyncUsageResponse } from './usage';
+import { Usage, UsageChargeUsageParams, UsageChargeUsageResponse } from './usage';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -3940,7 +3940,6 @@ export declare namespace Subscriptions {
   export {
     Usage as Usage,
     type UsageChargeUsageResponse as UsageChargeUsageResponse,
-    type UsageSyncUsageResponse as UsageSyncUsageResponse,
     type UsageChargeUsageParams as UsageChargeUsageParams,
   };
 
