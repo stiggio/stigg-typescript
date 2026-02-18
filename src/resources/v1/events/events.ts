@@ -15,6 +15,16 @@ import {
   FeatureUpdateFeatureResponse,
   Features,
 } from './features';
+import * as PlansAPI from './plans';
+import {
+  PlanCreateParams,
+  PlanCreateResponse,
+  PlanListParams,
+  PlanListResponse,
+  PlanListResponsesMyCursorIDPage,
+  PlanRetrieveResponse,
+  Plans,
+} from './plans';
 import * as AddonsAPI from './addons/addons';
 import {
   AddonArchiveAddonResponse,
@@ -36,6 +46,7 @@ import { RequestOptions } from '../../../internal/request-options';
 export class Events extends APIResource {
   features: FeaturesAPI.Features = new FeaturesAPI.Features(this._client);
   addons: AddonsAPI.Addons = new AddonsAPI.Addons(this._client);
+  plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
 
   /**
    * Reports raw usage events for event-based metering. Events are ingested
@@ -103,6 +114,7 @@ export namespace EventReportParams {
 
 Events.Features = Features;
 Events.Addons = Addons;
+Events.Plans = Plans;
 
 export declare namespace Events {
   export { type EventReportResponse as EventReportResponse, type EventReportParams as EventReportParams };
@@ -134,5 +146,15 @@ export declare namespace Events {
     type AddonListAddonsParams as AddonListAddonsParams,
     type AddonPublishAddonParams as AddonPublishAddonParams,
     type AddonUpdateAddonParams as AddonUpdateAddonParams,
+  };
+
+  export {
+    Plans as Plans,
+    type PlanCreateResponse as PlanCreateResponse,
+    type PlanRetrieveResponse as PlanRetrieveResponse,
+    type PlanListResponse as PlanListResponse,
+    type PlanListResponsesMyCursorIDPage as PlanListResponsesMyCursorIDPage,
+    type PlanCreateParams as PlanCreateParams,
+    type PlanListParams as PlanListParams,
   };
 }
