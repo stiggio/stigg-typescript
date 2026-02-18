@@ -44,8 +44,8 @@ describe('resource products', () => {
   });
 
   // Prism tests are disabled
-  test.skip('duplicateProduct', async () => {
-    const responsePromise = client.v1.products.duplicateProduct('x', {});
+  test.skip('duplicateProduct: only required params', async () => {
+    const responsePromise = client.v1.products.duplicateProduct('x', { body_id: 'id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,6 +53,15 @@ describe('resource products', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('duplicateProduct: required and optional params', async () => {
+    const response = await client.v1.products.duplicateProduct('x', {
+      body_id: 'id',
+      description: 'description',
+      displayName: 'displayName',
+    });
   });
 
   // Prism tests are disabled
