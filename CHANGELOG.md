@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.1.0-alpha.8 (2026-02-18)
+
+Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
+
+### Features
+
+* **api:** add events features/addons/plans, subscriptions usage/invoice, coupons/products endpoints ([aa80361](https://github.com/stiggio/stigg-typescript/commit/aa8036192fd6f8a060ee861d2dd0da1de86e3cb6))
+* **api:** Add missing endpoints ([ded1c1d](https://github.com/stiggio/stigg-typescript/commit/ded1c1d297174ddc906862c0587ae020442cc7d6))
+* **api:** api update ([356282f](https://github.com/stiggio/stigg-typescript/commit/356282f1f257e6176c26c8163b8f801d74b09282))
+* **api:** api update ([473a89c](https://github.com/stiggio/stigg-typescript/commit/473a89c5a14c9c1391039a4d03b5109b9538595d))
+* **api:** api update ([d2cfe9f](https://github.com/stiggio/stigg-typescript/commit/d2cfe9f5b1e4424ccca75eea6c815ff56e677d16))
+* **api:** manual updates ([622e55e](https://github.com/stiggio/stigg-typescript/commit/622e55e14a46fb239763101b95f2cbad5e3c10de))
+* **api:** manual updates ([622e55e](https://github.com/stiggio/stigg-typescript/commit/622e55e14a46fb239763101b95f2cbad5e3c10de))
+* **api:** manual updates ([b7e5a4b](https://github.com/stiggio/stigg-typescript/commit/b7e5a4bb6dcabe6fa369741eb779050901e827f1))
+* **api:** manual updates ([083f5fa](https://github.com/stiggio/stigg-typescript/commit/083f5fac9a83126b4fbbfd55228b39164eadb325))
+* **api:** manual updates ([a15494f](https://github.com/stiggio/stigg-typescript/commit/a15494fb80a3d76eae49a2b8beac10b8a569f68d))
+* **api:** trigger release ([4f4bd4f](https://github.com/stiggio/stigg-typescript/commit/4f4bd4fe4fba2e9fdbee9a7391a009a3674bcd2b))
+* **api:** trigger release ([4f4bd4f](https://github.com/stiggio/stigg-typescript/commit/4f4bd4fe4fba2e9fdbee9a7391a009a3674bcd2b))
+
+
+### Bug Fixes
+
+* **api:** rename pathID param, remove body_id field in products.duplicateProduct ([b2b795e](https://github.com/stiggio/stigg-typescript/commit/b2b795e5f0ec8f72f3392d82b428a627c84294da))
+
+
+### Chores
+
+* **internal/client:** fix form-urlencoded requests ([456672a](https://github.com/stiggio/stigg-typescript/commit/456672ad70b99e5ce322a15a48d958da37ffb7a0))
+* **internal:** allow setting x-stainless-api-key header on mcp server requests ([c73920b](https://github.com/stiggio/stigg-typescript/commit/c73920be5a90ca466d47848418e9d7cb0b81ebd3))
+* remove custom code ([0a618df](https://github.com/stiggio/stigg-typescript/commit/0a618df73be4e5b195393c813740838d179b7d5c))
+* update SDK settings ([23fb700](https://github.com/stiggio/stigg-typescript/commit/23fb700dadc23339d0d3f075c7a869687b206ce5))
+* update SDK settings ([0c8a587](https://github.com/stiggio/stigg-typescript/commit/0c8a58729cc38e085cf988b43a6d88e4ff3a0122))
+
 ## 0.1.0-alpha.7 (2026-02-17)
 
 Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
