@@ -44,7 +44,7 @@ describe('resource addons', () => {
       productId: 'productId',
       billingId: 'billingId',
       description: 'description',
-      maxQuantity: 1,
+      maxQuantity: 0,
       metadata: { foo: 'string' },
       pricingType: 'FREE',
       status: 'DRAFT',
