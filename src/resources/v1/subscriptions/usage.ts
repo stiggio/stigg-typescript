@@ -17,6 +17,14 @@ export class Usage extends APIResource {
   ): APIPromise<UsageChargeUsageResponse> {
     return this._client.post(path`/api/v1/subscriptions/${id}/usage/charge`, { body, ...options });
   }
+
+  /**
+   * Triggers a usage sync for a subscription, reporting current usage to the billing
+   * provider.
+   */
+  sync(id: string, options?: RequestOptions): APIPromise<UsageSyncResponse> {
+    return this._client.post(path`/api/v1/subscriptions/${id}/usage/sync`, options);
+  }
 }
 
 /**
@@ -80,6 +88,28 @@ export namespace UsageChargeUsageResponse {
   }
 }
 
+/**
+ * Response object
+ */
+export interface UsageSyncResponse {
+  /**
+   * Result of triggering a subscription usage sync.
+   */
+  data: UsageSyncResponse.Data;
+}
+
+export namespace UsageSyncResponse {
+  /**
+   * Result of triggering a subscription usage sync.
+   */
+  export interface Data {
+    /**
+     * Whether usage was synced to the billing provider
+     */
+    triggered: boolean;
+  }
+}
+
 export interface UsageChargeUsageParams {
   /**
    * Cutoff date for usage calculation. If not provided, the current time is used.
@@ -90,6 +120,7 @@ export interface UsageChargeUsageParams {
 export declare namespace Usage {
   export {
     type UsageChargeUsageResponse as UsageChargeUsageResponse,
+    type UsageSyncResponse as UsageSyncResponse,
     type UsageChargeUsageParams as UsageChargeUsageParams,
   };
 }
