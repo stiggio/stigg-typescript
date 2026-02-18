@@ -167,12 +167,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/subscriptions/{id}/usage/charge',
   },
   {
-    clientCallName: 'client.v1.subscriptions.usage.syncUsage',
-    fullyQualifiedName: 'v1.subscriptions.usage.syncUsage',
-    httpMethod: 'post',
-    httpPath: '/api/v1/subscriptions/{id}/usage/sync',
-  },
-  {
     clientCallName: 'client.v1.subscriptions.invoice.markAsPaid',
     fullyQualifiedName: 'v1.subscriptions.invoice.markAsPaid',
     httpMethod: 'post',

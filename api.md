@@ -80,12 +80,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/subscriptions/usage.ts">UsageChargeUsageResponse</a></code>
-- <code><a href="./src/resources/v1/subscriptions/usage.ts">UsageSyncUsageResponse</a></code>
 
 Methods:
 
 - <code title="post /api/v1/subscriptions/{id}/usage/charge">client.v1.subscriptions.usage.<a href="./src/resources/v1/subscriptions/usage.ts">chargeUsage</a>(id, { ...params }) -> UsageChargeUsageResponse</code>
-- <code title="post /api/v1/subscriptions/{id}/usage/sync">client.v1.subscriptions.usage.<a href="./src/resources/v1/subscriptions/usage.ts">syncUsage</a>(id) -> UsageSyncUsageResponse</code>
 
 ### Invoice
 
