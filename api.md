@@ -215,7 +215,7 @@ Methods:
 
 - <code title="post /api/v1/products/{id}/archive">client.v1.products.<a href="./src/resources/v1/products.ts">archiveProduct</a>(id) -> ProductArchiveProductResponse</code>
 - <code title="post /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">createProduct</a>({ ...params }) -> ProductCreateProductResponse</code>
-- <code title="post /api/v1/products/{id}/duplicate">client.v1.products.<a href="./src/resources/v1/products.ts">duplicateProduct</a>(id, { ...params }) -> ProductDuplicateProductResponse</code>
+- <code title="post /api/v1/products/{id}/duplicate">client.v1.products.<a href="./src/resources/v1/products.ts">duplicateProduct</a>(pathID, { ...params }) -> ProductDuplicateProductResponse</code>
 - <code title="get /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">listProducts</a>({ ...params }) -> ProductListProductsResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id) -> ProductUnarchiveProductResponse</code>
 - <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> ProductUpdateProductResponse</code>
