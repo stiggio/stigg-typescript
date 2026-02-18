@@ -67,7 +67,7 @@ export namespace DraftCreateAddonDraftResponse {
     displayName: string;
 
     /**
-     * List of entitlements for the addon
+     * List of entitlements of the package
      */
     entitlements: Array<Data.Entitlement>;
 
@@ -90,6 +90,11 @@ export namespace DraftCreateAddonDraftResponse {
      * The pricing type of the package
      */
     pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+    /**
+     * The product id of the package
+     */
+    productId: string;
 
     /**
      * The status of the package

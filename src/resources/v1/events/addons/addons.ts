@@ -118,7 +118,7 @@ export namespace AddonArchiveAddonResponse {
     displayName: string;
 
     /**
-     * List of entitlements for the addon
+     * List of entitlements of the package
      */
     entitlements: Array<Data.Entitlement>;
 
@@ -141,6 +141,11 @@ export namespace AddonArchiveAddonResponse {
      * The pricing type of the package
      */
     pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+    /**
+     * The product id of the package
+     */
+    productId: string;
 
     /**
      * The status of the package
@@ -219,7 +224,7 @@ export namespace AddonCreateAddonResponse {
     displayName: string;
 
     /**
-     * List of entitlements for the addon
+     * List of entitlements of the package
      */
     entitlements: Array<Data.Entitlement>;
 
@@ -242,6 +247,11 @@ export namespace AddonCreateAddonResponse {
      * The pricing type of the package
      */
     pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+    /**
+     * The product id of the package
+     */
+    productId: string;
 
     /**
      * The status of the package
@@ -309,7 +319,7 @@ export interface AddonListAddonsResponse {
   displayName: string;
 
   /**
-   * List of entitlements for the addon
+   * List of entitlements of the package
    */
   entitlements: Array<AddonListAddonsResponse.Entitlement>;
 
@@ -332,6 +342,11 @@ export interface AddonListAddonsResponse {
    * The pricing type of the package
    */
   pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+  /**
+   * The product id of the package
+   */
+  productId: string;
 
   /**
    * The status of the package
@@ -425,7 +440,7 @@ export namespace AddonRetrieveAddonResponse {
     displayName: string;
 
     /**
-     * List of entitlements for the addon
+     * List of entitlements of the package
      */
     entitlements: Array<Data.Entitlement>;
 
@@ -448,6 +463,11 @@ export namespace AddonRetrieveAddonResponse {
      * The pricing type of the package
      */
     pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+    /**
+     * The product id of the package
+     */
+    productId: string;
 
     /**
      * The status of the package
@@ -526,7 +546,7 @@ export namespace AddonUpdateAddonResponse {
     displayName: string;
 
     /**
-     * List of entitlements for the addon
+     * List of entitlements of the package
      */
     entitlements: Array<Data.Entitlement>;
 
@@ -549,6 +569,11 @@ export namespace AddonUpdateAddonResponse {
      * The pricing type of the package
      */
     pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+    /**
+     * The product id of the package
+     */
+    productId: string;
 
     /**
      * The status of the package
@@ -593,24 +618,24 @@ export interface AddonCreateAddonParams {
   displayName: string;
 
   /**
-   * The product ID to associate the addon with
+   * The product id of the package
    */
   productId: string;
 
   /**
    * The unique identifier for the entity in the billing provider
    */
-  billingId?: string;
+  billingId?: string | null;
 
   /**
    * The description of the package
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * The maximum quantity of this addon that can be added to a subscription
    */
-  maxQuantity?: number;
+  maxQuantity?: number | null;
 
   /**
    * Metadata associated with the entity
@@ -620,7 +645,7 @@ export interface AddonCreateAddonParams {
   /**
    * The pricing type of the package
    */
-  pricingType?: 'FREE' | 'PAID' | 'CUSTOM';
+  pricingType?: 'FREE' | 'PAID' | 'CUSTOM' | null;
 
   /**
    * The status of the package
@@ -640,7 +665,7 @@ export interface AddonListAddonsParams extends MyCursorIDPageParams {
   productId?: string;
 
   /**
-   * Filter by addon status. Supports comma-separated values for multiple statuses
+   * Filter by status. Supports comma-separated values for multiple statuses
    */
   status?: string;
 }
