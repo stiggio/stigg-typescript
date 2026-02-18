@@ -299,6 +299,24 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/addons/{id}/draft',
   },
   {
+    clientCallName: 'client.v1.events.plans.create',
+    fullyQualifiedName: 'v1.events.plans.create',
+    httpMethod: 'post',
+    httpPath: '/api/v1/plans',
+  },
+  {
+    clientCallName: 'client.v1.events.plans.retrieve',
+    fullyQualifiedName: 'v1.events.plans.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1/plans/{id}',
+  },
+  {
+    clientCallName: 'client.v1.events.plans.list',
+    fullyQualifiedName: 'v1.events.plans.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/plans',
+  },
+  {
     clientCallName: 'client.v1.usage.history',
     fullyQualifiedName: 'v1.usage.history',
     httpMethod: 'get',

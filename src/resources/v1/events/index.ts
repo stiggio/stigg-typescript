@@ -28,3 +28,12 @@ export {
   type FeatureUpdateFeatureParams,
   type FeatureListFeaturesResponsesMyCursorIDPage,
 } from './features';
+export {
+  Plans,
+  type PlanCreateResponse,
+  type PlanRetrieveResponse,
+  type PlanListResponse,
+  type PlanCreateParams,
+  type PlanListParams,
+  type PlanListResponsesMyCursorIDPage,
+} from './plans';

@@ -174,6 +174,20 @@ Methods:
 - <code title="post /api/v1/addons/{id}/draft">client.v1.events.addons.draft.<a href="./src/resources/v1/events/addons/draft.ts">createAddonDraft</a>(id) -> DraftCreateAddonDraftResponse</code>
 - <code title="delete /api/v1/addons/{id}/draft">client.v1.events.addons.draft.<a href="./src/resources/v1/events/addons/draft.ts">removeAddonDraft</a>(id) -> DraftRemoveAddonDraftResponse</code>
 
+### Plans
+
+Types:
+
+- <code><a href="./src/resources/v1/events/plans.ts">PlanCreateResponse</a></code>
+- <code><a href="./src/resources/v1/events/plans.ts">PlanRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1/events/plans.ts">PlanListResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/plans">client.v1.events.plans.<a href="./src/resources/v1/events/plans.ts">create</a>({ ...params }) -> PlanCreateResponse</code>
+- <code title="get /api/v1/plans/{id}">client.v1.events.plans.<a href="./src/resources/v1/events/plans.ts">retrieve</a>(id) -> PlanRetrieveResponse</code>
+- <code title="get /api/v1/plans">client.v1.events.plans.<a href="./src/resources/v1/events/plans.ts">list</a>({ ...params }) -> PlanListResponsesMyCursorIDPage</code>
+
 ## Usage
 
 Types:
