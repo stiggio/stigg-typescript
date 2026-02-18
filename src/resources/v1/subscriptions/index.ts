@@ -20,4 +20,9 @@ export {
   type SubscriptionTransferParams,
   type SubscriptionListResponsesMyCursorIDPage,
 } from './subscriptions';
-export { Usage, type UsageChargeUsageResponse, type UsageChargeUsageParams } from './usage';
+export {
+  Usage,
+  type UsageChargeUsageResponse,
+  type UsageSyncResponse,
+  type UsageChargeUsageParams,
+} from './usage';
