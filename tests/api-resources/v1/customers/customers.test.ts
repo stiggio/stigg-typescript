@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource customers', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.v1.customers.retrieve('x');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.v1.customers.update('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.customers.list();
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -67,7 +67,7 @@ describe('resource customers', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('archive', async () => {
     const responsePromise = client.v1.customers.archive('x');
     const rawResponse = await responsePromise.asResponse();
@@ -79,7 +79,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('import: only required params', async () => {
     const responsePromise = client.v1.customers.import({
       customers: [
@@ -99,7 +99,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('import: required and optional params', async () => {
     const response = await client.v1.customers.import({
       customers: [
@@ -115,7 +115,7 @@ describe('resource customers', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listResources', async () => {
     const responsePromise = client.v1.customers.listResources('x');
     const rawResponse = await responsePromise.asResponse();
@@ -127,7 +127,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listResources: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -143,7 +143,7 @@ describe('resource customers', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('provision: only required params', async () => {
     const responsePromise = client.v1.customers.provision({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
@@ -155,7 +155,7 @@ describe('resource customers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('provision: required and optional params', async () => {
     const response = await client.v1.customers.provision({
       id: 'id',
@@ -180,7 +180,7 @@ describe('resource customers', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('unarchive', async () => {
     const responsePromise = client.v1.customers.unarchive('x');
     const rawResponse = await responsePromise.asResponse();

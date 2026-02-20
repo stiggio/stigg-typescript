@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource usage', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('history: only required params', async () => {
     const responsePromise = client.v1.usage.history('featureId', {
       customerId: 'customerId',
@@ -23,7 +23,7 @@ describe('resource usage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('history: required and optional params', async () => {
     const response = await client.v1.usage.history('featureId', {
       customerId: 'customerId',
@@ -34,7 +34,7 @@ describe('resource usage', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('report: only required params', async () => {
     const responsePromise = client.v1.usage.report({
       usages: [
@@ -54,7 +54,7 @@ describe('resource usage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('report: required and optional params', async () => {
     const response = await client.v1.usage.report({
       usages: [

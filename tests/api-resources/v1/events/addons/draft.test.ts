@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource draft', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createAddonDraft', async () => {
     const responsePromise = client.v1.events.addons.draft.createAddonDraft('x');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource draft', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('removeAddonDraft', async () => {
     const responsePromise = client.v1.events.addons.draft.removeAddonDraft('x');
     const rawResponse = await responsePromise.asResponse();

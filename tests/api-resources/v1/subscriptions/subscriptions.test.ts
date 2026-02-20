@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource subscriptions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.v1.subscriptions.retrieve('x');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.v1.subscriptions.update('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.subscriptions.list();
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -70,7 +70,7 @@ describe('resource subscriptions', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancel', async () => {
     const responsePromise = client.v1.subscriptions.cancel('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -82,7 +82,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delegate: only required params', async () => {
     const responsePromise = client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });
     const rawResponse = await responsePromise.asResponse();
@@ -94,12 +94,12 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delegate: required and optional params', async () => {
     const response = await client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('import: only required params', async () => {
     const responsePromise = client.v1.subscriptions.import({
       subscriptions: [
@@ -119,7 +119,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('import: required and optional params', async () => {
     const response = await client.v1.subscriptions.import({
       subscriptions: [
@@ -138,7 +138,7 @@ describe('resource subscriptions', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('migrate', async () => {
     const responsePromise = client.v1.subscriptions.migrate('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -150,7 +150,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('preview: only required params', async () => {
     const responsePromise = client.v1.subscriptions.preview({ customerId: 'customerId', planId: 'planId' });
     const rawResponse = await responsePromise.asResponse();
@@ -162,7 +162,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('preview: required and optional params', async () => {
     const response = await client.v1.subscriptions.preview({
       customerId: 'customerId',
@@ -224,7 +224,7 @@ describe('resource subscriptions', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('provision: only required params', async () => {
     const responsePromise = client.v1.subscriptions.provision({ customerId: 'customerId', planId: 'planId' });
     const rawResponse = await responsePromise.asResponse();
@@ -236,7 +236,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('provision: required and optional params', async () => {
     const response = await client.v1.subscriptions.provision({
       customerId: 'customerId',
@@ -361,7 +361,7 @@ describe('resource subscriptions', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('transfer: only required params', async () => {
     const responsePromise = client.v1.subscriptions.transfer('x', {
       destinationResourceId: 'destinationResourceId',
@@ -375,7 +375,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('transfer: required and optional params', async () => {
     const response = await client.v1.subscriptions.transfer('x', {
       destinationResourceId: 'destinationResourceId',

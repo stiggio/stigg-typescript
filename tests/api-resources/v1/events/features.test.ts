@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource features', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('archiveFeature', async () => {
     const responsePromise = client.v1.events.features.archiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource features', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createFeature: only required params', async () => {
     const responsePromise = client.v1.events.features.createFeature({
       id: 'id',
@@ -36,7 +36,7 @@ describe('resource features', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createFeature: required and optional params', async () => {
     const response = await client.v1.events.features.createFeature({
       id: 'id',
@@ -58,7 +58,7 @@ describe('resource features', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listFeatures', async () => {
     const responsePromise = client.v1.events.features.listFeatures();
     const rawResponse = await responsePromise.asResponse();
@@ -70,7 +70,7 @@ describe('resource features', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listFeatures: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -95,7 +95,7 @@ describe('resource features', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveFeature', async () => {
     const responsePromise = client.v1.events.features.retrieveFeature('x');
     const rawResponse = await responsePromise.asResponse();
@@ -107,7 +107,7 @@ describe('resource features', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('unarchiveFeature', async () => {
     const responsePromise = client.v1.events.features.unarchiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
@@ -119,7 +119,7 @@ describe('resource features', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateFeature', async () => {
     const responsePromise = client.v1.events.features.updateFeature('x', {});
     const rawResponse = await responsePromise.asResponse();

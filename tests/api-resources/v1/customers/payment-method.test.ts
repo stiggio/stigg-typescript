@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource paymentMethod', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attach: only required params', async () => {
     const responsePromise = client.v1.customers.paymentMethod.attach('x', {
       integrationId: 'integrationId',
@@ -24,7 +24,7 @@ describe('resource paymentMethod', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attach: required and optional params', async () => {
     const response = await client.v1.customers.paymentMethod.attach('x', {
       integrationId: 'integrationId',
@@ -34,7 +34,7 @@ describe('resource paymentMethod', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('detach', async () => {
     const responsePromise = client.v1.customers.paymentMethod.detach('x');
     const rawResponse = await responsePromise.asResponse();
