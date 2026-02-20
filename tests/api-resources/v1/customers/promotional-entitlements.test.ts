@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource promotionalEntitlements', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.v1.customers.promotionalEntitlements.create('x', {
       promotionalEntitlements: [
@@ -37,7 +37,7 @@ describe('resource promotionalEntitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.customers.promotionalEntitlements.create('x', {
       promotionalEntitlements: [
@@ -59,7 +59,7 @@ describe('resource promotionalEntitlements', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.customers.promotionalEntitlements.list('x');
     const rawResponse = await responsePromise.asResponse();
@@ -71,7 +71,7 @@ describe('resource promotionalEntitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -94,7 +94,7 @@ describe('resource promotionalEntitlements', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('revoke: only required params', async () => {
     const responsePromise = client.v1.customers.promotionalEntitlements.revoke('featureId', { id: 'id' });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +106,7 @@ describe('resource promotionalEntitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('revoke: required and optional params', async () => {
     const response = await client.v1.customers.promotionalEntitlements.revoke('featureId', { id: 'id' });
   });

@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource coupons', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.v1.coupons.create({
       id: 'id',
@@ -28,7 +28,7 @@ describe('resource coupons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.coupons.create({
       id: 'id',
@@ -41,7 +41,7 @@ describe('resource coupons', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.v1.coupons.retrieve('x');
     const rawResponse = await responsePromise.asResponse();
@@ -53,7 +53,7 @@ describe('resource coupons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.coupons.list();
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +65,7 @@ describe('resource coupons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -89,7 +89,7 @@ describe('resource coupons', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('archiveCoupon', async () => {
     const responsePromise = client.v1.coupons.archiveCoupon('x');
     const rawResponse = await responsePromise.asResponse();
@@ -101,7 +101,7 @@ describe('resource coupons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateCoupon', async () => {
     const responsePromise = client.v1.coupons.updateCoupon('x', {});
     const rawResponse = await responsePromise.asResponse();

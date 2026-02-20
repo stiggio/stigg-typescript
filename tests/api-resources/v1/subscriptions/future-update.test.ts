@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource futureUpdate', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancelPendingPayment', async () => {
     const responsePromise = client.v1.subscriptions.futureUpdate.cancelPendingPayment('x');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource futureUpdate', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancelSchedule', async () => {
     const responsePromise = client.v1.subscriptions.futureUpdate.cancelSchedule('x');
     const rawResponse = await responsePromise.asResponse();

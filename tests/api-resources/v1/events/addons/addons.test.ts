@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource addons', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('archiveAddon', async () => {
     const responsePromise = client.v1.events.addons.archiveAddon('x');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource addons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createAddon: only required params', async () => {
     const responsePromise = client.v1.events.addons.createAddon({
       id: 'id',
@@ -36,7 +36,7 @@ describe('resource addons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createAddon: required and optional params', async () => {
     const response = await client.v1.events.addons.createAddon({
       id: 'id',
@@ -51,7 +51,7 @@ describe('resource addons', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAddons', async () => {
     const responsePromise = client.v1.events.addons.listAddons();
     const rawResponse = await responsePromise.asResponse();
@@ -63,7 +63,7 @@ describe('resource addons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAddons: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -86,7 +86,7 @@ describe('resource addons', () => {
     ).rejects.toThrow(Stigg.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('publishAddon: only required params', async () => {
     const responsePromise = client.v1.events.addons.publishAddon('x', { migrationType: 'NEW_CUSTOMERS' });
     const rawResponse = await responsePromise.asResponse();
@@ -98,12 +98,12 @@ describe('resource addons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('publishAddon: required and optional params', async () => {
     const response = await client.v1.events.addons.publishAddon('x', { migrationType: 'NEW_CUSTOMERS' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveAddon', async () => {
     const responsePromise = client.v1.events.addons.retrieveAddon('x');
     const rawResponse = await responsePromise.asResponse();
@@ -115,7 +115,7 @@ describe('resource addons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateAddon', async () => {
     const responsePromise = client.v1.events.addons.updateAddon('x', {});
     const rawResponse = await responsePromise.asResponse();
