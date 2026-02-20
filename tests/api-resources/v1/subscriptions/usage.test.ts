@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource usage', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('chargeUsage', async () => {
     const responsePromise = client.v1.subscriptions.usage.chargeUsage('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource usage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('sync', async () => {
     const responsePromise = client.v1.subscriptions.usage.sync('x');
     const rawResponse = await responsePromise.asResponse();

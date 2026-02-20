@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource events', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('report: only required params', async () => {
     const responsePromise = client.v1.events.report({
       events: [
@@ -28,7 +28,7 @@ describe('resource events', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('report: required and optional params', async () => {
     const response = await client.v1.events.report({
       events: [

@@ -8,7 +8,7 @@ const client = new Stigg({
 });
 
 describe('resource invoice', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('markAsPaid', async () => {
     const responsePromise = client.v1.subscriptions.invoice.markAsPaid('x');
     const rawResponse = await responsePromise.asResponse();
