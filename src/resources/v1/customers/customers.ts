@@ -70,7 +70,7 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Get a list of customerresources
+   * Retrieves a paginated list of resources within the same customer.
    */
   listResources(
     id: string,
