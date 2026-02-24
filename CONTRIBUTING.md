@@ -60,7 +60,7 @@ $ yarn link @stigg/typescript
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @stigg/typescript
+$ pnpm link --global @stigg/typescript
 ```
 
 ## Running tests
