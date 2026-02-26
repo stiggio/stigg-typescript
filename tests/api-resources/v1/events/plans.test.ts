@@ -31,6 +31,12 @@ describe('resource plans', () => {
       displayName: 'displayName',
       productId: 'productId',
       billingId: 'billingId',
+      defaultTrialConfig: {
+        duration: 0,
+        units: 'DAY',
+        budget: { hasSoftLimit: true, limit: 0 },
+        trialEndBehavior: 'CONVERT_TO_PAID',
+      },
       description: 'description',
       metadata: { foo: 'string' },
       parentPlanId: 'parentPlanId',

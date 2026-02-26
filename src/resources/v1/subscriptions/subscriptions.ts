@@ -968,6 +968,31 @@ export namespace SubscriptionProvisionResponse {
          * The unique identifier of the custom currency.
          */
         currencyId: string;
+
+        /**
+         * The display name of the currency.
+         */
+        displayName: string;
+
+        /**
+         * Additional metadata associated with the currency.
+         */
+        additionalMetaData?: unknown;
+
+        /**
+         * A description of the currency.
+         */
+        description?: string | null;
+
+        /**
+         * The plural form of the currency unit.
+         */
+        unitPlural?: string | null;
+
+        /**
+         * The singular form of the currency unit.
+         */
+        unitSingular?: string | null;
       }
     }
 

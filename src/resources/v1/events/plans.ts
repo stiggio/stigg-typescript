@@ -60,10 +60,17 @@ export namespace PlanCreateResponse {
      */
     billingId: string | null;
 
+    compatibleAddonIds: Array<string> | null;
+
     /**
      * Timestamp of when the record was created
      */
     createdAt: string;
+
+    /**
+     * Default trial configuration for the plan
+     */
+    defaultTrialConfig: Data.DefaultTrialConfig | null;
 
     /**
      * The description of the package
@@ -122,6 +129,48 @@ export namespace PlanCreateResponse {
   }
 
   export namespace Data {
+    /**
+     * Default trial configuration for the plan
+     */
+    export interface DefaultTrialConfig {
+      /**
+       * The duration of the trial in the specified units
+       */
+      duration: number;
+
+      /**
+       * The time unit for the trial duration (DAY or MONTH)
+       */
+      units: 'DAY' | 'MONTH';
+
+      /**
+       * Budget configuration for the trial
+       */
+      budget?: DefaultTrialConfig.Budget | null;
+
+      /**
+       * Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+       */
+      trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION' | null;
+    }
+
+    export namespace DefaultTrialConfig {
+      /**
+       * Budget configuration for the trial
+       */
+      export interface Budget {
+        /**
+         * Whether the budget limit is a soft limit (allows overage) or hard limit
+         */
+        hasSoftLimit: boolean;
+
+        /**
+         * The budget limit amount
+         */
+        limit: number;
+      }
+    }
+
     /**
      * Entitlement reference with type and identifier
      */
@@ -161,10 +210,17 @@ export namespace PlanRetrieveResponse {
      */
     billingId: string | null;
 
+    compatibleAddonIds: Array<string> | null;
+
     /**
      * Timestamp of when the record was created
      */
     createdAt: string;
+
+    /**
+     * Default trial configuration for the plan
+     */
+    defaultTrialConfig: Data.DefaultTrialConfig | null;
 
     /**
      * The description of the package
@@ -224,6 +280,48 @@ export namespace PlanRetrieveResponse {
 
   export namespace Data {
     /**
+     * Default trial configuration for the plan
+     */
+    export interface DefaultTrialConfig {
+      /**
+       * The duration of the trial in the specified units
+       */
+      duration: number;
+
+      /**
+       * The time unit for the trial duration (DAY or MONTH)
+       */
+      units: 'DAY' | 'MONTH';
+
+      /**
+       * Budget configuration for the trial
+       */
+      budget?: DefaultTrialConfig.Budget | null;
+
+      /**
+       * Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+       */
+      trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION' | null;
+    }
+
+    export namespace DefaultTrialConfig {
+      /**
+       * Budget configuration for the trial
+       */
+      export interface Budget {
+        /**
+         * Whether the budget limit is a soft limit (allows overage) or hard limit
+         */
+        hasSoftLimit: boolean;
+
+        /**
+         * The budget limit amount
+         */
+        limit: number;
+      }
+    }
+
+    /**
      * Entitlement reference with type and identifier
      */
     export interface Entitlement {
@@ -251,10 +349,17 @@ export interface PlanListResponse {
    */
   billingId: string | null;
 
+  compatibleAddonIds: Array<string> | null;
+
   /**
    * Timestamp of when the record was created
    */
   createdAt: string;
+
+  /**
+   * Default trial configuration for the plan
+   */
+  defaultTrialConfig: PlanListResponse.DefaultTrialConfig | null;
 
   /**
    * The description of the package
@@ -314,6 +419,48 @@ export interface PlanListResponse {
 
 export namespace PlanListResponse {
   /**
+   * Default trial configuration for the plan
+   */
+  export interface DefaultTrialConfig {
+    /**
+     * The duration of the trial in the specified units
+     */
+    duration: number;
+
+    /**
+     * The time unit for the trial duration (DAY or MONTH)
+     */
+    units: 'DAY' | 'MONTH';
+
+    /**
+     * Budget configuration for the trial
+     */
+    budget?: DefaultTrialConfig.Budget | null;
+
+    /**
+     * Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+     */
+    trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION' | null;
+  }
+
+  export namespace DefaultTrialConfig {
+    /**
+     * Budget configuration for the trial
+     */
+    export interface Budget {
+      /**
+       * Whether the budget limit is a soft limit (allows overage) or hard limit
+       */
+      hasSoftLimit: boolean;
+
+      /**
+       * The budget limit amount
+       */
+      limit: number;
+    }
+  }
+
+  /**
    * Entitlement reference with type and identifier
    */
   export interface Entitlement {
@@ -348,6 +495,11 @@ export interface PlanCreateParams {
   billingId?: string | null;
 
   /**
+   * Default trial configuration for the plan
+   */
+  defaultTrialConfig?: PlanCreateParams.DefaultTrialConfig | null;
+
+  /**
    * The description of the package
    */
   description?: string | null;
@@ -371,6 +523,50 @@ export interface PlanCreateParams {
    * The status of the package
    */
   status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+}
+
+export namespace PlanCreateParams {
+  /**
+   * Default trial configuration for the plan
+   */
+  export interface DefaultTrialConfig {
+    /**
+     * The duration of the trial in the specified units
+     */
+    duration: number;
+
+    /**
+     * The time unit for the trial duration (DAY or MONTH)
+     */
+    units: 'DAY' | 'MONTH';
+
+    /**
+     * Budget configuration for the trial
+     */
+    budget?: DefaultTrialConfig.Budget | null;
+
+    /**
+     * Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+     */
+    trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION' | null;
+  }
+
+  export namespace DefaultTrialConfig {
+    /**
+     * Budget configuration for the trial
+     */
+    export interface Budget {
+      /**
+       * Whether the budget limit is a soft limit (allows overage) or hard limit
+       */
+      hasSoftLimit: boolean;
+
+      /**
+       * The budget limit amount
+       */
+      limit: number;
+    }
+  }
 }
 
 export interface PlanListParams extends MyCursorIDPageParams {
