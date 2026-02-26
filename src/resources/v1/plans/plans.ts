@@ -1,9 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
+import { APIResource } from '../../../core/resource';
 import * as AddonsAPI from '../addons/addons';
-import * as DraftAPI from './draft';
-import { Draft, DraftRemoveResponse } from './draft';
 import * as EntitlementsAPI from './entitlements';
 import {
   EntitlementCreateParams,
@@ -14,13 +12,12 @@ import {
   Entitlements,
   PlanEntitlement,
 } from './entitlements';
-import { APIPromise } from '../../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../core/pagination';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
+import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Plans extends APIResource {
-  draft: DraftAPI.Draft = new DraftAPI.Draft(this._client);
   entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
 
   /**
@@ -64,10 +61,24 @@ export class Plans extends APIResource {
   }
 
   /**
+   * Creates a draft version of an existing plan for modification before publishing.
+   */
+  createDraft(id: string, options?: RequestOptions): APIPromise<Plan> {
+    return this._client.post(path`/api/v1/plans/${id}/draft`, options);
+  }
+
+  /**
    * Publishes a draft plan, making it available for use in subscriptions.
    */
   publish(id: string, body: PlanPublishParams, options?: RequestOptions): APIPromise<PlanPublishResponse> {
     return this._client.post(path`/api/v1/plans/${id}/publish`, { body, ...options });
+  }
+
+  /**
+   * Removes a draft version of a plan.
+   */
+  removeDraft(id: string, options?: RequestOptions): APIPromise<PlanRemoveDraftResponse> {
+    return this._client.delete(path`/api/v1/plans/${id}/draft`, options);
   }
 
   /**
@@ -386,6 +397,22 @@ export namespace PlanPublishResponse {
      * Task ID for tracking the async publish operation
      */
     taskId: string | null;
+  }
+}
+
+/**
+ * Response confirming the plan draft was removed.
+ */
+export interface PlanRemoveDraftResponse {
+  data: PlanRemoveDraftResponse.Data;
+}
+
+export namespace PlanRemoveDraftResponse {
+  export interface Data {
+    /**
+     * The unique identifier for the entity
+     */
+    id: string;
   }
 }
 
@@ -1977,7 +2004,6 @@ export namespace PlanSetPricingParams {
   }
 }
 
-Plans.Draft = Draft;
 Plans.Entitlements = Entitlements;
 
 export declare namespace Plans {
@@ -1985,6 +2011,7 @@ export declare namespace Plans {
     type Plan as Plan,
     type PlanListResponse as PlanListResponse,
     type PlanPublishResponse as PlanPublishResponse,
+    type PlanRemoveDraftResponse as PlanRemoveDraftResponse,
     type PlanListResponsesMyCursorIDPage as PlanListResponsesMyCursorIDPage,
     type PlanCreateParams as PlanCreateParams,
     type PlanUpdateParams as PlanUpdateParams,
@@ -1992,8 +2019,6 @@ export declare namespace Plans {
     type PlanPublishParams as PlanPublishParams,
     type PlanSetPricingParams as PlanSetPricingParams,
   };
-
-  export { Draft as Draft, type DraftRemoveResponse as DraftRemoveResponse };
 
   export {
     Entitlements as Entitlements,

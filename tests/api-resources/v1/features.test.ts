@@ -10,7 +10,7 @@ const client = new Stigg({
 describe('resource features', () => {
   // Mock server tests are disabled
   test.skip('archiveFeature', async () => {
-    const responsePromise = client.v1.events.features.archiveFeature('x');
+    const responsePromise = client.v1.features.archiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource features', () => {
 
   // Mock server tests are disabled
   test.skip('createFeature: only required params', async () => {
-    const responsePromise = client.v1.events.features.createFeature({
+    const responsePromise = client.v1.features.createFeature({
       id: 'id',
       displayName: 'displayName',
       featureType: 'BOOLEAN',
@@ -38,7 +38,7 @@ describe('resource features', () => {
 
   // Mock server tests are disabled
   test.skip('createFeature: required and optional params', async () => {
-    const response = await client.v1.events.features.createFeature({
+    const response = await client.v1.features.createFeature({
       id: 'id',
       displayName: 'displayName',
       featureType: 'BOOLEAN',
@@ -60,7 +60,7 @@ describe('resource features', () => {
 
   // Mock server tests are disabled
   test.skip('listFeatures', async () => {
-    const responsePromise = client.v1.events.features.listFeatures();
+    const responsePromise = client.v1.features.listFeatures();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,7 +74,7 @@ describe('resource features', () => {
   test.skip('listFeatures: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.events.features.listFeatures(
+      client.v1.features.listFeatures(
         {
           id: 'id',
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -97,7 +97,7 @@ describe('resource features', () => {
 
   // Mock server tests are disabled
   test.skip('retrieveFeature', async () => {
-    const responsePromise = client.v1.events.features.retrieveFeature('x');
+    const responsePromise = client.v1.features.retrieveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,7 +109,7 @@ describe('resource features', () => {
 
   // Mock server tests are disabled
   test.skip('unarchiveFeature', async () => {
-    const responsePromise = client.v1.events.features.unarchiveFeature('x');
+    const responsePromise = client.v1.features.unarchiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,7 +121,7 @@ describe('resource features', () => {
 
   // Mock server tests are disabled
   test.skip('updateFeature', async () => {
-    const responsePromise = client.v1.events.features.updateFeature('x', {});
+    const responsePromise = client.v1.features.updateFeature('x', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
