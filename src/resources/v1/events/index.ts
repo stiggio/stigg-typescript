@@ -2,27 +2,23 @@
 
 export {
   Addons,
-  type AddonArchiveAddonResponse,
-  type AddonCreateAddonResponse,
+  type Addon,
+  type SetPackagePricing,
+  type SetPackagePricingResponse,
   type AddonListAddonsResponse,
   type AddonPublishAddonResponse,
-  type AddonRetrieveAddonResponse,
-  type AddonUpdateAddonResponse,
   type AddonCreateAddonParams,
   type AddonListAddonsParams,
   type AddonPublishAddonParams,
+  type AddonSetPricingParams,
   type AddonUpdateAddonParams,
   type AddonListAddonsResponsesMyCursorIDPage,
 } from './addons/index';
 export { Events, type EventReportResponse, type EventReportParams } from './events';
 export {
   Features,
-  type FeatureArchiveFeatureResponse,
-  type FeatureCreateFeatureResponse,
+  type Feature,
   type FeatureListFeaturesResponse,
-  type FeatureRetrieveFeatureResponse,
-  type FeatureUnarchiveFeatureResponse,
-  type FeatureUpdateFeatureResponse,
   type FeatureCreateFeatureParams,
   type FeatureListFeaturesParams,
   type FeatureUpdateFeatureParams,
@@ -30,10 +26,13 @@ export {
 } from './features';
 export {
   Plans,
-  type PlanCreateResponse,
-  type PlanRetrieveResponse,
+  type Plan,
   type PlanListResponse,
+  type PlanPublishResponse,
   type PlanCreateParams,
+  type PlanUpdateParams,
   type PlanListParams,
+  type PlanPublishParams,
+  type PlanSetPricingParams,
   type PlanListResponsesMyCursorIDPage,
-} from './plans';
+} from './plans/index';

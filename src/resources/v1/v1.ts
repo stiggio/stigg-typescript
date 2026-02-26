@@ -13,17 +13,13 @@ import {
 } from './coupons';
 import * as ProductsAPI from './products';
 import {
-  ProductArchiveProductResponse,
+  Product,
   ProductCreateProductParams,
-  ProductCreateProductResponse,
   ProductDuplicateProductParams,
-  ProductDuplicateProductResponse,
   ProductListProductsParams,
   ProductListProductsResponse,
   ProductListProductsResponsesMyCursorIDPage,
-  ProductUnarchiveProductResponse,
   ProductUpdateProductParams,
-  ProductUpdateProductResponse,
   Products,
 } from './products';
 import * as UsageAPI from './usage';
@@ -148,12 +144,8 @@ export declare namespace V1 {
 
   export {
     Products as Products,
-    type ProductArchiveProductResponse as ProductArchiveProductResponse,
-    type ProductCreateProductResponse as ProductCreateProductResponse,
-    type ProductDuplicateProductResponse as ProductDuplicateProductResponse,
+    type Product as Product,
     type ProductListProductsResponse as ProductListProductsResponse,
-    type ProductUnarchiveProductResponse as ProductUnarchiveProductResponse,
-    type ProductUpdateProductResponse as ProductUpdateProductResponse,
     type ProductListProductsResponsesMyCursorIDPage as ProductListProductsResponsesMyCursorIDPage,
     type ProductCreateProductParams as ProductCreateProductParams,
     type ProductDuplicateProductParams as ProductDuplicateProductParams,

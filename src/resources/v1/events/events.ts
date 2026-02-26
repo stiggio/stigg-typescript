@@ -3,43 +3,42 @@
 import { APIResource } from '../../../core/resource';
 import * as FeaturesAPI from './features';
 import {
-  FeatureArchiveFeatureResponse,
+  Feature,
   FeatureCreateFeatureParams,
-  FeatureCreateFeatureResponse,
   FeatureListFeaturesParams,
   FeatureListFeaturesResponse,
   FeatureListFeaturesResponsesMyCursorIDPage,
-  FeatureRetrieveFeatureResponse,
-  FeatureUnarchiveFeatureResponse,
   FeatureUpdateFeatureParams,
-  FeatureUpdateFeatureResponse,
   Features,
 } from './features';
-import * as PlansAPI from './plans';
-import {
-  PlanCreateParams,
-  PlanCreateResponse,
-  PlanListParams,
-  PlanListResponse,
-  PlanListResponsesMyCursorIDPage,
-  PlanRetrieveResponse,
-  Plans,
-} from './plans';
 import * as AddonsAPI from './addons/addons';
 import {
-  AddonArchiveAddonResponse,
+  Addon,
   AddonCreateAddonParams,
-  AddonCreateAddonResponse,
   AddonListAddonsParams,
   AddonListAddonsResponse,
   AddonListAddonsResponsesMyCursorIDPage,
   AddonPublishAddonParams,
   AddonPublishAddonResponse,
-  AddonRetrieveAddonResponse,
+  AddonSetPricingParams,
   AddonUpdateAddonParams,
-  AddonUpdateAddonResponse,
   Addons,
+  SetPackagePricing,
+  SetPackagePricingResponse,
 } from './addons/addons';
+import * as PlansAPI from './plans/plans';
+import {
+  Plan,
+  PlanCreateParams,
+  PlanListParams,
+  PlanListResponse,
+  PlanListResponsesMyCursorIDPage,
+  PlanPublishParams,
+  PlanPublishResponse,
+  PlanSetPricingParams,
+  PlanUpdateParams,
+  Plans,
+} from './plans/plans';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -121,12 +120,8 @@ export declare namespace Events {
 
   export {
     Features as Features,
-    type FeatureArchiveFeatureResponse as FeatureArchiveFeatureResponse,
-    type FeatureCreateFeatureResponse as FeatureCreateFeatureResponse,
+    type Feature as Feature,
     type FeatureListFeaturesResponse as FeatureListFeaturesResponse,
-    type FeatureRetrieveFeatureResponse as FeatureRetrieveFeatureResponse,
-    type FeatureUnarchiveFeatureResponse as FeatureUnarchiveFeatureResponse,
-    type FeatureUpdateFeatureResponse as FeatureUpdateFeatureResponse,
     type FeatureListFeaturesResponsesMyCursorIDPage as FeatureListFeaturesResponsesMyCursorIDPage,
     type FeatureCreateFeatureParams as FeatureCreateFeatureParams,
     type FeatureListFeaturesParams as FeatureListFeaturesParams,
@@ -135,26 +130,29 @@ export declare namespace Events {
 
   export {
     Addons as Addons,
-    type AddonArchiveAddonResponse as AddonArchiveAddonResponse,
-    type AddonCreateAddonResponse as AddonCreateAddonResponse,
+    type Addon as Addon,
+    type SetPackagePricing as SetPackagePricing,
+    type SetPackagePricingResponse as SetPackagePricingResponse,
     type AddonListAddonsResponse as AddonListAddonsResponse,
     type AddonPublishAddonResponse as AddonPublishAddonResponse,
-    type AddonRetrieveAddonResponse as AddonRetrieveAddonResponse,
-    type AddonUpdateAddonResponse as AddonUpdateAddonResponse,
     type AddonListAddonsResponsesMyCursorIDPage as AddonListAddonsResponsesMyCursorIDPage,
     type AddonCreateAddonParams as AddonCreateAddonParams,
     type AddonListAddonsParams as AddonListAddonsParams,
     type AddonPublishAddonParams as AddonPublishAddonParams,
+    type AddonSetPricingParams as AddonSetPricingParams,
     type AddonUpdateAddonParams as AddonUpdateAddonParams,
   };
 
   export {
     Plans as Plans,
-    type PlanCreateResponse as PlanCreateResponse,
-    type PlanRetrieveResponse as PlanRetrieveResponse,
+    type Plan as Plan,
     type PlanListResponse as PlanListResponse,
+    type PlanPublishResponse as PlanPublishResponse,
     type PlanListResponsesMyCursorIDPage as PlanListResponsesMyCursorIDPage,
     type PlanCreateParams as PlanCreateParams,
+    type PlanUpdateParams as PlanUpdateParams,
     type PlanListParams as PlanListParams,
+    type PlanPublishParams as PlanPublishParams,
+    type PlanSetPricingParams as PlanSetPricingParams,
   };
 }
