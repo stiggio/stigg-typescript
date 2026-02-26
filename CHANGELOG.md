@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2026-02-26)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Features
+
+* **api:** api update ([0ab6f6f](https://github.com/stiggio/stigg-typescript/commit/0ab6f6fb541d52cf589c33378dbbec65ee20bfdf))
+
+
+### Bug Fixes
+
+* **docs/contributing:** correct pnpm link command ([9fa3bb5](https://github.com/stiggio/stigg-typescript/commit/9fa3bb58a1803c49be282e085f588197e95256f5))
+* **mcp:** initialize SDK lazily to avoid failing the connection on init errors ([f8a472c](https://github.com/stiggio/stigg-typescript/commit/f8a472c5ca146393bcdd85867149740b8e1e8155))
+
+
+### Chores
+
+* **internal:** cache fetch instruction calls in MCP server ([dfab22a](https://github.com/stiggio/stigg-typescript/commit/dfab22a2308eec2a10bdb5b9733132dd31136505))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([22f41ef](https://github.com/stiggio/stigg-typescript/commit/22f41efdf7a55e61d24554976b817d4409da8eb2))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([e9d86c4](https://github.com/stiggio/stigg-typescript/commit/e9d86c47627080d38c1ee5c6491cfb655103daf2))
+* **internal:** make MCP code execution location configurable via a flag ([6f3c168](https://github.com/stiggio/stigg-typescript/commit/6f3c1687a702a149895a12603a9d334017dd8dde))
+* **internal:** remove mock server code ([b70b5a5](https://github.com/stiggio/stigg-typescript/commit/b70b5a5640848e2981fdd26f11aa0bfd3c0daf57))
+* **internal:** upgrade @modelcontextprotocol/sdk and hono ([f1ba036](https://github.com/stiggio/stigg-typescript/commit/f1ba0369b02d44365986b56b028d5b1c6af128a4))
+* **mcp:** correctly update version in sync with sdk ([3d658ff](https://github.com/stiggio/stigg-typescript/commit/3d658ff565dfbcaeb1f1883eadae3d4a84a4fd00))
+* update mock server docs ([47ff87f](https://github.com/stiggio/stigg-typescript/commit/47ff87f0b115bdc2106afc31a6319d2bcb6ae8a8))
+
 ## 0.1.0-alpha.9 (2026-02-18)
 
 Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
