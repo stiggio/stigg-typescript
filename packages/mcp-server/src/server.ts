@@ -20,7 +20,7 @@ export const newMcpServer = async (stainlessApiKey: string | undefined) =>
   new McpServer(
     {
       name: 'stigg_typescript_api',
-      version: '0.1.0-alpha.9',
+      version: '0.1.0-alpha.10',
     },
     {
       instructions: await getInstructions(stainlessApiKey),
