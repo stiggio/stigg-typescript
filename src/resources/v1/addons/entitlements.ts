@@ -1,59 +1,67 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
-import { APIPromise } from '../../../../core/api-promise';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Entitlements extends APIResource {
   /**
-   * Creates one or more entitlements (feature or credit) on a draft plan.
+   * Creates one or more entitlements (feature or credit) on a draft addon.
    */
   create(
-    planID: string,
+    addonID: string,
     body: EntitlementCreateParams,
     options?: RequestOptions,
   ): APIPromise<EntitlementCreateResponse> {
-    return this._client.post(path`/api/v1/plans/${planID}/entitlements`, { body, ...options });
+    return this._client.post(path`/api/v1/addons/${addonID}/entitlements`, { body, ...options });
   }
 
   /**
-   * Updates an existing entitlement on a draft plan.
+   * Updates an existing entitlement on a draft addon.
    */
-  update(id: string, params: EntitlementUpdateParams, options?: RequestOptions): APIPromise<PlanEntitlement> {
-    const { planId, ...body } = params;
-    return this._client.patch(path`/api/v1/plans/${planId}/entitlements/${id}`, { body, ...options });
+  update(
+    id: string,
+    params: EntitlementUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AddonPackageEntitlement> {
+    const { addonId, ...body } = params;
+    return this._client.patch(path`/api/v1/addons/${addonId}/entitlements/${id}`, { body, ...options });
   }
 
   /**
-   * Retrieves a list of entitlements for a plan.
+   * Retrieves a list of entitlements for an addon.
    */
-  list(planID: string, options?: RequestOptions): APIPromise<EntitlementListResponse> {
-    return this._client.get(path`/api/v1/plans/${planID}/entitlements`, options);
+  list(addonID: string, options?: RequestOptions): APIPromise<EntitlementListResponse> {
+    return this._client.get(path`/api/v1/addons/${addonID}/entitlements`, options);
   }
 
   /**
-   * Deletes an entitlement from a draft plan.
+   * Deletes an entitlement from a draft addon.
    */
-  delete(id: string, params: EntitlementDeleteParams, options?: RequestOptions): APIPromise<PlanEntitlement> {
-    const { planId } = params;
-    return this._client.delete(path`/api/v1/plans/${planId}/entitlements/${id}`, options);
+  delete(
+    id: string,
+    params: EntitlementDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<AddonPackageEntitlement> {
+    const { addonId } = params;
+    return this._client.delete(path`/api/v1/addons/${addonId}/entitlements/${id}`, options);
   }
 }
 
 /**
  * Response object
  */
-export interface PlanEntitlement {
+export interface AddonPackageEntitlement {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature or credit entitlement on an addon
    */
-  data: PlanEntitlement.Data;
+  data: AddonPackageEntitlement.Data;
 }
 
-export namespace PlanEntitlement {
+export namespace AddonPackageEntitlement {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature or credit entitlement on an addon
    */
   export interface Data {
     /**
@@ -216,7 +224,7 @@ export interface EntitlementCreateResponse {
 
 export namespace EntitlementCreateResponse {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature or credit entitlement on an addon
    */
   export interface Data {
     /**
@@ -384,7 +392,7 @@ export interface EntitlementListResponse {
 
 export namespace EntitlementListResponse {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature or credit entitlement on an addon
    */
   export interface Data {
     /**
@@ -762,9 +770,9 @@ export namespace EntitlementCreateParams {
 
 export interface EntitlementUpdateParams {
   /**
-   * Path param: The plan ID
+   * Path param: The addon ID
    */
-  planId: string;
+  addonId: string;
 
   /**
    * Body param: Credit entitlement fields to update
@@ -951,14 +959,14 @@ export namespace EntitlementUpdateParams {
 
 export interface EntitlementDeleteParams {
   /**
-   * The plan ID
+   * The addon ID
    */
-  planId: string;
+  addonId: string;
 }
 
 export declare namespace Entitlements {
   export {
-    type PlanEntitlement as PlanEntitlement,
+    type AddonPackageEntitlement as AddonPackageEntitlement,
     type EntitlementCreateResponse as EntitlementCreateResponse,
     type EntitlementListResponse as EntitlementListResponse,
     type EntitlementCreateParams as EntitlementCreateParams,

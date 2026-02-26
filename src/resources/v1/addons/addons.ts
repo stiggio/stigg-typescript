@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
-import * as DraftAPI from './draft';
-import { Draft, DraftRemoveAddonDraftResponse } from './draft';
+import { APIResource } from '../../../core/resource';
 import * as EntitlementsAPI from './entitlements';
 import {
   AddonPackageEntitlement,
@@ -13,59 +11,76 @@ import {
   EntitlementUpdateParams,
   Entitlements,
 } from './entitlements';
-import { APIPromise } from '../../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../core/pagination';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
+import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Addons extends APIResource {
-  draft: DraftAPI.Draft = new DraftAPI.Draft(this._client);
   entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
-
-  /**
-   * Archives an addon, preventing it from being used in new subscriptions.
-   */
-  archiveAddon(id: string, options?: RequestOptions): APIPromise<Addon> {
-    return this._client.post(path`/api/v1/addons/${id}/archive`, options);
-  }
 
   /**
    * Creates a new addon in draft status, associated with a specific product.
    */
-  createAddon(body: AddonCreateAddonParams, options?: RequestOptions): APIPromise<Addon> {
+  create(body: AddonCreateParams, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post('/api/v1/addons', { body, ...options });
-  }
-
-  /**
-   * Retrieves a paginated list of addons in the environment.
-   */
-  listAddons(
-    query: AddonListAddonsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AddonListAddonsResponsesMyCursorIDPage, AddonListAddonsResponse> {
-    return this._client.getAPIList('/api/v1/addons', MyCursorIDPage<AddonListAddonsResponse>, {
-      query,
-      ...options,
-    });
-  }
-
-  /**
-   * Publishes a draft addon, making it available for use in subscriptions.
-   */
-  publishAddon(
-    id: string,
-    body: AddonPublishAddonParams,
-    options?: RequestOptions,
-  ): APIPromise<AddonPublishAddonResponse> {
-    return this._client.post(path`/api/v1/addons/${id}/publish`, { body, ...options });
   }
 
   /**
    * Retrieves an addon by its unique identifier, including entitlements and pricing
    * details.
    */
-  retrieveAddon(id: string, options?: RequestOptions): APIPromise<Addon> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.get(path`/api/v1/addons/${id}`, options);
+  }
+
+  /**
+   * Updates an existing addon's properties such as display name, description, and
+   * metadata.
+   */
+  update(id: string, body: AddonUpdateParams, options?: RequestOptions): APIPromise<Addon> {
+    return this._client.patch(path`/api/v1/addons/${id}`, { body, ...options });
+  }
+
+  /**
+   * Retrieves a paginated list of addons in the environment.
+   */
+  list(
+    query: AddonListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AddonListResponsesMyCursorIDPage, AddonListResponse> {
+    return this._client.getAPIList('/api/v1/addons', MyCursorIDPage<AddonListResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
+   * Archives an addon, preventing it from being used in new subscriptions.
+   */
+  archive(id: string, options?: RequestOptions): APIPromise<Addon> {
+    return this._client.post(path`/api/v1/addons/${id}/archive`, options);
+  }
+
+  /**
+   * Creates a draft version of an existing addon for modification before publishing.
+   */
+  createDraft(id: string, options?: RequestOptions): APIPromise<Addon> {
+    return this._client.post(path`/api/v1/addons/${id}/draft`, options);
+  }
+
+  /**
+   * Publishes a draft addon, making it available for use in subscriptions.
+   */
+  publish(id: string, body: AddonPublishParams, options?: RequestOptions): APIPromise<AddonPublishResponse> {
+    return this._client.post(path`/api/v1/addons/${id}/publish`, { body, ...options });
+  }
+
+  /**
+   * Removes a draft version of an addon.
+   */
+  removeDraft(id: string, options?: RequestOptions): APIPromise<AddonRemoveDraftResponse> {
+    return this._client.delete(path`/api/v1/addons/${id}/draft`, options);
   }
 
   /**
@@ -78,17 +93,9 @@ export class Addons extends APIResource {
   ): APIPromise<SetPackagePricingResponse> {
     return this._client.put(path`/api/v1/addons/${id}/charges`, { body, ...options });
   }
-
-  /**
-   * Updates an existing addon's properties such as display name, description, and
-   * metadata.
-   */
-  updateAddon(id: string, body: AddonUpdateAddonParams, options?: RequestOptions): APIPromise<Addon> {
-    return this._client.patch(path`/api/v1/addons/${id}`, { body, ...options });
-  }
 }
 
-export type AddonListAddonsResponsesMyCursorIDPage = MyCursorIDPage<AddonListAddonsResponse>;
+export type AddonListResponsesMyCursorIDPage = MyCursorIDPage<AddonListResponse>;
 
 /**
  * Response object
@@ -1592,7 +1599,7 @@ export namespace SetPackagePricingResponse {
 /**
  * Addon configuration object
  */
-export interface AddonListAddonsResponse {
+export interface AddonListResponse {
   /**
    * The unique identifier for the entity
    */
@@ -1626,7 +1633,7 @@ export interface AddonListAddonsResponse {
   /**
    * List of entitlements of the package
    */
-  entitlements: Array<AddonListAddonsResponse.Entitlement>;
+  entitlements: Array<AddonListResponse.Entitlement>;
 
   /**
    * Indicates if the package is the latest version
@@ -1669,7 +1676,7 @@ export interface AddonListAddonsResponse {
   versionNumber: number;
 }
 
-export namespace AddonListAddonsResponse {
+export namespace AddonListResponse {
   /**
    * Entitlement reference with type and identifier
    */
@@ -1686,11 +1693,11 @@ export namespace AddonListAddonsResponse {
 /**
  * Response containing task ID for publish operation
  */
-export interface AddonPublishAddonResponse {
-  data: AddonPublishAddonResponse.Data;
+export interface AddonPublishResponse {
+  data: AddonPublishResponse.Data;
 }
 
-export namespace AddonPublishAddonResponse {
+export namespace AddonPublishResponse {
   export interface Data {
     /**
      * Task ID for tracking the async publish operation
@@ -1699,7 +1706,23 @@ export namespace AddonPublishAddonResponse {
   }
 }
 
-export interface AddonCreateAddonParams {
+/**
+ * Response confirming the addon draft was removed.
+ */
+export interface AddonRemoveDraftResponse {
+  data: AddonRemoveDraftResponse.Data;
+}
+
+export namespace AddonRemoveDraftResponse {
+  export interface Data {
+    /**
+     * The unique identifier for the entity
+     */
+    id: string;
+  }
+}
+
+export interface AddonCreateParams {
   /**
    * The unique identifier for the entity
    */
@@ -1746,11 +1769,43 @@ export interface AddonCreateAddonParams {
   status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 }
 
-export interface AddonListAddonsParams extends MyCursorIDPageParams {
+export interface AddonUpdateParams {
+  /**
+   * The unique identifier for the entity in the billing provider
+   */
+  billingId?: string | null;
+
+  /**
+   * List of addons the addon is dependant on
+   */
+  dependencies?: Array<string> | null;
+
+  /**
+   * The description of the package
+   */
+  description?: string | null;
+
+  /**
+   * The display name of the package
+   */
+  displayName?: string;
+
+  /**
+   * The maximum quantity of this addon that can be added to a subscription
+   */
+  maxQuantity?: number | null;
+
+  /**
+   * Metadata associated with the entity
+   */
+  metadata?: { [key: string]: string };
+}
+
+export interface AddonListParams extends MyCursorIDPageParams {
   /**
    * Filter by creation date using range operators: gt, gte, lt, lte
    */
-  createdAt?: AddonListAddonsParams.CreatedAt;
+  createdAt?: AddonListParams.CreatedAt;
 
   /**
    * Filter by product ID
@@ -1763,7 +1818,7 @@ export interface AddonListAddonsParams extends MyCursorIDPageParams {
   status?: string;
 }
 
-export namespace AddonListAddonsParams {
+export namespace AddonListParams {
   /**
    * Filter by creation date using range operators: gt, gte, lt, lte
    */
@@ -1790,7 +1845,7 @@ export namespace AddonListAddonsParams {
   }
 }
 
-export interface AddonPublishAddonParams {
+export interface AddonPublishParams {
   /**
    * The migration type of the package
    */
@@ -3160,39 +3215,6 @@ export namespace AddonSetPricingParams {
   }
 }
 
-export interface AddonUpdateAddonParams {
-  /**
-   * The unique identifier for the entity in the billing provider
-   */
-  billingId?: string | null;
-
-  /**
-   * List of addons the addon is dependant on
-   */
-  dependencies?: Array<string> | null;
-
-  /**
-   * The description of the package
-   */
-  description?: string | null;
-
-  /**
-   * The display name of the package
-   */
-  displayName?: string;
-
-  /**
-   * The maximum quantity of this addon that can be added to a subscription
-   */
-  maxQuantity?: number | null;
-
-  /**
-   * Metadata associated with the entity
-   */
-  metadata?: { [key: string]: string };
-}
-
-Addons.Draft = Draft;
 Addons.Entitlements = Entitlements;
 
 export declare namespace Addons {
@@ -3200,17 +3222,16 @@ export declare namespace Addons {
     type Addon as Addon,
     type SetPackagePricing as SetPackagePricing,
     type SetPackagePricingResponse as SetPackagePricingResponse,
-    type AddonListAddonsResponse as AddonListAddonsResponse,
-    type AddonPublishAddonResponse as AddonPublishAddonResponse,
-    type AddonListAddonsResponsesMyCursorIDPage as AddonListAddonsResponsesMyCursorIDPage,
-    type AddonCreateAddonParams as AddonCreateAddonParams,
-    type AddonListAddonsParams as AddonListAddonsParams,
-    type AddonPublishAddonParams as AddonPublishAddonParams,
+    type AddonListResponse as AddonListResponse,
+    type AddonPublishResponse as AddonPublishResponse,
+    type AddonRemoveDraftResponse as AddonRemoveDraftResponse,
+    type AddonListResponsesMyCursorIDPage as AddonListResponsesMyCursorIDPage,
+    type AddonCreateParams as AddonCreateParams,
+    type AddonUpdateParams as AddonUpdateParams,
+    type AddonListParams as AddonListParams,
+    type AddonPublishParams as AddonPublishParams,
     type AddonSetPricingParams as AddonSetPricingParams,
-    type AddonUpdateAddonParams as AddonUpdateAddonParams,
   };
-
-  export { Draft as Draft, type DraftRemoveAddonDraftResponse as DraftRemoveAddonDraftResponse };
 
   export {
     Entitlements as Entitlements,

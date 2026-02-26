@@ -7,22 +7,10 @@ const client = new Stigg({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource addons', () => {
+describe('resource plans', () => {
   // Mock server tests are disabled
-  test.skip('archiveAddon', async () => {
-    const responsePromise = client.v1.events.addons.archiveAddon('x');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createAddon: only required params', async () => {
-    const responsePromise = client.v1.events.addons.createAddon({
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.v1.plans.create({
       id: 'id',
       displayName: 'displayName',
       productId: 'productId',
@@ -37,23 +25,29 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createAddon: required and optional params', async () => {
-    const response = await client.v1.events.addons.createAddon({
+  test.skip('create: required and optional params', async () => {
+    const response = await client.v1.plans.create({
       id: 'id',
       displayName: 'displayName',
       productId: 'productId',
       billingId: 'billingId',
+      defaultTrialConfig: {
+        duration: 0,
+        units: 'DAY',
+        budget: { hasSoftLimit: true, limit: 0 },
+        trialEndBehavior: 'CONVERT_TO_PAID',
+      },
       description: 'description',
-      maxQuantity: 0,
       metadata: { foo: 'string' },
+      parentPlanId: 'parentPlanId',
       pricingType: 'FREE',
       status: 'DRAFT',
     });
   });
 
   // Mock server tests are disabled
-  test.skip('listAddons', async () => {
-    const responsePromise = client.v1.events.addons.listAddons();
+  test.skip('retrieve', async () => {
+    const responsePromise = client.v1.plans.retrieve('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,10 +58,34 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listAddons: request options and params are passed correctly', async () => {
+  test.skip('update', async () => {
+    const responsePromise = client.v1.plans.update('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.v1.plans.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.events.addons.listAddons(
+      client.v1.plans.list(
         {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -87,8 +105,8 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('publishAddon: only required params', async () => {
-    const responsePromise = client.v1.events.addons.publishAddon('x', { migrationType: 'NEW_CUSTOMERS' });
+  test.skip('archive', async () => {
+    const responsePromise = client.v1.plans.archive('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,13 +117,37 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('publishAddon: required and optional params', async () => {
-    const response = await client.v1.events.addons.publishAddon('x', { migrationType: 'NEW_CUSTOMERS' });
+  test.skip('createDraft', async () => {
+    const responsePromise = client.v1.plans.createDraft('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
-  test.skip('retrieveAddon', async () => {
-    const responsePromise = client.v1.events.addons.retrieveAddon('x');
+  test.skip('publish: only required params', async () => {
+    const responsePromise = client.v1.plans.publish('x', { migrationType: 'NEW_CUSTOMERS' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('publish: required and optional params', async () => {
+    const response = await client.v1.plans.publish('x', { migrationType: 'NEW_CUSTOMERS' });
+  });
+
+  // Mock server tests are disabled
+  test.skip('removeDraft', async () => {
+    const responsePromise = client.v1.plans.removeDraft('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,7 +159,7 @@ describe('resource addons', () => {
 
   // Mock server tests are disabled
   test.skip('setPricing: only required params', async () => {
-    const responsePromise = client.v1.events.addons.setPricing('x', { pricingType: 'FREE' });
+    const responsePromise = client.v1.plans.setPricing('x', { pricingType: 'FREE' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -129,7 +171,7 @@ describe('resource addons', () => {
 
   // Mock server tests are disabled
   test.skip('setPricing: required and optional params', async () => {
-    const response = await client.v1.events.addons.setPricing('x', {
+    const response = await client.v1.plans.setPricing('x', {
       pricingType: 'FREE',
       billingId: 'billingId',
       minimumSpend: [
@@ -215,17 +257,5 @@ describe('resource addons', () => {
         },
       ],
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('updateAddon', async () => {
-    const responsePromise = client.v1.events.addons.updateAddon('x', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

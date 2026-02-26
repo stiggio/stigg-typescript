@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Draft, type DraftRemoveResponse } from './draft';
 export {
   Entitlements,
   type PlanEntitlement,
@@ -15,6 +14,7 @@ export {
   type Plan,
   type PlanListResponse,
   type PlanPublishResponse,
+  type PlanRemoveDraftResponse,
   type PlanCreateParams,
   type PlanUpdateParams,
   type PlanListParams,

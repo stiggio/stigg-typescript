@@ -10,7 +10,7 @@ const client = new Stigg({
 describe('resource entitlements', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.v1.events.plans.entitlements.create('planId', { entitlements: [{}] });
+    const responsePromise = client.v1.addons.entitlements.create('addonId', { entitlements: [{}] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.v1.events.plans.entitlements.create('planId', {
+    const response = await client.v1.addons.entitlements.create('addonId', {
       entitlements: [
         {
           credit: {
@@ -62,7 +62,7 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.v1.events.plans.entitlements.update('id', { planId: 'planId' });
+    const responsePromise = client.v1.addons.entitlements.update('id', { addonId: 'addonId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,8 +74,8 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.v1.events.plans.entitlements.update('id', {
-      planId: 'planId',
+    const response = await client.v1.addons.entitlements.update('id', {
+      addonId: 'addonId',
       credit: {
         amount: 1,
         behavior: 'Increment',
@@ -109,7 +109,7 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.v1.events.plans.entitlements.list('planId');
+    const responsePromise = client.v1.addons.entitlements.list('addonId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,7 +121,7 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.v1.events.plans.entitlements.delete('id', { planId: 'planId' });
+    const responsePromise = client.v1.addons.entitlements.delete('id', { addonId: 'addonId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -133,6 +133,6 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.v1.events.plans.entitlements.delete('id', { planId: 'planId' });
+    const response = await client.v1.addons.entitlements.delete('id', { addonId: 'addonId' });
   });
 });
