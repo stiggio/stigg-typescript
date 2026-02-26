@@ -116,77 +116,101 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/events/events.ts">EventReportResponse</a></code>
+- <code><a href="./src/resources/v1/events.ts">EventReportResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
+- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
 
-### Features
+## Features
 
 Types:
 
-- <code><a href="./src/resources/v1/events/features.ts">FeatureArchiveFeatureResponse</a></code>
-- <code><a href="./src/resources/v1/events/features.ts">FeatureCreateFeatureResponse</a></code>
-- <code><a href="./src/resources/v1/events/features.ts">FeatureListFeaturesResponse</a></code>
-- <code><a href="./src/resources/v1/events/features.ts">FeatureRetrieveFeatureResponse</a></code>
-- <code><a href="./src/resources/v1/events/features.ts">FeatureUnarchiveFeatureResponse</a></code>
-- <code><a href="./src/resources/v1/events/features.ts">FeatureUpdateFeatureResponse</a></code>
+- <code><a href="./src/resources/v1/features.ts">Feature</a></code>
+- <code><a href="./src/resources/v1/features.ts">FeatureListFeaturesResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/features/{id}/archive">client.v1.events.features.<a href="./src/resources/v1/events/features.ts">archiveFeature</a>(id) -> FeatureArchiveFeatureResponse</code>
-- <code title="post /api/v1/features">client.v1.events.features.<a href="./src/resources/v1/events/features.ts">createFeature</a>({ ...params }) -> FeatureCreateFeatureResponse</code>
-- <code title="get /api/v1/features">client.v1.events.features.<a href="./src/resources/v1/events/features.ts">listFeatures</a>({ ...params }) -> FeatureListFeaturesResponsesMyCursorIDPage</code>
-- <code title="get /api/v1/features/{id}">client.v1.events.features.<a href="./src/resources/v1/events/features.ts">retrieveFeature</a>(id) -> FeatureRetrieveFeatureResponse</code>
-- <code title="post /api/v1/features/{id}/unarchive">client.v1.events.features.<a href="./src/resources/v1/events/features.ts">unarchiveFeature</a>(id) -> FeatureUnarchiveFeatureResponse</code>
-- <code title="patch /api/v1/features/{id}">client.v1.events.features.<a href="./src/resources/v1/events/features.ts">updateFeature</a>(id, { ...params }) -> FeatureUpdateFeatureResponse</code>
+- <code title="post /api/v1/features/{id}/archive">client.v1.features.<a href="./src/resources/v1/features.ts">archiveFeature</a>(id) -> Feature</code>
+- <code title="post /api/v1/features">client.v1.features.<a href="./src/resources/v1/features.ts">createFeature</a>({ ...params }) -> Feature</code>
+- <code title="get /api/v1/features">client.v1.features.<a href="./src/resources/v1/features.ts">listFeatures</a>({ ...params }) -> FeatureListFeaturesResponsesMyCursorIDPage</code>
+- <code title="get /api/v1/features/{id}">client.v1.features.<a href="./src/resources/v1/features.ts">retrieveFeature</a>(id) -> Feature</code>
+- <code title="post /api/v1/features/{id}/unarchive">client.v1.features.<a href="./src/resources/v1/features.ts">unarchiveFeature</a>(id) -> Feature</code>
+- <code title="patch /api/v1/features/{id}">client.v1.features.<a href="./src/resources/v1/features.ts">updateFeature</a>(id, { ...params }) -> Feature</code>
 
-### Addons
+## Addons
 
 Types:
 
-- <code><a href="./src/resources/v1/events/addons/addons.ts">AddonArchiveAddonResponse</a></code>
-- <code><a href="./src/resources/v1/events/addons/addons.ts">AddonCreateAddonResponse</a></code>
-- <code><a href="./src/resources/v1/events/addons/addons.ts">AddonListAddonsResponse</a></code>
-- <code><a href="./src/resources/v1/events/addons/addons.ts">AddonPublishAddonResponse</a></code>
-- <code><a href="./src/resources/v1/events/addons/addons.ts">AddonRetrieveAddonResponse</a></code>
-- <code><a href="./src/resources/v1/events/addons/addons.ts">AddonUpdateAddonResponse</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">Addon</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">SetPackagePricing</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">SetPackagePricingResponse</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">AddonListResponse</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">AddonPublishResponse</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">AddonRemoveDraftResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/addons/{id}/archive">client.v1.events.addons.<a href="./src/resources/v1/events/addons/addons.ts">archiveAddon</a>(id) -> AddonArchiveAddonResponse</code>
-- <code title="post /api/v1/addons">client.v1.events.addons.<a href="./src/resources/v1/events/addons/addons.ts">createAddon</a>({ ...params }) -> AddonCreateAddonResponse</code>
-- <code title="get /api/v1/addons">client.v1.events.addons.<a href="./src/resources/v1/events/addons/addons.ts">listAddons</a>({ ...params }) -> AddonListAddonsResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/addons/{id}/publish">client.v1.events.addons.<a href="./src/resources/v1/events/addons/addons.ts">publishAddon</a>(id, { ...params }) -> AddonPublishAddonResponse</code>
-- <code title="get /api/v1/addons/{id}">client.v1.events.addons.<a href="./src/resources/v1/events/addons/addons.ts">retrieveAddon</a>(id) -> AddonRetrieveAddonResponse</code>
-- <code title="patch /api/v1/addons/{id}">client.v1.events.addons.<a href="./src/resources/v1/events/addons/addons.ts">updateAddon</a>(id, { ...params }) -> AddonUpdateAddonResponse</code>
+- <code title="post /api/v1/addons">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">create</a>({ ...params }) -> Addon</code>
+- <code title="get /api/v1/addons/{id}">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">retrieve</a>(id) -> Addon</code>
+- <code title="patch /api/v1/addons/{id}">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">update</a>(id, { ...params }) -> Addon</code>
+- <code title="get /api/v1/addons">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">list</a>({ ...params }) -> AddonListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/addons/{id}/archive">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">archive</a>(id) -> Addon</code>
+- <code title="post /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">createDraft</a>(id) -> Addon</code>
+- <code title="post /api/v1/addons/{id}/publish">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">publish</a>(id, { ...params }) -> AddonPublishResponse</code>
+- <code title="delete /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">removeDraft</a>(id) -> AddonRemoveDraftResponse</code>
+- <code title="put /api/v1/addons/{id}/charges">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">setPricing</a>(id, { ...params }) -> SetPackagePricingResponse</code>
 
-#### Draft
+### Entitlements
 
 Types:
 
-- <code><a href="./src/resources/v1/events/addons/draft.ts">DraftCreateAddonDraftResponse</a></code>
-- <code><a href="./src/resources/v1/events/addons/draft.ts">DraftRemoveAddonDraftResponse</a></code>
+- <code><a href="./src/resources/v1/addons/entitlements.ts">AddonPackageEntitlement</a></code>
+- <code><a href="./src/resources/v1/addons/entitlements.ts">EntitlementCreateResponse</a></code>
+- <code><a href="./src/resources/v1/addons/entitlements.ts">EntitlementListResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/addons/{id}/draft">client.v1.events.addons.draft.<a href="./src/resources/v1/events/addons/draft.ts">createAddonDraft</a>(id) -> DraftCreateAddonDraftResponse</code>
-- <code title="delete /api/v1/addons/{id}/draft">client.v1.events.addons.draft.<a href="./src/resources/v1/events/addons/draft.ts">removeAddonDraft</a>(id) -> DraftRemoveAddonDraftResponse</code>
+- <code title="post /api/v1/addons/{addonId}/entitlements">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">create</a>(addonID, { ...params }) -> EntitlementCreateResponse</code>
+- <code title="patch /api/v1/addons/{addonId}/entitlements/{id}">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">update</a>(id, { ...params }) -> AddonPackageEntitlement</code>
+- <code title="get /api/v1/addons/{addonId}/entitlements">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">list</a>(addonID) -> EntitlementListResponse</code>
+- <code title="delete /api/v1/addons/{addonId}/entitlements/{id}">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">delete</a>(id, { ...params }) -> AddonPackageEntitlement</code>
 
-### Plans
+## Plans
 
 Types:
 
-- <code><a href="./src/resources/v1/events/plans.ts">PlanCreateResponse</a></code>
-- <code><a href="./src/resources/v1/events/plans.ts">PlanRetrieveResponse</a></code>
-- <code><a href="./src/resources/v1/events/plans.ts">PlanListResponse</a></code>
+- <code><a href="./src/resources/v1/plans/plans.ts">Plan</a></code>
+- <code><a href="./src/resources/v1/plans/plans.ts">PlanListResponse</a></code>
+- <code><a href="./src/resources/v1/plans/plans.ts">PlanPublishResponse</a></code>
+- <code><a href="./src/resources/v1/plans/plans.ts">PlanRemoveDraftResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/plans">client.v1.events.plans.<a href="./src/resources/v1/events/plans.ts">create</a>({ ...params }) -> PlanCreateResponse</code>
-- <code title="get /api/v1/plans/{id}">client.v1.events.plans.<a href="./src/resources/v1/events/plans.ts">retrieve</a>(id) -> PlanRetrieveResponse</code>
-- <code title="get /api/v1/plans">client.v1.events.plans.<a href="./src/resources/v1/events/plans.ts">list</a>({ ...params }) -> PlanListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/plans">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">create</a>({ ...params }) -> Plan</code>
+- <code title="get /api/v1/plans/{id}">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">retrieve</a>(id) -> Plan</code>
+- <code title="patch /api/v1/plans/{id}">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">update</a>(id, { ...params }) -> Plan</code>
+- <code title="get /api/v1/plans">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">list</a>({ ...params }) -> PlanListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/plans/{id}/archive">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">archive</a>(id) -> Plan</code>
+- <code title="post /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">createDraft</a>(id) -> Plan</code>
+- <code title="post /api/v1/plans/{id}/publish">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">publish</a>(id, { ...params }) -> PlanPublishResponse</code>
+- <code title="delete /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">removeDraft</a>(id) -> PlanRemoveDraftResponse</code>
+- <code title="put /api/v1/plans/{id}/charges">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">setPricing</a>(id, { ...params }) -> SetPackagePricingResponse</code>
+
+### Entitlements
+
+Types:
+
+- <code><a href="./src/resources/v1/plans/entitlements.ts">PlanEntitlement</a></code>
+- <code><a href="./src/resources/v1/plans/entitlements.ts">EntitlementCreateResponse</a></code>
+- <code><a href="./src/resources/v1/plans/entitlements.ts">EntitlementListResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/plans/{planId}/entitlements">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">create</a>(planID, { ...params }) -> EntitlementCreateResponse</code>
+- <code title="patch /api/v1/plans/{planId}/entitlements/{id}">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">update</a>(id, { ...params }) -> PlanEntitlement</code>
+- <code title="get /api/v1/plans/{planId}/entitlements">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">list</a>(planID) -> EntitlementListResponse</code>
+- <code title="delete /api/v1/plans/{planId}/entitlements/{id}">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">delete</a>(id, { ...params }) -> PlanEntitlement</code>
 
 ## Usage
 
@@ -204,18 +228,14 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/products.ts">ProductArchiveProductResponse</a></code>
-- <code><a href="./src/resources/v1/products.ts">ProductCreateProductResponse</a></code>
-- <code><a href="./src/resources/v1/products.ts">ProductDuplicateProductResponse</a></code>
+- <code><a href="./src/resources/v1/products.ts">Product</a></code>
 - <code><a href="./src/resources/v1/products.ts">ProductListProductsResponse</a></code>
-- <code><a href="./src/resources/v1/products.ts">ProductUnarchiveProductResponse</a></code>
-- <code><a href="./src/resources/v1/products.ts">ProductUpdateProductResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/products/{id}/archive">client.v1.products.<a href="./src/resources/v1/products.ts">archiveProduct</a>(id) -> ProductArchiveProductResponse</code>
-- <code title="post /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">createProduct</a>({ ...params }) -> ProductCreateProductResponse</code>
-- <code title="post /api/v1/products/{id}/duplicate">client.v1.products.<a href="./src/resources/v1/products.ts">duplicateProduct</a>(pathID, { ...params }) -> ProductDuplicateProductResponse</code>
+- <code title="post /api/v1/products/{id}/archive">client.v1.products.<a href="./src/resources/v1/products.ts">archiveProduct</a>(id) -> Product</code>
+- <code title="post /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">createProduct</a>({ ...params }) -> Product</code>
+- <code title="post /api/v1/products/{id}/duplicate">client.v1.products.<a href="./src/resources/v1/products.ts">duplicateProduct</a>(pathID, { ...params }) -> Product</code>
 - <code title="get /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">listProducts</a>({ ...params }) -> ProductListProductsResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id) -> ProductUnarchiveProductResponse</code>
-- <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> ProductUpdateProductResponse</code>
+- <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id) -> Product</code>
+- <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> Product</code>

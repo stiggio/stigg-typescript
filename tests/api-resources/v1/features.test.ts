@@ -7,10 +7,10 @@ const client = new Stigg({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource addons', () => {
+describe('resource features', () => {
   // Mock server tests are disabled
-  test.skip('archiveAddon', async () => {
-    const responsePromise = client.v1.events.addons.archiveAddon('x');
+  test.skip('archiveFeature', async () => {
+    const responsePromise = client.v1.features.archiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +21,11 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createAddon: only required params', async () => {
-    const responsePromise = client.v1.events.addons.createAddon({
+  test.skip('createFeature: only required params', async () => {
+    const responsePromise = client.v1.features.createFeature({
       id: 'id',
       displayName: 'displayName',
-      productId: 'productId',
+      featureType: 'BOOLEAN',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -37,23 +37,30 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createAddon: required and optional params', async () => {
-    const response = await client.v1.events.addons.createAddon({
+  test.skip('createFeature: required and optional params', async () => {
+    const response = await client.v1.features.createFeature({
       id: 'id',
       displayName: 'displayName',
-      productId: 'productId',
-      billingId: 'billingId',
+      featureType: 'BOOLEAN',
       description: 'description',
-      maxQuantity: 0,
+      enumConfiguration: [{ displayName: 'displayName', value: 'value' }],
+      featureStatus: 'NEW',
+      featureUnits: 'featureUnits',
+      featureUnitsPlural: 'featureUnitsPlural',
       metadata: { foo: 'string' },
-      pricingType: 'FREE',
-      status: 'DRAFT',
+      meterType: 'None',
+      unitTransformation: {
+        divide: 0,
+        featureUnits: 'featureUnits',
+        featureUnitsPlural: 'featureUnitsPlural',
+        round: 'UP',
+      },
     });
   });
 
   // Mock server tests are disabled
-  test.skip('listAddons', async () => {
-    const responsePromise = client.v1.events.addons.listAddons();
+  test.skip('listFeatures', async () => {
+    const responsePromise = client.v1.features.listFeatures();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,11 +71,12 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listAddons: request options and params are passed correctly', async () => {
+  test.skip('listFeatures: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.events.addons.listAddons(
+      client.v1.features.listFeatures(
         {
+          id: 'id',
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           createdAt: {
@@ -77,8 +85,9 @@ describe('resource addons', () => {
             lt: '2019-12-27T18:11:19.117Z',
             lte: '2019-12-27T18:11:19.117Z',
           },
+          featureType: 'featureType',
           limit: 1,
-          productId: 'productId',
+          meterType: 'meterType',
           status: 'status',
         },
         { path: '/_stainless_unknown_path' },
@@ -87,8 +96,8 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('publishAddon: only required params', async () => {
-    const responsePromise = client.v1.events.addons.publishAddon('x', { migrationType: 'NEW_CUSTOMERS' });
+  test.skip('retrieveFeature', async () => {
+    const responsePromise = client.v1.features.retrieveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,13 +108,8 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('publishAddon: required and optional params', async () => {
-    const response = await client.v1.events.addons.publishAddon('x', { migrationType: 'NEW_CUSTOMERS' });
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieveAddon', async () => {
-    const responsePromise = client.v1.events.addons.retrieveAddon('x');
+  test.skip('unarchiveFeature', async () => {
+    const responsePromise = client.v1.features.unarchiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,8 +120,8 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('updateAddon', async () => {
-    const responsePromise = client.v1.events.addons.updateAddon('x', {});
+  test.skip('updateFeature', async () => {
+    const responsePromise = client.v1.features.updateFeature('x', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

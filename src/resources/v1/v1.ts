@@ -11,19 +11,27 @@ import {
   CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
+import * as EventsAPI from './events';
+import { EventReportParams, EventReportResponse, Events } from './events';
+import * as FeaturesAPI from './features';
+import {
+  Feature,
+  FeatureCreateFeatureParams,
+  FeatureListFeaturesParams,
+  FeatureListFeaturesResponse,
+  FeatureListFeaturesResponsesMyCursorIDPage,
+  FeatureUpdateFeatureParams,
+  Features,
+} from './features';
 import * as ProductsAPI from './products';
 import {
-  ProductArchiveProductResponse,
+  Product,
   ProductCreateProductParams,
-  ProductCreateProductResponse,
   ProductDuplicateProductParams,
-  ProductDuplicateProductResponse,
   ProductListProductsParams,
   ProductListProductsResponse,
   ProductListProductsResponsesMyCursorIDPage,
-  ProductUnarchiveProductResponse,
   ProductUpdateProductParams,
-  ProductUpdateProductResponse,
   Products,
 } from './products';
 import * as UsageAPI from './usage';
@@ -34,6 +42,22 @@ import {
   UsageReportParams,
   UsageReportResponse,
 } from './usage';
+import * as AddonsAPI from './addons/addons';
+import {
+  Addon,
+  AddonCreateParams,
+  AddonListParams,
+  AddonListResponse,
+  AddonListResponsesMyCursorIDPage,
+  AddonPublishParams,
+  AddonPublishResponse,
+  AddonRemoveDraftResponse,
+  AddonSetPricingParams,
+  AddonUpdateParams,
+  Addons,
+  SetPackagePricing,
+  SetPackagePricingResponse,
+} from './addons/addons';
 import * as CustomersAPI from './customers/customers';
 import {
   CustomerImportParams,
@@ -49,8 +73,20 @@ import {
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
-import * as EventsAPI from './events/events';
-import { EventReportParams, EventReportResponse, Events } from './events/events';
+import * as PlansAPI from './plans/plans';
+import {
+  Plan,
+  PlanCreateParams,
+  PlanListParams,
+  PlanListResponse,
+  PlanListResponsesMyCursorIDPage,
+  PlanPublishParams,
+  PlanPublishResponse,
+  PlanRemoveDraftResponse,
+  PlanSetPricingParams,
+  PlanUpdateParams,
+  Plans,
+} from './plans/plans';
 import * as SubscriptionsAPI from './subscriptions/subscriptions';
 import {
   Subscription,
@@ -76,6 +112,9 @@ export class V1 extends APIResource {
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   coupons: CouponsAPI.Coupons = new CouponsAPI.Coupons(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  features: FeaturesAPI.Features = new FeaturesAPI.Features(this._client);
+  addons: AddonsAPI.Addons = new AddonsAPI.Addons(this._client);
+  plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
 }
@@ -84,6 +123,9 @@ V1.Customers = Customers;
 V1.Subscriptions = Subscriptions;
 V1.Coupons = Coupons;
 V1.Events = Events;
+V1.Features = Features;
+V1.Addons = Addons;
+V1.Plans = Plans;
 V1.Usage = Usage;
 V1.Products = Products;
 
@@ -139,6 +181,46 @@ export declare namespace V1 {
   };
 
   export {
+    Features as Features,
+    type Feature as Feature,
+    type FeatureListFeaturesResponse as FeatureListFeaturesResponse,
+    type FeatureListFeaturesResponsesMyCursorIDPage as FeatureListFeaturesResponsesMyCursorIDPage,
+    type FeatureCreateFeatureParams as FeatureCreateFeatureParams,
+    type FeatureListFeaturesParams as FeatureListFeaturesParams,
+    type FeatureUpdateFeatureParams as FeatureUpdateFeatureParams,
+  };
+
+  export {
+    Addons as Addons,
+    type Addon as Addon,
+    type SetPackagePricing as SetPackagePricing,
+    type SetPackagePricingResponse as SetPackagePricingResponse,
+    type AddonListResponse as AddonListResponse,
+    type AddonPublishResponse as AddonPublishResponse,
+    type AddonRemoveDraftResponse as AddonRemoveDraftResponse,
+    type AddonListResponsesMyCursorIDPage as AddonListResponsesMyCursorIDPage,
+    type AddonCreateParams as AddonCreateParams,
+    type AddonUpdateParams as AddonUpdateParams,
+    type AddonListParams as AddonListParams,
+    type AddonPublishParams as AddonPublishParams,
+    type AddonSetPricingParams as AddonSetPricingParams,
+  };
+
+  export {
+    Plans as Plans,
+    type Plan as Plan,
+    type PlanListResponse as PlanListResponse,
+    type PlanPublishResponse as PlanPublishResponse,
+    type PlanRemoveDraftResponse as PlanRemoveDraftResponse,
+    type PlanListResponsesMyCursorIDPage as PlanListResponsesMyCursorIDPage,
+    type PlanCreateParams as PlanCreateParams,
+    type PlanUpdateParams as PlanUpdateParams,
+    type PlanListParams as PlanListParams,
+    type PlanPublishParams as PlanPublishParams,
+    type PlanSetPricingParams as PlanSetPricingParams,
+  };
+
+  export {
     Usage as Usage,
     type UsageHistoryResponse as UsageHistoryResponse,
     type UsageReportResponse as UsageReportResponse,
@@ -148,12 +230,8 @@ export declare namespace V1 {
 
   export {
     Products as Products,
-    type ProductArchiveProductResponse as ProductArchiveProductResponse,
-    type ProductCreateProductResponse as ProductCreateProductResponse,
-    type ProductDuplicateProductResponse as ProductDuplicateProductResponse,
+    type Product as Product,
     type ProductListProductsResponse as ProductListProductsResponse,
-    type ProductUnarchiveProductResponse as ProductUnarchiveProductResponse,
-    type ProductUpdateProductResponse as ProductUpdateProductResponse,
     type ProductListProductsResponsesMyCursorIDPage as ProductListProductsResponsesMyCursorIDPage,
     type ProductCreateProductParams as ProductCreateProductParams,
     type ProductDuplicateProductParams as ProductDuplicateProductParams,

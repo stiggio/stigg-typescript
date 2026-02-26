@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Addons,
+  type Addon,
+  type SetPackagePricing,
+  type SetPackagePricingResponse,
+  type AddonListResponse,
+  type AddonPublishResponse,
+  type AddonRemoveDraftResponse,
+  type AddonCreateParams,
+  type AddonUpdateParams,
+  type AddonListParams,
+  type AddonPublishParams,
+  type AddonSetPricingParams,
+  type AddonListResponsesMyCursorIDPage,
+} from './addons/index';
+export {
   Coupons,
   type Coupon,
   type CouponListResponse,
@@ -23,15 +38,33 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events/index';
+export { Events, type EventReportResponse, type EventReportParams } from './events';
+export {
+  Features,
+  type Feature,
+  type FeatureListFeaturesResponse,
+  type FeatureCreateFeatureParams,
+  type FeatureListFeaturesParams,
+  type FeatureUpdateFeatureParams,
+  type FeatureListFeaturesResponsesMyCursorIDPage,
+} from './features';
+export {
+  Plans,
+  type Plan,
+  type PlanListResponse,
+  type PlanPublishResponse,
+  type PlanRemoveDraftResponse,
+  type PlanCreateParams,
+  type PlanUpdateParams,
+  type PlanListParams,
+  type PlanPublishParams,
+  type PlanSetPricingParams,
+  type PlanListResponsesMyCursorIDPage,
+} from './plans/index';
 export {
   Products,
-  type ProductArchiveProductResponse,
-  type ProductCreateProductResponse,
-  type ProductDuplicateProductResponse,
+  type Product,
   type ProductListProductsResponse,
-  type ProductUnarchiveProductResponse,
-  type ProductUpdateProductResponse,
   type ProductCreateProductParams,
   type ProductDuplicateProductParams,
   type ProductListProductsParams,

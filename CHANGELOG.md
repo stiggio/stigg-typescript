@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.11 (2026-02-26)
+
+Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
+
+### Features
+
+* **api:** api update ([eb2a4cc](https://github.com/stiggio/stigg-typescript/commit/eb2a4cc0f2f0c9d7bb0eac31f45647bb022814ef))
+* **api:** stainless config updates ([255807f](https://github.com/stiggio/stigg-typescript/commit/255807f1f82acd0172fcb09343edd8ef6c2c237f))
+* **api:** update endpoints and models ([7f9b02d](https://github.com/stiggio/stigg-typescript/commit/7f9b02d4d889d42f12967dbe8fcffd1c498dab82))
+
 ## 0.1.0-alpha.10 (2026-02-26)
 
 Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
