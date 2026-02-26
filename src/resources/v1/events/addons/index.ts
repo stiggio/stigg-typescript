@@ -2,16 +2,25 @@
 
 export {
   Addons,
-  type AddonArchiveAddonResponse,
-  type AddonCreateAddonResponse,
+  type Addon,
+  type SetPackagePricing,
+  type SetPackagePricingResponse,
   type AddonListAddonsResponse,
   type AddonPublishAddonResponse,
-  type AddonRetrieveAddonResponse,
-  type AddonUpdateAddonResponse,
   type AddonCreateAddonParams,
   type AddonListAddonsParams,
   type AddonPublishAddonParams,
+  type AddonSetPricingParams,
   type AddonUpdateAddonParams,
   type AddonListAddonsResponsesMyCursorIDPage,
 } from './addons';
-export { Draft, type DraftCreateAddonDraftResponse, type DraftRemoveAddonDraftResponse } from './draft';
+export { Draft, type DraftRemoveAddonDraftResponse } from './draft';
+export {
+  Entitlements,
+  type AddonPackageEntitlement,
+  type EntitlementCreateResponse,
+  type EntitlementListResponse,
+  type EntitlementCreateParams,
+  type EntitlementUpdateParams,
+  type EntitlementDeleteParams,
+} from './entitlements';

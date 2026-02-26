@@ -26,12 +26,8 @@ export {
 export { Events, type EventReportResponse, type EventReportParams } from './events/index';
 export {
   Products,
-  type ProductArchiveProductResponse,
-  type ProductCreateProductResponse,
-  type ProductDuplicateProductResponse,
+  type Product,
   type ProductListProductsResponse,
-  type ProductUnarchiveProductResponse,
-  type ProductUpdateProductResponse,
   type ProductCreateProductParams,
   type ProductDuplicateProductParams,
   type ProductListProductsParams,
