@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.12 (2026-02-27)
+
+Full Changelog: [v0.1.0-alpha.11...v0.1.0-alpha.12](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.11...v0.1.0-alpha.12)
+
+### Features
+
+* **mcp:** add an option to disable code tool ([48ef94d](https://github.com/stiggio/stigg-typescript/commit/48ef94db9af330f0c6aef3b0df98a4ee8cdb8a00))
+
+
+### Bug Fixes
+
+* **mcp:** update prompt ([074e755](https://github.com/stiggio/stigg-typescript/commit/074e755f197434542e58cf6e66a0e5daf5b8c6a2))
+
+
+### Chores
+
+* **internal:** move stringifyQuery implementation to internal function ([da0839b](https://github.com/stiggio/stigg-typescript/commit/da0839b349ab846cb445e2474a397baf1f45f6fa))
+
 ## 0.1.0-alpha.11 (2026-02-26)
 
 Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
