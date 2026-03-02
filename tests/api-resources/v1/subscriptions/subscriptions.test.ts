@@ -127,7 +127,16 @@ describe('resource subscriptions', () => {
           id: 'id',
           customerId: 'customerId',
           planId: 'planId',
+          addons: [{ id: 'id', quantity: 0 }],
           billingId: 'billingId',
+          billingPeriod: 'MONTHLY',
+          charges: [
+            {
+              id: 'id',
+              quantity: 1,
+              type: 'FEATURE',
+            },
+          ],
           endDate: '2019-12-27T18:11:19.117Z',
           metadata: { foo: 'string' },
           resourceId: 'resourceId',
@@ -167,7 +176,7 @@ describe('resource subscriptions', () => {
     const response = await client.v1.subscriptions.preview({
       customerId: 'customerId',
       planId: 'planId',
-      addons: [{ addonId: 'addonId', quantity: 1 }],
+      addons: [{ id: 'id', quantity: 0 }],
       appliedCoupon: {
         billingCouponId: 'billingCouponId',
         configuration: { startDate: '2019-12-27T18:11:19.117Z' },
@@ -242,7 +251,7 @@ describe('resource subscriptions', () => {
       customerId: 'customerId',
       planId: 'planId',
       id: 'id',
-      addons: [{ addonId: 'addonId', quantity: 1 }],
+      addons: [{ id: 'id', quantity: 0 }],
       appliedCoupon: {
         billingCouponId: 'billingCouponId',
         configuration: { startDate: '2019-12-27T18:11:19.117Z' },

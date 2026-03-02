@@ -172,6 +172,8 @@ export namespace Subscription {
      */
     status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED';
 
+    addons?: Array<Data.Addon>;
+
     /**
      * Subscription cancellation date
      */
@@ -243,6 +245,21 @@ export namespace Subscription {
   }
 
   export namespace Data {
+    /**
+     * Addon configuration
+     */
+    export interface Addon {
+      /**
+       * Addon ID
+       */
+      id: string;
+
+      /**
+       * Number of addon instances
+       */
+      quantity: number;
+    }
+
     export interface Price {
       /**
        * Price ID
@@ -312,6 +329,8 @@ export interface SubscriptionListResponse {
    * Subscription status
    */
   status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED';
+
+  addons?: Array<SubscriptionListResponse.Addon>;
 
   /**
    * Subscription cancellation date
@@ -384,6 +403,21 @@ export interface SubscriptionListResponse {
 }
 
 export namespace SubscriptionListResponse {
+  /**
+   * Addon configuration
+   */
+  export interface Addon {
+    /**
+     * Addon ID
+     */
+    id: string;
+
+    /**
+     * Number of addon instances
+     */
+    quantity: number;
+  }
+
   export interface Price {
     /**
      * Price ID
@@ -620,16 +654,16 @@ export namespace SubscriptionPreviewResponse {
     }
 
     /**
-     * Free item in subscription
+     * Addon configuration
      */
     export interface FreeItem {
       /**
        * Addon ID
        */
-      addonId: string;
+      id: string;
 
       /**
-       * Quantity
+       * Number of addon instances
        */
       quantity: number;
     }
@@ -1045,6 +1079,8 @@ export namespace SubscriptionProvisionResponse {
        */
       status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED';
 
+      addons?: Array<Subscription.Addon>;
+
       /**
        * Subscription cancellation date
        */
@@ -1116,6 +1152,21 @@ export namespace SubscriptionProvisionResponse {
     }
 
     export namespace Subscription {
+      /**
+       * Addon configuration
+       */
+      export interface Addon {
+        /**
+         * Addon ID
+         */
+        id: string;
+
+        /**
+         * Number of addon instances
+         */
+        quantity: number;
+      }
+
       export interface Price {
         /**
          * Addon identifier for the price override
@@ -1617,12 +1668,18 @@ export interface SubscriptionUpdateParams {
 }
 
 export namespace SubscriptionUpdateParams {
+  /**
+   * Addon configuration
+   */
   export interface Addon {
     /**
      * Addon ID
      */
-    addonId: string;
+    id: string;
 
+    /**
+     * Number of addon instances
+     */
     quantity: number;
   }
 
@@ -2314,10 +2371,19 @@ export namespace SubscriptionImportParams {
      */
     planId: string;
 
+    addons?: Array<Subscription.Addon>;
+
     /**
      * Billing ID
      */
     billingId?: string | null;
+
+    /**
+     * Billing period (MONTHLY or ANNUALLY)
+     */
+    billingPeriod?: 'MONTHLY' | 'ANNUALLY';
+
+    charges?: Array<Subscription.Charge>;
 
     /**
      * Subscription end date
@@ -2338,6 +2404,43 @@ export namespace SubscriptionImportParams {
      * Subscription start date
      */
     startDate?: string;
+  }
+
+  export namespace Subscription {
+    /**
+     * Addon configuration
+     */
+    export interface Addon {
+      /**
+       * Addon ID
+       */
+      id: string;
+
+      /**
+       * Number of addon instances
+       */
+      quantity: number;
+    }
+
+    /**
+     * Charge item
+     */
+    export interface Charge {
+      /**
+       * Charge ID
+       */
+      id: string;
+
+      /**
+       * Charge quantity
+       */
+      quantity: number;
+
+      /**
+       * Charge type
+       */
+      type: 'FEATURE' | 'CREDIT';
+    }
   }
 }
 
@@ -2433,12 +2536,12 @@ export namespace SubscriptionPreviewParams {
     /**
      * Addon ID
      */
-    addonId: string;
+    id: string;
 
     /**
      * Number of addon instances
      */
-    quantity?: number;
+    quantity: number;
   }
 
   /**
@@ -2897,16 +3000,19 @@ export interface SubscriptionProvisionParams {
 }
 
 export namespace SubscriptionProvisionParams {
+  /**
+   * Addon configuration
+   */
   export interface Addon {
     /**
-     * Addon identifier
+     * Addon ID
      */
-    addonId: string;
+    id: string;
 
     /**
-     * Number of addon units
+     * Number of addon instances
      */
-    quantity?: number;
+    quantity: number;
   }
 
   /**
