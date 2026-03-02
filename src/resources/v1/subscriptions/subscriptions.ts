@@ -1638,6 +1638,8 @@ export interface SubscriptionUpdateParams {
 
   awaitPaymentConfirmation?: boolean;
 
+  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
+
   billingInformation?: SubscriptionUpdateParams.BillingInformation;
 
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
@@ -2483,6 +2485,11 @@ export interface SubscriptionPreviewParams {
   billingCountryCode?: string;
 
   /**
+   * Billing cycle anchor behavior for the subscription
+   */
+  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
+
+  /**
    * Billing and tax configuration
    */
   billingInformation?: SubscriptionPreviewParams.BillingInformation;
@@ -2928,6 +2935,11 @@ export interface SubscriptionProvisionParams {
    * The ISO 3166-1 alpha-2 country code for billing
    */
   billingCountryCode?: string | null;
+
+  /**
+   * Billing cycle anchor behavior for the subscription
+   */
+  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
 
   /**
    * External billing system identifier

@@ -192,6 +192,7 @@ describe('resource subscriptions', () => {
       },
       billableFeatures: [{ featureId: 'featureId', quantity: 1 }],
       billingCountryCode: 'billingCountryCode',
+      billingCycleAnchor: 'UNCHANGED',
       billingInformation: {
         billingAddress: {
           city: 'city',
@@ -267,6 +268,7 @@ describe('resource subscriptions', () => {
       },
       awaitPaymentConfirmation: true,
       billingCountryCode: 'billingCountryCode',
+      billingCycleAnchor: 'UNCHANGED',
       billingId: 'billingId',
       billingInformation: {
         billingAddress: {
