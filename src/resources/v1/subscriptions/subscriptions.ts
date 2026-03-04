@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as FutureUpdateAPI from './future-update';
-import { CancelSubscription, FutureUpdate } from './future-update';
+import { CancelSubscription, FutureUpdate as FutureUpdateAPIFutureUpdate } from './future-update';
 import * as InvoiceAPI from './invoice';
 import { Invoice, InvoiceMarkAsPaidResponse } from './invoice';
 import * as UsageAPI from './usage';
@@ -175,6 +175,16 @@ export namespace Subscription {
     addons?: Array<Data.Addon>;
 
     /**
+     * Billing cycle anchor date
+     */
+    billingCycleAnchor?: string | null;
+
+    /**
+     * Budget configuration
+     */
+    budget?: Data.Budget | null;
+
+    /**
      * Subscription cancellation date
      */
     cancellationDate?: string | null;
@@ -197,6 +207,11 @@ export namespace Subscription {
       | null;
 
     /**
+     * Coupons applied to the subscription
+     */
+    coupons?: Array<Data.Coupon>;
+
+    /**
      * End of the current billing period
      */
     currentBillingPeriodEnd?: string | null;
@@ -217,9 +232,24 @@ export namespace Subscription {
     endDate?: string | null;
 
     /**
+     * Scheduled future updates for the subscription
+     */
+    futureUpdates?: Array<Data.FutureUpdate>;
+
+    /**
+     * Latest invoice for the subscription
+     */
+    latestInvoice?: Data.LatestInvoice | null;
+
+    /**
      * Additional metadata for the subscription
      */
     metadata?: { [key: string]: string };
+
+    /**
+     * Minimum spend configuration
+     */
+    minimumSpend?: Data.MinimumSpend | null;
 
     /**
      * Paying customer ID for delegated billing
@@ -237,6 +267,16 @@ export namespace Subscription {
      * Resource ID
      */
     resourceId?: string | null;
+
+    /**
+     * Entitlements associated with the subscription
+     */
+    subscriptionEntitlements?: Array<Data.SubscriptionEntitlement>;
+
+    /**
+     * Trial configuration
+     */
+    trial?: Data.Trial | null;
 
     /**
      * Subscription trial end date
@@ -260,23 +300,881 @@ export namespace Subscription {
       quantity: number;
     }
 
-    export interface Price {
+    /**
+     * Budget configuration
+     */
+    export interface Budget {
       /**
-       * Price ID
+       * Whether the budget is a soft limit
+       */
+      hasSoftLimit: boolean;
+
+      /**
+       * Maximum spending limit
+       */
+      limit: number;
+    }
+
+    /**
+     * Coupon applied to a subscription
+     */
+    export interface Coupon {
+      /**
+       * Coupon ID
        */
       id: string;
 
       /**
-       * Creation timestamp
+       * Coupon name
+       */
+      name: string;
+
+      /**
+       * Coupon status
+       */
+      status: 'ACTIVE' | 'EXPIRED' | 'REMOVED';
+
+      /**
+       * Fixed amount discounts by currency
+       */
+      amountsOff?: Array<Coupon.AmountsOff> | null;
+
+      /**
+       * Percentage discount
+       */
+      percentOff?: number | null;
+    }
+
+    export namespace Coupon {
+      export interface AmountsOff {
+        /**
+         * The price amount
+         */
+        amount?: number;
+
+        /**
+         * The price currency
+         */
+        currency?:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+    }
+
+    /**
+     * Scheduled subscription update
+     */
+    export interface FutureUpdate {
+      /**
+       * Scheduled execution time
+       */
+      scheduledExecutionTime: string;
+
+      /**
+       * Status of the scheduled update
+       */
+      scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED';
+
+      /**
+       * Type of scheduled change
+       */
+      subscriptionScheduleType:
+        | 'DOWNGRADE'
+        | 'PLAN'
+        | 'BILLING_PERIOD'
+        | 'UNIT_AMOUNT'
+        | 'RECURRING_CREDITS'
+        | 'PRICE_OVERRIDE'
+        | 'ADDON'
+        | 'COUPON'
+        | 'MIGRATE_TO_LATEST'
+        | 'ADDITIONAL_META_DATA'
+        | 'BILLING_INFO_METADATA';
+
+      /**
+       * Target package for the update
+       */
+      targetPackage?: FutureUpdate.TargetPackage | null;
+    }
+
+    export namespace FutureUpdate {
+      /**
+       * Target package for the update
+       */
+      export interface TargetPackage {
+        /**
+         * Target package for the update
+         */
+        id: string;
+      }
+    }
+
+    /**
+     * Latest invoice for the subscription
+     */
+    export interface LatestInvoice {
+      /**
+       * Invoice billing ID
+       */
+      billingId: string;
+
+      /**
+       * Invoice creation date
        */
       createdAt: string;
 
       /**
-       * Last update timestamp
+       * Whether payment requires action
        */
-      updatedAt: string;
+      requiresAction: boolean;
 
-      [k: string]: unknown;
+      /**
+       * Invoice status
+       */
+      status: 'OPEN' | 'CANCELED' | 'PAID';
+
+      /**
+       * Amount due
+       */
+      amountDue?: number | null;
+
+      /**
+       * Billing reason
+       */
+      billingReason?:
+        | 'BILLING_CYCLE'
+        | 'SUBSCRIPTION_CREATION'
+        | 'SUBSCRIPTION_UPDATE'
+        | 'MANUAL'
+        | 'MINIMUM_INVOICE_AMOUNT_EXCEEDED'
+        | 'OTHER'
+        | null;
+
+      /**
+       * Invoice currency
+       */
+      currency?: string | null;
+
+      /**
+       * Invoice PDF URL
+       */
+      pdfUrl?: string | null;
+
+      /**
+       * Total amount
+       */
+      total?: number | null;
+    }
+
+    /**
+     * Minimum spend configuration
+     */
+    export interface MinimumSpend {
+      /**
+       * The price amount
+       */
+      amount?: number;
+
+      /**
+       * The price currency
+       */
+      currency?:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
+    }
+
+    export interface Price {
+      /**
+       * Addon identifier for the price override
+       */
+      addonId?: string | null;
+
+      /**
+       * The price amount
+       */
+      amount?: number;
+
+      /**
+       * Whether this is a base charge override
+       */
+      baseCharge?: boolean;
+
+      /**
+       * The billing country code of the price
+       */
+      billingCountryCode?: string;
+
+      /**
+       * Block size for pricing
+       */
+      blockSize?: number;
+
+      /**
+       * The price currency
+       */
+      currency?:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
+
+      /**
+       * Feature identifier for the price override
+       */
+      featureId?: string | null;
+
+      /**
+       * Pricing tiers configuration
+       */
+      tiers?: Array<Price.Tier>;
+    }
+
+    export namespace Price {
+      export interface Tier {
+        /**
+         * The flat fee price of the price tier
+         */
+        flatPrice?: Tier.FlatPrice;
+
+        /**
+         * The unit price of the price tier
+         */
+        unitPrice?: Tier.UnitPrice;
+
+        /**
+         * The up to quantity of the price tier
+         */
+        upTo?: number;
+      }
+
+      export namespace Tier {
+        /**
+         * The flat fee price of the price tier
+         */
+        export interface FlatPrice {
+          /**
+           * The price amount
+           */
+          amount: number;
+
+          /**
+           * The price currency
+           */
+          currency:
+            | 'usd'
+            | 'aed'
+            | 'all'
+            | 'amd'
+            | 'ang'
+            | 'aud'
+            | 'awg'
+            | 'azn'
+            | 'bam'
+            | 'bbd'
+            | 'bdt'
+            | 'bgn'
+            | 'bif'
+            | 'bmd'
+            | 'bnd'
+            | 'bsd'
+            | 'bwp'
+            | 'byn'
+            | 'bzd'
+            | 'brl'
+            | 'cad'
+            | 'cdf'
+            | 'chf'
+            | 'cny'
+            | 'czk'
+            | 'dkk'
+            | 'dop'
+            | 'dzd'
+            | 'egp'
+            | 'etb'
+            | 'eur'
+            | 'fjd'
+            | 'gbp'
+            | 'gel'
+            | 'gip'
+            | 'gmd'
+            | 'gyd'
+            | 'hkd'
+            | 'hrk'
+            | 'htg'
+            | 'idr'
+            | 'ils'
+            | 'inr'
+            | 'isk'
+            | 'jmd'
+            | 'jpy'
+            | 'kes'
+            | 'kgs'
+            | 'khr'
+            | 'kmf'
+            | 'krw'
+            | 'kyd'
+            | 'kzt'
+            | 'lbp'
+            | 'lkr'
+            | 'lrd'
+            | 'lsl'
+            | 'mad'
+            | 'mdl'
+            | 'mga'
+            | 'mkd'
+            | 'mmk'
+            | 'mnt'
+            | 'mop'
+            | 'mro'
+            | 'mvr'
+            | 'mwk'
+            | 'mxn'
+            | 'myr'
+            | 'mzn'
+            | 'nad'
+            | 'ngn'
+            | 'nok'
+            | 'npr'
+            | 'nzd'
+            | 'pgk'
+            | 'php'
+            | 'pkr'
+            | 'pln'
+            | 'qar'
+            | 'ron'
+            | 'rsd'
+            | 'rub'
+            | 'rwf'
+            | 'sar'
+            | 'sbd'
+            | 'scr'
+            | 'sek'
+            | 'sgd'
+            | 'sle'
+            | 'sll'
+            | 'sos'
+            | 'szl'
+            | 'thb'
+            | 'tjs'
+            | 'top'
+            | 'try'
+            | 'ttd'
+            | 'tzs'
+            | 'uah'
+            | 'uzs'
+            | 'vnd'
+            | 'vuv'
+            | 'wst'
+            | 'xaf'
+            | 'xcd'
+            | 'yer'
+            | 'zar'
+            | 'zmw'
+            | 'clp'
+            | 'djf'
+            | 'gnf'
+            | 'ugx'
+            | 'pyg'
+            | 'xof'
+            | 'xpf';
+        }
+
+        /**
+         * The unit price of the price tier
+         */
+        export interface UnitPrice {
+          /**
+           * The price amount
+           */
+          amount: number;
+
+          /**
+           * The price currency
+           */
+          currency:
+            | 'usd'
+            | 'aed'
+            | 'all'
+            | 'amd'
+            | 'ang'
+            | 'aud'
+            | 'awg'
+            | 'azn'
+            | 'bam'
+            | 'bbd'
+            | 'bdt'
+            | 'bgn'
+            | 'bif'
+            | 'bmd'
+            | 'bnd'
+            | 'bsd'
+            | 'bwp'
+            | 'byn'
+            | 'bzd'
+            | 'brl'
+            | 'cad'
+            | 'cdf'
+            | 'chf'
+            | 'cny'
+            | 'czk'
+            | 'dkk'
+            | 'dop'
+            | 'dzd'
+            | 'egp'
+            | 'etb'
+            | 'eur'
+            | 'fjd'
+            | 'gbp'
+            | 'gel'
+            | 'gip'
+            | 'gmd'
+            | 'gyd'
+            | 'hkd'
+            | 'hrk'
+            | 'htg'
+            | 'idr'
+            | 'ils'
+            | 'inr'
+            | 'isk'
+            | 'jmd'
+            | 'jpy'
+            | 'kes'
+            | 'kgs'
+            | 'khr'
+            | 'kmf'
+            | 'krw'
+            | 'kyd'
+            | 'kzt'
+            | 'lbp'
+            | 'lkr'
+            | 'lrd'
+            | 'lsl'
+            | 'mad'
+            | 'mdl'
+            | 'mga'
+            | 'mkd'
+            | 'mmk'
+            | 'mnt'
+            | 'mop'
+            | 'mro'
+            | 'mvr'
+            | 'mwk'
+            | 'mxn'
+            | 'myr'
+            | 'mzn'
+            | 'nad'
+            | 'ngn'
+            | 'nok'
+            | 'npr'
+            | 'nzd'
+            | 'pgk'
+            | 'php'
+            | 'pkr'
+            | 'pln'
+            | 'qar'
+            | 'ron'
+            | 'rsd'
+            | 'rub'
+            | 'rwf'
+            | 'sar'
+            | 'sbd'
+            | 'scr'
+            | 'sek'
+            | 'sgd'
+            | 'sle'
+            | 'sll'
+            | 'sos'
+            | 'szl'
+            | 'thb'
+            | 'tjs'
+            | 'top'
+            | 'try'
+            | 'ttd'
+            | 'tzs'
+            | 'uah'
+            | 'uzs'
+            | 'vnd'
+            | 'vuv'
+            | 'wst'
+            | 'xaf'
+            | 'xcd'
+            | 'yer'
+            | 'zar'
+            | 'zmw'
+            | 'clp'
+            | 'djf'
+            | 'gnf'
+            | 'ugx'
+            | 'pyg'
+            | 'xof'
+            | 'xpf';
+        }
+      }
+    }
+
+    /**
+     * Subscription entitlement reference
+     */
+    export interface SubscriptionEntitlement {
+      /**
+       * Feature ID or currency ID
+       */
+      id: string;
+
+      /**
+       * Entitlement type (FEATURE or CREDIT)
+       */
+      type: 'FEATURE' | 'CREDIT';
+    }
+
+    /**
+     * Trial configuration
+     */
+    export interface Trial {
+      /**
+       * Behavior when the trial ends
+       */
+      trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION';
     }
   }
 }
@@ -333,6 +1231,16 @@ export interface SubscriptionListResponse {
   addons?: Array<SubscriptionListResponse.Addon>;
 
   /**
+   * Billing cycle anchor date
+   */
+  billingCycleAnchor?: string | null;
+
+  /**
+   * Budget configuration
+   */
+  budget?: SubscriptionListResponse.Budget | null;
+
+  /**
    * Subscription cancellation date
    */
   cancellationDate?: string | null;
@@ -355,6 +1263,11 @@ export interface SubscriptionListResponse {
     | null;
 
   /**
+   * Coupons applied to the subscription
+   */
+  coupons?: Array<SubscriptionListResponse.Coupon>;
+
+  /**
    * End of the current billing period
    */
   currentBillingPeriodEnd?: string | null;
@@ -375,9 +1288,24 @@ export interface SubscriptionListResponse {
   endDate?: string | null;
 
   /**
+   * Scheduled future updates for the subscription
+   */
+  futureUpdates?: Array<SubscriptionListResponse.FutureUpdate>;
+
+  /**
+   * Latest invoice for the subscription
+   */
+  latestInvoice?: SubscriptionListResponse.LatestInvoice | null;
+
+  /**
    * Additional metadata for the subscription
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * Minimum spend configuration
+   */
+  minimumSpend?: SubscriptionListResponse.MinimumSpend | null;
 
   /**
    * Paying customer ID for delegated billing
@@ -395,6 +1323,16 @@ export interface SubscriptionListResponse {
    * Resource ID
    */
   resourceId?: string | null;
+
+  /**
+   * Entitlements associated with the subscription
+   */
+  subscriptionEntitlements?: Array<SubscriptionListResponse.SubscriptionEntitlement>;
+
+  /**
+   * Trial configuration
+   */
+  trial?: SubscriptionListResponse.Trial | null;
 
   /**
    * Subscription trial end date
@@ -418,23 +1356,881 @@ export namespace SubscriptionListResponse {
     quantity: number;
   }
 
-  export interface Price {
+  /**
+   * Budget configuration
+   */
+  export interface Budget {
     /**
-     * Price ID
+     * Whether the budget is a soft limit
+     */
+    hasSoftLimit: boolean;
+
+    /**
+     * Maximum spending limit
+     */
+    limit: number;
+  }
+
+  /**
+   * Coupon applied to a subscription
+   */
+  export interface Coupon {
+    /**
+     * Coupon ID
      */
     id: string;
 
     /**
-     * Creation timestamp
+     * Coupon name
+     */
+    name: string;
+
+    /**
+     * Coupon status
+     */
+    status: 'ACTIVE' | 'EXPIRED' | 'REMOVED';
+
+    /**
+     * Fixed amount discounts by currency
+     */
+    amountsOff?: Array<Coupon.AmountsOff> | null;
+
+    /**
+     * Percentage discount
+     */
+    percentOff?: number | null;
+  }
+
+  export namespace Coupon {
+    export interface AmountsOff {
+      /**
+       * The price amount
+       */
+      amount?: number;
+
+      /**
+       * The price currency
+       */
+      currency?:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
+    }
+  }
+
+  /**
+   * Scheduled subscription update
+   */
+  export interface FutureUpdate {
+    /**
+     * Scheduled execution time
+     */
+    scheduledExecutionTime: string;
+
+    /**
+     * Status of the scheduled update
+     */
+    scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED';
+
+    /**
+     * Type of scheduled change
+     */
+    subscriptionScheduleType:
+      | 'DOWNGRADE'
+      | 'PLAN'
+      | 'BILLING_PERIOD'
+      | 'UNIT_AMOUNT'
+      | 'RECURRING_CREDITS'
+      | 'PRICE_OVERRIDE'
+      | 'ADDON'
+      | 'COUPON'
+      | 'MIGRATE_TO_LATEST'
+      | 'ADDITIONAL_META_DATA'
+      | 'BILLING_INFO_METADATA';
+
+    /**
+     * Target package for the update
+     */
+    targetPackage?: FutureUpdate.TargetPackage | null;
+  }
+
+  export namespace FutureUpdate {
+    /**
+     * Target package for the update
+     */
+    export interface TargetPackage {
+      /**
+       * Target package for the update
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Latest invoice for the subscription
+   */
+  export interface LatestInvoice {
+    /**
+     * Invoice billing ID
+     */
+    billingId: string;
+
+    /**
+     * Invoice creation date
      */
     createdAt: string;
 
     /**
-     * Last update timestamp
+     * Whether payment requires action
      */
-    updatedAt: string;
+    requiresAction: boolean;
 
-    [k: string]: unknown;
+    /**
+     * Invoice status
+     */
+    status: 'OPEN' | 'CANCELED' | 'PAID';
+
+    /**
+     * Amount due
+     */
+    amountDue?: number | null;
+
+    /**
+     * Billing reason
+     */
+    billingReason?:
+      | 'BILLING_CYCLE'
+      | 'SUBSCRIPTION_CREATION'
+      | 'SUBSCRIPTION_UPDATE'
+      | 'MANUAL'
+      | 'MINIMUM_INVOICE_AMOUNT_EXCEEDED'
+      | 'OTHER'
+      | null;
+
+    /**
+     * Invoice currency
+     */
+    currency?: string | null;
+
+    /**
+     * Invoice PDF URL
+     */
+    pdfUrl?: string | null;
+
+    /**
+     * Total amount
+     */
+    total?: number | null;
+  }
+
+  /**
+   * Minimum spend configuration
+   */
+  export interface MinimumSpend {
+    /**
+     * The price amount
+     */
+    amount?: number;
+
+    /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
+  }
+
+  export interface Price {
+    /**
+     * Addon identifier for the price override
+     */
+    addonId?: string | null;
+
+    /**
+     * The price amount
+     */
+    amount?: number;
+
+    /**
+     * Whether this is a base charge override
+     */
+    baseCharge?: boolean;
+
+    /**
+     * The billing country code of the price
+     */
+    billingCountryCode?: string;
+
+    /**
+     * Block size for pricing
+     */
+    blockSize?: number;
+
+    /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
+
+    /**
+     * Feature identifier for the price override
+     */
+    featureId?: string | null;
+
+    /**
+     * Pricing tiers configuration
+     */
+    tiers?: Array<Price.Tier>;
+  }
+
+  export namespace Price {
+    export interface Tier {
+      /**
+       * The flat fee price of the price tier
+       */
+      flatPrice?: Tier.FlatPrice;
+
+      /**
+       * The unit price of the price tier
+       */
+      unitPrice?: Tier.UnitPrice;
+
+      /**
+       * The up to quantity of the price tier
+       */
+      upTo?: number;
+    }
+
+    export namespace Tier {
+      /**
+       * The flat fee price of the price tier
+       */
+      export interface FlatPrice {
+        /**
+         * The price amount
+         */
+        amount: number;
+
+        /**
+         * The price currency
+         */
+        currency:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+
+      /**
+       * The unit price of the price tier
+       */
+      export interface UnitPrice {
+        /**
+         * The price amount
+         */
+        amount: number;
+
+        /**
+         * The price currency
+         */
+        currency:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+    }
+  }
+
+  /**
+   * Subscription entitlement reference
+   */
+  export interface SubscriptionEntitlement {
+    /**
+     * Feature ID or currency ID
+     */
+    id: string;
+
+    /**
+     * Entitlement type (FEATURE or CREDIT)
+     */
+    type: 'FEATURE' | 'CREDIT';
+  }
+
+  /**
+   * Trial configuration
+   */
+  export interface Trial {
+    /**
+     * Behavior when the trial ends
+     */
+    trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION';
   }
 }
 
@@ -1082,6 +2878,16 @@ export namespace SubscriptionProvisionResponse {
       addons?: Array<Subscription.Addon>;
 
       /**
+       * Billing cycle anchor date
+       */
+      billingCycleAnchor?: string | null;
+
+      /**
+       * Budget configuration
+       */
+      budget?: Subscription.Budget | null;
+
+      /**
        * Subscription cancellation date
        */
       cancellationDate?: string | null;
@@ -1104,6 +2910,11 @@ export namespace SubscriptionProvisionResponse {
         | null;
 
       /**
+       * Coupons applied to the subscription
+       */
+      coupons?: Array<Subscription.Coupon>;
+
+      /**
        * End of the current billing period
        */
       currentBillingPeriodEnd?: string | null;
@@ -1124,9 +2935,24 @@ export namespace SubscriptionProvisionResponse {
       endDate?: string | null;
 
       /**
+       * Scheduled future updates for the subscription
+       */
+      futureUpdates?: Array<Subscription.FutureUpdate>;
+
+      /**
+       * Latest invoice for the subscription
+       */
+      latestInvoice?: Subscription.LatestInvoice | null;
+
+      /**
        * Additional metadata for the subscription
        */
       metadata?: { [key: string]: string };
+
+      /**
+       * Minimum spend configuration
+       */
+      minimumSpend?: Subscription.MinimumSpend | null;
 
       /**
        * Paying customer ID for delegated billing
@@ -1144,6 +2970,16 @@ export namespace SubscriptionProvisionResponse {
        * Resource ID
        */
       resourceId?: string | null;
+
+      /**
+       * Entitlements associated with the subscription
+       */
+      subscriptionEntitlements?: Array<Subscription.SubscriptionEntitlement>;
+
+      /**
+       * Trial configuration
+       */
+      trial?: Subscription.Trial | null;
 
       /**
        * Subscription trial end date
@@ -1167,52 +3003,57 @@ export namespace SubscriptionProvisionResponse {
         quantity: number;
       }
 
-      export interface Price {
+      /**
+       * Budget configuration
+       */
+      export interface Budget {
         /**
-         * Addon identifier for the price override
+         * Whether the budget is a soft limit
          */
-        addonId?: string | null;
+        hasSoftLimit: boolean;
 
         /**
-         * Whether this is a base charge override
+         * Maximum spending limit
          */
-        baseCharge?: boolean;
-
-        /**
-         * Block size for pricing
-         */
-        blockSize?: number;
-
-        /**
-         * Feature identifier for the price override
-         */
-        featureId?: string | null;
-
-        /**
-         * Override price amount
-         */
-        price?: Price.Price;
-
-        /**
-         * Pricing tiers configuration
-         */
-        tiers?: Array<Price.Tier>;
+        limit: number;
       }
 
-      export namespace Price {
+      /**
+       * Coupon applied to a subscription
+       */
+      export interface Coupon {
         /**
-         * Override price amount
+         * Coupon ID
          */
-        export interface Price {
+        id: string;
+
+        /**
+         * Coupon name
+         */
+        name: string;
+
+        /**
+         * Coupon status
+         */
+        status: 'ACTIVE' | 'EXPIRED' | 'REMOVED';
+
+        /**
+         * Fixed amount discounts by currency
+         */
+        amountsOff?: Array<Coupon.AmountsOff> | null;
+
+        /**
+         * Percentage discount
+         */
+        percentOff?: number | null;
+      }
+
+      export namespace Coupon {
+        export interface AmountsOff {
           /**
            * The price amount
            */
           amount?: number;
-
-          /**
-           * The billing country code of the price
-           */
-          billingCountryCode?: string | null;
 
           /**
            * The price currency
@@ -1335,7 +3176,403 @@ export namespace SubscriptionProvisionResponse {
             | 'xof'
             | 'xpf';
         }
+      }
 
+      /**
+       * Scheduled subscription update
+       */
+      export interface FutureUpdate {
+        /**
+         * Scheduled execution time
+         */
+        scheduledExecutionTime: string;
+
+        /**
+         * Status of the scheduled update
+         */
+        scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED';
+
+        /**
+         * Type of scheduled change
+         */
+        subscriptionScheduleType:
+          | 'DOWNGRADE'
+          | 'PLAN'
+          | 'BILLING_PERIOD'
+          | 'UNIT_AMOUNT'
+          | 'RECURRING_CREDITS'
+          | 'PRICE_OVERRIDE'
+          | 'ADDON'
+          | 'COUPON'
+          | 'MIGRATE_TO_LATEST'
+          | 'ADDITIONAL_META_DATA'
+          | 'BILLING_INFO_METADATA';
+
+        /**
+         * Target package for the update
+         */
+        targetPackage?: FutureUpdate.TargetPackage | null;
+      }
+
+      export namespace FutureUpdate {
+        /**
+         * Target package for the update
+         */
+        export interface TargetPackage {
+          /**
+           * Target package for the update
+           */
+          id: string;
+        }
+      }
+
+      /**
+       * Latest invoice for the subscription
+       */
+      export interface LatestInvoice {
+        /**
+         * Invoice billing ID
+         */
+        billingId: string;
+
+        /**
+         * Invoice creation date
+         */
+        createdAt: string;
+
+        /**
+         * Whether payment requires action
+         */
+        requiresAction: boolean;
+
+        /**
+         * Invoice status
+         */
+        status: 'OPEN' | 'CANCELED' | 'PAID';
+
+        /**
+         * Amount due
+         */
+        amountDue?: number | null;
+
+        /**
+         * Billing reason
+         */
+        billingReason?:
+          | 'BILLING_CYCLE'
+          | 'SUBSCRIPTION_CREATION'
+          | 'SUBSCRIPTION_UPDATE'
+          | 'MANUAL'
+          | 'MINIMUM_INVOICE_AMOUNT_EXCEEDED'
+          | 'OTHER'
+          | null;
+
+        /**
+         * Invoice currency
+         */
+        currency?: string | null;
+
+        /**
+         * Invoice PDF URL
+         */
+        pdfUrl?: string | null;
+
+        /**
+         * Total amount
+         */
+        total?: number | null;
+      }
+
+      /**
+       * Minimum spend configuration
+       */
+      export interface MinimumSpend {
+        /**
+         * The price amount
+         */
+        amount?: number;
+
+        /**
+         * The price currency
+         */
+        currency?:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+
+      export interface Price {
+        /**
+         * Addon identifier for the price override
+         */
+        addonId?: string | null;
+
+        /**
+         * The price amount
+         */
+        amount?: number;
+
+        /**
+         * Whether this is a base charge override
+         */
+        baseCharge?: boolean;
+
+        /**
+         * The billing country code of the price
+         */
+        billingCountryCode?: string;
+
+        /**
+         * Block size for pricing
+         */
+        blockSize?: number;
+
+        /**
+         * The price currency
+         */
+        currency?:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+
+        /**
+         * Feature identifier for the price override
+         */
+        featureId?: string | null;
+
+        /**
+         * Pricing tiers configuration
+         */
+        tiers?: Array<Price.Tier>;
+      }
+
+      export namespace Price {
         export interface Tier {
           /**
            * The flat fee price of the price tier
@@ -1361,17 +3598,12 @@ export namespace SubscriptionProvisionResponse {
             /**
              * The price amount
              */
-            amount?: number;
-
-            /**
-             * The billing country code of the price
-             */
-            billingCountryCode?: string | null;
+            amount: number;
 
             /**
              * The price currency
              */
-            currency?:
+            currency:
               | 'usd'
               | 'aed'
               | 'all'
@@ -1497,17 +3729,12 @@ export namespace SubscriptionProvisionResponse {
             /**
              * The price amount
              */
-            amount?: number;
-
-            /**
-             * The billing country code of the price
-             */
-            billingCountryCode?: string | null;
+            amount: number;
 
             /**
              * The price currency
              */
-            currency?:
+            currency:
               | 'usd'
               | 'aed'
               | 'all'
@@ -1627,6 +3854,31 @@ export namespace SubscriptionProvisionResponse {
           }
         }
       }
+
+      /**
+       * Subscription entitlement reference
+       */
+      export interface SubscriptionEntitlement {
+        /**
+         * Feature ID or currency ID
+         */
+        id: string;
+
+        /**
+         * Entitlement type (FEATURE or CREDIT)
+         */
+        type: 'FEATURE' | 'CREDIT';
+      }
+
+      /**
+       * Trial configuration
+       */
+      export interface Trial {
+        /**
+         * Behavior when the trial ends
+         */
+        trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION';
+      }
     }
   }
 }
@@ -1653,6 +3905,9 @@ export interface SubscriptionUpdateParams {
    */
   metadata?: { [key: string]: string };
 
+  /**
+   * Minimum spend amount
+   */
   minimumSpend?: SubscriptionUpdateParams.MinimumSpend | null;
 
   priceOverrides?: Array<SubscriptionUpdateParams.PriceOverride>;
@@ -1718,10 +3973,19 @@ export namespace SubscriptionUpdateParams {
     }
 
     export namespace Discount {
+      /**
+       * Monetary amount with currency
+       */
       export interface AmountsOff {
+        /**
+         * The price amount
+         */
         amount: number;
 
-        currency?:
+        /**
+         * The price currency
+         */
+        currency:
           | 'usd'
           | 'aed'
           | 'all'
@@ -1918,8 +4182,14 @@ export namespace SubscriptionUpdateParams {
   }
 
   export interface Budget {
+    /**
+     * Whether the budget is a soft limit
+     */
     hasSoftLimit: boolean;
 
+    /**
+     * Maximum spending limit
+     */
     limit: number;
   }
 
@@ -1934,132 +4204,135 @@ export namespace SubscriptionUpdateParams {
     type: 'FEATURE' | 'CREDIT';
   }
 
+  /**
+   * Minimum spend amount
+   */
   export interface MinimumSpend {
-    minimum?: MinimumSpend.Minimum | null;
-  }
+    /**
+     * The price amount
+     */
+    amount?: number;
 
-  export namespace MinimumSpend {
-    export interface Minimum {
-      amount: number;
-
-      currency?:
-        | 'usd'
-        | 'aed'
-        | 'all'
-        | 'amd'
-        | 'ang'
-        | 'aud'
-        | 'awg'
-        | 'azn'
-        | 'bam'
-        | 'bbd'
-        | 'bdt'
-        | 'bgn'
-        | 'bif'
-        | 'bmd'
-        | 'bnd'
-        | 'bsd'
-        | 'bwp'
-        | 'byn'
-        | 'bzd'
-        | 'brl'
-        | 'cad'
-        | 'cdf'
-        | 'chf'
-        | 'cny'
-        | 'czk'
-        | 'dkk'
-        | 'dop'
-        | 'dzd'
-        | 'egp'
-        | 'etb'
-        | 'eur'
-        | 'fjd'
-        | 'gbp'
-        | 'gel'
-        | 'gip'
-        | 'gmd'
-        | 'gyd'
-        | 'hkd'
-        | 'hrk'
-        | 'htg'
-        | 'idr'
-        | 'ils'
-        | 'inr'
-        | 'isk'
-        | 'jmd'
-        | 'jpy'
-        | 'kes'
-        | 'kgs'
-        | 'khr'
-        | 'kmf'
-        | 'krw'
-        | 'kyd'
-        | 'kzt'
-        | 'lbp'
-        | 'lkr'
-        | 'lrd'
-        | 'lsl'
-        | 'mad'
-        | 'mdl'
-        | 'mga'
-        | 'mkd'
-        | 'mmk'
-        | 'mnt'
-        | 'mop'
-        | 'mro'
-        | 'mvr'
-        | 'mwk'
-        | 'mxn'
-        | 'myr'
-        | 'mzn'
-        | 'nad'
-        | 'ngn'
-        | 'nok'
-        | 'npr'
-        | 'nzd'
-        | 'pgk'
-        | 'php'
-        | 'pkr'
-        | 'pln'
-        | 'qar'
-        | 'ron'
-        | 'rsd'
-        | 'rub'
-        | 'rwf'
-        | 'sar'
-        | 'sbd'
-        | 'scr'
-        | 'sek'
-        | 'sgd'
-        | 'sle'
-        | 'sll'
-        | 'sos'
-        | 'szl'
-        | 'thb'
-        | 'tjs'
-        | 'top'
-        | 'try'
-        | 'ttd'
-        | 'tzs'
-        | 'uah'
-        | 'uzs'
-        | 'vnd'
-        | 'vuv'
-        | 'wst'
-        | 'xaf'
-        | 'xcd'
-        | 'yer'
-        | 'zar'
-        | 'zmw'
-        | 'clp'
-        | 'djf'
-        | 'gnf'
-        | 'ugx'
-        | 'pyg'
-        | 'xof'
-        | 'xpf';
-    }
+    /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
   }
 
   export interface PriceOverride {
@@ -2069,9 +4342,135 @@ export namespace SubscriptionUpdateParams {
     addonId?: string;
 
     /**
+     * The price amount
+     */
+    amount?: number;
+
+    /**
      * Whether this is a base charge override
      */
     baseCharge?: boolean;
+
+    /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
 
     /**
      * The corresponding custom currency id of the recurring credits price
@@ -2082,132 +4481,6 @@ export namespace SubscriptionUpdateParams {
      * Feature ID
      */
     featureId?: string;
-
-    price?: PriceOverride.Price;
-  }
-
-  export namespace PriceOverride {
-    export interface Price {
-      amount: number;
-
-      currency?:
-        | 'usd'
-        | 'aed'
-        | 'all'
-        | 'amd'
-        | 'ang'
-        | 'aud'
-        | 'awg'
-        | 'azn'
-        | 'bam'
-        | 'bbd'
-        | 'bdt'
-        | 'bgn'
-        | 'bif'
-        | 'bmd'
-        | 'bnd'
-        | 'bsd'
-        | 'bwp'
-        | 'byn'
-        | 'bzd'
-        | 'brl'
-        | 'cad'
-        | 'cdf'
-        | 'chf'
-        | 'cny'
-        | 'czk'
-        | 'dkk'
-        | 'dop'
-        | 'dzd'
-        | 'egp'
-        | 'etb'
-        | 'eur'
-        | 'fjd'
-        | 'gbp'
-        | 'gel'
-        | 'gip'
-        | 'gmd'
-        | 'gyd'
-        | 'hkd'
-        | 'hrk'
-        | 'htg'
-        | 'idr'
-        | 'ils'
-        | 'inr'
-        | 'isk'
-        | 'jmd'
-        | 'jpy'
-        | 'kes'
-        | 'kgs'
-        | 'khr'
-        | 'kmf'
-        | 'krw'
-        | 'kyd'
-        | 'kzt'
-        | 'lbp'
-        | 'lkr'
-        | 'lrd'
-        | 'lsl'
-        | 'mad'
-        | 'mdl'
-        | 'mga'
-        | 'mkd'
-        | 'mmk'
-        | 'mnt'
-        | 'mop'
-        | 'mro'
-        | 'mvr'
-        | 'mwk'
-        | 'mxn'
-        | 'myr'
-        | 'mzn'
-        | 'nad'
-        | 'ngn'
-        | 'nok'
-        | 'npr'
-        | 'nzd'
-        | 'pgk'
-        | 'php'
-        | 'pkr'
-        | 'pln'
-        | 'qar'
-        | 'ron'
-        | 'rsd'
-        | 'rub'
-        | 'rwf'
-        | 'sar'
-        | 'sbd'
-        | 'scr'
-        | 'sek'
-        | 'sgd'
-        | 'sle'
-        | 'sll'
-        | 'sos'
-        | 'szl'
-        | 'thb'
-        | 'tjs'
-        | 'top'
-        | 'try'
-        | 'ttd'
-        | 'tzs'
-        | 'uah'
-        | 'uzs'
-        | 'vnd'
-        | 'vuv'
-        | 'wst'
-        | 'xaf'
-        | 'xcd'
-        | 'yer'
-        | 'zar'
-        | 'zmw'
-        | 'clp'
-        | 'djf'
-        | 'gnf'
-        | 'ugx'
-        | 'pyg'
-        | 'xof'
-        | 'xpf';
-    }
   }
 
   export interface SubscriptionEntitlement {
@@ -2967,6 +5240,9 @@ export interface SubscriptionProvisionParams {
    */
   metadata?: { [key: string]: string };
 
+  /**
+   * Minimum spend amount
+   */
   minimumSpend?: SubscriptionProvisionParams.MinimumSpend | null;
 
   /**
@@ -3389,149 +5665,135 @@ export namespace SubscriptionProvisionParams {
     referenceId?: string | null;
   }
 
+  /**
+   * Minimum spend amount
+   */
   export interface MinimumSpend {
     /**
-     * Minimum spend amount
+     * The price amount
      */
-    minimum?: MinimumSpend.Minimum | null;
-  }
+    amount?: number;
 
-  export namespace MinimumSpend {
     /**
-     * Minimum spend amount
+     * The price currency
      */
-    export interface Minimum {
-      /**
-       * The price amount
-       */
-      amount?: number;
-
-      /**
-       * The billing country code of the price
-       */
-      billingCountryCode?: string | null;
-
-      /**
-       * The price currency
-       */
-      currency?:
-        | 'usd'
-        | 'aed'
-        | 'all'
-        | 'amd'
-        | 'ang'
-        | 'aud'
-        | 'awg'
-        | 'azn'
-        | 'bam'
-        | 'bbd'
-        | 'bdt'
-        | 'bgn'
-        | 'bif'
-        | 'bmd'
-        | 'bnd'
-        | 'bsd'
-        | 'bwp'
-        | 'byn'
-        | 'bzd'
-        | 'brl'
-        | 'cad'
-        | 'cdf'
-        | 'chf'
-        | 'cny'
-        | 'czk'
-        | 'dkk'
-        | 'dop'
-        | 'dzd'
-        | 'egp'
-        | 'etb'
-        | 'eur'
-        | 'fjd'
-        | 'gbp'
-        | 'gel'
-        | 'gip'
-        | 'gmd'
-        | 'gyd'
-        | 'hkd'
-        | 'hrk'
-        | 'htg'
-        | 'idr'
-        | 'ils'
-        | 'inr'
-        | 'isk'
-        | 'jmd'
-        | 'jpy'
-        | 'kes'
-        | 'kgs'
-        | 'khr'
-        | 'kmf'
-        | 'krw'
-        | 'kyd'
-        | 'kzt'
-        | 'lbp'
-        | 'lkr'
-        | 'lrd'
-        | 'lsl'
-        | 'mad'
-        | 'mdl'
-        | 'mga'
-        | 'mkd'
-        | 'mmk'
-        | 'mnt'
-        | 'mop'
-        | 'mro'
-        | 'mvr'
-        | 'mwk'
-        | 'mxn'
-        | 'myr'
-        | 'mzn'
-        | 'nad'
-        | 'ngn'
-        | 'nok'
-        | 'npr'
-        | 'nzd'
-        | 'pgk'
-        | 'php'
-        | 'pkr'
-        | 'pln'
-        | 'qar'
-        | 'ron'
-        | 'rsd'
-        | 'rub'
-        | 'rwf'
-        | 'sar'
-        | 'sbd'
-        | 'scr'
-        | 'sek'
-        | 'sgd'
-        | 'sle'
-        | 'sll'
-        | 'sos'
-        | 'szl'
-        | 'thb'
-        | 'tjs'
-        | 'top'
-        | 'try'
-        | 'ttd'
-        | 'tzs'
-        | 'uah'
-        | 'uzs'
-        | 'vnd'
-        | 'vuv'
-        | 'wst'
-        | 'xaf'
-        | 'xcd'
-        | 'yer'
-        | 'zar'
-        | 'zmw'
-        | 'clp'
-        | 'djf'
-        | 'gnf'
-        | 'ugx'
-        | 'pyg'
-        | 'xof'
-        | 'xpf';
-    }
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
   }
 
   export interface PriceOverride {
@@ -3541,9 +5803,19 @@ export namespace SubscriptionProvisionParams {
     addonId?: string | null;
 
     /**
+     * The price amount
+     */
+    amount?: number;
+
+    /**
      * Whether this is a base charge override
      */
     baseCharge?: boolean;
+
+    /**
+     * The billing country code of the price
+     */
+    billingCountryCode?: string;
 
     /**
      * Block size for pricing
@@ -3555,14 +5827,130 @@ export namespace SubscriptionProvisionParams {
     creditRate?: PriceOverride.CreditRate;
 
     /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
+
+    /**
      * Feature identifier for the price override
      */
     featureId?: string | null;
-
-    /**
-     * Override price amount
-     */
-    price?: PriceOverride.Price;
 
     /**
      * Pricing tiers configuration
@@ -3586,142 +5974,6 @@ export namespace SubscriptionProvisionParams {
        * A custom formula for calculating cost based on single event dimensions
        */
       costFormula?: string | null;
-    }
-
-    /**
-     * Override price amount
-     */
-    export interface Price {
-      /**
-       * The price amount
-       */
-      amount?: number;
-
-      /**
-       * The billing country code of the price
-       */
-      billingCountryCode?: string | null;
-
-      /**
-       * The price currency
-       */
-      currency?:
-        | 'usd'
-        | 'aed'
-        | 'all'
-        | 'amd'
-        | 'ang'
-        | 'aud'
-        | 'awg'
-        | 'azn'
-        | 'bam'
-        | 'bbd'
-        | 'bdt'
-        | 'bgn'
-        | 'bif'
-        | 'bmd'
-        | 'bnd'
-        | 'bsd'
-        | 'bwp'
-        | 'byn'
-        | 'bzd'
-        | 'brl'
-        | 'cad'
-        | 'cdf'
-        | 'chf'
-        | 'cny'
-        | 'czk'
-        | 'dkk'
-        | 'dop'
-        | 'dzd'
-        | 'egp'
-        | 'etb'
-        | 'eur'
-        | 'fjd'
-        | 'gbp'
-        | 'gel'
-        | 'gip'
-        | 'gmd'
-        | 'gyd'
-        | 'hkd'
-        | 'hrk'
-        | 'htg'
-        | 'idr'
-        | 'ils'
-        | 'inr'
-        | 'isk'
-        | 'jmd'
-        | 'jpy'
-        | 'kes'
-        | 'kgs'
-        | 'khr'
-        | 'kmf'
-        | 'krw'
-        | 'kyd'
-        | 'kzt'
-        | 'lbp'
-        | 'lkr'
-        | 'lrd'
-        | 'lsl'
-        | 'mad'
-        | 'mdl'
-        | 'mga'
-        | 'mkd'
-        | 'mmk'
-        | 'mnt'
-        | 'mop'
-        | 'mro'
-        | 'mvr'
-        | 'mwk'
-        | 'mxn'
-        | 'myr'
-        | 'mzn'
-        | 'nad'
-        | 'ngn'
-        | 'nok'
-        | 'npr'
-        | 'nzd'
-        | 'pgk'
-        | 'php'
-        | 'pkr'
-        | 'pln'
-        | 'qar'
-        | 'ron'
-        | 'rsd'
-        | 'rub'
-        | 'rwf'
-        | 'sar'
-        | 'sbd'
-        | 'scr'
-        | 'sek'
-        | 'sgd'
-        | 'sle'
-        | 'sll'
-        | 'sos'
-        | 'szl'
-        | 'thb'
-        | 'tjs'
-        | 'top'
-        | 'try'
-        | 'ttd'
-        | 'tzs'
-        | 'uah'
-        | 'uzs'
-        | 'vnd'
-        | 'vuv'
-        | 'wst'
-        | 'xaf'
-        | 'xcd'
-        | 'yer'
-        | 'zar'
-        | 'zmw'
-        | 'clp'
-        | 'djf'
-        | 'gnf'
-        | 'ugx'
-        | 'pyg'
-        | 'xof'
-        | 'xpf';
     }
 
     export interface Tier {
@@ -3749,17 +6001,12 @@ export namespace SubscriptionProvisionParams {
         /**
          * The price amount
          */
-        amount?: number;
-
-        /**
-         * The billing country code of the price
-         */
-        billingCountryCode?: string | null;
+        amount: number;
 
         /**
          * The price currency
          */
-        currency?:
+        currency:
           | 'usd'
           | 'aed'
           | 'all'
@@ -3885,17 +6132,12 @@ export namespace SubscriptionProvisionParams {
         /**
          * The price amount
          */
-        amount?: number;
-
-        /**
-         * The billing country code of the price
-         */
-        billingCountryCode?: string | null;
+        amount: number;
 
         /**
          * The price currency
          */
-        currency?:
+        currency:
           | 'usd'
           | 'aed'
           | 'all'
@@ -4055,7 +6297,7 @@ export interface SubscriptionTransferParams {
   destinationResourceId: string;
 }
 
-Subscriptions.FutureUpdate = FutureUpdate;
+Subscriptions.FutureUpdate = FutureUpdateAPIFutureUpdate;
 Subscriptions.Usage = Usage;
 Subscriptions.Invoice = Invoice;
 
@@ -4078,7 +6320,7 @@ export declare namespace Subscriptions {
     type SubscriptionTransferParams as SubscriptionTransferParams,
   };
 
-  export { FutureUpdate as FutureUpdate, type CancelSubscription as CancelSubscription };
+  export { FutureUpdateAPIFutureUpdate as FutureUpdate, type CancelSubscription as CancelSubscription };
 
   export {
     Usage as Usage,
