@@ -16,6 +16,9 @@ import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../..
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Operations related to addons
+ */
 export class Addons extends APIResource {
   entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
 

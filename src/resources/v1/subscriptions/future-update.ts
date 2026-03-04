@@ -5,6 +5,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Operations related to subscriptions
+ */
 export class FutureUpdate extends APIResource {
   /**
    * Cancels a subscription update that is pending payment completion.

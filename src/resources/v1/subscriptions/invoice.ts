@@ -5,6 +5,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Operations related to subscriptions
+ */
 export class Invoice extends APIResource {
   /**
    * Marks the latest invoice of a subscription as paid in the billing provider. The

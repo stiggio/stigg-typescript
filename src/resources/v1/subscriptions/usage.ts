@@ -5,6 +5,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Operations related to subscriptions
+ */
 export class Usage extends APIResource {
   /**
    * Immediately charges usage for a subscription via the billing integration.

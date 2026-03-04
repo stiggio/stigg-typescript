@@ -4,6 +4,9 @@ import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * Operations related to usage & metering
+ */
 export class Events extends APIResource {
   /**
    * Reports raw usage events for event-based metering. Events are ingested

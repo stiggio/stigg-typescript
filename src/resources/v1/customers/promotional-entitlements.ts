@@ -6,6 +6,9 @@ import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../..
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Operations related to promotional entitlements
+ */
 export class PromotionalEntitlements extends APIResource {
   /**
    * Grants promotional entitlements to a customer, providing feature access outside

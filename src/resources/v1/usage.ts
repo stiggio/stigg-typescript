@@ -5,6 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Operations related to usage & metering
+ */
 export class Usage extends APIResource {
   /**
    * Retrieves historical usage data for a customer's metered feature over time.
