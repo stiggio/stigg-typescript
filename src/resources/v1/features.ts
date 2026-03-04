@@ -6,6 +6,9 @@ import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../co
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Operations related to features
+ */
 export class Features extends APIResource {
   /**
    * Archives a feature, preventing it from being used in new entitlements.

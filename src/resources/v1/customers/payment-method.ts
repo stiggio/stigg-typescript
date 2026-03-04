@@ -6,6 +6,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Operations related to customers
+ */
 export class PaymentMethod extends APIResource {
   /**
    * Attaches a payment method to a customer for billing. Required for paid

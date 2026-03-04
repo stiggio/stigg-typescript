@@ -6,6 +6,9 @@ import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../co
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Operations related to products
+ */
 export class Products extends APIResource {
   /**
    * Archives a product, preventing new subscriptions. All plans and addons are
