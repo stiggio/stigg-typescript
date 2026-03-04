@@ -6,6 +6,9 @@ import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../co
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Operations related to coupons
+ */
 export class Coupons extends APIResource {
   /**
    * Creates a new discount coupon with percentage or fixed amount off, applicable to
