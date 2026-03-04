@@ -309,19 +309,15 @@ describe('resource subscriptions', () => {
         referenceId: 'referenceId',
       },
       metadata: { foo: 'string' },
-      minimumSpend: {
-        minimum: {
-          amount: 0,
-          billingCountryCode: 'billingCountryCode',
-          currency: 'usd',
-        },
-      },
+      minimumSpend: { amount: 0, currency: 'usd' },
       payingCustomerId: 'payingCustomerId',
       paymentCollectionMethod: 'CHARGE',
       priceOverrides: [
         {
           addonId: 'addonId',
+          amount: 0,
           baseCharge: true,
+          billingCountryCode: 'billingCountryCode',
           blockSize: 0,
           creditGrantCadence: 'BEGINNING_OF_BILLING_PERIOD',
           creditRate: {
@@ -329,24 +325,12 @@ describe('resource subscriptions', () => {
             currencyId: 'currencyId',
             costFormula: 'costFormula',
           },
+          currency: 'usd',
           featureId: 'featureId',
-          price: {
-            amount: 0,
-            billingCountryCode: 'billingCountryCode',
-            currency: 'usd',
-          },
           tiers: [
             {
-              flatPrice: {
-                amount: 0,
-                billingCountryCode: 'billingCountryCode',
-                currency: 'usd',
-              },
-              unitPrice: {
-                amount: 0,
-                billingCountryCode: 'billingCountryCode',
-                currency: 'usd',
-              },
+              flatPrice: { amount: 0, currency: 'usd' },
+              unitPrice: { amount: 0, currency: 'usd' },
               upTo: 0,
             },
           ],
