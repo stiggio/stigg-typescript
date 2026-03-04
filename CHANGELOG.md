@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.15 (2026-03-04)
+
+Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
+
+### Features
+
+* **api:** api update ([5e75193](https://github.com/stiggio/stigg-typescript/commit/5e751935f08e6338a339aec76463b132f12d64d0))
+
+
+### Chores
+
+* **internal:** codegen related update ([b31c7ae](https://github.com/stiggio/stigg-typescript/commit/b31c7ae69c8aae6b82aa88c341b8b380befcaf87))
+* **mcp-server:** return access instructions for 404 without API key ([1a702bc](https://github.com/stiggio/stigg-typescript/commit/1a702bc643f28d1f0e235c9061feaffca0f0d1d4))
+
 ## 0.1.0-alpha.14 (2026-03-02)
 
 Full Changelog: [v0.1.0-alpha.13...v0.1.0-alpha.14](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.13...v0.1.0-alpha.14)
