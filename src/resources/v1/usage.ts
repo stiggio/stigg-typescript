@@ -223,6 +223,12 @@ export interface UsageHistoryParams {
   groupBy?: string;
 
   /**
+   * Query param: When true, includes usage data from the most recent cancelled or
+   * expired subscription
+   */
+  includeHistoricalUsage?: boolean;
+
+  /**
    * Query param: Resource id
    */
   resourceId?: string | null;
