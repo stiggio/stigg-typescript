@@ -1802,6 +1802,11 @@ export interface AddonUpdateParams {
    * Metadata associated with the entity
    */
   metadata?: { [key: string]: string };
+
+  /**
+   * The status of the package
+   */
+  status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 }
 
 export interface AddonListParams extends MyCursorIDPageParams {
