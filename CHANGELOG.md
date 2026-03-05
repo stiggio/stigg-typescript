@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.17 (2026-03-05)
+
+Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
+
+### Features
+
+* **api:** api update ([b0490cc](https://github.com/stiggio/stigg-typescript/commit/b0490ccd79bdc32712c560297b0bfea6fb22ffe2))
+
 ## 0.1.0-alpha.16 (2026-03-05)
 
 Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
