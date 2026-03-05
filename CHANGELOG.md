@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.16 (2026-03-05)
+
+Full Changelog: [v0.1.0-alpha.15...v0.1.0-alpha.16](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.15...v0.1.0-alpha.16)
+
+### Features
+
+* **api:** api update ([c2e4823](https://github.com/stiggio/stigg-typescript/commit/c2e4823a5b43606f12c04fb7f5f1500bfadd3db2))
+
+
+### Chores
+
+* **internal:** use x-stainless-mcp-client-envs header for MCP remote code tool calls ([4f6b4a3](https://github.com/stiggio/stigg-typescript/commit/4f6b4a37d60bf9f28358f5cb343714d32da393cb))
+
 ## 0.1.0-alpha.15 (2026-03-04)
 
 Full Changelog: [v0.1.0-alpha.14...v0.1.0-alpha.15](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.14...v0.1.0-alpha.15)
