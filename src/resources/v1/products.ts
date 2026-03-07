@@ -29,11 +29,11 @@ export class Products extends APIResource {
    * Duplicates an existing product, including its plans, addons, and configuration.
    */
   duplicateProduct(
-    pathID: string,
+    id: string,
     body: ProductDuplicateProductParams,
     options?: RequestOptions,
   ): APIPromise<Product> {
-    return this._client.post(path`/api/v1/products/${pathID}/duplicate`, { body, ...options });
+    return this._client.post(path`/api/v1/products/${id}/duplicate`, { body, ...options });
   }
 
   /**
@@ -286,7 +286,7 @@ export interface ProductDuplicateProductParams {
   /**
    * The unique identifier for the entity
    */
-  body_id: string;
+  id: string;
 
   /**
    * Description of the product
