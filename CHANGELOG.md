@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.0-alpha.18 (2026-03-08)
+
+Full Changelog: [v0.1.0-alpha.17...v0.1.0-alpha.18](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.17...v0.1.0-alpha.18)
+
+### Features
+
+* **api:** api update ([3f5925d](https://github.com/stiggio/stigg-typescript/commit/3f5925d74abf2d6896c156bfecafb3a096658821))
+
+
+### Bug Fixes
+
+* **client:** improve parameter names ([31bd6fb](https://github.com/stiggio/stigg-typescript/commit/31bd6fb8353e52a1e8b5ebdad724c4d54cd48b6b))
+* **client:** preserve URL params already embedded in path ([d461718](https://github.com/stiggio/stigg-typescript/commit/d461718125f93fc32ee7e67f68ff4967bf18fc83))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([3a6276c](https://github.com/stiggio/stigg-typescript/commit/3a6276cfc3aa550d33fc82e49b8f5a37f37a8c40))
+* **internal:** codegen related update ([5834b85](https://github.com/stiggio/stigg-typescript/commit/5834b85e24ded0fc29b49f27a3a765346a896f53))
+* **mcp-server:** improve instructions ([1c4d9ad](https://github.com/stiggio/stigg-typescript/commit/1c4d9ad1b255af8793effbc5908e5a64010ebda4))
+
 ## 0.1.0-alpha.17 (2026-03-05)
 
 Full Changelog: [v0.1.0-alpha.16...v0.1.0-alpha.17](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.16...v0.1.0-alpha.17)
