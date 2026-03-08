@@ -308,6 +308,25 @@ describe('resource subscriptions', () => {
         collectPhoneNumber: true,
         referenceId: 'referenceId',
       },
+      entitlements: [
+        {
+          credit: {
+            amount: 1,
+            cadence: 'MONTH',
+            currencyId: 'currencyId',
+          },
+          feature: {
+            featureId: 'featureId',
+            hasSoftLimit: true,
+            hasUnlimitedUsage: true,
+            monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+            resetPeriod: 'YEAR',
+            usageLimit: 0,
+            weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+            yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+          },
+        },
+      ],
       metadata: { foo: 'string' },
       minimumSpend: { amount: 0, currency: 'usd' },
       payingCustomerId: 'payingCustomerId',
@@ -340,13 +359,6 @@ describe('resource subscriptions', () => {
       salesforceId: 'salesforceId',
       scheduleStrategy: 'END_OF_BILLING_PERIOD',
       startDate: '2019-12-27T18:11:19.117Z',
-      subscriptionEntitlements: [
-        {
-          featureId: 'featureId',
-          usageLimit: 0,
-          isGranted: true,
-        },
-      ],
       trialOverrideConfiguration: {
         isTrial: true,
         trialEndBehavior: 'CONVERT_TO_PAID',

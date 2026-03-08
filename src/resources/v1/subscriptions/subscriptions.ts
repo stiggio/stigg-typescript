@@ -3900,6 +3900,8 @@ export interface SubscriptionUpdateParams {
 
   charges?: Array<SubscriptionUpdateParams.Charge>;
 
+  entitlements?: Array<SubscriptionUpdateParams.Entitlement>;
+
   /**
    * Additional metadata for the subscription
    */
@@ -3915,8 +3917,6 @@ export interface SubscriptionUpdateParams {
   promotionCode?: string;
 
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
-
-  subscriptionEntitlements?: Array<SubscriptionUpdateParams.SubscriptionEntitlement>;
 
   /**
    * Subscription trial end date
@@ -4205,6 +4205,128 @@ export namespace SubscriptionUpdateParams {
   }
 
   /**
+   * A single subscription entitlement. Provide exactly one of feature or credit.
+   */
+  export interface Entitlement {
+    /**
+     * Credit entitlement configuration
+     */
+    credit?: Entitlement.Credit;
+
+    /**
+     * Feature entitlement configuration
+     */
+    feature?: Entitlement.Feature;
+  }
+
+  export namespace Entitlement {
+    /**
+     * Credit entitlement configuration
+     */
+    export interface Credit {
+      /**
+       * Credit grant amount
+       */
+      amount: number;
+
+      /**
+       * Credit grant cadence (MONTH or YEAR)
+       */
+      cadence: 'MONTH' | 'YEAR';
+
+      /**
+       * The custom currency ID for the credit entitlement
+       */
+      currencyId: string;
+    }
+
+    /**
+     * Feature entitlement configuration
+     */
+    export interface Feature {
+      /**
+       * The feature ID to attach the entitlement to
+       */
+      featureId: string;
+
+      /**
+       * Whether the usage limit is a soft limit
+       */
+      hasSoftLimit?: boolean;
+
+      /**
+       * Whether usage is unlimited
+       */
+      hasUnlimitedUsage?: boolean;
+
+      /**
+       * Configuration for monthly reset period
+       */
+      monthlyResetPeriodConfiguration?: Feature.MonthlyResetPeriodConfiguration | null;
+
+      /**
+       * Period at which usage resets
+       */
+      resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
+
+      /**
+       * Maximum allowed usage for the feature
+       */
+      usageLimit?: number;
+
+      /**
+       * Configuration for weekly reset period
+       */
+      weeklyResetPeriodConfiguration?: Feature.WeeklyResetPeriodConfiguration | null;
+
+      /**
+       * Configuration for yearly reset period
+       */
+      yearlyResetPeriodConfiguration?: Feature.YearlyResetPeriodConfiguration | null;
+    }
+
+    export namespace Feature {
+      /**
+       * Configuration for monthly reset period
+       */
+      export interface MonthlyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart or StartOfTheMonth)
+         */
+        accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
+      }
+
+      /**
+       * Configuration for weekly reset period
+       */
+      export interface WeeklyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart or specific day)
+         */
+        accordingTo:
+          | 'SubscriptionStart'
+          | 'EverySunday'
+          | 'EveryMonday'
+          | 'EveryTuesday'
+          | 'EveryWednesday'
+          | 'EveryThursday'
+          | 'EveryFriday'
+          | 'EverySaturday';
+      }
+
+      /**
+       * Configuration for yearly reset period
+       */
+      export interface YearlyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart)
+         */
+        accordingTo: 'SubscriptionStart';
+      }
+    }
+  }
+
+  /**
    * Minimum spend amount
    */
   export interface MinimumSpend {
@@ -4481,48 +4603,6 @@ export namespace SubscriptionUpdateParams {
      * Feature ID
      */
     featureId?: string;
-  }
-
-  export interface SubscriptionEntitlement {
-    id?: string;
-
-    featureId?: string;
-
-    hasSoftLimit?: boolean;
-
-    hasUnlimitedUsage?: boolean;
-
-    monthlyResetPeriodConfiguration?: SubscriptionEntitlement.MonthlyResetPeriodConfiguration;
-
-    resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
-
-    usageLimit?: number;
-
-    weeklyResetPeriodConfiguration?: SubscriptionEntitlement.WeeklyResetPeriodConfiguration;
-
-    yearlyResetPeriodConfiguration?: SubscriptionEntitlement.YearlyResetPeriodConfiguration;
-  }
-
-  export namespace SubscriptionEntitlement {
-    export interface MonthlyResetPeriodConfiguration {
-      accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
-    }
-
-    export interface WeeklyResetPeriodConfiguration {
-      accordingTo:
-        | 'SubscriptionStart'
-        | 'EverySunday'
-        | 'EveryMonday'
-        | 'EveryTuesday'
-        | 'EveryWednesday'
-        | 'EveryThursday'
-        | 'EveryFriday'
-        | 'EverySaturday';
-    }
-
-    export interface YearlyResetPeriodConfiguration {
-      accordingTo: 'SubscriptionStart';
-    }
   }
 }
 
@@ -5235,6 +5315,8 @@ export interface SubscriptionProvisionParams {
    */
   checkoutOptions?: SubscriptionProvisionParams.CheckoutOptions;
 
+  entitlements?: Array<SubscriptionProvisionParams.Entitlement>;
+
   /**
    * Additional metadata for the subscription
    */
@@ -5276,8 +5358,6 @@ export interface SubscriptionProvisionParams {
    * Subscription start date
    */
   startDate?: string;
-
-  subscriptionEntitlements?: Array<SubscriptionProvisionParams.SubscriptionEntitlement>;
 
   /**
    * Trial period override settings
@@ -5663,6 +5743,128 @@ export namespace SubscriptionProvisionParams {
      * Optional reference ID for the checkout session
      */
     referenceId?: string | null;
+  }
+
+  /**
+   * A single subscription entitlement. Provide exactly one of feature or credit.
+   */
+  export interface Entitlement {
+    /**
+     * Credit entitlement configuration
+     */
+    credit?: Entitlement.Credit;
+
+    /**
+     * Feature entitlement configuration
+     */
+    feature?: Entitlement.Feature;
+  }
+
+  export namespace Entitlement {
+    /**
+     * Credit entitlement configuration
+     */
+    export interface Credit {
+      /**
+       * Credit grant amount
+       */
+      amount: number;
+
+      /**
+       * Credit grant cadence (MONTH or YEAR)
+       */
+      cadence: 'MONTH' | 'YEAR';
+
+      /**
+       * The custom currency ID for the credit entitlement
+       */
+      currencyId: string;
+    }
+
+    /**
+     * Feature entitlement configuration
+     */
+    export interface Feature {
+      /**
+       * The feature ID to attach the entitlement to
+       */
+      featureId: string;
+
+      /**
+       * Whether the usage limit is a soft limit
+       */
+      hasSoftLimit?: boolean;
+
+      /**
+       * Whether usage is unlimited
+       */
+      hasUnlimitedUsage?: boolean;
+
+      /**
+       * Configuration for monthly reset period
+       */
+      monthlyResetPeriodConfiguration?: Feature.MonthlyResetPeriodConfiguration | null;
+
+      /**
+       * Period at which usage resets
+       */
+      resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
+
+      /**
+       * Maximum allowed usage for the feature
+       */
+      usageLimit?: number;
+
+      /**
+       * Configuration for weekly reset period
+       */
+      weeklyResetPeriodConfiguration?: Feature.WeeklyResetPeriodConfiguration | null;
+
+      /**
+       * Configuration for yearly reset period
+       */
+      yearlyResetPeriodConfiguration?: Feature.YearlyResetPeriodConfiguration | null;
+    }
+
+    export namespace Feature {
+      /**
+       * Configuration for monthly reset period
+       */
+      export interface MonthlyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart or StartOfTheMonth)
+         */
+        accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
+      }
+
+      /**
+       * Configuration for weekly reset period
+       */
+      export interface WeeklyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart or specific day)
+         */
+        accordingTo:
+          | 'SubscriptionStart'
+          | 'EverySunday'
+          | 'EveryMonday'
+          | 'EveryTuesday'
+          | 'EveryWednesday'
+          | 'EveryThursday'
+          | 'EveryFriday'
+          | 'EverySaturday';
+      }
+
+      /**
+       * Configuration for yearly reset period
+       */
+      export interface YearlyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart)
+         */
+        accordingTo: 'SubscriptionStart';
+      }
+    }
   }
 
   /**
@@ -6256,17 +6458,6 @@ export namespace SubscriptionProvisionParams {
           | 'xpf';
       }
     }
-  }
-
-  export interface SubscriptionEntitlement {
-    /**
-     * Feature ID
-     */
-    featureId: string;
-
-    usageLimit: number;
-
-    isGranted?: boolean;
   }
 
   /**
