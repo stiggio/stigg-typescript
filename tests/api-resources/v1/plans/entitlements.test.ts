@@ -10,7 +10,9 @@ const client = new Stigg({
 describe('resource entitlements', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.v1.plans.entitlements.create('planId', { entitlements: [{}] });
+    const responsePromise = client.v1.plans.entitlements.create('planId', {
+      entitlements: [{ id: 'id', type: 'FEATURE' }],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,36 +27,23 @@ describe('resource entitlements', () => {
     const response = await client.v1.plans.entitlements.create('planId', {
       entitlements: [
         {
-          credit: {
-            amount: 1,
-            cadence: 'MONTH',
-            customCurrencyId: 'customCurrencyId',
-            behavior: 'Increment',
-            description: 'description',
-            displayNameOverride: 'displayNameOverride',
-            hiddenFromWidgets: ['PAYWALL'],
-            isCustom: true,
-            isGranted: true,
-            order: 0,
-          },
-          feature: {
-            featureId: 'featureId',
-            behavior: 'Increment',
-            description: 'description',
-            displayNameOverride: 'displayNameOverride',
-            enumValues: ['string'],
-            hasSoftLimit: true,
-            hasUnlimitedUsage: true,
-            hiddenFromWidgets: ['PAYWALL'],
-            isCustom: true,
-            isGranted: true,
-            monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
-            order: 0,
-            resetPeriod: 'YEAR',
-            usageLimit: 0,
-            weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
-            yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
-          },
+          id: 'id',
+          type: 'FEATURE',
+          behavior: 'Increment',
+          description: 'description',
+          displayNameOverride: 'displayNameOverride',
+          enumValues: ['string'],
+          hasSoftLimit: true,
+          hasUnlimitedUsage: true,
+          hiddenFromWidgets: ['PAYWALL'],
+          isCustom: true,
+          isGranted: true,
+          monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+          order: 0,
+          resetPeriod: 'YEAR',
+          usageLimit: 0,
+          weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+          yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
         },
       ],
     });
@@ -62,7 +51,7 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.v1.plans.entitlements.update('id', { planId: 'planId' });
+    const responsePromise = client.v1.plans.entitlements.update('id', { planId: 'planId', type: 'FEATURE' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,34 +65,22 @@ describe('resource entitlements', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.v1.plans.entitlements.update('id', {
       planId: 'planId',
-      credit: {
-        amount: 1,
-        behavior: 'Increment',
-        cadence: 'MONTH',
-        description: 'description',
-        displayNameOverride: 'displayNameOverride',
-        hiddenFromWidgets: ['PAYWALL'],
-        isCustom: true,
-        isGranted: true,
-        order: 0,
-      },
-      feature: {
-        behavior: 'Increment',
-        description: 'description',
-        displayNameOverride: 'displayNameOverride',
-        enumValues: ['string'],
-        hasSoftLimit: true,
-        hasUnlimitedUsage: true,
-        hiddenFromWidgets: ['PAYWALL'],
-        isCustom: true,
-        isGranted: true,
-        monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
-        order: 0,
-        resetPeriod: 'YEAR',
-        usageLimit: 0,
-        weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
-        yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
-      },
+      type: 'FEATURE',
+      behavior: 'Increment',
+      description: 'description',
+      displayNameOverride: 'displayNameOverride',
+      enumValues: ['string'],
+      hasSoftLimit: true,
+      hasUnlimitedUsage: true,
+      hiddenFromWidgets: ['PAYWALL'],
+      isCustom: true,
+      isGranted: true,
+      monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+      order: 0,
+      resetPeriod: 'YEAR',
+      usageLimit: 0,
+      weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+      yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
     });
   });
 
