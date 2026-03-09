@@ -116,11 +116,38 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/events.ts">EventReportResponse</a></code>
+- <code><a href="./src/resources/v1/events/events.ts">EventReportResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
+- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
+
+### Credits
+
+Types:
+
+- <code><a href="./src/resources/v1/events/credits/credits.ts">CreditGetAutoRechargeResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/credits.ts">CreditGetUsageResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/credits.ts">CreditListLedgerResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/credits/auto-recharge">client.v1.events.credits.<a href="./src/resources/v1/events/credits/credits.ts">getAutoRecharge</a>({ ...params }) -> CreditGetAutoRechargeResponse</code>
+- <code title="get /api/v1/credits/usage">client.v1.events.credits.<a href="./src/resources/v1/events/credits/credits.ts">getUsage</a>({ ...params }) -> CreditGetUsageResponse</code>
+- <code title="get /api/v1/credits/ledger">client.v1.events.credits.<a href="./src/resources/v1/events/credits/credits.ts">listLedger</a>({ ...params }) -> CreditListLedgerResponsesMyCursorIDPage</code>
+
+#### Grants
+
+Types:
+
+- <code><a href="./src/resources/v1/events/credits/grants.ts">CreditGrantResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/grants.ts">GrantListResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/credits/grants">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">create</a>({ ...params }) -> CreditGrantResponse</code>
+- <code title="get /api/v1/credits/grants">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">list</a>({ ...params }) -> GrantListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/credits/grants/{id}/void">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">void</a>(id) -> CreditGrantResponse</code>
 
 ## Features
 
