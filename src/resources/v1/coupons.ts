@@ -106,6 +106,11 @@ export namespace Coupon {
     durationInMonths: number | null;
 
     /**
+     * Metadata associated with the entity
+     */
+    metadata: { [key: string]: string } | null;
+
+    /**
      * Name of the coupon
      */
     name: string;
@@ -308,6 +313,11 @@ export interface CouponListResponse {
    * Duration of the coupon validity in months
    */
   durationInMonths: number | null;
+
+  /**
+   * Metadata associated with the entity
+   */
+  metadata: { [key: string]: string } | null;
 
   /**
    * Name of the coupon
