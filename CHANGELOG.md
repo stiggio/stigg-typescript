@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-alpha.19 (2026-03-09)
+
+Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)
+
+### Features
+
+* **api:** added credits resources ([9b440aa](https://github.com/stiggio/stigg-typescript/commit/9b440aa26682530f642eeb479b6c17287c5bcda6))
+* **api:** api update ([020ee9f](https://github.com/stiggio/stigg-typescript/commit/020ee9fce20574e4336dc5e2418074388fe677cf))
+* **api:** api update ([bc2afcc](https://github.com/stiggio/stigg-typescript/commit/bc2afccb14dc7c690d3f1e54e81a33998b6dddfd))
+* **api:** api update ([79b5b2d](https://github.com/stiggio/stigg-typescript/commit/79b5b2d3c6c2878eaaaeb81d7bfff9ae6ac105ca))
+* **api:** api update ([20d6f41](https://github.com/stiggio/stigg-typescript/commit/20d6f41fac5ada56fa55ce8291c5f42551126bd9))
+
 ## 0.1.0-alpha.18 (2026-03-08)
 
 Full Changelog: [v0.1.0-alpha.17...v0.1.0-alpha.18](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.17...v0.1.0-alpha.18)
