@@ -226,7 +226,7 @@ export interface UsageHistoryParams {
    * Query param: When true, includes usage data from the most recent cancelled or
    * expired subscription
    */
-  includeHistoricalUsage?: boolean;
+  includeInactiveSubscriptions?: boolean;
 
   /**
    * Query param: Resource id
