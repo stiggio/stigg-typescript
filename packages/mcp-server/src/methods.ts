@@ -215,6 +215,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/events',
   },
   {
+    clientCallName: 'client.v1.events.credits.getAutoRecharge',
+    fullyQualifiedName: 'v1.events.credits.getAutoRecharge',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/auto-recharge',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.getUsage',
+    fullyQualifiedName: 'v1.events.credits.getUsage',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/usage',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.listLedger',
+    fullyQualifiedName: 'v1.events.credits.listLedger',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/ledger',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.grants.create',
+    fullyQualifiedName: 'v1.events.credits.grants.create',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/grants',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.grants.list',
+    fullyQualifiedName: 'v1.events.credits.grants.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/grants',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.grants.void',
+    fullyQualifiedName: 'v1.events.credits.grants.void',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/grants/{id}/void',
+  },
+  {
     clientCallName: 'client.v1.features.archiveFeature',
     fullyQualifiedName: 'v1.features.archiveFeature',
     httpMethod: 'post',

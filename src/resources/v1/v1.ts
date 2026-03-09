@@ -11,8 +11,6 @@ import {
   CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
-import * as EventsAPI from './events';
-import { EventReportParams, EventReportResponse, Events } from './events';
 import * as FeaturesAPI from './features';
 import {
   Feature,
@@ -73,6 +71,8 @@ import {
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
+import * as EventsAPI from './events/events';
+import { EventReportParams, EventReportResponse, Events } from './events/events';
 import * as PlansAPI from './plans/plans';
 import {
   Plan,
