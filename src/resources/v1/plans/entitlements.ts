@@ -46,25 +46,20 @@ export class Entitlements extends APIResource {
  */
 export interface PlanEntitlement {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature entitlement response
    */
-  data: PlanEntitlement.Data;
+  data: PlanEntitlement.Feature | PlanEntitlement.Credit;
 }
 
 export namespace PlanEntitlement {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature entitlement response
    */
-  export interface Data {
+  export interface Feature {
     /**
      * Unique identifier of the entitlement
      */
     id: string;
-
-    /**
-     * Credit amount (for credit entitlements)
-     */
-    amount: number | null;
 
     /**
      * Entitlement behavior (Increment or Override)
@@ -72,19 +67,9 @@ export namespace PlanEntitlement {
     behavior: 'Increment' | 'Override';
 
     /**
-     * Credit grant cadence (for credit entitlements)
-     */
-    cadence: 'MONTH' | 'YEAR' | null;
-
-    /**
      * Timestamp of when the record was created
      */
     createdAt: string;
-
-    /**
-     * Custom currency ID (for credit entitlements)
-     */
-    customCurrencyId: string | null;
 
     /**
      * Optional description of the entitlement
@@ -100,11 +85,6 @@ export namespace PlanEntitlement {
      * Allowed enum values (for feature entitlements)
      */
     enumValues: Array<string> | null;
-
-    /**
-     * Feature ID (for feature entitlements)
-     */
-    featureId: string | null;
 
     /**
      * Whether the usage limit is a soft limit (for feature entitlements)
@@ -145,15 +125,15 @@ export namespace PlanEntitlement {
      * Reset period configuration (for feature entitlements)
      */
     resetPeriodConfiguration:
-      | Data.YearlyResetPeriodConfig
-      | Data.MonthlyResetPeriodConfig
-      | Data.WeeklyResetPeriodConfig
+      | Feature.YearlyResetPeriodConfig
+      | Feature.MonthlyResetPeriodConfig
+      | Feature.WeeklyResetPeriodConfig
       | null;
 
     /**
      * Entitlement type (FEATURE or CREDIT)
      */
-    type: 'FEATURE' | 'CREDIT';
+    type: 'FEATURE';
 
     /**
      * Timestamp of when the record was last updated
@@ -166,7 +146,7 @@ export namespace PlanEntitlement {
     usageLimit: number | null;
   }
 
-  export namespace Data {
+  export namespace Feature {
     /**
      * Yearly reset configuration
      */
@@ -204,6 +184,76 @@ export namespace PlanEntitlement {
         | 'EveryFriday'
         | 'EverySaturday';
     }
+  }
+
+  /**
+   * Credit entitlement response
+   */
+  export interface Credit {
+    /**
+     * Unique identifier of the entitlement
+     */
+    id: string;
+
+    /**
+     * Credit amount (for credit entitlements)
+     */
+    amount: number | null;
+
+    /**
+     * Entitlement behavior (Increment or Override)
+     */
+    behavior: 'Increment' | 'Override';
+
+    /**
+     * Credit grant cadence (for credit entitlements)
+     */
+    cadence: 'MONTH' | 'YEAR' | null;
+
+    /**
+     * Timestamp of when the record was created
+     */
+    createdAt: string;
+
+    /**
+     * Optional description of the entitlement
+     */
+    description: string | null;
+
+    /**
+     * Override display name for the entitlement
+     */
+    displayNameOverride: string | null;
+
+    /**
+     * Widget types where this entitlement is hidden
+     */
+    hiddenFromWidgets: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
+
+    /**
+     * Whether this is a custom entitlement
+     */
+    isCustom: boolean | null;
+
+    /**
+     * Whether the entitlement is granted
+     */
+    isGranted: boolean;
+
+    /**
+     * Display order of the entitlement
+     */
+    order: number | null;
+
+    /**
+     * Entitlement type (FEATURE or CREDIT)
+     */
+    type: 'CREDIT';
+
+    /**
+     * Timestamp of when the record was last updated
+     */
+    updatedAt: string;
   }
 }
 
@@ -211,23 +261,18 @@ export namespace PlanEntitlement {
  * Response object
  */
 export interface EntitlementCreateResponse {
-  data: Array<EntitlementCreateResponse.Data>;
+  data: Array<EntitlementCreateResponse.Feature | EntitlementCreateResponse.Credit>;
 }
 
 export namespace EntitlementCreateResponse {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature entitlement response
    */
-  export interface Data {
+  export interface Feature {
     /**
      * Unique identifier of the entitlement
      */
     id: string;
-
-    /**
-     * Credit amount (for credit entitlements)
-     */
-    amount: number | null;
 
     /**
      * Entitlement behavior (Increment or Override)
@@ -235,19 +280,9 @@ export namespace EntitlementCreateResponse {
     behavior: 'Increment' | 'Override';
 
     /**
-     * Credit grant cadence (for credit entitlements)
-     */
-    cadence: 'MONTH' | 'YEAR' | null;
-
-    /**
      * Timestamp of when the record was created
      */
     createdAt: string;
-
-    /**
-     * Custom currency ID (for credit entitlements)
-     */
-    customCurrencyId: string | null;
 
     /**
      * Optional description of the entitlement
@@ -263,11 +298,6 @@ export namespace EntitlementCreateResponse {
      * Allowed enum values (for feature entitlements)
      */
     enumValues: Array<string> | null;
-
-    /**
-     * Feature ID (for feature entitlements)
-     */
-    featureId: string | null;
 
     /**
      * Whether the usage limit is a soft limit (for feature entitlements)
@@ -308,15 +338,15 @@ export namespace EntitlementCreateResponse {
      * Reset period configuration (for feature entitlements)
      */
     resetPeriodConfiguration:
-      | Data.YearlyResetPeriodConfig
-      | Data.MonthlyResetPeriodConfig
-      | Data.WeeklyResetPeriodConfig
+      | Feature.YearlyResetPeriodConfig
+      | Feature.MonthlyResetPeriodConfig
+      | Feature.WeeklyResetPeriodConfig
       | null;
 
     /**
      * Entitlement type (FEATURE or CREDIT)
      */
-    type: 'FEATURE' | 'CREDIT';
+    type: 'FEATURE';
 
     /**
      * Timestamp of when the record was last updated
@@ -329,7 +359,7 @@ export namespace EntitlementCreateResponse {
     usageLimit: number | null;
   }
 
-  export namespace Data {
+  export namespace Feature {
     /**
      * Yearly reset configuration
      */
@@ -368,13 +398,83 @@ export namespace EntitlementCreateResponse {
         | 'EverySaturday';
     }
   }
+
+  /**
+   * Credit entitlement response
+   */
+  export interface Credit {
+    /**
+     * Unique identifier of the entitlement
+     */
+    id: string;
+
+    /**
+     * Credit amount (for credit entitlements)
+     */
+    amount: number | null;
+
+    /**
+     * Entitlement behavior (Increment or Override)
+     */
+    behavior: 'Increment' | 'Override';
+
+    /**
+     * Credit grant cadence (for credit entitlements)
+     */
+    cadence: 'MONTH' | 'YEAR' | null;
+
+    /**
+     * Timestamp of when the record was created
+     */
+    createdAt: string;
+
+    /**
+     * Optional description of the entitlement
+     */
+    description: string | null;
+
+    /**
+     * Override display name for the entitlement
+     */
+    displayNameOverride: string | null;
+
+    /**
+     * Widget types where this entitlement is hidden
+     */
+    hiddenFromWidgets: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
+
+    /**
+     * Whether this is a custom entitlement
+     */
+    isCustom: boolean | null;
+
+    /**
+     * Whether the entitlement is granted
+     */
+    isGranted: boolean;
+
+    /**
+     * Display order of the entitlement
+     */
+    order: number | null;
+
+    /**
+     * Entitlement type (FEATURE or CREDIT)
+     */
+    type: 'CREDIT';
+
+    /**
+     * Timestamp of when the record was last updated
+     */
+    updatedAt: string;
+  }
 }
 
 /**
  * Response list object
  */
 export interface EntitlementListResponse {
-  data: Array<EntitlementListResponse.Data>;
+  data: Array<EntitlementListResponse.Feature | EntitlementListResponse.Credit>;
 
   /**
    * Pagination metadata including cursors for navigating through results
@@ -384,18 +484,13 @@ export interface EntitlementListResponse {
 
 export namespace EntitlementListResponse {
   /**
-   * Feature or credit entitlement on a plan
+   * Feature entitlement response
    */
-  export interface Data {
+  export interface Feature {
     /**
      * Unique identifier of the entitlement
      */
     id: string;
-
-    /**
-     * Credit amount (for credit entitlements)
-     */
-    amount: number | null;
 
     /**
      * Entitlement behavior (Increment or Override)
@@ -403,19 +498,9 @@ export namespace EntitlementListResponse {
     behavior: 'Increment' | 'Override';
 
     /**
-     * Credit grant cadence (for credit entitlements)
-     */
-    cadence: 'MONTH' | 'YEAR' | null;
-
-    /**
      * Timestamp of when the record was created
      */
     createdAt: string;
-
-    /**
-     * Custom currency ID (for credit entitlements)
-     */
-    customCurrencyId: string | null;
 
     /**
      * Optional description of the entitlement
@@ -431,11 +516,6 @@ export namespace EntitlementListResponse {
      * Allowed enum values (for feature entitlements)
      */
     enumValues: Array<string> | null;
-
-    /**
-     * Feature ID (for feature entitlements)
-     */
-    featureId: string | null;
 
     /**
      * Whether the usage limit is a soft limit (for feature entitlements)
@@ -476,15 +556,15 @@ export namespace EntitlementListResponse {
      * Reset period configuration (for feature entitlements)
      */
     resetPeriodConfiguration:
-      | Data.YearlyResetPeriodConfig
-      | Data.MonthlyResetPeriodConfig
-      | Data.WeeklyResetPeriodConfig
+      | Feature.YearlyResetPeriodConfig
+      | Feature.MonthlyResetPeriodConfig
+      | Feature.WeeklyResetPeriodConfig
       | null;
 
     /**
      * Entitlement type (FEATURE or CREDIT)
      */
-    type: 'FEATURE' | 'CREDIT';
+    type: 'FEATURE';
 
     /**
      * Timestamp of when the record was last updated
@@ -497,7 +577,7 @@ export namespace EntitlementListResponse {
     usageLimit: number | null;
   }
 
-  export namespace Data {
+  export namespace Feature {
     /**
      * Yearly reset configuration
      */
@@ -535,6 +615,76 @@ export namespace EntitlementListResponse {
         | 'EveryFriday'
         | 'EverySaturday';
     }
+  }
+
+  /**
+   * Credit entitlement response
+   */
+  export interface Credit {
+    /**
+     * Unique identifier of the entitlement
+     */
+    id: string;
+
+    /**
+     * Credit amount (for credit entitlements)
+     */
+    amount: number | null;
+
+    /**
+     * Entitlement behavior (Increment or Override)
+     */
+    behavior: 'Increment' | 'Override';
+
+    /**
+     * Credit grant cadence (for credit entitlements)
+     */
+    cadence: 'MONTH' | 'YEAR' | null;
+
+    /**
+     * Timestamp of when the record was created
+     */
+    createdAt: string;
+
+    /**
+     * Optional description of the entitlement
+     */
+    description: string | null;
+
+    /**
+     * Override display name for the entitlement
+     */
+    displayNameOverride: string | null;
+
+    /**
+     * Widget types where this entitlement is hidden
+     */
+    hiddenFromWidgets: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
+
+    /**
+     * Whether this is a custom entitlement
+     */
+    isCustom: boolean | null;
+
+    /**
+     * Whether the entitlement is granted
+     */
+    isGranted: boolean;
+
+    /**
+     * Display order of the entitlement
+     */
+    order: number | null;
+
+    /**
+     * Entitlement type (FEATURE or CREDIT)
+     */
+    type: 'CREDIT';
+
+    /**
+     * Timestamp of when the record was last updated
+     */
+    updatedAt: string;
   }
 
   /**
@@ -558,280 +708,24 @@ export interface EntitlementCreateParams {
   /**
    * Entitlements to create
    */
-  entitlements: Array<EntitlementCreateParams.Entitlement>;
+  entitlements: Array<EntitlementCreateParams.Feature | EntitlementCreateParams.Credit>;
 }
 
 export namespace EntitlementCreateParams {
   /**
-   * A single entitlement to create. Provide exactly one of feature or credit.
-   */
-  export interface Entitlement {
-    /**
-     * Credit entitlement to create
-     */
-    credit?: Entitlement.Credit;
-
-    /**
-     * Feature entitlement to create
-     */
-    feature?: Entitlement.Feature;
-  }
-
-  export namespace Entitlement {
-    /**
-     * Credit entitlement to create
-     */
-    export interface Credit {
-      /**
-       * Credit grant amount
-       */
-      amount: number | null;
-
-      /**
-       * Credit grant cadence (MONTH or YEAR)
-       */
-      cadence: 'MONTH' | 'YEAR';
-
-      /**
-       * The custom currency ID for the credit entitlement
-       */
-      customCurrencyId: string;
-
-      /**
-       * Entitlement behavior (Increment or Override)
-       */
-      behavior?: 'Increment' | 'Override';
-
-      /**
-       * Description of the entitlement
-       */
-      description?: string;
-
-      /**
-       * Override display name for the entitlement
-       */
-      displayNameOverride?: string;
-
-      /**
-       * Widget types where this entitlement is hidden
-       */
-      hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
-
-      /**
-       * Whether this is a custom entitlement
-       */
-      isCustom?: boolean;
-
-      /**
-       * Whether the entitlement is granted
-       */
-      isGranted?: boolean;
-
-      /**
-       * Display order of the entitlement
-       */
-      order?: number;
-    }
-
-    /**
-     * Feature entitlement to create
-     */
-    export interface Feature {
-      /**
-       * The feature ID to attach the entitlement to
-       */
-      featureId: string;
-
-      /**
-       * Entitlement behavior (Increment or Override)
-       */
-      behavior?: 'Increment' | 'Override';
-
-      /**
-       * Description of the entitlement
-       */
-      description?: string;
-
-      /**
-       * Override display name for the entitlement
-       */
-      displayNameOverride?: string;
-
-      /**
-       * Allowed enum values for the feature entitlement
-       */
-      enumValues?: Array<string>;
-
-      /**
-       * Whether the usage limit is a soft limit
-       */
-      hasSoftLimit?: boolean;
-
-      /**
-       * Whether usage is unlimited
-       */
-      hasUnlimitedUsage?: boolean;
-
-      /**
-       * Widget types where this entitlement is hidden
-       */
-      hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
-
-      /**
-       * Whether this is a custom entitlement
-       */
-      isCustom?: boolean;
-
-      /**
-       * Whether the entitlement is granted
-       */
-      isGranted?: boolean;
-
-      /**
-       * Configuration for monthly reset period
-       */
-      monthlyResetPeriodConfiguration?: Feature.MonthlyResetPeriodConfiguration | null;
-
-      /**
-       * Display order of the entitlement
-       */
-      order?: number;
-
-      /**
-       * Period at which usage resets
-       */
-      resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
-
-      /**
-       * Maximum allowed usage for the feature
-       */
-      usageLimit?: number | null;
-
-      /**
-       * Configuration for weekly reset period
-       */
-      weeklyResetPeriodConfiguration?: Feature.WeeklyResetPeriodConfiguration | null;
-
-      /**
-       * Configuration for yearly reset period
-       */
-      yearlyResetPeriodConfiguration?: Feature.YearlyResetPeriodConfiguration | null;
-    }
-
-    export namespace Feature {
-      /**
-       * Configuration for monthly reset period
-       */
-      export interface MonthlyResetPeriodConfiguration {
-        /**
-         * Reset anchor (SubscriptionStart or StartOfTheMonth)
-         */
-        accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
-      }
-
-      /**
-       * Configuration for weekly reset period
-       */
-      export interface WeeklyResetPeriodConfiguration {
-        /**
-         * Reset anchor (SubscriptionStart or specific day)
-         */
-        accordingTo:
-          | 'SubscriptionStart'
-          | 'EverySunday'
-          | 'EveryMonday'
-          | 'EveryTuesday'
-          | 'EveryWednesday'
-          | 'EveryThursday'
-          | 'EveryFriday'
-          | 'EverySaturday';
-      }
-
-      /**
-       * Configuration for yearly reset period
-       */
-      export interface YearlyResetPeriodConfiguration {
-        /**
-         * Reset anchor (SubscriptionStart)
-         */
-        accordingTo: 'SubscriptionStart';
-      }
-    }
-  }
-}
-
-export interface EntitlementUpdateParams {
-  /**
-   * Path param: The plan ID
-   */
-  planId: string;
-
-  /**
-   * Body param: Credit entitlement fields to update
-   */
-  credit?: EntitlementUpdateParams.Credit;
-
-  /**
-   * Body param: Feature entitlement fields to update
-   */
-  feature?: EntitlementUpdateParams.Feature;
-}
-
-export namespace EntitlementUpdateParams {
-  /**
-   * Credit entitlement fields to update
-   */
-  export interface Credit {
-    /**
-     * Credit grant amount
-     */
-    amount?: number;
-
-    /**
-     * Entitlement behavior (Increment or Override)
-     */
-    behavior?: 'Increment' | 'Override';
-
-    /**
-     * Credit grant cadence (MONTH or YEAR)
-     */
-    cadence?: 'MONTH' | 'YEAR';
-
-    /**
-     * Description of the entitlement
-     */
-    description?: string;
-
-    /**
-     * Override display name for the entitlement
-     */
-    displayNameOverride?: string;
-
-    /**
-     * Widget types where this entitlement is hidden
-     */
-    hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
-
-    /**
-     * Whether this is a custom entitlement
-     */
-    isCustom?: boolean;
-
-    /**
-     * Whether the entitlement is granted
-     */
-    isGranted?: boolean;
-
-    /**
-     * Display order of the entitlement
-     */
-    order?: number;
-  }
-
-  /**
-   * Feature entitlement fields to update
+   * Request to create a feature entitlement
    */
   export interface Feature {
+    /**
+     * The feature ID to attach the entitlement to
+     */
+    id: string;
+
+    /**
+     * CreateFeatureEntitlementRequest
+     */
+    type: 'FEATURE';
+
     /**
      * Entitlement behavior (Increment or Override)
      */
@@ -946,6 +840,256 @@ export namespace EntitlementUpdateParams {
        */
       accordingTo: 'SubscriptionStart';
     }
+  }
+
+  /**
+   * Request to create a credit entitlement
+   */
+  export interface Credit {
+    /**
+     * The custom currency ID for the credit entitlement
+     */
+    id: string;
+
+    /**
+     * Credit grant amount
+     */
+    amount: number | null;
+
+    /**
+     * Credit grant cadence (MONTH or YEAR)
+     */
+    cadence: 'MONTH' | 'YEAR';
+
+    /**
+     * CreateCreditEntitlementRequest
+     */
+    type: 'CREDIT';
+
+    /**
+     * Entitlement behavior (Increment or Override)
+     */
+    behavior?: 'Increment' | 'Override';
+
+    /**
+     * Description of the entitlement
+     */
+    description?: string;
+
+    /**
+     * Override display name for the entitlement
+     */
+    displayNameOverride?: string;
+
+    /**
+     * Widget types where this entitlement is hidden
+     */
+    hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
+
+    /**
+     * Whether this is a custom entitlement
+     */
+    isCustom?: boolean;
+
+    /**
+     * Whether the entitlement is granted
+     */
+    isGranted?: boolean;
+
+    /**
+     * Display order of the entitlement
+     */
+    order?: number;
+  }
+}
+
+export type EntitlementUpdateParams =
+  | EntitlementUpdateParams.UpdateFeatureEntitlementRequest
+  | EntitlementUpdateParams.UpdateCreditEntitlementRequest;
+
+export declare namespace EntitlementUpdateParams {
+  export interface UpdateFeatureEntitlementRequest {
+    /**
+     * Path param: The plan ID
+     */
+    planId: string;
+
+    /**
+     * Body param: UpdateFeatureEntitlementRequest
+     */
+    type: 'FEATURE';
+
+    /**
+     * Body param: Entitlement behavior (Increment or Override)
+     */
+    behavior?: 'Increment' | 'Override';
+
+    /**
+     * Body param: Description of the entitlement
+     */
+    description?: string;
+
+    /**
+     * Body param: Override display name for the entitlement
+     */
+    displayNameOverride?: string;
+
+    /**
+     * Body param: Allowed enum values for the feature entitlement
+     */
+    enumValues?: Array<string>;
+
+    /**
+     * Body param: Whether the usage limit is a soft limit
+     */
+    hasSoftLimit?: boolean;
+
+    /**
+     * Body param: Whether usage is unlimited
+     */
+    hasUnlimitedUsage?: boolean;
+
+    /**
+     * Body param: Widget types where this entitlement is hidden
+     */
+    hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
+
+    /**
+     * Body param: Whether this is a custom entitlement
+     */
+    isCustom?: boolean;
+
+    /**
+     * Body param: Whether the entitlement is granted
+     */
+    isGranted?: boolean;
+
+    /**
+     * Body param: Configuration for monthly reset period
+     */
+    monthlyResetPeriodConfiguration?: UpdateFeatureEntitlementRequest.MonthlyResetPeriodConfiguration | null;
+
+    /**
+     * Body param: Display order of the entitlement
+     */
+    order?: number;
+
+    /**
+     * Body param: Period at which usage resets
+     */
+    resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
+
+    /**
+     * Body param: Maximum allowed usage for the feature
+     */
+    usageLimit?: number | null;
+
+    /**
+     * Body param: Configuration for weekly reset period
+     */
+    weeklyResetPeriodConfiguration?: UpdateFeatureEntitlementRequest.WeeklyResetPeriodConfiguration | null;
+
+    /**
+     * Body param: Configuration for yearly reset period
+     */
+    yearlyResetPeriodConfiguration?: UpdateFeatureEntitlementRequest.YearlyResetPeriodConfiguration | null;
+  }
+
+  export namespace UpdateFeatureEntitlementRequest {
+    /**
+     * Configuration for monthly reset period
+     */
+    export interface MonthlyResetPeriodConfiguration {
+      /**
+       * Reset anchor (SubscriptionStart or StartOfTheMonth)
+       */
+      accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
+    }
+
+    /**
+     * Configuration for weekly reset period
+     */
+    export interface WeeklyResetPeriodConfiguration {
+      /**
+       * Reset anchor (SubscriptionStart or specific day)
+       */
+      accordingTo:
+        | 'SubscriptionStart'
+        | 'EverySunday'
+        | 'EveryMonday'
+        | 'EveryTuesday'
+        | 'EveryWednesday'
+        | 'EveryThursday'
+        | 'EveryFriday'
+        | 'EverySaturday';
+    }
+
+    /**
+     * Configuration for yearly reset period
+     */
+    export interface YearlyResetPeriodConfiguration {
+      /**
+       * Reset anchor (SubscriptionStart)
+       */
+      accordingTo: 'SubscriptionStart';
+    }
+  }
+
+  export interface UpdateCreditEntitlementRequest {
+    /**
+     * Path param: The plan ID
+     */
+    planId: string;
+
+    /**
+     * Body param: UpdateCreditEntitlementRequest
+     */
+    type: 'CREDIT';
+
+    /**
+     * Body param: Credit grant amount
+     */
+    amount?: number;
+
+    /**
+     * Body param: Entitlement behavior (Increment or Override)
+     */
+    behavior?: 'Increment' | 'Override';
+
+    /**
+     * Body param: Credit grant cadence (MONTH or YEAR)
+     */
+    cadence?: 'MONTH' | 'YEAR';
+
+    /**
+     * Body param: Description of the entitlement
+     */
+    description?: string;
+
+    /**
+     * Body param: Override display name for the entitlement
+     */
+    displayNameOverride?: string;
+
+    /**
+     * Body param: Widget types where this entitlement is hidden
+     */
+    hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
+
+    /**
+     * Body param: Whether this is a custom entitlement
+     */
+    isCustom?: boolean;
+
+    /**
+     * Body param: Whether the entitlement is granted
+     */
+    isGranted?: boolean;
+
+    /**
+     * Body param: Display order of the entitlement
+     */
+    order?: number;
   }
 }
 
