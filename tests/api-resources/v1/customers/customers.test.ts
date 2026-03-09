@@ -159,6 +159,7 @@ describe('resource customers', () => {
   test.skip('provision: required and optional params', async () => {
     const response = await client.v1.customers.provision({
       id: 'id',
+      billingId: 'billingId',
       couponId: 'couponId',
       defaultPaymentMethod: {
         billingId: 'billingId',
