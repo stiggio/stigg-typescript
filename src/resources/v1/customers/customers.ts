@@ -140,6 +140,11 @@ export namespace CustomerResponse {
     updatedAt: string;
 
     /**
+     * The unique identifier for the entity in the billing provider
+     */
+    billingId?: string | null;
+
+    /**
      * Customer level coupon
      */
     couponId?: string | null;
@@ -256,6 +261,11 @@ export interface CustomerListResponse {
    * Timestamp of when the record was last updated
    */
   updatedAt: string;
+
+  /**
+   * The unique identifier for the entity in the billing provider
+   */
+  billingId?: string | null;
 
   /**
    * Customer level coupon
@@ -393,6 +403,11 @@ export interface CustomerListResourcesResponse {
 }
 
 export interface CustomerUpdateParams {
+  /**
+   * The unique identifier for the entity in the billing provider
+   */
+  billingId?: string | null;
+
   /**
    * Customer level coupon
    */
@@ -543,6 +558,11 @@ export interface CustomerProvisionParams {
    * Customer slug
    */
   id: string;
+
+  /**
+   * The unique identifier for the entity in the billing provider
+   */
+  billingId?: string | null;
 
   /**
    * Customer level coupon
