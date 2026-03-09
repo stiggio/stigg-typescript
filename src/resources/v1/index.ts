@@ -38,7 +38,7 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events';
+export { Events, type EventReportResponse, type EventReportParams } from './events/index';
 export {
   Features,
   type Feature,
