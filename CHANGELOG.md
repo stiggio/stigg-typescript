@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.20 (2026-03-10)
+
+Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)
+
+### Chores
+
+* **internal:** update dependencies to address dependabot vulnerabilities ([93f2013](https://github.com/stiggio/stigg-typescript/commit/93f20138cceb8b8dd266b76c0d0b834be8e924e1))
+
 ## 0.1.0-alpha.19 (2026-03-09)
 
 Full Changelog: [v0.1.0-alpha.18...v0.1.0-alpha.19](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.18...v0.1.0-alpha.19)
