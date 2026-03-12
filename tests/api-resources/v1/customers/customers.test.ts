@@ -107,11 +107,14 @@ describe('resource customers', () => {
           id: 'id',
           email: 'dev@stainless.com',
           name: 'name',
+          billingId: 'billingId',
           metadata: { foo: 'string' },
           paymentMethodId: 'paymentMethodId',
+          salesforceId: 'salesforceId',
           updatedAt: '2019-12-27T18:11:19.117Z',
         },
       ],
+      integrationId: 'integrationId',
     });
   });
 
