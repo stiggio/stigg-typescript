@@ -515,6 +515,11 @@ export interface CustomerImportParams {
    * List of customer objects to import
    */
   customers: Array<CustomerImportParams.Customer>;
+
+  /**
+   * Integration details
+   */
+  integrationId?: string;
 }
 
 export namespace CustomerImportParams {
@@ -535,6 +540,11 @@ export namespace CustomerImportParams {
     name: string | null;
 
     /**
+     * Id in the billing provider
+     */
+    billingId?: string;
+
+    /**
      * Additional metadata
      */
     metadata?: { [key: string]: string };
@@ -543,6 +553,11 @@ export namespace CustomerImportParams {
      * Billing provider payment method id
      */
     paymentMethodId?: string;
+
+    /**
+     * The unique identifier for the customer in Salesforce integration
+     */
+    salesforceId?: string;
 
     /**
      * Timestamp of when the record was last updated
