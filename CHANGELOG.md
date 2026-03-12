@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.21 (2026-03-12)
+
+Full Changelog: [v0.1.0-alpha.20...v0.1.0-alpha.21](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.20...v0.1.0-alpha.21)
+
+### Features
+
+* **api:** api update ([3ae27b8](https://github.com/stiggio/stigg-typescript/commit/3ae27b8ac9550be5498b9bd687564a9c7e124b37))
+
+
+### Chores
+
+* **internal:** bump @modelcontextprotocol/sdk, @hono/node-server, and minimatch ([75580ea](https://github.com/stiggio/stigg-typescript/commit/75580ea84f0b39a6c3e87870ef61d895d131023c))
+
 ## 0.1.0-alpha.20 (2026-03-10)
 
 Full Changelog: [v0.1.0-alpha.19...v0.1.0-alpha.20](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.19...v0.1.0-alpha.20)
