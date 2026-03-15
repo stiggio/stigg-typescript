@@ -613,7 +613,7 @@ export namespace GrantCreateParams {
     amount: number;
 
     /**
-     * The price currency
+     * ISO 4217 currency code
      */
     currency:
       | 'usd'

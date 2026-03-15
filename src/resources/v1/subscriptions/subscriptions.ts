@@ -898,7 +898,7 @@ export namespace Subscription {
           amount: number;
 
           /**
-           * The price currency
+           * ISO 4217 currency code
            */
           currency:
             | 'usd'
@@ -1029,7 +1029,7 @@ export namespace Subscription {
           amount: number;
 
           /**
-           * The price currency
+           * ISO 4217 currency code
            */
           currency:
             | 'usd'
@@ -1954,7 +1954,7 @@ export namespace SubscriptionListResponse {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
@@ -2085,7 +2085,7 @@ export namespace SubscriptionListResponse {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
@@ -3601,7 +3601,7 @@ export namespace SubscriptionProvisionResponse {
             amount: number;
 
             /**
-             * The price currency
+             * ISO 4217 currency code
              */
             currency:
               | 'usd'
@@ -3732,7 +3732,7 @@ export namespace SubscriptionProvisionResponse {
             amount: number;
 
             /**
-             * The price currency
+             * ISO 4217 currency code
              */
             currency:
               | 'usd'
@@ -3983,7 +3983,7 @@ export namespace SubscriptionUpdateParams {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
@@ -4976,7 +4976,7 @@ export namespace SubscriptionPreviewParams {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
@@ -5455,7 +5455,7 @@ export namespace SubscriptionProvisionParams {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
@@ -6192,7 +6192,7 @@ export namespace SubscriptionProvisionParams {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
@@ -6323,7 +6323,7 @@ export namespace SubscriptionProvisionParams {
         amount: number;
 
         /**
-         * The price currency
+         * ISO 4217 currency code
          */
         currency:
           | 'usd'
