@@ -152,7 +152,7 @@ export namespace Coupon {
       amount: number;
 
       /**
-       * The price currency
+       * ISO 4217 currency code
        */
       currency:
         | 'usd'
@@ -361,7 +361,7 @@ export namespace CouponListResponse {
     amount: number;
 
     /**
-     * The price currency
+     * ISO 4217 currency code
      */
     currency:
       | 'usd'
@@ -531,7 +531,7 @@ export namespace CouponCreateParams {
     amount: number;
 
     /**
-     * The price currency
+     * ISO 4217 currency code
      */
     currency:
       | 'usd'
