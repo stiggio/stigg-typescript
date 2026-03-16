@@ -22,7 +22,7 @@ describe('resource products', () => {
 
   // Mock server tests are disabled
   test.skip('createProduct: only required params', async () => {
-    const responsePromise = client.v1.products.createProduct({ id: 'id' });
+    const responsePromise = client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,8 +36,8 @@ describe('resource products', () => {
   test.skip('createProduct: required and optional params', async () => {
     const response = await client.v1.products.createProduct({
       id: 'id',
-      description: 'description',
       displayName: 'displayName',
+      description: 'description',
       metadata: { foo: 'string' },
       multipleSubscriptions: true,
     });
