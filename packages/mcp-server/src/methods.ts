@@ -335,12 +335,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/addons/{id}/draft',
   },
   {
-    clientCallName: 'client.v1.addons.setPricing',
-    fullyQualifiedName: 'v1.addons.setPricing',
-    httpMethod: 'put',
-    httpPath: '/api/v1/addons/{id}/charges',
-  },
-  {
     clientCallName: 'client.v1.addons.entitlements.create',
     fullyQualifiedName: 'v1.addons.entitlements.create',
     httpMethod: 'post',
@@ -411,12 +405,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.plans.removeDraft',
     httpMethod: 'delete',
     httpPath: '/api/v1/plans/{id}/draft',
-  },
-  {
-    clientCallName: 'client.v1.plans.setPricing',
-    fullyQualifiedName: 'v1.plans.setPricing',
-    httpMethod: 'put',
-    httpPath: '/api/v1/plans/{id}/charges',
   },
   {
     clientCallName: 'client.v1.plans.entitlements.create',
