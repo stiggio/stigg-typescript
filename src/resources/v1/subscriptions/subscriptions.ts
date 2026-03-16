@@ -3945,6 +3945,9 @@ export namespace SubscriptionUpdateParams {
 
     configuration?: AppliedCoupon.Configuration;
 
+    /**
+     * Stigg coupon ID
+     */
     couponId?: string;
 
     discount?: AppliedCoupon.Discount;

@@ -269,7 +269,7 @@ export namespace CustomerResponse {
     /**
      * Customer level coupon
      */
-    couponId?: string | null;
+    couponId?: (string & {}) | '' | null;
 
     /**
      * The default payment method details
@@ -851,7 +851,7 @@ export interface CustomerListResponse {
   /**
    * Customer level coupon
    */
-  couponId?: string | null;
+  couponId?: (string & {}) | '' | null;
 
   /**
    * The default payment method details
@@ -1451,7 +1451,7 @@ export interface CustomerUpdateParams {
   /**
    * Customer level coupon
    */
-  couponId?: string | null;
+  couponId?: (string & {}) | '' | null;
 
   /**
    * The email of the customer
@@ -2081,7 +2081,7 @@ export interface CustomerProvisionParams {
   /**
    * Customer level coupon
    */
-  couponId?: string | null;
+  couponId?: (string & {}) | '' | null;
 
   /**
    * The default payment method details
