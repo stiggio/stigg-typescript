@@ -50,11 +50,8 @@ import {
   AddonPublishParams,
   AddonPublishResponse,
   AddonRemoveDraftResponse,
-  AddonSetPricingParams,
   AddonUpdateParams,
   Addons,
-  SetPackagePricing,
-  SetPackagePricingResponse,
 } from './addons/addons';
 import * as CustomersAPI from './customers/customers';
 import {
@@ -83,7 +80,6 @@ import {
   PlanPublishParams,
   PlanPublishResponse,
   PlanRemoveDraftResponse,
-  PlanSetPricingParams,
   PlanUpdateParams,
   Plans,
 } from './plans/plans';
@@ -193,8 +189,6 @@ export declare namespace V1 {
   export {
     Addons as Addons,
     type Addon as Addon,
-    type SetPackagePricing as SetPackagePricing,
-    type SetPackagePricingResponse as SetPackagePricingResponse,
     type AddonListResponse as AddonListResponse,
     type AddonPublishResponse as AddonPublishResponse,
     type AddonRemoveDraftResponse as AddonRemoveDraftResponse,
@@ -203,7 +197,6 @@ export declare namespace V1 {
     type AddonUpdateParams as AddonUpdateParams,
     type AddonListParams as AddonListParams,
     type AddonPublishParams as AddonPublishParams,
-    type AddonSetPricingParams as AddonSetPricingParams,
   };
 
   export {
@@ -217,7 +210,6 @@ export declare namespace V1 {
     type PlanUpdateParams as PlanUpdateParams,
     type PlanListParams as PlanListParams,
     type PlanPublishParams as PlanPublishParams,
-    type PlanSetPricingParams as PlanSetPricingParams,
   };
 
   export {

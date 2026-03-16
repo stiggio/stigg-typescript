@@ -3,8 +3,6 @@
 export {
   Addons,
   type Addon,
-  type SetPackagePricing,
-  type SetPackagePricingResponse,
   type AddonListResponse,
   type AddonPublishResponse,
   type AddonRemoveDraftResponse,
@@ -12,7 +10,6 @@ export {
   type AddonUpdateParams,
   type AddonListParams,
   type AddonPublishParams,
-  type AddonSetPricingParams,
   type AddonListResponsesMyCursorIDPage,
 } from './addons/index';
 export {
@@ -58,7 +55,6 @@ export {
   type PlanUpdateParams,
   type PlanListParams,
   type PlanPublishParams,
-  type PlanSetPricingParams,
   type PlanListResponsesMyCursorIDPage,
 } from './plans/index';
 export {

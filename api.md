@@ -170,8 +170,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/addons/addons.ts">Addon</a></code>
-- <code><a href="./src/resources/v1/addons/addons.ts">SetPackagePricing</a></code>
-- <code><a href="./src/resources/v1/addons/addons.ts">SetPackagePricingResponse</a></code>
 - <code><a href="./src/resources/v1/addons/addons.ts">AddonListResponse</a></code>
 - <code><a href="./src/resources/v1/addons/addons.ts">AddonPublishResponse</a></code>
 - <code><a href="./src/resources/v1/addons/addons.ts">AddonRemoveDraftResponse</a></code>
@@ -186,7 +184,6 @@ Methods:
 - <code title="post /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">createDraft</a>(id) -> Addon</code>
 - <code title="post /api/v1/addons/{id}/publish">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">publish</a>(id, { ...params }) -> AddonPublishResponse</code>
 - <code title="delete /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">removeDraft</a>(id) -> AddonRemoveDraftResponse</code>
-- <code title="put /api/v1/addons/{id}/charges">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">setPricing</a>(id, { ...params }) -> SetPackagePricingResponse</code>
 
 ### Entitlements
 
@@ -222,7 +219,6 @@ Methods:
 - <code title="post /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">createDraft</a>(id) -> Plan</code>
 - <code title="post /api/v1/plans/{id}/publish">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">publish</a>(id, { ...params }) -> PlanPublishResponse</code>
 - <code title="delete /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">removeDraft</a>(id) -> PlanRemoveDraftResponse</code>
-- <code title="put /api/v1/plans/{id}/charges">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">setPricing</a>(id, { ...params }) -> SetPackagePricingResponse</code>
 
 ### Entitlements
 

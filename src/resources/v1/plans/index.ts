@@ -19,6 +19,5 @@ export {
   type PlanUpdateParams,
   type PlanListParams,
   type PlanPublishParams,
-  type PlanSetPricingParams,
   type PlanListResponsesMyCursorIDPage,
 } from './plans';
