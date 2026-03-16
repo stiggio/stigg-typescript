@@ -262,14 +262,14 @@ export interface ProductCreateProductParams {
   id: string;
 
   /**
+   * Display name of the product
+   */
+  displayName: string;
+
+  /**
    * Description of the product
    */
   description?: string | null;
-
-  /**
-   * Display name of the product
-   */
-  displayName?: string;
 
   /**
    * Additional metadata for the product
