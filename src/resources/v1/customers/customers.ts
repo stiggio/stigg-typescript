@@ -287,6 +287,11 @@ export namespace CustomerResponse {
     integrations?: Array<Data.Integration>;
 
     /**
+     * Language to use for this customer
+     */
+    language?: string | null;
+
+    /**
      * Additional metadata
      */
     metadata?: { [key: string]: string };
@@ -295,6 +300,16 @@ export namespace CustomerResponse {
      * The name of the customer
      */
     name?: string | null;
+
+    /**
+     * Vendor-specific billing passthrough fields.
+     */
+    passthrough?: Data.Passthrough;
+
+    /**
+     * Timezone to use for this customer
+     */
+    timezone?: string | null;
   }
 
   export namespace Data {
@@ -356,6 +371,328 @@ export namespace CustomerResponse {
         | 'BIG_QUERY'
         | 'OPEN_FGA'
         | 'APP_STORE';
+    }
+
+    /**
+     * Vendor-specific billing passthrough fields.
+     */
+    export interface Passthrough {
+      /**
+       * Stripe-specific billing fields for the customer.
+       */
+      stripe?: Passthrough.Stripe;
+
+      /**
+       * Zuora-specific billing fields for the customer.
+       */
+      zuora?: Passthrough.Zuora;
+    }
+
+    export namespace Passthrough {
+      /**
+       * Stripe-specific billing fields for the customer.
+       */
+      export interface Stripe {
+        /**
+         * Physical address
+         */
+        billingAddress?: Stripe.BillingAddress;
+
+        /**
+         * Customer name
+         */
+        customerName?: string;
+
+        /**
+         * Invoice custom fields
+         */
+        invoiceCustomFields?: { [key: string]: string };
+
+        /**
+         * Additional metadata
+         */
+        metadata?: { [key: string]: string };
+
+        /**
+         * Billing provider payment method id, attached to this customer
+         */
+        paymentMethodId?: string;
+
+        /**
+         * Physical address
+         */
+        shippingAddress?: Stripe.ShippingAddress;
+
+        /**
+         * Tax IDs
+         */
+        taxIds?: Array<Stripe.TaxID>;
+      }
+
+      export namespace Stripe {
+        /**
+         * Physical address
+         */
+        export interface BillingAddress {
+          /**
+           * City name
+           */
+          city?: string;
+
+          /**
+           * Country code or name
+           */
+          country?: string;
+
+          /**
+           * Street address line 1
+           */
+          line1?: string;
+
+          /**
+           * Street address line 2
+           */
+          line2?: string;
+
+          /**
+           * Postal or ZIP code
+           */
+          postalCode?: string;
+
+          /**
+           * State or province
+           */
+          state?: string;
+        }
+
+        /**
+         * Physical address
+         */
+        export interface ShippingAddress {
+          /**
+           * City name
+           */
+          city?: string;
+
+          /**
+           * Country code or name
+           */
+          country?: string;
+
+          /**
+           * Street address line 1
+           */
+          line1?: string;
+
+          /**
+           * Street address line 2
+           */
+          line2?: string;
+
+          /**
+           * Postal or ZIP code
+           */
+          postalCode?: string;
+
+          /**
+           * State or province
+           */
+          state?: string;
+        }
+
+        /**
+         * Tax identifier with type and value for customer tax exemptions.
+         */
+        export interface TaxID {
+          /**
+           * The type of tax exemption identifier, such as VAT.
+           */
+          type: string;
+
+          /**
+           * The actual tax identifier value
+           */
+          value: string;
+        }
+      }
+
+      /**
+       * Zuora-specific billing fields for the customer.
+       */
+      export interface Zuora {
+        /**
+         * Physical address
+         */
+        billingAddress?: Zuora.BillingAddress;
+
+        /**
+         * Customers selected currency
+         */
+        currency?:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+
+        /**
+         * Additional metadata
+         */
+        metadata?: { [key: string]: string };
+
+        /**
+         * Billing provider payment method id, attached to this customer
+         */
+        paymentMethodId?: string;
+      }
+
+      export namespace Zuora {
+        /**
+         * Physical address
+         */
+        export interface BillingAddress {
+          /**
+           * City name
+           */
+          city?: string;
+
+          /**
+           * Country code or name
+           */
+          country?: string;
+
+          /**
+           * Street address line 1
+           */
+          line1?: string;
+
+          /**
+           * Street address line 2
+           */
+          line2?: string;
+
+          /**
+           * Postal or ZIP code
+           */
+          postalCode?: string;
+
+          /**
+           * State or province
+           */
+          state?: string;
+        }
+      }
     }
   }
 }
@@ -532,6 +869,11 @@ export interface CustomerListResponse {
   integrations?: Array<CustomerListResponse.Integration>;
 
   /**
+   * Language to use for this customer
+   */
+  language?: string | null;
+
+  /**
    * Additional metadata
    */
   metadata?: { [key: string]: string };
@@ -540,6 +882,16 @@ export interface CustomerListResponse {
    * The name of the customer
    */
   name?: string | null;
+
+  /**
+   * Vendor-specific billing passthrough fields.
+   */
+  passthrough?: CustomerListResponse.Passthrough;
+
+  /**
+   * Timezone to use for this customer
+   */
+  timezone?: string | null;
 }
 
 export namespace CustomerListResponse {
@@ -601,6 +953,328 @@ export namespace CustomerListResponse {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE';
+  }
+
+  /**
+   * Vendor-specific billing passthrough fields.
+   */
+  export interface Passthrough {
+    /**
+     * Stripe-specific billing fields for the customer.
+     */
+    stripe?: Passthrough.Stripe;
+
+    /**
+     * Zuora-specific billing fields for the customer.
+     */
+    zuora?: Passthrough.Zuora;
+  }
+
+  export namespace Passthrough {
+    /**
+     * Stripe-specific billing fields for the customer.
+     */
+    export interface Stripe {
+      /**
+       * Physical address
+       */
+      billingAddress?: Stripe.BillingAddress;
+
+      /**
+       * Customer name
+       */
+      customerName?: string;
+
+      /**
+       * Invoice custom fields
+       */
+      invoiceCustomFields?: { [key: string]: string };
+
+      /**
+       * Additional metadata
+       */
+      metadata?: { [key: string]: string };
+
+      /**
+       * Billing provider payment method id, attached to this customer
+       */
+      paymentMethodId?: string;
+
+      /**
+       * Physical address
+       */
+      shippingAddress?: Stripe.ShippingAddress;
+
+      /**
+       * Tax IDs
+       */
+      taxIds?: Array<Stripe.TaxID>;
+    }
+
+    export namespace Stripe {
+      /**
+       * Physical address
+       */
+      export interface BillingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+
+      /**
+       * Physical address
+       */
+      export interface ShippingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+
+      /**
+       * Tax identifier with type and value for customer tax exemptions.
+       */
+      export interface TaxID {
+        /**
+         * The type of tax exemption identifier, such as VAT.
+         */
+        type: string;
+
+        /**
+         * The actual tax identifier value
+         */
+        value: string;
+      }
+    }
+
+    /**
+     * Zuora-specific billing fields for the customer.
+     */
+    export interface Zuora {
+      /**
+       * Physical address
+       */
+      billingAddress?: Zuora.BillingAddress;
+
+      /**
+       * Customers selected currency
+       */
+      currency?:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
+
+      /**
+       * Additional metadata
+       */
+      metadata?: { [key: string]: string };
+
+      /**
+       * Billing provider payment method id, attached to this customer
+       */
+      paymentMethodId?: string;
+    }
+
+    export namespace Zuora {
+      /**
+       * Physical address
+       */
+      export interface BillingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+    }
   }
 }
 
@@ -790,6 +1464,11 @@ export interface CustomerUpdateParams {
   integrations?: Array<CustomerUpdateParams.Integration>;
 
   /**
+   * Language to use for this customer
+   */
+  language?: string | null;
+
+  /**
    * Additional metadata
    */
   metadata?: { [key: string]: string };
@@ -798,6 +1477,16 @@ export interface CustomerUpdateParams {
    * The name of the customer
    */
   name?: string | null;
+
+  /**
+   * Vendor-specific billing passthrough fields.
+   */
+  passthrough?: CustomerUpdateParams.Passthrough;
+
+  /**
+   * Timezone to use for this customer
+   */
+  timezone?: string | null;
 }
 
 export namespace CustomerUpdateParams {
@@ -829,6 +1518,328 @@ export namespace CustomerUpdateParams {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE';
+  }
+
+  /**
+   * Vendor-specific billing passthrough fields.
+   */
+  export interface Passthrough {
+    /**
+     * Stripe-specific billing fields for the customer.
+     */
+    stripe?: Passthrough.Stripe;
+
+    /**
+     * Zuora-specific billing fields for the customer.
+     */
+    zuora?: Passthrough.Zuora;
+  }
+
+  export namespace Passthrough {
+    /**
+     * Stripe-specific billing fields for the customer.
+     */
+    export interface Stripe {
+      /**
+       * Physical address
+       */
+      billingAddress?: Stripe.BillingAddress;
+
+      /**
+       * Customer name
+       */
+      customerName?: string;
+
+      /**
+       * Invoice custom fields
+       */
+      invoiceCustomFields?: { [key: string]: string };
+
+      /**
+       * Additional metadata
+       */
+      metadata?: { [key: string]: string };
+
+      /**
+       * Billing provider payment method id, attached to this customer
+       */
+      paymentMethodId?: string;
+
+      /**
+       * Physical address
+       */
+      shippingAddress?: Stripe.ShippingAddress;
+
+      /**
+       * Tax IDs
+       */
+      taxIds?: Array<Stripe.TaxID>;
+    }
+
+    export namespace Stripe {
+      /**
+       * Physical address
+       */
+      export interface BillingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+
+      /**
+       * Physical address
+       */
+      export interface ShippingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+
+      /**
+       * Tax identifier with type and value for customer tax exemptions.
+       */
+      export interface TaxID {
+        /**
+         * The type of tax exemption identifier, such as VAT.
+         */
+        type: string;
+
+        /**
+         * The actual tax identifier value
+         */
+        value: string;
+      }
+    }
+
+    /**
+     * Zuora-specific billing fields for the customer.
+     */
+    export interface Zuora {
+      /**
+       * Physical address
+       */
+      billingAddress?: Zuora.BillingAddress;
+
+      /**
+       * Customers selected currency
+       */
+      currency?:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
+
+      /**
+       * Additional metadata
+       */
+      metadata?: { [key: string]: string };
+
+      /**
+       * Billing provider payment method id, attached to this customer
+       */
+      paymentMethodId?: string;
+    }
+
+    export namespace Zuora {
+      /**
+       * Physical address
+       */
+      export interface BillingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+    }
   }
 }
 
@@ -1088,6 +2099,11 @@ export interface CustomerProvisionParams {
   integrations?: Array<CustomerProvisionParams.Integration>;
 
   /**
+   * Language to use for this customer
+   */
+  language?: string | null;
+
+  /**
    * Additional metadata
    */
   metadata?: { [key: string]: string };
@@ -1096,6 +2112,16 @@ export interface CustomerProvisionParams {
    * The name of the customer
    */
   name?: string | null;
+
+  /**
+   * Vendor-specific billing passthrough fields.
+   */
+  passthrough?: CustomerProvisionParams.Passthrough;
+
+  /**
+   * Timezone to use for this customer
+   */
+  timezone?: string | null;
 }
 
 export namespace CustomerProvisionParams {
@@ -1157,6 +2183,328 @@ export namespace CustomerProvisionParams {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE';
+  }
+
+  /**
+   * Vendor-specific billing passthrough fields.
+   */
+  export interface Passthrough {
+    /**
+     * Stripe-specific billing fields for the customer.
+     */
+    stripe?: Passthrough.Stripe;
+
+    /**
+     * Zuora-specific billing fields for the customer.
+     */
+    zuora?: Passthrough.Zuora;
+  }
+
+  export namespace Passthrough {
+    /**
+     * Stripe-specific billing fields for the customer.
+     */
+    export interface Stripe {
+      /**
+       * Physical address
+       */
+      billingAddress?: Stripe.BillingAddress;
+
+      /**
+       * Customer name
+       */
+      customerName?: string;
+
+      /**
+       * Invoice custom fields
+       */
+      invoiceCustomFields?: { [key: string]: string };
+
+      /**
+       * Additional metadata
+       */
+      metadata?: { [key: string]: string };
+
+      /**
+       * Billing provider payment method id, attached to this customer
+       */
+      paymentMethodId?: string;
+
+      /**
+       * Physical address
+       */
+      shippingAddress?: Stripe.ShippingAddress;
+
+      /**
+       * Tax IDs
+       */
+      taxIds?: Array<Stripe.TaxID>;
+    }
+
+    export namespace Stripe {
+      /**
+       * Physical address
+       */
+      export interface BillingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+
+      /**
+       * Physical address
+       */
+      export interface ShippingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+
+      /**
+       * Tax identifier with type and value for customer tax exemptions.
+       */
+      export interface TaxID {
+        /**
+         * The type of tax exemption identifier, such as VAT.
+         */
+        type: string;
+
+        /**
+         * The actual tax identifier value
+         */
+        value: string;
+      }
+    }
+
+    /**
+     * Zuora-specific billing fields for the customer.
+     */
+    export interface Zuora {
+      /**
+       * Physical address
+       */
+      billingAddress?: Zuora.BillingAddress;
+
+      /**
+       * Customers selected currency
+       */
+      currency?:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
+
+      /**
+       * Additional metadata
+       */
+      metadata?: { [key: string]: string };
+
+      /**
+       * Billing provider payment method id, attached to this customer
+       */
+      paymentMethodId?: string;
+    }
+
+    export namespace Zuora {
+      /**
+       * Physical address
+       */
+      export interface BillingAddress {
+        /**
+         * City name
+         */
+        city?: string;
+
+        /**
+         * Country code or name
+         */
+        country?: string;
+
+        /**
+         * Street address line 1
+         */
+        line1?: string;
+
+        /**
+         * Street address line 2
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code
+         */
+        postalCode?: string;
+
+        /**
+         * State or province
+         */
+        state?: string;
+      }
+    }
   }
 }
 

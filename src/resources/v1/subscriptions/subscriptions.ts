@@ -5653,6 +5653,9 @@ export namespace SubscriptionProvisionParams {
       state?: string;
     }
 
+    /**
+     * Tax identifier with type and value for customer tax exemptions.
+     */
     export interface TaxID {
       /**
        * The type of tax exemption identifier, such as VAT.

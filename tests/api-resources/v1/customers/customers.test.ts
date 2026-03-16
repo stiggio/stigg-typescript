@@ -180,8 +180,48 @@ describe('resource customers', () => {
           vendorIdentifier: 'AUTH0',
         },
       ],
+      language: 'language',
       metadata: { foo: 'string' },
       name: 'name',
+      passthrough: {
+        stripe: {
+          billingAddress: {
+            city: 'city',
+            country: 'country',
+            line1: 'line1',
+            line2: 'line2',
+            postalCode: 'postalCode',
+            state: 'state',
+          },
+          customerName: 'customerName',
+          invoiceCustomFields: { foo: 'string' },
+          metadata: { foo: 'string' },
+          paymentMethodId: 'paymentMethodId',
+          shippingAddress: {
+            city: 'city',
+            country: 'country',
+            line1: 'line1',
+            line2: 'line2',
+            postalCode: 'postalCode',
+            state: 'state',
+          },
+          taxIds: [{ type: 'type', value: 'value' }],
+        },
+        zuora: {
+          billingAddress: {
+            city: 'city',
+            country: 'country',
+            line1: 'line1',
+            line2: 'line2',
+            postalCode: 'postalCode',
+            state: 'state',
+          },
+          currency: 'usd',
+          metadata: { foo: 'string' },
+          paymentMethodId: 'paymentMethodId',
+        },
+      },
+      timezone: 'timezone',
     });
   });
 
