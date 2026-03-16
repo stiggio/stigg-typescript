@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as AddonsAPI from '../addons/addons';
 import * as EntitlementsAPI from './entitlements';
 import {
   EntitlementCreateParams,
@@ -82,18 +81,6 @@ export class Plans extends APIResource {
    */
   removeDraft(id: string, options?: RequestOptions): APIPromise<PlanRemoveDraftResponse> {
     return this._client.delete(path`/api/v1/plans/${id}/draft`, options);
-  }
-
-  /**
-   * Sets the pricing configuration for a plan, including pricing models, overage
-   * pricing, and minimum spend.
-   */
-  setPricing(
-    id: string,
-    body: PlanSetPricingParams,
-    options?: RequestOptions,
-  ): APIPromise<AddonsAPI.SetPackagePricingResponse> {
-    return this._client.put(path`/api/v1/plans/${id}/charges`, { body, ...options });
   }
 }
 
@@ -521,6 +508,11 @@ export interface PlanUpdateParams {
    */
   billingId?: string | null;
 
+  /**
+   * Pricing configuration to set on the plan draft
+   */
+  charges?: PlanUpdateParams.Charges;
+
   compatibleAddonIds?: Array<string> | null;
 
   /**
@@ -550,6 +542,1372 @@ export interface PlanUpdateParams {
 }
 
 export namespace PlanUpdateParams {
+  /**
+   * Pricing configuration to set on the plan draft
+   */
+  export interface Charges {
+    /**
+     * The pricing type (FREE, PAID, or CUSTOM)
+     */
+    pricingType: 'FREE' | 'PAID' | 'CUSTOM';
+
+    /**
+     * Deprecated: billing integration ID
+     */
+    billingId?: string;
+
+    /**
+     * Minimum spend configuration per billing period
+     */
+    minimumSpend?: Array<Charges.MinimumSpend> | null;
+
+    /**
+     * When overage charges are billed
+     */
+    overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY';
+
+    /**
+     * Array of overage pricing model configurations
+     */
+    overagePricingModels?: Array<Charges.OveragePricingModel>;
+
+    /**
+     * Array of pricing model configurations
+     */
+    pricingModels?: Array<Charges.PricingModel>;
+  }
+
+  export namespace Charges {
+    /**
+     * Minimum spend configuration for a billing period.
+     */
+    export interface MinimumSpend {
+      /**
+       * The billing period
+       */
+      billingPeriod: 'MONTHLY' | 'ANNUALLY';
+
+      /**
+       * The minimum spend amount
+       */
+      minimum: MinimumSpend.Minimum;
+    }
+
+    export namespace MinimumSpend {
+      /**
+       * The minimum spend amount
+       */
+      export interface Minimum {
+        /**
+         * The price amount
+         */
+        amount: number;
+
+        /**
+         * The price currency
+         */
+        currency?:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+    }
+
+    /**
+     * Overage pricing model configuration.
+     */
+    export interface OveragePricingModel {
+      /**
+       * The billing model for overages
+       */
+      billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
+
+      /**
+       * Price periods for overage pricing
+       */
+      pricePeriods: Array<OveragePricingModel.PricePeriod>;
+
+      /**
+       * The billing cadence for overages
+       */
+      billingCadence?: 'RECURRING' | 'ONE_OFF';
+
+      /**
+       * Entitlement configuration for the overage feature
+       */
+      entitlement?: OveragePricingModel.Entitlement;
+
+      /**
+       * The feature ID for overage pricing
+       */
+      featureId?: string;
+
+      /**
+       * Custom currency ID for overage top-up
+       */
+      topUpCustomCurrencyId?: string;
+    }
+
+    export namespace OveragePricingModel {
+      /**
+       * Price configuration for a specific billing period.
+       */
+      export interface PricePeriod {
+        /**
+         * The billing period (MONTHLY or ANNUALLY)
+         */
+        billingPeriod: 'MONTHLY' | 'ANNUALLY';
+
+        /**
+         * ISO country code for localized pricing
+         */
+        billingCountryCode?: string;
+
+        /**
+         * Block size for usage-based pricing
+         */
+        blockSize?: number;
+
+        /**
+         * When credits are granted
+         */
+        creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY';
+
+        /**
+         * Credit rate configuration for credit-based pricing
+         */
+        creditRate?: PricePeriod.CreditRate;
+
+        /**
+         * The price amount and currency
+         */
+        price?: PricePeriod.Price;
+
+        /**
+         * Tiered pricing configuration
+         */
+        tiers?: Array<PricePeriod.Tier>;
+      }
+
+      export namespace PricePeriod {
+        /**
+         * Credit rate configuration for credit-based pricing
+         */
+        export interface CreditRate {
+          /**
+           * The credit rate amount
+           */
+          amount: number;
+
+          /**
+           * The custom currency ID
+           */
+          currencyId: string;
+
+          /**
+           * Optional cost formula expression
+           */
+          costFormula?: string;
+        }
+
+        /**
+         * The price amount and currency
+         */
+        export interface Price {
+          /**
+           * The price amount
+           */
+          amount: number;
+
+          /**
+           * The price currency
+           */
+          currency?:
+            | 'usd'
+            | 'aed'
+            | 'all'
+            | 'amd'
+            | 'ang'
+            | 'aud'
+            | 'awg'
+            | 'azn'
+            | 'bam'
+            | 'bbd'
+            | 'bdt'
+            | 'bgn'
+            | 'bif'
+            | 'bmd'
+            | 'bnd'
+            | 'bsd'
+            | 'bwp'
+            | 'byn'
+            | 'bzd'
+            | 'brl'
+            | 'cad'
+            | 'cdf'
+            | 'chf'
+            | 'cny'
+            | 'czk'
+            | 'dkk'
+            | 'dop'
+            | 'dzd'
+            | 'egp'
+            | 'etb'
+            | 'eur'
+            | 'fjd'
+            | 'gbp'
+            | 'gel'
+            | 'gip'
+            | 'gmd'
+            | 'gyd'
+            | 'hkd'
+            | 'hrk'
+            | 'htg'
+            | 'idr'
+            | 'ils'
+            | 'inr'
+            | 'isk'
+            | 'jmd'
+            | 'jpy'
+            | 'kes'
+            | 'kgs'
+            | 'khr'
+            | 'kmf'
+            | 'krw'
+            | 'kyd'
+            | 'kzt'
+            | 'lbp'
+            | 'lkr'
+            | 'lrd'
+            | 'lsl'
+            | 'mad'
+            | 'mdl'
+            | 'mga'
+            | 'mkd'
+            | 'mmk'
+            | 'mnt'
+            | 'mop'
+            | 'mro'
+            | 'mvr'
+            | 'mwk'
+            | 'mxn'
+            | 'myr'
+            | 'mzn'
+            | 'nad'
+            | 'ngn'
+            | 'nok'
+            | 'npr'
+            | 'nzd'
+            | 'pgk'
+            | 'php'
+            | 'pkr'
+            | 'pln'
+            | 'qar'
+            | 'ron'
+            | 'rsd'
+            | 'rub'
+            | 'rwf'
+            | 'sar'
+            | 'sbd'
+            | 'scr'
+            | 'sek'
+            | 'sgd'
+            | 'sle'
+            | 'sll'
+            | 'sos'
+            | 'szl'
+            | 'thb'
+            | 'tjs'
+            | 'top'
+            | 'try'
+            | 'ttd'
+            | 'tzs'
+            | 'uah'
+            | 'uzs'
+            | 'vnd'
+            | 'vuv'
+            | 'wst'
+            | 'xaf'
+            | 'xcd'
+            | 'yer'
+            | 'zar'
+            | 'zmw'
+            | 'clp'
+            | 'djf'
+            | 'gnf'
+            | 'ugx'
+            | 'pyg'
+            | 'xof'
+            | 'xpf';
+        }
+
+        /**
+         * A tier in tiered pricing.
+         */
+        export interface Tier {
+          /**
+           * Flat price for this tier
+           */
+          flatPrice?: Tier.FlatPrice;
+
+          /**
+           * Per-unit price in this tier
+           */
+          unitPrice?: Tier.UnitPrice;
+
+          /**
+           * Upper bound of this tier (null for unlimited)
+           */
+          upTo?: number;
+        }
+
+        export namespace Tier {
+          /**
+           * Flat price for this tier
+           */
+          export interface FlatPrice {
+            /**
+             * The price amount
+             */
+            amount: number;
+
+            /**
+             * The price currency
+             */
+            currency?:
+              | 'usd'
+              | 'aed'
+              | 'all'
+              | 'amd'
+              | 'ang'
+              | 'aud'
+              | 'awg'
+              | 'azn'
+              | 'bam'
+              | 'bbd'
+              | 'bdt'
+              | 'bgn'
+              | 'bif'
+              | 'bmd'
+              | 'bnd'
+              | 'bsd'
+              | 'bwp'
+              | 'byn'
+              | 'bzd'
+              | 'brl'
+              | 'cad'
+              | 'cdf'
+              | 'chf'
+              | 'cny'
+              | 'czk'
+              | 'dkk'
+              | 'dop'
+              | 'dzd'
+              | 'egp'
+              | 'etb'
+              | 'eur'
+              | 'fjd'
+              | 'gbp'
+              | 'gel'
+              | 'gip'
+              | 'gmd'
+              | 'gyd'
+              | 'hkd'
+              | 'hrk'
+              | 'htg'
+              | 'idr'
+              | 'ils'
+              | 'inr'
+              | 'isk'
+              | 'jmd'
+              | 'jpy'
+              | 'kes'
+              | 'kgs'
+              | 'khr'
+              | 'kmf'
+              | 'krw'
+              | 'kyd'
+              | 'kzt'
+              | 'lbp'
+              | 'lkr'
+              | 'lrd'
+              | 'lsl'
+              | 'mad'
+              | 'mdl'
+              | 'mga'
+              | 'mkd'
+              | 'mmk'
+              | 'mnt'
+              | 'mop'
+              | 'mro'
+              | 'mvr'
+              | 'mwk'
+              | 'mxn'
+              | 'myr'
+              | 'mzn'
+              | 'nad'
+              | 'ngn'
+              | 'nok'
+              | 'npr'
+              | 'nzd'
+              | 'pgk'
+              | 'php'
+              | 'pkr'
+              | 'pln'
+              | 'qar'
+              | 'ron'
+              | 'rsd'
+              | 'rub'
+              | 'rwf'
+              | 'sar'
+              | 'sbd'
+              | 'scr'
+              | 'sek'
+              | 'sgd'
+              | 'sle'
+              | 'sll'
+              | 'sos'
+              | 'szl'
+              | 'thb'
+              | 'tjs'
+              | 'top'
+              | 'try'
+              | 'ttd'
+              | 'tzs'
+              | 'uah'
+              | 'uzs'
+              | 'vnd'
+              | 'vuv'
+              | 'wst'
+              | 'xaf'
+              | 'xcd'
+              | 'yer'
+              | 'zar'
+              | 'zmw'
+              | 'clp'
+              | 'djf'
+              | 'gnf'
+              | 'ugx'
+              | 'pyg'
+              | 'xof'
+              | 'xpf';
+          }
+
+          /**
+           * Per-unit price in this tier
+           */
+          export interface UnitPrice {
+            /**
+             * The price amount
+             */
+            amount: number;
+
+            /**
+             * The price currency
+             */
+            currency?:
+              | 'usd'
+              | 'aed'
+              | 'all'
+              | 'amd'
+              | 'ang'
+              | 'aud'
+              | 'awg'
+              | 'azn'
+              | 'bam'
+              | 'bbd'
+              | 'bdt'
+              | 'bgn'
+              | 'bif'
+              | 'bmd'
+              | 'bnd'
+              | 'bsd'
+              | 'bwp'
+              | 'byn'
+              | 'bzd'
+              | 'brl'
+              | 'cad'
+              | 'cdf'
+              | 'chf'
+              | 'cny'
+              | 'czk'
+              | 'dkk'
+              | 'dop'
+              | 'dzd'
+              | 'egp'
+              | 'etb'
+              | 'eur'
+              | 'fjd'
+              | 'gbp'
+              | 'gel'
+              | 'gip'
+              | 'gmd'
+              | 'gyd'
+              | 'hkd'
+              | 'hrk'
+              | 'htg'
+              | 'idr'
+              | 'ils'
+              | 'inr'
+              | 'isk'
+              | 'jmd'
+              | 'jpy'
+              | 'kes'
+              | 'kgs'
+              | 'khr'
+              | 'kmf'
+              | 'krw'
+              | 'kyd'
+              | 'kzt'
+              | 'lbp'
+              | 'lkr'
+              | 'lrd'
+              | 'lsl'
+              | 'mad'
+              | 'mdl'
+              | 'mga'
+              | 'mkd'
+              | 'mmk'
+              | 'mnt'
+              | 'mop'
+              | 'mro'
+              | 'mvr'
+              | 'mwk'
+              | 'mxn'
+              | 'myr'
+              | 'mzn'
+              | 'nad'
+              | 'ngn'
+              | 'nok'
+              | 'npr'
+              | 'nzd'
+              | 'pgk'
+              | 'php'
+              | 'pkr'
+              | 'pln'
+              | 'qar'
+              | 'ron'
+              | 'rsd'
+              | 'rub'
+              | 'rwf'
+              | 'sar'
+              | 'sbd'
+              | 'scr'
+              | 'sek'
+              | 'sgd'
+              | 'sle'
+              | 'sll'
+              | 'sos'
+              | 'szl'
+              | 'thb'
+              | 'tjs'
+              | 'top'
+              | 'try'
+              | 'ttd'
+              | 'tzs'
+              | 'uah'
+              | 'uzs'
+              | 'vnd'
+              | 'vuv'
+              | 'wst'
+              | 'xaf'
+              | 'xcd'
+              | 'yer'
+              | 'zar'
+              | 'zmw'
+              | 'clp'
+              | 'djf'
+              | 'gnf'
+              | 'ugx'
+              | 'pyg'
+              | 'xof'
+              | 'xpf';
+          }
+        }
+      }
+
+      /**
+       * Entitlement configuration for the overage feature
+       */
+      export interface Entitlement {
+        /**
+         * The feature ID for the entitlement
+         */
+        featureId: string;
+
+        /**
+         * Whether the limit is soft (allows overage)
+         */
+        hasSoftLimit?: boolean;
+
+        /**
+         * Whether usage is unlimited
+         */
+        hasUnlimitedUsage?: boolean;
+
+        /**
+         * Monthly reset configuration
+         */
+        monthlyResetPeriodConfiguration?: Entitlement.MonthlyResetPeriodConfiguration;
+
+        /**
+         * The usage reset period
+         */
+        resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
+
+        /**
+         * The usage limit before overage kicks in
+         */
+        usageLimit?: number;
+
+        /**
+         * Weekly reset configuration
+         */
+        weeklyResetPeriodConfiguration?: Entitlement.WeeklyResetPeriodConfiguration;
+
+        /**
+         * Yearly reset configuration
+         */
+        yearlyResetPeriodConfiguration?: Entitlement.YearlyResetPeriodConfiguration;
+      }
+
+      export namespace Entitlement {
+        /**
+         * Monthly reset configuration
+         */
+        export interface MonthlyResetPeriodConfiguration {
+          /**
+           * Reset anchor (SubscriptionStart or StartOfTheMonth)
+           */
+          accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
+        }
+
+        /**
+         * Weekly reset configuration
+         */
+        export interface WeeklyResetPeriodConfiguration {
+          /**
+           * Reset anchor (SubscriptionStart or specific day)
+           */
+          accordingTo:
+            | 'SubscriptionStart'
+            | 'EverySunday'
+            | 'EveryMonday'
+            | 'EveryTuesday'
+            | 'EveryWednesday'
+            | 'EveryThursday'
+            | 'EveryFriday'
+            | 'EverySaturday';
+        }
+
+        /**
+         * Yearly reset configuration
+         */
+        export interface YearlyResetPeriodConfiguration {
+          /**
+           * Reset anchor (SubscriptionStart)
+           */
+          accordingTo: 'SubscriptionStart';
+        }
+      }
+    }
+
+    /**
+     * A pricing model configuration with billing details and price periods.
+     */
+    export interface PricingModel {
+      /**
+       * The billing model (FLAT_FEE, PER_UNIT, USAGE_BASED, CREDIT_BASED)
+       */
+      billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
+
+      /**
+       * Array of price period configurations (at least one required)
+       */
+      pricePeriods: Array<PricingModel.PricePeriod>;
+
+      /**
+       * The billing cadence (RECURRING or ONE_OFF)
+       */
+      billingCadence?: 'RECURRING' | 'ONE_OFF';
+
+      /**
+       * The feature ID this pricing model is associated with
+       */
+      featureId?: string;
+
+      /**
+       * Maximum number of units (max 999999)
+       */
+      maxUnitQuantity?: number;
+
+      /**
+       * Minimum number of units
+       */
+      minUnitQuantity?: number;
+
+      /**
+       * Monthly reset period configuration
+       */
+      monthlyResetPeriodConfiguration?: PricingModel.MonthlyResetPeriodConfiguration;
+
+      /**
+       * The usage reset period
+       */
+      resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
+
+      /**
+       * The tiered pricing mode (VOLUME or GRADUATED)
+       */
+      tiersMode?: 'VOLUME' | 'GRADUATED';
+
+      /**
+       * The custom currency ID for top-up pricing
+       */
+      topUpCustomCurrencyId?: string;
+
+      /**
+       * Weekly reset period configuration
+       */
+      weeklyResetPeriodConfiguration?: PricingModel.WeeklyResetPeriodConfiguration;
+
+      /**
+       * Yearly reset period configuration
+       */
+      yearlyResetPeriodConfiguration?: PricingModel.YearlyResetPeriodConfiguration;
+    }
+
+    export namespace PricingModel {
+      /**
+       * Price configuration for a specific billing period.
+       */
+      export interface PricePeriod {
+        /**
+         * The billing period (MONTHLY or ANNUALLY)
+         */
+        billingPeriod: 'MONTHLY' | 'ANNUALLY';
+
+        /**
+         * ISO country code for localized pricing
+         */
+        billingCountryCode?: string;
+
+        /**
+         * Block size for usage-based pricing
+         */
+        blockSize?: number;
+
+        /**
+         * When credits are granted
+         */
+        creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY';
+
+        /**
+         * Credit rate configuration for credit-based pricing
+         */
+        creditRate?: PricePeriod.CreditRate;
+
+        /**
+         * The price amount and currency
+         */
+        price?: PricePeriod.Price;
+
+        /**
+         * Tiered pricing configuration
+         */
+        tiers?: Array<PricePeriod.Tier>;
+      }
+
+      export namespace PricePeriod {
+        /**
+         * Credit rate configuration for credit-based pricing
+         */
+        export interface CreditRate {
+          /**
+           * The credit rate amount
+           */
+          amount: number;
+
+          /**
+           * The custom currency ID
+           */
+          currencyId: string;
+
+          /**
+           * Optional cost formula expression
+           */
+          costFormula?: string;
+        }
+
+        /**
+         * The price amount and currency
+         */
+        export interface Price {
+          /**
+           * The price amount
+           */
+          amount: number;
+
+          /**
+           * The price currency
+           */
+          currency?:
+            | 'usd'
+            | 'aed'
+            | 'all'
+            | 'amd'
+            | 'ang'
+            | 'aud'
+            | 'awg'
+            | 'azn'
+            | 'bam'
+            | 'bbd'
+            | 'bdt'
+            | 'bgn'
+            | 'bif'
+            | 'bmd'
+            | 'bnd'
+            | 'bsd'
+            | 'bwp'
+            | 'byn'
+            | 'bzd'
+            | 'brl'
+            | 'cad'
+            | 'cdf'
+            | 'chf'
+            | 'cny'
+            | 'czk'
+            | 'dkk'
+            | 'dop'
+            | 'dzd'
+            | 'egp'
+            | 'etb'
+            | 'eur'
+            | 'fjd'
+            | 'gbp'
+            | 'gel'
+            | 'gip'
+            | 'gmd'
+            | 'gyd'
+            | 'hkd'
+            | 'hrk'
+            | 'htg'
+            | 'idr'
+            | 'ils'
+            | 'inr'
+            | 'isk'
+            | 'jmd'
+            | 'jpy'
+            | 'kes'
+            | 'kgs'
+            | 'khr'
+            | 'kmf'
+            | 'krw'
+            | 'kyd'
+            | 'kzt'
+            | 'lbp'
+            | 'lkr'
+            | 'lrd'
+            | 'lsl'
+            | 'mad'
+            | 'mdl'
+            | 'mga'
+            | 'mkd'
+            | 'mmk'
+            | 'mnt'
+            | 'mop'
+            | 'mro'
+            | 'mvr'
+            | 'mwk'
+            | 'mxn'
+            | 'myr'
+            | 'mzn'
+            | 'nad'
+            | 'ngn'
+            | 'nok'
+            | 'npr'
+            | 'nzd'
+            | 'pgk'
+            | 'php'
+            | 'pkr'
+            | 'pln'
+            | 'qar'
+            | 'ron'
+            | 'rsd'
+            | 'rub'
+            | 'rwf'
+            | 'sar'
+            | 'sbd'
+            | 'scr'
+            | 'sek'
+            | 'sgd'
+            | 'sle'
+            | 'sll'
+            | 'sos'
+            | 'szl'
+            | 'thb'
+            | 'tjs'
+            | 'top'
+            | 'try'
+            | 'ttd'
+            | 'tzs'
+            | 'uah'
+            | 'uzs'
+            | 'vnd'
+            | 'vuv'
+            | 'wst'
+            | 'xaf'
+            | 'xcd'
+            | 'yer'
+            | 'zar'
+            | 'zmw'
+            | 'clp'
+            | 'djf'
+            | 'gnf'
+            | 'ugx'
+            | 'pyg'
+            | 'xof'
+            | 'xpf';
+        }
+
+        /**
+         * A tier in tiered pricing.
+         */
+        export interface Tier {
+          /**
+           * Flat price for this tier
+           */
+          flatPrice?: Tier.FlatPrice;
+
+          /**
+           * Per-unit price in this tier
+           */
+          unitPrice?: Tier.UnitPrice;
+
+          /**
+           * Upper bound of this tier (null for unlimited)
+           */
+          upTo?: number;
+        }
+
+        export namespace Tier {
+          /**
+           * Flat price for this tier
+           */
+          export interface FlatPrice {
+            /**
+             * The price amount
+             */
+            amount: number;
+
+            /**
+             * The price currency
+             */
+            currency?:
+              | 'usd'
+              | 'aed'
+              | 'all'
+              | 'amd'
+              | 'ang'
+              | 'aud'
+              | 'awg'
+              | 'azn'
+              | 'bam'
+              | 'bbd'
+              | 'bdt'
+              | 'bgn'
+              | 'bif'
+              | 'bmd'
+              | 'bnd'
+              | 'bsd'
+              | 'bwp'
+              | 'byn'
+              | 'bzd'
+              | 'brl'
+              | 'cad'
+              | 'cdf'
+              | 'chf'
+              | 'cny'
+              | 'czk'
+              | 'dkk'
+              | 'dop'
+              | 'dzd'
+              | 'egp'
+              | 'etb'
+              | 'eur'
+              | 'fjd'
+              | 'gbp'
+              | 'gel'
+              | 'gip'
+              | 'gmd'
+              | 'gyd'
+              | 'hkd'
+              | 'hrk'
+              | 'htg'
+              | 'idr'
+              | 'ils'
+              | 'inr'
+              | 'isk'
+              | 'jmd'
+              | 'jpy'
+              | 'kes'
+              | 'kgs'
+              | 'khr'
+              | 'kmf'
+              | 'krw'
+              | 'kyd'
+              | 'kzt'
+              | 'lbp'
+              | 'lkr'
+              | 'lrd'
+              | 'lsl'
+              | 'mad'
+              | 'mdl'
+              | 'mga'
+              | 'mkd'
+              | 'mmk'
+              | 'mnt'
+              | 'mop'
+              | 'mro'
+              | 'mvr'
+              | 'mwk'
+              | 'mxn'
+              | 'myr'
+              | 'mzn'
+              | 'nad'
+              | 'ngn'
+              | 'nok'
+              | 'npr'
+              | 'nzd'
+              | 'pgk'
+              | 'php'
+              | 'pkr'
+              | 'pln'
+              | 'qar'
+              | 'ron'
+              | 'rsd'
+              | 'rub'
+              | 'rwf'
+              | 'sar'
+              | 'sbd'
+              | 'scr'
+              | 'sek'
+              | 'sgd'
+              | 'sle'
+              | 'sll'
+              | 'sos'
+              | 'szl'
+              | 'thb'
+              | 'tjs'
+              | 'top'
+              | 'try'
+              | 'ttd'
+              | 'tzs'
+              | 'uah'
+              | 'uzs'
+              | 'vnd'
+              | 'vuv'
+              | 'wst'
+              | 'xaf'
+              | 'xcd'
+              | 'yer'
+              | 'zar'
+              | 'zmw'
+              | 'clp'
+              | 'djf'
+              | 'gnf'
+              | 'ugx'
+              | 'pyg'
+              | 'xof'
+              | 'xpf';
+          }
+
+          /**
+           * Per-unit price in this tier
+           */
+          export interface UnitPrice {
+            /**
+             * The price amount
+             */
+            amount: number;
+
+            /**
+             * The price currency
+             */
+            currency?:
+              | 'usd'
+              | 'aed'
+              | 'all'
+              | 'amd'
+              | 'ang'
+              | 'aud'
+              | 'awg'
+              | 'azn'
+              | 'bam'
+              | 'bbd'
+              | 'bdt'
+              | 'bgn'
+              | 'bif'
+              | 'bmd'
+              | 'bnd'
+              | 'bsd'
+              | 'bwp'
+              | 'byn'
+              | 'bzd'
+              | 'brl'
+              | 'cad'
+              | 'cdf'
+              | 'chf'
+              | 'cny'
+              | 'czk'
+              | 'dkk'
+              | 'dop'
+              | 'dzd'
+              | 'egp'
+              | 'etb'
+              | 'eur'
+              | 'fjd'
+              | 'gbp'
+              | 'gel'
+              | 'gip'
+              | 'gmd'
+              | 'gyd'
+              | 'hkd'
+              | 'hrk'
+              | 'htg'
+              | 'idr'
+              | 'ils'
+              | 'inr'
+              | 'isk'
+              | 'jmd'
+              | 'jpy'
+              | 'kes'
+              | 'kgs'
+              | 'khr'
+              | 'kmf'
+              | 'krw'
+              | 'kyd'
+              | 'kzt'
+              | 'lbp'
+              | 'lkr'
+              | 'lrd'
+              | 'lsl'
+              | 'mad'
+              | 'mdl'
+              | 'mga'
+              | 'mkd'
+              | 'mmk'
+              | 'mnt'
+              | 'mop'
+              | 'mro'
+              | 'mvr'
+              | 'mwk'
+              | 'mxn'
+              | 'myr'
+              | 'mzn'
+              | 'nad'
+              | 'ngn'
+              | 'nok'
+              | 'npr'
+              | 'nzd'
+              | 'pgk'
+              | 'php'
+              | 'pkr'
+              | 'pln'
+              | 'qar'
+              | 'ron'
+              | 'rsd'
+              | 'rub'
+              | 'rwf'
+              | 'sar'
+              | 'sbd'
+              | 'scr'
+              | 'sek'
+              | 'sgd'
+              | 'sle'
+              | 'sll'
+              | 'sos'
+              | 'szl'
+              | 'thb'
+              | 'tjs'
+              | 'top'
+              | 'try'
+              | 'ttd'
+              | 'tzs'
+              | 'uah'
+              | 'uzs'
+              | 'vnd'
+              | 'vuv'
+              | 'wst'
+              | 'xaf'
+              | 'xcd'
+              | 'yer'
+              | 'zar'
+              | 'zmw'
+              | 'clp'
+              | 'djf'
+              | 'gnf'
+              | 'ugx'
+              | 'pyg'
+              | 'xof'
+              | 'xpf';
+          }
+        }
+      }
+
+      /**
+       * Monthly reset period configuration
+       */
+      export interface MonthlyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart or StartOfTheMonth)
+         */
+        accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
+      }
+
+      /**
+       * Weekly reset period configuration
+       */
+      export interface WeeklyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart or specific day)
+         */
+        accordingTo:
+          | 'SubscriptionStart'
+          | 'EverySunday'
+          | 'EveryMonday'
+          | 'EveryTuesday'
+          | 'EveryWednesday'
+          | 'EveryThursday'
+          | 'EveryFriday'
+          | 'EverySaturday';
+      }
+
+      /**
+       * Yearly reset period configuration
+       */
+      export interface YearlyResetPeriodConfiguration {
+        /**
+         * Reset anchor (SubscriptionStart)
+         */
+        accordingTo: 'SubscriptionStart';
+      }
+    }
+  }
+
   /**
    * Default trial configuration for the plan
    */
@@ -644,1369 +2002,6 @@ export interface PlanPublishParams {
   migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS';
 }
 
-export interface PlanSetPricingParams {
-  /**
-   * The pricing type (FREE, PAID, or CUSTOM)
-   */
-  pricingType: 'FREE' | 'PAID' | 'CUSTOM';
-
-  /**
-   * Deprecated: billing integration ID
-   */
-  billingId?: string;
-
-  /**
-   * Minimum spend configuration per billing period
-   */
-  minimumSpend?: Array<PlanSetPricingParams.MinimumSpend> | null;
-
-  /**
-   * When overage charges are billed
-   */
-  overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY';
-
-  /**
-   * Array of overage pricing model configurations
-   */
-  overagePricingModels?: Array<PlanSetPricingParams.OveragePricingModel>;
-
-  /**
-   * Array of pricing model configurations
-   */
-  pricingModels?: Array<PlanSetPricingParams.PricingModel>;
-}
-
-export namespace PlanSetPricingParams {
-  /**
-   * Minimum spend configuration for a billing period.
-   */
-  export interface MinimumSpend {
-    /**
-     * The billing period
-     */
-    billingPeriod: 'MONTHLY' | 'ANNUALLY';
-
-    /**
-     * The minimum spend amount
-     */
-    minimum: MinimumSpend.Minimum;
-  }
-
-  export namespace MinimumSpend {
-    /**
-     * The minimum spend amount
-     */
-    export interface Minimum {
-      /**
-       * The price amount
-       */
-      amount: number;
-
-      /**
-       * The price currency
-       */
-      currency?:
-        | 'usd'
-        | 'aed'
-        | 'all'
-        | 'amd'
-        | 'ang'
-        | 'aud'
-        | 'awg'
-        | 'azn'
-        | 'bam'
-        | 'bbd'
-        | 'bdt'
-        | 'bgn'
-        | 'bif'
-        | 'bmd'
-        | 'bnd'
-        | 'bsd'
-        | 'bwp'
-        | 'byn'
-        | 'bzd'
-        | 'brl'
-        | 'cad'
-        | 'cdf'
-        | 'chf'
-        | 'cny'
-        | 'czk'
-        | 'dkk'
-        | 'dop'
-        | 'dzd'
-        | 'egp'
-        | 'etb'
-        | 'eur'
-        | 'fjd'
-        | 'gbp'
-        | 'gel'
-        | 'gip'
-        | 'gmd'
-        | 'gyd'
-        | 'hkd'
-        | 'hrk'
-        | 'htg'
-        | 'idr'
-        | 'ils'
-        | 'inr'
-        | 'isk'
-        | 'jmd'
-        | 'jpy'
-        | 'kes'
-        | 'kgs'
-        | 'khr'
-        | 'kmf'
-        | 'krw'
-        | 'kyd'
-        | 'kzt'
-        | 'lbp'
-        | 'lkr'
-        | 'lrd'
-        | 'lsl'
-        | 'mad'
-        | 'mdl'
-        | 'mga'
-        | 'mkd'
-        | 'mmk'
-        | 'mnt'
-        | 'mop'
-        | 'mro'
-        | 'mvr'
-        | 'mwk'
-        | 'mxn'
-        | 'myr'
-        | 'mzn'
-        | 'nad'
-        | 'ngn'
-        | 'nok'
-        | 'npr'
-        | 'nzd'
-        | 'pgk'
-        | 'php'
-        | 'pkr'
-        | 'pln'
-        | 'qar'
-        | 'ron'
-        | 'rsd'
-        | 'rub'
-        | 'rwf'
-        | 'sar'
-        | 'sbd'
-        | 'scr'
-        | 'sek'
-        | 'sgd'
-        | 'sle'
-        | 'sll'
-        | 'sos'
-        | 'szl'
-        | 'thb'
-        | 'tjs'
-        | 'top'
-        | 'try'
-        | 'ttd'
-        | 'tzs'
-        | 'uah'
-        | 'uzs'
-        | 'vnd'
-        | 'vuv'
-        | 'wst'
-        | 'xaf'
-        | 'xcd'
-        | 'yer'
-        | 'zar'
-        | 'zmw'
-        | 'clp'
-        | 'djf'
-        | 'gnf'
-        | 'ugx'
-        | 'pyg'
-        | 'xof'
-        | 'xpf';
-    }
-  }
-
-  /**
-   * Overage pricing model configuration.
-   */
-  export interface OveragePricingModel {
-    /**
-     * The billing model for overages
-     */
-    billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
-
-    /**
-     * Price periods for overage pricing
-     */
-    pricePeriods: Array<OveragePricingModel.PricePeriod>;
-
-    /**
-     * The billing cadence for overages
-     */
-    billingCadence?: 'RECURRING' | 'ONE_OFF';
-
-    /**
-     * Entitlement configuration for the overage feature
-     */
-    entitlement?: OveragePricingModel.Entitlement;
-
-    /**
-     * The feature ID for overage pricing
-     */
-    featureId?: string;
-
-    /**
-     * Custom currency ID for overage top-up
-     */
-    topUpCustomCurrencyId?: string;
-  }
-
-  export namespace OveragePricingModel {
-    /**
-     * Price configuration for a specific billing period.
-     */
-    export interface PricePeriod {
-      /**
-       * The billing period (MONTHLY or ANNUALLY)
-       */
-      billingPeriod: 'MONTHLY' | 'ANNUALLY';
-
-      /**
-       * ISO country code for localized pricing
-       */
-      billingCountryCode?: string;
-
-      /**
-       * Block size for usage-based pricing
-       */
-      blockSize?: number;
-
-      /**
-       * When credits are granted
-       */
-      creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY';
-
-      /**
-       * Credit rate configuration for credit-based pricing
-       */
-      creditRate?: PricePeriod.CreditRate;
-
-      /**
-       * The price amount and currency
-       */
-      price?: PricePeriod.Price;
-
-      /**
-       * Tiered pricing configuration
-       */
-      tiers?: Array<PricePeriod.Tier>;
-    }
-
-    export namespace PricePeriod {
-      /**
-       * Credit rate configuration for credit-based pricing
-       */
-      export interface CreditRate {
-        /**
-         * The credit rate amount
-         */
-        amount: number;
-
-        /**
-         * The custom currency ID
-         */
-        currencyId: string;
-
-        /**
-         * Optional cost formula expression
-         */
-        costFormula?: string;
-      }
-
-      /**
-       * The price amount and currency
-       */
-      export interface Price {
-        /**
-         * The price amount
-         */
-        amount: number;
-
-        /**
-         * The price currency
-         */
-        currency?:
-          | 'usd'
-          | 'aed'
-          | 'all'
-          | 'amd'
-          | 'ang'
-          | 'aud'
-          | 'awg'
-          | 'azn'
-          | 'bam'
-          | 'bbd'
-          | 'bdt'
-          | 'bgn'
-          | 'bif'
-          | 'bmd'
-          | 'bnd'
-          | 'bsd'
-          | 'bwp'
-          | 'byn'
-          | 'bzd'
-          | 'brl'
-          | 'cad'
-          | 'cdf'
-          | 'chf'
-          | 'cny'
-          | 'czk'
-          | 'dkk'
-          | 'dop'
-          | 'dzd'
-          | 'egp'
-          | 'etb'
-          | 'eur'
-          | 'fjd'
-          | 'gbp'
-          | 'gel'
-          | 'gip'
-          | 'gmd'
-          | 'gyd'
-          | 'hkd'
-          | 'hrk'
-          | 'htg'
-          | 'idr'
-          | 'ils'
-          | 'inr'
-          | 'isk'
-          | 'jmd'
-          | 'jpy'
-          | 'kes'
-          | 'kgs'
-          | 'khr'
-          | 'kmf'
-          | 'krw'
-          | 'kyd'
-          | 'kzt'
-          | 'lbp'
-          | 'lkr'
-          | 'lrd'
-          | 'lsl'
-          | 'mad'
-          | 'mdl'
-          | 'mga'
-          | 'mkd'
-          | 'mmk'
-          | 'mnt'
-          | 'mop'
-          | 'mro'
-          | 'mvr'
-          | 'mwk'
-          | 'mxn'
-          | 'myr'
-          | 'mzn'
-          | 'nad'
-          | 'ngn'
-          | 'nok'
-          | 'npr'
-          | 'nzd'
-          | 'pgk'
-          | 'php'
-          | 'pkr'
-          | 'pln'
-          | 'qar'
-          | 'ron'
-          | 'rsd'
-          | 'rub'
-          | 'rwf'
-          | 'sar'
-          | 'sbd'
-          | 'scr'
-          | 'sek'
-          | 'sgd'
-          | 'sle'
-          | 'sll'
-          | 'sos'
-          | 'szl'
-          | 'thb'
-          | 'tjs'
-          | 'top'
-          | 'try'
-          | 'ttd'
-          | 'tzs'
-          | 'uah'
-          | 'uzs'
-          | 'vnd'
-          | 'vuv'
-          | 'wst'
-          | 'xaf'
-          | 'xcd'
-          | 'yer'
-          | 'zar'
-          | 'zmw'
-          | 'clp'
-          | 'djf'
-          | 'gnf'
-          | 'ugx'
-          | 'pyg'
-          | 'xof'
-          | 'xpf';
-      }
-
-      /**
-       * A tier in tiered pricing.
-       */
-      export interface Tier {
-        /**
-         * Flat price for this tier
-         */
-        flatPrice?: Tier.FlatPrice;
-
-        /**
-         * Per-unit price in this tier
-         */
-        unitPrice?: Tier.UnitPrice;
-
-        /**
-         * Upper bound of this tier (null for unlimited)
-         */
-        upTo?: number;
-      }
-
-      export namespace Tier {
-        /**
-         * Flat price for this tier
-         */
-        export interface FlatPrice {
-          /**
-           * The price amount
-           */
-          amount: number;
-
-          /**
-           * The price currency
-           */
-          currency?:
-            | 'usd'
-            | 'aed'
-            | 'all'
-            | 'amd'
-            | 'ang'
-            | 'aud'
-            | 'awg'
-            | 'azn'
-            | 'bam'
-            | 'bbd'
-            | 'bdt'
-            | 'bgn'
-            | 'bif'
-            | 'bmd'
-            | 'bnd'
-            | 'bsd'
-            | 'bwp'
-            | 'byn'
-            | 'bzd'
-            | 'brl'
-            | 'cad'
-            | 'cdf'
-            | 'chf'
-            | 'cny'
-            | 'czk'
-            | 'dkk'
-            | 'dop'
-            | 'dzd'
-            | 'egp'
-            | 'etb'
-            | 'eur'
-            | 'fjd'
-            | 'gbp'
-            | 'gel'
-            | 'gip'
-            | 'gmd'
-            | 'gyd'
-            | 'hkd'
-            | 'hrk'
-            | 'htg'
-            | 'idr'
-            | 'ils'
-            | 'inr'
-            | 'isk'
-            | 'jmd'
-            | 'jpy'
-            | 'kes'
-            | 'kgs'
-            | 'khr'
-            | 'kmf'
-            | 'krw'
-            | 'kyd'
-            | 'kzt'
-            | 'lbp'
-            | 'lkr'
-            | 'lrd'
-            | 'lsl'
-            | 'mad'
-            | 'mdl'
-            | 'mga'
-            | 'mkd'
-            | 'mmk'
-            | 'mnt'
-            | 'mop'
-            | 'mro'
-            | 'mvr'
-            | 'mwk'
-            | 'mxn'
-            | 'myr'
-            | 'mzn'
-            | 'nad'
-            | 'ngn'
-            | 'nok'
-            | 'npr'
-            | 'nzd'
-            | 'pgk'
-            | 'php'
-            | 'pkr'
-            | 'pln'
-            | 'qar'
-            | 'ron'
-            | 'rsd'
-            | 'rub'
-            | 'rwf'
-            | 'sar'
-            | 'sbd'
-            | 'scr'
-            | 'sek'
-            | 'sgd'
-            | 'sle'
-            | 'sll'
-            | 'sos'
-            | 'szl'
-            | 'thb'
-            | 'tjs'
-            | 'top'
-            | 'try'
-            | 'ttd'
-            | 'tzs'
-            | 'uah'
-            | 'uzs'
-            | 'vnd'
-            | 'vuv'
-            | 'wst'
-            | 'xaf'
-            | 'xcd'
-            | 'yer'
-            | 'zar'
-            | 'zmw'
-            | 'clp'
-            | 'djf'
-            | 'gnf'
-            | 'ugx'
-            | 'pyg'
-            | 'xof'
-            | 'xpf';
-        }
-
-        /**
-         * Per-unit price in this tier
-         */
-        export interface UnitPrice {
-          /**
-           * The price amount
-           */
-          amount: number;
-
-          /**
-           * The price currency
-           */
-          currency?:
-            | 'usd'
-            | 'aed'
-            | 'all'
-            | 'amd'
-            | 'ang'
-            | 'aud'
-            | 'awg'
-            | 'azn'
-            | 'bam'
-            | 'bbd'
-            | 'bdt'
-            | 'bgn'
-            | 'bif'
-            | 'bmd'
-            | 'bnd'
-            | 'bsd'
-            | 'bwp'
-            | 'byn'
-            | 'bzd'
-            | 'brl'
-            | 'cad'
-            | 'cdf'
-            | 'chf'
-            | 'cny'
-            | 'czk'
-            | 'dkk'
-            | 'dop'
-            | 'dzd'
-            | 'egp'
-            | 'etb'
-            | 'eur'
-            | 'fjd'
-            | 'gbp'
-            | 'gel'
-            | 'gip'
-            | 'gmd'
-            | 'gyd'
-            | 'hkd'
-            | 'hrk'
-            | 'htg'
-            | 'idr'
-            | 'ils'
-            | 'inr'
-            | 'isk'
-            | 'jmd'
-            | 'jpy'
-            | 'kes'
-            | 'kgs'
-            | 'khr'
-            | 'kmf'
-            | 'krw'
-            | 'kyd'
-            | 'kzt'
-            | 'lbp'
-            | 'lkr'
-            | 'lrd'
-            | 'lsl'
-            | 'mad'
-            | 'mdl'
-            | 'mga'
-            | 'mkd'
-            | 'mmk'
-            | 'mnt'
-            | 'mop'
-            | 'mro'
-            | 'mvr'
-            | 'mwk'
-            | 'mxn'
-            | 'myr'
-            | 'mzn'
-            | 'nad'
-            | 'ngn'
-            | 'nok'
-            | 'npr'
-            | 'nzd'
-            | 'pgk'
-            | 'php'
-            | 'pkr'
-            | 'pln'
-            | 'qar'
-            | 'ron'
-            | 'rsd'
-            | 'rub'
-            | 'rwf'
-            | 'sar'
-            | 'sbd'
-            | 'scr'
-            | 'sek'
-            | 'sgd'
-            | 'sle'
-            | 'sll'
-            | 'sos'
-            | 'szl'
-            | 'thb'
-            | 'tjs'
-            | 'top'
-            | 'try'
-            | 'ttd'
-            | 'tzs'
-            | 'uah'
-            | 'uzs'
-            | 'vnd'
-            | 'vuv'
-            | 'wst'
-            | 'xaf'
-            | 'xcd'
-            | 'yer'
-            | 'zar'
-            | 'zmw'
-            | 'clp'
-            | 'djf'
-            | 'gnf'
-            | 'ugx'
-            | 'pyg'
-            | 'xof'
-            | 'xpf';
-        }
-      }
-    }
-
-    /**
-     * Entitlement configuration for the overage feature
-     */
-    export interface Entitlement {
-      /**
-       * The feature ID for the entitlement
-       */
-      featureId: string;
-
-      /**
-       * Whether the limit is soft (allows overage)
-       */
-      hasSoftLimit?: boolean;
-
-      /**
-       * Whether usage is unlimited
-       */
-      hasUnlimitedUsage?: boolean;
-
-      /**
-       * Monthly reset configuration
-       */
-      monthlyResetPeriodConfiguration?: Entitlement.MonthlyResetPeriodConfiguration;
-
-      /**
-       * The usage reset period
-       */
-      resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
-
-      /**
-       * The usage limit before overage kicks in
-       */
-      usageLimit?: number;
-
-      /**
-       * Weekly reset configuration
-       */
-      weeklyResetPeriodConfiguration?: Entitlement.WeeklyResetPeriodConfiguration;
-
-      /**
-       * Yearly reset configuration
-       */
-      yearlyResetPeriodConfiguration?: Entitlement.YearlyResetPeriodConfiguration;
-    }
-
-    export namespace Entitlement {
-      /**
-       * Monthly reset configuration
-       */
-      export interface MonthlyResetPeriodConfiguration {
-        /**
-         * Reset anchor (SubscriptionStart or StartOfTheMonth)
-         */
-        accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
-      }
-
-      /**
-       * Weekly reset configuration
-       */
-      export interface WeeklyResetPeriodConfiguration {
-        /**
-         * Reset anchor (SubscriptionStart or specific day)
-         */
-        accordingTo:
-          | 'SubscriptionStart'
-          | 'EverySunday'
-          | 'EveryMonday'
-          | 'EveryTuesday'
-          | 'EveryWednesday'
-          | 'EveryThursday'
-          | 'EveryFriday'
-          | 'EverySaturday';
-      }
-
-      /**
-       * Yearly reset configuration
-       */
-      export interface YearlyResetPeriodConfiguration {
-        /**
-         * Reset anchor (SubscriptionStart)
-         */
-        accordingTo: 'SubscriptionStart';
-      }
-    }
-  }
-
-  /**
-   * A pricing model configuration with billing details and price periods.
-   */
-  export interface PricingModel {
-    /**
-     * The billing model (FLAT_FEE, PER_UNIT, USAGE_BASED, CREDIT_BASED)
-     */
-    billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
-
-    /**
-     * Array of price period configurations (at least one required)
-     */
-    pricePeriods: Array<PricingModel.PricePeriod>;
-
-    /**
-     * The billing cadence (RECURRING or ONE_OFF)
-     */
-    billingCadence?: 'RECURRING' | 'ONE_OFF';
-
-    /**
-     * The feature ID this pricing model is associated with
-     */
-    featureId?: string;
-
-    /**
-     * Maximum number of units (max 999999)
-     */
-    maxUnitQuantity?: number;
-
-    /**
-     * Minimum number of units
-     */
-    minUnitQuantity?: number;
-
-    /**
-     * Monthly reset period configuration
-     */
-    monthlyResetPeriodConfiguration?: PricingModel.MonthlyResetPeriodConfiguration;
-
-    /**
-     * The usage reset period
-     */
-    resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
-
-    /**
-     * The tiered pricing mode (VOLUME or GRADUATED)
-     */
-    tiersMode?: 'VOLUME' | 'GRADUATED';
-
-    /**
-     * The custom currency ID for top-up pricing
-     */
-    topUpCustomCurrencyId?: string;
-
-    /**
-     * Weekly reset period configuration
-     */
-    weeklyResetPeriodConfiguration?: PricingModel.WeeklyResetPeriodConfiguration;
-
-    /**
-     * Yearly reset period configuration
-     */
-    yearlyResetPeriodConfiguration?: PricingModel.YearlyResetPeriodConfiguration;
-  }
-
-  export namespace PricingModel {
-    /**
-     * Price configuration for a specific billing period.
-     */
-    export interface PricePeriod {
-      /**
-       * The billing period (MONTHLY or ANNUALLY)
-       */
-      billingPeriod: 'MONTHLY' | 'ANNUALLY';
-
-      /**
-       * ISO country code for localized pricing
-       */
-      billingCountryCode?: string;
-
-      /**
-       * Block size for usage-based pricing
-       */
-      blockSize?: number;
-
-      /**
-       * When credits are granted
-       */
-      creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY';
-
-      /**
-       * Credit rate configuration for credit-based pricing
-       */
-      creditRate?: PricePeriod.CreditRate;
-
-      /**
-       * The price amount and currency
-       */
-      price?: PricePeriod.Price;
-
-      /**
-       * Tiered pricing configuration
-       */
-      tiers?: Array<PricePeriod.Tier>;
-    }
-
-    export namespace PricePeriod {
-      /**
-       * Credit rate configuration for credit-based pricing
-       */
-      export interface CreditRate {
-        /**
-         * The credit rate amount
-         */
-        amount: number;
-
-        /**
-         * The custom currency ID
-         */
-        currencyId: string;
-
-        /**
-         * Optional cost formula expression
-         */
-        costFormula?: string;
-      }
-
-      /**
-       * The price amount and currency
-       */
-      export interface Price {
-        /**
-         * The price amount
-         */
-        amount: number;
-
-        /**
-         * The price currency
-         */
-        currency?:
-          | 'usd'
-          | 'aed'
-          | 'all'
-          | 'amd'
-          | 'ang'
-          | 'aud'
-          | 'awg'
-          | 'azn'
-          | 'bam'
-          | 'bbd'
-          | 'bdt'
-          | 'bgn'
-          | 'bif'
-          | 'bmd'
-          | 'bnd'
-          | 'bsd'
-          | 'bwp'
-          | 'byn'
-          | 'bzd'
-          | 'brl'
-          | 'cad'
-          | 'cdf'
-          | 'chf'
-          | 'cny'
-          | 'czk'
-          | 'dkk'
-          | 'dop'
-          | 'dzd'
-          | 'egp'
-          | 'etb'
-          | 'eur'
-          | 'fjd'
-          | 'gbp'
-          | 'gel'
-          | 'gip'
-          | 'gmd'
-          | 'gyd'
-          | 'hkd'
-          | 'hrk'
-          | 'htg'
-          | 'idr'
-          | 'ils'
-          | 'inr'
-          | 'isk'
-          | 'jmd'
-          | 'jpy'
-          | 'kes'
-          | 'kgs'
-          | 'khr'
-          | 'kmf'
-          | 'krw'
-          | 'kyd'
-          | 'kzt'
-          | 'lbp'
-          | 'lkr'
-          | 'lrd'
-          | 'lsl'
-          | 'mad'
-          | 'mdl'
-          | 'mga'
-          | 'mkd'
-          | 'mmk'
-          | 'mnt'
-          | 'mop'
-          | 'mro'
-          | 'mvr'
-          | 'mwk'
-          | 'mxn'
-          | 'myr'
-          | 'mzn'
-          | 'nad'
-          | 'ngn'
-          | 'nok'
-          | 'npr'
-          | 'nzd'
-          | 'pgk'
-          | 'php'
-          | 'pkr'
-          | 'pln'
-          | 'qar'
-          | 'ron'
-          | 'rsd'
-          | 'rub'
-          | 'rwf'
-          | 'sar'
-          | 'sbd'
-          | 'scr'
-          | 'sek'
-          | 'sgd'
-          | 'sle'
-          | 'sll'
-          | 'sos'
-          | 'szl'
-          | 'thb'
-          | 'tjs'
-          | 'top'
-          | 'try'
-          | 'ttd'
-          | 'tzs'
-          | 'uah'
-          | 'uzs'
-          | 'vnd'
-          | 'vuv'
-          | 'wst'
-          | 'xaf'
-          | 'xcd'
-          | 'yer'
-          | 'zar'
-          | 'zmw'
-          | 'clp'
-          | 'djf'
-          | 'gnf'
-          | 'ugx'
-          | 'pyg'
-          | 'xof'
-          | 'xpf';
-      }
-
-      /**
-       * A tier in tiered pricing.
-       */
-      export interface Tier {
-        /**
-         * Flat price for this tier
-         */
-        flatPrice?: Tier.FlatPrice;
-
-        /**
-         * Per-unit price in this tier
-         */
-        unitPrice?: Tier.UnitPrice;
-
-        /**
-         * Upper bound of this tier (null for unlimited)
-         */
-        upTo?: number;
-      }
-
-      export namespace Tier {
-        /**
-         * Flat price for this tier
-         */
-        export interface FlatPrice {
-          /**
-           * The price amount
-           */
-          amount: number;
-
-          /**
-           * The price currency
-           */
-          currency?:
-            | 'usd'
-            | 'aed'
-            | 'all'
-            | 'amd'
-            | 'ang'
-            | 'aud'
-            | 'awg'
-            | 'azn'
-            | 'bam'
-            | 'bbd'
-            | 'bdt'
-            | 'bgn'
-            | 'bif'
-            | 'bmd'
-            | 'bnd'
-            | 'bsd'
-            | 'bwp'
-            | 'byn'
-            | 'bzd'
-            | 'brl'
-            | 'cad'
-            | 'cdf'
-            | 'chf'
-            | 'cny'
-            | 'czk'
-            | 'dkk'
-            | 'dop'
-            | 'dzd'
-            | 'egp'
-            | 'etb'
-            | 'eur'
-            | 'fjd'
-            | 'gbp'
-            | 'gel'
-            | 'gip'
-            | 'gmd'
-            | 'gyd'
-            | 'hkd'
-            | 'hrk'
-            | 'htg'
-            | 'idr'
-            | 'ils'
-            | 'inr'
-            | 'isk'
-            | 'jmd'
-            | 'jpy'
-            | 'kes'
-            | 'kgs'
-            | 'khr'
-            | 'kmf'
-            | 'krw'
-            | 'kyd'
-            | 'kzt'
-            | 'lbp'
-            | 'lkr'
-            | 'lrd'
-            | 'lsl'
-            | 'mad'
-            | 'mdl'
-            | 'mga'
-            | 'mkd'
-            | 'mmk'
-            | 'mnt'
-            | 'mop'
-            | 'mro'
-            | 'mvr'
-            | 'mwk'
-            | 'mxn'
-            | 'myr'
-            | 'mzn'
-            | 'nad'
-            | 'ngn'
-            | 'nok'
-            | 'npr'
-            | 'nzd'
-            | 'pgk'
-            | 'php'
-            | 'pkr'
-            | 'pln'
-            | 'qar'
-            | 'ron'
-            | 'rsd'
-            | 'rub'
-            | 'rwf'
-            | 'sar'
-            | 'sbd'
-            | 'scr'
-            | 'sek'
-            | 'sgd'
-            | 'sle'
-            | 'sll'
-            | 'sos'
-            | 'szl'
-            | 'thb'
-            | 'tjs'
-            | 'top'
-            | 'try'
-            | 'ttd'
-            | 'tzs'
-            | 'uah'
-            | 'uzs'
-            | 'vnd'
-            | 'vuv'
-            | 'wst'
-            | 'xaf'
-            | 'xcd'
-            | 'yer'
-            | 'zar'
-            | 'zmw'
-            | 'clp'
-            | 'djf'
-            | 'gnf'
-            | 'ugx'
-            | 'pyg'
-            | 'xof'
-            | 'xpf';
-        }
-
-        /**
-         * Per-unit price in this tier
-         */
-        export interface UnitPrice {
-          /**
-           * The price amount
-           */
-          amount: number;
-
-          /**
-           * The price currency
-           */
-          currency?:
-            | 'usd'
-            | 'aed'
-            | 'all'
-            | 'amd'
-            | 'ang'
-            | 'aud'
-            | 'awg'
-            | 'azn'
-            | 'bam'
-            | 'bbd'
-            | 'bdt'
-            | 'bgn'
-            | 'bif'
-            | 'bmd'
-            | 'bnd'
-            | 'bsd'
-            | 'bwp'
-            | 'byn'
-            | 'bzd'
-            | 'brl'
-            | 'cad'
-            | 'cdf'
-            | 'chf'
-            | 'cny'
-            | 'czk'
-            | 'dkk'
-            | 'dop'
-            | 'dzd'
-            | 'egp'
-            | 'etb'
-            | 'eur'
-            | 'fjd'
-            | 'gbp'
-            | 'gel'
-            | 'gip'
-            | 'gmd'
-            | 'gyd'
-            | 'hkd'
-            | 'hrk'
-            | 'htg'
-            | 'idr'
-            | 'ils'
-            | 'inr'
-            | 'isk'
-            | 'jmd'
-            | 'jpy'
-            | 'kes'
-            | 'kgs'
-            | 'khr'
-            | 'kmf'
-            | 'krw'
-            | 'kyd'
-            | 'kzt'
-            | 'lbp'
-            | 'lkr'
-            | 'lrd'
-            | 'lsl'
-            | 'mad'
-            | 'mdl'
-            | 'mga'
-            | 'mkd'
-            | 'mmk'
-            | 'mnt'
-            | 'mop'
-            | 'mro'
-            | 'mvr'
-            | 'mwk'
-            | 'mxn'
-            | 'myr'
-            | 'mzn'
-            | 'nad'
-            | 'ngn'
-            | 'nok'
-            | 'npr'
-            | 'nzd'
-            | 'pgk'
-            | 'php'
-            | 'pkr'
-            | 'pln'
-            | 'qar'
-            | 'ron'
-            | 'rsd'
-            | 'rub'
-            | 'rwf'
-            | 'sar'
-            | 'sbd'
-            | 'scr'
-            | 'sek'
-            | 'sgd'
-            | 'sle'
-            | 'sll'
-            | 'sos'
-            | 'szl'
-            | 'thb'
-            | 'tjs'
-            | 'top'
-            | 'try'
-            | 'ttd'
-            | 'tzs'
-            | 'uah'
-            | 'uzs'
-            | 'vnd'
-            | 'vuv'
-            | 'wst'
-            | 'xaf'
-            | 'xcd'
-            | 'yer'
-            | 'zar'
-            | 'zmw'
-            | 'clp'
-            | 'djf'
-            | 'gnf'
-            | 'ugx'
-            | 'pyg'
-            | 'xof'
-            | 'xpf';
-        }
-      }
-    }
-
-    /**
-     * Monthly reset period configuration
-     */
-    export interface MonthlyResetPeriodConfiguration {
-      /**
-       * Reset anchor (SubscriptionStart or StartOfTheMonth)
-       */
-      accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
-    }
-
-    /**
-     * Weekly reset period configuration
-     */
-    export interface WeeklyResetPeriodConfiguration {
-      /**
-       * Reset anchor (SubscriptionStart or specific day)
-       */
-      accordingTo:
-        | 'SubscriptionStart'
-        | 'EverySunday'
-        | 'EveryMonday'
-        | 'EveryTuesday'
-        | 'EveryWednesday'
-        | 'EveryThursday'
-        | 'EveryFriday'
-        | 'EverySaturday';
-    }
-
-    /**
-     * Yearly reset period configuration
-     */
-    export interface YearlyResetPeriodConfiguration {
-      /**
-       * Reset anchor (SubscriptionStart)
-       */
-      accordingTo: 'SubscriptionStart';
-    }
-  }
-}
-
 Plans.Entitlements = Entitlements;
 
 export declare namespace Plans {
@@ -2020,7 +2015,6 @@ export declare namespace Plans {
     type PlanUpdateParams as PlanUpdateParams,
     type PlanListParams as PlanListParams,
     type PlanPublishParams as PlanPublishParams,
-    type PlanSetPricingParams as PlanSetPricingParams,
   };
 
   export {

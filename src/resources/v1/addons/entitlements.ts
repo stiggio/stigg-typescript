@@ -262,6 +262,13 @@ export namespace AddonPackageEntitlement {
      * Timestamp of when the record was last updated
      */
     updatedAt: string;
+
+    /**
+     * The feature ID this entitlement depends on (for credit entitlements). The
+     * entitlement value will be calculated as: base amount × dependency feature usage
+     * limit
+     */
+    dependencyFeatureId?: string | null;
   }
 }
 
@@ -475,6 +482,13 @@ export namespace EntitlementCreateResponse {
      * Timestamp of when the record was last updated
      */
     updatedAt: string;
+
+    /**
+     * The feature ID this entitlement depends on (for credit entitlements). The
+     * entitlement value will be calculated as: base amount × dependency feature usage
+     * limit
+     */
+    dependencyFeatureId?: string | null;
   }
 }
 
@@ -693,6 +707,13 @@ export namespace EntitlementListResponse {
      * Timestamp of when the record was last updated
      */
     updatedAt: string;
+
+    /**
+     * The feature ID this entitlement depends on (for credit entitlements). The
+     * entitlement value will be calculated as: base amount × dependency feature usage
+     * limit
+     */
+    dependencyFeatureId?: string | null;
   }
 
   /**
@@ -878,6 +899,12 @@ export namespace EntitlementCreateParams {
      * Entitlement behavior (Increment or Override)
      */
     behavior?: 'Increment' | 'Override';
+
+    /**
+     * The feature ID this entitlement depends on. The entitlement value will be
+     * calculated as: base amount × dependency feature usage limit
+     */
+    dependencyFeatureId?: string;
 
     /**
      * Description of the entitlement
@@ -1068,6 +1095,12 @@ export declare namespace EntitlementUpdateParams {
      * Body param: Credit grant cadence (MONTH or YEAR)
      */
     cadence?: 'MONTH' | 'YEAR';
+
+    /**
+     * Body param: The feature ID this entitlement depends on. The entitlement value
+     * will be calculated as: base amount × dependency feature usage limit
+     */
+    dependencyFeatureId?: string | null;
 
     /**
      * Body param: Description of the entitlement
