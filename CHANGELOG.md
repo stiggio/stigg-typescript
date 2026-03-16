@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-alpha.22 (2026-03-16)
+
+Full Changelog: [v0.1.0-alpha.21...v0.1.0-alpha.22](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.21...v0.1.0-alpha.22)
+
+### Features
+
+* **api:** api update ([7dd8af8](https://github.com/stiggio/stigg-typescript/commit/7dd8af817239bc18fb627bead4b9b017bd609fe3))
+* **api:** api update ([fcda896](https://github.com/stiggio/stigg-typescript/commit/fcda8963c63a6d8b3bfc577ae62ef14882e02cb2))
+* **api:** api update ([b68062e](https://github.com/stiggio/stigg-typescript/commit/b68062e8a4ebaab40052b9229dc3de56bef8ec19))
+
+
+### Chores
+
+* **internal:** make generated MCP servers compatible with Cloudflare worker environments ([d7ffcbf](https://github.com/stiggio/stigg-typescript/commit/d7ffcbfe34c5d2409caf709851e6d53f84ba3403))
+* **internal:** support x-stainless-mcp-client-envs header in MCP servers ([d8f554f](https://github.com/stiggio/stigg-typescript/commit/d8f554f6083a6d494bd1ad81c2cba96bd1a12b49))
+
 ## 0.1.0-alpha.21 (2026-03-12)
 
 Full Changelog: [v0.1.0-alpha.20...v0.1.0-alpha.21](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.20...v0.1.0-alpha.21)
