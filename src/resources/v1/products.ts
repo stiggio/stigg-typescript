@@ -394,6 +394,10 @@ export namespace ProductUpdateProductParams {
      */
     downgradePlanId?: string | null;
 
+    /**
+     * Indicates if the subscription should be prorated at the end of the billing
+     * period
+     */
     prorateAtEndOfBillingPeriod?: boolean | null;
 
     /**
