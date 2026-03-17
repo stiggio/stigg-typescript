@@ -286,7 +286,7 @@ export interface ProductDuplicateProductParams {
   /**
    * The unique identifier for the entity
    */
-  id: string;
+  targetId: string;
 
   /**
    * Description of the product
