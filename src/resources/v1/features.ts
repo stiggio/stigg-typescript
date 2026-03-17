@@ -504,6 +504,9 @@ export namespace FeatureUpdateFeatureParams {
     export interface Aggregation {
       function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
 
+      /**
+       * Aggregation field name
+       */
       field?: string;
     }
 
@@ -513,6 +516,9 @@ export namespace FeatureUpdateFeatureParams {
 
     export namespace Filter {
       export interface Condition {
+        /**
+         * Condition field name
+         */
         field: string;
 
         operation:
@@ -529,6 +535,9 @@ export namespace FeatureUpdateFeatureParams {
           | 'ENDS_WITH'
           | 'IN';
 
+        /**
+         * Condition value
+         */
         value?: string;
 
         values?: Array<string>;
