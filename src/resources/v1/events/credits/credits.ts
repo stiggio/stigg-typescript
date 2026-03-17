@@ -262,7 +262,9 @@ export interface CreditListLedgerResponse {
     | 'CREDITS_EXPIRED'
     | 'CREDITS_CONSUMED'
     | 'CREDITS_VOIDED'
-    | 'CREDITS_UPDATED';
+    | 'CREDITS_UPDATED'
+    | 'CREDITS_CONSUMPTION_TRANSFER_SOURCE'
+    | 'CREDITS_CONSUMPTION_TRANSFER_TARGET';
 
   /**
    * The feature ID associated with this event
