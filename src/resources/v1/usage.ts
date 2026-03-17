@@ -218,7 +218,7 @@ export interface UsageHistoryParams {
   endDate?: string;
 
   /**
-   * Query param
+   * Query param: Criteria by which to group the usage history
    */
   groupBy?: string;
 
