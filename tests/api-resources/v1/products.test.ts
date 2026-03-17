@@ -45,7 +45,7 @@ describe('resource products', () => {
 
   // Mock server tests are disabled
   test.skip('duplicateProduct: only required params', async () => {
-    const responsePromise = client.v1.products.duplicateProduct('x', { id: 'id' });
+    const responsePromise = client.v1.products.duplicateProduct('x', { targetId: 'targetId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,7 +58,7 @@ describe('resource products', () => {
   // Mock server tests are disabled
   test.skip('duplicateProduct: required and optional params', async () => {
     const response = await client.v1.products.duplicateProduct('x', {
-      id: 'id',
+      targetId: 'targetId',
       description: 'description',
       displayName: 'displayName',
     });
