@@ -53,6 +53,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers',
   },
   {
+    clientCallName: 'client.v1.customers.retrieveEntitlements',
+    fullyQualifiedName: 'v1.customers.retrieveEntitlements',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entitlements',
+  },
+  {
     clientCallName: 'client.v1.customers.unarchive',
     fullyQualifiedName: 'v1.customers.unarchive',
     httpMethod: 'post',

@@ -27,11 +27,13 @@ export {
   type CustomerListResponse,
   type CustomerImportResponse,
   type CustomerListResourcesResponse,
+  type CustomerRetrieveEntitlementsResponse,
   type CustomerUpdateParams,
   type CustomerListParams,
   type CustomerImportParams,
   type CustomerListResourcesParams,
   type CustomerProvisionParams,
+  type CustomerRetrieveEntitlementsParams,
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';

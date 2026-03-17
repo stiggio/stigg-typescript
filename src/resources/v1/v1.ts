@@ -65,6 +65,8 @@ import {
   CustomerListResponsesMyCursorIDPage,
   CustomerProvisionParams,
   CustomerResponse,
+  CustomerRetrieveEntitlementsParams,
+  CustomerRetrieveEntitlementsResponse,
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
@@ -132,6 +134,7 @@ export declare namespace V1 {
     type CustomerListResponse as CustomerListResponse,
     type CustomerImportResponse as CustomerImportResponse,
     type CustomerListResourcesResponse as CustomerListResourcesResponse,
+    type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerUpdateParams as CustomerUpdateParams,
@@ -139,6 +142,7 @@ export declare namespace V1 {
     type CustomerImportParams as CustomerImportParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
+    type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
   };
 
   export {

@@ -110,6 +110,7 @@ const fuse = new Fuse(
     'client.v1.customers.listResources',
     'client.v1.customers.provision',
     'client.v1.customers.retrieve',
+    'client.v1.customers.retrieveEntitlements',
     'client.v1.customers.unarchive',
     'client.v1.customers.update',
     'client.v1.customers.paymentMethod.attach',
