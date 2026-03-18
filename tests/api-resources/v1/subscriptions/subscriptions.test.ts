@@ -207,7 +207,7 @@ describe('resource subscriptions', () => {
         invoiceDaysUntilDue: 0,
         isBackdated: true,
         isInvoicePaid: true,
-        metadata: {},
+        metadata: { foo: 'string' },
         prorationBehavior: 'INVOICE_IMMEDIATELY',
         taxIds: [{ type: 'type', value: 'value' }],
         taxPercentage: 0,
