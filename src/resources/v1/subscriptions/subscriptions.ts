@@ -2716,6 +2716,11 @@ export namespace SubscriptionProvisionResponse {
     export namespace UnionObjectVariant0 {
       export interface Feature {
         /**
+         * The unique reference ID of the entitlement.
+         */
+        id: string;
+
+        /**
          * The human-readable name of the entitlement, shown in UI elements.
          */
         displayName: string;
@@ -2729,11 +2734,6 @@ export namespace SubscriptionProvisionResponse {
          * The type of feature associated with the entitlement.
          */
         featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
-
-        /**
-         * The unique reference ID of the entitlement.
-         */
-        refId: string;
       }
     }
 
