@@ -3888,6 +3888,9 @@ export interface SubscriptionUpdateParams {
 
   appliedCoupon?: SubscriptionUpdateParams.AppliedCoupon;
 
+  /**
+   * Await payment confirmation
+   */
   awaitPaymentConfirmation?: boolean;
 
   billingCycleAnchor?: 'UNCHANGED' | 'NOW';
@@ -3914,6 +3917,9 @@ export interface SubscriptionUpdateParams {
 
   priceOverrides?: Array<SubscriptionUpdateParams.PriceOverride>;
 
+  /**
+   * Promotion code
+   */
   promotionCode?: string;
 
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
@@ -5360,6 +5366,9 @@ export interface SubscriptionProvisionParams {
    */
   trialOverrideConfiguration?: SubscriptionProvisionParams.TrialOverrideConfiguration;
 
+  /**
+   * Unit quantity
+   */
   unitQuantity?: number;
 }
 
