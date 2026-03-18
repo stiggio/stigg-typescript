@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.0-alpha.23 (2026-03-18)
+
+Full Changelog: [v0.1.0-alpha.22...v0.1.0-alpha.23](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.22...v0.1.0-alpha.23)
+
+### Features
+
+* **api:** api update ([e778eab](https://github.com/stiggio/stigg-typescript/commit/e778eabb4a458e11d1c2ac83d20f9bed6d45d10e))
+* **api:** api update ([24bfdcb](https://github.com/stiggio/stigg-typescript/commit/24bfdcb0a5e9c1b700affe134b4628bae833a8e8))
+* **api:** api update ([a54a374](https://github.com/stiggio/stigg-typescript/commit/a54a374474dd8aef9c0c8c67cf4b09288d63a44a))
+* **api:** api update ([a1ff1f8](https://github.com/stiggio/stigg-typescript/commit/a1ff1f88f10da41e8a29179a48aefa8ae4ed1596))
+* **api:** api update ([dd99ba3](https://github.com/stiggio/stigg-typescript/commit/dd99ba37c2f54de06aa0d69ebd3b4a253c61269e))
+* **api:** api update ([0f8db16](https://github.com/stiggio/stigg-typescript/commit/0f8db163f40373895072f6006d7fd79a63a0ed74))
+* **api:** api update ([565005d](https://github.com/stiggio/stigg-typescript/commit/565005d415105290612f5ab4f1d8a575b5d6e960))
+* **api:** updated stainless config with new endpoint ([740d9d9](https://github.com/stiggio/stigg-typescript/commit/740d9d9461e667c1278fb36110f47aae48c45bf6))
+
+
+### Chores
+
+* **internal:** support x-stainless-mcp-client-permissions headers in MCP servers ([ba112e0](https://github.com/stiggio/stigg-typescript/commit/ba112e04fdcd78696451ffbf0058015c1baa952c))
+* **internal:** tweak CI branches ([554dc5a](https://github.com/stiggio/stigg-typescript/commit/554dc5adcffc85d5e5be8adb65bde4150873a799))
+
 ## 0.1.0-alpha.22 (2026-03-16)
 
 Full Changelog: [v0.1.0-alpha.21...v0.1.0-alpha.22](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.21...v0.1.0-alpha.22)
