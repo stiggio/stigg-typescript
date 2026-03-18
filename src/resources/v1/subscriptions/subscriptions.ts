@@ -2805,14 +2805,14 @@ export namespace SubscriptionProvisionResponse {
         displayName: string;
 
         /**
-         * Additional metadata associated with the currency.
-         */
-        additionalMetaData?: unknown;
-
-        /**
          * A description of the currency.
          */
         description?: string | null;
+
+        /**
+         * Additional metadata associated with the currency.
+         */
+        metadata?: { [key: string]: string } | null;
 
         /**
          * The plural form of the currency unit.
@@ -4130,7 +4130,7 @@ export namespace SubscriptionUpdateParams {
     /**
      * Additional metadata for the subscription
      */
-    metadata?: { [key: string]: unknown };
+    metadata?: { [key: string]: string };
 
     prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE';
 
@@ -5154,7 +5154,7 @@ export namespace SubscriptionPreviewParams {
     /**
      * Additional billing metadata
      */
-    metadata?: unknown;
+    metadata?: { [key: string]: string };
 
     /**
      * Proration behavior
