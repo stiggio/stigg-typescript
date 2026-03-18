@@ -1512,14 +1512,14 @@ export namespace CustomerRetrieveEntitlementsResponse {
         displayName: string;
 
         /**
-         * Additional metadata associated with the currency.
-         */
-        additionalMetaData?: unknown;
-
-        /**
          * A description of the currency.
          */
         description?: string | null;
+
+        /**
+         * Additional metadata associated with the currency.
+         */
+        metadata?: { [key: string]: string } | null;
 
         /**
          * The plural form of the currency unit.
