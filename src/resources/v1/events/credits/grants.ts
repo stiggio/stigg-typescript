@@ -115,7 +115,7 @@ export namespace CreditGrantResponse {
     /**
      * The type of credit grant (PAID, PROMOTIONAL, RECURRING)
      */
-    grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING';
+    grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT';
 
     /**
      * The billing invoice ID associated with this grant
@@ -323,7 +323,7 @@ export interface GrantListResponse {
   /**
    * The type of credit grant (PAID, PROMOTIONAL, RECURRING)
    */
-  grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING';
+  grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT';
 
   /**
    * The billing invoice ID associated with this grant
@@ -492,7 +492,7 @@ export interface GrantCreateParams {
   /**
    * The type of credit grant (PAID, PROMOTIONAL, RECURRING)
    */
-  grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING';
+  grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT';
 
   /**
    * Whether to wait for payment confirmation before returning (default: true)
