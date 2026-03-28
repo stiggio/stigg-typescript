@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.26 (2026-03-28)
+
+Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
+
+### Chores
+
+* **ci:** escape input path in publish-npm workflow ([7e93438](https://github.com/stiggio/stigg-typescript/commit/7e93438a7cbb3b10c9d3caaaea4acbd378da1117))
+* **ci:** skip lint on metadata-only changes ([9cc3309](https://github.com/stiggio/stigg-typescript/commit/9cc3309b7b7c7dcdce41e834d8945159f902afbc))
+* **internal:** codegen related update ([5d3341c](https://github.com/stiggio/stigg-typescript/commit/5d3341cb9ed07689b5b961c92f85185dd7d875e4))
+* **internal:** fix MCP server TS errors that occur with required client options ([640352c](https://github.com/stiggio/stigg-typescript/commit/640352c746337c07a5fee1029d369b226654cd0f))
+* **internal:** support custom-instructions-path flag in MCP servers ([e54fc8c](https://github.com/stiggio/stigg-typescript/commit/e54fc8c25bf842fa884a8bb1262701a908c3398b))
+* **internal:** support local docs search in MCP servers ([6295c74](https://github.com/stiggio/stigg-typescript/commit/6295c7401aa82325d3a18dfbcccb3cc8ae669982))
+* **internal:** update gitignore ([25b7bb6](https://github.com/stiggio/stigg-typescript/commit/25b7bb6bcd870167b9c5741070f88eab329d8dbf))
+
 ## 0.1.0-alpha.25 (2026-03-18)
 
 Full Changelog: [v0.1.0-alpha.24...v0.1.0-alpha.25](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.24...v0.1.0-alpha.25)
