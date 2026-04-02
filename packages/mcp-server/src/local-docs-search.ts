@@ -69,6 +69,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'customers retrieve',
         example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Customers.Retrieve',
+        example:
+          'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       go: {
         method: 'client.V1.Customers.Get',
         example:
@@ -129,6 +134,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'customers update',
         example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Customers.Update',
+        example:
+          'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       go: {
         method: 'client.V1.Customers.Update',
         example:
@@ -184,6 +194,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'customers list',
         example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1.Customers.List',
+        example:
+          'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       go: {
         method: 'client.V1.Customers.List',
@@ -247,6 +262,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'customers provision',
         example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
       },
+      csharp: {
+        method: 'V1.Customers.Provision',
+        example:
+          'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       go: {
         method: 'client.V1.Customers.Provision',
         example:
@@ -297,6 +317,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'customers archive',
         example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Customers.Archive',
+        example:
+          'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       go: {
         method: 'client.V1.Customers.Archive',
         example:
@@ -345,6 +370,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'customers unarchive',
         example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Customers.Unarchive',
+        example:
+          'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       go: {
         method: 'client.V1.Customers.Unarchive',
@@ -399,6 +429,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:customers import \\\n  --api-key 'My API Key' \\\n  --customer '{id: id, email: dev@stainless.com, name: name}'",
       },
+      csharp: {
+        method: 'V1.Customers.Import',
+        example:
+          'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Customers.Import',
         example:
@@ -446,6 +481,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'customers list_resources',
         example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Customers.ListResources',
+        example:
+          'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       go: {
         method: 'client.V1.Customers.ListResources',
@@ -496,6 +536,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'customers retrieve_entitlements',
         example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Customers.RetrieveEntitlements',
+        example:
+          'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Customers.GetEntitlements',
@@ -554,6 +599,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:customers:payment-method attach \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --integration-id integrationId \\\n  --payment-method-id paymentMethodId \\\n  --vendor-identifier AUTH0",
       },
+      csharp: {
+        method: 'V1.Customers.PaymentMethod.Attach',
+        example:
+          'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Attach',
         example:
@@ -603,6 +653,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'payment_method detach',
         example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Customers.PaymentMethod.Detach',
+        example:
+          'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Detach',
@@ -660,6 +715,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'promotional_entitlements list',
         example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Customers.PromotionalEntitlements.List',
+        example:
+          'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.List',
         example:
@@ -714,6 +774,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:customers:promotional-entitlements create \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --promotional-entitlement \"{customEndDate: '2019-12-27T18:11:19.117Z', enumValues: [string], featureId: featureId, hasSoftLimit: true, hasUnlimitedUsage: true, isVisible: true, monthlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, period: 1 week, resetPeriod: YEAR, usageLimit: -9007199254740991, weeklyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, yearlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}}\"",
       },
+      csharp: {
+        method: 'V1.Customers.PromotionalEntitlements.Create',
+        example:
+          'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
+      },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.New',
         example:
@@ -765,6 +830,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:customers:promotional-entitlements revoke \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --feature-id featureId",
       },
+      csharp: {
+        method: 'V1.Customers.PromotionalEntitlements.Revoke',
+        example:
+          'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
         example:
@@ -814,6 +884,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'subscriptions retrieve',
         example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.Retrieve',
+        example:
+          'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
       },
       go: {
         method: 'client.V1.Subscriptions.Get',
@@ -873,6 +948,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'subscriptions list',
         example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.List',
+        example:
+          'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.List',
@@ -951,6 +1031,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:subscriptions provision \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
       },
+      csharp: {
+        method: 'V1.Subscriptions.Provision',
+        example:
+          'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Subscriptions.Provision',
         example:
@@ -1002,6 +1087,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:subscriptions transfer \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --destination-resource-id destinationResourceId",
       },
+      csharp: {
+        method: 'V1.Subscriptions.Transfer',
+        example:
+          'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       go: {
         method: 'client.V1.Subscriptions.Transfer',
         example:
@@ -1051,6 +1141,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'subscriptions migrate',
         example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.Migrate',
+        example:
+          'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
       },
       go: {
         method: 'client.V1.Subscriptions.Migrate',
@@ -1102,6 +1197,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'subscriptions delegate',
         example:
           "stigg v1:subscriptions delegate \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-customer-id targetCustomerId",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.Delegate',
+        example:
+          'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
       },
       go: {
         method: 'client.V1.Subscriptions.Delegate',
@@ -1171,6 +1271,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:subscriptions preview \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
       },
+      csharp: {
+        method: 'V1.Subscriptions.Preview',
+        example:
+          'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Subscriptions.Preview',
         example:
@@ -1238,6 +1343,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'subscriptions update',
         example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Subscriptions.Update',
+        example:
+          'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       go: {
         method: 'client.V1.Subscriptions.Update',
         example:
@@ -1290,6 +1400,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'subscriptions import',
         example:
           "stigg v1:subscriptions import \\\n  --api-key 'My API Key' \\\n  --subscription '{id: id, customerId: customerId, planId: planId}'",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.Import',
+        example:
+          'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 1,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Subscriptions.Import',
@@ -1347,6 +1462,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'subscriptions cancel',
         example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Subscriptions.Cancel',
+        example:
+          'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       go: {
         method: 'client.V1.Subscriptions.Cancel',
         example:
@@ -1396,6 +1516,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:subscriptions:future-update cancel-pending-payment \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Subscriptions.FutureUpdate.CancelPendingPayment',
+        example:
+          'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
+      },
       go: {
         method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
         example:
@@ -1444,6 +1569,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'future_update cancel_schedule',
         example:
           "stigg v1:subscriptions:future-update cancel-schedule \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.FutureUpdate.CancelSchedule',
+        example:
+          'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
       go: {
         method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
@@ -1495,6 +1625,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'usage charge_usage',
         example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Subscriptions.Usage.ChargeUsage',
+        example:
+          'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Subscriptions.Usage.ChargeUsage',
         example:
@@ -1542,6 +1677,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'usage sync',
         example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.Usage.Sync',
+        example:
+          'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Subscriptions.Usage.Sync',
@@ -1591,6 +1731,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'invoice mark_as_paid',
         example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Subscriptions.Invoice.MarkAsPaid',
+        example:
+          'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
@@ -1651,6 +1796,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:coupons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --amounts-off '{amount: 0, currency: usd}' \\\n  --description description \\\n  --duration-in-months 1 \\\n  --metadata '{foo: string}' \\\n  --name name \\\n  --percent-off 1",
       },
+      csharp: {
+        method: 'V1.Coupons.Create',
+        example:
+          'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
+      },
       go: {
         method: 'client.V1.Coupons.New',
         example:
@@ -1708,6 +1858,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'coupons list',
         example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
       },
+      csharp: {
+        method: 'V1.Coupons.List',
+        example:
+          'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       go: {
         method: 'client.V1.Coupons.List',
         example:
@@ -1755,6 +1910,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'coupons retrieve',
         example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Coupons.Retrieve',
+        example:
+          'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
       },
       go: {
         method: 'client.V1.Coupons.Get',
@@ -1804,6 +1964,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'coupons update_coupon',
         example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Coupons.UpdateCoupon',
+        example:
+          'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
+      },
       go: {
         method: 'client.V1.Coupons.UpdateCoupon',
         example:
@@ -1852,6 +2017,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'coupons archive_coupon',
         example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Coupons.ArchiveCoupon',
+        example:
+          'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
       go: {
         method: 'client.V1.Coupons.ArchiveCoupon',
@@ -1904,6 +2074,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'events report',
         example:
           "stigg v1:events report \\\n  --api-key 'My API Key' \\\n  --event '{customerId: customerId, eventName: x, idempotencyKey: x}'",
+      },
+      csharp: {
+        method: 'V1.Events.Report',
+        example:
+          'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Events.Report',
@@ -1961,6 +2136,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:events:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
+      csharp: {
+        method: 'V1.Events.Credits.GetUsage',
+        example:
+          'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Events.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Events.Credits.GetUsage',
         example:
@@ -2010,6 +2190,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'credits get_auto_recharge',
         example:
           "stigg v1:events:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.GetAutoRecharge',
+        example:
+          'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Events.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Events.Credits.GetAutoRecharge',
@@ -2068,6 +2253,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:events:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
+      csharp: {
+        method: 'V1.Events.Credits.ListLedger',
+        example:
+          'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Events.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       go: {
         method: 'client.V1.Events.Credits.ListLedger',
         example:
@@ -2124,6 +2314,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'grants list',
         example:
           "stigg v1:events:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.Grants.List',
+        example:
+          'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Events.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       go: {
         method: 'client.V1.Events.Credits.Grants.List',
@@ -2191,6 +2386,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:events:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
       },
+      csharp: {
+        method: 'V1.Events.Credits.Grants.Create',
+        example:
+          'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Events.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
+      },
       go: {
         method: 'client.V1.Events.Credits.Grants.New',
         example:
@@ -2240,6 +2440,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'grants void',
         example: "stigg v1:events:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Events.Credits.Grants.Void',
+        example:
+          'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Events.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
+      },
       go: {
         method: 'client.V1.Events.Credits.Grants.Void',
         example:
@@ -2288,6 +2493,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'features retrieve_feature',
         example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Features.RetrieveFeature',
+        example:
+          'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       go: {
         method: 'client.V1.Features.GetFeature',
@@ -2347,6 +2557,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'features update_feature',
         example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Features.UpdateFeature',
+        example:
+          'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       go: {
         method: 'client.V1.Features.UpdateFeature',
@@ -2410,6 +2625,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:features create-feature \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --feature-type BOOLEAN",
       },
+      csharp: {
+        method: 'V1.Features.CreateFeature',
+        example:
+          'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
+      },
       go: {
         method: 'client.V1.Features.NewFeature',
         example:
@@ -2468,6 +2688,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'features list_features',
         example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
       },
+      csharp: {
+        method: 'V1.Features.ListFeatures',
+        example:
+          'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       go: {
         method: 'client.V1.Features.ListFeatures',
         example:
@@ -2515,6 +2740,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'features archive_feature',
         example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Features.ArchiveFeature',
+        example:
+          'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       go: {
         method: 'client.V1.Features.ArchiveFeature',
@@ -2564,6 +2794,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'features unarchive_feature',
         example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Features.UnarchiveFeature',
+        example:
+          'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       go: {
         method: 'client.V1.Features.UnarchiveFeature',
@@ -2620,6 +2855,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'addons list',
         example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1.Addons.List',
+        example:
+          'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       go: {
         method: 'client.V1.Addons.List',
@@ -2680,6 +2920,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:addons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
       },
+      csharp: {
+        method: 'V1.Addons.Create',
+        example:
+          'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
+      },
       go: {
         method: 'client.V1.Addons.New',
         example:
@@ -2728,6 +2973,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'addons retrieve',
         example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Addons.Retrieve',
+        example:
+          'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
       },
       go: {
         method: 'client.V1.Addons.Get',
@@ -2787,6 +3037,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'addons update',
         example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Addons.Update',
+        example:
+          'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
+      },
       go: {
         method: 'client.V1.Addons.Update',
         example:
@@ -2835,6 +3090,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'addons archive',
         example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Addons.Archive',
+        example:
+          'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
       },
       go: {
         method: 'client.V1.Addons.Archive',
@@ -2885,6 +3145,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:addons publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
       },
+      csharp: {
+        method: 'V1.Addons.Publish',
+        example:
+          'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Addons.Publish',
         example:
@@ -2934,6 +3199,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'addons create_draft',
         example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Addons.CreateDraft',
+        example:
+          'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
+      },
       go: {
         method: 'client.V1.Addons.NewDraft',
         example:
@@ -2981,6 +3251,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'addons remove_draft',
         example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Addons.RemoveDraft',
+        example:
+          'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Addons.RemoveDraft',
@@ -3030,6 +3305,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'entitlements list',
         example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
+      },
+      csharp: {
+        method: 'V1.Addons.Entitlements.List',
+        example:
+          'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
       go: {
         method: 'client.V1.Addons.Entitlements.List',
@@ -3084,6 +3364,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:addons:entitlements create \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --entitlement '{id: id, type: FEATURE}'",
       },
+      csharp: {
+        method: 'V1.Addons.Entitlements.Create',
+        example:
+          'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
+      },
       go: {
         method: 'client.V1.Addons.Entitlements.New',
         example:
@@ -3136,6 +3421,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:addons:entitlements update \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id \\\n  --type FEATURE",
       },
+      csharp: {
+        method: 'V1.Addons.Entitlements.Update',
+        example:
+          'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
+      },
       go: {
         method: 'client.V1.Addons.Entitlements.Update',
         example:
@@ -3185,6 +3475,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'entitlements delete',
         example:
           "stigg v1:addons:entitlements delete \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id",
+      },
+      csharp: {
+        method: 'V1.Addons.Entitlements.Delete',
+        example:
+          'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
       go: {
         method: 'client.V1.Addons.Entitlements.Delete',
@@ -3247,6 +3542,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:plans create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
       },
+      csharp: {
+        method: 'V1.Plans.Create',
+        example:
+          'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
+      },
       go: {
         method: 'client.V1.Plans.New',
         example:
@@ -3303,6 +3603,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'plans list',
         example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
       },
+      csharp: {
+        method: 'V1.Plans.List',
+        example:
+          'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       go: {
         method: 'client.V1.Plans.List',
         example:
@@ -3350,6 +3655,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'plans retrieve',
         example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Plans.Retrieve',
+        example:
+          'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
       },
       go: {
         method: 'client.V1.Plans.Get',
@@ -3409,6 +3719,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'plans update',
         example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Plans.Update',
+        example:
+          'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
+      },
       go: {
         method: 'client.V1.Plans.Update',
         example:
@@ -3457,6 +3772,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'plans archive',
         example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Plans.Archive',
+        example:
+          'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
       },
       go: {
         method: 'client.V1.Plans.Archive',
@@ -3507,6 +3827,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:plans publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
       },
+      csharp: {
+        method: 'V1.Plans.Publish',
+        example:
+          'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Plans.Publish',
         example:
@@ -3556,6 +3881,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'plans create_draft',
         example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Plans.CreateDraft',
+        example:
+          'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
+      },
       go: {
         method: 'client.V1.Plans.NewDraft',
         example:
@@ -3603,6 +3933,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'plans remove_draft',
         example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Plans.RemoveDraft',
+        example:
+          'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Plans.RemoveDraft',
@@ -3652,6 +3987,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'entitlements list',
         example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
+      },
+      csharp: {
+        method: 'V1.Plans.Entitlements.List',
+        example:
+          'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
       go: {
         method: 'client.V1.Plans.Entitlements.List',
@@ -3706,6 +4046,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:plans:entitlements create \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --entitlement '{id: id, type: FEATURE}'",
       },
+      csharp: {
+        method: 'V1.Plans.Entitlements.Create',
+        example:
+          'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
+      },
       go: {
         method: 'client.V1.Plans.Entitlements.New',
         example:
@@ -3758,6 +4103,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:plans:entitlements update \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id \\\n  --type FEATURE",
       },
+      csharp: {
+        method: 'V1.Plans.Entitlements.Update',
+        example:
+          'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
+      },
       go: {
         method: 'client.V1.Plans.Entitlements.Update',
         example:
@@ -3807,6 +4157,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'entitlements delete',
         example:
           "stigg v1:plans:entitlements delete \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id",
+      },
+      csharp: {
+        method: 'V1.Plans.Entitlements.Delete',
+        example:
+          'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
       go: {
         method: 'client.V1.Plans.Entitlements.Delete',
@@ -3860,6 +4215,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'usage report',
         example:
           "stigg v1:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
+      },
+      csharp: {
+        method: 'V1.Usage.Report',
+        example:
+          'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
       go: {
         method: 'client.V1.Usage.Report',
@@ -3919,6 +4279,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "stigg v1:usage history \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --start-date \"'2019-12-27T18:11:19.117Z'\"",
       },
+      csharp: {
+        method: 'V1.Usage.History',
+        example:
+          'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
+      },
       go: {
         method: 'client.V1.Usage.History',
         example:
@@ -3975,6 +4340,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'products list_products',
         example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
       },
+      csharp: {
+        method: 'V1.Products.ListProducts',
+        example:
+          'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       go: {
         method: 'client.V1.Products.ListProducts',
         example:
@@ -4029,6 +4399,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'products create_product',
         example:
           "stigg v1:products create-product \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+      },
+      csharp: {
+        method: 'V1.Products.CreateProduct',
+        example:
+          'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       go: {
         method: 'client.V1.Products.NewProduct',
@@ -4087,6 +4462,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'products update_product',
         example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Products.UpdateProduct',
+        example:
+          'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       go: {
         method: 'client.V1.Products.UpdateProduct',
         example:
@@ -4135,6 +4515,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       cli: {
         method: 'products archive_product',
         example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Products.ArchiveProduct',
+        example:
+          'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       go: {
         method: 'client.V1.Products.ArchiveProduct',
@@ -4185,6 +4570,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'products unarchive_product',
         example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
+      csharp: {
+        method: 'V1.Products.UnarchiveProduct',
+        example:
+          'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       go: {
         method: 'client.V1.Products.UnarchiveProduct',
         example:
@@ -4234,6 +4624,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'products duplicate_product',
         example:
           "stigg v1:products duplicate-product \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-id targetId",
+      },
+      csharp: {
+        method: 'V1.Products.DuplicateProduct',
+        example:
+          'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       go: {
         method: 'client.V1.Products.DuplicateProduct',
@@ -4293,6 +4688,11 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'java',
     content:
       '# Stigg Java API Library\n\n<!-- x-release-please-start-version -->\n[![Maven Central](https://img.shields.io/maven-central/v/io.stigg/stigg-java)](https://central.sonatype.com/artifact/io.stigg/stigg-java/0.0.1)\n[![javadoc](https://javadoc.io/badge2/io.stigg/stigg-java/0.0.1/javadoc.svg)](https://javadoc.io/doc/io.stigg/stigg-java/0.0.1)\n<!-- x-release-please-end -->\n\nThe Stigg Java SDK provides convenient access to the Stigg REST API   from applications written in Java.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJuYW1lIjoiQHN0aWdnL3R5cGVzY3JpcHQtbWNwIiwidHJhbnNwb3J0IjoiaHR0cCIsInVybCI6Imh0dHBzOi8vc3RpZ2ctbWNwLnN0bG1jcC5jb20iLCJoZWFkZXJzIjp7IlgtQVBJLUtFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fstigg-mcp.stlmcp.com%22%2C%22headers%22%3A%7B%22X-API-KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n<!-- x-release-please-start-version -->\n\nJavadocs are available on [javadoc.io](https://javadoc.io/doc/io.stigg/stigg-java/0.0.1).\n\n<!-- x-release-please-end -->\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n### Gradle\n\n~~~kotlin\nimplementation("io.stigg:stigg-java:0.0.1")\n~~~\n\n### Maven\n\n~~~xml\n<dependency>\n  <groupId>io.stigg</groupId>\n  <artifactId>stigg-java</artifactId>\n  <version>0.0.1</version>\n</dependency>\n~~~\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Java 8 or later.\n\n## Usage\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCustomerResponse customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\n## Client configuration\n\nConfigure the client using system properties or environment variables:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n```\n\nOr manually:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .apiKey("My API Key")\n    .build();\n```\n\nOr using a combination of the two approaches:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    // Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n    // Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\n    .fromEnv()\n    .apiKey("My API Key")\n    .build();\n```\n\nSee this table for the available options:\n\n| Setter    | System property | Environment variable | Required | Default value            |\n| --------- | --------------- | -------------------- | -------- | ------------------------ |\n| `apiKey`  | `stigg.apiKey`  | `STIGG_API_KEY`      | true     | -                        |\n| `baseUrl` | `stigg.baseUrl` | `STIGG_BASE_URL`     | true     | `"https://api.stigg.io"` |\n\nSystem properties take precedence over environment variables.\n\n> [!TIP]\n> Don\'t create more than one client in the same application. Each client has a connection pool and\n> thread pools, which are more efficient to share between requests.\n\n### Modifying configuration\n\nTo temporarily use a modified client configuration, while reusing the same connection and thread       pools, call `withOptions()` on any client or service:\n\n```java\nimport io.stigg.client.StiggClient;\n\nStiggClient clientWithOptions = client.withOptions(optionsBuilder -> {\n    optionsBuilder.baseUrl("https://example.com");\n    optionsBuilder.maxRetries(42);\n});\n```\n\nThe `withOptions()` method does not affect the original client or service.\n\n## Requests and responses\n\nTo send a request to the Stigg API, build an instance of some `Params` class and pass it to the     corresponding client method. When the response is received, it will be deserialized into an instance of     a Java class.\n\nFor example, `client.v1().customers().retrieve(...)` should be called with an instance of `CustomerRetrieveParams`, and it     will return an instance of `CustomerResponse`.\n\n## Immutability\n\nEach class in the SDK has an associated   [builder](https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java)   or factory method for constructing it.\n\nEach class is [immutable](https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html)   once constructed. If the class has an associated builder, then it has a `toBuilder()` method, which can   be used to convert it back to a builder for making a modified copy.\n\nBecause each class is immutable, builder modification will _never_ affect already built class instances.\n\n## Asynchronous execution\n\nThe default client is synchronous. To switch to asynchronous execution, call the `async()` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.async().v1().customers().retrieve("REPLACE_ME");\n```\n\nOr create an asynchronous client from the beginning:\n\n```java\nimport io.stigg.client.StiggClientAsync;\nimport io.stigg.client.okhttp.StiggOkHttpClientAsync;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClientAsync client = StiggOkHttpClientAsync.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\nThe asynchronous client supports the same options as the synchronous one, except most methods return `CompletableFuture`s.\n\n\n\n\n\n\n\n## Raw responses\n\nThe SDK defines methods that deserialize responses into instances of Java classes.       However, these methods don\'t provide access to the response headers, status code, or the raw response       body.\n\nTo access this data, prefix any HTTP method call on a client or service with `withRawResponse()`:\n\n```java\nimport io.stigg.core.http.Headers;\nimport io.stigg.core.http.HttpResponseFor;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nHttpResponseFor<CustomerResponse> customerResponse = client.v1().customers().withRawResponse().retrieve("REPLACE_ME");\n\nint statusCode = customerResponse.statusCode();\nHeaders headers = customerResponse.headers();\n```\n\nYou can still deserialize the response into an instance of a Java class if needed:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse parsedCustomerResponse = customerResponse.parse();\n```\n\n## Error handling\n\nThe SDK throws custom unchecked exception types:\n\n- [`StiggServiceException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggServiceException.kt): Base class for HTTP errors. See this table for which exception       subclass is thrown for each HTTP status code:\n\n  | Status | Exception                                          |\n  | ------ | -------------------------------------------------- |\n  | 400    | [`BadRequestException`](stigg-java-core/src/main/kotlin/io/stigg/errors/BadRequestException.kt)           |\n  | 401    | [`UnauthorizedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnauthorizedException.kt)         |\n  | 403    | [`PermissionDeniedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/PermissionDeniedException.kt)     |\n  | 404    | [`NotFoundException`](stigg-java-core/src/main/kotlin/io/stigg/errors/NotFoundException.kt)             |\n  | 422    | [`UnprocessableEntityException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnprocessableEntityException.kt)  |\n  | 429    | [`RateLimitException`](stigg-java-core/src/main/kotlin/io/stigg/errors/RateLimitException.kt)            |\n  | 5xx    | [`InternalServerException`](stigg-java-core/src/main/kotlin/io/stigg/errors/InternalServerException.kt)       |\n  | others | [`UnexpectedStatusCodeException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnexpectedStatusCodeException.kt) |\n\n- [`StiggIoException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggIoException.kt): I/O networking errors.\n\n- [`StiggRetryableException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggRetryableException.kt): Generic error indicating a failure that could be retried by the client.\n\n- [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt): Failure to interpret successfully parsed data. For example,       when accessing a property that\'s supposed to be required, but the API unexpectedly omitted it from the       response.\n\n- [`StiggException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggException.kt): Base class for all exceptions. Most errors will result in one of the       previously mentioned ones, but completely generic errors may be thrown using the base class.\n\n## Pagination\n\nThe SDK defines methods that return a paginated lists of results. It provides convenient ways to access     the results either one page at a time or item-by-item across all pages.\n\n### Auto-pagination\n\nTo iterate through all results across all pages, use the `autoPager()` method, which automatically     fetches more pages as needed.\n\nWhen using the synchronous client, the method returns an [`Iterable`](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\n\n// Process as an Iterable\nfor (CustomerListResponse customer : page.autoPager()) {\n    System.out.println(customer);\n}\n\n// Process as a Stream\npage.autoPager()\n    .stream()\n    .limit(50)\n    .forEach(customer -> System.out.println(customer));\n```\n\nWhen using the asynchronous client, the method returns an [`AsyncStreamResponse`](stigg-java-core/src/main/kotlin/io/stigg/core/http/AsyncStreamResponse.kt):\n\n```java\nimport io.stigg.core.http.AsyncStreamResponse;\nimport io.stigg.models.v1.customers.CustomerListPageAsync;\nimport io.stigg.models.v1.customers.CustomerListResponse;\nimport java.util.Optional;\nimport java.util.concurrent.CompletableFuture;\n\nCompletableFuture<CustomerListPageAsync> pageFuture = client.async().v1().customers().list();\n\npageFuture.thenRun(page -> page.autoPager().subscribe(customer -> {\n    System.out.println(customer);\n}));\n\n// If you need to handle errors or completion of the stream\npageFuture.thenRun(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {\n    @Override\n    public void onNext(CustomerListResponse customer) {\n        System.out.println(customer);\n    }\n\n    @Override\n    public void onComplete(Optional<Throwable> error) {\n        if (error.isPresent()) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error.get());\n        } else {\n            System.out.println("No more!");\n        }\n    }\n}));\n\n// Or use futures\npageFuture.thenRun(page -> page.autoPager()\n    .subscribe(customer -> {\n        System.out.println(customer);\n    })\n    .onCompleteFuture()\n    .whenComplete((unused, error) -> {\n        if (error != null) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error);\n        } else {\n            System.out.println("No more!");\n        }\n    }));\n```\n\n### Manual pagination\n\nTo access individual page items and manually request the next page, use the `items()`,\n`hasNextPage()`, and `nextPage()` methods:\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\nwhile (true) {\n    for (CustomerListResponse customer : page.items()) {\n        System.out.println(customer);\n    }\n\n    if (!page.hasNextPage()) {\n        break;\n    }\n\n    page = page.nextPage();\n}\n```\n\n## Logging\n\nThe SDK uses the standard   [OkHttp logging interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor).\n\nEnable logging by setting the `STIGG_LOG` environment variable to   `info`:\n\n```sh\nexport STIGG_LOG=info\n```\n\nOr to `debug` for more verbose logging:\n\n```sh\nexport STIGG_LOG=debug\n```\n\n## ProGuard and R8\n\nAlthough the SDK uses reflection, it is still usable with     [ProGuard](https://github.com/Guardsquare/proguard) and     [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because     `stigg-java-core` is published with a     [configuration file](stigg-java-core/src/main/resources/META-INF/proguard/stigg-java-core.pro) containing     [keep rules](https://www.guardsquare.com/manual/configuration/usage).\n\nProGuard and R8 should automatically detect and use the published rules, but you can also manually copy     the keep rules if necessary.\n\n\n\n\n\n## Jackson\n\nThe SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON     serialization/deserialization. It is compatible with version 2.13.4 or higher,     but depends on version 2.18.2 by default.\n\nThe SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the     default version was overridden in your Maven or Gradle config).\n\nIf the SDK threw an exception, but you\'re _certain_ the version is compatible, then disable the version     check using the `checkJacksonVersionCompatibility` on [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or     [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt).\n\n> [!CAUTION]\n> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.\n\nAlso note that there are bugs in older Jackson versions that can affect the SDK. We don\'t work around all     Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to     upgrade Jackson for those instead.\n\n## Network options\n\n### Retries\n\nThe SDK automatically retries 2 times by default, with a short exponential backoff between requests.\n\nOnly the following error types are retried:\n- Connection errors (for example, due to a network connectivity problem)\n- 408 Request Timeout\n- 409 Conflict\n- 429 Rate Limit\n- 5xx Internal\n\nThe API may also explicitly instruct the SDK to retry or not retry a request.\n\nTo set a custom number of retries, configure the client using the `maxRetries` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .maxRetries(4)\n    .build();\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default.\n\nTo set a custom timeout, configure the method call using the `timeout` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .timeout(Duration.ofSeconds(30))\n    .build();\n```\n\n### Proxies\n\nTo route requests through a proxy, configure the client using the `proxy` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.net.InetSocketAddress;\nimport java.net.Proxy;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(new Proxy(\n      Proxy.Type.HTTP, new InetSocketAddress(\n        "https://example.com", 8080\n      )\n    ))\n    .build();\n```\n\n### Connection pooling\n\nTo customize the underlying OkHttp connection pool, configure the client using the   `maxIdleConnections` and `keepAliveDuration` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.\n    .maxIdleConnections(10)\n    .keepAliveDuration(Duration.ofMinutes(2))\n    .build();\n```\n\nIf both options are unset, OkHttp\'s default connection pool settings are used.\n\n### HTTPS\n\n> [!NOTE]\n> Most applications should not call these methods, and instead use the system defaults. The defaults include\n> special optimizations that can be lost if the implementations are modified.\n\nTo configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`,   `trustManager`, and `hostnameVerifier` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.\n    .sslSocketFactory(yourSSLSocketFactory)\n    .trustManager(yourTrustManager)\n    .hostnameVerifier(yourHostnameVerifier)\n    .build();\n```\n\n\n\n### Custom HTTP client\n\nThe SDK consists of three artifacts:\n- `stigg-java-core`\n  - Contains core SDK logic\n  - Does not depend on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggClient`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClient.kt), [`StiggClientAsync`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsync.kt),             [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt), and [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), all of which can             work with any HTTP client\n- `stigg-java-client-okhttp`\n  - Depends on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) and [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), which             provide a way to construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) and             [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), respectively, using OkHttp\n- `stigg-java`\n  - Depends on and exposes the APIs of both `stigg-java-core` and `stigg-java-client-okhttp`\n  - Does not have its own logic\n\nThis structure allows replacing the SDK\'s default HTTP client without pulling in unnecessary dependencies.\n\n#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)\n\n> [!TIP]\n> Try the available [network options](#network-options) before replacing the default client.\n\nTo use a customized `OkHttpClient`:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Copy `stigg-java-client-okhttp`\'s [`OkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/OkHttpClient.kt) class into your code and        customize it\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your        customized client\n\n### Completely custom HTTP client\n\nTo use a completely custom HTTP client:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Write a class that implements the [`HttpClient`](stigg-java-core/src/main/kotlin/io/stigg/core/http/HttpClient.kt) interface\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your new        client class\n\n## Undocumented API functionality\n\nThe SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.\n\n### Parameters\n\nTo set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQueryParam`, or       `putAdditionalBodyProperty` methods on any `Params` class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .putAdditionalHeader("Secret-Header", "42")\n    .putAdditionalQueryParam("secret_query_param", "42")\n    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))\n    .build();\n```\n\nThese can be accessed on the built object later using the `_additionalHeaders()`,       `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.\n\nTo set undocumented parameters on _nested_ headers, query params, or body classes, call the         `putAdditionalProperty` method on the nested class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\nCustomerUpdateParams params = CustomerUpdateParams.builder()\n    .passthrough(CustomerUpdateParams.Passthrough.builder()\n        .putAdditionalProperty("secretProperty", JsonValue.from("42"))\n        .build())\n    .build();\n```\n\nThese properties can be accessed on the nested built object later using the         `_additionalProperties()` method.\n\nTo set a documented parameter or property to an undocumented or not yet supported _value_, pass a       [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) object to its setter:\n\n```java\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder().build();\n```\n\nThe most straightforward way to create a [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) is using its       `from(...)` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.List;\nimport java.util.Map;\n\n// Create primitive JSON values\nJsonValue nullValue = JsonValue.from(null);\nJsonValue booleanValue = JsonValue.from(true);\nJsonValue numberValue = JsonValue.from(42);\nJsonValue stringValue = JsonValue.from("Hello World!");\n\n// Create a JSON array value equivalent to `["Hello", "World"]`\nJsonValue arrayValue = JsonValue.from(List.of(\n  "Hello", "World"\n));\n\n// Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`\nJsonValue objectValue = JsonValue.from(Map.of(\n  "a", 1,\n  "b", 2\n));\n\n// Create an arbitrarily nested JSON equivalent to:\n// {\n//   "a": [1, 2],\n//   "b": [3, 4]\n// }\nJsonValue complexValue = JsonValue.from(Map.of(\n  "a", List.of(\n    1, 2\n  ),\n  "b", List.of(\n    3, 4\n  )\n));\n```\n\nNormally a `Builder` class\'s `build` method will throw         [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html)         if any required parameter or property is unset.\n\nTo forcibly omit a required parameter or property, pass [`JsonMissing`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt):\n\n```java\nimport io.stigg.core.JsonMissing;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .id(JsonMissing.of())\n    .build();\n```\n\n### Response properties\n\nTo access undocumented response properties, call the `_additionalProperties()` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.Map;\n\nMap<String, JsonValue> additionalProperties = client.v1().customers().retrieve(params)._additionalProperties();\nJsonValue secretPropertyValue = additionalProperties.get("secretProperty");\n\nString result = secretPropertyValue.accept(new JsonValue.Visitor<>() {\n    @Override\n    public String visitNull() {\n        return "It\'s null!";\n    }\n\n    @Override\n    public String visitBoolean(boolean value) {\n        return "It\'s a boolean!";\n    }\n\n    @Override\n    public String visitNumber(Number value) {\n        return "It\'s a number!";\n    }\n\n    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`\n    // The default implementation of each unimplemented method delegates to `visitDefault`, which throws by default, but can also be overridden\n});\n```\n\nTo access a property\'s raw JSON value, which may be undocumented, call its `_` prefixed method:\n\n```java\nimport io.stigg.core.JsonField;\nimport java.util.Optional;\n\nJsonField<Object> field = client.v1().customers().retrieve(params)._field();\n\nif (field.isMissing()) {\n  // The property is absent from the JSON response\n} else if (field.isNull()) {\n  // The property was set to literal null\n} else {\n  // Check if value was provided as a string\n  // Other methods include `asNumber()`, `asBoolean()`, etc.\n  Optional<String> jsonString = field.asString();\n\n  // Try to deserialize into a custom type\n  MyClass myObject = field.asUnknown().orElseThrow().convert(MyClass.class);\n}\n```\n\n### Response validation\n\nIn rare cases, the API may return a response that doesn\'t match the expected type. For example, the SDK     may expect a property to contain a `String`, but the API could return something else.\n\nBy default, the SDK will not throw an exception in this case. It will throw     [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt) only if you directly access the property.\n\nIf you would prefer to check that the response is completely well-typed upfront, then either call     `validate()`:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(params).validate();\n```\n\nOr configure the method call to validate the response using the `responseValidation` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().responseValidation(true).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .responseValidation(true)\n    .build();\n```\n\n## FAQ\n\n### Why don\'t you use plain `enum` classes?\n\nJava `enum` classes are not trivially   [forwards compatible](https://www.stainless.com/blog/making-java-enums-forwards-compatible). Using them in   the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.\n\n### Why do you represent fields using `JsonField<T>` instead of just plain `T`?\n\nUsing `JsonField<T>` enables a few features:\n\n- Allowing usage of [undocumented API functionality](#undocumented-api-functionality)\n- Lazily [validating the API response against the expected shape](#response-validation)\n- Representing absent vs explicitly null values\n\n### Why don\'t you use [`data` classes](https://kotlinlang.org/docs/data-classes.html)?\n\nIt is not [backwards compatible to add new fields to a data class](https://kotlinlang.org/docs/api-guidelines-backward-compatibility.html#avoid-using-data-classes-in-your-api)   and we don\'t want to introduce a breaking change every time we add a field to a class.\n\n### Why don\'t you use checked exceptions?\n\nChecked exceptions are widely considered a mistake in the Java programming language. In fact, they were   omitted from Kotlin for this reason.\n\nChecked exceptions:\n\n- Are verbose to handle\n- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error\n- Are tedious to propagate due to the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function)\n- Don\'t play well with lambdas (also due to the function coloring problem)\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-java/issues) with questions, bugs, or suggestions.\n',
+  },
+  {
+    language: 'csharp',
+    content:
+      '# Stigg C# API Library\n\nThe Stigg C# SDK provides convenient access to the Stigg REST API from applications written in   C#.\n\n## Installation\n\nInstall the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):\n\n```bash\ndotnet add package Stigg.Client\n```\n\n## Requirements\n\nThis library requires .NET Standard 2.0 or later.\n\n## Usage\n\nSee the [`examples`](examples) directory for complete and runnable examples.\n\n```csharp\nStiggClient client = new();\n\nCustomerRetrieveParams parameters = new() { ID = "REPLACE_ME" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);\n```',
   },
   {
     language: 'cli',
