@@ -43,6 +43,24 @@ Methods:
 - <code title="get /api/v1/customers/{id}/promotional-entitlements">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">list</a>(id, { ...params }) -> PromotionalEntitlementListResponsesMyCursorIDPage</code>
 - <code title="delete /api/v1/customers/{id}/promotional-entitlements/{featureId}">client.v1.customers.promotionalEntitlements.<a href="./src/resources/v1/customers/promotional-entitlements.ts">revoke</a>(featureID, { ...params }) -> PromotionalEntitlementRevokeResponse</code>
 
+### Integrations
+
+Types:
+
+- <code><a href="./src/resources/v1/customers/integrations.ts">IntegrationRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1/customers/integrations.ts">IntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/v1/customers/integrations.ts">IntegrationListResponse</a></code>
+- <code><a href="./src/resources/v1/customers/integrations.ts">IntegrationLinkResponse</a></code>
+- <code><a href="./src/resources/v1/customers/integrations.ts">IntegrationUnlinkResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/customers/{id}/integrations/{integrationId}">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">retrieve</a>(integrationID, { ...params }) -> IntegrationRetrieveResponse</code>
+- <code title="patch /api/v1/customers/{id}/integrations/{integrationId}">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">update</a>(integrationID, { ...params }) -> IntegrationUpdateResponse</code>
+- <code title="get /api/v1/customers/{id}/integrations">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">list</a>(id, { ...params }) -> IntegrationListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/customers/{id}/integrations">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">link</a>(id, { ...params }) -> IntegrationLinkResponse</code>
+- <code title="delete /api/v1/customers/{id}/integrations/{integrationId}">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">unlink</a>(integrationID, { ...params }) -> IntegrationUnlinkResponse</code>
+
 ## Subscriptions
 
 Types:
@@ -264,3 +282,25 @@ Methods:
 - <code title="get /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">listProducts</a>({ ...params }) -> ProductListProductsResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id) -> Product</code>
 - <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> Product</code>
+
+# Internal
+
+## Beta
+
+### EventQueues
+
+Types:
+
+- <code><a href="./src/resources/internal/beta/event-queues.ts">EventQueueRetrieveResponse</a></code>
+- <code><a href="./src/resources/internal/beta/event-queues.ts">EventQueueUpdateResponse</a></code>
+- <code><a href="./src/resources/internal/beta/event-queues.ts">EventQueueListResponse</a></code>
+- <code><a href="./src/resources/internal/beta/event-queues.ts">EventQueueDeleteResponse</a></code>
+- <code><a href="./src/resources/internal/beta/event-queues.ts">EventQueueProvisionResponse</a></code>
+
+Methods:
+
+- <code title="get /internal/beta/event-queues/{queueName}">client.internal.beta.eventQueues.<a href="./src/resources/internal/beta/event-queues.ts">retrieve</a>(queueName) -> EventQueueRetrieveResponse</code>
+- <code title="patch /internal/beta/event-queues/{queueName}">client.internal.beta.eventQueues.<a href="./src/resources/internal/beta/event-queues.ts">update</a>(queueName, { ...params }) -> EventQueueUpdateResponse</code>
+- <code title="get /internal/beta/event-queues">client.internal.beta.eventQueues.<a href="./src/resources/internal/beta/event-queues.ts">list</a>() -> EventQueueListResponse</code>
+- <code title="delete /internal/beta/event-queues/{queueName}">client.internal.beta.eventQueues.<a href="./src/resources/internal/beta/event-queues.ts">delete</a>(queueName) -> EventQueueDeleteResponse</code>
+- <code title="post /internal/beta/event-queues/provision">client.internal.beta.eventQueues.<a href="./src/resources/internal/beta/event-queues.ts">provision</a>({ ...params }) -> EventQueueProvisionResponse</code>

@@ -16,6 +16,20 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers';
+export {
+  Integrations,
+  type IntegrationRetrieveResponse,
+  type IntegrationUpdateResponse,
+  type IntegrationListResponse,
+  type IntegrationLinkResponse,
+  type IntegrationUnlinkResponse,
+  type IntegrationRetrieveParams,
+  type IntegrationUpdateParams,
+  type IntegrationListParams,
+  type IntegrationLinkParams,
+  type IntegrationUnlinkParams,
+  type IntegrationListResponsesMyCursorIDPage,
+} from './integrations';
 export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
 export {
   PromotionalEntitlements,

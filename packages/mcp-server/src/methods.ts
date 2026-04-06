@@ -95,6 +95,36 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/promotional-entitlements/{featureId}',
   },
   {
+    clientCallName: 'client.v1.customers.integrations.retrieve',
+    fullyQualifiedName: 'v1.customers.integrations.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/integrations/{integrationId}',
+  },
+  {
+    clientCallName: 'client.v1.customers.integrations.update',
+    fullyQualifiedName: 'v1.customers.integrations.update',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/customers/{id}/integrations/{integrationId}',
+  },
+  {
+    clientCallName: 'client.v1.customers.integrations.list',
+    fullyQualifiedName: 'v1.customers.integrations.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/integrations',
+  },
+  {
+    clientCallName: 'client.v1.customers.integrations.link',
+    fullyQualifiedName: 'v1.customers.integrations.link',
+    httpMethod: 'post',
+    httpPath: '/api/v1/customers/{id}/integrations',
+  },
+  {
+    clientCallName: 'client.v1.customers.integrations.unlink',
+    fullyQualifiedName: 'v1.customers.integrations.unlink',
+    httpMethod: 'delete',
+    httpPath: '/api/v1/customers/{id}/integrations/{integrationId}',
+  },
+  {
     clientCallName: 'client.v1.subscriptions.retrieve',
     fullyQualifiedName: 'v1.subscriptions.retrieve',
     httpMethod: 'get',
@@ -483,6 +513,36 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.products.updateProduct',
     httpMethod: 'patch',
     httpPath: '/api/v1/products/{id}',
+  },
+  {
+    clientCallName: 'client.internal.beta.eventQueues.retrieve',
+    fullyQualifiedName: 'internal.beta.eventQueues.retrieve',
+    httpMethod: 'get',
+    httpPath: '/internal/beta/event-queues/{queueName}',
+  },
+  {
+    clientCallName: 'client.internal.beta.eventQueues.update',
+    fullyQualifiedName: 'internal.beta.eventQueues.update',
+    httpMethod: 'patch',
+    httpPath: '/internal/beta/event-queues/{queueName}',
+  },
+  {
+    clientCallName: 'client.internal.beta.eventQueues.list',
+    fullyQualifiedName: 'internal.beta.eventQueues.list',
+    httpMethod: 'get',
+    httpPath: '/internal/beta/event-queues',
+  },
+  {
+    clientCallName: 'client.internal.beta.eventQueues.delete',
+    fullyQualifiedName: 'internal.beta.eventQueues.delete',
+    httpMethod: 'delete',
+    httpPath: '/internal/beta/event-queues/{queueName}',
+  },
+  {
+    clientCallName: 'client.internal.beta.eventQueues.provision',
+    fullyQualifiedName: 'internal.beta.eventQueues.provision',
+    httpMethod: 'post',
+    httpPath: '/internal/beta/event-queues/provision',
   },
 ];
 

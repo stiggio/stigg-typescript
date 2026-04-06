@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as IntegrationsAPI from './integrations';
+import {
+  IntegrationLinkParams,
+  IntegrationLinkResponse,
+  IntegrationListParams,
+  IntegrationListResponse,
+  IntegrationListResponsesMyCursorIDPage,
+  IntegrationRetrieveParams,
+  IntegrationRetrieveResponse,
+  IntegrationUnlinkParams,
+  IntegrationUnlinkResponse,
+  IntegrationUpdateParams,
+  IntegrationUpdateResponse,
+  Integrations,
+} from './integrations';
 import * as PaymentMethodAPI from './payment-method';
 import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
 import * as PromotionalEntitlementsAPI from './promotional-entitlements';
@@ -23,6 +38,7 @@ export class Customers extends APIResource {
   paymentMethod: PaymentMethodAPI.PaymentMethod = new PaymentMethodAPI.PaymentMethod(this._client);
   promotionalEntitlements: PromotionalEntitlementsAPI.PromotionalEntitlements =
     new PromotionalEntitlementsAPI.PromotionalEntitlements(this._client);
+  integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
 
   /**
    * Retrieves a customer by their unique identifier, including billing information
@@ -2732,6 +2748,7 @@ export interface CustomerRetrieveEntitlementsParams {
 
 Customers.PaymentMethod = PaymentMethod;
 Customers.PromotionalEntitlements = PromotionalEntitlements;
+Customers.Integrations = Integrations;
 
 export declare namespace Customers {
   export {
@@ -2761,5 +2778,20 @@ export declare namespace Customers {
     type PromotionalEntitlementCreateParams as PromotionalEntitlementCreateParams,
     type PromotionalEntitlementListParams as PromotionalEntitlementListParams,
     type PromotionalEntitlementRevokeParams as PromotionalEntitlementRevokeParams,
+  };
+
+  export {
+    Integrations as Integrations,
+    type IntegrationRetrieveResponse as IntegrationRetrieveResponse,
+    type IntegrationUpdateResponse as IntegrationUpdateResponse,
+    type IntegrationListResponse as IntegrationListResponse,
+    type IntegrationLinkResponse as IntegrationLinkResponse,
+    type IntegrationUnlinkResponse as IntegrationUnlinkResponse,
+    type IntegrationListResponsesMyCursorIDPage as IntegrationListResponsesMyCursorIDPage,
+    type IntegrationRetrieveParams as IntegrationRetrieveParams,
+    type IntegrationUpdateParams as IntegrationUpdateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationLinkParams as IntegrationLinkParams,
+    type IntegrationUnlinkParams as IntegrationUnlinkParams,
   };
 }
