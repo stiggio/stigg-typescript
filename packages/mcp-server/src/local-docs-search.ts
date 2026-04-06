@@ -867,6 +867,287 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list',
+    endpoint: '/api/v1/customers/{id}/integrations',
+    httpMethod: 'get',
+    summary: 'Get a list of customer integrations',
+    description: "Retrieves a paginated list of a customer's external integrations (billing, CRM, etc.).",
+    stainlessPath: '(resource) v1.customers.integrations > (method) list',
+    qualified: 'client.v1.customers.integrations.list',
+    params: [
+      'id: string;',
+      'after?: string;',
+      'before?: string;',
+      'limit?: number;',
+      'vendorIdentifier?: string;',
+    ],
+    response:
+      '{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }',
+    markdown:
+      "## list\n\n`client.v1.customers.integrations.list(id: string, after?: string, before?: string, limit?: number, vendorIdentifier?: string): { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: object | object | object; }`\n\n**get** `/api/v1/customers/{id}/integrations`\n\nRetrieves a paginated list of a customer's external integrations (billing, CRM, etc.).\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `vendorIdentifier?: string`\n  Filter by vendor identifier. Supports comma-separated values for multiple vendors (e.g., STRIPE,HUBSPOT)\n\n### Returns\n\n- `{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n  External billing or CRM integration link\n\n  - `id: string`\n  - `syncedEntityId: string`\n  - `vendorIdentifier: string`\n  - `syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse);\n}\n```",
+    perLanguage: {
+      cli: {
+        method: 'integrations list',
+        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Customers.Integrations.List',
+        example:
+          'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.Integrations.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      java: {
+        method: 'v1().customers().integrations().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationListPage;\nimport io.stigg.models.v1.customers.integrations.IntegrationListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationListPage page = client.v1().customers().integrations().list("x");\n    }\n}',
+      },
+      python: {
+        method: 'v1.customers.integrations.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.integrations.list(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.integrations.list("x")\n\nputs(page)',
+      },
+      typescript: {
+        method: 'client.v1.customers.integrations.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse.id);\n}",
+      },
+    },
+  },
+  {
+    name: 'link',
+    endpoint: '/api/v1/customers/{id}/integrations',
+    httpMethod: 'post',
+    summary: 'Link customer integration',
+    description:
+      'Links a customer to an external integration by specifying the vendor and external entity ID.',
+    stainlessPath: '(resource) v1.customers.integrations > (method) link',
+    qualified: 'client.v1.customers.integrations.link',
+    params: ['id: string;', 'id: string;', 'syncedEntityId: string;', 'vendorIdentifier: string;'],
+    response:
+      '{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }',
+    markdown:
+      "## link\n\n`client.v1.customers.integrations.link(id: string, id: string, syncedEntityId: string, vendorIdentifier: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/integrations`\n\nLinks a customer to an external integration by specifying the vendor and external entity ID.\n\n### Parameters\n\n- `id: string`\n\n- `id: string`\n  Integration details\n\n- `syncedEntityId: string`\n  Synced entity id\n\n- `vendorIdentifier: string`\n  The vendor identifier of integration\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.integrations.link('x', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(response);\n```",
+    perLanguage: {
+      cli: {
+        method: 'integrations link',
+        example:
+          "stigg v1:customers:integrations link \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --id id \\\n  --synced-entity-id syncedEntityId \\\n  --vendor-identifier AUTH0",
+      },
+      csharp: {
+        method: 'V1.Customers.Integrations.Link',
+        example:
+          'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar response = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(response);',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Link',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Integrations.Link(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationLinkParams{\n\t\t\tID:               "id",\n\t\t\tSyncedEntityID:   "syncedEntityId",\n\t\t\tVendorIdentifier: stigg.V1CustomerIntegrationLinkParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
+      },
+      java: {
+        method: 'v1().customers().integrations().link',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationLinkParams;\nimport io.stigg.models.v1.customers.integrations.IntegrationLinkResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationLinkParams params = IntegrationLinkParams.builder()\n            .pathId("x")\n            .bodyId("id")\n            .syncedEntityId("syncedEntityId")\n            .vendorIdentifier(IntegrationLinkParams.VendorIdentifier.AUTH0)\n            .build();\n        IntegrationLinkResponse response = client.v1().customers().integrations().link(params);\n    }\n}',
+      },
+      python: {
+        method: 'v1.customers.integrations.link',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.integrations.link(\n    path_id="x",\n    body_id="id",\n    synced_entity_id="syncedEntityId",\n    vendor_identifier="AUTH0",\n)\nprint(response.data)',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.link',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.integrations.link(\n  "x",\n  body_id: "id",\n  synced_entity_id: "syncedEntityId",\n  vendor_identifier: :AUTH0\n)\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.v1.customers.integrations.link',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.integrations.link('x', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(response.data);",
+      },
+    },
+  },
+  {
+    name: 'retrieve',
+    endpoint: '/api/v1/customers/{id}/integrations/{integrationId}',
+    httpMethod: 'get',
+    summary: 'Get a single customer integration by ID',
+    description: 'Retrieves a specific integration for a customer by integration ID.',
+    stainlessPath: '(resource) v1.customers.integrations > (method) retrieve',
+    qualified: 'client.v1.customers.integrations.retrieve',
+    params: ['id: string;', 'integrationId: string;'],
+    response:
+      '{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }',
+    markdown:
+      "## retrieve\n\n`client.v1.customers.integrations.retrieve(id: string, integrationId: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nRetrieves a specific integration for a customer by integration ID.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst integration = await client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });\n\nconsole.log(integration);\n```",
+    perLanguage: {
+      cli: {
+        method: 'integrations retrieve',
+        example:
+          "stigg v1:customers:integrations retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
+      csharp: {
+        method: 'V1.Customers.Integrations.Retrieve',
+        example:
+          'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar integration = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(integration);',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tintegration, err := client.V1.Customers.Integrations.Get(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", integration.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      java: {
+        method: 'v1().customers().integrations().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationRetrieveParams;\nimport io.stigg.models.v1.customers.integrations.IntegrationRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationRetrieveParams params = IntegrationRetrieveParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        IntegrationRetrieveResponse integration = client.v1().customers().integrations().retrieve(params);\n    }\n}',
+      },
+      python: {
+        method: 'v1.customers.integrations.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nintegration = client.v1.customers.integrations.retrieve(\n    integration_id="integrationId",\n    id="id",\n)\nprint(integration.data)',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nintegration = stigg.v1.customers.integrations.retrieve("integrationId", id: "id")\n\nputs(integration)',
+      },
+      typescript: {
+        method: 'client.v1.customers.integrations.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst integration = await client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });\n\nconsole.log(integration.data);",
+      },
+    },
+  },
+  {
+    name: 'update',
+    endpoint: '/api/v1/customers/{id}/integrations/{integrationId}',
+    httpMethod: 'patch',
+    summary: 'Update a customer integration',
+    description: "Updates a customer's integration link, such as changing the synced external entity ID.",
+    stainlessPath: '(resource) v1.customers.integrations > (method) update',
+    qualified: 'client.v1.customers.integrations.update',
+    params: ['id: string;', 'integrationId: string;', 'syncedEntityId: string;'],
+    response:
+      '{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }',
+    markdown:
+      "## update\n\n`client.v1.customers.integrations.update(id: string, integrationId: string, syncedEntityId: string): { data: object; }`\n\n**patch** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nUpdates a customer's integration link, such as changing the synced external entity ID.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n- `syncedEntityId: string`\n  Synced entity id\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst integration = await client.v1.customers.integrations.update('integrationId', { id: 'id', syncedEntityId: 'syncedEntityId' });\n\nconsole.log(integration);\n```",
+    perLanguage: {
+      cli: {
+        method: 'integrations update',
+        example:
+          "stigg v1:customers:integrations update \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId \\\n  --synced-entity-id syncedEntityId",
+      },
+      csharp: {
+        method: 'V1.Customers.Integrations.Update',
+        example:
+          'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar integration = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(integration);',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tintegration, err := client.V1.Customers.Integrations.Update(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUpdateParams{\n\t\t\tID:             "id",\n\t\t\tSyncedEntityID: stigg.String("syncedEntityId"),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", integration.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
+      },
+      java: {
+        method: 'v1().customers().integrations().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationUpdateParams;\nimport io.stigg.models.v1.customers.integrations.IntegrationUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUpdateParams params = IntegrationUpdateParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .syncedEntityId("syncedEntityId")\n            .build();\n        IntegrationUpdateResponse integration = client.v1().customers().integrations().update(params);\n    }\n}',
+      },
+      python: {
+        method: 'v1.customers.integrations.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nintegration = client.v1.customers.integrations.update(\n    integration_id="integrationId",\n    id="id",\n    synced_entity_id="syncedEntityId",\n)\nprint(integration.data)',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nintegration = stigg.v1.customers.integrations.update("integrationId", id: "id", synced_entity_id: "syncedEntityId")\n\nputs(integration)',
+      },
+      typescript: {
+        method: 'client.v1.customers.integrations.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst integration = await client.v1.customers.integrations.update('integrationId', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n});\n\nconsole.log(integration.data);",
+      },
+    },
+  },
+  {
+    name: 'unlink',
+    endpoint: '/api/v1/customers/{id}/integrations/{integrationId}',
+    httpMethod: 'delete',
+    summary: 'Unlink customer integration',
+    description: 'Removes the link between a customer and an external integration.',
+    stainlessPath: '(resource) v1.customers.integrations > (method) unlink',
+    qualified: 'client.v1.customers.integrations.unlink',
+    params: ['id: string;', 'integrationId: string;'],
+    response:
+      '{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }',
+    markdown:
+      "## unlink\n\n`client.v1.customers.integrations.unlink(id: string, integrationId: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nRemoves the link between a customer and an external integration.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.integrations.unlink('integrationId', { id: 'id' });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      cli: {
+        method: 'integrations unlink',
+        example:
+          "stigg v1:customers:integrations unlink \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
+      csharp: {
+        method: 'V1.Customers.Integrations.Unlink',
+        example:
+          'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar response = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(response);',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Unlink',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Integrations.Unlink(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUnlinkParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      java: {
+        method: 'v1().customers().integrations().unlink',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationUnlinkParams;\nimport io.stigg.models.v1.customers.integrations.IntegrationUnlinkResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUnlinkParams params = IntegrationUnlinkParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        IntegrationUnlinkResponse response = client.v1().customers().integrations().unlink(params);\n    }\n}',
+      },
+      python: {
+        method: 'v1.customers.integrations.unlink',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.integrations.unlink(\n    integration_id="integrationId",\n    id="id",\n)\nprint(response.data)',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.unlink',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.integrations.unlink("integrationId", id: "id")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.v1.customers.integrations.unlink',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.integrations.unlink('integrationId', { id: 'id' });\n\nconsole.log(response.data);",
+      },
+    },
+  },
+  {
     name: 'retrieve',
     endpoint: '/api/v1/subscriptions/{id}',
     httpMethod: 'get',
@@ -4658,6 +4939,288 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.v1.products.duplicateProduct',
         example:
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.duplicateProduct('x', { targetId: 'targetId' });\n\nconsole.log(product.data);",
+      },
+    },
+  },
+  {
+    name: 'provision',
+    endpoint: '/internal/beta/event-queues/provision',
+    httpMethod: 'post',
+    summary: 'Provision event queue',
+    description: 'Provision SQS queue, SNS subscriptions, and IAM role for the current environment',
+    stainlessPath: '(resource) internal.beta.event_queues > (method) provision',
+    qualified: 'client.internal.beta.eventQueues.provision',
+    params: [
+      'region: string;',
+      'allowedAssumeRoleArns?: string[];',
+      'createLowPriorityQueues?: boolean;',
+      'eventTypes?: string[];',
+      'suffix?: string;',
+    ],
+    response:
+      "{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }",
+    markdown:
+      "## provision\n\n`client.internal.beta.eventQueues.provision(region: string, allowedAssumeRoleArns?: string[], createLowPriorityQueues?: boolean, eventTypes?: string[], suffix?: string): { data: object; }`\n\n**post** `/internal/beta/event-queues/provision`\n\nProvision SQS queue, SNS subscriptions, and IAM role for the current environment\n\n### Parameters\n\n- `region: string`\n  AWS region for the SQS queue (e.g., us-east-1, eu-west-1)\n\n- `allowedAssumeRoleArns?: string[]`\n  Additional IAM role ARNs allowed to assume the external role for queue access\n\n- `createLowPriorityQueues?: boolean`\n  Whether to create separate low-priority queues for standard topic events\n\n- `eventTypes?: string[]`\n  Event types to subscribe to. Defaults to entitlements, measurements, and migrations.\n\n- `suffix?: string`\n  Optional suffix to allow multiple queues for the same environment and region\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.internal.beta.eventQueues.provision({ region: 'us-east-1' });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      cli: {
+        method: 'event_queues provision',
+        example:
+          "stigg internal:beta:event-queues provision \\\n  --api-key 'My API Key' \\\n  --region us-east-1",
+      },
+      csharp: {
+        method: 'Internal.Beta.EventQueues.Provision',
+        example:
+          'EventQueueProvisionParams parameters = new() { Region = Region.UsEast1 };\n\nvar response = await client.Internal.Beta.EventQueues.Provision(parameters);\n\nConsole.WriteLine(response);',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Provision',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.Internal.Beta.EventQueues.Provision(context.TODO(), stigg.InternalBetaEventQueueProvisionParams{\n\t\tRegion: stigg.InternalBetaEventQueueProvisionParamsRegionUsEast1,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/internal/beta/event-queues/provision \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "region": "us-east-1"\n        }\'',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().provision',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueProvisionParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueProvisionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueProvisionParams params = EventQueueProvisionParams.builder()\n            .region(EventQueueProvisionParams.Region.US_EAST_1)\n            .build();\n        EventQueueProvisionResponse response = client.internal_().beta().eventQueues().provision(params);\n    }\n}',
+      },
+      python: {
+        method: 'internal.beta.event_queues.provision',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.internal.beta.event_queues.provision(\n    region="us-east-1",\n)\nprint(response.data)',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.provision',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.internal.beta.event_queues.provision(region: :"us-east-1")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.internal.beta.eventQueues.provision',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.internal.beta.eventQueues.provision({ region: 'us-east-1' });\n\nconsole.log(response.data);",
+      },
+    },
+  },
+  {
+    name: 'list',
+    endpoint: '/internal/beta/event-queues',
+    httpMethod: 'get',
+    summary: 'Get a list of event queues',
+    description: 'List all event queues for the current environment',
+    stainlessPath: '(resource) internal.beta.event_queues > (method) list',
+    qualified: 'client.internal.beta.eventQueues.list',
+    response:
+      "{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }[]; pagination: { next: string; prev: string; }; }",
+    markdown:
+      "## list\n\n`client.internal.beta.eventQueues.list(): { data: object[]; pagination: object; }`\n\n**get** `/internal/beta/event-queues`\n\nList all event queues for the current environment\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }[]; pagination: { next: string; prev: string; }; }`\n  Response list object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }[]`\n  - `pagination: { next: string; prev: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueues = await client.internal.beta.eventQueues.list();\n\nconsole.log(eventQueues);\n```",
+    perLanguage: {
+      cli: {
+        method: 'event_queues list',
+        example: "stigg internal:beta:event-queues list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'Internal.Beta.EventQueues.List',
+        example:
+          'EventQueueListParams parameters = new();\n\nvar eventQueues = await client.Internal.Beta.EventQueues.List(parameters);\n\nConsole.WriteLine(eventQueues);',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueues, err := client.Internal.Beta.EventQueues.List(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueues.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/internal/beta/event-queues \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueListParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueListResponse eventQueues = client.internal_().beta().eventQueues().list();\n    }\n}',
+      },
+      python: {
+        method: 'internal.beta.event_queues.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queues = client.internal.beta.event_queues.list()\nprint(event_queues.data)',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queues = stigg.internal.beta.event_queues.list\n\nputs(event_queues)',
+      },
+      typescript: {
+        method: 'client.internal.beta.eventQueues.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueues = await client.internal.beta.eventQueues.list();\n\nconsole.log(eventQueues.data);",
+      },
+    },
+  },
+  {
+    name: 'retrieve',
+    endpoint: '/internal/beta/event-queues/{queueName}',
+    httpMethod: 'get',
+    summary: 'Get a single event queue by ID',
+    description: 'Get event queue by queue name',
+    stainlessPath: '(resource) internal.beta.event_queues > (method) retrieve',
+    qualified: 'client.internal.beta.eventQueues.retrieve',
+    params: ['queueName: string;'],
+    response:
+      "{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }",
+    markdown:
+      "## retrieve\n\n`client.internal.beta.eventQueues.retrieve(queueName: string): { data: object; }`\n\n**get** `/internal/beta/event-queues/{queueName}`\n\nGet event queue by queue name\n\n### Parameters\n\n- `queueName: string`\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueue = await client.internal.beta.eventQueues.retrieve('x');\n\nconsole.log(eventQueue);\n```",
+    perLanguage: {
+      cli: {
+        method: 'event_queues retrieve',
+        example:
+          "stigg internal:beta:event-queues retrieve \\\n  --api-key 'My API Key' \\\n  --queue-name x",
+      },
+      csharp: {
+        method: 'Internal.Beta.EventQueues.Retrieve',
+        example:
+          'EventQueueRetrieveParams parameters = new() { QueueName = "x" };\n\nvar eventQueue = await client.Internal.Beta.EventQueues.Retrieve(parameters);\n\nConsole.WriteLine(eventQueue);',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueue, err := client.Internal.Beta.EventQueues.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueue.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/internal/beta/event-queues/$QUEUE_NAME \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueRetrieveParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueRetrieveResponse eventQueue = client.internal_().beta().eventQueues().retrieve("x");\n    }\n}',
+      },
+      python: {
+        method: 'internal.beta.event_queues.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue = client.internal.beta.event_queues.retrieve(\n    "x",\n)\nprint(event_queue.data)',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue = stigg.internal.beta.event_queues.retrieve("x")\n\nputs(event_queue)',
+      },
+      typescript: {
+        method: 'client.internal.beta.eventQueues.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueue = await client.internal.beta.eventQueues.retrieve('x');\n\nconsole.log(eventQueue.data);",
+      },
+    },
+  },
+  {
+    name: 'update',
+    endpoint: '/internal/beta/event-queues/{queueName}',
+    httpMethod: 'patch',
+    summary: 'Update a event queue',
+    description: 'Update event queue configuration',
+    stainlessPath: '(resource) internal.beta.event_queues > (method) update',
+    qualified: 'client.internal.beta.eventQueues.update',
+    params: [
+      'queueName: string;',
+      'allowedAssumeRoleArns?: string[];',
+      'createLowPriorityQueues?: boolean;',
+      'eventTypes?: string[];',
+    ],
+    response:
+      "{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }",
+    markdown:
+      "## update\n\n`client.internal.beta.eventQueues.update(queueName: string, allowedAssumeRoleArns?: string[], createLowPriorityQueues?: boolean, eventTypes?: string[]): { data: object; }`\n\n**patch** `/internal/beta/event-queues/{queueName}`\n\nUpdate event queue configuration\n\n### Parameters\n\n- `queueName: string`\n\n- `allowedAssumeRoleArns?: string[]`\n\n- `createLowPriorityQueues?: boolean`\n  Whether to create separate low-priority queues for standard topic events\n\n- `eventTypes?: string[]`\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueue = await client.internal.beta.eventQueues.update('x');\n\nconsole.log(eventQueue);\n```",
+    perLanguage: {
+      cli: {
+        method: 'event_queues update',
+        example: "stigg internal:beta:event-queues update \\\n  --api-key 'My API Key' \\\n  --queue-name x",
+      },
+      csharp: {
+        method: 'Internal.Beta.EventQueues.Update',
+        example:
+          'EventQueueUpdateParams parameters = new() { QueueName = "x" };\n\nvar eventQueue = await client.Internal.Beta.EventQueues.Update(parameters);\n\nConsole.WriteLine(eventQueue);',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueue, err := client.Internal.Beta.EventQueues.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.InternalBetaEventQueueUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueue.Data)\n}\n',
+      },
+      http: {
+        example:
+          "curl https://api.stigg.io/internal/beta/event-queues/$QUEUE_NAME \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueUpdateParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueUpdateResponse eventQueue = client.internal_().beta().eventQueues().update("x");\n    }\n}',
+      },
+      python: {
+        method: 'internal.beta.event_queues.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue = client.internal.beta.event_queues.update(\n    queue_name="x",\n)\nprint(event_queue.data)',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue = stigg.internal.beta.event_queues.update("x")\n\nputs(event_queue)',
+      },
+      typescript: {
+        method: 'client.internal.beta.eventQueues.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueue = await client.internal.beta.eventQueues.update('x');\n\nconsole.log(eventQueue.data);",
+      },
+    },
+  },
+  {
+    name: 'delete',
+    endpoint: '/internal/beta/event-queues/{queueName}',
+    httpMethod: 'delete',
+    summary: 'Delete event queue',
+    description: 'Delete an event queue and tear down its infrastructure',
+    stainlessPath: '(resource) internal.beta.event_queues > (method) delete',
+    qualified: 'client.internal.beta.eventQueues.delete',
+    params: ['queueName: string;'],
+    response:
+      "{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }",
+    markdown:
+      "## delete\n\n`client.internal.beta.eventQueues.delete(queueName: string): { data: object; }`\n\n**delete** `/internal/beta/event-queues/{queueName}`\n\nDelete an event queue and tear down its infrastructure\n\n### Parameters\n\n- `queueName: string`\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueue = await client.internal.beta.eventQueues.delete('x');\n\nconsole.log(eventQueue);\n```",
+    perLanguage: {
+      cli: {
+        method: 'event_queues delete',
+        example: "stigg internal:beta:event-queues delete \\\n  --api-key 'My API Key' \\\n  --queue-name x",
+      },
+      csharp: {
+        method: 'Internal.Beta.EventQueues.Delete',
+        example:
+          'EventQueueDeleteParams parameters = new() { QueueName = "x" };\n\nvar eventQueue = await client.Internal.Beta.EventQueues.Delete(parameters);\n\nConsole.WriteLine(eventQueue);',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueue, err := client.Internal.Beta.EventQueues.Delete(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueue.Data)\n}\n',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/internal/beta/event-queues/$QUEUE_NAME \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueDeleteParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueDeleteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueDeleteResponse eventQueue = client.internal_().beta().eventQueues().delete("x");\n    }\n}',
+      },
+      python: {
+        method: 'internal.beta.event_queues.delete',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue = client.internal.beta.event_queues.delete(\n    "x",\n)\nprint(event_queue.data)',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.delete',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue = stigg.internal.beta.event_queues.delete("x")\n\nputs(event_queue)',
+      },
+      typescript: {
+        method: 'client.internal.beta.eventQueues.delete',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueue = await client.internal.beta.eventQueues.delete('x');\n\nconsole.log(eventQueue.data);",
       },
     },
   },

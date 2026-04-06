@@ -32,6 +32,7 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+import { Internal } from './resources/internal/internal';
 
 export interface ClientOptions {
   /**
@@ -742,9 +743,11 @@ export class Stigg {
   static toFile = Uploads.toFile;
 
   v1: API.V1 = new API.V1(this);
+  internal: API.Internal = new API.Internal(this);
 }
 
 Stigg.V1 = V1;
+Stigg.Internal = Internal;
 
 export declare namespace Stigg {
   export type RequestOptions = Opts.RequestOptions;
@@ -756,4 +759,6 @@ export declare namespace Stigg {
   };
 
   export { V1 as V1 };
+
+  export { Internal as Internal };
 }
