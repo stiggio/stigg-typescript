@@ -7,6 +7,10 @@ import ts from 'typescript';
 import { WorkerOutput } from './code-tool-types';
 import { Stigg, ClientOptions } from '@stigg/typescript';
 
+async function tseval(code: string) {
+  return import('data:application/typescript;charset=utf-8;base64,' + Buffer.from(code).toString('base64'));
+}
+
 function getRunFunctionSource(code: string): {
   type: 'declaration' | 'expression';
   client: string | undefined;
@@ -118,6 +122,11 @@ const fuse = new Fuse(
     'client.v1.customers.promotionalEntitlements.create',
     'client.v1.customers.promotionalEntitlements.list',
     'client.v1.customers.promotionalEntitlements.revoke',
+    'client.v1.customers.integrations.link',
+    'client.v1.customers.integrations.list',
+    'client.v1.customers.integrations.retrieve',
+    'client.v1.customers.integrations.unlink',
+    'client.v1.customers.integrations.update',
     'client.v1.subscriptions.cancel',
     'client.v1.subscriptions.delegate',
     'client.v1.subscriptions.import',
@@ -183,6 +192,11 @@ const fuse = new Fuse(
     'client.v1.products.listProducts',
     'client.v1.products.unarchiveProduct',
     'client.v1.products.updateProduct',
+    'client.internal.beta.eventQueues.delete',
+    'client.internal.beta.eventQueues.list',
+    'client.internal.beta.eventQueues.provision',
+    'client.internal.beta.eventQueues.retrieve',
+    'client.internal.beta.eventQueues.update',
   ],
   { threshold: 1, shouldSort: true },
 );
@@ -315,7 +329,9 @@ const fetch = async (req: Request): Promise<Response> => {
 
   const log_lines: string[] = [];
   const err_lines: string[] = [];
-  const console = {
+  const originalConsole = globalThis.console;
+  globalThis.console = {
+    ...originalConsole,
     log: (...args: unknown[]) => {
       log_lines.push(util.format(...args));
     },
@@ -325,7 +341,7 @@ const fetch = async (req: Request): Promise<Response> => {
   };
   try {
     let run_ = async (client: any) => {};
-    eval(`${code}\nrun_ = run;`);
+    run_ = (await tseval(`${code}\nexport default run;`)).default;
     const result = await run_(makeSdkProxy(client, { path: ['client'] }));
     return Response.json({
       is_error: false,
@@ -343,6 +359,8 @@ const fetch = async (req: Request): Promise<Response> => {
       } satisfies WorkerOutput,
       { status: 400, statusText: 'Code execution error' },
     );
+  } finally {
+    globalThis.console = originalConsole;
   }
 };
 

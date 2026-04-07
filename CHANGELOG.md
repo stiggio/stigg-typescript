@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.1.0-alpha.26 (2026-04-06)
+
+Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
+
+### Features
+
+* **api:** add customer integrations and event queues endpoints ([7144126](https://github.com/stiggio/stigg-typescript/commit/714412616815880c7da3dbe65dfa9fa0db136a44))
+
+
+### Chores
+
+* **ci:** escape input path in publish-npm workflow ([7e93438](https://github.com/stiggio/stigg-typescript/commit/7e93438a7cbb3b10c9d3caaaea4acbd378da1117))
+* **ci:** skip lint on metadata-only changes ([9cc3309](https://github.com/stiggio/stigg-typescript/commit/9cc3309b7b7c7dcdce41e834d8945159f902afbc))
+* **internal:** codegen related update ([8a4a582](https://github.com/stiggio/stigg-typescript/commit/8a4a582a09f8c07a253fe87524726b4f131652d3))
+* **internal:** codegen related update ([5d3341c](https://github.com/stiggio/stigg-typescript/commit/5d3341cb9ed07689b5b961c92f85185dd7d875e4))
+* **internal:** fix MCP docker image builds in yarn projects ([37d9a6c](https://github.com/stiggio/stigg-typescript/commit/37d9a6c3eeb7b80dddb874027b9dd945fcfe6c42))
+* **internal:** fix MCP server TS errors that occur with required client options ([640352c](https://github.com/stiggio/stigg-typescript/commit/640352c746337c07a5fee1029d369b226654cd0f))
+* **internal:** improve local docs search for MCP servers ([15ab3e5](https://github.com/stiggio/stigg-typescript/commit/15ab3e5815e9a9f0f1b499af364c30456331741d))
+* **internal:** improve local docs search for MCP servers ([d279d7b](https://github.com/stiggio/stigg-typescript/commit/d279d7be33974ff2c5f164f57d54ba1e796e8b43))
+* **internal:** support custom-instructions-path flag in MCP servers ([e54fc8c](https://github.com/stiggio/stigg-typescript/commit/e54fc8c25bf842fa884a8bb1262701a908c3398b))
+* **internal:** support local docs search in MCP servers ([6295c74](https://github.com/stiggio/stigg-typescript/commit/6295c7401aa82325d3a18dfbcccb3cc8ae669982))
+* **internal:** support type annotations when running MCP in local execution mode ([47889cb](https://github.com/stiggio/stigg-typescript/commit/47889cb9fc788b51bdc8cdaca46d4a955e66dca7))
+* **internal:** update gitignore ([25b7bb6](https://github.com/stiggio/stigg-typescript/commit/25b7bb6bcd870167b9c5741070f88eab329d8dbf))
+* **internal:** use link instead of file in MCP server package.json files ([6e7a769](https://github.com/stiggio/stigg-typescript/commit/6e7a76965b3863d3fd5d46c43e41afa809568c84))
+* **mcp-server:** add support for session id, forward client info ([8f2e457](https://github.com/stiggio/stigg-typescript/commit/8f2e4576b42c339af00150a29599bcc281efd591))
+* **mcp-server:** log client info ([e2e8fbc](https://github.com/stiggio/stigg-typescript/commit/e2e8fbcc323832771404e52d0b6c885b2ac332ef))
+
 ## 0.1.0-alpha.25 (2026-03-18)
 
 Full Changelog: [v0.1.0-alpha.24...v0.1.0-alpha.25](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.24...v0.1.0-alpha.25)
