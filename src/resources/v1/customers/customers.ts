@@ -4,16 +4,12 @@ import { APIResource } from '../../../core/resource';
 import * as IntegrationsAPI from './integrations';
 import {
   IntegrationLinkParams,
-  IntegrationLinkResponse,
   IntegrationListParams,
   IntegrationListResponse,
   IntegrationListResponsesMyCursorIDPage,
   IntegrationRetrieveParams,
-  IntegrationRetrieveResponse,
   IntegrationUnlinkParams,
-  IntegrationUnlinkResponse,
   IntegrationUpdateParams,
-  IntegrationUpdateResponse,
   Integrations,
 } from './integrations';
 import * as PaymentMethodAPI from './payment-method';
@@ -131,6 +127,106 @@ export class Customers extends APIResource {
 export type CustomerListResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResponse>;
 
 export type CustomerListResourcesResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResourcesResponse>;
+
+/**
+ * Response object
+ */
+export interface CustomerIntegrationResponse {
+  /**
+   * External billing or CRM integration link
+   */
+  data: CustomerIntegrationResponse.Data;
+}
+
+export namespace CustomerIntegrationResponse {
+  /**
+   * External billing or CRM integration link
+   */
+  export interface Data {
+    /**
+     * Integration details
+     */
+    id: string;
+
+    /**
+     * Synced entity id
+     */
+    syncedEntityId: string | null;
+
+    /**
+     * The vendor identifier of integration
+     */
+    vendorIdentifier:
+      | 'AUTH0'
+      | 'ZUORA'
+      | 'STRIPE'
+      | 'HUBSPOT'
+      | 'AWS_MARKETPLACE'
+      | 'SNOWFLAKE'
+      | 'SALESFORCE'
+      | 'BIG_QUERY'
+      | 'OPEN_FGA'
+      | 'APP_STORE';
+
+    /**
+     * Price billing sync revision data containing billing ID, link URL, and price
+     * group package billing ID
+     */
+    syncData?:
+      | Data.SyncRevisionPriceBillingData
+      | Data.SyncRevisionBillingData
+      | Data.SyncRevisionMarketplaceData
+      | null;
+  }
+
+  export namespace Data {
+    /**
+     * Price billing sync revision data containing billing ID, link URL, and price
+     * group package billing ID
+     */
+    export interface SyncRevisionPriceBillingData {
+      /**
+       * Billing integration id
+       */
+      billingId: string;
+
+      /**
+       * Billing integration url
+       */
+      billingLinkUrl: string;
+
+      /**
+       * Price group package billing id
+       */
+      priceGroupPackageBillingId: string;
+    }
+
+    /**
+     * Billing sync revision data containing billing ID and link URL
+     */
+    export interface SyncRevisionBillingData {
+      /**
+       * Billing integration id
+       */
+      billingId: string;
+
+      /**
+       * Billing integration url
+       */
+      billingLinkUrl: string;
+    }
+
+    /**
+     * Marketplace sync revision data containing dimensions
+     */
+    export interface SyncRevisionMarketplaceData {
+      /**
+       * Dimensions of the marketplace sync revision
+       */
+      dimensions: string;
+    }
+  }
+}
 
 /**
  * Response object
@@ -2752,6 +2848,7 @@ Customers.Integrations = Integrations;
 
 export declare namespace Customers {
   export {
+    type CustomerIntegrationResponse as CustomerIntegrationResponse,
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
     type CustomerImportResponse as CustomerImportResponse,
@@ -2782,11 +2879,7 @@ export declare namespace Customers {
 
   export {
     Integrations as Integrations,
-    type IntegrationRetrieveResponse as IntegrationRetrieveResponse,
-    type IntegrationUpdateResponse as IntegrationUpdateResponse,
     type IntegrationListResponse as IntegrationListResponse,
-    type IntegrationLinkResponse as IntegrationLinkResponse,
-    type IntegrationUnlinkResponse as IntegrationUnlinkResponse,
     type IntegrationListResponsesMyCursorIDPage as IntegrationListResponsesMyCursorIDPage,
     type IntegrationRetrieveParams as IntegrationRetrieveParams,
     type IntegrationUpdateParams as IntegrationUpdateParams,

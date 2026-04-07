@@ -3,11 +3,8 @@
 export { Beta } from './beta';
 export {
   EventQueues,
-  type EventQueueRetrieveResponse,
-  type EventQueueUpdateResponse,
+  type EventQueueResponse,
   type EventQueueListResponse,
-  type EventQueueDeleteResponse,
-  type EventQueueProvisionResponse,
   type EventQueueUpdateParams,
   type EventQueueProvisionParams,
 } from './event-queues';

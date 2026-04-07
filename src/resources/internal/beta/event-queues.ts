@@ -9,7 +9,7 @@ export class EventQueues extends APIResource {
   /**
    * Get event queue by queue name
    */
-  retrieve(queueName: string, options?: RequestOptions): APIPromise<EventQueueRetrieveResponse> {
+  retrieve(queueName: string, options?: RequestOptions): APIPromise<EventQueueResponse> {
     return this._client.get(path`/internal/beta/event-queues/${queueName}`, options);
   }
 
@@ -20,7 +20,7 @@ export class EventQueues extends APIResource {
     queueName: string,
     body: EventQueueUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<EventQueueUpdateResponse> {
+  ): APIPromise<EventQueueResponse> {
     return this._client.patch(path`/internal/beta/event-queues/${queueName}`, { body, ...options });
   }
 
@@ -34,17 +34,14 @@ export class EventQueues extends APIResource {
   /**
    * Delete an event queue and tear down its infrastructure
    */
-  delete(queueName: string, options?: RequestOptions): APIPromise<EventQueueDeleteResponse> {
+  delete(queueName: string, options?: RequestOptions): APIPromise<EventQueueResponse> {
     return this._client.delete(path`/internal/beta/event-queues/${queueName}`, options);
   }
 
   /**
    * Provision SQS queue, SNS subscriptions, and IAM role for the current environment
    */
-  provision(
-    body: EventQueueProvisionParams,
-    options?: RequestOptions,
-  ): APIPromise<EventQueueProvisionResponse> {
+  provision(body: EventQueueProvisionParams, options?: RequestOptions): APIPromise<EventQueueResponse> {
     return this._client.post('/internal/beta/event-queues/provision', { body, ...options });
   }
 }
@@ -52,98 +49,14 @@ export class EventQueues extends APIResource {
 /**
  * Response object
  */
-export interface EventQueueRetrieveResponse {
+export interface EventQueueResponse {
   /**
    * Event queue provisioning status and details
    */
-  data: EventQueueRetrieveResponse.Data;
+  data: EventQueueResponse.Data;
 }
 
-export namespace EventQueueRetrieveResponse {
-  /**
-   * Event queue provisioning status and details
-   */
-  export interface Data {
-    /**
-     * Timestamp of when the record was created
-     */
-    createdAt: string;
-
-    /**
-     * Unique queue identifier
-     */
-    queueName: string;
-
-    /**
-     * AWS region where the queue is deployed
-     */
-    region:
-      | 'us-east-1'
-      | 'us-east-2'
-      | 'us-west-1'
-      | 'us-west-2'
-      | 'ca-central-1'
-      | 'eu-west-1'
-      | 'eu-west-2'
-      | 'eu-west-3'
-      | 'eu-central-1'
-      | 'eu-central-2'
-      | 'eu-north-1'
-      | 'eu-south-1'
-      | 'eu-south-2'
-      | 'ap-southeast-1'
-      | 'ap-southeast-2'
-      | 'ap-southeast-3'
-      | 'ap-northeast-1'
-      | 'ap-northeast-2'
-      | 'ap-northeast-3'
-      | 'ap-south-1'
-      | 'ap-south-2'
-      | 'ap-east-1'
-      | 'sa-east-1'
-      | 'af-south-1'
-      | 'me-south-1'
-      | 'me-central-1'
-      | 'il-central-1';
-
-    /**
-     * Current provisioning status
-     */
-    status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING';
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * SQS queue URL
-     */
-    queueUrl?: string | null;
-
-    /**
-     * IAM role ARN for queue access
-     */
-    roleArn?: string | null;
-
-    /**
-     * Queue suffix for disambiguation
-     */
-    suffix?: string | null;
-  }
-}
-
-/**
- * Response object
- */
-export interface EventQueueUpdateResponse {
-  /**
-   * Event queue provisioning status and details
-   */
-  data: EventQueueUpdateResponse.Data;
-}
-
-export namespace EventQueueUpdateResponse {
+export namespace EventQueueResponse {
   /**
    * Event queue provisioning status and details
    */
@@ -316,174 +229,6 @@ export namespace EventQueueListResponse {
      * Cursor for fetching the previous page of results, or null if at the beginning
      */
     prev: string | null;
-  }
-}
-
-/**
- * Response object
- */
-export interface EventQueueDeleteResponse {
-  /**
-   * Event queue provisioning status and details
-   */
-  data: EventQueueDeleteResponse.Data;
-}
-
-export namespace EventQueueDeleteResponse {
-  /**
-   * Event queue provisioning status and details
-   */
-  export interface Data {
-    /**
-     * Timestamp of when the record was created
-     */
-    createdAt: string;
-
-    /**
-     * Unique queue identifier
-     */
-    queueName: string;
-
-    /**
-     * AWS region where the queue is deployed
-     */
-    region:
-      | 'us-east-1'
-      | 'us-east-2'
-      | 'us-west-1'
-      | 'us-west-2'
-      | 'ca-central-1'
-      | 'eu-west-1'
-      | 'eu-west-2'
-      | 'eu-west-3'
-      | 'eu-central-1'
-      | 'eu-central-2'
-      | 'eu-north-1'
-      | 'eu-south-1'
-      | 'eu-south-2'
-      | 'ap-southeast-1'
-      | 'ap-southeast-2'
-      | 'ap-southeast-3'
-      | 'ap-northeast-1'
-      | 'ap-northeast-2'
-      | 'ap-northeast-3'
-      | 'ap-south-1'
-      | 'ap-south-2'
-      | 'ap-east-1'
-      | 'sa-east-1'
-      | 'af-south-1'
-      | 'me-south-1'
-      | 'me-central-1'
-      | 'il-central-1';
-
-    /**
-     * Current provisioning status
-     */
-    status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING';
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * SQS queue URL
-     */
-    queueUrl?: string | null;
-
-    /**
-     * IAM role ARN for queue access
-     */
-    roleArn?: string | null;
-
-    /**
-     * Queue suffix for disambiguation
-     */
-    suffix?: string | null;
-  }
-}
-
-/**
- * Response object
- */
-export interface EventQueueProvisionResponse {
-  /**
-   * Event queue provisioning status and details
-   */
-  data: EventQueueProvisionResponse.Data;
-}
-
-export namespace EventQueueProvisionResponse {
-  /**
-   * Event queue provisioning status and details
-   */
-  export interface Data {
-    /**
-     * Timestamp of when the record was created
-     */
-    createdAt: string;
-
-    /**
-     * Unique queue identifier
-     */
-    queueName: string;
-
-    /**
-     * AWS region where the queue is deployed
-     */
-    region:
-      | 'us-east-1'
-      | 'us-east-2'
-      | 'us-west-1'
-      | 'us-west-2'
-      | 'ca-central-1'
-      | 'eu-west-1'
-      | 'eu-west-2'
-      | 'eu-west-3'
-      | 'eu-central-1'
-      | 'eu-central-2'
-      | 'eu-north-1'
-      | 'eu-south-1'
-      | 'eu-south-2'
-      | 'ap-southeast-1'
-      | 'ap-southeast-2'
-      | 'ap-southeast-3'
-      | 'ap-northeast-1'
-      | 'ap-northeast-2'
-      | 'ap-northeast-3'
-      | 'ap-south-1'
-      | 'ap-south-2'
-      | 'ap-east-1'
-      | 'sa-east-1'
-      | 'af-south-1'
-      | 'me-south-1'
-      | 'me-central-1'
-      | 'il-central-1';
-
-    /**
-     * Current provisioning status
-     */
-    status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING';
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * SQS queue URL
-     */
-    queueUrl?: string | null;
-
-    /**
-     * IAM role ARN for queue access
-     */
-    roleArn?: string | null;
-
-    /**
-     * Queue suffix for disambiguation
-     */
-    suffix?: string | null;
   }
 }
 
@@ -787,11 +532,8 @@ export interface EventQueueProvisionParams {
 
 export declare namespace EventQueues {
   export {
-    type EventQueueRetrieveResponse as EventQueueRetrieveResponse,
-    type EventQueueUpdateResponse as EventQueueUpdateResponse,
+    type EventQueueResponse as EventQueueResponse,
     type EventQueueListResponse as EventQueueListResponse,
-    type EventQueueDeleteResponse as EventQueueDeleteResponse,
-    type EventQueueProvisionResponse as EventQueueProvisionResponse,
     type EventQueueUpdateParams as EventQueueUpdateParams,
     type EventQueueProvisionParams as EventQueueProvisionParams,
   };

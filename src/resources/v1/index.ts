@@ -23,6 +23,7 @@ export {
 } from './coupons';
 export {
   Customers,
+  type CustomerIntegrationResponse,
   type CustomerResponse,
   type CustomerListResponse,
   type CustomerImportResponse,
