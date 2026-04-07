@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as CustomersAPI from './customers';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -14,7 +15,7 @@ export class Integrations extends APIResource {
     integrationID: string,
     params: IntegrationRetrieveParams,
     options?: RequestOptions,
-  ): APIPromise<IntegrationRetrieveResponse> {
+  ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
     const { id } = params;
     return this._client.get(path`/api/v1/customers/${id}/integrations/${integrationID}`, options);
   }
@@ -27,7 +28,7 @@ export class Integrations extends APIResource {
     integrationID: string,
     params: IntegrationUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<IntegrationUpdateResponse> {
+  ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
     const { id, ...body } = params;
     return this._client.patch(path`/api/v1/customers/${id}/integrations/${integrationID}`, {
       body,
@@ -59,7 +60,7 @@ export class Integrations extends APIResource {
     id: string,
     body: IntegrationLinkParams,
     options?: RequestOptions,
-  ): APIPromise<IntegrationLinkResponse> {
+  ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
     return this._client.post(path`/api/v1/customers/${id}/integrations`, { body, ...options });
   }
 
@@ -70,213 +71,13 @@ export class Integrations extends APIResource {
     integrationID: string,
     params: IntegrationUnlinkParams,
     options?: RequestOptions,
-  ): APIPromise<IntegrationUnlinkResponse> {
+  ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
     const { id } = params;
     return this._client.delete(path`/api/v1/customers/${id}/integrations/${integrationID}`, options);
   }
 }
 
 export type IntegrationListResponsesMyCursorIDPage = MyCursorIDPage<IntegrationListResponse>;
-
-/**
- * Response object
- */
-export interface IntegrationRetrieveResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  data: IntegrationRetrieveResponse.Data;
-}
-
-export namespace IntegrationRetrieveResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  export interface Data {
-    /**
-     * Integration details
-     */
-    id: string;
-
-    /**
-     * Synced entity id
-     */
-    syncedEntityId: string | null;
-
-    /**
-     * The vendor identifier of integration
-     */
-    vendorIdentifier:
-      | 'AUTH0'
-      | 'ZUORA'
-      | 'STRIPE'
-      | 'HUBSPOT'
-      | 'AWS_MARKETPLACE'
-      | 'SNOWFLAKE'
-      | 'SALESFORCE'
-      | 'BIG_QUERY'
-      | 'OPEN_FGA'
-      | 'APP_STORE';
-
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    syncData?:
-      | Data.SyncRevisionPriceBillingData
-      | Data.SyncRevisionBillingData
-      | Data.SyncRevisionMarketplaceData
-      | null;
-  }
-
-  export namespace Data {
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    export interface SyncRevisionPriceBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-
-      /**
-       * Price group package billing id
-       */
-      priceGroupPackageBillingId: string;
-    }
-
-    /**
-     * Billing sync revision data containing billing ID and link URL
-     */
-    export interface SyncRevisionBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-    }
-
-    /**
-     * Marketplace sync revision data containing dimensions
-     */
-    export interface SyncRevisionMarketplaceData {
-      /**
-       * Dimensions of the marketplace sync revision
-       */
-      dimensions: string;
-    }
-  }
-}
-
-/**
- * Response object
- */
-export interface IntegrationUpdateResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  data: IntegrationUpdateResponse.Data;
-}
-
-export namespace IntegrationUpdateResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  export interface Data {
-    /**
-     * Integration details
-     */
-    id: string;
-
-    /**
-     * Synced entity id
-     */
-    syncedEntityId: string | null;
-
-    /**
-     * The vendor identifier of integration
-     */
-    vendorIdentifier:
-      | 'AUTH0'
-      | 'ZUORA'
-      | 'STRIPE'
-      | 'HUBSPOT'
-      | 'AWS_MARKETPLACE'
-      | 'SNOWFLAKE'
-      | 'SALESFORCE'
-      | 'BIG_QUERY'
-      | 'OPEN_FGA'
-      | 'APP_STORE';
-
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    syncData?:
-      | Data.SyncRevisionPriceBillingData
-      | Data.SyncRevisionBillingData
-      | Data.SyncRevisionMarketplaceData
-      | null;
-  }
-
-  export namespace Data {
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    export interface SyncRevisionPriceBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-
-      /**
-       * Price group package billing id
-       */
-      priceGroupPackageBillingId: string;
-    }
-
-    /**
-     * Billing sync revision data containing billing ID and link URL
-     */
-    export interface SyncRevisionBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-    }
-
-    /**
-     * Marketplace sync revision data containing dimensions
-     */
-    export interface SyncRevisionMarketplaceData {
-      /**
-       * Dimensions of the marketplace sync revision
-       */
-      dimensions: string;
-    }
-  }
-}
 
 /**
  * External billing or CRM integration link
@@ -366,206 +167,6 @@ export namespace IntegrationListResponse {
   }
 }
 
-/**
- * Response object
- */
-export interface IntegrationLinkResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  data: IntegrationLinkResponse.Data;
-}
-
-export namespace IntegrationLinkResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  export interface Data {
-    /**
-     * Integration details
-     */
-    id: string;
-
-    /**
-     * Synced entity id
-     */
-    syncedEntityId: string | null;
-
-    /**
-     * The vendor identifier of integration
-     */
-    vendorIdentifier:
-      | 'AUTH0'
-      | 'ZUORA'
-      | 'STRIPE'
-      | 'HUBSPOT'
-      | 'AWS_MARKETPLACE'
-      | 'SNOWFLAKE'
-      | 'SALESFORCE'
-      | 'BIG_QUERY'
-      | 'OPEN_FGA'
-      | 'APP_STORE';
-
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    syncData?:
-      | Data.SyncRevisionPriceBillingData
-      | Data.SyncRevisionBillingData
-      | Data.SyncRevisionMarketplaceData
-      | null;
-  }
-
-  export namespace Data {
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    export interface SyncRevisionPriceBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-
-      /**
-       * Price group package billing id
-       */
-      priceGroupPackageBillingId: string;
-    }
-
-    /**
-     * Billing sync revision data containing billing ID and link URL
-     */
-    export interface SyncRevisionBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-    }
-
-    /**
-     * Marketplace sync revision data containing dimensions
-     */
-    export interface SyncRevisionMarketplaceData {
-      /**
-       * Dimensions of the marketplace sync revision
-       */
-      dimensions: string;
-    }
-  }
-}
-
-/**
- * Response object
- */
-export interface IntegrationUnlinkResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  data: IntegrationUnlinkResponse.Data;
-}
-
-export namespace IntegrationUnlinkResponse {
-  /**
-   * External billing or CRM integration link
-   */
-  export interface Data {
-    /**
-     * Integration details
-     */
-    id: string;
-
-    /**
-     * Synced entity id
-     */
-    syncedEntityId: string | null;
-
-    /**
-     * The vendor identifier of integration
-     */
-    vendorIdentifier:
-      | 'AUTH0'
-      | 'ZUORA'
-      | 'STRIPE'
-      | 'HUBSPOT'
-      | 'AWS_MARKETPLACE'
-      | 'SNOWFLAKE'
-      | 'SALESFORCE'
-      | 'BIG_QUERY'
-      | 'OPEN_FGA'
-      | 'APP_STORE';
-
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    syncData?:
-      | Data.SyncRevisionPriceBillingData
-      | Data.SyncRevisionBillingData
-      | Data.SyncRevisionMarketplaceData
-      | null;
-  }
-
-  export namespace Data {
-    /**
-     * Price billing sync revision data containing billing ID, link URL, and price
-     * group package billing ID
-     */
-    export interface SyncRevisionPriceBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-
-      /**
-       * Price group package billing id
-       */
-      priceGroupPackageBillingId: string;
-    }
-
-    /**
-     * Billing sync revision data containing billing ID and link URL
-     */
-    export interface SyncRevisionBillingData {
-      /**
-       * Billing integration id
-       */
-      billingId: string;
-
-      /**
-       * Billing integration url
-       */
-      billingLinkUrl: string;
-    }
-
-    /**
-     * Marketplace sync revision data containing dimensions
-     */
-    export interface SyncRevisionMarketplaceData {
-      /**
-       * Dimensions of the marketplace sync revision
-       */
-      dimensions: string;
-    }
-  }
-}
-
 export interface IntegrationRetrieveParams {
   /**
    * Customer slug
@@ -629,11 +230,7 @@ export interface IntegrationUnlinkParams {
 
 export declare namespace Integrations {
   export {
-    type IntegrationRetrieveResponse as IntegrationRetrieveResponse,
-    type IntegrationUpdateResponse as IntegrationUpdateResponse,
     type IntegrationListResponse as IntegrationListResponse,
-    type IntegrationLinkResponse as IntegrationLinkResponse,
-    type IntegrationUnlinkResponse as IntegrationUnlinkResponse,
     type IntegrationListResponsesMyCursorIDPage as IntegrationListResponsesMyCursorIDPage,
     type IntegrationRetrieveParams as IntegrationRetrieveParams,
     type IntegrationUpdateParams as IntegrationUpdateParams,

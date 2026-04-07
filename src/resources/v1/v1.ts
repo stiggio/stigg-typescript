@@ -57,6 +57,7 @@ import * as CustomersAPI from './customers/customers';
 import {
   CustomerImportParams,
   CustomerImportResponse,
+  CustomerIntegrationResponse,
   CustomerListParams,
   CustomerListResourcesParams,
   CustomerListResourcesResponse,
@@ -130,6 +131,7 @@ V1.Products = Products;
 export declare namespace V1 {
   export {
     Customers as Customers,
+    type CustomerIntegrationResponse as CustomerIntegrationResponse,
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
     type CustomerImportResponse as CustomerImportResponse,
