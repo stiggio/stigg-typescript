@@ -3,13 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as EventQueuesAPI from './event-queues';
 import {
-  EventQueueDeleteResponse,
   EventQueueListResponse,
   EventQueueProvisionParams,
-  EventQueueProvisionResponse,
-  EventQueueRetrieveResponse,
+  EventQueueResponse,
   EventQueueUpdateParams,
-  EventQueueUpdateResponse,
   EventQueues,
 } from './event-queues';
 
@@ -22,11 +19,8 @@ Beta.EventQueues = EventQueues;
 export declare namespace Beta {
   export {
     EventQueues as EventQueues,
-    type EventQueueRetrieveResponse as EventQueueRetrieveResponse,
-    type EventQueueUpdateResponse as EventQueueUpdateResponse,
+    type EventQueueResponse as EventQueueResponse,
     type EventQueueListResponse as EventQueueListResponse,
-    type EventQueueDeleteResponse as EventQueueDeleteResponse,
-    type EventQueueProvisionResponse as EventQueueProvisionResponse,
     type EventQueueUpdateParams as EventQueueUpdateParams,
     type EventQueueProvisionParams as EventQueueProvisionParams,
   };

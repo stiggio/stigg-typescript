@@ -2,6 +2,7 @@
 
 export {
   Customers,
+  type CustomerIntegrationResponse,
   type CustomerResponse,
   type CustomerListResponse,
   type CustomerImportResponse,
@@ -18,11 +19,7 @@ export {
 } from './customers';
 export {
   Integrations,
-  type IntegrationRetrieveResponse,
-  type IntegrationUpdateResponse,
   type IntegrationListResponse,
-  type IntegrationLinkResponse,
-  type IntegrationUnlinkResponse,
   type IntegrationRetrieveParams,
   type IntegrationUpdateParams,
   type IntegrationListParams,
