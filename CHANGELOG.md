@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-alpha.27 (2026-04-08)
+
+Full Changelog: [v0.1.0-alpha.26...v0.1.0-alpha.27](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.26...v0.1.0-alpha.27)
+
+### Features
+
+* **api:** add includeInactiveSubscriptions parameter to usage history method ([98fa3fe](https://github.com/stiggio/stigg-typescript/commit/98fa3fe2999228e76d66f6a7f4b9142dfbbef0eb))
+* **api:** stainless.yml ([e64cead](https://github.com/stiggio/stigg-typescript/commit/e64ceadf05c559bec3cdd48f770e75c9acd8893f))
+
+
+### Bug Fixes
+
+* **STIGG-7500:** stripe account not deauthorized when connected to multiple environments ([c57334e](https://github.com/stiggio/stigg-typescript/commit/c57334ef4fc0a245ac79c352fb00feade3f31f5b))
+
+
+### Chores
+
+* **internal:** fix MCP server import ordering ([813ad3d](https://github.com/stiggio/stigg-typescript/commit/813ad3dae35de51aaf1731c59aa9448eef60fa2c))
+
 ## 0.1.0-alpha.26 (2026-04-06)
 
 Full Changelog: [v0.1.0-alpha.25...v0.1.0-alpha.26](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.25...v0.1.0-alpha.26)
