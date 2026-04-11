@@ -164,7 +164,7 @@ describe('resource customers', () => {
       id: 'id',
       billingCurrency: 'usd',
       billingId: 'billingId',
-      couponId: 'NxI',
+      couponId: '',
       defaultPaymentMethod: {
         billingId: 'billingId',
         cardExpiryMonth: 0,
