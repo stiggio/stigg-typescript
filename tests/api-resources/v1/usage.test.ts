@@ -30,7 +30,6 @@ describe('resource usage', () => {
       startDate: '2019-12-27T18:11:19.117Z',
       endDate: '2019-12-27T18:11:19.117Z',
       groupBy: 'groupBy',
-      includeInactiveSubscriptions: true,
       resourceId: 'resourceId',
     });
   });
