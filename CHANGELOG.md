@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.29 (2026-04-15)
+
+Full Changelog: [v0.1.0-alpha.28...v0.1.0-alpha.29](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.28...v0.1.0-alpha.29)
+
+### Features
+
+* **api:** add custom currency event types to event queue update/provision params ([6b30516](https://github.com/stiggio/stigg-typescript/commit/6b3051670cbf2ba430327cf4965d7d4e7cc2c4f2))
+
 ## 0.1.0-alpha.28 (2026-04-14)
 
 Full Changelog: [v0.1.0-alpha.27...v0.1.0-alpha.28](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.27...v0.1.0-alpha.28)
