@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.30 (2026-04-16)
+
+Full Changelog: [v0.1.0-alpha.29...v0.1.0-alpha.30](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.29...v0.1.0-alpha.30)
+
+### Features
+
+* **api:** add event queue types, remove includeInactiveSubscriptions from usage.history ([3a80a0c](https://github.com/stiggio/stigg-typescript/commit/3a80a0ca63c8eb610673c4365f5f492ec114054c))
+
 ## 0.1.0-alpha.29 (2026-04-15)
 
 Full Changelog: [v0.1.0-alpha.28...v0.1.0-alpha.29](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.28...v0.1.0-alpha.29)
