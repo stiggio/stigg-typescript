@@ -48,7 +48,9 @@ describe('resource credits', () => {
     const response = await client.v1.events.credits.getUsage({
       customerId: 'customerId',
       currencyId: 'currencyId',
+      endDate: '2019-12-27T18:11:19.117Z',
       resourceId: 'resourceId',
+      startDate: '2019-12-27T18:11:19.117Z',
       timeRange: 'LAST_DAY',
     });
   });

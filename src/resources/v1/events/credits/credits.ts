@@ -306,9 +306,21 @@ export interface CreditGetUsageParams {
   currencyId?: string;
 
   /**
+   * End date for the credit usage time range (ISO 8601). Defaults to now when
+   * startDate is provided
+   */
+  endDate?: string;
+
+  /**
    * Filter by resource ID
    */
   resourceId?: string;
+
+  /**
+   * Start date for the credit usage time range (ISO 8601). Takes precedence over
+   * timeRange when provided
+   */
+  startDate?: string;
 
   /**
    * Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults
