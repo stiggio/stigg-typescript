@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.31 (2026-04-20)
+
+Full Changelog: [v0.1.0-alpha.30...v0.1.0-alpha.31](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.30...v0.1.0-alpha.31)
+
+### Features
+
+* **api:** add endDate and startDate parameters to credits getUsage method ([7a85813](https://github.com/stiggio/stigg-typescript/commit/7a8581310bc4e4fbda6f0ca5b2c7a8ca5e8e7f52))
+
 ## 0.1.0-alpha.30 (2026-04-16)
 
 Full Changelog: [v0.1.0-alpha.29...v0.1.0-alpha.30](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.29...v0.1.0-alpha.30)
