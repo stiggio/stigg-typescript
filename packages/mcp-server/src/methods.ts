@@ -514,36 +514,6 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'patch',
     httpPath: '/api/v1/products/{id}',
   },
-  {
-    clientCallName: 'client.internal.beta.eventQueues.retrieve',
-    fullyQualifiedName: 'internal.beta.eventQueues.retrieve',
-    httpMethod: 'get',
-    httpPath: '/internal/beta/event-queues/{queueName}',
-  },
-  {
-    clientCallName: 'client.internal.beta.eventQueues.update',
-    fullyQualifiedName: 'internal.beta.eventQueues.update',
-    httpMethod: 'patch',
-    httpPath: '/internal/beta/event-queues/{queueName}',
-  },
-  {
-    clientCallName: 'client.internal.beta.eventQueues.list',
-    fullyQualifiedName: 'internal.beta.eventQueues.list',
-    httpMethod: 'get',
-    httpPath: '/internal/beta/event-queues',
-  },
-  {
-    clientCallName: 'client.internal.beta.eventQueues.delete',
-    fullyQualifiedName: 'internal.beta.eventQueues.delete',
-    httpMethod: 'delete',
-    httpPath: '/internal/beta/event-queues/{queueName}',
-  },
-  {
-    clientCallName: 'client.internal.beta.eventQueues.provision',
-    fullyQualifiedName: 'internal.beta.eventQueues.provision',
-    httpMethod: 'post',
-    httpPath: '/internal/beta/event-queues/provision',
-  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {
