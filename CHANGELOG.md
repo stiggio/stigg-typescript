@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-alpha.32 (2026-04-28)
+
+Full Changelog: [v0.1.0-alpha.31...v0.1.0-alpha.32](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.31...v0.1.0-alpha.32)
+
+### Features
+
+* support setting headers via env ([0e09c73](https://github.com/stiggio/stigg-typescript/commit/0e09c732f8d935bc537da046f4a38b297f465de1))
+
+
+### Chores
+
+* **internal:** codegen related update ([9c11f53](https://github.com/stiggio/stigg-typescript/commit/9c11f537d670ed74d692db5bf1a05f9a60260278))
+* **internal:** more robust bootstrap script ([1dbd1cd](https://github.com/stiggio/stigg-typescript/commit/1dbd1cda9bc73b6e59537ce179df1ad410dc9949))
+* **internal:** update docs ordering ([767ac01](https://github.com/stiggio/stigg-typescript/commit/767ac014bbc17faa4f0686c7a0868166373d2889))
+* restructure docs search code ([c1cd5c1](https://github.com/stiggio/stigg-typescript/commit/c1cd5c11a397e4ae2cffbe716b3bb8f6ccb31daa))
+
 ## 0.1.0-alpha.31 (2026-04-20)
 
 Full Changelog: [v0.1.0-alpha.30...v0.1.0-alpha.31](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.30...v0.1.0-alpha.31)
