@@ -192,11 +192,6 @@ const fuse = new Fuse(
     'client.v1.products.listProducts',
     'client.v1.products.unarchiveProduct',
     'client.v1.products.updateProduct',
-    'client.internal.beta.eventQueues.delete',
-    'client.internal.beta.eventQueues.list',
-    'client.internal.beta.eventQueues.provision',
-    'client.internal.beta.eventQueues.retrieve',
-    'client.internal.beta.eventQueues.update',
   ],
   { threshold: 1, shouldSort: true },
 );
