@@ -65,6 +65,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.customers.retrieve(id: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}`\n\nRetrieves a customer by their unique identifier, including billing information and subscription status.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.retrieve('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.retrieve('x');\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.retrieve(\n    "x",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().retrieve("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.retrieve("x")\n\nputs(customer_response)',
+      },
       cli: {
         method: 'customers retrieve',
         example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -74,33 +99,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/customers/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().retrieve("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.retrieve(\n    "x",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.retrieve("x")\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.retrieve('x');\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -130,6 +130,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.customers.update(id: string, billingCurrency?: string, billingId?: string, couponId?: string | '', email?: string, integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[], language?: string, metadata?: object, name?: string, passthrough?: { stripe?: { billingAddress?: object; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: object; taxIds?: object[]; }; zuora?: { billingAddress?: object; currency?: string; metadata?: object; paymentMethodId?: string; }; }, timezone?: string): { data: object; }`\n\n**patch** `/api/v1/customers/{id}`\n\nUpdates an existing customer's properties such as name, email, and billing information.\n\n### Parameters\n\n- `id: string`\n\n- `billingCurrency?: string`\n  The billing currency of the customer\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `couponId?: string | ''`\n  Customer level coupon\n\n- `email?: string`\n  The email of the customer\n\n- `integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]`\n  List of integrations\n\n- `language?: string`\n  Language to use for this customer\n\n- `metadata?: object`\n  Additional metadata\n\n- `name?: string`\n  The name of the customer\n\n- `passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }`\n  Vendor-specific billing passthrough fields.\n  - `stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }`\n    Stripe-specific billing fields for the customer.\n  - `zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }`\n    Zuora-specific billing fields for the customer.\n\n- `timezone?: string`\n  Timezone to use for this customer\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.update('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.update('x');\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.update(\n    id="x",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().update("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.update("x")\n\nputs(customer_response)',
+      },
       cli: {
         method: 'customers update',
         example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -139,34 +164,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/customers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().customers().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().update("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.update(\n    id="x",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.update("x")\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.update('x');\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -191,6 +191,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.customers.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, email?: string, limit?: number, name?: string): { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: object; email?: string; integrations?: object[]; language?: string; metadata?: object; name?: string; passthrough?: object; timezone?: string; }`\n\n**get** `/api/v1/customers`\n\nRetrieves a paginated list of customers in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `email?: string`\n  Filter by exact customer email address\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `name?: string`\n  Filter by exact customer name\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: object; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: object; taxIds?: object[]; }; zuora?: { billingAddress?: object; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n  A customer can be either an organization or an individual\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `updatedAt: string`\n  - `billingCurrency?: string`\n  - `billingId?: string`\n  - `couponId?: string | ''`\n  - `defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }`\n  - `email?: string`\n  - `integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]`\n  - `language?: string`\n  - `metadata?: object`\n  - `name?: string`\n  - `passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }`\n  - `timezone?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResponse of client.v1.customers.list()) {\n  console.log(customerListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResponse of client.v1.customers.list()) {\n  console.log(customerListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.customers.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().customers().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListPage page = client.v1().customers().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.list\n\nputs(page)',
+      },
       cli: {
         method: 'customers list',
         example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
@@ -200,33 +225,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Customers.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/customers \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListPage page = client.v1().customers().list();\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.customers.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.list\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.customers.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResponse of client.v1.customers.list()) {\n  console.log(customerListResponse.id);\n}",
       },
     },
   },
@@ -258,6 +258,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## provision\n\n`client.v1.customers.provision(id: string, billingCurrency?: string, billingId?: string, couponId?: string | '', defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }, email?: string, integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[], language?: string, metadata?: object, name?: string, passthrough?: { stripe?: { billingAddress?: object; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: object; taxIds?: object[]; }; zuora?: { billingAddress?: object; currency?: string; metadata?: object; paymentMethodId?: string; }; }, timezone?: string): { data: object; }`\n\n**post** `/api/v1/customers`\n\nCreates a new customer and optionally provisions an initial subscription in a single operation.\n\n### Parameters\n\n- `id: string`\n  Customer slug\n\n- `billingCurrency?: string`\n  The billing currency of the customer\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `couponId?: string | ''`\n  Customer level coupon\n\n- `defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }`\n  The default payment method details\n  - `billingId: string`\n    The default payment method id\n  - `cardExpiryMonth: number`\n    The expiration month of the default payment method\n  - `cardExpiryYear: number`\n    The expiration year of the default payment method\n  - `cardLast4Digits: string`\n    The last 4 digits of the default payment method\n  - `type: 'CARD' | 'BANK' | 'CASH_APP'`\n    The default payment method type\n\n- `email?: string`\n  The email of the customer\n\n- `integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]`\n  List of integrations\n\n- `language?: string`\n  Language to use for this customer\n\n- `metadata?: object`\n  Additional metadata\n\n- `name?: string`\n  The name of the customer\n\n- `passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }`\n  Vendor-specific billing passthrough fields.\n  - `stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }`\n    Stripe-specific billing fields for the customer.\n  - `zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }`\n    Zuora-specific billing fields for the customer.\n\n- `timezone?: string`\n  Timezone to use for this customer\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.provision({ id: 'id' });\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.provision',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.provision({ id: 'id' });\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.provision',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.provision(\n    id="id",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().provision',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerProvisionParams;\nimport io.stigg.models.v1.customers.CustomerResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerProvisionParams params = CustomerProvisionParams.builder()\n            .id("id")\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().provision(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Provision',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Provision(context.TODO(), stigg.V1CustomerProvisionParams{\n\t\tID: "id",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.provision',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.provision(id: "id")\n\nputs(customer_response)',
+      },
       cli: {
         method: 'customers provision',
         example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
@@ -267,34 +292,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Provision',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Provision(context.TODO(), stigg.V1CustomerProvisionParams{\n\t\tID: "id",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id"\n        }\'',
-      },
-      java: {
-        method: 'v1().customers().provision',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerProvisionParams;\nimport io.stigg.models.v1.customers.CustomerResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerProvisionParams params = CustomerProvisionParams.builder()\n            .id("id")\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().provision(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.provision',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.provision(\n    id="id",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.provision',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.provision(id: "id")\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.provision',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.provision({ id: 'id' });\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -313,6 +313,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.customers.archive(id: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/archive`\n\nArchives a customer, preventing new subscriptions. Optionally cancels existing subscriptions.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.archive('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.archive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.archive('x');\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.archive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.archive(\n    "x",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerArchiveParams;\nimport io.stigg.models.v1.customers.CustomerResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().archive("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Archive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.archive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.archive("x")\n\nputs(customer_response)',
+      },
       cli: {
         method: 'customers archive',
         example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -322,34 +347,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Archive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Archive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().archive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerArchiveParams;\nimport io.stigg.models.v1.customers.CustomerResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().archive("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.archive',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.archive(\n    "x",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.archive',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.archive("x")\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.archive',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.archive('x');\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -367,6 +367,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive\n\n`client.v1.customers.unarchive(id: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/unarchive`\n\nRestores an archived customer, allowing them to create new subscriptions again.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.unarchive('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.unarchive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.unarchive('x');\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.unarchive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.unarchive(\n    "x",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().unarchive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerUnarchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().unarchive("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Unarchive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Unarchive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.unarchive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.unarchive("x")\n\nputs(customer_response)',
+      },
       cli: {
         method: 'customers unarchive',
         example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -376,34 +401,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Unarchive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Unarchive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().unarchive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerUnarchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().unarchive("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.unarchive',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.unarchive(\n    "x",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.unarchive',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.unarchive("x")\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.unarchive',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.unarchive('x');\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -424,6 +424,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## import\n\n`client.v1.customers.import(customers: { id: string; email: string; name: string; billingId?: string; metadata?: object; paymentMethodId?: string; salesforceId?: string; updatedAt?: string; }[], integrationId?: string): { data: object; }`\n\n**post** `/api/v1/customers/import`\n\nImports multiple customers in bulk. Used for migrating customer data from external systems.\n\n### Parameters\n\n- `customers: { id: string; email: string; name: string; billingId?: string; metadata?: object; paymentMethodId?: string; salesforceId?: string; updatedAt?: string; }[]`\n  List of customer objects to import\n\n- `integrationId?: string`\n  Integration details\n\n### Returns\n\n- `{ data: { newCustomers: string[]; }; }`\n  Response object\n\n  - `data: { newCustomers: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.import({ customers: [{\n  id: 'id',\n  email: 'dev@stainless.com',\n  name: 'name',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.import',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.import({\n  customers: [\n    {\n      id: 'id',\n      email: 'dev@stainless.com',\n      name: 'name',\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.customers.import_',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.import_(\n    customers=[{\n        "id": "id",\n        "email": "dev@stainless.com",\n        "name": "name",\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().customers().import_',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerImportParams;\nimport io.stigg.models.v1.customers.CustomerImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerImportParams params = CustomerImportParams.builder()\n            .addCustomer(CustomerImportParams.Customer.builder()\n                .id("id")\n                .email("dev@stainless.com")\n                .name("name")\n                .build())\n            .build();\n        CustomerImportResponse response = client.v1().customers().import_(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Import',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Import(context.TODO(), stigg.V1CustomerImportParams{\n\t\tCustomers: []stigg.V1CustomerImportParamsCustomer{{\n\t\t\tID:    "id",\n\t\t\tEmail: stigg.String("dev@stainless.com"),\n\t\t\tName:  stigg.String("name"),\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.import',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.import(customers: [{id: "id", email: "dev@stainless.com", name: "name"}])\n\nputs(response)',
+      },
       cli: {
         method: 'customers import',
         example:
@@ -434,34 +459,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Customers.Import',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Import(context.TODO(), stigg.V1CustomerImportParams{\n\t\tCustomers: []stigg.V1CustomerImportParamsCustomer{{\n\t\t\tID:    "id",\n\t\t\tEmail: stigg.String("dev@stainless.com"),\n\t\t\tName:  stigg.String("name"),\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customers": [\n            {\n              "id": "id",\n              "email": "dev@stainless.com",\n              "name": "name"\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().customers().import_',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerImportParams;\nimport io.stigg.models.v1.customers.CustomerImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerImportParams params = CustomerImportParams.builder()\n            .addCustomer(CustomerImportParams.Customer.builder()\n                .id("id")\n                .email("dev@stainless.com")\n                .name("name")\n                .build())\n            .build();\n        CustomerImportResponse response = client.v1().customers().import_(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.import_',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.import_(\n    customers=[{\n        "id": "id",\n        "email": "dev@stainless.com",\n        "name": "name",\n    }],\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.import',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.import(customers: [{id: "id", email: "dev@stainless.com", name: "name"}])\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.import',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.import({\n  customers: [\n    {\n      id: 'id',\n      email: 'dev@stainless.com',\n      name: 'name',\n    },\n  ],\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -478,6 +478,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_resources\n\n`client.v1.customers.listResources(id: string, after?: string, before?: string, limit?: number): { id: string; createdAt: string; updatedAt: string; }`\n\n**get** `/api/v1/customers/{id}/resources`\n\nRetrieves a paginated list of resources within the same customer.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n### Returns\n\n- `{ id: string; createdAt: string; updatedAt: string; }`\n  Resource object that belongs to a customer\n\n  - `id: string`\n  - `createdAt: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResourcesResponse of client.v1.customers.listResources('x')) {\n  console.log(customerListResourcesResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.listResources',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResourcesResponse of client.v1.customers.listResources('x')) {\n  console.log(customerListResourcesResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.customers.list_resources',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.list_resources(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().customers().listResources',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListResourcesPage;\nimport io.stigg.models.v1.customers.CustomerListResourcesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListResourcesPage page = client.v1().customers().listResources("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.ListResources',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.ListResources(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerListResourcesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.list_resources',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.list_resources("x")\n\nputs(page)',
+      },
       cli: {
         method: 'customers list_resources',
         example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -487,34 +512,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Customers.ListResources',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.ListResources(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerListResourcesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/resources \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().listResources',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListResourcesPage;\nimport io.stigg.models.v1.customers.CustomerListResourcesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListResourcesPage page = client.v1().customers().listResources("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.list_resources',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.list_resources(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.customers.list_resources',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.list_resources("x")\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.customers.listResources',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResourcesResponse of client.v1.customers.listResources('x')) {\n  console.log(customerListResourcesResponse.id);\n}",
       },
     },
   },
@@ -533,6 +533,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_entitlements\n\n`client.v1.customers.retrieveEntitlements(id: string, resourceId?: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}/entitlements`\n\nRetrieves the effective entitlements for a customer or resource, including feature and credit entitlements.\n\n**Warning:** This REST API endpoint lacks built-in client-side caching, fallback mechanisms, and low-latency guarantees. It is not recommended for hot-path entitlement checks. For production use, consider using the Stigg Node Server SDK with caching or the Sidecar for low-latency cached responses.\n\n### Parameters\n\n- `id: string`\n\n- `resourceId?: string`\n  Resource ID to scope entitlements to a specific resource\n\n### Returns\n\n- `{ data: { accessDeniedReason: 'CustomerNotFound' | 'NoActiveSubscription' | 'CustomerIsArchived'; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: object; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: object; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: 'CustomerNotFound' | 'NoActiveSubscription' | 'CustomerIsArchived'; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.retrieveEntitlements('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.retrieveEntitlements',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.retrieveEntitlements('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.customers.retrieve_entitlements',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.retrieve_entitlements(\n    id="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().customers().retrieveEntitlements',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerRetrieveEntitlementsParams;\nimport io.stigg.models.v1.customers.CustomerRetrieveEntitlementsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveEntitlementsResponse response = client.v1().customers().retrieveEntitlements("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.GetEntitlements',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.GetEntitlements(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerGetEntitlementsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.retrieve_entitlements',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.retrieve_entitlements("x")\n\nputs(response)',
+      },
       cli: {
         method: 'customers retrieve_entitlements',
         example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -542,34 +567,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Customers.GetEntitlements',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.GetEntitlements(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerGetEntitlementsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().retrieveEntitlements',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerRetrieveEntitlementsParams;\nimport io.stigg.models.v1.customers.CustomerRetrieveEntitlementsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveEntitlementsResponse response = client.v1().customers().retrieveEntitlements("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.retrieve_entitlements',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.retrieve_entitlements(\n    id="x",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.retrieve_entitlements',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.retrieve_entitlements("x")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.retrieveEntitlements',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.retrieveEntitlements('x');\n\nconsole.log(response.data);",
       },
     },
   },
@@ -594,6 +594,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## attach\n\n`client.v1.customers.paymentMethod.attach(id: string, integrationId: string, paymentMethodId: string, vendorIdentifier: string, billingCurrency?: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/payment-method`\n\nAttaches a payment method to a customer for billing. Required for paid subscriptions when integrated with a billing provider.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n  Integration details\n\n- `paymentMethodId: string`\n  Billing provider payment method id\n\n- `vendorIdentifier: string`\n  The vendor identifier of integration\n\n- `billingCurrency?: string`\n  Customers selected currency\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.paymentMethod.attach('x', {\n  integrationId: 'integrationId',\n  paymentMethodId: 'paymentMethodId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.paymentMethod.attach',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.paymentMethod.attach('x', {\n  integrationId: 'integrationId',\n  paymentMethodId: 'paymentMethodId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.payment_method.attach',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.payment_method.attach(\n    id="x",\n    integration_id="integrationId",\n    payment_method_id="paymentMethodId",\n    vendor_identifier="AUTH0",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().paymentMethod().attach',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodAttachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PaymentMethodAttachParams params = PaymentMethodAttachParams.builder()\n            .id("x")\n            .integrationId("integrationId")\n            .paymentMethodId("paymentMethodId")\n            .vendorIdentifier(PaymentMethodAttachParams.VendorIdentifier.AUTH0)\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().attach(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.PaymentMethod.Attach',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Attach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodAttachParams{\n\t\t\tIntegrationID:    "integrationId",\n\t\t\tPaymentMethodID:  "paymentMethodId",\n\t\t\tVendorIdentifier: stigg.V1CustomerPaymentMethodAttachParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.payment_method.attach',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.payment_method.attach(\n  "x",\n  integration_id: "integrationId",\n  payment_method_id: "paymentMethodId",\n  vendor_identifier: :AUTH0\n)\n\nputs(customer_response)',
+      },
       cli: {
         method: 'payment_method attach',
         example:
@@ -604,34 +629,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.PaymentMethod.Attach',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Attach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodAttachParams{\n\t\t\tIntegrationID:    "integrationId",\n\t\t\tPaymentMethodID:  "paymentMethodId",\n\t\t\tVendorIdentifier: stigg.V1CustomerPaymentMethodAttachParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "integrationId": "integrationId",\n          "paymentMethodId": "paymentMethodId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
-      },
-      java: {
-        method: 'v1().customers().paymentMethod().attach',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodAttachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PaymentMethodAttachParams params = PaymentMethodAttachParams.builder()\n            .id("x")\n            .integrationId("integrationId")\n            .paymentMethodId("paymentMethodId")\n            .vendorIdentifier(PaymentMethodAttachParams.VendorIdentifier.AUTH0)\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().attach(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.payment_method.attach',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.payment_method.attach(\n    id="x",\n    integration_id="integrationId",\n    payment_method_id="paymentMethodId",\n    vendor_identifier="AUTH0",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.payment_method.attach',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.payment_method.attach(\n  "x",\n  integration_id: "integrationId",\n  payment_method_id: "paymentMethodId",\n  vendor_identifier: :AUTH0\n)\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.paymentMethod.attach',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.paymentMethod.attach('x', {\n  integrationId: 'integrationId',\n  paymentMethodId: 'paymentMethodId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -650,6 +650,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## detach\n\n`client.v1.customers.paymentMethod.detach(id: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/payment-method`\n\nRemoves the payment method from a customer. Ensure active paid subscriptions have an alternative payment method.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.paymentMethod.detach('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.paymentMethod.detach',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.paymentMethod.detach('x');\n\nconsole.log(customerResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.payment_method.detach',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.payment_method.detach(\n    "x",\n)\nprint(customer_response.data)',
+      },
+      java: {
+        method: 'v1().customers().paymentMethod().detach',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodDetachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().detach("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.PaymentMethod.Detach',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Detach(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.payment_method.detach',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.payment_method.detach("x")\n\nputs(customer_response)',
+      },
       cli: {
         method: 'payment_method detach',
         example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -659,34 +684,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.PaymentMethod.Detach',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Detach(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().paymentMethod().detach',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodDetachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().detach("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.payment_method.detach',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_response = client.v1.customers.payment_method.detach(\n    "x",\n)\nprint(customer_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.payment_method.detach',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_response = stigg.v1.customers.payment_method.detach("x")\n\nputs(customer_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.paymentMethod.detach',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.paymentMethod.detach('x');\n\nconsole.log(customerResponse.data);",
       },
     },
   },
@@ -711,6 +711,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.customers.promotionalEntitlements.list(id: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: string): { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: object | object | object; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n\n**get** `/api/v1/customers/{id}/promotional-entitlements`\n\nRetrieves a paginated list of a customer's promotional entitlements.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: string`\n  Filter by promotional entitlement status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n  Granted feature entitlement\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `endDate: string`\n  - `enumValues: string[]`\n  - `environmentId: string`\n  - `featureGroupIds: string[]`\n  - `featureId: string`\n  - `hasSoftLimit: boolean`\n  - `hasUnlimitedUsage: boolean`\n  - `isVisible: boolean`\n  - `period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'`\n  - `resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'`\n  - `resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }`\n  - `startDate: string`\n  - `status: 'Active' | 'Expired' | 'Paused'`\n  - `updatedAt: string`\n  - `usageLimit: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list('x')) {\n  console.log(promotionalEntitlementListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.promotionalEntitlements.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list(\n  'x',\n)) {\n  console.log(promotionalEntitlementListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.customers.promotional_entitlements.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.promotional_entitlements.list(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().customers().promotionalEntitlements().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementListPage;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementListPage page = client.v1().customers().promotionalEntitlements().list("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.PromotionalEntitlements.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.PromotionalEntitlements.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.promotional_entitlements.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.promotional_entitlements.list("x")\n\nputs(page)',
+      },
       cli: {
         method: 'promotional_entitlements list',
         example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -720,34 +745,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Customers.PromotionalEntitlements.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.PromotionalEntitlements.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().promotionalEntitlements().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementListPage;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementListPage page = client.v1().customers().promotionalEntitlements().list("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.promotional_entitlements.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.promotional_entitlements.list(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.customers.promotional_entitlements.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.promotional_entitlements.list("x")\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.customers.promotionalEntitlements.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list(\n  'x',\n)) {\n  console.log(promotionalEntitlementListResponse.id);\n}",
       },
     },
   },
@@ -769,6 +769,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.customers.promotionalEntitlements.create(id: string, promotionalEntitlements: { customEndDate: string; enumValues: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit: number; weeklyResetPeriodConfiguration: { accordingTo: string; }; yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; }; }[]): { data: object[]; }`\n\n**post** `/api/v1/customers/{id}/promotional-entitlements`\n\nGrants promotional entitlements to a customer, providing feature access outside their subscription. Entitlements can be time-limited or permanent.\n\n### Parameters\n\n- `id: string`\n\n- `promotionalEntitlements: { customEndDate: string; enumValues: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit: number; weeklyResetPeriodConfiguration: { accordingTo: string; }; yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; }; }[]`\n  Promotional entitlements to grant\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }[]; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst promotionalEntitlement = await client.v1.customers.promotionalEntitlements.create('x', { promotionalEntitlements: [{\n  customEndDate: '2019-12-27T18:11:19.117Z',\n  enumValues: ['string'],\n  featureId: 'featureId',\n  hasSoftLimit: true,\n  hasUnlimitedUsage: true,\n  isVisible: true,\n  monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n  period: '1 week',\n  resetPeriod: 'YEAR',\n  usageLimit: -9007199254740991,\n  weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n  yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n}] });\n\nconsole.log(promotionalEntitlement);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.promotionalEntitlements.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst promotionalEntitlement = await client.v1.customers.promotionalEntitlements.create('x', {\n  promotionalEntitlements: [\n    {\n      customEndDate: '2019-12-27T18:11:19.117Z',\n      enumValues: ['string'],\n      featureId: 'featureId',\n      hasSoftLimit: true,\n      hasUnlimitedUsage: true,\n      isVisible: true,\n      monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n      period: '1 week',\n      resetPeriod: 'YEAR',\n      usageLimit: -9007199254740991,\n      weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n      yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n    },\n  ],\n});\n\nconsole.log(promotionalEntitlement.data);",
+      },
+      python: {
+        method: 'v1.customers.promotional_entitlements.create',
+        example:
+          'import os\nfrom datetime import datetime\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npromotional_entitlement = client.v1.customers.promotional_entitlements.create(\n    id="x",\n    promotional_entitlements=[{\n        "custom_end_date": datetime.fromisoformat("2019-12-27T18:11:19.117"),\n        "enum_values": ["string"],\n        "feature_id": "featureId",\n        "has_soft_limit": True,\n        "has_unlimited_usage": True,\n        "is_visible": True,\n        "monthly_reset_period_configuration": {\n            "according_to": "SubscriptionStart"\n        },\n        "period": "1 week",\n        "reset_period": "YEAR",\n        "usage_limit": -9007199254740991,\n        "weekly_reset_period_configuration": {\n            "according_to": "SubscriptionStart"\n        },\n        "yearly_reset_period_configuration": {\n            "according_to": "SubscriptionStart"\n        },\n    }],\n)\nprint(promotional_entitlement.data)',
+      },
+      java: {
+        method: 'v1().customers().promotionalEntitlements().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementCreateParams params = PromotionalEntitlementCreateParams.builder()\n            .id("x")\n            .addPromotionalEntitlement(PromotionalEntitlementCreateParams.PromotionalEntitlement.builder()\n                .customEndDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n                .addEnumValue("string")\n                .featureId("featureId")\n                .hasSoftLimit(true)\n                .hasUnlimitedUsage(true)\n                .isVisible(true)\n                .monthlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .period(PromotionalEntitlementCreateParams.PromotionalEntitlement.Period._1_WEEK)\n                .resetPeriod(PromotionalEntitlementCreateParams.PromotionalEntitlement.ResetPeriod.YEAR)\n                .usageLimit(-9007199254740991L)\n                .weeklyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .yearlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .build())\n            .build();\n        PromotionalEntitlementCreateResponse promotionalEntitlement = client.v1().customers().promotionalEntitlements().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.PromotionalEntitlements.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpromotionalEntitlement, err := client.V1.Customers.PromotionalEntitlements.New(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementNewParams{\n\t\t\tPromotionalEntitlements: []stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlement{{\n\t\t\t\tCustomEndDate:     stigg.Time(time.Now()),\n\t\t\t\tEnumValues:        []string{"string"},\n\t\t\t\tFeatureID:         "featureId",\n\t\t\t\tHasSoftLimit:      stigg.Bool(true),\n\t\t\t\tHasUnlimitedUsage: stigg.Bool(true),\n\t\t\t\tIsVisible:         stigg.Bool(true),\n\t\t\t\tMonthlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementMonthlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tPeriod:      "1 week",\n\t\t\t\tResetPeriod: "YEAR",\n\t\t\t\tUsageLimit:  stigg.Int(-9007199254740991),\n\t\t\t\tWeeklyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementWeeklyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tYearlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementYearlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", promotionalEntitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.promotional_entitlements.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npromotional_entitlement = stigg.v1.customers.promotional_entitlements.create(\n  "x",\n  promotional_entitlements: [\n    {\n      customEndDate: "2019-12-27T18:11:19.117Z",\n      enumValues: ["string"],\n      featureId: "featureId",\n      hasSoftLimit: true,\n      hasUnlimitedUsage: true,\n      isVisible: true,\n      monthlyResetPeriodConfiguration: {accordingTo: :SubscriptionStart},\n      period: :"1 week",\n      resetPeriod: :YEAR,\n      usageLimit: -9007199254740991,\n      weeklyResetPeriodConfiguration: {accordingTo: :SubscriptionStart},\n      yearlyResetPeriodConfiguration: {accordingTo: :SubscriptionStart}\n    }\n  ]\n)\n\nputs(promotional_entitlement)',
+      },
       cli: {
         method: 'promotional_entitlements create',
         example:
@@ -779,34 +804,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
       },
-      go: {
-        method: 'client.V1.Customers.PromotionalEntitlements.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpromotionalEntitlement, err := client.V1.Customers.PromotionalEntitlements.New(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementNewParams{\n\t\t\tPromotionalEntitlements: []stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlement{{\n\t\t\t\tCustomEndDate:     stigg.Time(time.Now()),\n\t\t\t\tEnumValues:        []string{"string"},\n\t\t\t\tFeatureID:         "featureId",\n\t\t\t\tHasSoftLimit:      stigg.Bool(true),\n\t\t\t\tHasUnlimitedUsage: stigg.Bool(true),\n\t\t\t\tIsVisible:         stigg.Bool(true),\n\t\t\t\tMonthlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementMonthlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tPeriod:      "1 week",\n\t\t\t\tResetPeriod: "YEAR",\n\t\t\t\tUsageLimit:  stigg.Int(-9007199254740991),\n\t\t\t\tWeeklyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementWeeklyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tYearlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementYearlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", promotionalEntitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "promotionalEntitlements": [\n            {\n              "customEndDate": "2019-12-27T18:11:19.117Z",\n              "enumValues": [\n                "string"\n              ],\n              "featureId": "featureId",\n              "hasSoftLimit": true,\n              "hasUnlimitedUsage": true,\n              "isVisible": true,\n              "monthlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "period": "1 week",\n              "resetPeriod": "YEAR",\n              "usageLimit": -9007199254740991,\n              "weeklyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "yearlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              }\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().customers().promotionalEntitlements().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementCreateParams params = PromotionalEntitlementCreateParams.builder()\n            .id("x")\n            .addPromotionalEntitlement(PromotionalEntitlementCreateParams.PromotionalEntitlement.builder()\n                .customEndDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n                .addEnumValue("string")\n                .featureId("featureId")\n                .hasSoftLimit(true)\n                .hasUnlimitedUsage(true)\n                .isVisible(true)\n                .monthlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .period(PromotionalEntitlementCreateParams.PromotionalEntitlement.Period._1_WEEK)\n                .resetPeriod(PromotionalEntitlementCreateParams.PromotionalEntitlement.ResetPeriod.YEAR)\n                .usageLimit(-9007199254740991L)\n                .weeklyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .yearlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .build())\n            .build();\n        PromotionalEntitlementCreateResponse promotionalEntitlement = client.v1().customers().promotionalEntitlements().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.promotional_entitlements.create',
-        example:
-          'import os\nfrom datetime import datetime\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npromotional_entitlement = client.v1.customers.promotional_entitlements.create(\n    id="x",\n    promotional_entitlements=[{\n        "custom_end_date": datetime.fromisoformat("2019-12-27T18:11:19.117"),\n        "enum_values": ["string"],\n        "feature_id": "featureId",\n        "has_soft_limit": True,\n        "has_unlimited_usage": True,\n        "is_visible": True,\n        "monthly_reset_period_configuration": {\n            "according_to": "SubscriptionStart"\n        },\n        "period": "1 week",\n        "reset_period": "YEAR",\n        "usage_limit": -9007199254740991,\n        "weekly_reset_period_configuration": {\n            "according_to": "SubscriptionStart"\n        },\n        "yearly_reset_period_configuration": {\n            "according_to": "SubscriptionStart"\n        },\n    }],\n)\nprint(promotional_entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.customers.promotional_entitlements.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npromotional_entitlement = stigg.v1.customers.promotional_entitlements.create(\n  "x",\n  promotional_entitlements: [\n    {\n      customEndDate: "2019-12-27T18:11:19.117Z",\n      enumValues: ["string"],\n      featureId: "featureId",\n      hasSoftLimit: true,\n      hasUnlimitedUsage: true,\n      isVisible: true,\n      monthlyResetPeriodConfiguration: {accordingTo: :SubscriptionStart},\n      period: :"1 week",\n      resetPeriod: :YEAR,\n      usageLimit: -9007199254740991,\n      weeklyResetPeriodConfiguration: {accordingTo: :SubscriptionStart},\n      yearlyResetPeriodConfiguration: {accordingTo: :SubscriptionStart}\n    }\n  ]\n)\n\nputs(promotional_entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.customers.promotionalEntitlements.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst promotionalEntitlement = await client.v1.customers.promotionalEntitlements.create('x', {\n  promotionalEntitlements: [\n    {\n      customEndDate: '2019-12-27T18:11:19.117Z',\n      enumValues: ['string'],\n      featureId: 'featureId',\n      hasSoftLimit: true,\n      hasUnlimitedUsage: true,\n      isVisible: true,\n      monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n      period: '1 week',\n      resetPeriod: 'YEAR',\n      usageLimit: -9007199254740991,\n      weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n      yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n    },\n  ],\n});\n\nconsole.log(promotionalEntitlement.data);",
       },
     },
   },
@@ -825,6 +825,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## revoke\n\n`client.v1.customers.promotionalEntitlements.revoke(id: string, featureId: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/promotional-entitlements/{featureId}`\n\nRevokes a previously granted promotional entitlement from a customer for a specific feature.\n\n### Parameters\n\n- `id: string`\n\n- `featureId: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.promotionalEntitlements.revoke('featureId', { id: 'id' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.promotionalEntitlements.revoke',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.promotionalEntitlements.revoke('featureId', {\n  id: 'id',\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.customers.promotional_entitlements.revoke',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.promotional_entitlements.revoke(\n    feature_id="featureId",\n    id="id",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().customers().promotionalEntitlements().revoke',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementRevokeParams params = PromotionalEntitlementRevokeParams.builder()\n            .id("id")\n            .featureId("featureId")\n            .build();\n        PromotionalEntitlementRevokeResponse response = client.v1().customers().promotionalEntitlements().revoke(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.PromotionalEntitlements.Revoke(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1CustomerPromotionalEntitlementRevokeParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.promotional_entitlements.revoke',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.promotional_entitlements.revoke("featureId", id: "id")\n\nputs(response)',
+      },
       cli: {
         method: 'promotional_entitlements revoke',
         example:
@@ -835,34 +860,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.PromotionalEntitlements.Revoke(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1CustomerPromotionalEntitlementRevokeParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements/$FEATURE_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().promotionalEntitlements().revoke',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementRevokeParams params = PromotionalEntitlementRevokeParams.builder()\n            .id("id")\n            .featureId("featureId")\n            .build();\n        PromotionalEntitlementRevokeResponse response = client.v1().customers().promotionalEntitlements().revoke(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.promotional_entitlements.revoke',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.promotional_entitlements.revoke(\n    feature_id="featureId",\n    id="id",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.promotional_entitlements.revoke',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.promotional_entitlements.revoke("featureId", id: "id")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.promotionalEntitlements.revoke',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.promotionalEntitlements.revoke('featureId', {\n  id: 'id',\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -886,6 +886,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.customers.integrations.list(id: string, after?: string, before?: string, limit?: number, vendorIdentifier?: string): { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: object | object | object; }`\n\n**get** `/api/v1/customers/{id}/integrations`\n\nRetrieves a paginated list of a customer's external integrations (billing, CRM, etc.).\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `vendorIdentifier?: string`\n  Filter by vendor identifier. Supports comma-separated values for multiple vendors (e.g., STRIPE,HUBSPOT)\n\n### Returns\n\n- `{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n  External billing or CRM integration link\n\n  - `id: string`\n  - `syncedEntityId: string`\n  - `vendorIdentifier: string`\n  - `syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.integrations.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.customers.integrations.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.integrations.list(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().customers().integrations().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationListPage;\nimport io.stigg.models.v1.customers.integrations.IntegrationListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationListPage page = client.v1().customers().integrations().list("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.Integrations.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.integrations.list("x")\n\nputs(page)',
+      },
       cli: {
         method: 'integrations list',
         example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -895,34 +920,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.Integrations.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().integrations().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationListPage;\nimport io.stigg.models.v1.customers.integrations.IntegrationListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationListPage page = client.v1().customers().integrations().list("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.integrations.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.customers.integrations.list(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.customers.integrations.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.customers.integrations.list("x")\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.customers.integrations.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse.id);\n}",
       },
     },
   },
@@ -941,6 +941,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## link\n\n`client.v1.customers.integrations.link(id: string, id: string, syncedEntityId: string, vendorIdentifier: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/integrations`\n\nLinks a customer to an external integration by specifying the vendor and external entity ID.\n\n### Parameters\n\n- `id: string`\n\n- `id: string`\n  Integration details\n\n- `syncedEntityId: string`\n  Synced entity id\n\n- `vendorIdentifier: string`\n  The vendor identifier of integration\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.link('x', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.integrations.link',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.link('x', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerIntegrationResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.integrations.link',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.link(\n    path_id="x",\n    body_id="id",\n    synced_entity_id="syncedEntityId",\n    vendor_identifier="AUTH0",\n)\nprint(customer_integration_response.data)',
+      },
+      java: {
+        method: 'v1().customers().integrations().link',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationLinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationLinkParams params = IntegrationLinkParams.builder()\n            .pathId("x")\n            .bodyId("id")\n            .syncedEntityId("syncedEntityId")\n            .vendorIdentifier(IntegrationLinkParams.VendorIdentifier.AUTH0)\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().link(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Link',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Link(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationLinkParams{\n\t\t\tID:               "id",\n\t\t\tSyncedEntityID:   "syncedEntityId",\n\t\t\tVendorIdentifier: stigg.V1CustomerIntegrationLinkParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.link',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.link(\n  "x",\n  body_id: "id",\n  synced_entity_id: "syncedEntityId",\n  vendor_identifier: :AUTH0\n)\n\nputs(customer_integration_response)',
+      },
       cli: {
         method: 'integrations link',
         example:
@@ -951,34 +976,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Link',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Link(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationLinkParams{\n\t\t\tID:               "id",\n\t\t\tSyncedEntityID:   "syncedEntityId",\n\t\t\tVendorIdentifier: stigg.V1CustomerIntegrationLinkParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
-      },
-      java: {
-        method: 'v1().customers().integrations().link',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationLinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationLinkParams params = IntegrationLinkParams.builder()\n            .pathId("x")\n            .bodyId("id")\n            .syncedEntityId("syncedEntityId")\n            .vendorIdentifier(IntegrationLinkParams.VendorIdentifier.AUTH0)\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().link(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.integrations.link',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.link(\n    path_id="x",\n    body_id="id",\n    synced_entity_id="syncedEntityId",\n    vendor_identifier="AUTH0",\n)\nprint(customer_integration_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.integrations.link',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.link(\n  "x",\n  body_id: "id",\n  synced_entity_id: "syncedEntityId",\n  vendor_identifier: :AUTH0\n)\n\nputs(customer_integration_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.integrations.link',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.link('x', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerIntegrationResponse.data);",
       },
     },
   },
@@ -996,6 +996,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.customers.integrations.retrieve(id: string, integrationId: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nRetrieves a specific integration for a customer by integration ID.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.integrations.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.retrieve(\n  'integrationId',\n  { id: 'id' },\n);\n\nconsole.log(customerIntegrationResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.integrations.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.retrieve(\n    integration_id="integrationId",\n    id="id",\n)\nprint(customer_integration_response.data)',
+      },
+      java: {
+        method: 'v1().customers().integrations().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationRetrieveParams params = IntegrationRetrieveParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Get(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.retrieve("integrationId", id: "id")\n\nputs(customer_integration_response)',
+      },
       cli: {
         method: 'integrations retrieve',
         example:
@@ -1006,34 +1031,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Get(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().integrations().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationRetrieveParams params = IntegrationRetrieveParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().retrieve(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.integrations.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.retrieve(\n    integration_id="integrationId",\n    id="id",\n)\nprint(customer_integration_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.integrations.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.retrieve("integrationId", id: "id")\n\nputs(customer_integration_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.integrations.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.retrieve(\n  'integrationId',\n  { id: 'id' },\n);\n\nconsole.log(customerIntegrationResponse.data);",
       },
     },
   },
@@ -1051,6 +1051,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.customers.integrations.update(id: string, integrationId: string, syncedEntityId: string): { data: object; }`\n\n**patch** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nUpdates a customer's integration link, such as changing the synced external entity ID.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n- `syncedEntityId: string`\n  Synced entity id\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.update('integrationId', { id: 'id', syncedEntityId: 'syncedEntityId' });\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.integrations.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.update('integrationId', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n});\n\nconsole.log(customerIntegrationResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.integrations.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.update(\n    integration_id="integrationId",\n    id="id",\n    synced_entity_id="syncedEntityId",\n)\nprint(customer_integration_response.data)',
+      },
+      java: {
+        method: 'v1().customers().integrations().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUpdateParams params = IntegrationUpdateParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .syncedEntityId("syncedEntityId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().update(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Update(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUpdateParams{\n\t\t\tID:             "id",\n\t\t\tSyncedEntityID: stigg.String("syncedEntityId"),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.update("integrationId", id: "id", synced_entity_id: "syncedEntityId")\n\nputs(customer_integration_response)',
+      },
       cli: {
         method: 'integrations update',
         example:
@@ -1061,34 +1086,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Update(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUpdateParams{\n\t\t\tID:             "id",\n\t\t\tSyncedEntityID: stigg.String("syncedEntityId"),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
-      },
-      java: {
-        method: 'v1().customers().integrations().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUpdateParams params = IntegrationUpdateParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .syncedEntityId("syncedEntityId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().update(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.integrations.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.update(\n    integration_id="integrationId",\n    id="id",\n    synced_entity_id="syncedEntityId",\n)\nprint(customer_integration_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.integrations.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.update("integrationId", id: "id", synced_entity_id: "syncedEntityId")\n\nputs(customer_integration_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.integrations.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.update('integrationId', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n});\n\nconsole.log(customerIntegrationResponse.data);",
       },
     },
   },
@@ -1106,6 +1106,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unlink\n\n`client.v1.customers.integrations.unlink(id: string, integrationId: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nRemoves the link between a customer and an external integration.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.unlink('integrationId', { id: 'id' });\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.integrations.unlink',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.unlink('integrationId', {\n  id: 'id',\n});\n\nconsole.log(customerIntegrationResponse.data);",
+      },
+      python: {
+        method: 'v1.customers.integrations.unlink',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.unlink(\n    integration_id="integrationId",\n    id="id",\n)\nprint(customer_integration_response.data)',
+      },
+      java: {
+        method: 'v1().customers().integrations().unlink',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUnlinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUnlinkParams params = IntegrationUnlinkParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().unlink(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Unlink',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Unlink(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUnlinkParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.integrations.unlink',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.unlink("integrationId", id: "id")\n\nputs(customer_integration_response)',
+      },
       cli: {
         method: 'integrations unlink',
         example:
@@ -1116,34 +1141,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Unlink',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Unlink(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUnlinkParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().customers().integrations().unlink',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUnlinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUnlinkParams params = IntegrationUnlinkParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().unlink(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.customers.integrations.unlink',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustomer_integration_response = client.v1.customers.integrations.unlink(\n    integration_id="integrationId",\n    id="id",\n)\nprint(customer_integration_response.data)',
-      },
-      ruby: {
-        method: 'v1.customers.integrations.unlink',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustomer_integration_response = stigg.v1.customers.integrations.unlink("integrationId", id: "id")\n\nputs(customer_integration_response)',
-      },
-      typescript: {
-        method: 'client.v1.customers.integrations.unlink',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.unlink('integrationId', {\n  id: 'id',\n});\n\nconsole.log(customerIntegrationResponse.data);",
       },
     },
   },
@@ -1162,6 +1162,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.subscriptions.retrieve(id: string): { data: object; }`\n\n**get** `/api/v1/subscriptions/{id}`\n\nRetrieves a subscription by its unique identifier, including plan details, billing period, status, and add-ons.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.retrieve('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.retrieve('x');\n\nconsole.log(subscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.retrieve(\n    "x",\n)\nprint(subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().retrieve("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.retrieve("x")\n\nputs(subscription)',
+      },
       cli: {
         method: 'subscriptions retrieve',
         example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1171,33 +1196,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/subscriptions/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().subscriptions().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().retrieve("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.retrieve(\n    "x",\n)\nprint(subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.retrieve("x")\n\nputs(subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.retrieve('x');\n\nconsole.log(subscription.data);",
       },
     },
   },
@@ -1226,6 +1226,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.subscriptions.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, customerId?: string, limit?: number, planId?: string, pricingType?: string, resourceId?: string, status?: string): { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }`\n\n**get** `/api/v1/subscriptions`\n\nRetrieves a paginated list of subscriptions, with optional filters for customer, status, and plan.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `customerId?: string`\n  Filter by customer ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `planId?: string`\n  Filter by plan ID\n\n- `pricingType?: string`\n  Filter by pricing type. Supports comma-separated values for multiple types\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `status?: string`\n  Filter by subscription status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n  Customer subscription to a plan\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `customerId: string`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `planId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `startDate: string`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'`\n  - `addons?: { id: string; quantity: number; }[]`\n  - `billingCycleAnchor?: string`\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `cancellationDate?: string`\n  - `cancelReason?: string`\n  - `coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]`\n  - `currentBillingPeriodEnd?: string`\n  - `currentBillingPeriodStart?: string`\n  - `effectiveEndDate?: string`\n  - `endDate?: string`\n  - `futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]`\n  - `latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }`\n  - `metadata?: object`\n  - `minimumSpend?: { amount?: number; currency?: string; }`\n  - `payingCustomerId?: string`\n  - `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  - `prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]`\n  - `resourceId?: string`\n  - `subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `trialEndDate?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.subscriptions.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.subscriptions.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().subscriptions().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionListPage;\nimport io.stigg.models.v1.subscriptions.SubscriptionListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionListPage page = client.v1().subscriptions().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Subscriptions.List(context.TODO(), stigg.V1SubscriptionListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.subscriptions.list\n\nputs(page)',
+      },
       cli: {
         method: 'subscriptions list',
         example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
@@ -1235,33 +1260,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Subscriptions.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Subscriptions.List(context.TODO(), stigg.V1SubscriptionListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/subscriptions \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().subscriptions().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionListPage;\nimport io.stigg.models.v1.subscriptions.SubscriptionListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionListPage page = client.v1().subscriptions().list();\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.subscriptions.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.subscriptions.list\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse.id);\n}",
       },
     },
   },
@@ -1307,6 +1307,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## provision\n\n`client.v1.subscriptions.provision(customerId: string, planId: string, id?: string, addons?: { id: string; quantity: number; }[], appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }, awaitPaymentConfirmation?: boolean, billingCountryCode?: string, billingCycleAnchor?: 'UNCHANGED' | 'NOW', billingId?: string, billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }, billingPeriod?: 'MONTHLY' | 'ANNUALLY', budget?: { hasSoftLimit: boolean; limit: number; }, charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[], checkoutOptions?: { cancelUrl: string; successUrl: string; allowPromoCodes?: boolean; allowTaxIdCollection?: boolean; collectBillingAddress?: boolean; collectPhoneNumber?: boolean; referenceId?: string; }, entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; }[], metadata?: object, minimumSpend?: { amount?: number; currency?: string; }, payingCustomerId?: string, paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE', priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[], resourceId?: string, salesforceId?: string, scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE', startDate?: string, trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }, unitQuantity?: number): { data: object; }`\n\n**post** `/api/v1/subscriptions`\n\nCreates a new subscription for an existing customer. When payment is required and no payment method exists, returns a checkout URL.\n\n### Parameters\n\n- `customerId: string`\n  Customer ID to provision the subscription for\n\n- `planId: string`\n  Plan ID to provision\n\n- `id?: string`\n  Unique identifier for the subscription\n\n- `addons?: { id: string; quantity: number; }[]`\n\n- `appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }`\n  Coupon configuration\n  - `billingCouponId?: string`\n    Billing provider coupon ID\n  - `configuration?: { startDate?: string; }`\n    Coupon timing configuration\n  - `couponId?: string`\n    Stigg coupon ID\n  - `discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }`\n    Ad-hoc discount configuration\n  - `promotionCode?: string`\n    Promotion code to apply\n\n- `awaitPaymentConfirmation?: boolean`\n  Whether to wait for payment confirmation before returning the subscription\n\n- `billingCountryCode?: string`\n  The ISO 3166-1 alpha-2 country code for billing\n\n- `billingCycleAnchor?: 'UNCHANGED' | 'NOW'`\n  Billing cycle anchor behavior for the subscription\n\n- `billingId?: string`\n  External billing system identifier\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }`\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    Billing address for the subscription\n  - `chargeOnBehalfOfAccount?: string`\n    Stripe Connect account to charge on behalf of\n  - `integrationId?: string`\n    Billing integration identifier\n  - `invoiceDaysUntilDue?: number`\n    Number of days until invoice is due\n  - `isBackdated?: boolean`\n    Whether the subscription is backdated\n  - `isInvoicePaid?: boolean`\n    Whether the invoice is marked as paid\n  - `metadata?: object`\n    Additional metadata for the subscription\n  - `prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'`\n    How to handle proration for billing changes\n  - `taxIds?: { type: string; value: string; }[]`\n    Customer tax identification numbers\n  - `taxPercentage?: number`\n    Tax percentage (0-100)\n  - `taxRateIds?: string[]`\n    Tax rate identifiers to apply\n\n- `billingPeriod?: 'MONTHLY' | 'ANNUALLY'`\n  Billing period (MONTHLY or ANNUALLY)\n\n- `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `hasSoftLimit: boolean`\n    Whether the budget is a soft limit\n  - `limit: number`\n    Maximum spending limit\n\n- `charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]`\n\n- `checkoutOptions?: { cancelUrl: string; successUrl: string; allowPromoCodes?: boolean; allowTaxIdCollection?: boolean; collectBillingAddress?: boolean; collectPhoneNumber?: boolean; referenceId?: string; }`\n  Checkout page configuration for payment collection\n  - `cancelUrl: string`\n    URL to redirect to if checkout is canceled\n  - `successUrl: string`\n    URL to redirect to after successful checkout\n  - `allowPromoCodes?: boolean`\n    Allow promotional codes during checkout\n  - `allowTaxIdCollection?: boolean`\n    Allow tax ID collection during checkout\n  - `collectBillingAddress?: boolean`\n    Collect billing address during checkout\n  - `collectPhoneNumber?: boolean`\n    Collect phone number during checkout\n  - `referenceId?: string`\n    Optional reference ID for the checkout session\n\n- `entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; }[]`\n\n- `metadata?: object`\n  Additional metadata for the subscription\n\n- `minimumSpend?: { amount?: number; currency?: string; }`\n  Minimum spend amount\n  - `amount?: number`\n    The price amount\n  - `currency?: string`\n    The price currency\n\n- `payingCustomerId?: string`\n  Optional paying customer ID for split billing scenarios\n\n- `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  How payments should be collected for this subscription\n\n- `priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]`\n\n- `resourceId?: string`\n  Optional resource ID for multi-instance subscriptions\n\n- `salesforceId?: string`\n  Salesforce ID\n\n- `scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'`\n  Strategy for scheduling subscription changes\n\n- `startDate?: string`\n  Subscription start date\n\n- `trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }`\n  Trial period override settings\n  - `isTrial: boolean`\n    Whether the subscription should start with a trial period\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when trial ends: CONVERT_TO_PAID or CANCEL_SUBSCRIPTION\n  - `trialEndDate?: string`\n    Custom trial end date\n\n- `unitQuantity?: number`\n  Unit quantity\n\n### Returns\n\n- `{ data: { id: string; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: object; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: object; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; status: 'SUCCESS' | 'PAYMENT_REQUIRED'; subscription: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }; checkoutBillingId?: string; checkoutUrl?: string; isScheduled?: boolean; }; }`\n  Response object\n\n  - `data: { id: string; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; status: 'SUCCESS' | 'PAYMENT_REQUIRED'; subscription: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; checkoutBillingId?: string; checkoutUrl?: string; isScheduled?: boolean; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.provision({ customerId: 'customerId', planId: 'planId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.provision',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.provision({\n  customerId: 'customerId',\n  planId: 'planId',\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.provision',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.provision(\n    customer_id="customerId",\n    plan_id="planId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().provision',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionProvisionParams params = SubscriptionProvisionParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionProvisionResponse response = client.v1().subscriptions().provision(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Provision',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Provision(context.TODO(), stigg.V1SubscriptionProvisionParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.provision',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.provision(customer_id: "customerId", plan_id: "planId")\n\nputs(response)',
+      },
       cli: {
         method: 'subscriptions provision',
         example:
@@ -1317,34 +1342,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Provision',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Provision(context.TODO(), stigg.V1SubscriptionProvisionParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
-      },
-      java: {
-        method: 'v1().subscriptions().provision',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionProvisionParams params = SubscriptionProvisionParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionProvisionResponse response = client.v1().subscriptions().provision(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.provision',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.provision(\n    customer_id="customerId",\n    plan_id="planId",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.provision',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.provision(customer_id: "customerId", plan_id: "planId")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.provision',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.provision({\n  customerId: 'customerId',\n  planId: 'planId',\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -1363,6 +1363,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## transfer\n\n`client.v1.subscriptions.transfer(id: string, destinationResourceId: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/transfer`\n\nTransfers a subscription to a different resource ID. Used for multi-resource products where subscriptions apply to specific entities like websites or apps.\n\n### Parameters\n\n- `id: string`\n\n- `destinationResourceId: string`\n  Resource ID to transfer the subscription to\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.transfer('x', { destinationResourceId: 'destinationResourceId' });\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.transfer',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.transfer('x', {\n  destinationResourceId: 'destinationResourceId',\n});\n\nconsole.log(subscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.transfer',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.transfer(\n    id="x",\n    destination_resource_id="destinationResourceId",\n)\nprint(subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().transfer',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionTransferParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionTransferParams params = SubscriptionTransferParams.builder()\n            .id("x")\n            .destinationResourceId("destinationResourceId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().transfer(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Transfer',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Transfer(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionTransferParams{\n\t\t\tDestinationResourceID: "destinationResourceId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.transfer',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.transfer("x", destination_resource_id: "destinationResourceId")\n\nputs(subscription)',
+      },
       cli: {
         method: 'subscriptions transfer',
         example:
@@ -1373,34 +1398,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Transfer',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Transfer(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionTransferParams{\n\t\t\tDestinationResourceID: "destinationResourceId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/$ID/transfer \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationResourceId": "destinationResourceId"\n        }\'',
-      },
-      java: {
-        method: 'v1().subscriptions().transfer',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionTransferParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionTransferParams params = SubscriptionTransferParams.builder()\n            .id("x")\n            .destinationResourceId("destinationResourceId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().transfer(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.transfer',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.transfer(\n    id="x",\n    destination_resource_id="destinationResourceId",\n)\nprint(subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.transfer',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.transfer("x", destination_resource_id: "destinationResourceId")\n\nputs(subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.transfer',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.transfer('x', {\n  destinationResourceId: 'destinationResourceId',\n});\n\nconsole.log(subscription.data);",
       },
     },
   },
@@ -1419,6 +1419,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## migrate\n\n`client.v1.subscriptions.migrate(id: string, subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE'): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/migrate`\n\nMigrates a subscription to the latest published version of its plan or add-ons. Handles prorated charges or credits automatically.\n\n### Parameters\n\n- `id: string`\n\n- `subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE'`\n  When to migrate (immediate or period end)\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.migrate('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.migrate',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.migrate('x');\n\nconsole.log(subscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.migrate',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.migrate(\n    id="x",\n)\nprint(subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().migrate',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionMigrateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().migrate("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Migrate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Migrate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionMigrateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.migrate',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.migrate("x")\n\nputs(subscription)',
+      },
       cli: {
         method: 'subscriptions migrate',
         example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1428,34 +1453,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Migrate',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Migrate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionMigrateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/subscriptions/$ID/migrate \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().subscriptions().migrate',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionMigrateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().migrate("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.migrate',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.migrate(\n    id="x",\n)\nprint(subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.migrate',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.migrate("x")\n\nputs(subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.migrate',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.migrate('x');\n\nconsole.log(subscription.data);",
       },
     },
   },
@@ -1474,6 +1474,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delegate\n\n`client.v1.subscriptions.delegate(id: string, targetCustomerId: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/delegate`\n\nDelegates the payment responsibility of a subscription to a different customer. The delegated customer will be billed for this subscription.\n\n### Parameters\n\n- `id: string`\n\n- `targetCustomerId: string`\n  The unique identifier of the customer who will assume payment responsibility for this subscription. This customer must already exist in your Stigg account and have a valid payment method if the subscription requires payment.\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.delegate',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.delegate('x', {\n  targetCustomerId: 'targetCustomerId',\n});\n\nconsole.log(subscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.delegate',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.delegate(\n    id="x",\n    target_customer_id="targetCustomerId",\n)\nprint(subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().delegate',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionDelegateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionDelegateParams params = SubscriptionDelegateParams.builder()\n            .id("x")\n            .targetCustomerId("targetCustomerId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().delegate(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Delegate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Delegate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionDelegateParams{\n\t\t\tTargetCustomerID: "targetCustomerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.delegate',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.delegate("x", target_customer_id: "targetCustomerId")\n\nputs(subscription)',
+      },
       cli: {
         method: 'subscriptions delegate',
         example:
@@ -1484,34 +1509,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Delegate',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Delegate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionDelegateParams{\n\t\t\tTargetCustomerID: "targetCustomerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/$ID/delegate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetCustomerId": "targetCustomerId"\n        }\'',
-      },
-      java: {
-        method: 'v1().subscriptions().delegate',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionDelegateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionDelegateParams params = SubscriptionDelegateParams.builder()\n            .id("x")\n            .targetCustomerId("targetCustomerId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().delegate(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.delegate',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.delegate(\n    id="x",\n    target_customer_id="targetCustomerId",\n)\nprint(subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.delegate',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.delegate("x", target_customer_id: "targetCustomerId")\n\nputs(subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.delegate',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.delegate('x', {\n  targetCustomerId: 'targetCustomerId',\n});\n\nconsole.log(subscription.data);",
       },
     },
   },
@@ -1547,6 +1547,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## preview\n\n`client.v1.subscriptions.preview(customerId: string, planId: string, addons?: { id: string; quantity: number; }[], appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }, billableFeatures?: { featureId: string; quantity: number; }[], billingCountryCode?: string, billingCycleAnchor?: 'UNCHANGED' | 'NOW', billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }, billingPeriod?: 'MONTHLY' | 'ANNUALLY', charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[], payingCustomerId?: string, resourceId?: string, scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE', startDate?: string, trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }, unitQuantity?: number): { data: object; }`\n\n**post** `/api/v1/subscriptions/preview`\n\nPreviews the pricing impact of creating or updating a subscription without making changes. Returns estimated costs, taxes, and proration details.\n\n### Parameters\n\n- `customerId: string`\n  Customer ID\n\n- `planId: string`\n  Plan ID\n\n- `addons?: { id: string; quantity: number; }[]`\n  Addons to include\n\n- `appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }`\n  Coupon or discount to apply\n  - `billingCouponId?: string`\n    Billing provider coupon ID\n  - `configuration?: { startDate?: string; }`\n    Coupon timing configuration\n  - `couponId?: string`\n    Stigg coupon ID\n  - `discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }`\n    Ad-hoc discount configuration\n  - `promotionCode?: string`\n    Promotion code to apply\n\n- `billableFeatures?: { featureId: string; quantity: number; }[]`\n  Billable features with quantities\n\n- `billingCountryCode?: string`\n  ISO 3166-1 country code for localization\n\n- `billingCycleAnchor?: 'UNCHANGED' | 'NOW'`\n  Billing cycle anchor behavior for the subscription\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }`\n  Billing and tax configuration\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    Billing address\n  - `chargeOnBehalfOfAccount?: string`\n    Connected account ID for platform billing\n  - `integrationId?: string`\n    Billing integration ID\n  - `invoiceDaysUntilDue?: number`\n    Days until invoice is due\n  - `isBackdated?: boolean`\n    Whether subscription is backdated\n  - `isInvoicePaid?: boolean`\n    Whether invoice is already paid\n  - `metadata?: object`\n    Additional billing metadata\n  - `prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'`\n    Proration behavior\n  - `taxIds?: { type: string; value: string; }[]`\n    Customer tax IDs\n  - `taxPercentage?: number`\n    Tax percentage to apply\n  - `taxRateIds?: string[]`\n    Tax rate IDs from billing provider\n\n- `billingPeriod?: 'MONTHLY' | 'ANNUALLY'`\n  Billing period (MONTHLY or ANNUALLY)\n\n- `charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]`\n  One-time or recurring charges\n\n- `payingCustomerId?: string`\n  Paying customer ID for delegated billing\n\n- `resourceId?: string`\n  Resource ID for multi-instance subscriptions\n\n- `scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'`\n  When to apply subscription changes\n\n- `startDate?: string`\n  Subscription start date\n\n- `trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }`\n  Trial period override settings\n  - `isTrial: boolean`\n    Whether to start as trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when trial ends\n  - `trialEndDate?: string`\n    Trial end date\n\n- `unitQuantity?: number`\n  Unit quantity for per-unit pricing\n\n### Returns\n\n- `{ data: { immediateInvoice: { subTotal: number; total: number; billingPeriodRange?: object; currency?: string; discount?: number; discountDetails?: object; discounts?: object[]; lines?: object[]; tax?: number; }; billingPeriodRange?: { end?: string; start?: string; }; freeItems?: { id: string; quantity: number; }[]; hasScheduledUpdates?: boolean; isPlanDowngrade?: boolean; recurringInvoice?: { subTotal: number; total: number; billingPeriodRange?: object; currency?: string; discount?: number; discountDetails?: object; discounts?: object[]; lines?: object[]; tax?: number; }; }; }`\n  Response object\n\n  - `data: { immediateInvoice: { subTotal: number; total: number; billingPeriodRange?: { end: string; start: string; }; currency?: string; discount?: number; discountDetails?: { code?: string; fixedAmount?: number; percentage?: number; }; discounts?: { amount: number; currency: string; description: string; }[]; lines?: { currency: string; description: string; subTotal: number; unitPrice: number; quantity?: number; }[]; tax?: number; }; billingPeriodRange?: { end?: string; start?: string; }; freeItems?: { id: string; quantity: number; }[]; hasScheduledUpdates?: boolean; isPlanDowngrade?: boolean; recurringInvoice?: { subTotal: number; total: number; billingPeriodRange?: { end: string; start: string; }; currency?: string; discount?: number; discountDetails?: { code?: string; fixedAmount?: number; percentage?: number; }; discounts?: { amount: number; currency: string; description: string; }[]; lines?: { currency: string; description: string; subTotal: number; unitPrice: number; quantity?: number; }[]; tax?: number; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.preview({ customerId: 'customerId', planId: 'planId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.preview',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.preview({\n  customerId: 'customerId',\n  planId: 'planId',\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.preview',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.preview(\n    customer_id="customerId",\n    plan_id="planId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().preview',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionPreviewParams params = SubscriptionPreviewParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionPreviewResponse response = client.v1().subscriptions().preview(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Preview',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Preview(context.TODO(), stigg.V1SubscriptionPreviewParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.preview',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.preview(customer_id: "customerId", plan_id: "planId")\n\nputs(response)',
+      },
       cli: {
         method: 'subscriptions preview',
         example:
@@ -1557,34 +1582,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Preview',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Preview(context.TODO(), stigg.V1SubscriptionPreviewParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/preview \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
-      },
-      java: {
-        method: 'v1().subscriptions().preview',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionPreviewParams params = SubscriptionPreviewParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionPreviewResponse response = client.v1().subscriptions().preview(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.preview',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.preview(\n    customer_id="customerId",\n    plan_id="planId",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.preview',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.preview(customer_id: "customerId", plan_id: "planId")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.preview',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.preview({\n  customerId: 'customerId',\n  planId: 'planId',\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -1620,6 +1620,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.subscriptions.update(id: string, addons?: { id: string; quantity: number; }[], appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }, awaitPaymentConfirmation?: boolean, billingCycleAnchor?: 'UNCHANGED' | 'NOW', billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; couponId?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }, billingPeriod?: 'MONTHLY' | 'ANNUALLY', budget?: { hasSoftLimit: boolean; limit: number; }, charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[], entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; }[], metadata?: object, minimumSpend?: { amount?: number; currency?: string; }, priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; currency?: string; currencyId?: string; featureId?: string; }[], promotionCode?: string, scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE', trialEndDate?: string): { data: object; }`\n\n**patch** `/api/v1/subscriptions/{id}`\n\nUpdates an active subscription's properties including billing period, add-ons, unit quantities, and discounts.\n\n### Parameters\n\n- `id: string`\n\n- `addons?: { id: string; quantity: number; }[]`\n\n- `appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }`\n  - `billingCouponId?: string`\n  - `configuration?: { startDate?: string; }`\n  - `couponId?: string`\n    Stigg coupon ID\n  - `discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }`\n  - `promotionCode?: string`\n\n- `awaitPaymentConfirmation?: boolean`\n  Await payment confirmation\n\n- `billingCycleAnchor?: 'UNCHANGED' | 'NOW'`\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; couponId?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }`\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    Physical address\n  - `chargeOnBehalfOfAccount?: string`\n  - `couponId?: string`\n  - `integrationId?: string`\n  - `invoiceDaysUntilDue?: number`\n  - `isBackdated?: boolean`\n  - `isInvoicePaid?: boolean`\n  - `metadata?: object`\n    Additional metadata for the subscription\n  - `prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'`\n  - `taxIds?: { type: string; value: string; }[]`\n  - `taxPercentage?: number`\n  - `taxRateIds?: string[]`\n\n- `billingPeriod?: 'MONTHLY' | 'ANNUALLY'`\n\n- `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `hasSoftLimit: boolean`\n    Whether the budget is a soft limit\n  - `limit: number`\n    Maximum spending limit\n\n- `charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]`\n\n- `entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; }[]`\n\n- `metadata?: object`\n  Additional metadata for the subscription\n\n- `minimumSpend?: { amount?: number; currency?: string; }`\n  Minimum spend amount\n  - `amount?: number`\n    The price amount\n  - `currency?: string`\n    The price currency\n\n- `priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; currency?: string; currencyId?: string; featureId?: string; }[]`\n\n- `promotionCode?: string`\n  Promotion code\n\n- `scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'`\n\n- `trialEndDate?: string`\n  Subscription trial end date\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.update('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.update('x');\n\nconsole.log(subscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.update(\n    id="x",\n)\nprint(subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().update("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.update("x")\n\nputs(subscription)',
+      },
       cli: {
         method: 'subscriptions update',
         example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1629,34 +1654,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/subscriptions/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().subscriptions().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().update("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.update(\n    id="x",\n)\nprint(subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.update("x")\n\nputs(subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.update('x');\n\nconsole.log(subscription.data);",
       },
     },
   },
@@ -1677,6 +1677,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## import\n\n`client.v1.subscriptions.import(subscriptions: { id: string; customerId: string; planId: string; addons?: { id: string; quantity: number; }[]; billingId?: string; billingPeriod?: 'MONTHLY' | 'ANNUALLY'; charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]; endDate?: string; metadata?: object; resourceId?: string; startDate?: string; }[], integrationId?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/import`\n\nImports multiple subscriptions in bulk. Used for migrating subscription data from external systems.\n\n### Parameters\n\n- `subscriptions: { id: string; customerId: string; planId: string; addons?: { id: string; quantity: number; }[]; billingId?: string; billingPeriod?: 'MONTHLY' | 'ANNUALLY'; charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]; endDate?: string; metadata?: object; resourceId?: string; startDate?: string; }[]`\n  List of subscription objects to import\n\n- `integrationId?: string`\n  Integration ID to use for importing subscriptions\n\n### Returns\n\n- `{ data: { taskId: string; }; }`\n  Response object\n\n  - `data: { taskId: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.import({ subscriptions: [{\n  id: 'id',\n  customerId: 'customerId',\n  planId: 'planId',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.import',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.import({\n  subscriptions: [\n    {\n      id: 'id',\n      customerId: 'customerId',\n      planId: 'planId',\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.import_',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.import_(\n    subscriptions=[{\n        "id": "id",\n        "customer_id": "customerId",\n        "plan_id": "planId",\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().import_',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionImportParams params = SubscriptionImportParams.builder()\n            .addSubscription(SubscriptionImportParams.Subscription.builder()\n                .id("id")\n                .customerId("customerId")\n                .planId("planId")\n                .build())\n            .build();\n        SubscriptionImportResponse response = client.v1().subscriptions().import_(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Import',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Import(context.TODO(), stigg.V1SubscriptionImportParams{\n\t\tSubscriptions: []stigg.V1SubscriptionImportParamsSubscription{{\n\t\t\tID:         "id",\n\t\t\tCustomerID: "customerId",\n\t\t\tPlanID:     "planId",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.import',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.import(subscriptions: [{id: "id", customerId: "customerId", planId: "planId"}])\n\nputs(response)',
+      },
       cli: {
         method: 'subscriptions import',
         example:
@@ -1687,34 +1712,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 1,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Import',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Import(context.TODO(), stigg.V1SubscriptionImportParams{\n\t\tSubscriptions: []stigg.V1SubscriptionImportParamsSubscription{{\n\t\t\tID:         "id",\n\t\t\tCustomerID: "customerId",\n\t\t\tPlanID:     "planId",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "subscriptions": [\n            {\n              "id": "id",\n              "customerId": "customerId",\n              "planId": "planId"\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().subscriptions().import_',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionImportParams params = SubscriptionImportParams.builder()\n            .addSubscription(SubscriptionImportParams.Subscription.builder()\n                .id("id")\n                .customerId("customerId")\n                .planId("planId")\n                .build())\n            .build();\n        SubscriptionImportResponse response = client.v1().subscriptions().import_(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.import_',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.import_(\n    subscriptions=[{\n        "id": "id",\n        "customer_id": "customerId",\n        "plan_id": "planId",\n    }],\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.import',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.import(subscriptions: [{id: "id", customerId: "customerId", planId: "planId"}])\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.import',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.import({\n  subscriptions: [\n    {\n      id: 'id',\n      customerId: 'customerId',\n      planId: 'planId',\n    },\n  ],\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -1739,6 +1739,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel\n\n`client.v1.subscriptions.cancel(id: string, cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS', cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE', endDate?: string, prorate?: boolean): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/cancel`\n\nCancels an active subscription, either immediately or at a specified time such as end of billing period.\n\n### Parameters\n\n- `id: string`\n\n- `cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS'`\n  Action on cancellation (downgrade or revoke)\n\n- `cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'`\n  When to cancel (immediate, period end, or date)\n\n- `endDate?: string`\n  Subscription end date\n\n- `prorate?: boolean`\n  If set, enables or disables prorating of credits on subscription cancellation.\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.cancel('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.cancel',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.cancel('x');\n\nconsole.log(subscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.cancel',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.cancel(\n    id="x",\n)\nprint(subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().cancel',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().cancel("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Cancel',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Cancel(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionCancelParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.cancel',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.cancel("x")\n\nputs(subscription)',
+      },
       cli: {
         method: 'subscriptions cancel',
         example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1748,34 +1773,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Cancel',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Cancel(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionCancelParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/subscriptions/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().subscriptions().cancel',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().cancel("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.cancel',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nsubscription = client.v1.subscriptions.cancel(\n    id="x",\n)\nprint(subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.cancel',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nsubscription = stigg.v1.subscriptions.cancel("x")\n\nputs(subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.cancel',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.cancel('x');\n\nconsole.log(subscription.data);",
       },
     },
   },
@@ -1792,6 +1792,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel_pending_payment\n\n`client.v1.subscriptions.futureUpdate.cancelPendingPayment(id: string): { data: object; }`\n\n**delete** `/api/v1/subscriptions/{id}/future-update/pending-payment`\n\nCancels a subscription update that is pending payment completion.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response object\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelPendingPayment('x');\n\nconsole.log(cancelSubscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.futureUpdate.cancelPendingPayment',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelPendingPayment('x');\n\nconsole.log(cancelSubscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.future_update.cancel_pending_payment',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncancel_subscription = client.v1.subscriptions.future_update.cancel_pending_payment(\n    "x",\n)\nprint(cancel_subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().futureUpdate().cancelPendingPayment',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelPendingPaymentParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelPendingPayment("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.future_update.cancel_pending_payment',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncancel_subscription = stigg.v1.subscriptions.future_update.cancel_pending_payment("x")\n\nputs(cancel_subscription)',
+      },
       cli: {
         method: 'future_update cancel_pending_payment',
         example:
@@ -1802,34 +1827,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/$ID/future-update/pending-payment \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().subscriptions().futureUpdate().cancelPendingPayment',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelPendingPaymentParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelPendingPayment("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.future_update.cancel_pending_payment',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncancel_subscription = client.v1.subscriptions.future_update.cancel_pending_payment(\n    "x",\n)\nprint(cancel_subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.future_update.cancel_pending_payment',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncancel_subscription = stigg.v1.subscriptions.future_update.cancel_pending_payment("x")\n\nputs(cancel_subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.futureUpdate.cancelPendingPayment',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelPendingPayment('x');\n\nconsole.log(cancelSubscription.data);",
       },
     },
   },
@@ -1846,6 +1846,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel_schedule\n\n`client.v1.subscriptions.futureUpdate.cancelSchedule(id: string): { data: object; }`\n\n**delete** `/api/v1/subscriptions/{id}/future-update/schedule`\n\nCancels a scheduled subscription update, such as a future downgrade or plan change.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response object\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelSchedule('x');\n\nconsole.log(cancelSubscription);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.futureUpdate.cancelSchedule',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelSchedule('x');\n\nconsole.log(cancelSubscription.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.future_update.cancel_schedule',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncancel_subscription = client.v1.subscriptions.future_update.cancel_schedule(\n    "x",\n)\nprint(cancel_subscription.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().futureUpdate().cancelSchedule',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelScheduleParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelSchedule("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelSchedule(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.future_update.cancel_schedule',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncancel_subscription = stigg.v1.subscriptions.future_update.cancel_schedule("x")\n\nputs(cancel_subscription)',
+      },
       cli: {
         method: 'future_update cancel_schedule',
         example:
@@ -1856,34 +1881,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelSchedule(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/$ID/future-update/schedule \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().subscriptions().futureUpdate().cancelSchedule',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelScheduleParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelSchedule("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.future_update.cancel_schedule',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncancel_subscription = client.v1.subscriptions.future_update.cancel_schedule(\n    "x",\n)\nprint(cancel_subscription.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.future_update.cancel_schedule',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncancel_subscription = stigg.v1.subscriptions.future_update.cancel_schedule("x")\n\nputs(cancel_subscription)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.futureUpdate.cancelSchedule',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelSchedule('x');\n\nconsole.log(cancelSubscription.data);",
       },
     },
   },
@@ -1902,6 +1902,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## charge_usage\n\n`client.v1.subscriptions.usage.chargeUsage(id: string, untilDate?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/usage/charge`\n\nImmediately charges usage for a subscription via the billing integration. Calculates usage since the last charge and creates an invoice.\n\n### Parameters\n\n- `id: string`\n\n- `untilDate?: string`\n  Cutoff date for usage calculation. If not provided, the current time is used.\n\n### Returns\n\n- `{ data: { invoiceBillingId: string; periodEnd: string; periodStart: string; subscriptionId: string; usageCharged: { featureId: string; usageAmount: number; }[]; }; }`\n  Response object\n\n  - `data: { invoiceBillingId: string; periodEnd: string; periodStart: string; subscriptionId: string; usageCharged: { featureId: string; usageAmount: number; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.usage.chargeUsage('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.usage.chargeUsage',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.usage.chargeUsage('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.usage.charge_usage',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.usage.charge_usage(\n    id="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().usage().chargeUsage',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.usage.UsageChargeUsageParams;\nimport io.stigg.models.v1.subscriptions.usage.UsageChargeUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageChargeUsageResponse response = client.v1().subscriptions().usage().chargeUsage("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Usage.ChargeUsage',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.ChargeUsage(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUsageChargeUsageParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.usage.charge_usage',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.usage.charge_usage("x")\n\nputs(response)',
+      },
       cli: {
         method: 'usage charge_usage',
         example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1911,34 +1936,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Usage.ChargeUsage',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.ChargeUsage(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUsageChargeUsageParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/subscriptions/$ID/usage/charge \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().subscriptions().usage().chargeUsage',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.usage.UsageChargeUsageParams;\nimport io.stigg.models.v1.subscriptions.usage.UsageChargeUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageChargeUsageResponse response = client.v1().subscriptions().usage().chargeUsage("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.usage.charge_usage',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.usage.charge_usage(\n    id="x",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.usage.charge_usage',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.usage.charge_usage("x")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.usage.chargeUsage',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.usage.chargeUsage('x');\n\nconsole.log(response.data);",
       },
     },
   },
@@ -1955,6 +1955,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## sync\n\n`client.v1.subscriptions.usage.sync(id: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/usage/sync`\n\nTriggers a usage sync for a subscription, reporting current usage to the billing provider.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { triggered: boolean; }; }`\n  Response object\n\n  - `data: { triggered: boolean; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.usage.sync('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.usage.sync',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.usage.sync('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.usage.sync',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.usage.sync(\n    "x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().usage().sync',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.usage.UsageSyncParams;\nimport io.stigg.models.v1.subscriptions.usage.UsageSyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageSyncResponse response = client.v1().subscriptions().usage().sync("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Usage.Sync',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.Sync(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.usage.sync',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.usage.sync("x")\n\nputs(response)',
+      },
       cli: {
         method: 'usage sync',
         example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1964,34 +1989,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Usage.Sync',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.Sync(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/$ID/usage/sync \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().subscriptions().usage().sync',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.usage.UsageSyncParams;\nimport io.stigg.models.v1.subscriptions.usage.UsageSyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageSyncResponse response = client.v1().subscriptions().usage().sync("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.usage.sync',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.usage.sync(\n    "x",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.usage.sync',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.usage.sync("x")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.usage.sync',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.usage.sync('x');\n\nconsole.log(response.data);",
       },
     },
   },
@@ -2009,6 +2009,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## mark_as_paid\n\n`client.v1.subscriptions.invoice.markAsPaid(id: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/invoice/paid`\n\nMarks the latest invoice of a subscription as paid in the billing provider. The invoice must exist and have an OPEN status.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response object\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.invoice.markAsPaid('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.subscriptions.invoice.markAsPaid',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.invoice.markAsPaid('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.subscriptions.invoice.mark_as_paid',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.invoice.mark_as_paid(\n    "x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().subscriptions().invoice().markAsPaid',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.invoice.InvoiceMarkAsPaidParams;\nimport io.stigg.models.v1.subscriptions.invoice.InvoiceMarkAsPaidResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        InvoiceMarkAsPaidResponse response = client.v1().subscriptions().invoice().markAsPaid("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Invoice.MarkAsPaid(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.subscriptions.invoice.mark_as_paid',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.invoice.mark_as_paid("x")\n\nputs(response)',
+      },
       cli: {
         method: 'invoice mark_as_paid',
         example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2018,34 +2043,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Invoice.MarkAsPaid(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/subscriptions/$ID/invoice/paid \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().subscriptions().invoice().markAsPaid',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.invoice.InvoiceMarkAsPaidParams;\nimport io.stigg.models.v1.subscriptions.invoice.InvoiceMarkAsPaidResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        InvoiceMarkAsPaidResponse response = client.v1().subscriptions().invoice().markAsPaid("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.subscriptions.invoice.mark_as_paid',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.subscriptions.invoice.mark_as_paid(\n    "x",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.subscriptions.invoice.mark_as_paid',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.subscriptions.invoice.mark_as_paid("x")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.subscriptions.invoice.markAsPaid',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.subscriptions.invoice.markAsPaid('x');\n\nconsole.log(response.data);",
       },
     },
   },
@@ -2072,6 +2072,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.coupons.create(id: string, amountsOff: { amount: number; currency: string; }[], description: string, durationInMonths: number, metadata: object, name: string, percentOff: number): { data: object; }`\n\n**post** `/api/v1/coupons`\n\nCreates a new discount coupon with percentage or fixed amount off, applicable to customer subscriptions.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `amountsOff: { amount: number; currency: string; }[]`\n  Fixed amount discounts in different currencies\n\n- `description: string`\n  Description of the coupon\n\n- `durationInMonths: number`\n  Duration of the coupon validity in months\n\n- `metadata: object`\n  Metadata associated with the entity\n\n- `name: string`\n  Name of the coupon\n\n- `percentOff: number`\n  Percentage discount off the original price\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.create({\n  id: 'id',\n  amountsOff: [{ amount: 0, currency: 'usd' }],\n  description: 'description',\n  durationInMonths: 1,\n  metadata: { foo: 'string' },\n  name: 'name',\n  percentOff: 1,\n});\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.coupons.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.create({\n  id: 'id',\n  amountsOff: [{ amount: 0, currency: 'usd' }],\n  description: 'description',\n  durationInMonths: 1,\n  metadata: { foo: 'string' },\n  name: 'name',\n  percentOff: 1,\n});\n\nconsole.log(coupon.data);",
+      },
+      python: {
+        method: 'v1.coupons.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.create(\n    id="id",\n    amounts_off=[{\n        "amount": 0,\n        "currency": "usd",\n    }],\n    description="description",\n    duration_in_months=1,\n    metadata={\n        "foo": "string"\n    },\n    name="name",\n    percent_off=1,\n)\nprint(coupon.data)',
+      },
+      java: {
+        method: 'v1().coupons().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponCreateParams params = CouponCreateParams.builder()\n            .id("id")\n            .addAmountsOff(CouponCreateParams.AmountsOff.builder()\n                .amount(0.0)\n                .currency(CouponCreateParams.AmountsOff.Currency.USD)\n                .build())\n            .description("description")\n            .durationInMonths(1L)\n            .metadata(CouponCreateParams.Metadata.builder()\n                .putAdditionalProperty("foo", JsonValue.from("string"))\n                .build())\n            .name("name")\n            .percentOff(1.0)\n            .build();\n        Coupon coupon = client.v1().coupons().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Coupons.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.New(context.TODO(), stigg.V1CouponNewParams{\n\t\tID: "id",\n\t\tAmountsOff: []stigg.V1CouponNewParamsAmountsOff{{\n\t\t\tAmount:   0,\n\t\t\tCurrency: "usd",\n\t\t}},\n\t\tDescription:      stigg.String("description"),\n\t\tDurationInMonths: stigg.Int(1),\n\t\tMetadata: map[string]string{\n\t\t\t"foo": "string",\n\t\t},\n\t\tName:       "name",\n\t\tPercentOff: stigg.Float(1),\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.coupons.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.create(\n  id: "id",\n  amounts_off: [{amount: 0, currency: :usd}],\n  description: "description",\n  duration_in_months: 1,\n  metadata: {foo: "string"},\n  name: "name",\n  percent_off: 1\n)\n\nputs(coupon)',
+      },
       cli: {
         method: 'coupons create',
         example:
@@ -2082,34 +2107,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      go: {
-        method: 'client.V1.Coupons.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.New(context.TODO(), stigg.V1CouponNewParams{\n\t\tID: "id",\n\t\tAmountsOff: []stigg.V1CouponNewParamsAmountsOff{{\n\t\t\tAmount:   0,\n\t\t\tCurrency: "usd",\n\t\t}},\n\t\tDescription:      stigg.String("description"),\n\t\tDurationInMonths: stigg.Int(1),\n\t\tMetadata: map[string]string{\n\t\t\t"foo": "string",\n\t\t},\n\t\tName:       "name",\n\t\tPercentOff: stigg.Float(1),\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/coupons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "amountsOff": [\n            {\n              "amount": 0,\n              "currency": "usd"\n            }\n          ],\n          "description": "description",\n          "durationInMonths": 1,\n          "metadata": {\n            "foo": "string"\n          },\n          "name": "name",\n          "percentOff": 1\n        }\'',
-      },
-      java: {
-        method: 'v1().coupons().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponCreateParams params = CouponCreateParams.builder()\n            .id("id")\n            .addAmountsOff(CouponCreateParams.AmountsOff.builder()\n                .amount(0.0)\n                .currency(CouponCreateParams.AmountsOff.Currency.USD)\n                .build())\n            .description("description")\n            .durationInMonths(1L)\n            .metadata(CouponCreateParams.Metadata.builder()\n                .putAdditionalProperty("foo", JsonValue.from("string"))\n                .build())\n            .name("name")\n            .percentOff(1.0)\n            .build();\n        Coupon coupon = client.v1().coupons().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.coupons.create',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.create(\n    id="id",\n    amounts_off=[{\n        "amount": 0,\n        "currency": "usd",\n    }],\n    description="description",\n    duration_in_months=1,\n    metadata={\n        "foo": "string"\n    },\n    name="name",\n    percent_off=1,\n)\nprint(coupon.data)',
-      },
-      ruby: {
-        method: 'v1.coupons.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.create(\n  id: "id",\n  amounts_off: [{amount: 0, currency: :usd}],\n  description: "description",\n  duration_in_months: 1,\n  metadata: {foo: "string"},\n  name: "name",\n  percent_off: 1\n)\n\nputs(coupon)',
-      },
-      typescript: {
-        method: 'client.v1.coupons.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.create({\n  id: 'id',\n  amountsOff: [{ amount: 0, currency: 'usd' }],\n  description: 'description',\n  durationInMonths: 1,\n  metadata: { foo: 'string' },\n  name: 'name',\n  percentOff: 1,\n});\n\nconsole.log(coupon.data);",
       },
     },
   },
@@ -2135,6 +2135,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.coupons.list(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: string, type?: 'FIXED' | 'PERCENTAGE'): { id: string; amountsOff: object[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n**get** `/api/v1/coupons`\n\nRetrieves a paginated list of coupons in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: string`\n  Filter by coupon status. Supports comma-separated values for multiple statuses\n\n- `type?: 'FIXED' | 'PERCENTAGE'`\n  Filter by coupon type (FIXED or PERCENTAGE)\n\n### Returns\n\n- `{ id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n  Discount instrument with percentage or fixed amount\n\n  - `id: string`\n  - `amountsOff: { amount: number; currency: string; }[]`\n  - `billingId: string`\n  - `billingLinkUrl: string`\n  - `createdAt: string`\n  - `description: string`\n  - `durationInMonths: number`\n  - `metadata: object`\n  - `name: string`\n  - `percentOff: number`\n  - `source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'`\n  - `status: 'ACTIVE' | 'ARCHIVED'`\n  - `type: 'FIXED' | 'PERCENTAGE'`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.coupons.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.coupons.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.coupons.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().coupons().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.CouponListPage;\nimport io.stigg.models.v1.coupons.CouponListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponListPage page = client.v1().coupons().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Coupons.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Coupons.List(context.TODO(), stigg.V1CouponListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.coupons.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.coupons.list\n\nputs(page)',
+      },
       cli: {
         method: 'coupons list',
         example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
@@ -2144,33 +2169,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Coupons.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Coupons.List(context.TODO(), stigg.V1CouponListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/coupons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().coupons().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.CouponListPage;\nimport io.stigg.models.v1.coupons.CouponListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponListPage page = client.v1().coupons().list();\n    }\n}',
-      },
-      python: {
-        method: 'v1.coupons.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.coupons.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.coupons.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.coupons.list\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.coupons.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse.id);\n}",
       },
     },
   },
@@ -2188,6 +2188,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.coupons.retrieve(id: string): { data: object; }`\n\n**get** `/api/v1/coupons/{id}`\n\nRetrieves a coupon by its unique identifier.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.retrieve('x');\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.coupons.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.retrieve('x');\n\nconsole.log(coupon.data);",
+      },
+      python: {
+        method: 'v1.coupons.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.retrieve(\n    "x",\n)\nprint(coupon.data)',
+      },
+      java: {
+        method: 'v1().coupons().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().retrieve("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Coupons.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.coupons.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.retrieve("x")\n\nputs(coupon)',
+      },
       cli: {
         method: 'coupons retrieve',
         example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2197,33 +2222,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      go: {
-        method: 'client.V1.Coupons.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/coupons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().coupons().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().retrieve("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.coupons.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.retrieve(\n    "x",\n)\nprint(coupon.data)',
-      },
-      ruby: {
-        method: 'v1.coupons.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.retrieve("x")\n\nputs(coupon)',
-      },
-      typescript: {
-        method: 'client.v1.coupons.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.retrieve('x');\n\nconsole.log(coupon.data);",
       },
     },
   },
@@ -2241,6 +2241,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_coupon\n\n`client.v1.coupons.updateCoupon(id: string, description?: string, metadata?: object, name?: string): { data: object; }`\n\n**patch** `/api/v1/coupons/{id}`\n\nUpdates an existing coupon's properties such as name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `description?: string`\n  Description of the coupon\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `name?: string`\n  Name of the coupon\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.updateCoupon('x');\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.coupons.updateCoupon',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.updateCoupon('x');\n\nconsole.log(coupon.data);",
+      },
+      python: {
+        method: 'v1.coupons.update_coupon',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.update_coupon(\n    id="x",\n)\nprint(coupon.data)',
+      },
+      java: {
+        method: 'v1().coupons().updateCoupon',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponUpdateCouponParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().updateCoupon("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Coupons.UpdateCoupon',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.UpdateCoupon(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponUpdateCouponParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.coupons.update_coupon',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.update_coupon("x")\n\nputs(coupon)',
+      },
       cli: {
         method: 'coupons update_coupon',
         example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2250,34 +2275,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      go: {
-        method: 'client.V1.Coupons.UpdateCoupon',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.UpdateCoupon(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponUpdateCouponParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/coupons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().coupons().updateCoupon',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponUpdateCouponParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().updateCoupon("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.coupons.update_coupon',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.update_coupon(\n    id="x",\n)\nprint(coupon.data)',
-      },
-      ruby: {
-        method: 'v1.coupons.update_coupon',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.update_coupon("x")\n\nputs(coupon)',
-      },
-      typescript: {
-        method: 'client.v1.coupons.updateCoupon',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.updateCoupon('x');\n\nconsole.log(coupon.data);",
       },
     },
   },
@@ -2295,6 +2295,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive_coupon\n\n`client.v1.coupons.archiveCoupon(id: string): { data: object; }`\n\n**post** `/api/v1/coupons/{id}/archive`\n\nArchives a coupon, preventing it from being applied to new subscriptions.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.archiveCoupon('x');\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.coupons.archiveCoupon',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.archiveCoupon('x');\n\nconsole.log(coupon.data);",
+      },
+      python: {
+        method: 'v1.coupons.archive_coupon',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.archive_coupon(\n    "x",\n)\nprint(coupon.data)',
+      },
+      java: {
+        method: 'v1().coupons().archiveCoupon',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponArchiveCouponParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().archiveCoupon("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Coupons.ArchiveCoupon',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.ArchiveCoupon(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.coupons.archive_coupon',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.archive_coupon("x")\n\nputs(coupon)',
+      },
       cli: {
         method: 'coupons archive_coupon',
         example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2304,34 +2329,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      go: {
-        method: 'client.V1.Coupons.ArchiveCoupon',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.ArchiveCoupon(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/coupons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().coupons().archiveCoupon',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponArchiveCouponParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().archiveCoupon("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.coupons.archive_coupon',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncoupon = client.v1.coupons.archive_coupon(\n    "x",\n)\nprint(coupon.data)',
-      },
-      ruby: {
-        method: 'v1.coupons.archive_coupon',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncoupon = stigg.v1.coupons.archive_coupon("x")\n\nputs(coupon)',
-      },
-      typescript: {
-        method: 'client.v1.coupons.archiveCoupon',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.archiveCoupon('x');\n\nconsole.log(coupon.data);",
       },
     },
   },
@@ -2351,6 +2351,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## report\n\n`client.v1.events.report(events: { customerId: string; eventName: string; idempotencyKey: string; dimensions?: object; resourceId?: string; timestamp?: string; }[]): { data: object; }`\n\n**post** `/api/v1/events`\n\nReports raw usage events for event-based metering. Events are ingested asynchronously and aggregated into usage totals.\n\n### Parameters\n\n- `events: { customerId: string; eventName: string; idempotencyKey: string; dimensions?: object; resourceId?: string; timestamp?: string; }[]`\n  A list of usage events to report\n\n### Returns\n\n- `{ data: object; }`\n  Response object\n\n  - `data: object`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.report({ events: [{\n  customerId: 'customerId',\n  eventName: 'x',\n  idempotencyKey: 'x',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.report',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.report({\n  events: [\n    {\n      customerId: 'customerId',\n      eventName: 'x',\n      idempotencyKey: 'x',\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.report',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.report(\n    events=[{\n        "customer_id": "customerId",\n        "event_name": "x",\n        "idempotency_key": "x",\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().report',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventReportParams;\nimport io.stigg.models.v1.events.EventReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventReportParams params = EventReportParams.builder()\n            .addEvent(EventReportParams.Event.builder()\n                .customerId("customerId")\n                .eventName("x")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        EventReportResponse response = client.v1().events().report(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Report',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Report(context.TODO(), stigg.V1EventReportParams{\n\t\tEvents: []stigg.V1EventReportParamsEvent{{\n\t\t\tCustomerID:     "customerId",\n\t\t\tEventName:      "x",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.report',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.report(events: [{customerId: "customerId", eventName: "x", idempotencyKey: "x"}])\n\nputs(response)',
+      },
       cli: {
         method: 'events report',
         example:
@@ -2361,34 +2386,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.Report',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Report(context.TODO(), stigg.V1EventReportParams{\n\t\tEvents: []stigg.V1EventReportParamsEvent{{\n\t\t\tCustomerID:     "customerId",\n\t\t\tEventName:      "x",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/events \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "events": [\n            {\n              "customerId": "customerId",\n              "eventName": "x",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().events().report',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventReportParams;\nimport io.stigg.models.v1.events.EventReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventReportParams params = EventReportParams.builder()\n            .addEvent(EventReportParams.Event.builder()\n                .customerId("customerId")\n                .eventName("x")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        EventReportResponse response = client.v1().events().report(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.report',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.report(\n    events=[{\n        "customer_id": "customerId",\n        "event_name": "x",\n        "idempotency_key": "x",\n    }],\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.events.report',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.report(events: [{customerId: "customerId", eventName: "x", idempotencyKey: "x"}])\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.events.report',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.report({\n  events: [\n    {\n      customerId: 'customerId',\n      eventName: 'x',\n      idempotencyKey: 'x',\n    },\n  ],\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -2414,6 +2414,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_usage\n\n`client.v1.events.credits.getUsage(customerId: string, currencyId?: string, endDate?: string, resourceId?: string, startDate?: string, timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'): { data: object; }`\n\n**get** `/api/v1/credits/usage`\n\nRetrieves credit usage time-series data for a customer, grouped by feature, over a specified time range.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `endDate?: string`\n  End date for the credit usage time range (ISO 8601). Defaults to now when startDate is provided\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `startDate?: string`\n  Start date for the credit usage time range (ISO 8601). Takes precedence over timeRange when provided\n\n- `timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'`\n  Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults to LAST_MONTH\n\n### Returns\n\n- `{ data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: object[]; totalCredits: number; }[]; }; }`\n  Response object\n\n  - `data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: { timestamp: string; value: number; }[]; totalCredits: number; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.getUsage',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.credits.get_usage',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.get_usage(\n    customer_id="customerId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().getUsage',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditGetUsageParams;\nimport io.stigg.models.v1.events.credits.CreditGetUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetUsageParams params = CreditGetUsageParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditGetUsageResponse response = client.v1().events().credits().getUsage(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.GetUsage',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.GetUsage(context.TODO(), stigg.V1EventCreditGetUsageParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.get_usage',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.get_usage(customer_id: "customerId")\n\nputs(response)',
+      },
       cli: {
         method: 'credits get_usage',
         example:
@@ -2424,33 +2449,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Events.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.Credits.GetUsage',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.GetUsage(context.TODO(), stigg.V1EventCreditGetUsageParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().events().credits().getUsage',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditGetUsageParams;\nimport io.stigg.models.v1.events.credits.CreditGetUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetUsageParams params = CreditGetUsageParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditGetUsageResponse response = client.v1().events().credits().getUsage(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.credits.get_usage',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.get_usage(\n    customer_id="customerId",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.events.credits.get_usage',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.get_usage(customer_id: "customerId")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.events.credits.getUsage',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response.data);",
       },
     },
   },
@@ -2469,6 +2469,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_auto_recharge\n\n`client.v1.events.credits.getAutoRecharge(currencyId: string, customerId: string): { data: object; }`\n\n**get** `/api/v1/credits/auto-recharge`\n\nRetrieves the automatic recharge configuration for a customer and currency. Returns default settings if no configuration exists.\n\n### Parameters\n\n- `currencyId: string`\n  Filter by currency ID (required)\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.getAutoRecharge({ currencyId: 'currencyId', customerId: 'customerId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.getAutoRecharge',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.getAutoRecharge({\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.credits.get_auto_recharge',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.get_auto_recharge(\n    currency_id="currencyId",\n    customer_id="customerId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().getAutoRecharge',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditGetAutoRechargeParams;\nimport io.stigg.models.v1.events.credits.CreditGetAutoRechargeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetAutoRechargeParams params = CreditGetAutoRechargeParams.builder()\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        CreditGetAutoRechargeResponse response = client.v1().events().credits().getAutoRecharge(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.GetAutoRecharge',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.GetAutoRecharge(context.TODO(), stigg.V1EventCreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.get_auto_recharge',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.get_auto_recharge(currency_id: "currencyId", customer_id: "customerId")\n\nputs(response)',
+      },
       cli: {
         method: 'credits get_auto_recharge',
         example:
@@ -2479,34 +2504,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Events.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.Credits.GetAutoRecharge',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.GetAutoRecharge(context.TODO(), stigg.V1EventCreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/credits/auto-recharge \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().events().credits().getAutoRecharge',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditGetAutoRechargeParams;\nimport io.stigg.models.v1.events.credits.CreditGetAutoRechargeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetAutoRechargeParams params = CreditGetAutoRechargeParams.builder()\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        CreditGetAutoRechargeResponse response = client.v1().events().credits().getAutoRecharge(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.credits.get_auto_recharge',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.get_auto_recharge(\n    currency_id="currencyId",\n    customer_id="customerId",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.events.credits.get_auto_recharge',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.get_auto_recharge(currency_id: "currencyId", customer_id: "customerId")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.events.credits.getAutoRecharge',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.getAutoRecharge({\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -2531,6 +2531,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_ledger\n\n`client.v1.events.credits.listLedger(customerId: string, after?: string, before?: string, currencyId?: string, limit?: number, resourceId?: string): { amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n\n**get** `/api/v1/credits/ledger`\n\nRetrieves a paginated list of credit ledger events for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID\n\n### Returns\n\n- `{ amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n  A credit ledger event representing a change to credit balance\n\n  - `amount: number`\n  - `creditCurrencyId: string`\n  - `creditGrantId: string`\n  - `customerId: string`\n  - `eventId: string`\n  - `eventType: string`\n  - `featureId: string`\n  - `resourceId: string`\n  - `timestamp: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.events.credits.listLedger({ customerId: 'customerId' })) {\n  console.log(creditListLedgerResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.listLedger',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.events.credits.listLedger({\n  customerId: 'customerId',\n})) {\n  console.log(creditListLedgerResponse.amount);\n}",
+      },
+      python: {
+        method: 'v1.events.credits.list_ledger',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.list_ledger(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.amount)',
+      },
+      java: {
+        method: 'v1().events().credits().listLedger',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditListLedgerPage;\nimport io.stigg.models.v1.events.credits.CreditListLedgerParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditListLedgerParams params = CreditListLedgerParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditListLedgerPage page = client.v1().events().credits().listLedger(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.ListLedger',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.ListLedger(context.TODO(), stigg.V1EventCreditListLedgerParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.list_ledger',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.list_ledger(customer_id: "customerId")\n\nputs(page)',
+      },
       cli: {
         method: 'credits list_ledger',
         example:
@@ -2541,33 +2566,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Events.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Events.Credits.ListLedger',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.ListLedger(context.TODO(), stigg.V1EventCreditListLedgerParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().events().credits().listLedger',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditListLedgerPage;\nimport io.stigg.models.v1.events.credits.CreditListLedgerParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditListLedgerParams params = CreditListLedgerParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditListLedgerPage page = client.v1().events().credits().listLedger(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.credits.list_ledger',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.list_ledger(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.amount)',
-      },
-      ruby: {
-        method: 'v1.events.credits.list_ledger',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.list_ledger(customer_id: "customerId")\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.events.credits.listLedger',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.events.credits.listLedger({\n  customerId: 'customerId',\n})) {\n  console.log(creditListLedgerResponse.amount);\n}",
       },
     },
   },
@@ -2593,6 +2593,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.events.credits.grants.list(customerId: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, currencyId?: string, limit?: number, resourceId?: string): { id: string; amount: number; comment: string; consumedAmount: number; cost: object; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: object; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n**get** `/api/v1/credits/grants`\n\nRetrieves a paginated list of credit grants for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID. When omitted, only grants without a resource are returned\n\n### Returns\n\n- `{ id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n  Credit grant object representing allocated credits for a customer\n\n  - `id: string`\n  - `amount: number`\n  - `comment: string`\n  - `consumedAmount: number`\n  - `cost: { amount: number; currency: string; }`\n  - `createdAt: string`\n  - `currencyId: string`\n  - `customerId: string`\n  - `displayName: string`\n  - `effectiveAt: string`\n  - `expireAt: string`\n  - `grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'`\n  - `invoiceId: string`\n  - `latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }`\n  - `metadata: object`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `priority: number`\n  - `resourceId: string`\n  - `sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'`\n  - `updatedAt: string`\n  - `voidedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.events.credits.grants.list({ customerId: 'customerId' })) {\n  console.log(grantListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.grants.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.events.credits.grants.list({\n  customerId: 'customerId',\n})) {\n  console.log(grantListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.events.credits.grants.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.grants.list(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().events().credits().grants().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.GrantListPage;\nimport io.stigg.models.v1.events.credits.grants.GrantListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantListParams params = GrantListParams.builder()\n            .customerId("customerId")\n            .build();\n        GrantListPage page = client.v1().events().credits().grants().list(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.Grants.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.Grants.List(context.TODO(), stigg.V1EventCreditGrantListParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.grants.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.grants.list(customer_id: "customerId")\n\nputs(page)',
+      },
       cli: {
         method: 'grants list',
         example:
@@ -2603,33 +2628,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Events.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Events.Credits.Grants.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.Grants.List(context.TODO(), stigg.V1EventCreditGrantListParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().events().credits().grants().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.GrantListPage;\nimport io.stigg.models.v1.events.credits.grants.GrantListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantListParams params = GrantListParams.builder()\n            .customerId("customerId")\n            .build();\n        GrantListPage page = client.v1().events().credits().grants().list(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.credits.grants.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.grants.list(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.events.credits.grants.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.grants.list(customer_id: "customerId")\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.events.credits.grants.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.events.credits.grants.list({\n  customerId: 'customerId',\n})) {\n  console.log(grantListResponse.id);\n}",
       },
     },
   },
@@ -2664,6 +2664,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.events.credits.grants.create(amount: number, currencyId: string, customerId: string, displayName: string, grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT', awaitPaymentConfirmation?: boolean, billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }, comment?: string, cost?: { amount: number; currency: string; }, effectiveAt?: string, expireAt?: string, metadata?: object, paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE', priority?: number, resourceId?: string): { data: object; }`\n\n**post** `/api/v1/credits/grants`\n\nCreates a new credit grant for a customer with specified amount, type, and optional billing configuration.\n\n### Parameters\n\n- `amount: number`\n  The credit amount to grant\n\n- `currencyId: string`\n  The credit currency ID (required)\n\n- `customerId: string`\n  The customer ID to grant credits to (required)\n\n- `displayName: string`\n  The display name for the credit grant\n\n- `grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'`\n  The type of credit grant (PAID, PROMOTIONAL, RECURRING)\n\n- `awaitPaymentConfirmation?: boolean`\n  Whether to wait for payment confirmation before returning (default: true)\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }`\n  Billing information for the credit grant\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    The billing address\n  - `invoiceDaysUntilDue?: number`\n    Days until the invoice is due\n  - `isInvoicePaid?: boolean`\n    Whether the invoice is already paid\n\n- `comment?: string`\n  An optional comment on the credit grant\n\n- `cost?: { amount: number; currency: string; }`\n  The monetary cost of the credit grant\n  - `amount: number`\n    The price amount\n  - `currency: string`\n    ISO 4217 currency code\n\n- `effectiveAt?: string`\n  The date when the credit grant becomes effective\n\n- `expireAt?: string`\n  The date when the credit grant expires\n\n- `metadata?: object`\n  Additional metadata for the credit grant\n\n- `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  The payment collection method (CHARGE, INVOICE, NONE)\n\n- `priority?: number`\n  The priority of the credit grant (lower number = higher priority)\n\n- `resourceId?: string`\n  The resource ID to scope the grant to\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.events.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.grants.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.events.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse.data);",
+      },
+      python: {
+        method: 'v1.events.credits.grants.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.events.credits.grants.create(\n    amount=0,\n    currency_id="currencyId",\n    customer_id="customerId",\n    display_name="displayName",\n    grant_type="PAID",\n)\nprint(credit_grant_response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().grants().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.events.credits.grants.GrantCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantCreateParams params = GrantCreateParams.builder()\n            .amount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .displayName("displayName")\n            .grantType(GrantCreateParams.GrantType.PAID)\n            .build();\n        CreditGrantResponse creditGrantResponse = client.v1().events().credits().grants().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.Grants.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Events.Credits.Grants.New(context.TODO(), stigg.V1EventCreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1EventCreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.grants.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.events.credits.grants.create(\n  amount: 0,\n  currency_id: "currencyId",\n  customer_id: "customerId",\n  display_name: "displayName",\n  grant_type: :PAID\n)\n\nputs(credit_grant_response)',
+      },
       cli: {
         method: 'grants create',
         example:
@@ -2674,34 +2699,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Events.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
-      go: {
-        method: 'client.V1.Events.Credits.Grants.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Events.Credits.Grants.New(context.TODO(), stigg.V1EventCreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1EventCreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "displayName": "displayName",\n          "grantType": "PAID"\n        }\'',
-      },
-      java: {
-        method: 'v1().events().credits().grants().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.events.credits.grants.GrantCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantCreateParams params = GrantCreateParams.builder()\n            .amount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .displayName("displayName")\n            .grantType(GrantCreateParams.GrantType.PAID)\n            .build();\n        CreditGrantResponse creditGrantResponse = client.v1().events().credits().grants().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.credits.grants.create',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.events.credits.grants.create(\n    amount=0,\n    currency_id="currencyId",\n    customer_id="customerId",\n    display_name="displayName",\n    grant_type="PAID",\n)\nprint(credit_grant_response.data)',
-      },
-      ruby: {
-        method: 'v1.events.credits.grants.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.events.credits.grants.create(\n  amount: 0,\n  currency_id: "currencyId",\n  customer_id: "customerId",\n  display_name: "displayName",\n  grant_type: :PAID\n)\n\nputs(credit_grant_response)',
-      },
-      typescript: {
-        method: 'client.v1.events.credits.grants.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.events.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse.data);",
       },
     },
   },
@@ -2719,6 +2719,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## void\n\n`client.v1.events.credits.grants.void(id: string): { data: object; }`\n\n**post** `/api/v1/credits/grants/{id}/void`\n\nVoids an existing credit grant, preventing further consumption of the remaining credits.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.events.credits.grants.void('x');\n\nconsole.log(creditGrantResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.grants.void',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.events.credits.grants.void('x');\n\nconsole.log(creditGrantResponse.data);",
+      },
+      python: {
+        method: 'v1.events.credits.grants.void',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.events.credits.grants.void(\n    "x",\n)\nprint(credit_grant_response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().grants().void_',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.events.credits.grants.GrantVoidParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGrantResponse creditGrantResponse = client.v1().events().credits().grants().void_("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.Grants.Void',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Events.Credits.Grants.Void(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.grants.void',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.events.credits.grants.void("x")\n\nputs(credit_grant_response)',
+      },
       cli: {
         method: 'grants void',
         example: "stigg v1:events:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2728,34 +2753,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Events.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
-      go: {
-        method: 'client.V1.Events.Credits.Grants.Void',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Events.Credits.Grants.Void(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/credits/grants/$ID/void \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().events().credits().grants().void_',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.events.credits.grants.GrantVoidParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGrantResponse creditGrantResponse = client.v1().events().credits().grants().void_("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.events.credits.grants.void',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.events.credits.grants.void(\n    "x",\n)\nprint(credit_grant_response.data)',
-      },
-      ruby: {
-        method: 'v1.events.credits.grants.void',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.events.credits.grants.void("x")\n\nputs(credit_grant_response)',
-      },
-      typescript: {
-        method: 'client.v1.events.credits.grants.void',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.events.credits.grants.void('x');\n\nconsole.log(creditGrantResponse.data);",
       },
     },
   },
@@ -2773,6 +2773,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_feature\n\n`client.v1.features.retrieveFeature(id: string): { data: object; }`\n\n**get** `/api/v1/features/{id}`\n\nRetrieves a feature by its unique identifier.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.retrieveFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.features.retrieveFeature',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.retrieveFeature('x');\n\nconsole.log(feature.data);",
+      },
+      python: {
+        method: 'v1.features.retrieve_feature',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.retrieve_feature(\n    "x",\n)\nprint(feature.data)',
+      },
+      java: {
+        method: 'v1().features().retrieveFeature',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureRetrieveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().retrieveFeature("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Features.GetFeature',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.GetFeature(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.features.retrieve_feature',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.retrieve_feature("x")\n\nputs(feature)',
+      },
       cli: {
         method: 'features retrieve_feature',
         example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2782,33 +2807,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      go: {
-        method: 'client.V1.Features.GetFeature',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.GetFeature(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/features/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().features().retrieveFeature',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureRetrieveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().retrieveFeature("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.features.retrieve_feature',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.retrieve_feature(\n    "x",\n)\nprint(feature.data)',
-      },
-      ruby: {
-        method: 'v1.features.retrieve_feature',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.retrieve_feature("x")\n\nputs(feature)',
-      },
-      typescript: {
-        method: 'client.v1.features.retrieveFeature',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.retrieveFeature('x');\n\nconsole.log(feature.data);",
       },
     },
   },
@@ -2837,6 +2837,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_feature\n\n`client.v1.features.updateFeature(id: string, description?: string, displayName?: string, enumConfiguration?: { displayName: string; value: string; }[], featureUnits?: string, featureUnitsPlural?: string, metadata?: object, meter?: { aggregation: { function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE'; field?: string; }; filters: { conditions: object[]; }[]; }, unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }): { data: object; }`\n\n**patch** `/api/v1/features/{id}`\n\nUpdates an existing feature's properties such as display name, description, and configuration.\n\n### Parameters\n\n- `id: string`\n\n- `description?: string`\n  The description for the feature\n\n- `displayName?: string`\n  The display name for the feature\n\n- `enumConfiguration?: { displayName: string; value: string; }[]`\n  The configuration data for the feature\n\n- `featureUnits?: string`\n  The units for the feature\n\n- `featureUnitsPlural?: string`\n  The plural units for the feature\n\n- `metadata?: object`\n  The additional metadata for the feature\n\n- `meter?: { aggregation: { function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE'; field?: string; }; filters: { conditions: { field: string; operation: string; value?: string; values?: string[]; }[]; }[]; }`\n  - `aggregation: { function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE'; field?: string; }`\n  - `filters: { conditions: { field: string; operation: string; value?: string; values?: string[]; }[]; }[]`\n\n- `unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }`\n  Unit transformation to be applied to the reported usage\n  - `divide: number`\n    Divide usage by this number\n  - `featureUnits?: string`\n    Singular feature units after the transformation\n  - `featureUnitsPlural?: string`\n    Plural feature units after the transformation\n  - `round?: 'UP' | 'DOWN'`\n    After division, either round the result up or down\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.updateFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.features.updateFeature',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.updateFeature('x');\n\nconsole.log(feature.data);",
+      },
+      python: {
+        method: 'v1.features.update_feature',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.update_feature(\n    id="x",\n)\nprint(feature.data)',
+      },
+      java: {
+        method: 'v1().features().updateFeature',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureUpdateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().updateFeature("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Features.UpdateFeature',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UpdateFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureUpdateFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.features.update_feature',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.update_feature("x")\n\nputs(feature)',
+      },
       cli: {
         method: 'features update_feature',
         example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2846,34 +2871,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      go: {
-        method: 'client.V1.Features.UpdateFeature',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UpdateFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureUpdateFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/features/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().features().updateFeature',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureUpdateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().updateFeature("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.features.update_feature',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.update_feature(\n    id="x",\n)\nprint(feature.data)',
-      },
-      ruby: {
-        method: 'v1.features.update_feature',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.update_feature("x")\n\nputs(feature)',
-      },
-      typescript: {
-        method: 'client.v1.features.updateFeature',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.updateFeature('x');\n\nconsole.log(feature.data);",
       },
     },
   },
@@ -2903,6 +2903,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_feature\n\n`client.v1.features.createFeature(id: string, displayName: string, featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM', description?: string, enumConfiguration?: { displayName: string; value: string; }[], featureStatus?: 'NEW' | 'SUSPENDED' | 'ACTIVE', featureUnits?: string, featureUnitsPlural?: string, metadata?: object, meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL', unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }): { data: object; }`\n\n**post** `/api/v1/features`\n\nCreates a new feature with the specified type, metering, and configuration.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the feature\n\n- `displayName: string`\n  The display name for the feature\n\n- `featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'`\n  The type of the feature\n\n- `description?: string`\n  The description for the feature\n\n- `enumConfiguration?: { displayName: string; value: string; }[]`\n  The configuration data for the feature\n\n- `featureStatus?: 'NEW' | 'SUSPENDED' | 'ACTIVE'`\n  The status of the feature\n\n- `featureUnits?: string`\n  The units for the feature\n\n- `featureUnitsPlural?: string`\n  The plural units for the feature\n\n- `metadata?: object`\n  The additional metadata for the feature\n\n- `meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'`\n  The meter type for the feature\n\n- `unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }`\n  Unit transformation to be applied to the reported usage\n  - `divide: number`\n    Divide usage by this number\n  - `featureUnits?: string`\n    Singular feature units after the transformation\n  - `featureUnitsPlural?: string`\n    Plural feature units after the transformation\n  - `round?: 'UP' | 'DOWN'`\n    After division, either round the result up or down\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.createFeature({\n  id: 'id',\n  displayName: 'displayName',\n  featureType: 'BOOLEAN',\n});\n\nconsole.log(feature);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.features.createFeature',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.createFeature({\n  id: 'id',\n  displayName: 'displayName',\n  featureType: 'BOOLEAN',\n});\n\nconsole.log(feature.data);",
+      },
+      python: {
+        method: 'v1.features.create_feature',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.create_feature(\n    id="id",\n    display_name="displayName",\n    feature_type="BOOLEAN",\n)\nprint(feature.data)',
+      },
+      java: {
+        method: 'v1().features().createFeature',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureCreateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureCreateFeatureParams params = FeatureCreateFeatureParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .featureType(FeatureCreateFeatureParams.FeatureType.BOOLEAN)\n            .build();\n        Feature feature = client.v1().features().createFeature(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Features.NewFeature',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.NewFeature(context.TODO(), stigg.V1FeatureNewFeatureParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tFeatureType: stigg.V1FeatureNewFeatureParamsFeatureTypeBoolean,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.features.create_feature',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.create_feature(id: "id", display_name: "displayName", feature_type: :BOOLEAN)\n\nputs(feature)',
+      },
       cli: {
         method: 'features create_feature',
         example:
@@ -2913,34 +2938,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      go: {
-        method: 'client.V1.Features.NewFeature',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.NewFeature(context.TODO(), stigg.V1FeatureNewFeatureParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tFeatureType: stigg.V1FeatureNewFeatureParamsFeatureTypeBoolean,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/features \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "featureType": "BOOLEAN"\n        }\'',
-      },
-      java: {
-        method: 'v1().features().createFeature',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureCreateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureCreateFeatureParams params = FeatureCreateFeatureParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .featureType(FeatureCreateFeatureParams.FeatureType.BOOLEAN)\n            .build();\n        Feature feature = client.v1().features().createFeature(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.features.create_feature',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.create_feature(\n    id="id",\n    display_name="displayName",\n    feature_type="BOOLEAN",\n)\nprint(feature.data)',
-      },
-      ruby: {
-        method: 'v1.features.create_feature',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.create_feature(id: "id", display_name: "displayName", feature_type: :BOOLEAN)\n\nputs(feature)',
-      },
-      typescript: {
-        method: 'client.v1.features.createFeature',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.createFeature({\n  id: 'id',\n  displayName: 'displayName',\n  featureType: 'BOOLEAN',\n});\n\nconsole.log(feature.data);",
       },
     },
   },
@@ -2967,6 +2967,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_features\n\n`client.v1.features.listFeatures(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, featureType?: string, limit?: number, meterType?: string, status?: string): { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: object[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: object; updatedAt: string; }`\n\n**get** `/api/v1/features`\n\nRetrieves a paginated list of features in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `featureType?: string`\n  Filter by feature type. Supports comma-separated values for multiple types\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `meterType?: string`\n  Filter by meter type. Supports comma-separated values for multiple types\n\n- `status?: string`\n  Filter by feature status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n  Feature configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `enumConfiguration: { displayName: string; value: string; }[]`\n  - `featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'`\n  - `featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'`\n  - `featureUnits: string`\n  - `featureUnitsPlural: string`\n  - `metadata: object`\n  - `meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'`\n  - `unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.features.listFeatures',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.features.list_features',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.features.list_features()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().features().listFeatures',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.FeatureListFeaturesPage;\nimport io.stigg.models.v1.features.FeatureListFeaturesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureListFeaturesPage page = client.v1().features().listFeatures();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Features.ListFeatures',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Features.ListFeatures(context.TODO(), stigg.V1FeatureListFeaturesParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.features.list_features',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.features.list_features\n\nputs(page)',
+      },
       cli: {
         method: 'features list_features',
         example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
@@ -2976,33 +3001,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Features.ListFeatures',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Features.ListFeatures(context.TODO(), stigg.V1FeatureListFeaturesParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/features \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().features().listFeatures',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.FeatureListFeaturesPage;\nimport io.stigg.models.v1.features.FeatureListFeaturesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureListFeaturesPage page = client.v1().features().listFeatures();\n    }\n}',
-      },
-      python: {
-        method: 'v1.features.list_features',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.features.list_features()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.features.list_features',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.features.list_features\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.features.listFeatures',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse.id);\n}",
       },
     },
   },
@@ -3020,6 +3020,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive_feature\n\n`client.v1.features.archiveFeature(id: string): { data: object; }`\n\n**post** `/api/v1/features/{id}/archive`\n\nArchives a feature, preventing it from being used in new entitlements.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.archiveFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.features.archiveFeature',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.archiveFeature('x');\n\nconsole.log(feature.data);",
+      },
+      python: {
+        method: 'v1.features.archive_feature',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.archive_feature(\n    "x",\n)\nprint(feature.data)',
+      },
+      java: {
+        method: 'v1().features().archiveFeature',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureArchiveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().archiveFeature("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Features.ArchiveFeature',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.ArchiveFeature(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.features.archive_feature',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.archive_feature("x")\n\nputs(feature)',
+      },
       cli: {
         method: 'features archive_feature',
         example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3029,34 +3054,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      go: {
-        method: 'client.V1.Features.ArchiveFeature',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.ArchiveFeature(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/features/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().features().archiveFeature',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureArchiveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().archiveFeature("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.features.archive_feature',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.archive_feature(\n    "x",\n)\nprint(feature.data)',
-      },
-      ruby: {
-        method: 'v1.features.archive_feature',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.archive_feature("x")\n\nputs(feature)',
-      },
-      typescript: {
-        method: 'client.v1.features.archiveFeature',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.archiveFeature('x');\n\nconsole.log(feature.data);",
       },
     },
   },
@@ -3074,6 +3074,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive_feature\n\n`client.v1.features.unarchiveFeature(id: string): { data: object; }`\n\n**post** `/api/v1/features/{id}/unarchive`\n\nRestores an archived feature, allowing it to be used in entitlements again.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.unarchiveFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.features.unarchiveFeature',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.unarchiveFeature('x');\n\nconsole.log(feature.data);",
+      },
+      python: {
+        method: 'v1.features.unarchive_feature',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.unarchive_feature(\n    "x",\n)\nprint(feature.data)',
+      },
+      java: {
+        method: 'v1().features().unarchiveFeature',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureUnarchiveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().unarchiveFeature("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Features.UnarchiveFeature',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UnarchiveFeature(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.features.unarchive_feature',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.unarchive_feature("x")\n\nputs(feature)',
+      },
       cli: {
         method: 'features unarchive_feature',
         example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3083,34 +3108,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      go: {
-        method: 'client.V1.Features.UnarchiveFeature',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UnarchiveFeature(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/features/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().features().unarchiveFeature',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureUnarchiveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().unarchiveFeature("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.features.unarchive_feature',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nfeature = client.v1.features.unarchive_feature(\n    "x",\n)\nprint(feature.data)',
-      },
-      ruby: {
-        method: 'v1.features.unarchive_feature',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nfeature = stigg.v1.features.unarchive_feature("x")\n\nputs(feature)',
-      },
-      typescript: {
-        method: 'client.v1.features.unarchiveFeature',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.unarchiveFeature('x');\n\nconsole.log(feature.data);",
       },
     },
   },
@@ -3135,6 +3135,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.addons.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: string): { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: object[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/addons`\n\nRetrieves a paginated list of addons in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: string`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Addon configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `dependencies: string[]`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `maxQuantity: number`\n  - `metadata: object`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.addons.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.addons.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().addons().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonListPage;\nimport io.stigg.models.v1.addons.AddonListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonListPage page = client.v1().addons().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.List(context.TODO(), stigg.V1AddonListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.addons.list\n\nputs(page)',
+      },
       cli: {
         method: 'addons list',
         example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
@@ -3144,33 +3169,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Addons.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.List(context.TODO(), stigg.V1AddonListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/addons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonListPage;\nimport io.stigg.models.v1.addons.AddonListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonListPage page = client.v1().addons().list();\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.addons.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.addons.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.addons.list\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.addons.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse.id);\n}",
       },
     },
   },
@@ -3198,6 +3198,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.addons.create(id: string, displayName: string, productId: string, billingId?: string, description?: string, maxQuantity?: number, metadata?: object, pricingType?: 'FREE' | 'PAID' | 'CUSTOM', status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'): { data: object; }`\n\n**post** `/api/v1/addons`\n\nCreates a new addon in draft status, associated with a specific product.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `displayName: string`\n  The display name of the package\n\n- `productId: string`\n  The product id of the package\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `description?: string`\n  The description of the package\n\n- `maxQuantity?: number`\n  The maximum quantity of this addon that can be added to a subscription\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `pricingType?: 'FREE' | 'PAID' | 'CUSTOM'`\n  The pricing type of the package\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(addon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(addon.data);",
+      },
+      python: {
+        method: 'v1.addons.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.create(\n    id="id",\n    display_name="displayName",\n    product_id="productId",\n)\nprint(addon.data)',
+      },
+      java: {
+        method: 'v1().addons().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonCreateParams params = AddonCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Addon addon = client.v1().addons().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.New(context.TODO(), stigg.V1AddonNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.create(id: "id", display_name: "displayName", product_id: "productId")\n\nputs(addon)',
+      },
       cli: {
         method: 'addons create',
         example:
@@ -3208,34 +3233,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
       },
-      go: {
-        method: 'client.V1.Addons.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.New(context.TODO(), stigg.V1AddonNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
-      },
-      java: {
-        method: 'v1().addons().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonCreateParams params = AddonCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Addon addon = client.v1().addons().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.create',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.create(\n    id="id",\n    display_name="displayName",\n    product_id="productId",\n)\nprint(addon.data)',
-      },
-      ruby: {
-        method: 'v1.addons.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.create(id: "id", display_name: "displayName", product_id: "productId")\n\nputs(addon)',
-      },
-      typescript: {
-        method: 'client.v1.addons.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(addon.data);",
       },
     },
   },
@@ -3253,6 +3253,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.addons.retrieve(id: string): { data: object; }`\n\n**get** `/api/v1/addons/{id}`\n\nRetrieves an addon by its unique identifier, including entitlements and pricing details.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.retrieve('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.retrieve('x');\n\nconsole.log(addon.data);",
+      },
+      python: {
+        method: 'v1.addons.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.retrieve(\n    "x",\n)\nprint(addon.data)',
+      },
+      java: {
+        method: 'v1().addons().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().retrieve("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.retrieve("x")\n\nputs(addon)',
+      },
       cli: {
         method: 'addons retrieve',
         example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3262,33 +3287,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
       },
-      go: {
-        method: 'client.V1.Addons.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/addons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().retrieve("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.retrieve(\n    "x",\n)\nprint(addon.data)',
-      },
-      ruby: {
-        method: 'v1.addons.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.retrieve("x")\n\nputs(addon)',
-      },
-      typescript: {
-        method: 'client.v1.addons.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.retrieve('x');\n\nconsole.log(addon.data);",
       },
     },
   },
@@ -3316,6 +3316,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.addons.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: object; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, dependencies?: string[], description?: string, displayName?: string, maxQuantity?: number, metadata?: object, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'): { data: object; }`\n\n**patch** `/api/v1/addons/{id}`\n\nUpdates an existing addon's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the addon draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `dependencies?: string[]`\n  List of addons the addon is dependant on\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `maxQuantity?: number`\n  The maximum quantity of this addon that can be added to a subscription\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.update('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.update('x');\n\nconsole.log(addon.data);",
+      },
+      python: {
+        method: 'v1.addons.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.update(\n    id="x",\n)\nprint(addon.data)',
+      },
+      java: {
+        method: 'v1().addons().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().update("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.update("x")\n\nputs(addon)',
+      },
       cli: {
         method: 'addons update',
         example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3325,34 +3350,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
       },
-      go: {
-        method: 'client.V1.Addons.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/addons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().addons().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().update("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.update(\n    id="x",\n)\nprint(addon.data)',
-      },
-      ruby: {
-        method: 'v1.addons.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.update("x")\n\nputs(addon)',
-      },
-      typescript: {
-        method: 'client.v1.addons.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.update('x');\n\nconsole.log(addon.data);",
       },
     },
   },
@@ -3370,6 +3370,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.addons.archive(id: string): { data: object; }`\n\n**post** `/api/v1/addons/{id}/archive`\n\nArchives an addon, preventing it from being used in new subscriptions.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.archive('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.archive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.archive('x');\n\nconsole.log(addon.data);",
+      },
+      python: {
+        method: 'v1.addons.archive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.archive(\n    "x",\n)\nprint(addon.data)',
+      },
+      java: {
+        method: 'v1().addons().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonArchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().archive("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Archive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.archive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.archive("x")\n\nputs(addon)',
+      },
       cli: {
         method: 'addons archive',
         example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3379,34 +3404,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
       },
-      go: {
-        method: 'client.V1.Addons.Archive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Archive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().archive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonArchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().archive("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.archive',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.archive(\n    "x",\n)\nprint(addon.data)',
-      },
-      ruby: {
-        method: 'v1.addons.archive',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.archive("x")\n\nputs(addon)',
-      },
-      typescript: {
-        method: 'client.v1.addons.archive',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.archive('x');\n\nconsole.log(addon.data);",
       },
     },
   },
@@ -3423,6 +3423,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## publish\n\n`client.v1.addons.publish(id: string, migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS'): { data: object; }`\n\n**post** `/api/v1/addons/{id}/publish`\n\nPublishes a draft addon, making it available for use in subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS'`\n  The migration type of the package\n\n### Returns\n\n- `{ data: { taskId: string; }; }`\n  Response containing task ID for publish operation\n\n  - `data: { taskId: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.addons.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.publish',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.addons.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.addons.publish',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.addons.publish(\n    id="x",\n    migration_type="NEW_CUSTOMERS",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().addons().publish',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonPublishParams;\nimport io.stigg.models.v1.addons.AddonPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonPublishParams params = AddonPublishParams.builder()\n            .id("x")\n            .migrationType(AddonPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        AddonPublishResponse response = client.v1().addons().publish(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Publish',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonPublishParams{\n\t\t\tMigrationType: stigg.V1AddonPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.publish',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.addons.publish("x", migration_type: :NEW_CUSTOMERS)\n\nputs(response)',
+      },
       cli: {
         method: 'addons publish',
         example:
@@ -3433,34 +3458,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Addons.Publish',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonPublishParams{\n\t\t\tMigrationType: stigg.V1AddonPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
-      },
-      java: {
-        method: 'v1().addons().publish',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonPublishParams;\nimport io.stigg.models.v1.addons.AddonPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonPublishParams params = AddonPublishParams.builder()\n            .id("x")\n            .migrationType(AddonPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        AddonPublishResponse response = client.v1().addons().publish(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.publish',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.addons.publish(\n    id="x",\n    migration_type="NEW_CUSTOMERS",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.addons.publish',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.addons.publish("x", migration_type: :NEW_CUSTOMERS)\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.addons.publish',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.addons.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response.data);",
       },
     },
   },
@@ -3478,6 +3478,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_draft\n\n`client.v1.addons.createDraft(id: string): { data: object; }`\n\n**post** `/api/v1/addons/{id}/draft`\n\nCreates a draft version of an existing addon for modification before publishing.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.createDraft('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.createDraft',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.createDraft('x');\n\nconsole.log(addon.data);",
+      },
+      python: {
+        method: 'v1.addons.create_draft',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.create_draft(\n    "x",\n)\nprint(addon.data)',
+      },
+      java: {
+        method: 'v1().addons().createDraft',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateDraftParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().createDraft("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.NewDraft',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.NewDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.create_draft',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.create_draft("x")\n\nputs(addon)',
+      },
       cli: {
         method: 'addons create_draft',
         example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3487,34 +3512,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
       },
-      go: {
-        method: 'client.V1.Addons.NewDraft',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.NewDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().createDraft',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateDraftParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().createDraft("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.create_draft',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon = client.v1.addons.create_draft(\n    "x",\n)\nprint(addon.data)',
-      },
-      ruby: {
-        method: 'v1.addons.create_draft',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon = stigg.v1.addons.create_draft("x")\n\nputs(addon)',
-      },
-      typescript: {
-        method: 'client.v1.addons.createDraft',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.createDraft('x');\n\nconsole.log(addon.data);",
       },
     },
   },
@@ -3531,6 +3531,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## remove_draft\n\n`client.v1.addons.removeDraft(id: string): { data: object; }`\n\n**delete** `/api/v1/addons/{id}/draft`\n\nRemoves a draft version of an addon.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response confirming the addon draft was removed.\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.addons.removeDraft('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.removeDraft',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.addons.removeDraft('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.addons.remove_draft',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.addons.remove_draft(\n    "x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().addons().removeDraft',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonRemoveDraftParams;\nimport io.stigg.models.v1.addons.AddonRemoveDraftResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonRemoveDraftResponse response = client.v1().addons().removeDraft("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.RemoveDraft',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.RemoveDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.remove_draft',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.addons.remove_draft("x")\n\nputs(response)',
+      },
       cli: {
         method: 'addons remove_draft',
         example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3540,34 +3565,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Addons.RemoveDraft',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.RemoveDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().removeDraft',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonRemoveDraftParams;\nimport io.stigg.models.v1.addons.AddonRemoveDraftResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonRemoveDraftResponse response = client.v1().addons().removeDraft("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.remove_draft',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.addons.remove_draft(\n    "x",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.addons.remove_draft',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.addons.remove_draft("x")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.addons.removeDraft',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.addons.removeDraft('x');\n\nconsole.log(response.data);",
       },
     },
   },
@@ -3585,6 +3585,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.addons.entitlements.list(addonId: string): { data: object | object[]; pagination: object; }`\n\n**get** `/api/v1/addons/{addonId}/entitlements`\n\nRetrieves a list of entitlements for an addon.\n\n### Parameters\n\n- `addonId: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; pagination: { next: string; prev: string; }; }`\n  Response list object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n  - `pagination: { next: string; prev: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlements = await client.v1.addons.entitlements.list('addonId');\n\nconsole.log(entitlements);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.entitlements.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlements = await client.v1.addons.entitlements.list('addonId');\n\nconsole.log(entitlements.data);",
+      },
+      python: {
+        method: 'v1.addons.entitlements.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlements = client.v1.addons.entitlements.list(\n    "addonId",\n)\nprint(entitlements.data)',
+      },
+      java: {
+        method: 'v1().addons().entitlements().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementListParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementListResponse entitlements = client.v1().addons().entitlements().list("addonId");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Addons.Entitlements.List(context.TODO(), "addonId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.entitlements.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlements = stigg.v1.addons.entitlements.list("addonId")\n\nputs(entitlements)',
+      },
       cli: {
         method: 'entitlements list',
         example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
@@ -3594,34 +3619,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Addons.Entitlements.List(context.TODO(), "addonId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().entitlements().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementListParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementListResponse entitlements = client.v1().addons().entitlements().list("addonId");\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.entitlements.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlements = client.v1.addons.entitlements.list(\n    "addonId",\n)\nprint(entitlements.data)',
-      },
-      ruby: {
-        method: 'v1.addons.entitlements.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlements = stigg.v1.addons.entitlements.list("addonId")\n\nputs(entitlements)',
-      },
-      typescript: {
-        method: 'client.v1.addons.entitlements.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlements = await client.v1.addons.entitlements.list('addonId');\n\nconsole.log(entitlements.data);",
       },
     },
   },
@@ -3642,6 +3642,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.addons.entitlements.create(addonId: string, entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[]): { data: object | object[]; }`\n\n**post** `/api/v1/addons/{addonId}/entitlements`\n\nCreates one or more entitlements (feature or credit) on a draft addon.\n\n### Parameters\n\n- `addonId: string`\n\n- `entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[]`\n  Entitlements to create\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlement = await client.v1.addons.entitlements.create('addonId', { entitlements: [{ id: 'id', type: 'FEATURE' }] });\n\nconsole.log(entitlement);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.entitlements.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlement = await client.v1.addons.entitlements.create('addonId', {\n  entitlements: [{ id: 'id', type: 'FEATURE' }],\n});\n\nconsole.log(entitlement.data);",
+      },
+      python: {
+        method: 'v1.addons.entitlements.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlement = client.v1.addons.entitlements.create(\n    addon_id="addonId",\n    entitlements=[{\n        "id": "id",\n        "type": "FEATURE",\n    }],\n)\nprint(entitlement.data)',
+      },
+      java: {
+        method: 'v1().addons().entitlements().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .addonId("addonId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().addons().entitlements().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Addons.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1AddonEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1AddonEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.entitlements.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlement = stigg.v1.addons.entitlements.create("addonId", entitlements: [{id: "id", type: :FEATURE}])\n\nputs(entitlement)',
+      },
       cli: {
         method: 'entitlements create',
         example:
@@ -3652,34 +3677,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Addons.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1AddonEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1AddonEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().addons().entitlements().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .addonId("addonId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().addons().entitlements().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.entitlements.create',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlement = client.v1.addons.entitlements.create(\n    addon_id="addonId",\n    entitlements=[{\n        "id": "id",\n        "type": "FEATURE",\n    }],\n)\nprint(entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.addons.entitlements.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlement = stigg.v1.addons.entitlements.create("addonId", entitlements: [{id: "id", type: :FEATURE}])\n\nputs(entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.addons.entitlements.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlement = await client.v1.addons.entitlements.create('addonId', {\n  entitlements: [{ id: 'id', type: 'FEATURE' }],\n});\n\nconsole.log(entitlement.data);",
       },
     },
   },
@@ -3699,6 +3699,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.entitlements.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addonPackageEntitlement = await client.v1.addons.entitlements.update('id', {\n  addonId: 'addonId',\n  type: 'FEATURE',\n});\n\nconsole.log(addonPackageEntitlement.data);",
+      },
+      python: {
+        method: 'v1.addons.entitlements.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon_package_entitlement = client.v1.addons.entitlements.update(\n    id="id",\n    addon_id="addonId",\n    type="FEATURE",\n)\nprint(addon_package_entitlement.data)',
+      },
+      java: {
+        method: 'v1().addons().entitlements().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().update(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementUpdateParams{\n\t\t\tAddonID:   "addonId",\n\t\t\tOfFeature: &stigg.V1AddonEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.entitlements.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon_package_entitlement = stigg.v1.addons.entitlements.update("id", addon_id: "addonId", body: {type: :FEATURE})\n\nputs(addon_package_entitlement)',
+      },
       cli: {
         method: 'entitlements update',
         example:
@@ -3709,34 +3734,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementUpdateParams{\n\t\t\tAddonID:   "addonId",\n\t\t\tOfFeature: &stigg.V1AddonEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
-      },
-      java: {
-        method: 'v1().addons().entitlements().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().update(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.entitlements.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon_package_entitlement = client.v1.addons.entitlements.update(\n    id="id",\n    addon_id="addonId",\n    type="FEATURE",\n)\nprint(addon_package_entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.addons.entitlements.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon_package_entitlement = stigg.v1.addons.entitlements.update("id", addon_id: "addonId", body: {type: :FEATURE})\n\nputs(addon_package_entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.addons.entitlements.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addonPackageEntitlement = await client.v1.addons.entitlements.update('id', {\n  addonId: 'addonId',\n  type: 'FEATURE',\n});\n\nconsole.log(addonPackageEntitlement.data);",
       },
     },
   },
@@ -3754,6 +3754,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.v1.addons.entitlements.delete(addonId: string, id: string): { data: object | object; }`\n\n**delete** `/api/v1/addons/{addonId}/entitlements/{id}`\n\nDeletes an entitlement from a draft addon.\n\n### Parameters\n\n- `addonId: string`\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addonPackageEntitlement = await client.v1.addons.entitlements.delete('id', { addonId: 'addonId' });\n\nconsole.log(addonPackageEntitlement);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.entitlements.delete',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addonPackageEntitlement = await client.v1.addons.entitlements.delete('id', {\n  addonId: 'addonId',\n});\n\nconsole.log(addonPackageEntitlement.data);",
+      },
+      python: {
+        method: 'v1.addons.entitlements.delete',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon_package_entitlement = client.v1.addons.entitlements.delete(\n    id="id",\n    addon_id="addonId",\n)\nprint(addon_package_entitlement.data)',
+      },
+      java: {
+        method: 'v1().addons().entitlements().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().delete(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementDeleteParams{\n\t\t\tAddonID: "addonId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.entitlements.delete',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon_package_entitlement = stigg.v1.addons.entitlements.delete("id", addon_id: "addonId")\n\nputs(addon_package_entitlement)',
+      },
       cli: {
         method: 'entitlements delete',
         example:
@@ -3764,34 +3789,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementDeleteParams{\n\t\t\tAddonID: "addonId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().addons().entitlements().delete',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().delete(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.addons.entitlements.delete',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\naddon_package_entitlement = client.v1.addons.entitlements.delete(\n    id="id",\n    addon_id="addonId",\n)\nprint(addon_package_entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.addons.entitlements.delete',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\naddon_package_entitlement = stigg.v1.addons.entitlements.delete("id", addon_id: "addonId")\n\nputs(addon_package_entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.addons.entitlements.delete',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addonPackageEntitlement = await client.v1.addons.entitlements.delete('id', {\n  addonId: 'addonId',\n});\n\nconsole.log(addonPackageEntitlement.data);",
       },
     },
   },
@@ -3820,6 +3820,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.plans.create(id: string, displayName: string, productId: string, billingId?: string, defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }, description?: string, metadata?: object, parentPlanId?: string, pricingType?: 'FREE' | 'PAID' | 'CUSTOM', status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'): { data: object; }`\n\n**post** `/api/v1/plans`\n\nCreates a new plan in draft status.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `displayName: string`\n  The display name of the package\n\n- `productId: string`\n  The product ID to associate the plan with\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  Default trial configuration for the plan\n  - `duration: number`\n    The duration of the trial in the specified units\n  - `units: 'DAY' | 'MONTH'`\n    The time unit for the trial duration (DAY or MONTH)\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n    Budget configuration for the trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)\n\n- `description?: string`\n  The description of the package\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `parentPlanId?: string`\n  The ID of the parent plan, if applicable\n\n- `pricingType?: 'FREE' | 'PAID' | 'CUSTOM'`\n  The pricing type of the package\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(plan);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(plan.data);",
+      },
+      python: {
+        method: 'v1.plans.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.create(\n    id="id",\n    display_name="displayName",\n    product_id="productId",\n)\nprint(plan.data)',
+      },
+      java: {
+        method: 'v1().plans().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanCreateParams params = PlanCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Plan plan = client.v1().plans().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.New(context.TODO(), stigg.V1PlanNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.create(id: "id", display_name: "displayName", product_id: "productId")\n\nputs(plan)',
+      },
       cli: {
         method: 'plans create',
         example:
@@ -3830,34 +3855,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
       },
-      go: {
-        method: 'client.V1.Plans.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.New(context.TODO(), stigg.V1PlanNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
-      },
-      java: {
-        method: 'v1().plans().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanCreateParams params = PlanCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Plan plan = client.v1().plans().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.create',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.create(\n    id="id",\n    display_name="displayName",\n    product_id="productId",\n)\nprint(plan.data)',
-      },
-      ruby: {
-        method: 'v1.plans.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.create(id: "id", display_name: "displayName", product_id: "productId")\n\nputs(plan)',
-      },
-      typescript: {
-        method: 'client.v1.plans.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(plan.data);",
       },
     },
   },
@@ -3882,6 +3882,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.plans.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: string): { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: object; description: string; displayName: string; entitlements: object[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/plans`\n\nRetrieves a paginated list of plans in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: string`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Plan configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `compatibleAddonIds: string[]`\n  - `createdAt: string`\n  - `defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `metadata: object`\n  - `parentPlanId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.plans.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.plans.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().plans().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListPage;\nimport io.stigg.models.v1.plans.PlanListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListPage page = client.v1().plans().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.List(context.TODO(), stigg.V1PlanListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.plans.list\n\nputs(page)',
+      },
       cli: {
         method: 'plans list',
         example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
@@ -3891,33 +3916,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Plans.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.List(context.TODO(), stigg.V1PlanListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/plans \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListPage;\nimport io.stigg.models.v1.plans.PlanListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListPage page = client.v1().plans().list();\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.plans.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.plans.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.plans.list\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.plans.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse.id);\n}",
       },
     },
   },
@@ -3935,6 +3935,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.plans.retrieve(id: string): { data: object; }`\n\n**get** `/api/v1/plans/{id}`\n\nRetrieves a plan by its unique identifier, including entitlements and pricing details.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.retrieve('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.retrieve('x');\n\nconsole.log(plan.data);",
+      },
+      python: {
+        method: 'v1.plans.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.retrieve(\n    "x",\n)\nprint(plan.data)',
+      },
+      java: {
+        method: 'v1().plans().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().retrieve("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.retrieve("x")\n\nputs(plan)',
+      },
       cli: {
         method: 'plans retrieve',
         example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3944,33 +3969,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
       },
-      go: {
-        method: 'client.V1.Plans.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/plans/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().retrieve("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.retrieve(\n    "x",\n)\nprint(plan.data)',
-      },
-      ruby: {
-        method: 'v1.plans.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.retrieve("x")\n\nputs(plan)',
-      },
-      typescript: {
-        method: 'client.v1.plans.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.retrieve('x');\n\nconsole.log(plan.data);",
       },
     },
   },
@@ -3998,6 +3998,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.plans.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: object; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, compatibleAddonIds?: string[], defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }, description?: string, displayName?: string, metadata?: object, parentPlanId?: string): { data: object; }`\n\n**patch** `/api/v1/plans/{id}`\n\nUpdates an existing plan's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the plan draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `compatibleAddonIds?: string[]`\n\n- `defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  Default trial configuration for the plan\n  - `duration: number`\n    The duration of the trial in the specified units\n  - `units: 'DAY' | 'MONTH'`\n    The time unit for the trial duration (DAY or MONTH)\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n    Budget configuration for the trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `parentPlanId?: string`\n  The ID of the parent plan, if applicable\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.update('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.update('x');\n\nconsole.log(plan.data);",
+      },
+      python: {
+        method: 'v1.plans.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.update(\n    id="x",\n)\nprint(plan.data)',
+      },
+      java: {
+        method: 'v1().plans().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().update("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.update("x")\n\nputs(plan)',
+      },
       cli: {
         method: 'plans update',
         example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4007,34 +4032,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
       },
-      go: {
-        method: 'client.V1.Plans.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().plans().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().update("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.update(\n    id="x",\n)\nprint(plan.data)',
-      },
-      ruby: {
-        method: 'v1.plans.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.update("x")\n\nputs(plan)',
-      },
-      typescript: {
-        method: 'client.v1.plans.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.update('x');\n\nconsole.log(plan.data);",
       },
     },
   },
@@ -4052,6 +4052,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.plans.archive(id: string): { data: object; }`\n\n**post** `/api/v1/plans/{id}/archive`\n\nArchives a plan, preventing it from being used in new subscriptions.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.archive('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.archive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.archive('x');\n\nconsole.log(plan.data);",
+      },
+      python: {
+        method: 'v1.plans.archive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.archive(\n    "x",\n)\nprint(plan.data)',
+      },
+      java: {
+        method: 'v1().plans().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanArchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().archive("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Archive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.archive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.archive("x")\n\nputs(plan)',
+      },
       cli: {
         method: 'plans archive',
         example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4061,34 +4086,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
       },
-      go: {
-        method: 'client.V1.Plans.Archive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Archive(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().archive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanArchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().archive("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.archive',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.archive(\n    "x",\n)\nprint(plan.data)',
-      },
-      ruby: {
-        method: 'v1.plans.archive',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.archive("x")\n\nputs(plan)',
-      },
-      typescript: {
-        method: 'client.v1.plans.archive',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.archive('x');\n\nconsole.log(plan.data);",
       },
     },
   },
@@ -4105,6 +4105,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## publish\n\n`client.v1.plans.publish(id: string, migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS'): { data: object; }`\n\n**post** `/api/v1/plans/{id}/publish`\n\nPublishes a draft plan, making it available for use in subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS'`\n  The migration type of the package\n\n### Returns\n\n- `{ data: { taskId: string; }; }`\n  Response containing task ID for publish operation\n\n  - `data: { taskId: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.plans.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.publish',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.plans.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.plans.publish',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.plans.publish(\n    id="x",\n    migration_type="NEW_CUSTOMERS",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().plans().publish',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanPublishParams;\nimport io.stigg.models.v1.plans.PlanPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanPublishParams params = PlanPublishParams.builder()\n            .id("x")\n            .migrationType(PlanPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        PlanPublishResponse response = client.v1().plans().publish(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Publish',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanPublishParams{\n\t\t\tMigrationType: stigg.V1PlanPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.publish',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.plans.publish("x", migration_type: :NEW_CUSTOMERS)\n\nputs(response)',
+      },
       cli: {
         method: 'plans publish',
         example:
@@ -4115,34 +4140,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Plans.Publish',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanPublishParams{\n\t\t\tMigrationType: stigg.V1PlanPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
-      },
-      java: {
-        method: 'v1().plans().publish',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanPublishParams;\nimport io.stigg.models.v1.plans.PlanPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanPublishParams params = PlanPublishParams.builder()\n            .id("x")\n            .migrationType(PlanPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        PlanPublishResponse response = client.v1().plans().publish(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.publish',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.plans.publish(\n    id="x",\n    migration_type="NEW_CUSTOMERS",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.plans.publish',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.plans.publish("x", migration_type: :NEW_CUSTOMERS)\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.plans.publish',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.plans.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response.data);",
       },
     },
   },
@@ -4160,6 +4160,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_draft\n\n`client.v1.plans.createDraft(id: string): { data: object; }`\n\n**post** `/api/v1/plans/{id}/draft`\n\nCreates a draft version of an existing plan for modification before publishing.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.createDraft('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.createDraft',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.createDraft('x');\n\nconsole.log(plan.data);",
+      },
+      python: {
+        method: 'v1.plans.create_draft',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.create_draft(\n    "x",\n)\nprint(plan.data)',
+      },
+      java: {
+        method: 'v1().plans().createDraft',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateDraftParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().createDraft("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.NewDraft',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.NewDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.create_draft',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.create_draft("x")\n\nputs(plan)',
+      },
       cli: {
         method: 'plans create_draft',
         example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4169,34 +4194,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
       },
-      go: {
-        method: 'client.V1.Plans.NewDraft',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.NewDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().createDraft',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateDraftParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().createDraft("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.create_draft',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.v1.plans.create_draft(\n    "x",\n)\nprint(plan.data)',
-      },
-      ruby: {
-        method: 'v1.plans.create_draft',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan = stigg.v1.plans.create_draft("x")\n\nputs(plan)',
-      },
-      typescript: {
-        method: 'client.v1.plans.createDraft',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.createDraft('x');\n\nconsole.log(plan.data);",
       },
     },
   },
@@ -4213,6 +4213,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## remove_draft\n\n`client.v1.plans.removeDraft(id: string): { data: object; }`\n\n**delete** `/api/v1/plans/{id}/draft`\n\nRemoves a draft version of a plan.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response confirming the plan draft was removed.\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.plans.removeDraft('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.removeDraft',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.plans.removeDraft('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.plans.remove_draft',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.plans.remove_draft(\n    "x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().plans().removeDraft',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanRemoveDraftParams;\nimport io.stigg.models.v1.plans.PlanRemoveDraftResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanRemoveDraftResponse response = client.v1().plans().removeDraft("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.RemoveDraft',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.RemoveDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.remove_draft',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.plans.remove_draft("x")\n\nputs(response)',
+      },
       cli: {
         method: 'plans remove_draft',
         example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4222,34 +4247,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Plans.RemoveDraft',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.RemoveDraft(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().removeDraft',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanRemoveDraftParams;\nimport io.stigg.models.v1.plans.PlanRemoveDraftResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanRemoveDraftResponse response = client.v1().plans().removeDraft("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.remove_draft',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.plans.remove_draft(\n    "x",\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.plans.remove_draft',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.plans.remove_draft("x")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.plans.removeDraft',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.plans.removeDraft('x');\n\nconsole.log(response.data);",
       },
     },
   },
@@ -4267,6 +4267,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.plans.entitlements.list(planId: string): { data: object | object[]; pagination: object; }`\n\n**get** `/api/v1/plans/{planId}/entitlements`\n\nRetrieves a list of entitlements for a plan.\n\n### Parameters\n\n- `planId: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; pagination: { next: string; prev: string; }; }`\n  Response list object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n  - `pagination: { next: string; prev: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlements = await client.v1.plans.entitlements.list('planId');\n\nconsole.log(entitlements);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.entitlements.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlements = await client.v1.plans.entitlements.list('planId');\n\nconsole.log(entitlements.data);",
+      },
+      python: {
+        method: 'v1.plans.entitlements.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlements = client.v1.plans.entitlements.list(\n    "planId",\n)\nprint(entitlements.data)',
+      },
+      java: {
+        method: 'v1().plans().entitlements().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementListParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementListResponse entitlements = client.v1().plans().entitlements().list("planId");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Plans.Entitlements.List(context.TODO(), "planId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.entitlements.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlements = stigg.v1.plans.entitlements.list("planId")\n\nputs(entitlements)',
+      },
       cli: {
         method: 'entitlements list',
         example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
@@ -4276,34 +4301,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Plans.Entitlements.List(context.TODO(), "planId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().entitlements().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementListParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementListResponse entitlements = client.v1().plans().entitlements().list("planId");\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.entitlements.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlements = client.v1.plans.entitlements.list(\n    "planId",\n)\nprint(entitlements.data)',
-      },
-      ruby: {
-        method: 'v1.plans.entitlements.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlements = stigg.v1.plans.entitlements.list("planId")\n\nputs(entitlements)',
-      },
-      typescript: {
-        method: 'client.v1.plans.entitlements.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlements = await client.v1.plans.entitlements.list('planId');\n\nconsole.log(entitlements.data);",
       },
     },
   },
@@ -4324,6 +4324,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.plans.entitlements.create(planId: string, entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[]): { data: object | object[]; }`\n\n**post** `/api/v1/plans/{planId}/entitlements`\n\nCreates one or more entitlements (feature or credit) on a draft plan.\n\n### Parameters\n\n- `planId: string`\n\n- `entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[]`\n  Entitlements to create\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlement = await client.v1.plans.entitlements.create('planId', { entitlements: [{ id: 'id', type: 'FEATURE' }] });\n\nconsole.log(entitlement);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.entitlements.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlement = await client.v1.plans.entitlements.create('planId', {\n  entitlements: [{ id: 'id', type: 'FEATURE' }],\n});\n\nconsole.log(entitlement.data);",
+      },
+      python: {
+        method: 'v1.plans.entitlements.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlement = client.v1.plans.entitlements.create(\n    plan_id="planId",\n    entitlements=[{\n        "id": "id",\n        "type": "FEATURE",\n    }],\n)\nprint(entitlement.data)',
+      },
+      java: {
+        method: 'v1().plans().entitlements().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .planId("planId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().plans().entitlements().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Plans.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1PlanEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1PlanEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.entitlements.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlement = stigg.v1.plans.entitlements.create("planId", entitlements: [{id: "id", type: :FEATURE}])\n\nputs(entitlement)',
+      },
       cli: {
         method: 'entitlements create',
         example:
@@ -4334,34 +4359,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Plans.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1PlanEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1PlanEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().plans().entitlements().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .planId("planId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().plans().entitlements().create(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.entitlements.create',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentitlement = client.v1.plans.entitlements.create(\n    plan_id="planId",\n    entitlements=[{\n        "id": "id",\n        "type": "FEATURE",\n    }],\n)\nprint(entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.plans.entitlements.create',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentitlement = stigg.v1.plans.entitlements.create("planId", entitlements: [{id: "id", type: :FEATURE}])\n\nputs(entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.plans.entitlements.create',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entitlement = await client.v1.plans.entitlements.create('planId', {\n  entitlements: [{ id: 'id', type: 'FEATURE' }],\n});\n\nconsole.log(entitlement.data);",
       },
     },
   },
@@ -4381,6 +4381,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.entitlements.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst planEntitlement = await client.v1.plans.entitlements.update('id', {\n  planId: 'planId',\n  type: 'FEATURE',\n});\n\nconsole.log(planEntitlement.data);",
+      },
+      python: {
+        method: 'v1.plans.entitlements.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan_entitlement = client.v1.plans.entitlements.update(\n    id="id",\n    plan_id="planId",\n    type="FEATURE",\n)\nprint(plan_entitlement.data)',
+      },
+      java: {
+        method: 'v1().plans().entitlements().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementUpdateParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .planId("planId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().update(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementUpdateParams{\n\t\t\tPlanID:    "planId",\n\t\t\tOfFeature: &stigg.V1PlanEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.entitlements.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan_entitlement = stigg.v1.plans.entitlements.update("id", plan_id: "planId", body: {type: :FEATURE})\n\nputs(plan_entitlement)',
+      },
       cli: {
         method: 'entitlements update',
         example:
@@ -4391,34 +4416,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementUpdateParams{\n\t\t\tPlanID:    "planId",\n\t\t\tOfFeature: &stigg.V1PlanEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
-      },
-      java: {
-        method: 'v1().plans().entitlements().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementUpdateParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .planId("planId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().update(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.entitlements.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan_entitlement = client.v1.plans.entitlements.update(\n    id="id",\n    plan_id="planId",\n    type="FEATURE",\n)\nprint(plan_entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.plans.entitlements.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan_entitlement = stigg.v1.plans.entitlements.update("id", plan_id: "planId", body: {type: :FEATURE})\n\nputs(plan_entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.plans.entitlements.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst planEntitlement = await client.v1.plans.entitlements.update('id', {\n  planId: 'planId',\n  type: 'FEATURE',\n});\n\nconsole.log(planEntitlement.data);",
       },
     },
   },
@@ -4436,6 +4436,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.v1.plans.entitlements.delete(planId: string, id: string): { data: object | object; }`\n\n**delete** `/api/v1/plans/{planId}/entitlements/{id}`\n\nDeletes an entitlement from a draft plan.\n\n### Parameters\n\n- `planId: string`\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst planEntitlement = await client.v1.plans.entitlements.delete('id', { planId: 'planId' });\n\nconsole.log(planEntitlement);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.entitlements.delete',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst planEntitlement = await client.v1.plans.entitlements.delete('id', { planId: 'planId' });\n\nconsole.log(planEntitlement.data);",
+      },
+      python: {
+        method: 'v1.plans.entitlements.delete',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan_entitlement = client.v1.plans.entitlements.delete(\n    id="id",\n    plan_id="planId",\n)\nprint(plan_entitlement.data)',
+      },
+      java: {
+        method: 'v1().plans().entitlements().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementDeleteParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .planId("planId")\n            .id("id")\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().delete(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementDeleteParams{\n\t\t\tPlanID: "planId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.entitlements.delete',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan_entitlement = stigg.v1.plans.entitlements.delete("id", plan_id: "planId")\n\nputs(plan_entitlement)',
+      },
       cli: {
         method: 'entitlements delete',
         example:
@@ -4446,34 +4471,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementDeleteParams{\n\t\t\tPlanID: "planId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().plans().entitlements().delete',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementDeleteParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .planId("planId")\n            .id("id")\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().delete(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.plans.entitlements.delete',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nplan_entitlement = client.v1.plans.entitlements.delete(\n    id="id",\n    plan_id="planId",\n)\nprint(plan_entitlement.data)',
-      },
-      ruby: {
-        method: 'v1.plans.entitlements.delete',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nplan_entitlement = stigg.v1.plans.entitlements.delete("id", plan_id: "planId")\n\nputs(plan_entitlement)',
-      },
-      typescript: {
-        method: 'client.v1.plans.entitlements.delete',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst planEntitlement = await client.v1.plans.entitlements.delete('id', { planId: 'planId' });\n\nconsole.log(planEntitlement.data);",
       },
     },
   },
@@ -4494,6 +4494,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## report\n\n`client.v1.usage.report(usages: { customerId: string; featureId: string; value: number; createdAt?: string; dimensions?: object; resourceId?: string; updateBehavior?: 'DELTA' | 'SET'; }[]): { data: object[]; }`\n\n**post** `/api/v1/usage`\n\nReports usage measurements for metered features. The reported usage is used to track, limit, and bill customer consumption.\n\n### Parameters\n\n- `usages: { customerId: string; featureId: string; value: number; createdAt?: string; dimensions?: object; resourceId?: string; updateBehavior?: 'DELTA' | 'SET'; }[]`\n  A list of usage reports to be submitted in bulk\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; customerId: string; featureId: string; timestamp: string; value: number; currentUsage?: number; nextResetDate?: string; resourceId?: string; usagePeriodEnd?: string; usagePeriodStart?: string; }[]; }`\n  Response containing reported usage measurements with current usage values, period information, and reset dates for each measurement.\n\n  - `data: { id: string; createdAt: string; customerId: string; featureId: string; timestamp: string; value: number; currentUsage?: number; nextResetDate?: string; resourceId?: string; usagePeriodEnd?: string; usagePeriodStart?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.report({ usages: [{\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.usage.report',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.report({\n  usages: [\n    {\n      customerId: 'customerId',\n      featureId: 'featureId',\n      value: -9007199254740991,\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.usage.report',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.report(\n    usages=[{\n        "customer_id": "customerId",\n        "feature_id": "featureId",\n        "value": -9007199254740991,\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().usage().report',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageReportParams;\nimport io.stigg.models.v1.usage.UsageReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageReportParams params = UsageReportParams.builder()\n            .addUsage(UsageReportParams.Usage.builder()\n                .customerId("customerId")\n                .featureId("featureId")\n                .value(-9007199254740991L)\n                .build())\n            .build();\n        UsageReportResponse response = client.v1().usage().report(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Usage.Report',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Report(context.TODO(), stigg.V1UsageReportParams{\n\t\tUsages: []stigg.V1UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.usage.report',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.report(\n  usages: [{customerId: "customerId", featureId: "featureId", value: -9007199254740991}]\n)\n\nputs(response)',
+      },
       cli: {
         method: 'usage report',
         example:
@@ -4504,34 +4529,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Usage.Report',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Report(context.TODO(), stigg.V1UsageReportParams{\n\t\tUsages: []stigg.V1UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
-      },
-      java: {
-        method: 'v1().usage().report',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageReportParams;\nimport io.stigg.models.v1.usage.UsageReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageReportParams params = UsageReportParams.builder()\n            .addUsage(UsageReportParams.Usage.builder()\n                .customerId("customerId")\n                .featureId("featureId")\n                .value(-9007199254740991L)\n                .build())\n            .build();\n        UsageReportResponse response = client.v1().usage().report(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.usage.report',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.report(\n    usages=[{\n        "customer_id": "customerId",\n        "feature_id": "featureId",\n        "value": -9007199254740991,\n    }],\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.usage.report',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.report(\n  usages: [{customerId: "customerId", featureId: "featureId", value: -9007199254740991}]\n)\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.usage.report',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.report({\n  usages: [\n    {\n      customerId: 'customerId',\n      featureId: 'featureId',\n      value: -9007199254740991,\n    },\n  ],\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -4556,6 +4556,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## history\n\n`client.v1.usage.history(customerId: string, featureId: string, startDate: string, endDate?: string, groupBy?: string, resourceId?: string): { data: object; }`\n\n**get** `/api/v1/usage/{customerId}/history/{featureId}`\n\nRetrieves historical usage data for a customer's metered feature over time.\n\n### Parameters\n\n- `customerId: string`\n\n- `featureId: string`\n\n- `startDate: string`\n  The start date of the range\n\n- `endDate?: string`\n  The end date of the range\n\n- `groupBy?: string`\n  Criteria by which to group the usage history\n\n- `resourceId?: string`\n  Resource id\n\n### Returns\n\n- `{ data: { markers: { timestamp: string; type: 'PERIODIC_RESET' | 'SUBSCRIPTION_CHANGE_RESET'; }[]; series: { points: object[]; tags: object[]; }[]; }; }`\n  Response object\n\n  - `data: { markers: { timestamp: string; type: 'PERIODIC_RESET' | 'SUBSCRIPTION_CHANGE_RESET'; }[]; series: { points: { isResetPoint: boolean; timestamp: string; value: number; }[]; tags: { key: string; value: string; }[]; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.history('featureId', { customerId: 'customerId', startDate: '2019-12-27T18:11:19.117Z' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.usage.history',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.history('featureId', {\n  customerId: 'customerId',\n  startDate: '2019-12-27T18:11:19.117Z',\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.usage.history',
+        example:
+          'import os\nfrom datetime import datetime\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.history(\n    feature_id="featureId",\n    customer_id="customerId",\n    start_date=datetime.fromisoformat("2019-12-27T18:11:19.117"),\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().usage().history',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageHistoryParams;\nimport io.stigg.models.v1.usage.UsageHistoryResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageHistoryParams params = UsageHistoryParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .startDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n            .build();\n        UsageHistoryResponse response = client.v1().usage().history(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Usage.History',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.History(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1UsageHistoryParams{\n\t\t\tCustomerID: "customerId",\n\t\t\tStartDate:  time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.usage.history',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.history("featureId", customer_id: "customerId", start_date: "2019-12-27T18:11:19.117Z")\n\nputs(response)',
+      },
       cli: {
         method: 'usage history',
         example:
@@ -4566,34 +4591,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Usage.History',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.History(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1UsageHistoryParams{\n\t\t\tCustomerID: "customerId",\n\t\t\tStartDate:  time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().usage().history',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageHistoryParams;\nimport io.stigg.models.v1.usage.UsageHistoryResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageHistoryParams params = UsageHistoryParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .startDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n            .build();\n        UsageHistoryResponse response = client.v1().usage().history(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.usage.history',
-        example:
-          'import os\nfrom datetime import datetime\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.history(\n    feature_id="featureId",\n    customer_id="customerId",\n    start_date=datetime.fromisoformat("2019-12-27T18:11:19.117"),\n)\nprint(response.data)',
-      },
-      ruby: {
-        method: 'v1.usage.history',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.history("featureId", customer_id: "customerId", start_date: "2019-12-27T18:11:19.117Z")\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.v1.usage.history',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.history('featureId', {\n  customerId: 'customerId',\n  startDate: '2019-12-27T18:11:19.117Z',\n});\n\nconsole.log(response.data);",
       },
     },
   },
@@ -4618,6 +4618,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_products\n\n`client.v1.products.listProducts(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: string): { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: object; }`\n\n**get** `/api/v1/products`\n\nRetrieves a paginated list of products in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: string`\n  Filter by product status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n  Product configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `multipleSubscriptions: boolean`\n  - `status: 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse);\n}\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.products.listProducts',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.products.list_products',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.products.list_products()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().products().listProducts',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.ProductListProductsPage;\nimport io.stigg.models.v1.products.ProductListProductsParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductListProductsPage page = client.v1().products().listProducts();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Products.ListProducts',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Products.ListProducts(context.TODO(), stigg.V1ProductListProductsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.products.list_products',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.products.list_products\n\nputs(page)',
+      },
       cli: {
         method: 'products list_products',
         example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
@@ -4627,33 +4652,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      go: {
-        method: 'client.V1.Products.ListProducts',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Products.ListProducts(context.TODO(), stigg.V1ProductListProductsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
       http: {
         example: 'curl https://api.stigg.io/api/v1/products \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().products().listProducts',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.ProductListProductsPage;\nimport io.stigg.models.v1.products.ProductListProductsParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductListProductsPage page = client.v1().products().listProducts();\n    }\n}',
-      },
-      python: {
-        method: 'v1.products.list_products',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.products.list_products()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'v1.products.list_products',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.products.list_products\n\nputs(page)',
-      },
-      typescript: {
-        method: 'client.v1.products.listProducts',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse.id);\n}",
       },
     },
   },
@@ -4677,6 +4677,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_product\n\n`client.v1.products.createProduct(id: string, displayName: string, description?: string, metadata?: object, multipleSubscriptions?: boolean): { data: object; }`\n\n**post** `/api/v1/products`\n\nCreates a new product.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `displayName: string`\n  Display name of the product\n\n- `description?: string`\n  Description of the product\n\n- `metadata?: object`\n  Additional metadata for the product\n\n- `multipleSubscriptions?: boolean`\n  Indicates if multiple subscriptions to this product are allowed\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });\n\nconsole.log(product);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.products.createProduct',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });\n\nconsole.log(product.data);",
+      },
+      python: {
+        method: 'v1.products.create_product',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.create_product(\n    id="id",\n    display_name="displayName",\n)\nprint(product.data)',
+      },
+      java: {
+        method: 'v1().products().createProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductCreateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductCreateProductParams params = ProductCreateProductParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        Product product = client.v1().products().createProduct(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Products.NewProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.NewProduct(context.TODO(), stigg.V1ProductNewProductParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.products.create_product',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.create_product(id: "id", display_name: "displayName")\n\nputs(product)',
+      },
       cli: {
         method: 'products create_product',
         example:
@@ -4687,34 +4712,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.NewProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.NewProduct(context.TODO(), stigg.V1ProductNewProductParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
-      },
-      java: {
-        method: 'v1().products().createProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductCreateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductCreateProductParams params = ProductCreateProductParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        Product product = client.v1().products().createProduct(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.products.create_product',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.create_product(\n    id="id",\n    display_name="displayName",\n)\nprint(product.data)',
-      },
-      ruby: {
-        method: 'v1.products.create_product',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.create_product(id: "id", display_name: "displayName")\n\nputs(product)',
-      },
-      typescript: {
-        method: 'client.v1.products.createProduct',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });\n\nconsole.log(product.data);",
       },
     },
   },
@@ -4740,6 +4740,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_product\n\n`client.v1.products.updateProduct(id: string, description?: string, displayName?: string, metadata?: object, multipleSubscriptions?: boolean, productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }, usageResetCutoffRule?: { behavior: 'NEVER_RESET' | 'ALWAYS_RESET' | 'BILLING_PERIOD_CHANGE'; }): { data: object; }`\n\n**patch** `/api/v1/products/{id}`\n\nUpdates an existing product's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `description?: string`\n  Description of the product\n\n- `displayName?: string`\n  Display name of the product\n\n- `metadata?: object`\n  Additional metadata for the product\n\n- `multipleSubscriptions?: boolean`\n  Indicates if multiple subscriptions to this product are allowed\n\n- `productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }`\n  - `subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'`\n    Time when the subscription will be cancelled\n  - `subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'`\n    Setup for the end of the subscription\n  - `subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'`\n    Setup for the start of the subscription\n  - `downgradePlanId?: string`\n    ID of the plan to downgrade to at the end of the billing period\n  - `prorateAtEndOfBillingPeriod?: boolean`\n    Indicates if the subscription should be prorated at the end of the billing period\n  - `subscriptionStartPlanId?: string`\n    ID of the plan to start the subscription with\n\n- `usageResetCutoffRule?: { behavior: 'NEVER_RESET' | 'ALWAYS_RESET' | 'BILLING_PERIOD_CHANGE'; }`\n  Rule defining when usage resets upon subscription update.\n  - `behavior: 'NEVER_RESET' | 'ALWAYS_RESET' | 'BILLING_PERIOD_CHANGE'`\n    Behavior of the usage reset cutoff rule\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.updateProduct('x');\n\nconsole.log(product);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.products.updateProduct',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.updateProduct('x');\n\nconsole.log(product.data);",
+      },
+      python: {
+        method: 'v1.products.update_product',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.update_product(\n    id="x",\n)\nprint(product.data)',
+      },
+      java: {
+        method: 'v1().products().updateProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductUpdateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().updateProduct("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Products.UpdateProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UpdateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductUpdateProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.products.update_product',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.update_product("x")\n\nputs(product)',
+      },
       cli: {
         method: 'products update_product',
         example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4749,34 +4774,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.UpdateProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UpdateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductUpdateProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/api/v1/products/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'v1().products().updateProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductUpdateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().updateProduct("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.products.update_product',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.update_product(\n    id="x",\n)\nprint(product.data)',
-      },
-      ruby: {
-        method: 'v1.products.update_product',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.update_product("x")\n\nputs(product)',
-      },
-      typescript: {
-        method: 'client.v1.products.updateProduct',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.updateProduct('x');\n\nconsole.log(product.data);",
       },
     },
   },
@@ -4794,6 +4794,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive_product\n\n`client.v1.products.archiveProduct(id: string): { data: object; }`\n\n**post** `/api/v1/products/{id}/archive`\n\nArchives a product, preventing new subscriptions. All plans and addons are archived.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.archiveProduct('x');\n\nconsole.log(product);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.products.archiveProduct',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.archiveProduct('x');\n\nconsole.log(product.data);",
+      },
+      python: {
+        method: 'v1.products.archive_product',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.archive_product(\n    "x",\n)\nprint(product.data)',
+      },
+      java: {
+        method: 'v1().products().archiveProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductArchiveProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().archiveProduct("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Products.ArchiveProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.ArchiveProduct(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.products.archive_product',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.archive_product("x")\n\nputs(product)',
+      },
       cli: {
         method: 'products archive_product',
         example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4803,34 +4828,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.ArchiveProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.ArchiveProduct(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/products/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().products().archiveProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductArchiveProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().archiveProduct("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.products.archive_product',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.archive_product(\n    "x",\n)\nprint(product.data)',
-      },
-      ruby: {
-        method: 'v1.products.archive_product',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.archive_product("x")\n\nputs(product)',
-      },
-      typescript: {
-        method: 'client.v1.products.archiveProduct',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.archiveProduct('x');\n\nconsole.log(product.data);",
       },
     },
   },
@@ -4848,6 +4848,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive_product\n\n`client.v1.products.unarchiveProduct(id: string): { data: object; }`\n\n**post** `/api/v1/products/{id}/unarchive`\n\nRestores an archived product, allowing new subscriptions to be created.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.unarchiveProduct('x');\n\nconsole.log(product);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.products.unarchiveProduct',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.unarchiveProduct('x');\n\nconsole.log(product.data);",
+      },
+      python: {
+        method: 'v1.products.unarchive_product',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.unarchive_product(\n    "x",\n)\nprint(product.data)',
+      },
+      java: {
+        method: 'v1().products().unarchiveProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductUnarchiveProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().unarchiveProduct("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Products.UnarchiveProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UnarchiveProduct(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.products.unarchive_product',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.unarchive_product("x")\n\nputs(product)',
+      },
       cli: {
         method: 'products unarchive_product',
         example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4857,34 +4882,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.UnarchiveProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UnarchiveProduct(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/products/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'v1().products().unarchiveProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductUnarchiveProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().unarchiveProduct("x");\n    }\n}',
-      },
-      python: {
-        method: 'v1.products.unarchive_product',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.unarchive_product(\n    "x",\n)\nprint(product.data)',
-      },
-      ruby: {
-        method: 'v1.products.unarchive_product',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.unarchive_product("x")\n\nputs(product)',
-      },
-      typescript: {
-        method: 'client.v1.products.unarchiveProduct',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.unarchiveProduct('x');\n\nconsole.log(product.data);",
       },
     },
   },
@@ -4902,6 +4902,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## duplicate_product\n\n`client.v1.products.duplicateProduct(id: string, targetId: string, description?: string, displayName?: string): { data: object; }`\n\n**post** `/api/v1/products/{id}/duplicate`\n\nDuplicates an existing product, including its plans, addons, and configuration.\n\n### Parameters\n\n- `id: string`\n\n- `targetId: string`\n  The unique identifier for the entity\n\n- `description?: string`\n  Description of the product\n\n- `displayName?: string`\n  Display name of the product\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.duplicateProduct('x', { targetId: 'targetId' });\n\nconsole.log(product);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.v1.products.duplicateProduct',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.duplicateProduct('x', { targetId: 'targetId' });\n\nconsole.log(product.data);",
+      },
+      python: {
+        method: 'v1.products.duplicate_product',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.duplicate_product(\n    id="x",\n    target_id="targetId",\n)\nprint(product.data)',
+      },
+      java: {
+        method: 'v1().products().duplicateProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductDuplicateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductDuplicateProductParams params = ProductDuplicateProductParams.builder()\n            .id("x")\n            .targetId("targetId")\n            .build();\n        Product product = client.v1().products().duplicateProduct(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Products.DuplicateProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.DuplicateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductDuplicateProductParams{\n\t\t\tTargetID: "targetId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.products.duplicate_product',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.duplicate_product("x", target_id: "targetId")\n\nputs(product)',
+      },
       cli: {
         method: 'products duplicate_product',
         example:
@@ -4912,34 +4937,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.DuplicateProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.DuplicateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductDuplicateProductParams{\n\t\t\tTargetID: "targetId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
-      },
-      java: {
-        method: 'v1().products().duplicateProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductDuplicateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductDuplicateProductParams params = ProductDuplicateProductParams.builder()\n            .id("x")\n            .targetId("targetId")\n            .build();\n        Product product = client.v1().products().duplicateProduct(params);\n    }\n}',
-      },
-      python: {
-        method: 'v1.products.duplicate_product',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.v1.products.duplicate_product(\n    id="x",\n    target_id="targetId",\n)\nprint(product.data)',
-      },
-      ruby: {
-        method: 'v1.products.duplicate_product',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nproduct = stigg.v1.products.duplicate_product("x", target_id: "targetId")\n\nputs(product)',
-      },
-      typescript: {
-        method: 'client.v1.products.duplicateProduct',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst product = await client.v1.products.duplicateProduct('x', { targetId: 'targetId' });\n\nconsole.log(product.data);",
       },
     },
   },
@@ -4963,6 +4963,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## provision\n\n`client.internal.beta.eventQueues.provision(region: string, allowedAssumeRoleArns?: string[], createLowPriorityQueues?: boolean, eventTypes?: string[], suffix?: string): { data: object; }`\n\n**post** `/internal/beta/event-queues/provision`\n\nProvision SQS queue, SNS subscriptions, and IAM role for the current environment\n\n### Parameters\n\n- `region: string`\n  AWS region for the SQS queue (e.g., us-east-1, eu-west-1)\n\n- `allowedAssumeRoleArns?: string[]`\n  Additional IAM role ARNs allowed to assume the external role for queue access\n\n- `createLowPriorityQueues?: boolean`\n  Whether to create separate low-priority queues for standard topic events\n\n- `eventTypes?: string[]`\n  Event types to subscribe to. Defaults to entitlements, measurements, and migrations.\n\n- `suffix?: string`\n  Optional suffix to allow multiple queues for the same environment and region\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.provision({ region: 'us-east-1' });\n\nconsole.log(eventQueueResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.internal.beta.eventQueues.provision',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.provision({\n  region: 'us-east-1',\n});\n\nconsole.log(eventQueueResponse.data);",
+      },
+      python: {
+        method: 'internal.beta.event_queues.provision',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.provision(\n    region="us-east-1",\n)\nprint(event_queue_response.data)',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().provision',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueProvisionParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueProvisionParams params = EventQueueProvisionParams.builder()\n            .region(EventQueueProvisionParams.Region.US_EAST_1)\n            .build();\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().provision(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Provision',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Provision(context.TODO(), stigg.InternalBetaEventQueueProvisionParams{\n\t\tRegion: stigg.InternalBetaEventQueueProvisionParamsRegionUsEast1,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.provision',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.provision(region: :"us-east-1")\n\nputs(event_queue_response)',
+      },
       cli: {
         method: 'event_queues provision',
         example:
@@ -4973,34 +4998,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventQueueProvisionParams parameters = new() { Region = Region.UsEast1 };\n\nvar eventQueueResponse = await client.Internal.Beta.EventQueues.Provision(parameters);\n\nConsole.WriteLine(eventQueueResponse);',
       },
-      go: {
-        method: 'client.Internal.Beta.EventQueues.Provision',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Provision(context.TODO(), stigg.InternalBetaEventQueueProvisionParams{\n\t\tRegion: stigg.InternalBetaEventQueueProvisionParamsRegionUsEast1,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/internal/beta/event-queues/provision \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "region": "us-east-1"\n        }\'',
-      },
-      java: {
-        method: 'internal_().beta().eventQueues().provision',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueProvisionParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueProvisionParams params = EventQueueProvisionParams.builder()\n            .region(EventQueueProvisionParams.Region.US_EAST_1)\n            .build();\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().provision(params);\n    }\n}',
-      },
-      python: {
-        method: 'internal.beta.event_queues.provision',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.provision(\n    region="us-east-1",\n)\nprint(event_queue_response.data)',
-      },
-      ruby: {
-        method: 'internal.beta.event_queues.provision',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.provision(region: :"us-east-1")\n\nputs(event_queue_response)',
-      },
-      typescript: {
-        method: 'client.internal.beta.eventQueues.provision',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.provision({\n  region: 'us-east-1',\n});\n\nconsole.log(eventQueueResponse.data);",
       },
     },
   },
@@ -5017,6 +5017,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.internal.beta.eventQueues.list(): { data: object[]; pagination: object; }`\n\n**get** `/internal/beta/event-queues`\n\nList all event queues for the current environment\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }[]; pagination: { next: string; prev: string; }; }`\n  Response list object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }[]`\n  - `pagination: { next: string; prev: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueues = await client.internal.beta.eventQueues.list();\n\nconsole.log(eventQueues);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.internal.beta.eventQueues.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueues = await client.internal.beta.eventQueues.list();\n\nconsole.log(eventQueues.data);",
+      },
+      python: {
+        method: 'internal.beta.event_queues.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queues = client.internal.beta.event_queues.list()\nprint(event_queues.data)',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueListParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueListResponse eventQueues = client.internal_().beta().eventQueues().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueues, err := client.Internal.Beta.EventQueues.List(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueues.Data)\n}\n',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queues = stigg.internal.beta.event_queues.list\n\nputs(event_queues)',
+      },
       cli: {
         method: 'event_queues list',
         example: "stigg internal:beta:event-queues list \\\n  --api-key 'My API Key'",
@@ -5026,34 +5051,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventQueueListParams parameters = new();\n\nvar eventQueues = await client.Internal.Beta.EventQueues.List(parameters);\n\nConsole.WriteLine(eventQueues);',
       },
-      go: {
-        method: 'client.Internal.Beta.EventQueues.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueues, err := client.Internal.Beta.EventQueues.List(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueues.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/internal/beta/event-queues \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'internal_().beta().eventQueues().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueListParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueListResponse eventQueues = client.internal_().beta().eventQueues().list();\n    }\n}',
-      },
-      python: {
-        method: 'internal.beta.event_queues.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queues = client.internal.beta.event_queues.list()\nprint(event_queues.data)',
-      },
-      ruby: {
-        method: 'internal.beta.event_queues.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queues = stigg.internal.beta.event_queues.list\n\nputs(event_queues)',
-      },
-      typescript: {
-        method: 'client.internal.beta.eventQueues.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueues = await client.internal.beta.eventQueues.list();\n\nconsole.log(eventQueues.data);",
       },
     },
   },
@@ -5071,6 +5071,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.internal.beta.eventQueues.retrieve(queueName: string): { data: object; }`\n\n**get** `/internal/beta/event-queues/{queueName}`\n\nGet event queue by queue name\n\n### Parameters\n\n- `queueName: string`\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.retrieve('x');\n\nconsole.log(eventQueueResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.internal.beta.eventQueues.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.retrieve('x');\n\nconsole.log(eventQueueResponse.data);",
+      },
+      python: {
+        method: 'internal.beta.event_queues.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.retrieve(\n    "x",\n)\nprint(event_queue_response.data)',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().retrieve("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.retrieve("x")\n\nputs(event_queue_response)',
+      },
       cli: {
         method: 'event_queues retrieve',
         example:
@@ -5081,34 +5106,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventQueueRetrieveParams parameters = new() { QueueName = "x" };\n\nvar eventQueueResponse = await client.Internal.Beta.EventQueues.Retrieve(parameters);\n\nConsole.WriteLine(eventQueueResponse);',
       },
-      go: {
-        method: 'client.Internal.Beta.EventQueues.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Get(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/internal/beta/event-queues/$QUEUE_NAME \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'internal_().beta().eventQueues().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().retrieve("x");\n    }\n}',
-      },
-      python: {
-        method: 'internal.beta.event_queues.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.retrieve(\n    "x",\n)\nprint(event_queue_response.data)',
-      },
-      ruby: {
-        method: 'internal.beta.event_queues.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.retrieve("x")\n\nputs(event_queue_response)',
-      },
-      typescript: {
-        method: 'client.internal.beta.eventQueues.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.retrieve('x');\n\nconsole.log(eventQueueResponse.data);",
       },
     },
   },
@@ -5131,6 +5131,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.internal.beta.eventQueues.update(queueName: string, allowedAssumeRoleArns?: string[], createLowPriorityQueues?: boolean, eventTypes?: string[]): { data: object; }`\n\n**patch** `/internal/beta/event-queues/{queueName}`\n\nUpdate event queue configuration\n\n### Parameters\n\n- `queueName: string`\n\n- `allowedAssumeRoleArns?: string[]`\n\n- `createLowPriorityQueues?: boolean`\n  Whether to create separate low-priority queues for standard topic events\n\n- `eventTypes?: string[]`\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.update('x');\n\nconsole.log(eventQueueResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.internal.beta.eventQueues.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.update('x');\n\nconsole.log(eventQueueResponse.data);",
+      },
+      python: {
+        method: 'internal.beta.event_queues.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.update(\n    queue_name="x",\n)\nprint(event_queue_response.data)',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().update("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.InternalBetaEventQueueUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.update("x")\n\nputs(event_queue_response)',
+      },
       cli: {
         method: 'event_queues update',
         example: "stigg internal:beta:event-queues update \\\n  --api-key 'My API Key' \\\n  --queue-name x",
@@ -5140,34 +5165,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventQueueUpdateParams parameters = new() { QueueName = "x" };\n\nvar eventQueueResponse = await client.Internal.Beta.EventQueues.Update(parameters);\n\nConsole.WriteLine(eventQueueResponse);',
       },
-      go: {
-        method: 'client.Internal.Beta.EventQueues.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.InternalBetaEventQueueUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
-      },
       http: {
         example:
           "curl https://api.stigg.io/internal/beta/event-queues/$QUEUE_NAME \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'internal_().beta().eventQueues().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().update("x");\n    }\n}',
-      },
-      python: {
-        method: 'internal.beta.event_queues.update',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.update(\n    queue_name="x",\n)\nprint(event_queue_response.data)',
-      },
-      ruby: {
-        method: 'internal.beta.event_queues.update',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.update("x")\n\nputs(event_queue_response)',
-      },
-      typescript: {
-        method: 'client.internal.beta.eventQueues.update',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.update('x');\n\nconsole.log(eventQueueResponse.data);",
       },
     },
   },
@@ -5185,6 +5185,31 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.internal.beta.eventQueues.delete(queueName: string): { data: object; }`\n\n**delete** `/internal/beta/event-queues/{queueName}`\n\nDelete an event queue and tear down its infrastructure\n\n### Parameters\n\n- `queueName: string`\n\n### Returns\n\n- `{ data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }; }`\n  Response object\n\n  - `data: { createdAt: string; queueName: string; region: string; status: 'PROVISIONING' | 'ACTIVE' | 'FAILED' | 'DEPROVISIONING'; updatedAt: string; queueUrl?: string; roleArn?: string; suffix?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.delete('x');\n\nconsole.log(eventQueueResponse);\n```",
     perLanguage: {
+      typescript: {
+        method: 'client.internal.beta.eventQueues.delete',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.delete('x');\n\nconsole.log(eventQueueResponse.data);",
+      },
+      python: {
+        method: 'internal.beta.event_queues.delete',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.delete(\n    "x",\n)\nprint(event_queue_response.data)',
+      },
+      java: {
+        method: 'internal_().beta().eventQueues().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueDeleteParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().delete("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.Internal.Beta.EventQueues.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Delete(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
+      },
+      ruby: {
+        method: 'internal.beta.event_queues.delete',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.delete("x")\n\nputs(event_queue_response)',
+      },
       cli: {
         method: 'event_queues delete',
         example: "stigg internal:beta:event-queues delete \\\n  --api-key 'My API Key' \\\n  --queue-name x",
@@ -5194,34 +5219,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventQueueDeleteParams parameters = new() { QueueName = "x" };\n\nvar eventQueueResponse = await client.Internal.Beta.EventQueues.Delete(parameters);\n\nConsole.WriteLine(eventQueueResponse);',
       },
-      go: {
-        method: 'client.Internal.Beta.EventQueues.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\teventQueueResponse, err := client.Internal.Beta.EventQueues.Delete(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", eventQueueResponse.Data)\n}\n',
-      },
       http: {
         example:
           'curl https://api.stigg.io/internal/beta/event-queues/$QUEUE_NAME \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-      java: {
-        method: 'internal_().beta().eventQueues().delete',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueDeleteParams;\nimport io.stigg.models.internal_.beta.eventqueues.EventQueueResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventQueueResponse eventQueueResponse = client.internal_().beta().eventQueues().delete("x");\n    }\n}',
-      },
-      python: {
-        method: 'internal.beta.event_queues.delete',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nevent_queue_response = client.internal.beta.event_queues.delete(\n    "x",\n)\nprint(event_queue_response.data)',
-      },
-      ruby: {
-        method: 'internal.beta.event_queues.delete',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nevent_queue_response = stigg.internal.beta.event_queues.delete("x")\n\nputs(event_queue_response)',
-      },
-      typescript: {
-        method: 'client.internal.beta.eventQueues.delete',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst eventQueueResponse = await client.internal.beta.eventQueues.delete('x');\n\nconsole.log(eventQueueResponse.data);",
       },
     },
   },
