@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.33 (2026-04-30)
+
+Full Changelog: [v0.1.0-alpha.32...v0.1.0-alpha.33](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.32...v0.1.0-alpha.33)
+
+### Features
+
+* **api:** remove internal.beta.eventQueues methods ([baa6b0d](https://github.com/stiggio/stigg-typescript/commit/baa6b0d5ed6a8cfcfdbb9b4085942b4802dd9cf3))
+
+
+### Chores
+
+* avoid formatting file that gets changed during releases ([824a020](https://github.com/stiggio/stigg-typescript/commit/824a0209d1be6210b35f625133e5a174d9a3d7d4))
+* **format:** run eslint and prettier separately ([0870f95](https://github.com/stiggio/stigg-typescript/commit/0870f9512298c548b63643513a771492830e8186))
+
 ## 0.1.0-alpha.32 (2026-04-28)
 
 Full Changelog: [v0.1.0-alpha.31...v0.1.0-alpha.32](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.31...v0.1.0-alpha.32)

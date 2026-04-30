@@ -28,7 +28,7 @@ export const newMcpServer = async ({
   new McpServer(
     {
       name: 'stigg_typescript_api',
-      version: '0.1.0-alpha.32',
+      version: '0.1.0-alpha.33',
     },
     {
       instructions: await getInstructions({ stainlessApiKey, customInstructionsPath }),
