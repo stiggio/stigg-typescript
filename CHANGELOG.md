@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.34 (2026-05-01)
+
+Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)
+
+### Features
+
+* **api:** update mcp instructions ([c8388bf](https://github.com/stiggio/stigg-typescript/commit/c8388bfacbb73a1c2030713a9815adb02848ad4f))
+
 ## 0.1.0-alpha.33 (2026-04-30)
 
 Full Changelog: [v0.1.0-alpha.32...v0.1.0-alpha.33](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.32...v0.1.0-alpha.33)
