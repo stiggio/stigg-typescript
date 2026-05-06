@@ -98,11 +98,11 @@ describe('resource customers', () => {
       client.v1.customers.checkEntitlement(
         'x',
         {
-          currencyId: 'currencyId',
-          featureId: 'featureId',
+          currencyId: 'x',
+          featureId: 'x',
           requestedUsage: 0,
           requestedValues: ['string'],
-          resourceId: 'resourceId',
+          resourceId: 'x',
         },
         { path: '/_stainless_unknown_path' },
       ),
