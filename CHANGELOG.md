@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.35 (2026-05-06)
+
+Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)
+
+### Features
+
+* **api:** add checkEntitlement method to customers ([6560bec](https://github.com/stiggio/stigg-typescript/commit/6560bec44d982d9d2cf2541bcfea13de93ba1e3c))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([e854963](https://github.com/stiggio/stigg-typescript/commit/e8549633b33eb9dde7e01d17ba5902fbc106cf54))
+
+
+### Documentation
+
+* clarify forwards compat behavior ([b55ab8d](https://github.com/stiggio/stigg-typescript/commit/b55ab8d9245f0e6146e846e5b6f0a06246f3d12e))
+
 ## 0.1.0-alpha.34 (2026-05-01)
 
 Full Changelog: [v0.1.0-alpha.33...v0.1.0-alpha.34](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.33...v0.1.0-alpha.34)
