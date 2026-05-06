@@ -7,6 +7,7 @@ Types:
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerIntegrationResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerCheckEntitlementResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerImportResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResourcesResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerRetrieveEntitlementsResponse</a></code>
@@ -17,6 +18,7 @@ Methods:
 - <code title="patch /api/v1/customers/{id}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">update</a>(id, { ...params }) -> CustomerResponse</code>
 - <code title="get /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">list</a>({ ...params }) -> CustomerListResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/customers/{id}/archive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">archive</a>(id) -> CustomerResponse</code>
+- <code title="get /api/v1/customers/{id}/entitlements/check">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">checkEntitlement</a>(id, { ...params }) -> CustomerCheckEntitlementResponse</code>
 - <code title="post /api/v1/customers/import">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">import</a>({ ...params }) -> CustomerImportResponse</code>
 - <code title="get /api/v1/customers/{id}/resources">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listResources</a>(id, { ...params }) -> CustomerListResourcesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">provision</a>({ ...params }) -> CustomerResponse</code>

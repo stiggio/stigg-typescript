@@ -80,6 +80,36 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('checkEntitlement', async () => {
+    const responsePromise = client.v1.customers.checkEntitlement('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('checkEntitlement: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.checkEntitlement(
+        'x',
+        {
+          currencyId: 'currencyId',
+          featureId: 'featureId',
+          requestedUsage: 0,
+          requestedValues: ['string'],
+          resourceId: 'resourceId',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('import: only required params', async () => {
     const responsePromise = client.v1.customers.import({
       customers: [

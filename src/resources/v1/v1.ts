@@ -55,6 +55,8 @@ import {
 } from './addons/addons';
 import * as CustomersAPI from './customers/customers';
 import {
+  CustomerCheckEntitlementParams,
+  CustomerCheckEntitlementResponse,
   CustomerImportParams,
   CustomerImportResponse,
   CustomerIntegrationResponse,
@@ -134,6 +136,7 @@ export declare namespace V1 {
     type CustomerIntegrationResponse as CustomerIntegrationResponse,
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
+    type CustomerCheckEntitlementResponse as CustomerCheckEntitlementResponse,
     type CustomerImportResponse as CustomerImportResponse,
     type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
@@ -141,6 +144,7 @@ export declare namespace V1 {
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
+    type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
     type CustomerImportParams as CustomerImportParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
