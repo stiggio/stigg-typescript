@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.36 (2026-05-06)
+
+Full Changelog: [v0.1.0-alpha.35...v0.1.0-alpha.36](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.35...v0.1.0-alpha.36)
+
+### Bug Fixes
+
+* **types:** remove RECURRING from grantType enum in grants ([d94b6a9](https://github.com/stiggio/stigg-typescript/commit/d94b6a9c6cf147b1c0b6abace948add4982f654b))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([ee149e1](https://github.com/stiggio/stigg-typescript/commit/ee149e17d675689463e9d3608889371fd5707f2b))
+
+
+### Documentation
+
+* update with proxy auth info ([bcf7e49](https://github.com/stiggio/stigg-typescript/commit/bcf7e492f1e2c04228cdf3b369ef4b76ee7399e7))
+
 ## 0.1.0-alpha.35 (2026-05-06)
 
 Full Changelog: [v0.1.0-alpha.34...v0.1.0-alpha.35](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.34...v0.1.0-alpha.35)
