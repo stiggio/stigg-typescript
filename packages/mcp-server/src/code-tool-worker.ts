@@ -109,6 +109,7 @@ function getTSDiagnostics(code: string): string[] {
 const fuse = new Fuse(
   [
     'client.v1.customers.archive',
+    'client.v1.customers.checkEntitlement',
     'client.v1.customers.import',
     'client.v1.customers.list',
     'client.v1.customers.listResources',
