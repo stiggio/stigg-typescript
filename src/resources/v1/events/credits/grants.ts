@@ -490,9 +490,9 @@ export interface GrantCreateParams {
   displayName: string;
 
   /**
-   * The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+   * The type of credit grant (PAID, PROMOTIONAL)
    */
-  grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT';
+  grantType: 'PAID' | 'PROMOTIONAL';
 
   /**
    * Whether to wait for payment confirmation before returning (default: true)
