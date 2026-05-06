@@ -35,6 +35,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/archive',
   },
   {
+    clientCallName: 'client.v1.customers.checkEntitlement',
+    fullyQualifiedName: 'v1.customers.checkEntitlement',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entitlements/check',
+  },
+  {
     clientCallName: 'client.v1.customers.import',
     fullyQualifiedName: 'v1.customers.import',
     httpMethod: 'post',

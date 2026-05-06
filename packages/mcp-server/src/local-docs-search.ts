@@ -574,6 +574,68 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'check_entitlement',
+    endpoint: '/api/v1/customers/{id}/entitlements/check',
+    httpMethod: 'get',
+    summary: 'Check entitlement',
+    description:
+      'Checks a single entitlement (feature or credit) for a customer or resource. Supports `requestedUsage` and `requestedValues` to evaluate against limits or enum values.\n\n**Warning:** This REST API endpoint lacks built-in client-side caching, fallback mechanisms, and low-latency guarantees. It is not recommended for hot-path entitlement checks. For production use, consider using the Stigg Node Server SDK with caching or the Sidecar for low-latency cached responses.',
+    stainlessPath: '(resource) v1.customers > (method) check_entitlement',
+    qualified: 'client.v1.customers.checkEntitlement',
+    params: [
+      'id: string;',
+      'currencyId?: string;',
+      'featureId?: string;',
+      'requestedUsage?: number;',
+      'requestedValues?: string[];',
+      'resourceId?: string;',
+    ],
+    response:
+      "{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }",
+    markdown:
+      "## check_entitlement\n\n`client.v1.customers.checkEntitlement(id: string, currencyId?: string, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string): { data: object | object; }`\n\n**get** `/api/v1/customers/{id}/entitlements/check`\n\nChecks a single entitlement (feature or credit) for a customer or resource. Supports `requestedUsage` and `requestedValues` to evaluate against limits or enum values.\n\n**Warning:** This REST API endpoint lacks built-in client-side caching, fallback mechanisms, and low-latency guarantees. It is not recommended for hot-path entitlement checks. For production use, consider using the Stigg Node Server SDK with caching or the Sidecar for low-latency cached responses.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.checkEntitlement('x');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.customers.checkEntitlement',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.customers.checkEntitlement('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.customers.check_entitlement',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.customers.check_entitlement(\n    id="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().customers().checkEntitlement',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerCheckEntitlementParams;\nimport io.stigg.models.v1.customers.CustomerCheckEntitlementResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerCheckEntitlementResponse response = client.v1().customers().checkEntitlement("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Customers.CheckEntitlement',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.CheckEntitlement(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerCheckEntitlementParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.customers.check_entitlement',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.customers.check_entitlement("x")\n\nputs(response)',
+      },
+      cli: {
+        method: 'customers check_entitlement',
+        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Customers.CheckEntitlement',
+        example:
+          'CustomerCheckEntitlementParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.CheckEntitlement(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'attach',
     endpoint: '/api/v1/customers/{id}/payment-method',
     httpMethod: 'post',

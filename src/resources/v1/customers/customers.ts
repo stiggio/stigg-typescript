@@ -74,6 +74,24 @@ export class Customers extends APIResource {
   }
 
   /**
+   * Checks a single entitlement (feature or credit) for a customer or resource.
+   * Supports `requestedUsage` and `requestedValues` to evaluate against limits or
+   * enum values.
+   *
+   * **Warning:** This REST API endpoint lacks built-in client-side caching, fallback
+   * mechanisms, and low-latency guarantees. It is not recommended for hot-path
+   * entitlement checks. For production use, consider using the Stigg Node Server SDK
+   * with caching or the Sidecar for low-latency cached responses.
+   */
+  checkEntitlement(
+    id: string,
+    query: CustomerCheckEntitlementParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomerCheckEntitlementResponse> {
+    return this._client.get(path`/api/v1/customers/${id}/entitlements/check`, { query, ...options });
+  }
+
+  /**
    * Imports multiple customers in bulk. Used for migrating customer data from
    * external systems.
    */
@@ -1410,6 +1428,189 @@ export namespace CustomerListResponse {
 /**
  * Response object
  */
+export interface CustomerCheckEntitlementResponse {
+  data: CustomerCheckEntitlementResponse.Feature | CustomerCheckEntitlementResponse.Credit;
+}
+
+export namespace CustomerCheckEntitlementResponse {
+  export interface Feature {
+    accessDeniedReason:
+      | 'FeatureNotFound'
+      | 'CustomerNotFound'
+      | 'CustomerIsArchived'
+      | 'CustomerResourceNotFound'
+      | 'NoActiveSubscription'
+      | 'NoFeatureEntitlementInSubscription'
+      | 'RequestedUsageExceedingLimit'
+      | 'RequestedValuesMismatch'
+      | 'BudgetExceeded'
+      | 'Unknown'
+      | 'FeatureTypeMismatch'
+      | 'Revoked'
+      | 'InsufficientCredits'
+      | 'EntitlementNotFound'
+      | null;
+
+    isGranted: boolean;
+
+    type: 'FEATURE';
+
+    currentUsage?: number;
+
+    /**
+     * Timestamp of the last update to the entitlement grant or configuration.
+     */
+    entitlementUpdatedAt?: string;
+
+    feature?: Feature.Feature;
+
+    hasUnlimitedUsage?: boolean;
+
+    resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | null;
+
+    usageLimit?: number | null;
+
+    /**
+     * The anchor for calculating the usage period for metered entitlements with a
+     * reset period configured
+     */
+    usagePeriodAnchor?: string;
+
+    /**
+     * The end date of the usage period for metered entitlements with a reset period
+     * configured
+     */
+    usagePeriodEnd?: string;
+
+    /**
+     * The start date of the usage period for metered entitlements with a reset period
+     * configured
+     */
+    usagePeriodStart?: string;
+
+    /**
+     * The next time the entitlement should be recalculated
+     */
+    validUntil?: string;
+  }
+
+  export namespace Feature {
+    export interface Feature {
+      /**
+       * The unique reference ID of the entitlement.
+       */
+      id: string;
+
+      /**
+       * The human-readable name of the entitlement, shown in UI elements.
+       */
+      displayName: string;
+
+      /**
+       * The current status of the feature.
+       */
+      featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE';
+
+      /**
+       * The type of feature associated with the entitlement.
+       */
+      featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
+    }
+  }
+
+  export interface Credit {
+    accessDeniedReason:
+      | 'FeatureNotFound'
+      | 'CustomerNotFound'
+      | 'CustomerIsArchived'
+      | 'CustomerResourceNotFound'
+      | 'NoActiveSubscription'
+      | 'NoFeatureEntitlementInSubscription'
+      | 'RequestedUsageExceedingLimit'
+      | 'RequestedValuesMismatch'
+      | 'BudgetExceeded'
+      | 'Unknown'
+      | 'FeatureTypeMismatch'
+      | 'Revoked'
+      | 'InsufficientCredits'
+      | 'EntitlementNotFound'
+      | null;
+
+    /**
+     * The currency associated with a credit entitlement.
+     */
+    currency: Credit.Currency;
+
+    currentUsage: number;
+
+    isGranted: boolean;
+
+    type: 'CREDIT';
+
+    usageLimit: number;
+
+    /**
+     * Timestamp of the last update to the credit usage.
+     */
+    usageUpdatedAt: string;
+
+    /**
+     * Timestamp of the last update to the entitlement grant or configuration.
+     */
+    entitlementUpdatedAt?: string;
+
+    /**
+     * The end date of the current billing period for recurring credit grants.
+     */
+    usagePeriodEnd?: string;
+
+    /**
+     * The next time the entitlement should be recalculated
+     */
+    validUntil?: string;
+  }
+
+  export namespace Credit {
+    /**
+     * The currency associated with a credit entitlement.
+     */
+    export interface Currency {
+      /**
+       * The unique identifier of the custom currency.
+       */
+      currencyId: string;
+
+      /**
+       * The display name of the currency.
+       */
+      displayName: string;
+
+      /**
+       * A description of the currency.
+       */
+      description?: string | null;
+
+      /**
+       * Additional metadata associated with the currency.
+       */
+      metadata?: { [key: string]: string } | null;
+
+      /**
+       * The plural form of the currency unit.
+       */
+      unitPlural?: string | null;
+
+      /**
+       * The singular form of the currency unit.
+       */
+      unitSingular?: string | null;
+    }
+  }
+}
+
+/**
+ * Response object
+ */
 export interface CustomerImportResponse {
   /**
    * List of newly created customer IDs from the import operation.
@@ -2219,6 +2420,35 @@ export namespace CustomerListParams {
   }
 }
 
+export interface CustomerCheckEntitlementParams {
+  /**
+   * Currency ID (refId) to check for credit entitlements. Mutually exclusive with
+   * `featureId`.
+   */
+  currencyId?: string;
+
+  /**
+   * Feature ID (refId) to check. Mutually exclusive with `currencyId`.
+   */
+  featureId?: string;
+
+  /**
+   * Requested usage amount to evaluate against the entitlement limit (numeric
+   * features only)
+   */
+  requestedUsage?: number;
+
+  /**
+   * Requested values to evaluate against allowed values (enum features only)
+   */
+  requestedValues?: Array<string>;
+
+  /**
+   * Resource ID to scope the entitlement check to a specific resource
+   */
+  resourceId?: string;
+}
+
 export interface CustomerImportParams {
   /**
    * List of customer objects to import
@@ -2856,6 +3086,7 @@ export declare namespace Customers {
     type CustomerIntegrationResponse as CustomerIntegrationResponse,
     type CustomerResponse as CustomerResponse,
     type CustomerListResponse as CustomerListResponse,
+    type CustomerCheckEntitlementResponse as CustomerCheckEntitlementResponse,
     type CustomerImportResponse as CustomerImportResponse,
     type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
@@ -2863,6 +3094,7 @@ export declare namespace Customers {
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
+    type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
     type CustomerImportParams as CustomerImportParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
