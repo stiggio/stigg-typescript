@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-alpha.37 (2026-05-11)
+
+Full Changelog: [v0.1.0-alpha.36...v0.1.0-alpha.37](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.36...v0.1.0-alpha.37)
+
+### Features
+
+* **api:** manual updates ([e5b50a9](https://github.com/stiggio/stigg-typescript/commit/e5b50a95cad67c2b613b6e16aed87974729d8151))
+
+
+### Chores
+
+* redact api-key headers in debug logs ([2d0ad84](https://github.com/stiggio/stigg-typescript/commit/2d0ad84dbf914f8bc2307ac009655e567145fd16))
+
+
+### Documentation
+
+* update logging docs ([5934e0b](https://github.com/stiggio/stigg-typescript/commit/5934e0b16292fa93af0f37dee4c08b389a03063e))
+
 ## 0.1.0-alpha.36 (2026-05-06)
 
 Full Changelog: [v0.1.0-alpha.35...v0.1.0-alpha.36](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.35...v0.1.0-alpha.36)
