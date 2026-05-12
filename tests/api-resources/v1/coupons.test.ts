@@ -81,7 +81,7 @@ describe('resource coupons', () => {
             lte: '2019-12-27T18:11:19.117Z',
           },
           limit: 1,
-          status: 'status',
+          status: ['ACTIVE'],
           type: 'FIXED',
         },
         { path: '/_stainless_unknown_path' },

@@ -97,7 +97,7 @@ describe('resource plans', () => {
           },
           limit: 1,
           productId: 'productId',
-          status: 'status',
+          status: ['DRAFT'],
         },
         { path: '/_stainless_unknown_path' },
       ),

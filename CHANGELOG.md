@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-beta.1 (2026-05-12)
+
+Full Changelog: [v0.1.0-alpha.37...v0.1.0-beta.1](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.37...v0.1.0-beta.1)
+
+### Features
+
+* **api:** add custom currencies resource to credits ([fc747f8](https://github.com/stiggio/stigg-typescript/commit/fc747f8109eaeb0d36e24aff07edbff88108b2f3))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([efa67cc](https://github.com/stiggio/stigg-typescript/commit/efa67cc969978ab827d72b72cd95f3e861108273))
+
 ## 0.1.0-alpha.37 (2026-05-11)
 
 Full Changelog: [v0.1.0-alpha.36...v0.1.0-alpha.37](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-alpha.36...v0.1.0-alpha.37)

@@ -1965,7 +1965,7 @@ export interface PlanListParams extends MyCursorIDPageParams {
   /**
    * Filter by status. Supports comma-separated values for multiple statuses
    */
-  status?: string;
+  status?: Array<'DRAFT' | 'PUBLISHED' | 'ARCHIVED'>;
 }
 
 export namespace PlanListParams {

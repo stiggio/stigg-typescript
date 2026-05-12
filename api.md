@@ -168,6 +168,26 @@ Methods:
 - <code title="get /api/v1/credits/grants">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">list</a>({ ...params }) -> GrantListResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/credits/grants/{id}/void">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">void</a>(id) -> CreditGrantResponse</code>
 
+#### CustomCurrencies
+
+Types:
+
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyCreateResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyUpdateResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyListResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyArchiveResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyListAssociatedEntitiesResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyUnarchiveResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/credits/custom-currencies">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">create</a>({ ...params }) -> CustomCurrencyCreateResponse</code>
+- <code title="patch /api/v1/credits/custom-currencies/{currencyId}">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">update</a>(currencyID, { ...params }) -> CustomCurrencyUpdateResponse</code>
+- <code title="get /api/v1/credits/custom-currencies">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">list</a>({ ...params }) -> CustomCurrencyListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/credits/custom-currencies/{currencyId}/archive">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">archive</a>(currencyID) -> CustomCurrencyArchiveResponse</code>
+- <code title="get /api/v1/credits/custom-currencies/{currencyId}/associated-entities">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">listAssociatedEntities</a>(currencyID) -> CustomCurrencyListAssociatedEntitiesResponse</code>
+- <code title="post /api/v1/credits/custom-currencies/{currencyId}/unarchive">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">unarchive</a>(currencyID) -> CustomCurrencyUnarchiveResponse</code>
+
 ## Features
 
 Types:

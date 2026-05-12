@@ -313,7 +313,7 @@ export interface ProductListProductsParams extends MyCursorIDPageParams {
   /**
    * Filter by product status. Supports comma-separated values for multiple statuses
    */
-  status?: string;
+  status?: Array<'PUBLISHED' | 'ARCHIVED'>;
 }
 
 export namespace ProductListProductsParams {

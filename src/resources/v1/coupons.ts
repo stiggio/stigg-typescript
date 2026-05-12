@@ -667,7 +667,7 @@ export interface CouponListParams extends MyCursorIDPageParams {
   /**
    * Filter by coupon status. Supports comma-separated values for multiple statuses
    */
-  status?: string;
+  status?: Array<'ACTIVE' | 'ARCHIVED'>;
 
   /**
    * Filter by coupon type (FIXED or PERCENTAGE)

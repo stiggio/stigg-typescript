@@ -191,7 +191,18 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
    * Filter by vendor identifier. Supports comma-separated values for multiple
    * vendors (e.g., STRIPE,HUBSPOT)
    */
-  vendorIdentifier?: string;
+  vendorIdentifier?: Array<
+    | 'AUTH0'
+    | 'ZUORA'
+    | 'STRIPE'
+    | 'HUBSPOT'
+    | 'AWS_MARKETPLACE'
+    | 'SNOWFLAKE'
+    | 'SALESFORCE'
+    | 'BIG_QUERY'
+    | 'OPEN_FGA'
+    | 'APP_STORE'
+  >;
 }
 
 export interface IntegrationLinkParams {
