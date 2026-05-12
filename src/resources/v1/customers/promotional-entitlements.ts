@@ -622,7 +622,7 @@ export interface PromotionalEntitlementListParams extends MyCursorIDPageParams {
    * Filter by promotional entitlement status. Supports comma-separated values for
    * multiple statuses
    */
-  status?: string;
+  status?: Array<'Active' | 'Expired' | 'Paused'>;
 }
 
 export namespace PromotionalEntitlementListParams {

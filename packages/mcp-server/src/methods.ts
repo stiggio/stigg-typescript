@@ -293,6 +293,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/credits/grants/{id}/void',
   },
   {
+    clientCallName: 'client.v1.events.credits.customCurrencies.create',
+    fullyQualifiedName: 'v1.events.credits.customCurrencies.create',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/custom-currencies',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.customCurrencies.update',
+    fullyQualifiedName: 'v1.events.credits.customCurrencies.update',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/credits/custom-currencies/{currencyId}',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.customCurrencies.list',
+    fullyQualifiedName: 'v1.events.credits.customCurrencies.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/custom-currencies',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.customCurrencies.archive',
+    fullyQualifiedName: 'v1.events.credits.customCurrencies.archive',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/custom-currencies/{currencyId}/archive',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.customCurrencies.listAssociatedEntities',
+    fullyQualifiedName: 'v1.events.credits.customCurrencies.listAssociatedEntities',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/custom-currencies/{currencyId}/associated-entities',
+  },
+  {
+    clientCallName: 'client.v1.events.credits.customCurrencies.unarchive',
+    fullyQualifiedName: 'v1.events.credits.customCurrencies.unarchive',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/custom-currencies/{currencyId}/unarchive',
+  },
+  {
     clientCallName: 'client.v1.features.archiveFeature',
     fullyQualifiedName: 'v1.features.archiveFeature',
     httpMethod: 'post',

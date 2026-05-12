@@ -4627,7 +4627,7 @@ export interface SubscriptionListParams extends MyCursorIDPageParams {
   /**
    * Filter by pricing type. Supports comma-separated values for multiple types
    */
-  pricingType?: string;
+  pricingType?: Array<'FREE' | 'PAID' | 'CUSTOM'>;
 
   /**
    * Filter by resource ID
@@ -4638,7 +4638,7 @@ export interface SubscriptionListParams extends MyCursorIDPageParams {
    * Filter by subscription status. Supports comma-separated values for multiple
    * statuses
    */
-  status?: string;
+  status?: Array<'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'>;
 }
 
 export namespace SubscriptionListParams {
