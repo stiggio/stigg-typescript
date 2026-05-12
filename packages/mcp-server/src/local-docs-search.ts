@@ -766,12 +766,12 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'before?: string;',
       'createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; };',
       'limit?: number;',
-      'status?: string;',
+      "status?: 'Active' | 'Expired' | 'Paused'[];",
     ],
     response:
       "{ id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }",
     markdown:
-      "## list\n\n`client.v1.customers.promotionalEntitlements.list(id: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: string): { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: object | object | object; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n\n**get** `/api/v1/customers/{id}/promotional-entitlements`\n\nRetrieves a paginated list of a customer's promotional entitlements.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: string`\n  Filter by promotional entitlement status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n  Granted feature entitlement\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `endDate: string`\n  - `enumValues: string[]`\n  - `environmentId: string`\n  - `featureGroupIds: string[]`\n  - `featureId: string`\n  - `hasSoftLimit: boolean`\n  - `hasUnlimitedUsage: boolean`\n  - `isVisible: boolean`\n  - `period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'`\n  - `resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'`\n  - `resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }`\n  - `startDate: string`\n  - `status: 'Active' | 'Expired' | 'Paused'`\n  - `updatedAt: string`\n  - `usageLimit: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list('x')) {\n  console.log(promotionalEntitlementListResponse);\n}\n```",
+      "## list\n\n`client.v1.customers.promotionalEntitlements.list(id: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: 'Active' | 'Expired' | 'Paused'[]): { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: object | object | object; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n\n**get** `/api/v1/customers/{id}/promotional-entitlements`\n\nRetrieves a paginated list of a customer's promotional entitlements.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'Active' | 'Expired' | 'Paused'[]`\n  Filter by promotional entitlement status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n  Granted feature entitlement\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `endDate: string`\n  - `enumValues: string[]`\n  - `environmentId: string`\n  - `featureGroupIds: string[]`\n  - `featureId: string`\n  - `hasSoftLimit: boolean`\n  - `hasUnlimitedUsage: boolean`\n  - `isVisible: boolean`\n  - `period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'`\n  - `resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'`\n  - `resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }`\n  - `startDate: string`\n  - `status: 'Active' | 'Expired' | 'Paused'`\n  - `updatedAt: string`\n  - `usageLimit: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list('x')) {\n  console.log(promotionalEntitlementListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.customers.promotionalEntitlements.list',
@@ -941,12 +941,12 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'after?: string;',
       'before?: string;',
       'limit?: number;',
-      'vendorIdentifier?: string;',
+      'vendorIdentifier?: string[];',
     ],
     response:
       '{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }',
     markdown:
-      "## list\n\n`client.v1.customers.integrations.list(id: string, after?: string, before?: string, limit?: number, vendorIdentifier?: string): { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: object | object | object; }`\n\n**get** `/api/v1/customers/{id}/integrations`\n\nRetrieves a paginated list of a customer's external integrations (billing, CRM, etc.).\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `vendorIdentifier?: string`\n  Filter by vendor identifier. Supports comma-separated values for multiple vendors (e.g., STRIPE,HUBSPOT)\n\n### Returns\n\n- `{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n  External billing or CRM integration link\n\n  - `id: string`\n  - `syncedEntityId: string`\n  - `vendorIdentifier: string`\n  - `syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse);\n}\n```",
+      "## list\n\n`client.v1.customers.integrations.list(id: string, after?: string, before?: string, limit?: number, vendorIdentifier?: string[]): { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: object | object | object; }`\n\n**get** `/api/v1/customers/{id}/integrations`\n\nRetrieves a paginated list of a customer's external integrations (billing, CRM, etc.).\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `vendorIdentifier?: string[]`\n  Filter by vendor identifier. Supports comma-separated values for multiple vendors (e.g., STRIPE,HUBSPOT)\n\n### Returns\n\n- `{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n  External billing or CRM integration link\n\n  - `id: string`\n  - `syncedEntityId: string`\n  - `vendorIdentifier: string`\n  - `syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.customers.integrations.list',
@@ -1279,14 +1279,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'customerId?: string;',
       'limit?: number;',
       'planId?: string;',
-      'pricingType?: string;',
+      "pricingType?: 'FREE' | 'PAID' | 'CUSTOM'[];",
       'resourceId?: string;',
-      'status?: string;',
+      "status?: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'[];",
     ],
     response:
       "{ id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }",
     markdown:
-      "## list\n\n`client.v1.subscriptions.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, customerId?: string, limit?: number, planId?: string, pricingType?: string, resourceId?: string, status?: string): { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }`\n\n**get** `/api/v1/subscriptions`\n\nRetrieves a paginated list of subscriptions, with optional filters for customer, status, and plan.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `customerId?: string`\n  Filter by customer ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `planId?: string`\n  Filter by plan ID\n\n- `pricingType?: string`\n  Filter by pricing type. Supports comma-separated values for multiple types\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `status?: string`\n  Filter by subscription status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n  Customer subscription to a plan\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `customerId: string`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `planId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `startDate: string`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'`\n  - `addons?: { id: string; quantity: number; }[]`\n  - `billingCycleAnchor?: string`\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `cancellationDate?: string`\n  - `cancelReason?: string`\n  - `coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]`\n  - `currentBillingPeriodEnd?: string`\n  - `currentBillingPeriodStart?: string`\n  - `effectiveEndDate?: string`\n  - `endDate?: string`\n  - `futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]`\n  - `latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }`\n  - `metadata?: object`\n  - `minimumSpend?: { amount?: number; currency?: string; }`\n  - `payingCustomerId?: string`\n  - `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  - `prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]`\n  - `resourceId?: string`\n  - `subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `trialEndDate?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse);\n}\n```",
+      "## list\n\n`client.v1.subscriptions.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, customerId?: string, limit?: number, planId?: string, pricingType?: 'FREE' | 'PAID' | 'CUSTOM'[], resourceId?: string, status?: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'[]): { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }`\n\n**get** `/api/v1/subscriptions`\n\nRetrieves a paginated list of subscriptions, with optional filters for customer, status, and plan.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `customerId?: string`\n  Filter by customer ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `planId?: string`\n  Filter by plan ID\n\n- `pricingType?: 'FREE' | 'PAID' | 'CUSTOM'[]`\n  Filter by pricing type. Supports comma-separated values for multiple types\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `status?: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'[]`\n  Filter by subscription status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n  Customer subscription to a plan\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `customerId: string`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `planId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `startDate: string`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'`\n  - `addons?: { id: string; quantity: number; }[]`\n  - `billingCycleAnchor?: string`\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `cancellationDate?: string`\n  - `cancelReason?: string`\n  - `coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]`\n  - `currentBillingPeriodEnd?: string`\n  - `currentBillingPeriodStart?: string`\n  - `effectiveEndDate?: string`\n  - `endDate?: string`\n  - `futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]`\n  - `latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }`\n  - `metadata?: object`\n  - `minimumSpend?: { amount?: number; currency?: string; }`\n  - `payingCustomerId?: string`\n  - `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  - `prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]`\n  - `resourceId?: string`\n  - `subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `trialEndDate?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.subscriptions.list',
@@ -2189,13 +2189,13 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'before?: string;',
       'createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; };',
       'limit?: number;',
-      'status?: string;',
+      "status?: 'ACTIVE' | 'ARCHIVED'[];",
       "type?: 'FIXED' | 'PERCENTAGE';",
     ],
     response:
       "{ id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }",
     markdown:
-      "## list\n\n`client.v1.coupons.list(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: string, type?: 'FIXED' | 'PERCENTAGE'): { id: string; amountsOff: object[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n**get** `/api/v1/coupons`\n\nRetrieves a paginated list of coupons in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: string`\n  Filter by coupon status. Supports comma-separated values for multiple statuses\n\n- `type?: 'FIXED' | 'PERCENTAGE'`\n  Filter by coupon type (FIXED or PERCENTAGE)\n\n### Returns\n\n- `{ id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n  Discount instrument with percentage or fixed amount\n\n  - `id: string`\n  - `amountsOff: { amount: number; currency: string; }[]`\n  - `billingId: string`\n  - `billingLinkUrl: string`\n  - `createdAt: string`\n  - `description: string`\n  - `durationInMonths: number`\n  - `metadata: object`\n  - `name: string`\n  - `percentOff: number`\n  - `source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'`\n  - `status: 'ACTIVE' | 'ARCHIVED'`\n  - `type: 'FIXED' | 'PERCENTAGE'`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse);\n}\n```",
+      "## list\n\n`client.v1.coupons.list(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: 'ACTIVE' | 'ARCHIVED'[], type?: 'FIXED' | 'PERCENTAGE'): { id: string; amountsOff: object[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n**get** `/api/v1/coupons`\n\nRetrieves a paginated list of coupons in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'ACTIVE' | 'ARCHIVED'[]`\n  Filter by coupon status. Supports comma-separated values for multiple statuses\n\n- `type?: 'FIXED' | 'PERCENTAGE'`\n  Filter by coupon type (FIXED or PERCENTAGE)\n\n### Returns\n\n- `{ id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n  Discount instrument with percentage or fixed amount\n\n  - `id: string`\n  - `amountsOff: { amount: number; currency: string; }[]`\n  - `billingId: string`\n  - `billingLinkUrl: string`\n  - `createdAt: string`\n  - `description: string`\n  - `durationInMonths: number`\n  - `metadata: object`\n  - `name: string`\n  - `percentOff: number`\n  - `source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'`\n  - `status: 'ACTIVE' | 'ARCHIVED'`\n  - `type: 'FIXED' | 'PERCENTAGE'`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.coupons.list',
@@ -2822,6 +2822,352 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list',
+    endpoint: '/api/v1/credits/custom-currencies',
+    httpMethod: 'get',
+    summary: 'Get a list of custom currencys',
+    description:
+      'Retrieves a paginated list of custom currencies in the environment. Archived currencies are excluded by default; pass `status=ARCHIVED` (or `status=ACTIVE,ARCHIVED`) to include them.',
+    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) list',
+    qualified: 'client.v1.events.credits.customCurrencies.list',
+    params: ['after?: string;', 'before?: string;', 'limit?: number;', "status?: 'ACTIVE' | 'ARCHIVED'[];"],
+    response:
+      '{ id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }',
+    markdown:
+      "## list\n\n`client.v1.events.credits.customCurrencies.list(after?: string, before?: string, limit?: number, status?: 'ACTIVE' | 'ARCHIVED'[]): { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: object; updatedAt: string; }`\n\n**get** `/api/v1/credits/custom-currencies`\n\nRetrieves a paginated list of custom currencies in the environment. Archived currencies are excluded by default; pass `status=ARCHIVED` (or `status=ACTIVE,ARCHIVED`) to include them.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'ACTIVE' | 'ARCHIVED'[]`\n  Filter by custom currency status. Supports comma-separated values (e.g., `ACTIVE,ARCHIVED`). Defaults to `ACTIVE`.\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n  A custom currency used to denominate credit-based entitlements and pricing\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `symbol: string`\n  - `units: { plural: string; singular: string; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.events.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.customCurrencies.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.events.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.events.credits.custom_currencies.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.custom_currencies.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().events().credits().customCurrencies().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListPage;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListPage page = client.v1().events().credits().customCurrencies().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.CustomCurrencies.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.CustomCurrencies.List(context.TODO(), stigg.V1EventCreditCustomCurrencyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.custom_currencies.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.custom_currencies.list\n\nputs(page)',
+      },
+      cli: {
+        method: 'custom_currencies list',
+        example: "stigg v1:events:credits:custom-currencies list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.CustomCurrencies.List',
+        example:
+          'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Events.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'create',
+    endpoint: '/api/v1/credits/custom-currencies',
+    httpMethod: 'post',
+    summary: 'Create custom currency',
+    description: 'Creates a new custom currency in the environment.',
+    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) create',
+    qualified: 'client.v1.events.credits.customCurrencies.create',
+    params: [
+      'id: string;',
+      'displayName: string;',
+      'description?: string;',
+      'metadata?: object;',
+      'symbol?: string;',
+      'units?: { plural: string; singular: string; };',
+    ],
+    response:
+      '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
+    markdown:
+      "## create\n\n`client.v1.events.credits.customCurrencies.create(id: string, displayName: string, description?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies`\n\nCreates a new custom currency in the environment.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the new custom currency\n\n- `displayName: string`\n  The display name of the custom currency\n\n- `description?: string`\n  Description of the currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.create({ id: 'id', displayName: 'displayName' });\n\nconsole.log(customCurrency);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.customCurrencies.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.create({\n  id: 'id',\n  displayName: 'displayName',\n});\n\nconsole.log(customCurrency.data);",
+      },
+      python: {
+        method: 'v1.events.credits.custom_currencies.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency = client.v1.events.credits.custom_currencies.create(\n    id="id",\n    display_name="displayName",\n)\nprint(custom_currency.data)',
+      },
+      java: {
+        method: 'v1().events().credits().customCurrencies().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyCreateParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyCreateParams params = CustomCurrencyCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        CustomCurrencyCreateResponse customCurrency = client.v1().events().credits().customCurrencies().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.CustomCurrencies.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrency, err := client.V1.Events.Credits.CustomCurrencies.New(context.TODO(), stigg.V1EventCreditCustomCurrencyNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrency.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.custom_currencies.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency = stigg.v1.events.credits.custom_currencies.create(id: "id", display_name: "displayName")\n\nputs(custom_currency)',
+      },
+      cli: {
+        method: 'custom_currencies create',
+        example:
+          "stigg v1:events:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.CustomCurrencies.Create',
+        example:
+          'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrency = await client.V1.Events.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrency);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'update',
+    endpoint: '/api/v1/credits/custom-currencies/{currencyId}',
+    httpMethod: 'patch',
+    summary: 'Update custom currency',
+    description: 'Updates an existing custom currency. Only the supplied fields are modified.',
+    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) update',
+    qualified: 'client.v1.events.credits.customCurrencies.update',
+    params: [
+      'currencyId: string;',
+      'description?: string;',
+      'displayName?: string;',
+      'metadata?: object;',
+      'symbol?: string;',
+      'units?: { plural: string; singular: string; };',
+    ],
+    response:
+      '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
+    markdown:
+      "## update\n\n`client.v1.events.credits.customCurrencies.update(currencyId: string, description?: string, displayName?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }): { data: object; }`\n\n**patch** `/api/v1/credits/custom-currencies/{currencyId}`\n\nUpdates an existing custom currency. Only the supplied fields are modified.\n\n### Parameters\n\n- `currencyId: string`\n\n- `description?: string`\n  A human-readable description of the custom currency. Send an empty string to clear.\n\n- `displayName?: string`\n  The display name of the custom currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency. Send an empty string to clear.\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrency);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.customCurrencies.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrency.data);",
+      },
+      python: {
+        method: 'v1.events.credits.custom_currencies.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency = client.v1.events.credits.custom_currencies.update(\n    currency_id="currencyId",\n)\nprint(custom_currency.data)',
+      },
+      java: {
+        method: 'v1().events().credits().customCurrencies().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUpdateParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyUpdateResponse customCurrency = client.v1().events().credits().customCurrencies().update("currencyId");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.CustomCurrencies.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrency, err := client.V1.Events.Credits.CustomCurrencies.Update(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1EventCreditCustomCurrencyUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrency.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.custom_currencies.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency = stigg.v1.events.credits.custom_currencies.update("currencyId")\n\nputs(custom_currency)',
+      },
+      cli: {
+        method: 'custom_currencies update',
+        example:
+          "stigg v1:events:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.CustomCurrencies.Update',
+        example:
+          'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrency = await client.V1.Events.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrency);',
+      },
+      http: {
+        example:
+          "curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+      },
+    },
+  },
+  {
+    name: 'archive',
+    endpoint: '/api/v1/credits/custom-currencies/{currencyId}/archive',
+    httpMethod: 'post',
+    summary: 'Archive custom currency',
+    description:
+      'Archives a custom currency. Fails if the currency is still associated with any active plan or addon — use the associated-entities endpoint first to inspect dependencies.',
+    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) archive',
+    qualified: 'client.v1.events.credits.customCurrencies.archive',
+    params: ['currencyId: string;'],
+    response:
+      '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
+    markdown:
+      "## archive\n\n`client.v1.events.credits.customCurrencies.archive(currencyId: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/archive`\n\nArchives a custom currency. Fails if the currency is still associated with any active plan or addon — use the associated-entities endpoint first to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.customCurrencies.archive('currencyId');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.customCurrencies.archive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.customCurrencies.archive('currencyId');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.credits.custom_currencies.archive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.custom_currencies.archive(\n    "currencyId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().customCurrencies().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyArchiveParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyArchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyArchiveResponse response = client.v1().events().credits().customCurrencies().archive("currencyId");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.CustomCurrencies.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.CustomCurrencies.Archive(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.custom_currencies.archive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.custom_currencies.archive("currencyId")\n\nputs(response)',
+      },
+      cli: {
+        method: 'custom_currencies archive',
+        example:
+          "stigg v1:events:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.CustomCurrencies.Archive',
+        example:
+          'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar response = await client.V1.Events.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'unarchive',
+    endpoint: '/api/v1/credits/custom-currencies/{currencyId}/unarchive',
+    httpMethod: 'post',
+    summary: 'Unarchive custom currency',
+    description:
+      'Restores a previously archived custom currency. Fails if another active currency with the same ID already exists.',
+    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) unarchive',
+    qualified: 'client.v1.events.credits.customCurrencies.unarchive',
+    params: ['currencyId: string;'],
+    response:
+      '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
+    markdown:
+      "## unarchive\n\n`client.v1.events.credits.customCurrencies.unarchive(currencyId: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/unarchive`\n\nRestores a previously archived custom currency. Fails if another active currency with the same ID already exists.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.customCurrencies.unarchive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.credits.custom_currencies.unarchive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.custom_currencies.unarchive(\n    "currencyId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().customCurrencies().unarchive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUnarchiveParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUnarchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyUnarchiveResponse response = client.v1().events().credits().customCurrencies().unarchive("currencyId");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.CustomCurrencies.Unarchive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.CustomCurrencies.Unarchive(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.custom_currencies.unarchive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.custom_currencies.unarchive("currencyId")\n\nputs(response)',
+      },
+      cli: {
+        method: 'custom_currencies unarchive',
+        example:
+          "stigg v1:events:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.CustomCurrencies.Unarchive',
+        example:
+          'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar response = await client.V1.Events.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list_associated_entities',
+    endpoint: '/api/v1/credits/custom-currencies/{currencyId}/associated-entities',
+    httpMethod: 'get',
+    summary: 'List custom currency associated entities',
+    description:
+      'Lists the active plans and addons that reference a custom currency. Useful before archiving to inspect dependencies.',
+    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) list_associated_entities',
+    qualified: 'client.v1.events.credits.customCurrencies.listAssociatedEntities',
+    params: ['currencyId: string;'],
+    response: '{ data: { id: string; displayName: string; type: string; }[]; }',
+    markdown:
+      "## list_associated_entities\n\n`client.v1.events.credits.customCurrencies.listAssociatedEntities(currencyId: string): { data: object[]; }`\n\n**get** `/api/v1/credits/custom-currencies/{currencyId}/associated-entities`\n\nLists the active plans and addons that reference a custom currency. Useful before archiving to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; displayName: string; type: string; }[]; }`\n  List of entities (plans or addons) that reference a custom currency\n\n  - `data: { id: string; displayName: string; type: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.customCurrencies.listAssociatedEntities('currencyId');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.credits.customCurrencies.listAssociatedEntities',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.customCurrencies.listAssociatedEntities(\n  'currencyId',\n);\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.credits.custom_currencies.list_associated_entities',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.custom_currencies.list_associated_entities(\n    "currencyId",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().credits().customCurrencies().listAssociatedEntities',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListAssociatedEntitiesResponse response = client.v1().events().credits().customCurrencies().listAssociatedEntities("currencyId");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Credits.CustomCurrencies.ListAssociatedEntities',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.CustomCurrencies.ListAssociatedEntities(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.credits.custom_currencies.list_associated_entities',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.custom_currencies.list_associated_entities("currencyId")\n\nputs(response)',
+      },
+      cli: {
+        method: 'custom_currencies list_associated_entities',
+        example:
+          "stigg v1:events:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      csharp: {
+        method: 'V1.Events.Credits.CustomCurrencies.ListAssociatedEntities',
+        example:
+          'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Events.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/associated-entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'retrieve_feature',
     endpoint: '/api/v1/features/{id}',
     httpMethod: 'get',
@@ -3019,15 +3365,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'after?: string;',
       'before?: string;',
       'createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; };',
-      'featureType?: string;',
+      "featureType?: 'BOOLEAN' | 'NUMBER' | 'ENUM'[];",
       'limit?: number;',
-      'meterType?: string;',
-      'status?: string;',
+      "meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'[];",
+      "status?: 'NEW' | 'SUSPENDED' | 'ACTIVE'[];",
     ],
     response:
       "{ id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }",
     markdown:
-      "## list_features\n\n`client.v1.features.listFeatures(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, featureType?: string, limit?: number, meterType?: string, status?: string): { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: object[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: object; updatedAt: string; }`\n\n**get** `/api/v1/features`\n\nRetrieves a paginated list of features in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `featureType?: string`\n  Filter by feature type. Supports comma-separated values for multiple types\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `meterType?: string`\n  Filter by meter type. Supports comma-separated values for multiple types\n\n- `status?: string`\n  Filter by feature status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n  Feature configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `enumConfiguration: { displayName: string; value: string; }[]`\n  - `featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'`\n  - `featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'`\n  - `featureUnits: string`\n  - `featureUnitsPlural: string`\n  - `metadata: object`\n  - `meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'`\n  - `unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse);\n}\n```",
+      "## list_features\n\n`client.v1.features.listFeatures(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, featureType?: 'BOOLEAN' | 'NUMBER' | 'ENUM'[], limit?: number, meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'[], status?: 'NEW' | 'SUSPENDED' | 'ACTIVE'[]): { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: object[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: object; updatedAt: string; }`\n\n**get** `/api/v1/features`\n\nRetrieves a paginated list of features in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `featureType?: 'BOOLEAN' | 'NUMBER' | 'ENUM'[]`\n  Filter by feature type. Supports comma-separated values for multiple types\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'[]`\n  Filter by meter type. Supports comma-separated values for multiple types\n\n- `status?: 'NEW' | 'SUSPENDED' | 'ACTIVE'[]`\n  Filter by feature status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n  Feature configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `enumConfiguration: { displayName: string; value: string; }[]`\n  - `featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'`\n  - `featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'`\n  - `featureUnits: string`\n  - `featureUnitsPlural: string`\n  - `metadata: object`\n  - `meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'`\n  - `unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.features.listFeatures',
@@ -3190,12 +3536,12 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; };',
       'limit?: number;',
       'productId?: string;',
-      'status?: string;',
+      "status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[];",
     ],
     response:
       "{ id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }",
     markdown:
-      "## list\n\n`client.v1.addons.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: string): { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: object[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/addons`\n\nRetrieves a paginated list of addons in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: string`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Addon configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `dependencies: string[]`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `maxQuantity: number`\n  - `metadata: object`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse);\n}\n```",
+      "## list\n\n`client.v1.addons.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[]): { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: object[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/addons`\n\nRetrieves a paginated list of addons in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[]`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Addon configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `dependencies: string[]`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `maxQuantity: number`\n  - `metadata: object`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.addons.list',
@@ -3937,12 +4283,12 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; };',
       'limit?: number;',
       'productId?: string;',
-      'status?: string;',
+      "status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[];",
     ],
     response:
       "{ id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }",
     markdown:
-      "## list\n\n`client.v1.plans.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: string): { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: object; description: string; displayName: string; entitlements: object[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/plans`\n\nRetrieves a paginated list of plans in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: string`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Plan configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `compatibleAddonIds: string[]`\n  - `createdAt: string`\n  - `defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `metadata: object`\n  - `parentPlanId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse);\n}\n```",
+      "## list\n\n`client.v1.plans.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[]): { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: object; description: string; displayName: string; entitlements: object[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/plans`\n\nRetrieves a paginated list of plans in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[]`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Plan configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `compatibleAddonIds: string[]`\n  - `createdAt: string`\n  - `defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `metadata: object`\n  - `parentPlanId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.plans.list',
@@ -4673,12 +5019,12 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'before?: string;',
       'createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; };',
       'limit?: number;',
-      'status?: string;',
+      "status?: 'PUBLISHED' | 'ARCHIVED'[];",
     ],
     response:
       "{ id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }",
     markdown:
-      "## list_products\n\n`client.v1.products.listProducts(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: string): { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: object; }`\n\n**get** `/api/v1/products`\n\nRetrieves a paginated list of products in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: string`\n  Filter by product status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n  Product configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `multipleSubscriptions: boolean`\n  - `status: 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse);\n}\n```",
+      "## list_products\n\n`client.v1.products.listProducts(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: 'PUBLISHED' | 'ARCHIVED'[]): { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: object; }`\n\n**get** `/api/v1/products`\n\nRetrieves a paginated list of products in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'PUBLISHED' | 'ARCHIVED'[]`\n  Filter by product status. Supports comma-separated values for multiple statuses\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n  Product configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `multipleSubscriptions: boolean`\n  - `status: 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.products.listProducts',

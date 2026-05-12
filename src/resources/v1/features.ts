@@ -402,17 +402,17 @@ export interface FeatureListFeaturesParams extends MyCursorIDPageParams {
   /**
    * Filter by feature type. Supports comma-separated values for multiple types
    */
-  featureType?: string;
+  featureType?: Array<'BOOLEAN' | 'NUMBER' | 'ENUM'>;
 
   /**
    * Filter by meter type. Supports comma-separated values for multiple types
    */
-  meterType?: string;
+  meterType?: Array<'None' | 'FLUCTUATING' | 'INCREMENTAL'>;
 
   /**
    * Filter by feature status. Supports comma-separated values for multiple statuses
    */
-  status?: string;
+  status?: Array<'NEW' | 'SUSPENDED' | 'ACTIVE'>;
 }
 
 export namespace FeatureListFeaturesParams {
