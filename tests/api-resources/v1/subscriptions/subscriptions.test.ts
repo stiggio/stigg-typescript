@@ -133,7 +133,7 @@ describe('resource subscriptions', () => {
           charges: [
             {
               id: 'id',
-              quantity: 1,
+              quantity: 0,
               type: 'FEATURE',
             },
           ],
@@ -190,7 +190,7 @@ describe('resource subscriptions', () => {
         },
         promotionCode: 'promotionCode',
       },
-      billableFeatures: [{ featureId: 'featureId', quantity: 1 }],
+      billableFeatures: [{ featureId: 'featureId', quantity: 0 }],
       billingCountryCode: 'billingCountryCode',
       billingCycleAnchor: 'UNCHANGED',
       billingInformation: {
@@ -217,7 +217,7 @@ describe('resource subscriptions', () => {
       charges: [
         {
           id: 'id',
-          quantity: 1,
+          quantity: 0,
           type: 'FEATURE',
         },
       ],
@@ -230,7 +230,7 @@ describe('resource subscriptions', () => {
         trialEndBehavior: 'CONVERT_TO_PAID',
         trialEndDate: '2019-12-27T18:11:19.117Z',
       },
-      unitQuantity: 1,
+      unitQuantity: 0,
     });
   });
 
@@ -295,7 +295,7 @@ describe('resource subscriptions', () => {
       charges: [
         {
           id: 'id',
-          quantity: 1,
+          quantity: 0,
           type: 'FEATURE',
         },
       ],
@@ -358,7 +358,7 @@ describe('resource subscriptions', () => {
         trialEndBehavior: 'CONVERT_TO_PAID',
         trialEndDate: '2019-12-27T18:11:19.117Z',
       },
-      unitQuantity: 1,
+      unitQuantity: 0,
     });
   });
 

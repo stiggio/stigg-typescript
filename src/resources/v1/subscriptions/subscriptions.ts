@@ -4789,7 +4789,7 @@ export namespace SubscriptionImportParams {
       id: string;
 
       /**
-       * Charge quantity
+       * Charge quantity. Minimum is 0 (zero is allowed).
        */
       quantity: number;
 
@@ -4885,7 +4885,7 @@ export interface SubscriptionPreviewParams {
   trialOverrideConfiguration?: SubscriptionPreviewParams.TrialOverrideConfiguration;
 
   /**
-   * Unit quantity for per-unit pricing
+   * Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
    */
   unitQuantity?: number;
 }
@@ -5118,7 +5118,7 @@ export namespace SubscriptionPreviewParams {
     featureId: string;
 
     /**
-     * Quantity of feature units
+     * Quantity of feature units. Minimum is 0 (zero is allowed).
      */
     quantity: number;
   }
@@ -5227,7 +5227,7 @@ export namespace SubscriptionPreviewParams {
     id: string;
 
     /**
-     * Charge quantity
+     * Charge quantity. Minimum is 0 (zero is allowed).
      */
     quantity: number;
 
@@ -5367,7 +5367,7 @@ export interface SubscriptionProvisionParams {
   trialOverrideConfiguration?: SubscriptionProvisionParams.TrialOverrideConfiguration;
 
   /**
-   * Unit quantity
+   * Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
    */
   unitQuantity?: number;
 }
@@ -5703,7 +5703,7 @@ export namespace SubscriptionProvisionParams {
     id: string;
 
     /**
-     * Charge quantity
+     * Charge quantity. Minimum is 0 (zero is allowed).
      */
     quantity: number;
 
