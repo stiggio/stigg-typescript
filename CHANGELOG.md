@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.3 (2026-05-14)
+
+Full Changelog: [v0.1.0-beta.2...v0.1.0-beta.3](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.2...v0.1.0-beta.3)
+
+### Features
+
+* **api:** fix credits resource ([a9c3b5a](https://github.com/stiggio/stigg-typescript/commit/a9c3b5a87a9783ecc98ef8130b1be1b353d6509c))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([144bfc0](https://github.com/stiggio/stigg-typescript/commit/144bfc0df9d39d796be2997303e971dcc832c9ad))
+* **internal:** regenerate SDK with no functional changes ([e13b802](https://github.com/stiggio/stigg-typescript/commit/e13b802bbd102e33fcd757853e209cad004fc1c7))
+
 ## 0.1.0-beta.2 (2026-05-12)
 
 Full Changelog: [v0.1.0-beta.1...v0.1.0-beta.2](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.1...v0.1.0-beta.2)
