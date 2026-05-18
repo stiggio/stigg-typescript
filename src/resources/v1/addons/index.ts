@@ -4,13 +4,16 @@ export {
   Addons,
   type Addon,
   type AddonListResponse,
+  type AddonListChargesResponse,
   type AddonPublishResponse,
   type AddonRemoveDraftResponse,
   type AddonCreateParams,
   type AddonUpdateParams,
   type AddonListParams,
+  type AddonListChargesParams,
   type AddonPublishParams,
   type AddonListResponsesMyCursorIDPage,
+  type AddonListChargesResponsesMyCursorIDPage,
 } from './addons';
 export {
   Entitlements,
