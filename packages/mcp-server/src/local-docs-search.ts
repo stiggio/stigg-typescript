@@ -3977,6 +3977,59 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list_charges',
+    endpoint: '/api/v1/addons/{id}/charges',
+    httpMethod: 'get',
+    summary: 'List addon charges',
+    description: 'Retrieves the list of charges configured on an addon.',
+    stainlessPath: '(resource) v1.addons > (method) list_charges',
+    qualified: 'client.v1.addons.listCharges',
+    params: ['id: string;', 'after?: string;', 'before?: string;', 'limit?: number;'],
+    response:
+      "{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }",
+    markdown:
+      "## list_charges\n\n`client.v1.addons.listCharges(id: string, after?: string, before?: string, limit?: number): { id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: object; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: object; tiers?: object[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n\n**get** `/api/v1/addons/{id}/charges`\n\nRetrieves the list of charges configured on an addon.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n### Returns\n\n- `{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n  A single pricing row on a plan or addon. Each charge encodes one (billingPeriod, billingModel, billingCadence, billingCountryCode) combination. Plans and addons own many of these — one per currency / billing period / feature.\n\n  - `id: string`\n  - `billingCadence: 'RECURRING' | 'ONE_OFF'`\n  - `billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'`\n  - `billingPeriod: 'MONTHLY' | 'ANNUALLY'`\n  - `createdAt: string`\n  - `billingCountryCode?: string`\n  - `billingId?: string`\n  - `blockSize?: number`\n  - `creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'`\n  - `creditRate?: { amount: number; currencyId: string; costFormula?: string; }`\n  - `crmId?: string`\n  - `crmLinkUrl?: string`\n  - `featureId?: string`\n  - `maxUnitQuantity?: number`\n  - `minUnitQuantity?: number`\n  - `price?: { amount: number; currency: string; }`\n  - `tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]`\n  - `tiersMode?: 'VOLUME' | 'GRADUATED'`\n  - `topUpCustomCurrencyId?: string`\n  - `usedInSubscriptions?: boolean`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const addonListChargesResponse of client.v1.addons.listCharges('x')) {\n  console.log(addonListChargesResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.addons.listCharges',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const addonListChargesResponse of client.v1.addons.listCharges('x')) {\n  console.log(addonListChargesResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.addons.list_charges',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.addons.list_charges(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().addons().listCharges',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonListChargesPage;\nimport io.stigg.models.v1.addons.AddonListChargesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonListChargesPage page = client.v1().addons().listCharges("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Addons.ListCharges',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.ListCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonListChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.addons.list_charges',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.addons.list_charges("x")\n\nputs(page)',
+      },
+      cli: {
+        method: 'addons list_charges',
+        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Addons.ListCharges',
+        example:
+          'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example: 'curl https://api.stigg.io/api/v1/addons/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'list',
     endpoint: '/api/v1/addons/{addonId}/entitlements',
     httpMethod: 'get',
@@ -4655,6 +4708,113 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list_charges',
+    endpoint: '/api/v1/plans/{id}/charges',
+    httpMethod: 'get',
+    summary: 'List plan charges',
+    description: 'Retrieves the list of charges configured on a plan.',
+    stainlessPath: '(resource) v1.plans > (method) list_charges',
+    qualified: 'client.v1.plans.listCharges',
+    params: ['id: string;', 'after?: string;', 'before?: string;', 'limit?: number;'],
+    response:
+      "{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }",
+    markdown:
+      "## list_charges\n\n`client.v1.plans.listCharges(id: string, after?: string, before?: string, limit?: number): { id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: object; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: object; tiers?: object[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n\n**get** `/api/v1/plans/{id}/charges`\n\nRetrieves the list of charges configured on a plan.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n### Returns\n\n- `{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n  A single pricing row on a plan or addon. Each charge encodes one (billingPeriod, billingModel, billingCadence, billingCountryCode) combination. Plans and addons own many of these — one per currency / billing period / feature.\n\n  - `id: string`\n  - `billingCadence: 'RECURRING' | 'ONE_OFF'`\n  - `billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'`\n  - `billingPeriod: 'MONTHLY' | 'ANNUALLY'`\n  - `createdAt: string`\n  - `billingCountryCode?: string`\n  - `billingId?: string`\n  - `blockSize?: number`\n  - `creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'`\n  - `creditRate?: { amount: number; currencyId: string; costFormula?: string; }`\n  - `crmId?: string`\n  - `crmLinkUrl?: string`\n  - `featureId?: string`\n  - `maxUnitQuantity?: number`\n  - `minUnitQuantity?: number`\n  - `price?: { amount: number; currency: string; }`\n  - `tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]`\n  - `tiersMode?: 'VOLUME' | 'GRADUATED'`\n  - `topUpCustomCurrencyId?: string`\n  - `usedInSubscriptions?: boolean`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListChargesResponse of client.v1.plans.listCharges('x')) {\n  console.log(planListChargesResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.listCharges',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const planListChargesResponse of client.v1.plans.listCharges('x')) {\n  console.log(planListChargesResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.plans.list_charges',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.plans.list_charges(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().plans().listCharges',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListChargesPage;\nimport io.stigg.models.v1.plans.PlanListChargesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListChargesPage page = client.v1().plans().listCharges("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.ListCharges',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.ListCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanListChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.list_charges',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.plans.list_charges("x")\n\nputs(page)',
+      },
+      cli: {
+        method: 'plans list_charges',
+        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Plans.ListCharges',
+        example:
+          'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example: 'curl https://api.stigg.io/api/v1/plans/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list_overage_charges',
+    endpoint: '/api/v1/plans/{id}/overage-charges',
+    httpMethod: 'get',
+    summary: 'List plan overage charges',
+    description: 'Retrieves the list of overage charges configured on a plan.',
+    stainlessPath: '(resource) v1.plans > (method) list_overage_charges',
+    qualified: 'client.v1.plans.listOverageCharges',
+    params: ['id: string;', 'after?: string;', 'before?: string;', 'limit?: number;'],
+    response:
+      "{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }",
+    markdown:
+      "## list_overage_charges\n\n`client.v1.plans.listOverageCharges(id: string, after?: string, before?: string, limit?: number): { id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: object; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: object; tiers?: object[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n\n**get** `/api/v1/plans/{id}/overage-charges`\n\nRetrieves the list of overage charges configured on a plan.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n### Returns\n\n- `{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n  A single pricing row on a plan or addon. Each charge encodes one (billingPeriod, billingModel, billingCadence, billingCountryCode) combination. Plans and addons own many of these — one per currency / billing period / feature.\n\n  - `id: string`\n  - `billingCadence: 'RECURRING' | 'ONE_OFF'`\n  - `billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'`\n  - `billingPeriod: 'MONTHLY' | 'ANNUALLY'`\n  - `createdAt: string`\n  - `billingCountryCode?: string`\n  - `billingId?: string`\n  - `blockSize?: number`\n  - `creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'`\n  - `creditRate?: { amount: number; currencyId: string; costFormula?: string; }`\n  - `crmId?: string`\n  - `crmLinkUrl?: string`\n  - `featureId?: string`\n  - `maxUnitQuantity?: number`\n  - `minUnitQuantity?: number`\n  - `price?: { amount: number; currency: string; }`\n  - `tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]`\n  - `tiersMode?: 'VOLUME' | 'GRADUATED'`\n  - `topUpCustomCurrencyId?: string`\n  - `usedInSubscriptions?: boolean`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListOverageChargesResponse of client.v1.plans.listOverageCharges('x')) {\n  console.log(planListOverageChargesResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.plans.listOverageCharges',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const planListOverageChargesResponse of client.v1.plans.listOverageCharges('x')) {\n  console.log(planListOverageChargesResponse.id);\n}",
+      },
+      python: {
+        method: 'v1.plans.list_overage_charges',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.plans.list_overage_charges(\n    id="x",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1().plans().listOverageCharges',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListOverageChargesPage;\nimport io.stigg.models.v1.plans.PlanListOverageChargesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListOverageChargesPage page = client.v1().plans().listOverageCharges("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Plans.ListOverageCharges',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.ListOverageCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanListOverageChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1.plans.list_overage_charges',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.plans.list_overage_charges("x")\n\nputs(page)',
+      },
+      cli: {
+        method: 'plans list_overage_charges',
+        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Plans.ListOverageCharges',
+        example:
+          'PlanListOverageChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListOverageCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/plans/$ID/overage-charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },

@@ -207,6 +207,7 @@ Types:
 
 - <code><a href="./src/resources/v1/addons/addons.ts">Addon</a></code>
 - <code><a href="./src/resources/v1/addons/addons.ts">AddonListResponse</a></code>
+- <code><a href="./src/resources/v1/addons/addons.ts">AddonListChargesResponse</a></code>
 - <code><a href="./src/resources/v1/addons/addons.ts">AddonPublishResponse</a></code>
 - <code><a href="./src/resources/v1/addons/addons.ts">AddonRemoveDraftResponse</a></code>
 
@@ -218,6 +219,7 @@ Methods:
 - <code title="get /api/v1/addons">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">list</a>({ ...params }) -> AddonListResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/addons/{id}/archive">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">archive</a>(id) -> Addon</code>
 - <code title="post /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">createDraft</a>(id) -> Addon</code>
+- <code title="get /api/v1/addons/{id}/charges">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">listCharges</a>(id, { ...params }) -> AddonListChargesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/addons/{id}/publish">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">publish</a>(id, { ...params }) -> AddonPublishResponse</code>
 - <code title="delete /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">removeDraft</a>(id) -> AddonRemoveDraftResponse</code>
 
@@ -242,6 +244,8 @@ Types:
 
 - <code><a href="./src/resources/v1/plans/plans.ts">Plan</a></code>
 - <code><a href="./src/resources/v1/plans/plans.ts">PlanListResponse</a></code>
+- <code><a href="./src/resources/v1/plans/plans.ts">PlanListChargesResponse</a></code>
+- <code><a href="./src/resources/v1/plans/plans.ts">PlanListOverageChargesResponse</a></code>
 - <code><a href="./src/resources/v1/plans/plans.ts">PlanPublishResponse</a></code>
 - <code><a href="./src/resources/v1/plans/plans.ts">PlanRemoveDraftResponse</a></code>
 
@@ -253,6 +257,8 @@ Methods:
 - <code title="get /api/v1/plans">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">list</a>({ ...params }) -> PlanListResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/plans/{id}/archive">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">archive</a>(id) -> Plan</code>
 - <code title="post /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">createDraft</a>(id) -> Plan</code>
+- <code title="get /api/v1/plans/{id}/charges">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">listCharges</a>(id, { ...params }) -> PlanListChargesResponsesMyCursorIDPage</code>
+- <code title="get /api/v1/plans/{id}/overage-charges">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">listOverageCharges</a>(id, { ...params }) -> PlanListOverageChargesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/plans/{id}/publish">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">publish</a>(id, { ...params }) -> PlanPublishResponse</code>
 - <code title="delete /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">removeDraft</a>(id) -> PlanRemoveDraftResponse</code>
 

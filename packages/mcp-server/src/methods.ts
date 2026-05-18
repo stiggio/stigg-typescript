@@ -401,6 +401,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/addons/{id}/draft',
   },
   {
+    clientCallName: 'client.v1.addons.listCharges',
+    fullyQualifiedName: 'v1.addons.listCharges',
+    httpMethod: 'get',
+    httpPath: '/api/v1/addons/{id}/charges',
+  },
+  {
     clientCallName: 'client.v1.addons.publish',
     fullyQualifiedName: 'v1.addons.publish',
     httpMethod: 'post',
@@ -471,6 +477,18 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.plans.createDraft',
     httpMethod: 'post',
     httpPath: '/api/v1/plans/{id}/draft',
+  },
+  {
+    clientCallName: 'client.v1.plans.listCharges',
+    fullyQualifiedName: 'v1.plans.listCharges',
+    httpMethod: 'get',
+    httpPath: '/api/v1/plans/{id}/charges',
+  },
+  {
+    clientCallName: 'client.v1.plans.listOverageCharges',
+    fullyQualifiedName: 'v1.plans.listOverageCharges',
+    httpMethod: 'get',
+    httpPath: '/api/v1/plans/{id}/overage-charges',
   },
   {
     clientCallName: 'client.v1.plans.publish',

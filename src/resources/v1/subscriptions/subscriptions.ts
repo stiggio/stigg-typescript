@@ -4780,7 +4780,8 @@ export namespace SubscriptionImportParams {
     }
 
     /**
-     * Charge item
+     * A charge selection for a subscription (references a catalog charge with a
+     * quantity).
      */
     export interface Charge {
       /**
@@ -5218,7 +5219,8 @@ export namespace SubscriptionPreviewParams {
   }
 
   /**
-   * Charge item
+   * A charge selection for a subscription (references a catalog charge with a
+   * quantity).
    */
   export interface Charge {
     /**
@@ -5694,7 +5696,8 @@ export namespace SubscriptionProvisionParams {
   }
 
   /**
-   * Charge item
+   * A charge selection for a subscription (references a catalog charge with a
+   * quantity).
    */
   export interface Charge {
     /**
