@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.4 (2026-05-18)
+
+Full Changelog: [v0.1.0-beta.3...v0.1.0-beta.4](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.3...v0.1.0-beta.4)
+
+### Features
+
+* **api:** add listCharges to addons, listCharges/listOverageCharges to plans ([99ad001](https://github.com/stiggio/stigg-typescript/commit/99ad001ca8533ada4683869b7202363d9f142a73))
+
 ## 0.1.0-beta.3 (2026-05-14)
 
 Full Changelog: [v0.1.0-beta.2...v0.1.0-beta.3](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.2...v0.1.0-beta.3)
