@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-beta.5 (2026-05-19)
+
+Full Changelog: [v0.1.0-beta.4...v0.1.0-beta.5](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.4...v0.1.0-beta.5)
+
+### Bug Fixes
+
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([618e1a0](https://github.com/stiggio/stigg-typescript/commit/618e1a0b308836bddd40cbf1520f3ab09d3a48be))
+
+
+### Chores
+
+* **tests:** remove redundant File import ([09444fb](https://github.com/stiggio/stigg-typescript/commit/09444fbe1d9890e03eef3906d30ef73a38ea04e9))
+
 ## 0.1.0-beta.4 (2026-05-18)
 
 Full Changelog: [v0.1.0-beta.3...v0.1.0-beta.4](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.3...v0.1.0-beta.4)
