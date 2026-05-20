@@ -1,19 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
+import { APIResource } from '../../../core/resource';
 import * as CustomCurrenciesAPI from './custom-currencies';
 import {
   CustomCurrencies,
-  CustomCurrencyArchiveResponse,
   CustomCurrencyCreateParams,
-  CustomCurrencyCreateResponse,
   CustomCurrencyListAssociatedEntitiesResponse,
   CustomCurrencyListParams,
   CustomCurrencyListResponse,
   CustomCurrencyListResponsesMyCursorIDPage,
-  CustomCurrencyUnarchiveResponse,
+  CustomCurrencyResponse,
   CustomCurrencyUpdateParams,
-  CustomCurrencyUpdateResponse,
 } from './custom-currencies';
 import * as GrantsAPI from './grants';
 import {
@@ -24,9 +21,9 @@ import {
   GrantListResponsesMyCursorIDPage,
   Grants,
 } from './grants';
-import { APIPromise } from '../../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../core/pagination';
-import { RequestOptions } from '../../../../internal/request-options';
+import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
 
 export class Credits extends APIResource {
   grants: GrantsAPI.Grants = new GrantsAPI.Grants(this._client);
@@ -388,12 +385,9 @@ export declare namespace Credits {
 
   export {
     CustomCurrencies as CustomCurrencies,
-    type CustomCurrencyCreateResponse as CustomCurrencyCreateResponse,
-    type CustomCurrencyUpdateResponse as CustomCurrencyUpdateResponse,
+    type CustomCurrencyResponse as CustomCurrencyResponse,
     type CustomCurrencyListResponse as CustomCurrencyListResponse,
-    type CustomCurrencyArchiveResponse as CustomCurrencyArchiveResponse,
     type CustomCurrencyListAssociatedEntitiesResponse as CustomCurrencyListAssociatedEntitiesResponse,
-    type CustomCurrencyUnarchiveResponse as CustomCurrencyUnarchiveResponse,
     type CustomCurrencyListResponsesMyCursorIDPage as CustomCurrencyListResponsesMyCursorIDPage,
     type CustomCurrencyCreateParams as CustomCurrencyCreateParams,
     type CustomCurrencyUpdateParams as CustomCurrencyUpdateParams,
