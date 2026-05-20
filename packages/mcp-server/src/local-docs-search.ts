@@ -2461,8 +2461,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'Get credit usage',
     description:
       'Retrieves credit usage time-series data for a customer, grouped by feature, over a specified time range.',
-    stainlessPath: '(resource) v1.events.credits > (method) get_usage',
-    qualified: 'client.v1.events.credits.getUsage',
+    stainlessPath: '(resource) v1.credits > (method) get_usage',
+    qualified: 'client.v1.credits.getUsage',
     params: [
       'customerId: string;',
       'currencyId?: string;',
@@ -2474,42 +2474,41 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       '{ data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: object[]; totalCredits: number; }[]; }; }',
     markdown:
-      "## get_usage\n\n`client.v1.events.credits.getUsage(customerId: string, currencyId?: string, endDate?: string, resourceId?: string, startDate?: string, timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'): { data: object; }`\n\n**get** `/api/v1/credits/usage`\n\nRetrieves credit usage time-series data for a customer, grouped by feature, over a specified time range.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `endDate?: string`\n  End date for the credit usage time range (ISO 8601). Defaults to now when startDate is provided\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `startDate?: string`\n  Start date for the credit usage time range (ISO 8601). Takes precedence over timeRange when provided\n\n- `timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'`\n  Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults to LAST_MONTH\n\n### Returns\n\n- `{ data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: object[]; totalCredits: number; }[]; }; }`\n  Response object\n\n  - `data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: { timestamp: string; value: number; }[]; totalCredits: number; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response);\n```",
+      "## get_usage\n\n`client.v1.credits.getUsage(customerId: string, currencyId?: string, endDate?: string, resourceId?: string, startDate?: string, timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'): { data: object; }`\n\n**get** `/api/v1/credits/usage`\n\nRetrieves credit usage time-series data for a customer, grouped by feature, over a specified time range.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `endDate?: string`\n  End date for the credit usage time range (ISO 8601). Defaults to now when startDate is provided\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `startDate?: string`\n  Start date for the credit usage time range (ISO 8601). Takes precedence over timeRange when provided\n\n- `timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'`\n  Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults to LAST_MONTH\n\n### Returns\n\n- `{ data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: object[]; totalCredits: number; }[]; }; }`\n  Response object\n\n  - `data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; series: { featureId: string; featureName: string; points: { timestamp: string; value: number; }[]; totalCredits: number; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.getUsage',
+        method: 'client.v1.credits.getUsage',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response.data);",
       },
       python: {
-        method: 'v1.events.credits.get_usage',
+        method: 'v1.credits.get_usage',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.get_usage(\n    customer_id="customerId",\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.credits.get_usage(\n    customer_id="customerId",\n)\nprint(response.data)',
       },
       java: {
-        method: 'v1().events().credits().getUsage',
+        method: 'v1().credits().getUsage',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditGetUsageParams;\nimport io.stigg.models.v1.events.credits.CreditGetUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetUsageParams params = CreditGetUsageParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditGetUsageResponse response = client.v1().events().credits().getUsage(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditGetUsageParams;\nimport io.stigg.models.v1.credits.CreditGetUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetUsageParams params = CreditGetUsageParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditGetUsageResponse response = client.v1().credits().getUsage(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.GetUsage',
+        method: 'client.V1.Credits.GetUsage',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.GetUsage(context.TODO(), stigg.V1EventCreditGetUsageParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetUsage(context.TODO(), stigg.V1CreditGetUsageParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.get_usage',
+        method: 'v1.credits.get_usage',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.get_usage(customer_id: "customerId")\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.credits.get_usage(customer_id: "customerId")\n\nputs(response)',
       },
       cli: {
         method: 'credits get_usage',
-        example:
-          "stigg v1:events:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       csharp: {
-        method: 'V1.Events.Credits.GetUsage',
+        method: 'V1.Credits.GetUsage',
         example:
-          'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Events.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
+          'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
         example: 'curl https://api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
@@ -2523,48 +2522,48 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'Get automatic recharge configuration',
     description:
       'Retrieves the automatic recharge configuration for a customer and currency. Returns default settings if no configuration exists.',
-    stainlessPath: '(resource) v1.events.credits > (method) get_auto_recharge',
-    qualified: 'client.v1.events.credits.getAutoRecharge',
+    stainlessPath: '(resource) v1.credits > (method) get_auto_recharge',
+    qualified: 'client.v1.credits.getAutoRecharge',
     params: ['currencyId: string;', 'customerId: string;'],
     response:
       "{ data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }; }",
     markdown:
-      "## get_auto_recharge\n\n`client.v1.events.credits.getAutoRecharge(currencyId: string, customerId: string): { data: object; }`\n\n**get** `/api/v1/credits/auto-recharge`\n\nRetrieves the automatic recharge configuration for a customer and currency. Returns default settings if no configuration exists.\n\n### Parameters\n\n- `currencyId: string`\n  Filter by currency ID (required)\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.getAutoRecharge({ currencyId: 'currencyId', customerId: 'customerId' });\n\nconsole.log(response);\n```",
+      "## get_auto_recharge\n\n`client.v1.credits.getAutoRecharge(currencyId: string, customerId: string): { data: object; }`\n\n**get** `/api/v1/credits/auto-recharge`\n\nRetrieves the automatic recharge configuration for a customer and currency. Returns default settings if no configuration exists.\n\n### Parameters\n\n- `currencyId: string`\n  Filter by currency ID (required)\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.getAutoRecharge({ currencyId: 'currencyId', customerId: 'customerId' });\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.getAutoRecharge',
+        method: 'client.v1.credits.getAutoRecharge',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.getAutoRecharge({\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n});\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.credits.getAutoRecharge({\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n});\n\nconsole.log(response.data);",
       },
       python: {
-        method: 'v1.events.credits.get_auto_recharge',
+        method: 'v1.credits.get_auto_recharge',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.get_auto_recharge(\n    currency_id="currencyId",\n    customer_id="customerId",\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.credits.get_auto_recharge(\n    currency_id="currencyId",\n    customer_id="customerId",\n)\nprint(response.data)',
       },
       java: {
-        method: 'v1().events().credits().getAutoRecharge',
+        method: 'v1().credits().getAutoRecharge',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditGetAutoRechargeParams;\nimport io.stigg.models.v1.events.credits.CreditGetAutoRechargeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetAutoRechargeParams params = CreditGetAutoRechargeParams.builder()\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        CreditGetAutoRechargeResponse response = client.v1().events().credits().getAutoRecharge(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditGetAutoRechargeParams;\nimport io.stigg.models.v1.credits.CreditGetAutoRechargeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetAutoRechargeParams params = CreditGetAutoRechargeParams.builder()\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        CreditGetAutoRechargeResponse response = client.v1().credits().getAutoRecharge(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.GetAutoRecharge',
+        method: 'client.V1.Credits.GetAutoRecharge',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.GetAutoRecharge(context.TODO(), stigg.V1EventCreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetAutoRecharge(context.TODO(), stigg.V1CreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.get_auto_recharge',
+        method: 'v1.credits.get_auto_recharge',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.get_auto_recharge(currency_id: "currencyId", customer_id: "customerId")\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.credits.get_auto_recharge(currency_id: "currencyId", customer_id: "customerId")\n\nputs(response)',
       },
       cli: {
         method: 'credits get_auto_recharge',
         example:
-          "stigg v1:events:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
+          "stigg v1:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
       },
       csharp: {
-        method: 'V1.Events.Credits.GetAutoRecharge',
+        method: 'V1.Credits.GetAutoRecharge',
         example:
-          'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Events.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
+          'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
         example:
@@ -2578,8 +2577,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'get',
     summary: 'Get a list of credit ledger events',
     description: 'Retrieves a paginated list of credit ledger events for a customer.',
-    stainlessPath: '(resource) v1.events.credits > (method) list_ledger',
-    qualified: 'client.v1.events.credits.listLedger',
+    stainlessPath: '(resource) v1.credits > (method) list_ledger',
+    qualified: 'client.v1.credits.listLedger',
     params: [
       'customerId: string;',
       'after?: string;',
@@ -2591,42 +2590,41 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       '{ amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }',
     markdown:
-      "## list_ledger\n\n`client.v1.events.credits.listLedger(customerId: string, after?: string, before?: string, currencyId?: string, limit?: number, resourceId?: string): { amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n\n**get** `/api/v1/credits/ledger`\n\nRetrieves a paginated list of credit ledger events for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID\n\n### Returns\n\n- `{ amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n  A credit ledger event representing a change to credit balance\n\n  - `amount: number`\n  - `creditCurrencyId: string`\n  - `creditGrantId: string`\n  - `customerId: string`\n  - `eventId: string`\n  - `eventType: string`\n  - `featureId: string`\n  - `resourceId: string`\n  - `timestamp: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.events.credits.listLedger({ customerId: 'customerId' })) {\n  console.log(creditListLedgerResponse);\n}\n```",
+      "## list_ledger\n\n`client.v1.credits.listLedger(customerId: string, after?: string, before?: string, currencyId?: string, limit?: number, resourceId?: string): { amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n\n**get** `/api/v1/credits/ledger`\n\nRetrieves a paginated list of credit ledger events for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID\n\n### Returns\n\n- `{ amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n  A credit ledger event representing a change to credit balance\n\n  - `amount: number`\n  - `creditCurrencyId: string`\n  - `creditGrantId: string`\n  - `customerId: string`\n  - `eventId: string`\n  - `eventType: string`\n  - `featureId: string`\n  - `resourceId: string`\n  - `timestamp: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.credits.listLedger({ customerId: 'customerId' })) {\n  console.log(creditListLedgerResponse);\n}\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.listLedger',
+        method: 'client.v1.credits.listLedger',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.events.credits.listLedger({\n  customerId: 'customerId',\n})) {\n  console.log(creditListLedgerResponse.amount);\n}",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.credits.listLedger({\n  customerId: 'customerId',\n})) {\n  console.log(creditListLedgerResponse.amount);\n}",
       },
       python: {
-        method: 'v1.events.credits.list_ledger',
+        method: 'v1.credits.list_ledger',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.list_ledger(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.amount)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.credits.list_ledger(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.amount)',
       },
       java: {
-        method: 'v1().events().credits().listLedger',
+        method: 'v1().credits().listLedger',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.CreditListLedgerPage;\nimport io.stigg.models.v1.events.credits.CreditListLedgerParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditListLedgerParams params = CreditListLedgerParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditListLedgerPage page = client.v1().events().credits().listLedger(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditListLedgerPage;\nimport io.stigg.models.v1.credits.CreditListLedgerParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditListLedgerParams params = CreditListLedgerParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditListLedgerPage page = client.v1().credits().listLedger(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.ListLedger',
+        method: 'client.V1.Credits.ListLedger',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.ListLedger(context.TODO(), stigg.V1EventCreditListLedgerParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.ListLedger(context.TODO(), stigg.V1CreditListLedgerParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.list_ledger',
+        method: 'v1.credits.list_ledger',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.list_ledger(customer_id: "customerId")\n\nputs(page)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.credits.list_ledger(customer_id: "customerId")\n\nputs(page)',
       },
       cli: {
         method: 'credits list_ledger',
-        example:
-          "stigg v1:events:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       csharp: {
-        method: 'V1.Events.Credits.ListLedger',
+        method: 'V1.Credits.ListLedger',
         example:
-          'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Events.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+          'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
         example: 'curl https://api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
@@ -2639,8 +2637,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'get',
     summary: 'Get a list of credit grants',
     description: 'Retrieves a paginated list of credit grants for a customer.',
-    stainlessPath: '(resource) v1.events.credits.grants > (method) list',
-    qualified: 'client.v1.events.credits.grants.list',
+    stainlessPath: '(resource) v1.credits.grants > (method) list',
+    qualified: 'client.v1.credits.grants.list',
     params: [
       'customerId: string;',
       'after?: string;',
@@ -2653,42 +2651,41 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }",
     markdown:
-      "## list\n\n`client.v1.events.credits.grants.list(customerId: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, currencyId?: string, limit?: number, resourceId?: string): { id: string; amount: number; comment: string; consumedAmount: number; cost: object; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: object; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n**get** `/api/v1/credits/grants`\n\nRetrieves a paginated list of credit grants for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID. When omitted, only grants without a resource are returned\n\n### Returns\n\n- `{ id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n  Credit grant object representing allocated credits for a customer\n\n  - `id: string`\n  - `amount: number`\n  - `comment: string`\n  - `consumedAmount: number`\n  - `cost: { amount: number; currency: string; }`\n  - `createdAt: string`\n  - `currencyId: string`\n  - `customerId: string`\n  - `displayName: string`\n  - `effectiveAt: string`\n  - `expireAt: string`\n  - `grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'`\n  - `invoiceId: string`\n  - `latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }`\n  - `metadata: object`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `priority: number`\n  - `resourceId: string`\n  - `sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'`\n  - `updatedAt: string`\n  - `voidedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.events.credits.grants.list({ customerId: 'customerId' })) {\n  console.log(grantListResponse);\n}\n```",
+      "## list\n\n`client.v1.credits.grants.list(customerId: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, currencyId?: string, limit?: number, resourceId?: string): { id: string; amount: number; comment: string; consumedAmount: number; cost: object; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: object; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n**get** `/api/v1/credits/grants`\n\nRetrieves a paginated list of credit grants for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID. When omitted, only grants without a resource are returned\n\n### Returns\n\n- `{ id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n  Credit grant object representing allocated credits for a customer\n\n  - `id: string`\n  - `amount: number`\n  - `comment: string`\n  - `consumedAmount: number`\n  - `cost: { amount: number; currency: string; }`\n  - `createdAt: string`\n  - `currencyId: string`\n  - `customerId: string`\n  - `displayName: string`\n  - `effectiveAt: string`\n  - `expireAt: string`\n  - `grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'`\n  - `invoiceId: string`\n  - `latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }`\n  - `metadata: object`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `priority: number`\n  - `resourceId: string`\n  - `sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'`\n  - `updatedAt: string`\n  - `voidedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.credits.grants.list({ customerId: 'customerId' })) {\n  console.log(grantListResponse);\n}\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.grants.list',
+        method: 'client.v1.credits.grants.list',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.events.credits.grants.list({\n  customerId: 'customerId',\n})) {\n  console.log(grantListResponse.id);\n}",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.credits.grants.list({ customerId: 'customerId' })) {\n  console.log(grantListResponse.id);\n}",
       },
       python: {
-        method: 'v1.events.credits.grants.list',
+        method: 'v1.credits.grants.list',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.grants.list(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.id)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.credits.grants.list(\n    customer_id="customerId",\n)\npage = page.data[0]\nprint(page.id)',
       },
       java: {
-        method: 'v1().events().credits().grants().list',
+        method: 'v1().credits().grants().list',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.GrantListPage;\nimport io.stigg.models.v1.events.credits.grants.GrantListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantListParams params = GrantListParams.builder()\n            .customerId("customerId")\n            .build();\n        GrantListPage page = client.v1().events().credits().grants().list(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.GrantListPage;\nimport io.stigg.models.v1.credits.grants.GrantListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantListParams params = GrantListParams.builder()\n            .customerId("customerId")\n            .build();\n        GrantListPage page = client.v1().credits().grants().list(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.Grants.List',
+        method: 'client.V1.Credits.Grants.List',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.Grants.List(context.TODO(), stigg.V1EventCreditGrantListParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.Grants.List(context.TODO(), stigg.V1CreditGrantListParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.grants.list',
+        method: 'v1.credits.grants.list',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.grants.list(customer_id: "customerId")\n\nputs(page)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.credits.grants.list(customer_id: "customerId")\n\nputs(page)',
       },
       cli: {
         method: 'grants list',
-        example:
-          "stigg v1:events:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       csharp: {
-        method: 'V1.Events.Credits.Grants.List',
+        method: 'V1.Credits.Grants.List',
         example:
-          'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Events.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+          'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
         example: 'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
@@ -2702,8 +2699,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'Create a credit grant',
     description:
       'Creates a new credit grant for a customer with specified amount, type, and optional billing configuration.',
-    stainlessPath: '(resource) v1.events.credits.grants > (method) create',
-    qualified: 'client.v1.events.credits.grants.create',
+    stainlessPath: '(resource) v1.credits.grants > (method) create',
+    qualified: 'client.v1.credits.grants.create',
     params: [
       'amount: number;',
       'currencyId: string;',
@@ -2724,42 +2721,42 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }",
     markdown:
-      "## create\n\n`client.v1.events.credits.grants.create(amount: number, currencyId: string, customerId: string, displayName: string, grantType: 'PAID' | 'PROMOTIONAL', awaitPaymentConfirmation?: boolean, billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }, comment?: string, cost?: { amount: number; currency: string; }, effectiveAt?: string, expireAt?: string, metadata?: object, paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE', priority?: number, resourceId?: string): { data: object; }`\n\n**post** `/api/v1/credits/grants`\n\nCreates a new credit grant for a customer with specified amount, type, and optional billing configuration.\n\n### Parameters\n\n- `amount: number`\n  The credit amount to grant\n\n- `currencyId: string`\n  The credit currency ID (required)\n\n- `customerId: string`\n  The customer ID to grant credits to (required)\n\n- `displayName: string`\n  The display name for the credit grant\n\n- `grantType: 'PAID' | 'PROMOTIONAL'`\n  The type of credit grant (PAID, PROMOTIONAL)\n\n- `awaitPaymentConfirmation?: boolean`\n  Whether to wait for payment confirmation before returning (default: true)\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }`\n  Billing information for the credit grant\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    The billing address\n  - `invoiceDaysUntilDue?: number`\n    Days until the invoice is due\n  - `isInvoicePaid?: boolean`\n    Whether the invoice is already paid\n\n- `comment?: string`\n  An optional comment on the credit grant\n\n- `cost?: { amount: number; currency: string; }`\n  The monetary cost of the credit grant\n  - `amount: number`\n    The price amount\n  - `currency: string`\n    ISO 4217 currency code\n\n- `effectiveAt?: string`\n  The date when the credit grant becomes effective\n\n- `expireAt?: string`\n  The date when the credit grant expires\n\n- `metadata?: object`\n  Additional metadata for the credit grant\n\n- `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  The payment collection method (CHARGE, INVOICE, NONE)\n\n- `priority?: number`\n  The priority of the credit grant (lower number = higher priority)\n\n- `resourceId?: string`\n  The resource ID to scope the grant to\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.events.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse);\n```",
+      "## create\n\n`client.v1.credits.grants.create(amount: number, currencyId: string, customerId: string, displayName: string, grantType: 'PAID' | 'PROMOTIONAL', awaitPaymentConfirmation?: boolean, billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }, comment?: string, cost?: { amount: number; currency: string; }, effectiveAt?: string, expireAt?: string, metadata?: object, paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE', priority?: number, resourceId?: string): { data: object; }`\n\n**post** `/api/v1/credits/grants`\n\nCreates a new credit grant for a customer with specified amount, type, and optional billing configuration.\n\n### Parameters\n\n- `amount: number`\n  The credit amount to grant\n\n- `currencyId: string`\n  The credit currency ID (required)\n\n- `customerId: string`\n  The customer ID to grant credits to (required)\n\n- `displayName: string`\n  The display name for the credit grant\n\n- `grantType: 'PAID' | 'PROMOTIONAL'`\n  The type of credit grant (PAID, PROMOTIONAL)\n\n- `awaitPaymentConfirmation?: boolean`\n  Whether to wait for payment confirmation before returning (default: true)\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }`\n  Billing information for the credit grant\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    The billing address\n  - `invoiceDaysUntilDue?: number`\n    Days until the invoice is due\n  - `isInvoicePaid?: boolean`\n    Whether the invoice is already paid\n\n- `comment?: string`\n  An optional comment on the credit grant\n\n- `cost?: { amount: number; currency: string; }`\n  The monetary cost of the credit grant\n  - `amount: number`\n    The price amount\n  - `currency: string`\n    ISO 4217 currency code\n\n- `effectiveAt?: string`\n  The date when the credit grant becomes effective\n\n- `expireAt?: string`\n  The date when the credit grant expires\n\n- `metadata?: object`\n  Additional metadata for the credit grant\n\n- `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  The payment collection method (CHARGE, INVOICE, NONE)\n\n- `priority?: number`\n  The priority of the credit grant (lower number = higher priority)\n\n- `resourceId?: string`\n  The resource ID to scope the grant to\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.grants.create',
+        method: 'client.v1.credits.grants.create',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.events.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse.data);",
       },
       python: {
-        method: 'v1.events.credits.grants.create',
+        method: 'v1.credits.grants.create',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.events.credits.grants.create(\n    amount=0,\n    currency_id="currencyId",\n    customer_id="customerId",\n    display_name="displayName",\n    grant_type="PAID",\n)\nprint(credit_grant_response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.credits.grants.create(\n    amount=0,\n    currency_id="currencyId",\n    customer_id="customerId",\n    display_name="displayName",\n    grant_type="PAID",\n)\nprint(credit_grant_response.data)',
       },
       java: {
-        method: 'v1().events().credits().grants().create',
+        method: 'v1().credits().grants().create',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.events.credits.grants.GrantCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantCreateParams params = GrantCreateParams.builder()\n            .amount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .displayName("displayName")\n            .grantType(GrantCreateParams.GrantType.PAID)\n            .build();\n        CreditGrantResponse creditGrantResponse = client.v1().events().credits().grants().create(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.credits.grants.GrantCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantCreateParams params = GrantCreateParams.builder()\n            .amount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .displayName("displayName")\n            .grantType(GrantCreateParams.GrantType.PAID)\n            .build();\n        CreditGrantResponse creditGrantResponse = client.v1().credits().grants().create(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.Grants.New',
+        method: 'client.V1.Credits.Grants.New',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Events.Credits.Grants.New(context.TODO(), stigg.V1EventCreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1EventCreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.New(context.TODO(), stigg.V1CreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1CreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.grants.create',
+        method: 'v1.credits.grants.create',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.events.credits.grants.create(\n  amount: 0,\n  currency_id: "currencyId",\n  customer_id: "customerId",\n  display_name: "displayName",\n  grant_type: :PAID\n)\n\nputs(credit_grant_response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.credits.grants.create(\n  amount: 0,\n  currency_id: "currencyId",\n  customer_id: "customerId",\n  display_name: "displayName",\n  grant_type: :PAID\n)\n\nputs(credit_grant_response)',
       },
       cli: {
         method: 'grants create',
         example:
-          "stigg v1:events:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
+          "stigg v1:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
       },
       csharp: {
-        method: 'V1.Events.Credits.Grants.Create',
+        method: 'V1.Credits.Grants.Create',
         example:
-          'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Events.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
+          'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
       http: {
         example:
@@ -2773,47 +2770,47 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'post',
     summary: 'Void credit grant',
     description: 'Voids an existing credit grant, preventing further consumption of the remaining credits.',
-    stainlessPath: '(resource) v1.events.credits.grants > (method) void',
-    qualified: 'client.v1.events.credits.grants.void',
+    stainlessPath: '(resource) v1.credits.grants > (method) void',
+    qualified: 'client.v1.credits.grants.void',
     params: ['id: string;'],
     response:
       "{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }",
     markdown:
-      "## void\n\n`client.v1.events.credits.grants.void(id: string): { data: object; }`\n\n**post** `/api/v1/credits/grants/{id}/void`\n\nVoids an existing credit grant, preventing further consumption of the remaining credits.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.events.credits.grants.void('x');\n\nconsole.log(creditGrantResponse);\n```",
+      "## void\n\n`client.v1.credits.grants.void(id: string): { data: object; }`\n\n**post** `/api/v1/credits/grants/{id}/void`\n\nVoids an existing credit grant, preventing further consumption of the remaining credits.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.credits.grants.void('x');\n\nconsole.log(creditGrantResponse);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.grants.void',
+        method: 'client.v1.credits.grants.void',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.events.credits.grants.void('x');\n\nconsole.log(creditGrantResponse.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst creditGrantResponse = await client.v1.credits.grants.void('x');\n\nconsole.log(creditGrantResponse.data);",
       },
       python: {
-        method: 'v1.events.credits.grants.void',
+        method: 'v1.credits.grants.void',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.events.credits.grants.void(\n    "x",\n)\nprint(credit_grant_response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncredit_grant_response = client.v1.credits.grants.void(\n    "x",\n)\nprint(credit_grant_response.data)',
       },
       java: {
-        method: 'v1().events().credits().grants().void_',
+        method: 'v1().credits().grants().void_',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.events.credits.grants.GrantVoidParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGrantResponse creditGrantResponse = client.v1().events().credits().grants().void_("x");\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.credits.grants.GrantVoidParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGrantResponse creditGrantResponse = client.v1().credits().grants().void_("x");\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.Grants.Void',
+        method: 'client.V1.Credits.Grants.Void',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Events.Credits.Grants.Void(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.Void(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.grants.void',
+        method: 'v1.credits.grants.void',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.events.credits.grants.void("x")\n\nputs(credit_grant_response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncredit_grant_response = stigg.v1.credits.grants.void("x")\n\nputs(credit_grant_response)',
       },
       cli: {
         method: 'grants void',
-        example: "stigg v1:events:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
+        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       csharp: {
-        method: 'V1.Events.Credits.Grants.Void',
+        method: 'V1.Credits.Grants.Void',
         example:
-          'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Events.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
+          'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
       http: {
         example:
@@ -2828,47 +2825,47 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'Get a list of custom currencys',
     description:
       'Retrieves a paginated list of custom currencies in the environment. Archived currencies are excluded by default; pass `status=ARCHIVED` (or `status=ACTIVE,ARCHIVED`) to include them.',
-    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) list',
-    qualified: 'client.v1.events.credits.customCurrencies.list',
+    stainlessPath: '(resource) v1.credits.custom_currencies > (method) list',
+    qualified: 'client.v1.credits.customCurrencies.list',
     params: ['after?: string;', 'before?: string;', 'limit?: number;', "status?: 'ACTIVE' | 'ARCHIVED'[];"],
     response:
       '{ id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }',
     markdown:
-      "## list\n\n`client.v1.events.credits.customCurrencies.list(after?: string, before?: string, limit?: number, status?: 'ACTIVE' | 'ARCHIVED'[]): { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: object; updatedAt: string; }`\n\n**get** `/api/v1/credits/custom-currencies`\n\nRetrieves a paginated list of custom currencies in the environment. Archived currencies are excluded by default; pass `status=ARCHIVED` (or `status=ACTIVE,ARCHIVED`) to include them.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'ACTIVE' | 'ARCHIVED'[]`\n  Filter by custom currency status. Supports comma-separated values (e.g., `ACTIVE,ARCHIVED`). Defaults to `ACTIVE`.\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n  A custom currency used to denominate credit-based entitlements and pricing\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `symbol: string`\n  - `units: { plural: string; singular: string; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.events.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse);\n}\n```",
+      "## list\n\n`client.v1.credits.customCurrencies.list(after?: string, before?: string, limit?: number, status?: 'ACTIVE' | 'ARCHIVED'[]): { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: object; updatedAt: string; }`\n\n**get** `/api/v1/credits/custom-currencies`\n\nRetrieves a paginated list of custom currencies in the environment. Archived currencies are excluded by default; pass `status=ARCHIVED` (or `status=ACTIVE,ARCHIVED`) to include them.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'ACTIVE' | 'ARCHIVED'[]`\n  Filter by custom currency status. Supports comma-separated values (e.g., `ACTIVE,ARCHIVED`). Defaults to `ACTIVE`.\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n  A custom currency used to denominate credit-based entitlements and pricing\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `symbol: string`\n  - `units: { plural: string; singular: string; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse);\n}\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.customCurrencies.list',
+        method: 'client.v1.credits.customCurrencies.list',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.events.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse.id);\n}",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse.id);\n}",
       },
       python: {
-        method: 'v1.events.credits.custom_currencies.list',
+        method: 'v1.credits.custom_currencies.list',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.credits.custom_currencies.list()\npage = page.data[0]\nprint(page.id)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.credits.custom_currencies.list()\npage = page.data[0]\nprint(page.id)',
       },
       java: {
-        method: 'v1().events().credits().customCurrencies().list',
+        method: 'v1().credits().customCurrencies().list',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListPage;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListPage page = client.v1().events().credits().customCurrencies().list();\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListPage;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListPage page = client.v1().credits().customCurrencies().list();\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.CustomCurrencies.List',
+        method: 'client.V1.Credits.CustomCurrencies.List',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Credits.CustomCurrencies.List(context.TODO(), stigg.V1EventCreditCustomCurrencyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.CustomCurrencies.List(context.TODO(), stigg.V1CreditCustomCurrencyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.custom_currencies.list',
+        method: 'v1.credits.custom_currencies.list',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.credits.custom_currencies.list\n\nputs(page)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.credits.custom_currencies.list\n\nputs(page)',
       },
       cli: {
         method: 'custom_currencies list',
-        example: "stigg v1:events:credits:custom-currencies list \\\n  --api-key 'My API Key'",
+        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
       },
       csharp: {
-        method: 'V1.Events.Credits.CustomCurrencies.List',
+        method: 'V1.Credits.CustomCurrencies.List',
         example:
-          'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Events.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+          'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
         example:
@@ -2882,8 +2879,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'post',
     summary: 'Create custom currency',
     description: 'Creates a new custom currency in the environment.',
-    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) create',
-    qualified: 'client.v1.events.credits.customCurrencies.create',
+    stainlessPath: '(resource) v1.credits.custom_currencies > (method) create',
+    qualified: 'client.v1.credits.customCurrencies.create',
     params: [
       'id: string;',
       'displayName: string;',
@@ -2895,42 +2892,42 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
     markdown:
-      "## create\n\n`client.v1.events.credits.customCurrencies.create(id: string, displayName: string, description?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies`\n\nCreates a new custom currency in the environment.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the new custom currency\n\n- `displayName: string`\n  The display name of the custom currency\n\n- `description?: string`\n  Description of the currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.create({ id: 'id', displayName: 'displayName' });\n\nconsole.log(customCurrency);\n```",
+      "## create\n\n`client.v1.credits.customCurrencies.create(id: string, displayName: string, description?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies`\n\nCreates a new custom currency in the environment.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the new custom currency\n\n- `displayName: string`\n  The display name of the custom currency\n\n- `description?: string`\n  Description of the currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.create({ id: 'id', displayName: 'displayName' });\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.customCurrencies.create',
+        method: 'client.v1.credits.customCurrencies.create',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.create({\n  id: 'id',\n  displayName: 'displayName',\n});\n\nconsole.log(customCurrency.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.create({\n  id: 'id',\n  displayName: 'displayName',\n});\n\nconsole.log(customCurrencyResponse.data);",
       },
       python: {
-        method: 'v1.events.credits.custom_currencies.create',
+        method: 'v1.credits.custom_currencies.create',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency = client.v1.events.credits.custom_currencies.create(\n    id="id",\n    display_name="displayName",\n)\nprint(custom_currency.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency_response = client.v1.credits.custom_currencies.create(\n    id="id",\n    display_name="displayName",\n)\nprint(custom_currency_response.data)',
       },
       java: {
-        method: 'v1().events().credits().customCurrencies().create',
+        method: 'v1().credits().customCurrencies().create',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyCreateParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyCreateParams params = CustomCurrencyCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        CustomCurrencyCreateResponse customCurrency = client.v1().events().credits().customCurrencies().create(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyCreateParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyCreateParams params = CustomCurrencyCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().create(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.CustomCurrencies.New',
+        method: 'client.V1.Credits.CustomCurrencies.New',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrency, err := client.V1.Events.Credits.CustomCurrencies.New(context.TODO(), stigg.V1EventCreditCustomCurrencyNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrency.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.New(context.TODO(), stigg.V1CreditCustomCurrencyNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.custom_currencies.create',
+        method: 'v1.credits.custom_currencies.create',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency = stigg.v1.events.credits.custom_currencies.create(id: "id", display_name: "displayName")\n\nputs(custom_currency)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency_response = stigg.v1.credits.custom_currencies.create(id: "id", display_name: "displayName")\n\nputs(custom_currency_response)',
       },
       cli: {
         method: 'custom_currencies create',
         example:
-          "stigg v1:events:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+          "stigg v1:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
       },
       csharp: {
-        method: 'V1.Events.Credits.CustomCurrencies.Create',
+        method: 'V1.Credits.CustomCurrencies.Create',
         example:
-          'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrency = await client.V1.Events.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrency);',
+          'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       http: {
         example:
@@ -2944,8 +2941,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'patch',
     summary: 'Update custom currency',
     description: 'Updates an existing custom currency. Only the supplied fields are modified.',
-    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) update',
-    qualified: 'client.v1.events.credits.customCurrencies.update',
+    stainlessPath: '(resource) v1.credits.custom_currencies > (method) update',
+    qualified: 'client.v1.credits.customCurrencies.update',
     params: [
       'currencyId: string;',
       'description?: string;',
@@ -2957,42 +2954,42 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
     markdown:
-      "## update\n\n`client.v1.events.credits.customCurrencies.update(currencyId: string, description?: string, displayName?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }): { data: object; }`\n\n**patch** `/api/v1/credits/custom-currencies/{currencyId}`\n\nUpdates an existing custom currency. Only the supplied fields are modified.\n\n### Parameters\n\n- `currencyId: string`\n\n- `description?: string`\n  A human-readable description of the custom currency. Send an empty string to clear.\n\n- `displayName?: string`\n  The display name of the custom currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency. Send an empty string to clear.\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrency);\n```",
+      "## update\n\n`client.v1.credits.customCurrencies.update(currencyId: string, description?: string, displayName?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }): { data: object; }`\n\n**patch** `/api/v1/credits/custom-currencies/{currencyId}`\n\nUpdates an existing custom currency. Only the supplied fields are modified.\n\n### Parameters\n\n- `currencyId: string`\n\n- `description?: string`\n  A human-readable description of the custom currency. Send an empty string to clear.\n\n- `displayName?: string`\n  The display name of the custom currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency. Send an empty string to clear.\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.customCurrencies.update',
+        method: 'client.v1.credits.customCurrencies.update',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrency = await client.v1.events.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrency.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrencyResponse.data);",
       },
       python: {
-        method: 'v1.events.credits.custom_currencies.update',
+        method: 'v1.credits.custom_currencies.update',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency = client.v1.events.credits.custom_currencies.update(\n    currency_id="currencyId",\n)\nprint(custom_currency.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency_response = client.v1.credits.custom_currencies.update(\n    currency_id="currencyId",\n)\nprint(custom_currency_response.data)',
       },
       java: {
-        method: 'v1().events().credits().customCurrencies().update',
+        method: 'v1().credits().customCurrencies().update',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUpdateParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyUpdateResponse customCurrency = client.v1().events().credits().customCurrencies().update("currencyId");\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().update("currencyId");\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.CustomCurrencies.Update',
+        method: 'client.V1.Credits.CustomCurrencies.Update',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrency, err := client.V1.Events.Credits.CustomCurrencies.Update(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1EventCreditCustomCurrencyUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrency.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Update(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.custom_currencies.update',
+        method: 'v1.credits.custom_currencies.update',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency = stigg.v1.events.credits.custom_currencies.update("currencyId")\n\nputs(custom_currency)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency_response = stigg.v1.credits.custom_currencies.update("currencyId")\n\nputs(custom_currency_response)',
       },
       cli: {
         method: 'custom_currencies update',
         example:
-          "stigg v1:events:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+          "stigg v1:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       csharp: {
-        method: 'V1.Events.Credits.CustomCurrencies.Update',
+        method: 'V1.Credits.CustomCurrencies.Update',
         example:
-          'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrency = await client.V1.Events.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrency);',
+          'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       http: {
         example:
@@ -3007,48 +3004,48 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'Archive custom currency',
     description:
       'Archives a custom currency. Fails if the currency is still associated with any active plan or addon — use the associated-entities endpoint first to inspect dependencies.',
-    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) archive',
-    qualified: 'client.v1.events.credits.customCurrencies.archive',
+    stainlessPath: '(resource) v1.credits.custom_currencies > (method) archive',
+    qualified: 'client.v1.credits.customCurrencies.archive',
     params: ['currencyId: string;'],
     response:
       '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
     markdown:
-      "## archive\n\n`client.v1.events.credits.customCurrencies.archive(currencyId: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/archive`\n\nArchives a custom currency. Fails if the currency is still associated with any active plan or addon — use the associated-entities endpoint first to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.customCurrencies.archive('currencyId');\n\nconsole.log(response);\n```",
+      "## archive\n\n`client.v1.credits.customCurrencies.archive(currencyId: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/archive`\n\nArchives a custom currency. Fails if the currency is still associated with any active plan or addon — use the associated-entities endpoint first to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.archive('currencyId');\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.customCurrencies.archive',
+        method: 'client.v1.credits.customCurrencies.archive',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.customCurrencies.archive('currencyId');\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.archive('currencyId');\n\nconsole.log(customCurrencyResponse.data);",
       },
       python: {
-        method: 'v1.events.credits.custom_currencies.archive',
+        method: 'v1.credits.custom_currencies.archive',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.custom_currencies.archive(\n    "currencyId",\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency_response = client.v1.credits.custom_currencies.archive(\n    "currencyId",\n)\nprint(custom_currency_response.data)',
       },
       java: {
-        method: 'v1().events().credits().customCurrencies().archive',
+        method: 'v1().credits().customCurrencies().archive',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyArchiveParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyArchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyArchiveResponse response = client.v1().events().credits().customCurrencies().archive("currencyId");\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyArchiveParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().archive("currencyId");\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.CustomCurrencies.Archive',
+        method: 'client.V1.Credits.CustomCurrencies.Archive',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.CustomCurrencies.Archive(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Archive(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.custom_currencies.archive',
+        method: 'v1.credits.custom_currencies.archive',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.custom_currencies.archive("currencyId")\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency_response = stigg.v1.credits.custom_currencies.archive("currencyId")\n\nputs(custom_currency_response)',
       },
       cli: {
         method: 'custom_currencies archive',
         example:
-          "stigg v1:events:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+          "stigg v1:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       csharp: {
-        method: 'V1.Events.Credits.CustomCurrencies.Archive',
+        method: 'V1.Credits.CustomCurrencies.Archive',
         example:
-          'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar response = await client.V1.Events.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(response);',
+          'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       http: {
         example:
@@ -3063,48 +3060,48 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'Unarchive custom currency',
     description:
       'Restores a previously archived custom currency. Fails if another active currency with the same ID already exists.',
-    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) unarchive',
-    qualified: 'client.v1.events.credits.customCurrencies.unarchive',
+    stainlessPath: '(resource) v1.credits.custom_currencies > (method) unarchive',
+    qualified: 'client.v1.credits.customCurrencies.unarchive',
     params: ['currencyId: string;'],
     response:
       '{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }',
     markdown:
-      "## unarchive\n\n`client.v1.events.credits.customCurrencies.unarchive(currencyId: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/unarchive`\n\nRestores a previously archived custom currency. Fails if another active currency with the same ID already exists.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(response);\n```",
+      "## unarchive\n\n`client.v1.credits.customCurrencies.unarchive(currencyId: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/unarchive`\n\nRestores a previously archived custom currency. Fails if another active currency with the same ID already exists.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.customCurrencies.unarchive',
+        method: 'client.v1.credits.customCurrencies.unarchive',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(customCurrencyResponse.data);",
       },
       python: {
-        method: 'v1.events.credits.custom_currencies.unarchive',
+        method: 'v1.credits.custom_currencies.unarchive',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.custom_currencies.unarchive(\n    "currencyId",\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ncustom_currency_response = client.v1.credits.custom_currencies.unarchive(\n    "currencyId",\n)\nprint(custom_currency_response.data)',
       },
       java: {
-        method: 'v1().events().credits().customCurrencies().unarchive',
+        method: 'v1().credits().customCurrencies().unarchive',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUnarchiveParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyUnarchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyUnarchiveResponse response = client.v1().events().credits().customCurrencies().unarchive("currencyId");\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyUnarchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().unarchive("currencyId");\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.CustomCurrencies.Unarchive',
+        method: 'client.V1.Credits.CustomCurrencies.Unarchive',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.CustomCurrencies.Unarchive(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Unarchive(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.custom_currencies.unarchive',
+        method: 'v1.credits.custom_currencies.unarchive',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.custom_currencies.unarchive("currencyId")\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ncustom_currency_response = stigg.v1.credits.custom_currencies.unarchive("currencyId")\n\nputs(custom_currency_response)',
       },
       cli: {
         method: 'custom_currencies unarchive',
         example:
-          "stigg v1:events:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+          "stigg v1:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       csharp: {
-        method: 'V1.Events.Credits.CustomCurrencies.Unarchive',
+        method: 'V1.Credits.CustomCurrencies.Unarchive',
         example:
-          'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar response = await client.V1.Events.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(response);',
+          'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       http: {
         example:
@@ -3119,47 +3116,47 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     summary: 'List custom currency associated entities',
     description:
       'Lists the active plans and addons that reference a custom currency. Useful before archiving to inspect dependencies.',
-    stainlessPath: '(resource) v1.events.credits.custom_currencies > (method) list_associated_entities',
-    qualified: 'client.v1.events.credits.customCurrencies.listAssociatedEntities',
+    stainlessPath: '(resource) v1.credits.custom_currencies > (method) list_associated_entities',
+    qualified: 'client.v1.credits.customCurrencies.listAssociatedEntities',
     params: ['currencyId: string;'],
     response: '{ data: { id: string; displayName: string; type: string; }[]; }',
     markdown:
-      "## list_associated_entities\n\n`client.v1.events.credits.customCurrencies.listAssociatedEntities(currencyId: string): { data: object[]; }`\n\n**get** `/api/v1/credits/custom-currencies/{currencyId}/associated-entities`\n\nLists the active plans and addons that reference a custom currency. Useful before archiving to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; displayName: string; type: string; }[]; }`\n  List of entities (plans or addons) that reference a custom currency\n\n  - `data: { id: string; displayName: string; type: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.credits.customCurrencies.listAssociatedEntities('currencyId');\n\nconsole.log(response);\n```",
+      "## list_associated_entities\n\n`client.v1.credits.customCurrencies.listAssociatedEntities(currencyId: string): { data: object[]; }`\n\n**get** `/api/v1/credits/custom-currencies/{currencyId}/associated-entities`\n\nLists the active plans and addons that reference a custom currency. Useful before archiving to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n### Returns\n\n- `{ data: { id: string; displayName: string; type: string; }[]; }`\n  List of entities (plans or addons) that reference a custom currency\n\n  - `data: { id: string; displayName: string; type: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.customCurrencies.listAssociatedEntities('currencyId');\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.credits.customCurrencies.listAssociatedEntities',
+        method: 'client.v1.credits.customCurrencies.listAssociatedEntities',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.credits.customCurrencies.listAssociatedEntities(\n  'currencyId',\n);\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.credits.customCurrencies.listAssociatedEntities('currencyId');\n\nconsole.log(response.data);",
       },
       python: {
-        method: 'v1.events.credits.custom_currencies.list_associated_entities',
+        method: 'v1.credits.custom_currencies.list_associated_entities',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.credits.custom_currencies.list_associated_entities(\n    "currencyId",\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.credits.custom_currencies.list_associated_entities(\n    "currencyId",\n)\nprint(response.data)',
       },
       java: {
-        method: 'v1().events().credits().customCurrencies().listAssociatedEntities',
+        method: 'v1().credits().customCurrencies().listAssociatedEntities',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesParams;\nimport io.stigg.models.v1.events.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListAssociatedEntitiesResponse response = client.v1().events().credits().customCurrencies().listAssociatedEntities("currencyId");\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListAssociatedEntitiesResponse response = client.v1().credits().customCurrencies().listAssociatedEntities("currencyId");\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.Credits.CustomCurrencies.ListAssociatedEntities',
+        method: 'client.V1.Credits.CustomCurrencies.ListAssociatedEntities',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Credits.CustomCurrencies.ListAssociatedEntities(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.CustomCurrencies.ListAssociatedEntities(context.TODO(), "currencyId")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.credits.custom_currencies.list_associated_entities',
+        method: 'v1.credits.custom_currencies.list_associated_entities',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.credits.custom_currencies.list_associated_entities("currencyId")\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.credits.custom_currencies.list_associated_entities("currencyId")\n\nputs(response)',
       },
       cli: {
         method: 'custom_currencies list_associated_entities',
         example:
-          "stigg v1:events:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+          "stigg v1:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       csharp: {
-        method: 'V1.Events.Credits.CustomCurrencies.ListAssociatedEntities',
+        method: 'V1.Credits.CustomCurrencies.ListAssociatedEntities',
         example:
-          'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Events.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
+          'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
         example:

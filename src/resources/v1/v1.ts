@@ -11,6 +11,8 @@ import {
   CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
+import * as EventsAPI from './events';
+import { EventReportParams, EventReportResponse, Events } from './events';
 import * as FeaturesAPI from './features';
 import {
   Feature,
@@ -56,6 +58,17 @@ import {
   AddonUpdateParams,
   Addons,
 } from './addons/addons';
+import * as CreditsAPI from './credits/credits';
+import {
+  CreditGetAutoRechargeParams,
+  CreditGetAutoRechargeResponse,
+  CreditGetUsageParams,
+  CreditGetUsageResponse,
+  CreditListLedgerParams,
+  CreditListLedgerResponse,
+  CreditListLedgerResponsesMyCursorIDPage,
+  Credits,
+} from './credits/credits';
 import * as CustomersAPI from './customers/customers';
 import {
   CustomerCheckEntitlementParams,
@@ -76,8 +89,6 @@ import {
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
-import * as EventsAPI from './events/events';
-import { EventReportParams, EventReportResponse, Events } from './events/events';
 import * as PlansAPI from './plans/plans';
 import {
   Plan,
@@ -122,6 +133,7 @@ export class V1 extends APIResource {
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   coupons: CouponsAPI.Coupons = new CouponsAPI.Coupons(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  credits: CreditsAPI.Credits = new CreditsAPI.Credits(this._client);
   features: FeaturesAPI.Features = new FeaturesAPI.Features(this._client);
   addons: AddonsAPI.Addons = new AddonsAPI.Addons(this._client);
   plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
@@ -133,6 +145,7 @@ V1.Customers = Customers;
 V1.Subscriptions = Subscriptions;
 V1.Coupons = Coupons;
 V1.Events = Events;
+V1.Credits = Credits;
 V1.Features = Features;
 V1.Addons = Addons;
 V1.Plans = Plans;
@@ -193,6 +206,17 @@ export declare namespace V1 {
     Events as Events,
     type EventReportResponse as EventReportResponse,
     type EventReportParams as EventReportParams,
+  };
+
+  export {
+    Credits as Credits,
+    type CreditGetAutoRechargeResponse as CreditGetAutoRechargeResponse,
+    type CreditGetUsageResponse as CreditGetUsageResponse,
+    type CreditListLedgerResponse as CreditListLedgerResponse,
+    type CreditListLedgerResponsesMyCursorIDPage as CreditListLedgerResponsesMyCursorIDPage,
+    type CreditGetAutoRechargeParams as CreditGetAutoRechargeParams,
+    type CreditGetUsageParams as CreditGetUsageParams,
+    type CreditListLedgerParams as CreditListLedgerParams,
   };
 
   export {
