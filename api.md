@@ -135,55 +135,58 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/events.ts">EventReportResponse</a></code>
+- <code><a href="./src/resources/v1/events/events.ts">EventReportResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
+- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
 
-## Credits
+### Credits
 
 Types:
 
-- <code><a href="./src/resources/v1/credits/credits.ts">CreditGetAutoRechargeResponse</a></code>
-- <code><a href="./src/resources/v1/credits/credits.ts">CreditGetUsageResponse</a></code>
-- <code><a href="./src/resources/v1/credits/credits.ts">CreditListLedgerResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/credits.ts">CreditGetAutoRechargeResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/credits.ts">CreditGetUsageResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/credits.ts">CreditListLedgerResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1/credits/auto-recharge">client.v1.credits.<a href="./src/resources/v1/credits/credits.ts">getAutoRecharge</a>({ ...params }) -> CreditGetAutoRechargeResponse</code>
-- <code title="get /api/v1/credits/usage">client.v1.credits.<a href="./src/resources/v1/credits/credits.ts">getUsage</a>({ ...params }) -> CreditGetUsageResponse</code>
-- <code title="get /api/v1/credits/ledger">client.v1.credits.<a href="./src/resources/v1/credits/credits.ts">listLedger</a>({ ...params }) -> CreditListLedgerResponsesMyCursorIDPage</code>
+- <code title="get /api/v1/credits/auto-recharge">client.v1.events.credits.<a href="./src/resources/v1/events/credits/credits.ts">getAutoRecharge</a>({ ...params }) -> CreditGetAutoRechargeResponse</code>
+- <code title="get /api/v1/credits/usage">client.v1.events.credits.<a href="./src/resources/v1/events/credits/credits.ts">getUsage</a>({ ...params }) -> CreditGetUsageResponse</code>
+- <code title="get /api/v1/credits/ledger">client.v1.events.credits.<a href="./src/resources/v1/events/credits/credits.ts">listLedger</a>({ ...params }) -> CreditListLedgerResponsesMyCursorIDPage</code>
 
-### Grants
+#### Grants
 
 Types:
 
-- <code><a href="./src/resources/v1/credits/grants.ts">CreditGrantResponse</a></code>
-- <code><a href="./src/resources/v1/credits/grants.ts">GrantListResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/grants.ts">CreditGrantResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/grants.ts">GrantListResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/credits/grants">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">create</a>({ ...params }) -> CreditGrantResponse</code>
-- <code title="get /api/v1/credits/grants">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">list</a>({ ...params }) -> GrantListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/credits/grants/{id}/void">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">void</a>(id) -> CreditGrantResponse</code>
+- <code title="post /api/v1/credits/grants">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">create</a>({ ...params }) -> CreditGrantResponse</code>
+- <code title="get /api/v1/credits/grants">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">list</a>({ ...params }) -> GrantListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/credits/grants/{id}/void">client.v1.events.credits.grants.<a href="./src/resources/v1/events/credits/grants.ts">void</a>(id) -> CreditGrantResponse</code>
 
-### CustomCurrencies
+#### CustomCurrencies
 
 Types:
 
-- <code><a href="./src/resources/v1/credits/custom-currencies.ts">CustomCurrencyResponse</a></code>
-- <code><a href="./src/resources/v1/credits/custom-currencies.ts">CustomCurrencyListResponse</a></code>
-- <code><a href="./src/resources/v1/credits/custom-currencies.ts">CustomCurrencyListAssociatedEntitiesResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyCreateResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyUpdateResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyListResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyArchiveResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyListAssociatedEntitiesResponse</a></code>
+- <code><a href="./src/resources/v1/events/credits/custom-currencies.ts">CustomCurrencyUnarchiveResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/credits/custom-currencies">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">create</a>({ ...params }) -> CustomCurrencyResponse</code>
-- <code title="patch /api/v1/credits/custom-currencies/{currencyId}">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">update</a>(currencyID, { ...params }) -> CustomCurrencyResponse</code>
-- <code title="get /api/v1/credits/custom-currencies">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">list</a>({ ...params }) -> CustomCurrencyListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/credits/custom-currencies/{currencyId}/archive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">archive</a>(currencyID) -> CustomCurrencyResponse</code>
-- <code title="get /api/v1/credits/custom-currencies/{currencyId}/associated-entities">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">listAssociatedEntities</a>(currencyID) -> CustomCurrencyListAssociatedEntitiesResponse</code>
-- <code title="post /api/v1/credits/custom-currencies/{currencyId}/unarchive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">unarchive</a>(currencyID) -> CustomCurrencyResponse</code>
+- <code title="post /api/v1/credits/custom-currencies">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">create</a>({ ...params }) -> CustomCurrencyCreateResponse</code>
+- <code title="patch /api/v1/credits/custom-currencies/{currencyId}">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">update</a>(currencyID, { ...params }) -> CustomCurrencyUpdateResponse</code>
+- <code title="get /api/v1/credits/custom-currencies">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">list</a>({ ...params }) -> CustomCurrencyListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/credits/custom-currencies/{currencyId}/archive">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">archive</a>(currencyID) -> CustomCurrencyArchiveResponse</code>
+- <code title="get /api/v1/credits/custom-currencies/{currencyId}/associated-entities">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">listAssociatedEntities</a>(currencyID) -> CustomCurrencyListAssociatedEntitiesResponse</code>
+- <code title="post /api/v1/credits/custom-currencies/{currencyId}/unarchive">client.v1.events.credits.customCurrencies.<a href="./src/resources/v1/events/credits/custom-currencies.ts">unarchive</a>(currencyID) -> CustomCurrencyUnarchiveResponse</code>
 
 ## Features
 

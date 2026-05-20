@@ -12,9 +12,12 @@ export {
 } from './credits';
 export {
   CustomCurrencies,
-  type CustomCurrencyResponse,
+  type CustomCurrencyCreateResponse,
+  type CustomCurrencyUpdateResponse,
   type CustomCurrencyListResponse,
+  type CustomCurrencyArchiveResponse,
   type CustomCurrencyListAssociatedEntitiesResponse,
+  type CustomCurrencyUnarchiveResponse,
   type CustomCurrencyCreateParams,
   type CustomCurrencyUpdateParams,
   type CustomCurrencyListParams,
