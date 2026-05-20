@@ -25,16 +25,6 @@ export {
   type CouponListResponsesMyCursorIDPage,
 } from './coupons';
 export {
-  Credits,
-  type CreditGetAutoRechargeResponse,
-  type CreditGetUsageResponse,
-  type CreditListLedgerResponse,
-  type CreditGetAutoRechargeParams,
-  type CreditGetUsageParams,
-  type CreditListLedgerParams,
-  type CreditListLedgerResponsesMyCursorIDPage,
-} from './credits/index';
-export {
   Customers,
   type CustomerIntegrationResponse,
   type CustomerResponse,
@@ -53,7 +43,7 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events';
+export { Events, type EventReportResponse, type EventReportParams } from './events/index';
 export {
   Features,
   type Feature,
