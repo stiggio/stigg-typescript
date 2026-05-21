@@ -1,3 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export * from './events/index';
+export { Beta } from './beta';
+export { Customers } from './customers/index';

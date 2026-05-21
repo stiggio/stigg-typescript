@@ -135,11 +135,25 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/events.ts">EventReportResponse</a></code>
+- <code><a href="./src/resources/v1/events/events.ts">EventReportResponse</a></code>
 
 Methods:
 
-- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
+- <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
+
+### Beta
+
+#### Customers
+
+##### Entitlements
+
+Types:
+
+- <code><a href="./src/resources/v1/events/beta/customers/entitlements.ts">EntitlementCheckResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/entitlements/check">client.v1.events.beta.customers.entitlements.<a href="./src/resources/v1/events/beta/customers/entitlements.ts">check</a>(id, { ...params }) -> EntitlementCheckResponse</code>
 
 ## Credits
 
