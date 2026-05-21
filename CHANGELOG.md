@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.6 (2026-05-21)
+
+Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.5...v0.1.0-beta.6)
+
+### Features
+
+* **api:** add check method to beta.customers.entitlements ([8494ff9](https://github.com/stiggio/stigg-typescript/commit/8494ff959266b5f684c6132a139efa9e6dbc1672))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([666d524](https://github.com/stiggio/stigg-typescript/commit/666d52435d54cdf9a7699d37d5b1e1e7a9107930))
+* **internal:** regenerate SDK with no functional changes ([b6481d6](https://github.com/stiggio/stigg-typescript/commit/b6481d65443c041df28509cd82833fb8d7c2de07))
+
 ## 0.1.0-beta.5 (2026-05-19)
 
 Full Changelog: [v0.1.0-beta.4...v0.1.0-beta.5](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.4...v0.1.0-beta.5)
