@@ -149,6 +149,7 @@ const fuse = new Fuse(
     'client.v1.coupons.retrieve',
     'client.v1.coupons.updateCoupon',
     'client.v1.events.report',
+    'client.v1.events.beta.customers.entitlements.check',
     'client.v1.credits.getAutoRecharge',
     'client.v1.credits.getUsage',
     'client.v1.credits.listLedger',

@@ -2455,6 +2455,70 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'check',
+    endpoint: '/api/v1-beta/customers/{id}/entitlements/check',
+    httpMethod: 'get',
+    summary: 'Check entitlement (beta)',
+    description:
+      'Experimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.',
+    stainlessPath: '(resource) v1.events.beta.customers.entitlements > (method) check',
+    qualified: 'client.v1.events.beta.customers.entitlements.check',
+    params: [
+      'id: string;',
+      'currencyId?: string;',
+      'dimensions?: object;',
+      'featureId?: string;',
+      'requestedUsage?: number;',
+      'requestedValues?: string[];',
+      'resourceId?: string;',
+    ],
+    response:
+      "{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }",
+    markdown:
+      "## check\n\n`client.v1.events.beta.customers.entitlements.check(id: string, currencyId?: string, dimensions?: object, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string): { data: object | object; }`\n\n**get** `/api/v1-beta/customers/{id}/entitlements/check`\n\nExperimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `dimensions?: object`\n  Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the response includes a `chains` array with per-entity governance limits.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.entitlements.check('x');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.beta.customers.entitlements.check',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.entitlements.check('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.beta.customers.entitlements.check',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.entitlements.check(\n    id="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().beta().customers().entitlements().check',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entitlements.EntitlementCheckParams;\nimport io.stigg.models.v1.events.beta.customers.entitlements.EntitlementCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCheckResponse response = client.v1().events().beta().customers().entitlements().check("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Beta.Customers.Entitlements.Check',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventBetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.beta.customers.entitlements.check',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.entitlements.check("x")\n\nputs(response)',
+      },
+      cli: {
+        method: 'entitlements check',
+        example:
+          "stigg v1:events:beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1.Events.Beta.Customers.Entitlements.Check',
+        example:
+          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Events.Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'get_usage',
     endpoint: '/api/v1/credits/usage',
     httpMethod: 'get',
