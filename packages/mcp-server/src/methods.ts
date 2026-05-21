@@ -257,6 +257,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/events',
   },
   {
+    clientCallName: 'client.v1.events.beta.customers.entitlements.check',
+    fullyQualifiedName: 'v1.events.beta.customers.entitlements.check',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entitlements/check',
+  },
+  {
     clientCallName: 'client.v1.credits.getAutoRecharge',
     fullyQualifiedName: 'v1.credits.getAutoRecharge',
     httpMethod: 'get',
