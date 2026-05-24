@@ -257,12 +257,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/events',
   },
   {
-    clientCallName: 'client.v1.events.beta.customers.entitlements.check',
-    fullyQualifiedName: 'v1.events.beta.customers.entitlements.check',
-    httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/entitlements/check',
-  },
-  {
     clientCallName: 'client.v1.credits.getAutoRecharge',
     fullyQualifiedName: 'v1.credits.getAutoRecharge',
     httpMethod: 'get',
@@ -579,6 +573,24 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.products.updateProduct',
     httpMethod: 'patch',
     httpPath: '/api/v1/products/{id}',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entitlements.check',
+    fullyQualifiedName: 'v1Beta.customers.entitlements.check',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entitlements/check',
+  },
+  {
+    clientCallName: 'client.v1Beta.entityTypes.list',
+    fullyQualifiedName: 'v1Beta.entityTypes.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/entity-types',
+  },
+  {
+    clientCallName: 'client.v1Beta.entityTypes.upsert',
+    fullyQualifiedName: 'v1Beta.entityTypes.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1-beta/entity-types',
   },
 ];
 
