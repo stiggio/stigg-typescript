@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.7 (2026-05-24)
+
+Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.6...v0.1.0-beta.7)
+
+### Features
+
+* **api:** add entity types endpoints to v1.events.beta ([3d63e48](https://github.com/stiggio/stigg-typescript/commit/3d63e484f39aab84563fac3fb1be9e2199f46d72))
+
 ## 0.1.0-beta.6 (2026-05-21)
 
 Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.5...v0.1.0-beta.6)
