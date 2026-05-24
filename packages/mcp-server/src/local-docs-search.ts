@@ -2455,70 +2455,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
-    name: 'check',
-    endpoint: '/api/v1-beta/customers/{id}/entitlements/check',
-    httpMethod: 'get',
-    summary: 'Check entitlement (beta)',
-    description:
-      'Experimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.',
-    stainlessPath: '(resource) v1.events.beta.customers.entitlements > (method) check',
-    qualified: 'client.v1.events.beta.customers.entitlements.check',
-    params: [
-      'id: string;',
-      'currencyId?: string;',
-      'dimensions?: object;',
-      'featureId?: string;',
-      'requestedUsage?: number;',
-      'requestedValues?: string[];',
-      'resourceId?: string;',
-    ],
-    response:
-      "{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }",
-    markdown:
-      "## check\n\n`client.v1.events.beta.customers.entitlements.check(id: string, currencyId?: string, dimensions?: object, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string): { data: object | object; }`\n\n**get** `/api/v1-beta/customers/{id}/entitlements/check`\n\nExperimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `dimensions?: object`\n  Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the response includes a `chains` array with per-entity governance limits.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.entitlements.check('x');\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entitlements.check',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.entitlements.check('x');\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entitlements.check',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.entitlements.check(\n    id="x",\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entitlements().check',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entitlements.EntitlementCheckParams;\nimport io.stigg.models.v1.events.beta.customers.entitlements.EntitlementCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCheckResponse response = client.v1().events().beta().customers().entitlements().check("x");\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entitlements.Check',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventBetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entitlements.check',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.entitlements.check("x")\n\nputs(response)',
-      },
-      cli: {
-        method: 'entitlements check',
-        example:
-          "stigg v1:events:beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entitlements.Check',
-        example:
-          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Events.Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
     name: 'get_usage',
     endpoint: '/api/v1/credits/usage',
     httpMethod: 'get',
@@ -5569,6 +5505,179 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'check',
+    endpoint: '/api/v1-beta/customers/{id}/entitlements/check',
+    httpMethod: 'get',
+    summary: 'Check entitlement (beta)',
+    description:
+      'Experimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.',
+    stainlessPath: '(resource) v1-beta.customers.entitlements > (method) check',
+    qualified: 'client.v1Beta.customers.entitlements.check',
+    params: [
+      'id: string;',
+      'currencyId?: string;',
+      'dimensions?: object;',
+      'featureId?: string;',
+      'requestedUsage?: number;',
+      'requestedValues?: string[];',
+      'resourceId?: string;',
+    ],
+    response:
+      "{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }",
+    markdown:
+      "## check\n\n`client.v1Beta.customers.entitlements.check(id: string, currencyId?: string, dimensions?: object, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string): { data: object | object; }`\n\n**get** `/api/v1-beta/customers/{id}/entitlements/check`\n\nExperimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `dimensions?: object`\n  Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the response includes a `chains` array with per-entity governance limits.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entitlements.check('x');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entitlements.check',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.entitlements.check('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.entitlements.check',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.entitlements.check(\n    id="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().entitlements().check',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entitlements.EntitlementCheckParams;\nimport io.stigg.models.v1beta.customers.entitlements.EntitlementCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCheckResponse response = client.v1Beta().customers().entitlements().check("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entitlements.Check',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entitlements.check',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.entitlements.check("x")\n\nputs(response)',
+      },
+      cli: {
+        method: 'entitlements check',
+        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entitlements.Check',
+        example:
+          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list',
+    endpoint: '/api/v1-beta/entity-types',
+    httpMethod: 'get',
+    summary: 'Get a list of entity types',
+    description:
+      'Returns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).',
+    stainlessPath: '(resource) v1-beta.entity_types > (method) list',
+    qualified: 'client.v1Beta.entityTypes.list',
+    params: ['after?: string;', 'before?: string;', 'limit?: number;'],
+    response:
+      '{ id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }',
+    markdown:
+      "## list\n\n`client.v1Beta.entityTypes.list(after?: string, before?: string, limit?: number): { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }`\n\n**get** `/api/v1-beta/entity-types`\n\nReturns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n### Returns\n\n- `{ id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }`\n  A vendor-defined category of resource that can be governed (e.g. Org, Team, User). Vendors define entity types once per environment; their customers create instances (entities) of these types and the governance engine tracks usage and enforces limits per instance.\n\n  - `id: string`\n  - `attributionKeys: string[]`\n  - `createdAt: string`\n  - `displayName: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {\n  console.log(entityTypeListResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.entityTypes.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {\n  console.log(entityTypeListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1_beta.entity_types.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1_beta.entity_types.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1Beta().entityTypes().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeListPage;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeListPage page = client.v1Beta().entityTypes().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.EntityTypes.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.EntityTypes.List(context.TODO(), stigg.V1BetaEntityTypeListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.entity_types.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1_beta.entity_types.list\n\nputs(page)',
+      },
+      cli: {
+        method: 'entity_types list',
+        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1Beta.EntityTypes.List',
+        example:
+          'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example: 'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'upsert',
+    endpoint: '/api/v1-beta/entity-types',
+    httpMethod: 'put',
+    summary: 'Upsert entity types',
+    description:
+      'Batched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.',
+    stainlessPath: '(resource) v1-beta.entity_types > (method) upsert',
+    qualified: 'client.v1Beta.entityTypes.upsert',
+    params: ['types: { id: string; attributionKeys: string[]; displayName: string; }[];'],
+    response:
+      '{ data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]; }',
+    markdown:
+      "## upsert\n\n`client.v1Beta.entityTypes.upsert(types: { id: string; attributionKeys: string[]; displayName: string; }[]): { data: object[]; }`\n\n**put** `/api/v1-beta/entity-types`\n\nBatched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.\n\n### Parameters\n\n- `types: { id: string; attributionKeys: string[]; displayName: string; }[]`\n  Entity types to upsert (1–100 per request)\n\n### Returns\n\n- `{ data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]; }`\n  Entity types after upsert.\n\n  - `data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.entityTypes.upsert({ types: [{\n  id: 'org',\n  attributionKeys: ['organizationId'],\n  displayName: 'Organization',\n}, {\n  id: 'team',\n  attributionKeys: ['teamId'],\n  displayName: 'Team',\n}] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.entityTypes.upsert',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.entityTypes.upsert({\n  types: [\n    {\n      id: 'org',\n      displayName: 'Organization',\n      attributionKeys: ['organizationId'],\n    },\n    {\n      id: 'team',\n      displayName: 'Team',\n      attributionKeys: ['teamId'],\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.entity_types.upsert',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.entity_types.upsert(\n    types=[{\n        "id": "org",\n        "display_name": "Organization",\n        "attribution_keys": ["organizationId"],\n    }, {\n        "id": "team",\n        "display_name": "Team",\n        "attribution_keys": ["teamId"],\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().entityTypes().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertParams;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeUpsertParams params = EntityTypeUpsertParams.builder()\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("org")\n                .addAttributionKey("organizationId")\n                .displayName("Organization")\n                .build())\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("team")\n                .addAttributionKey("teamId")\n                .displayName("Team")\n                .build())\n            .build();\n        EntityTypeUpsertResponse response = client.v1Beta().entityTypes().upsert(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.EntityTypes.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.EntityTypes.Upsert(context.TODO(), stigg.V1BetaEntityTypeUpsertParams{\n\t\tTypes: []stigg.V1BetaEntityTypeUpsertParamsType{{\n\t\t\tID:              "org",\n\t\t\tDisplayName:     "Organization",\n\t\t\tAttributionKeys: []string{"organizationId"},\n\t\t}, {\n\t\t\tID:              "team",\n\t\t\tDisplayName:     "Team",\n\t\t\tAttributionKeys: []string{"teamId"},\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.entity_types.upsert',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.entity_types.upsert(\n  types: [\n    {id: "org", attributionKeys: ["organizationId"], displayName: "Organization"},\n    {id: "team", attributionKeys: ["teamId"], displayName: "Team"}\n  ]\n)\n\nputs(response)',
+      },
+      cli: {
+        method: 'entity_types upsert',
+        example:
+          "stigg v1-beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
+      },
+      csharp: {
+        method: 'V1Beta.EntityTypes.Upsert',
+        example:
+          'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization"\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
       },
     },
   },
