@@ -149,7 +149,6 @@ const fuse = new Fuse(
     'client.v1.coupons.retrieve',
     'client.v1.coupons.updateCoupon',
     'client.v1.events.report',
-    'client.v1.events.beta.customers.entitlements.check',
     'client.v1.credits.getAutoRecharge',
     'client.v1.credits.getUsage',
     'client.v1.credits.listLedger',
@@ -203,6 +202,9 @@ const fuse = new Fuse(
     'client.v1.products.listProducts',
     'client.v1.products.unarchiveProduct',
     'client.v1.products.updateProduct',
+    'client.v1Beta.customers.entitlements.check',
+    'client.v1Beta.entityTypes.list',
+    'client.v1Beta.entityTypes.upsert',
   ],
   { threshold: 1, shouldSort: true },
 );

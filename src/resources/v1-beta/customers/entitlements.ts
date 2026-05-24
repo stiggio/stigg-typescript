@@ -1,15 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../core/resource';
-import { APIPromise } from '../../../../../core/api-promise';
-import { RequestOptions } from '../../../../../internal/request-options';
-import { path } from '../../../../../internal/utils/path';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Entitlements extends APIResource {
   /**
    * Experimental — request and response shapes may change without notice. Same
    * semantics as `Check entitlement`, plus an optional `dimensions` query param that
    * resolves to per-entity governance limits surfaced as `chains` on the response.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1Beta.customers.entitlements.check('x');
+   * ```
    */
   check(
     id: string,
