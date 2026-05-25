@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.8 (2026-05-25)
+
+Full Changelog: [v0.1.0-beta.7...v0.1.0-beta.8](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.7...v0.1.0-beta.8)
+
+### Features
+
+* **api:** add retrieve/list/archive/unarchive/upsert to customers entities ([2192e30](https://github.com/stiggio/stigg-typescript/commit/2192e30efd76faa60acbc1e20465a50ec8325dd1))
+
 ## 0.1.0-beta.7 (2026-05-24)
 
 Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.6...v0.1.0-beta.7)
