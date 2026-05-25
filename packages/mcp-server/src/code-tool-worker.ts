@@ -205,6 +205,11 @@ const fuse = new Fuse(
     'client.v1Beta.customers.entitlements.check',
     'client.v1Beta.entityTypes.list',
     'client.v1Beta.entityTypes.upsert',
+    'client.v1Beta.entities.archive',
+    'client.v1Beta.entities.list',
+    'client.v1Beta.entities.retrieve',
+    'client.v1Beta.entities.unarchive',
+    'client.v1Beta.entities.upsert',
   ],
   { threshold: 1, shouldSort: true },
 );
