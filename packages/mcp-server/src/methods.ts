@@ -592,6 +592,36 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'put',
     httpPath: '/api/v1-beta/entity-types',
   },
+  {
+    clientCallName: 'client.v1Beta.entities.retrieve',
+    fullyQualifiedName: 'v1Beta.entities.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entities/{entityId}',
+  },
+  {
+    clientCallName: 'client.v1Beta.entities.list',
+    fullyQualifiedName: 'v1Beta.entities.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entities',
+  },
+  {
+    clientCallName: 'client.v1Beta.entities.archive',
+    fullyQualifiedName: 'v1Beta.entities.archive',
+    httpMethod: 'post',
+    httpPath: '/api/v1-beta/customers/{id}/entities/archive',
+  },
+  {
+    clientCallName: 'client.v1Beta.entities.unarchive',
+    fullyQualifiedName: 'v1Beta.entities.unarchive',
+    httpMethod: 'post',
+    httpPath: '/api/v1-beta/customers/{id}/entities/unarchive',
+  },
+  {
+    clientCallName: 'client.v1Beta.entities.upsert',
+    fullyQualifiedName: 'v1Beta.entities.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1-beta/customers/{id}/entities',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {
