@@ -200,14 +200,14 @@ export namespace CreditGetUsageResponse {
      */
     export interface Series {
       /**
-       * The feature ID
+       * The feature ID; null when grouping by dimensions only
        */
-      featureId: string;
+      featureId: string | null;
 
       /**
-       * The display name of the feature
+       * The display name of the feature; null when grouping by dimensions only
        */
-      featureName: string;
+      featureName: string | null;
 
       /**
        * Time-series data points for this feature
@@ -218,6 +218,11 @@ export namespace CreditGetUsageResponse {
        * Total credits consumed by this feature in the time range
        */
       totalCredits: number;
+
+      /**
+       * Dimension key/value pairs identifying this series when groupBy is applied
+       */
+      tags?: Array<Series.Tag>;
     }
 
     export namespace Series {
@@ -234,6 +239,21 @@ export namespace CreditGetUsageResponse {
          * The credit usage value at this point
          */
         value: number;
+      }
+
+      /**
+       * Dimension key/value pair identifying a credit usage series
+       */
+      export interface Tag {
+        /**
+         * The dimension key
+         */
+        key: string;
+
+        /**
+         * The dimension value for this series
+         */
+        value: string;
       }
     }
   }
@@ -324,6 +344,12 @@ export interface CreditGetUsageParams {
    * startDate is provided
    */
   endDate?: string;
+
+  /**
+   * Comma-separated list of feature dimension keys to group usage series by (up to
+   * 3). Each key matches /^[a-zA-Z0-9_$-]+$/
+   */
+  groupBy?: string;
 
   /**
    * Filter by resource ID
