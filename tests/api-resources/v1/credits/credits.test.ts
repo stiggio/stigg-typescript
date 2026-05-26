@@ -49,6 +49,7 @@ describe('resource credits', () => {
       customerId: 'customerId',
       currencyId: 'currencyId',
       endDate: '2019-12-27T18:11:19.117Z',
+      groupBy: 'groupBy',
       resourceId: 'resourceId',
       startDate: '2019-12-27T18:11:19.117Z',
       timeRange: 'LAST_DAY',
