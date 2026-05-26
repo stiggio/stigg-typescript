@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.9 (2026-05-26)
+
+Full Changelog: [v0.1.0-beta.8...v0.1.0-beta.9](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.8...v0.1.0-beta.9)
+
+### Features
+
+* **api:** add list/upsert methods to customer assignments ([f7e90c0](https://github.com/stiggio/stigg-typescript/commit/f7e90c023402721537bd4a500b04e3b47cd37c35))
+
 ## 0.1.0-beta.8 (2026-05-25)
 
 Full Changelog: [v0.1.0-beta.7...v0.1.0-beta.8](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.7...v0.1.0-beta.8)
