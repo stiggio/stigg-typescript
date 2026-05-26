@@ -11,10 +11,10 @@ export {
 export { Customers } from './customers';
 export {
   Entities,
+  type EntityIDsActionResponseDto,
+  type EntityIDsRequestDto,
   type EntityRetrieveResponse,
   type EntityListResponse,
-  type EntityArchiveResponse,
-  type EntityUnarchiveResponse,
   type EntityUpsertResponse,
   type EntityRetrieveParams,
   type EntityListParams,
