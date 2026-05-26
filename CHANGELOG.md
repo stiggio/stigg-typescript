@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.10 (2026-05-26)
+
+Full Changelog: [v0.1.0-beta.9...v0.1.0-beta.10](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.9...v0.1.0-beta.10)
+
+### Features
+
+* **api:** add groupBy param, tags field, update types in credits usage ([fe4c5a7](https://github.com/stiggio/stigg-typescript/commit/fe4c5a7ff383104402f11aaa58c1255269e92a6a))
+* **api:** manual updates ([24d702b](https://github.com/stiggio/stigg-typescript/commit/24d702b4e6ddecc5b6faee86f985b19a3b97e7b5))
+
 ## 0.1.0-beta.9 (2026-05-26)
 
 Full Changelog: [v0.1.0-beta.8...v0.1.0-beta.9](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.8...v0.1.0-beta.9)
