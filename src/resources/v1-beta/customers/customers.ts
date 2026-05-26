@@ -14,14 +14,14 @@ import * as EntitiesAPI from './entities';
 import {
   Entities,
   EntityArchiveParams,
-  EntityArchiveResponse,
+  EntityIDsActionResponseDto,
+  EntityIDsRequestDto,
   EntityListParams,
   EntityListResponse,
   EntityListResponsesMyCursorIDPage,
   EntityRetrieveParams,
   EntityRetrieveResponse,
   EntityUnarchiveParams,
-  EntityUnarchiveResponse,
   EntityUpsertParams,
   EntityUpsertResponse,
 } from './entities';
@@ -47,10 +47,10 @@ export declare namespace Customers {
 
   export {
     Entities as Entities,
+    type EntityIDsActionResponseDto as EntityIDsActionResponseDto,
+    type EntityIDsRequestDto as EntityIDsRequestDto,
     type EntityRetrieveResponse as EntityRetrieveResponse,
     type EntityListResponse as EntityListResponse,
-    type EntityArchiveResponse as EntityArchiveResponse,
-    type EntityUnarchiveResponse as EntityUnarchiveResponse,
     type EntityUpsertResponse as EntityUpsertResponse,
     type EntityListResponsesMyCursorIDPage as EntityListResponsesMyCursorIDPage,
     type EntityRetrieveParams as EntityRetrieveParams,

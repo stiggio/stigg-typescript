@@ -57,7 +57,7 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const entityIDsActionResponseDto =
    *   await client.v1Beta.customers.entities.archive('id', {
    *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
    *   });
@@ -67,7 +67,7 @@ export class Entities extends APIResource {
     id: string,
     body: EntityArchiveParams,
     options?: RequestOptions,
-  ): APIPromise<EntityArchiveResponse> {
+  ): APIPromise<EntityIDsActionResponseDto> {
     return this._client.post(path`/api/v1-beta/customers/${id}/entities/archive`, { body, ...options });
   }
 
@@ -76,7 +76,7 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const entityIDsActionResponseDto =
    *   await client.v1Beta.customers.entities.unarchive('id', {
    *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
    *   });
@@ -86,7 +86,7 @@ export class Entities extends APIResource {
     id: string,
     body: EntityUnarchiveParams,
     options?: RequestOptions,
-  ): APIPromise<EntityUnarchiveResponse> {
+  ): APIPromise<EntityIDsActionResponseDto> {
     return this._client.post(path`/api/v1-beta/customers/${id}/entities/unarchive`, { body, ...options });
   }
 
@@ -119,6 +119,38 @@ export class Entities extends APIResource {
 }
 
 export type EntityListResponsesMyCursorIDPage = MyCursorIDPage<EntityListResponse>;
+
+/**
+ * Wrapped response echoing the ids that were acted on by an archive/unarchive call
+ */
+export interface EntityIDsActionResponseDto {
+  /**
+   * List of entity identifiers that were acted on
+   */
+  data: EntityIDsActionResponseDto.Data;
+}
+
+export namespace EntityIDsActionResponseDto {
+  /**
+   * List of entity identifiers that were acted on
+   */
+  export interface Data {
+    /**
+     * Entity identifiers to act on
+     */
+    ids: Array<string>;
+  }
+}
+
+/**
+ * List of entity identifiers to act on in bulk (1-100 entries)
+ */
+export interface EntityIDsRequestDto {
+  /**
+   * Entity identifiers to act on
+   */
+  ids: Array<string>;
+}
 
 /**
  * Response object
@@ -200,50 +232,6 @@ export interface EntityListResponse {
    * Timestamp of when the record was last updated
    */
   updatedAt: string;
-}
-
-/**
- * Wrapped response echoing the ids that were acted on by an archive/unarchive call
- */
-export interface EntityArchiveResponse {
-  /**
-   * List of entity identifiers that were acted on
-   */
-  data: EntityArchiveResponse.Data;
-}
-
-export namespace EntityArchiveResponse {
-  /**
-   * List of entity identifiers that were acted on
-   */
-  export interface Data {
-    /**
-     * Entity identifiers to act on
-     */
-    ids: Array<string>;
-  }
-}
-
-/**
- * Wrapped response echoing the ids that were acted on by an archive/unarchive call
- */
-export interface EntityUnarchiveResponse {
-  /**
-   * List of entity identifiers that were acted on
-   */
-  data: EntityUnarchiveResponse.Data;
-}
-
-export namespace EntityUnarchiveResponse {
-  /**
-   * List of entity identifiers that were acted on
-   */
-  export interface Data {
-    /**
-     * Entity identifiers to act on
-     */
-    ids: Array<string>;
-  }
 }
 
 /**
@@ -357,10 +345,10 @@ export namespace EntityUpsertParams {
 
 export declare namespace Entities {
   export {
+    type EntityIDsActionResponseDto as EntityIDsActionResponseDto,
+    type EntityIDsRequestDto as EntityIDsRequestDto,
     type EntityRetrieveResponse as EntityRetrieveResponse,
     type EntityListResponse as EntityListResponse,
-    type EntityArchiveResponse as EntityArchiveResponse,
-    type EntityUnarchiveResponse as EntityUnarchiveResponse,
     type EntityUpsertResponse as EntityUpsertResponse,
     type EntityListResponsesMyCursorIDPage as EntityListResponsesMyCursorIDPage,
     type EntityRetrieveParams as EntityRetrieveParams,

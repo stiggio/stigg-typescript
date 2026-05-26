@@ -3,8 +3,8 @@
 export {
   Addons,
   type Addon,
+  type ChargeList,
   type AddonListResponse,
-  type AddonListChargesResponse,
   type AddonPublishResponse,
   type AddonRemoveDraftResponse,
   type AddonCreateParams,
@@ -13,7 +13,7 @@ export {
   type AddonListChargesParams,
   type AddonPublishParams,
   type AddonListResponsesMyCursorIDPage,
-  type AddonListChargesResponsesMyCursorIDPage,
+  type ChargeListDataMyCursorIDPage,
 } from './addons/index';
 export {
   Coupons,
@@ -67,8 +67,6 @@ export {
   Plans,
   type Plan,
   type PlanListResponse,
-  type PlanListChargesResponse,
-  type PlanListOverageChargesResponse,
   type PlanPublishResponse,
   type PlanRemoveDraftResponse,
   type PlanCreateParams,
@@ -78,8 +76,6 @@ export {
   type PlanListOverageChargesParams,
   type PlanPublishParams,
   type PlanListResponsesMyCursorIDPage,
-  type PlanListChargesResponsesMyCursorIDPage,
-  type PlanListOverageChargesResponsesMyCursorIDPage,
 } from './plans/index';
 export {
   Products,
