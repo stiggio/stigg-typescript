@@ -2,20 +2,6 @@
 
 export { Customers } from './customers/index';
 export {
-  Entities,
-  type EntityRetrieveResponse,
-  type EntityListResponse,
-  type EntityArchiveResponse,
-  type EntityUnarchiveResponse,
-  type EntityUpsertResponse,
-  type EntityRetrieveParams,
-  type EntityListParams,
-  type EntityArchiveParams,
-  type EntityUnarchiveParams,
-  type EntityUpsertParams,
-  type EntityListResponsesMyCursorIDPage,
-} from './entities';
-export {
   EntityTypes,
   type EntityTypeListResponse,
   type EntityTypeUpsertResponse,

@@ -581,6 +581,48 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1-beta/customers/{id}/entitlements/check',
   },
   {
+    clientCallName: 'client.v1Beta.customers.entities.retrieve',
+    fullyQualifiedName: 'v1Beta.customers.entities.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entities/{entityId}',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entities.list',
+    fullyQualifiedName: 'v1Beta.customers.entities.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entities',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entities.archive',
+    fullyQualifiedName: 'v1Beta.customers.entities.archive',
+    httpMethod: 'post',
+    httpPath: '/api/v1-beta/customers/{id}/entities/archive',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entities.unarchive',
+    fullyQualifiedName: 'v1Beta.customers.entities.unarchive',
+    httpMethod: 'post',
+    httpPath: '/api/v1-beta/customers/{id}/entities/unarchive',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entities.upsert',
+    fullyQualifiedName: 'v1Beta.customers.entities.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1-beta/customers/{id}/entities',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.assignments.list',
+    fullyQualifiedName: 'v1Beta.customers.assignments.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/assignments',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.assignments.upsert',
+    fullyQualifiedName: 'v1Beta.customers.assignments.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1-beta/customers/{id}/assignments',
+  },
+  {
     clientCallName: 'client.v1Beta.entityTypes.list',
     fullyQualifiedName: 'v1Beta.entityTypes.list',
     httpMethod: 'get',
@@ -591,36 +633,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1Beta.entityTypes.upsert',
     httpMethod: 'put',
     httpPath: '/api/v1-beta/entity-types',
-  },
-  {
-    clientCallName: 'client.v1Beta.entities.retrieve',
-    fullyQualifiedName: 'v1Beta.entities.retrieve',
-    httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/entities/{entityId}',
-  },
-  {
-    clientCallName: 'client.v1Beta.entities.list',
-    fullyQualifiedName: 'v1Beta.entities.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/entities',
-  },
-  {
-    clientCallName: 'client.v1Beta.entities.archive',
-    fullyQualifiedName: 'v1Beta.entities.archive',
-    httpMethod: 'post',
-    httpPath: '/api/v1-beta/customers/{id}/entities/archive',
-  },
-  {
-    clientCallName: 'client.v1Beta.entities.unarchive',
-    fullyQualifiedName: 'v1Beta.entities.unarchive',
-    httpMethod: 'post',
-    httpPath: '/api/v1-beta/customers/{id}/entities/unarchive',
-  },
-  {
-    clientCallName: 'client.v1Beta.entities.upsert',
-    fullyQualifiedName: 'v1Beta.entities.upsert',
-    httpMethod: 'put',
-    httpPath: '/api/v1-beta/customers/{id}/entities',
   },
 ];
 

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../core/pagination';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Entities extends APIResource {
   /**
@@ -12,9 +12,10 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const entity = await client.v1Beta.entities.retrieve('x', {
-   *   id: 'id',
-   * });
+   * const entity =
+   *   await client.v1Beta.customers.entities.retrieve('x', {
+   *     id: 'id',
+   *   });
    * ```
    */
   retrieve(
@@ -32,7 +33,7 @@ export class Entities extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const entityListResponse of client.v1Beta.entities.list(
+   * for await (const entityListResponse of client.v1Beta.customers.entities.list(
    *   'id',
    * )) {
    *   // ...
@@ -56,10 +57,10 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1Beta.entities.archive(
-   *   'id',
-   *   { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] },
-   * );
+   * const response =
+   *   await client.v1Beta.customers.entities.archive('id', {
+   *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
+   *   });
    * ```
    */
   archive(
@@ -75,10 +76,10 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1Beta.entities.unarchive(
-   *   'id',
-   *   { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] },
-   * );
+   * const response =
+   *   await client.v1Beta.customers.entities.unarchive('id', {
+   *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
+   *   });
    * ```
    */
   unarchive(
@@ -95,20 +96,21 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1Beta.entities.upsert('id', {
-   *   entities: [
-   *     {
-   *       id: 'user-7f3a0c1d',
-   *       typeRefId: 'user',
-   *       metadata: { email: 'jane@acme.com', role: 'admin' },
-   *     },
-   *     {
-   *       id: 'user-c4d1b2e9',
-   *       typeRefId: 'user',
-   *       metadata: { email: 'john@acme.com' },
-   *     },
-   *   ],
-   * });
+   * const response =
+   *   await client.v1Beta.customers.entities.upsert('id', {
+   *     entities: [
+   *       {
+   *         id: 'user-7f3a0c1d',
+   *         typeRefId: 'user',
+   *         metadata: { email: 'jane@acme.com', role: 'admin' },
+   *       },
+   *       {
+   *         id: 'user-c4d1b2e9',
+   *         typeRefId: 'user',
+   *         metadata: { email: 'john@acme.com' },
+   *       },
+   *     ],
+   *   });
    * ```
    */
   upsert(id: string, body: EntityUpsertParams, options?: RequestOptions): APIPromise<EntityUpsertResponse> {
