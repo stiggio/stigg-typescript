@@ -12,6 +12,15 @@ import { path } from '../../../internal/utils/path';
 export class CustomCurrencies extends APIResource {
   /**
    * Creates a new custom currency in the environment.
+   *
+   * @example
+   * ```ts
+   * const customCurrencyResponse =
+   *   await client.v1.credits.customCurrencies.create({
+   *     id: 'id',
+   *     displayName: 'displayName',
+   *   });
+   * ```
    */
   create(body: CustomCurrencyCreateParams, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
     return this._client.post('/api/v1/credits/custom-currencies', { body, ...options });
@@ -19,6 +28,14 @@ export class CustomCurrencies extends APIResource {
 
   /**
    * Updates an existing custom currency. Only the supplied fields are modified.
+   *
+   * @example
+   * ```ts
+   * const customCurrencyResponse =
+   *   await client.v1.credits.customCurrencies.update(
+   *     'currencyId',
+   *   );
+   * ```
    */
   update(
     currencyID: string,
@@ -32,6 +49,14 @@ export class CustomCurrencies extends APIResource {
    * Retrieves a paginated list of custom currencies in the environment. Archived
    * currencies are excluded by default; pass `status=ARCHIVED` (or
    * `status=ACTIVE,ARCHIVED`) to include them.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customCurrencyListResponse of client.v1.credits.customCurrencies.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: CustomCurrencyListParams | null | undefined = {},
@@ -48,6 +73,14 @@ export class CustomCurrencies extends APIResource {
    * Archives a custom currency. Fails if the currency is still associated with any
    * active plan or addon — use the associated-entities endpoint first to inspect
    * dependencies.
+   *
+   * @example
+   * ```ts
+   * const customCurrencyResponse =
+   *   await client.v1.credits.customCurrencies.archive(
+   *     'currencyId',
+   *   );
+   * ```
    */
   archive(currencyID: string, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
     return this._client.post(path`/api/v1/credits/custom-currencies/${currencyID}/archive`, options);
@@ -56,6 +89,14 @@ export class CustomCurrencies extends APIResource {
   /**
    * Lists the active plans and addons that reference a custom currency. Useful
    * before archiving to inspect dependencies.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.credits.customCurrencies.listAssociatedEntities(
+   *     'currencyId',
+   *   );
+   * ```
    */
   listAssociatedEntities(
     currencyID: string,
@@ -70,6 +111,14 @@ export class CustomCurrencies extends APIResource {
   /**
    * Restores a previously archived custom currency. Fails if another active currency
    * with the same ID already exists.
+   *
+   * @example
+   * ```ts
+   * const customCurrencyResponse =
+   *   await client.v1.credits.customCurrencies.unarchive(
+   *     'currencyId',
+   *   );
+   * ```
    */
   unarchive(currencyID: string, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
     return this._client.post(path`/api/v1/credits/custom-currencies/${currencyID}/unarchive`, options);

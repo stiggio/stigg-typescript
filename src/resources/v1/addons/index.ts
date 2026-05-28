@@ -3,8 +3,8 @@
 export {
   Addons,
   type Addon,
-  type ChargeList,
   type AddonListResponse,
+  type AddonListChargesResponse,
   type AddonPublishResponse,
   type AddonRemoveDraftResponse,
   type AddonCreateParams,
@@ -13,7 +13,7 @@ export {
   type AddonListChargesParams,
   type AddonPublishParams,
   type AddonListResponsesMyCursorIDPage,
-  type ChargeListDataMyCursorIDPage,
+  type AddonListChargesResponsesMyCursorIDPage,
 } from './addons';
 export {
   Entitlements,
