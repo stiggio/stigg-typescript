@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.11 (2026-05-28)
+
+Full Changelog: [v0.1.0-beta.10...v0.1.0-beta.11](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.10...v0.1.0-beta.11)
+
+### Features
+
+* **api:** add RECEIVED integration type to customers ([8325236](https://github.com/stiggio/stigg-typescript/commit/8325236ad3a1d655e9b407ed13fc120f5fd1fac0))
+
 ## 0.1.0-beta.10 (2026-05-26)
 
 Full Changelog: [v0.1.0-beta.9...v0.1.0-beta.10](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.9...v0.1.0-beta.10)
