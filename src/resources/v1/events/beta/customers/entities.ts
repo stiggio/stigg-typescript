@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../core/resource';
-import { APIPromise } from '../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
+import { APIResource } from '../../../../../core/resource';
+import { APIPromise } from '../../../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../../core/pagination';
+import { RequestOptions } from '../../../../../internal/request-options';
+import { path } from '../../../../../internal/utils/path';
 
 export class Entities extends APIResource {
   /**
@@ -13,9 +13,10 @@ export class Entities extends APIResource {
    * @example
    * ```ts
    * const entity =
-   *   await client.v1Beta.customers.entities.retrieve('x', {
-   *     id: 'id',
-   *   });
+   *   await client.v1.events.beta.customers.entities.retrieve(
+   *     'x',
+   *     { id: 'id' },
+   *   );
    * ```
    */
   retrieve(
@@ -33,7 +34,7 @@ export class Entities extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const entityListResponse of client.v1Beta.customers.entities.list(
+   * for await (const entityListResponse of client.v1.events.beta.customers.entities.list(
    *   'id',
    * )) {
    *   // ...
@@ -57,17 +58,18 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const entityIDsActionResponseDto =
-   *   await client.v1Beta.customers.entities.archive('id', {
-   *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
-   *   });
+   * const response =
+   *   await client.v1.events.beta.customers.entities.archive(
+   *     'id',
+   *     { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] },
+   *   );
    * ```
    */
   archive(
     id: string,
     body: EntityArchiveParams,
     options?: RequestOptions,
-  ): APIPromise<EntityIDsActionResponseDto> {
+  ): APIPromise<EntityArchiveResponse> {
     return this._client.post(path`/api/v1-beta/customers/${id}/entities/archive`, { body, ...options });
   }
 
@@ -76,17 +78,18 @@ export class Entities extends APIResource {
    *
    * @example
    * ```ts
-   * const entityIDsActionResponseDto =
-   *   await client.v1Beta.customers.entities.unarchive('id', {
-   *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
-   *   });
+   * const response =
+   *   await client.v1.events.beta.customers.entities.unarchive(
+   *     'id',
+   *     { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] },
+   *   );
    * ```
    */
   unarchive(
     id: string,
     body: EntityUnarchiveParams,
     options?: RequestOptions,
-  ): APIPromise<EntityIDsActionResponseDto> {
+  ): APIPromise<EntityUnarchiveResponse> {
     return this._client.post(path`/api/v1-beta/customers/${id}/entities/unarchive`, { body, ...options });
   }
 
@@ -97,20 +100,26 @@ export class Entities extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1Beta.customers.entities.upsert('id', {
-   *     entities: [
-   *       {
-   *         id: 'user-7f3a0c1d',
-   *         typeRefId: 'user',
-   *         metadata: { email: 'jane@acme.com', role: 'admin' },
-   *       },
-   *       {
-   *         id: 'user-c4d1b2e9',
-   *         typeRefId: 'user',
-   *         metadata: { email: 'john@acme.com' },
-   *       },
-   *     ],
-   *   });
+   *   await client.v1.events.beta.customers.entities.upsert(
+   *     'id',
+   *     {
+   *       entities: [
+   *         {
+   *           id: 'user-7f3a0c1d',
+   *           typeRefId: 'user',
+   *           metadata: {
+   *             email: 'jane@acme.com',
+   *             role: 'admin',
+   *           },
+   *         },
+   *         {
+   *           id: 'user-c4d1b2e9',
+   *           typeRefId: 'user',
+   *           metadata: { email: 'john@acme.com' },
+   *         },
+   *       ],
+   *     },
+   *   );
    * ```
    */
   upsert(id: string, body: EntityUpsertParams, options?: RequestOptions): APIPromise<EntityUpsertResponse> {
@@ -119,38 +128,6 @@ export class Entities extends APIResource {
 }
 
 export type EntityListResponsesMyCursorIDPage = MyCursorIDPage<EntityListResponse>;
-
-/**
- * Wrapped response echoing the ids that were acted on by an archive/unarchive call
- */
-export interface EntityIDsActionResponseDto {
-  /**
-   * List of entity identifiers that were acted on
-   */
-  data: EntityIDsActionResponseDto.Data;
-}
-
-export namespace EntityIDsActionResponseDto {
-  /**
-   * List of entity identifiers that were acted on
-   */
-  export interface Data {
-    /**
-     * Entity identifiers to act on
-     */
-    ids: Array<string>;
-  }
-}
-
-/**
- * List of entity identifiers to act on in bulk (1-100 entries)
- */
-export interface EntityIDsRequestDto {
-  /**
-   * Entity identifiers to act on
-   */
-  ids: Array<string>;
-}
 
 /**
  * Response object
@@ -232,6 +209,50 @@ export interface EntityListResponse {
    * Timestamp of when the record was last updated
    */
   updatedAt: string;
+}
+
+/**
+ * Wrapped response echoing the ids that were acted on by an archive/unarchive call
+ */
+export interface EntityArchiveResponse {
+  /**
+   * List of entity identifiers that were acted on
+   */
+  data: EntityArchiveResponse.Data;
+}
+
+export namespace EntityArchiveResponse {
+  /**
+   * List of entity identifiers that were acted on
+   */
+  export interface Data {
+    /**
+     * Entity identifiers to act on
+     */
+    ids: Array<string>;
+  }
+}
+
+/**
+ * Wrapped response echoing the ids that were acted on by an archive/unarchive call
+ */
+export interface EntityUnarchiveResponse {
+  /**
+   * List of entity identifiers that were acted on
+   */
+  data: EntityUnarchiveResponse.Data;
+}
+
+export namespace EntityUnarchiveResponse {
+  /**
+   * List of entity identifiers that were acted on
+   */
+  export interface Data {
+    /**
+     * Entity identifiers to act on
+     */
+    ids: Array<string>;
+  }
 }
 
 /**
@@ -345,10 +366,10 @@ export namespace EntityUpsertParams {
 
 export declare namespace Entities {
   export {
-    type EntityIDsActionResponseDto as EntityIDsActionResponseDto,
-    type EntityIDsRequestDto as EntityIDsRequestDto,
     type EntityRetrieveResponse as EntityRetrieveResponse,
     type EntityListResponse as EntityListResponse,
+    type EntityArchiveResponse as EntityArchiveResponse,
+    type EntityUnarchiveResponse as EntityUnarchiveResponse,
     type EntityUpsertResponse as EntityUpsertResponse,
     type EntityListResponsesMyCursorIDPage as EntityListResponsesMyCursorIDPage,
     type EntityRetrieveParams as EntityRetrieveParams,

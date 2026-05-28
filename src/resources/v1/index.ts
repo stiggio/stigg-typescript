@@ -3,8 +3,8 @@
 export {
   Addons,
   type Addon,
-  type ChargeList,
   type AddonListResponse,
+  type AddonListChargesResponse,
   type AddonPublishResponse,
   type AddonRemoveDraftResponse,
   type AddonCreateParams,
@@ -13,7 +13,7 @@ export {
   type AddonListChargesParams,
   type AddonPublishParams,
   type AddonListResponsesMyCursorIDPage,
-  type ChargeListDataMyCursorIDPage,
+  type AddonListChargesResponsesMyCursorIDPage,
 } from './addons/index';
 export {
   Coupons,
@@ -53,7 +53,7 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events';
+export { Events, type EventReportResponse, type EventReportParams } from './events/index';
 export {
   Features,
   type Feature,
@@ -67,6 +67,8 @@ export {
   Plans,
   type Plan,
   type PlanListResponse,
+  type PlanListChargesResponse,
+  type PlanListOverageChargesResponse,
   type PlanPublishResponse,
   type PlanRemoveDraftResponse,
   type PlanCreateParams,
@@ -76,6 +78,8 @@ export {
   type PlanListOverageChargesParams,
   type PlanPublishParams,
   type PlanListResponsesMyCursorIDPage,
+  type PlanListChargesResponsesMyCursorIDPage,
+  type PlanListOverageChargesResponsesMyCursorIDPage,
 } from './plans/index';
 export {
   Products,
