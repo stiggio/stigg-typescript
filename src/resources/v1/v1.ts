@@ -11,8 +11,6 @@ import {
   CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
-import * as EventsAPI from './events';
-import { EventReportParams, EventReportResponse, Events } from './events';
 import * as FeaturesAPI from './features';
 import {
   Feature,
@@ -47,6 +45,8 @@ import {
   Addon,
   AddonCreateParams,
   AddonListChargesParams,
+  AddonListChargesResponse,
+  AddonListChargesResponsesMyCursorIDPage,
   AddonListParams,
   AddonListResponse,
   AddonListResponsesMyCursorIDPage,
@@ -55,8 +55,6 @@ import {
   AddonRemoveDraftResponse,
   AddonUpdateParams,
   Addons,
-  ChargeList,
-  ChargeListDataMyCursorIDPage,
 } from './addons/addons';
 import * as CreditsAPI from './credits/credits';
 import {
@@ -89,12 +87,18 @@ import {
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
+import * as EventsAPI from './events/events';
+import { EventReportParams, EventReportResponse, Events } from './events/events';
 import * as PlansAPI from './plans/plans';
 import {
   Plan,
   PlanCreateParams,
   PlanListChargesParams,
+  PlanListChargesResponse,
+  PlanListChargesResponsesMyCursorIDPage,
   PlanListOverageChargesParams,
+  PlanListOverageChargesResponse,
+  PlanListOverageChargesResponsesMyCursorIDPage,
   PlanListParams,
   PlanListResponse,
   PlanListResponsesMyCursorIDPage,
@@ -228,12 +232,12 @@ export declare namespace V1 {
   export {
     Addons as Addons,
     type Addon as Addon,
-    type ChargeList as ChargeList,
     type AddonListResponse as AddonListResponse,
+    type AddonListChargesResponse as AddonListChargesResponse,
     type AddonPublishResponse as AddonPublishResponse,
     type AddonRemoveDraftResponse as AddonRemoveDraftResponse,
     type AddonListResponsesMyCursorIDPage as AddonListResponsesMyCursorIDPage,
-    type ChargeListDataMyCursorIDPage as ChargeListDataMyCursorIDPage,
+    type AddonListChargesResponsesMyCursorIDPage as AddonListChargesResponsesMyCursorIDPage,
     type AddonCreateParams as AddonCreateParams,
     type AddonUpdateParams as AddonUpdateParams,
     type AddonListParams as AddonListParams,
@@ -245,9 +249,13 @@ export declare namespace V1 {
     Plans as Plans,
     type Plan as Plan,
     type PlanListResponse as PlanListResponse,
+    type PlanListChargesResponse as PlanListChargesResponse,
+    type PlanListOverageChargesResponse as PlanListOverageChargesResponse,
     type PlanPublishResponse as PlanPublishResponse,
     type PlanRemoveDraftResponse as PlanRemoveDraftResponse,
     type PlanListResponsesMyCursorIDPage as PlanListResponsesMyCursorIDPage,
+    type PlanListChargesResponsesMyCursorIDPage as PlanListChargesResponsesMyCursorIDPage,
+    type PlanListOverageChargesResponsesMyCursorIDPage as PlanListOverageChargesResponsesMyCursorIDPage,
     type PlanCreateParams as PlanCreateParams,
     type PlanUpdateParams as PlanUpdateParams,
     type PlanListParams as PlanListParams,

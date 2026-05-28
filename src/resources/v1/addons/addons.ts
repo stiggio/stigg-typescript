@@ -24,6 +24,15 @@ export class Addons extends APIResource {
 
   /**
    * Creates a new addon in draft status, associated with a specific product.
+   *
+   * @example
+   * ```ts
+   * const addon = await client.v1.addons.create({
+   *   id: 'id',
+   *   displayName: 'displayName',
+   *   productId: 'productId',
+   * });
+   * ```
    */
   create(body: AddonCreateParams, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post('/api/v1/addons', { body, ...options });
@@ -32,6 +41,11 @@ export class Addons extends APIResource {
   /**
    * Retrieves an addon by its unique identifier, including entitlements and pricing
    * details.
+   *
+   * @example
+   * ```ts
+   * const addon = await client.v1.addons.retrieve('x');
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.get(path`/api/v1/addons/${id}`, options);
@@ -40,6 +54,11 @@ export class Addons extends APIResource {
   /**
    * Updates an existing addon's properties such as display name, description, and
    * metadata.
+   *
+   * @example
+   * ```ts
+   * const addon = await client.v1.addons.update('x');
+   * ```
    */
   update(id: string, body: AddonUpdateParams, options?: RequestOptions): APIPromise<Addon> {
     return this._client.patch(path`/api/v1/addons/${id}`, { body, ...options });
@@ -47,6 +66,14 @@ export class Addons extends APIResource {
 
   /**
    * Retrieves a paginated list of addons in the environment.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const addonListResponse of client.v1.addons.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: AddonListParams | null | undefined = {},
@@ -60,6 +87,11 @@ export class Addons extends APIResource {
 
   /**
    * Archives an addon, preventing it from being used in new subscriptions.
+   *
+   * @example
+   * ```ts
+   * const addon = await client.v1.addons.archive('x');
+   * ```
    */
   archive(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post(path`/api/v1/addons/${id}/archive`, options);
@@ -67,6 +99,11 @@ export class Addons extends APIResource {
 
   /**
    * Creates a draft version of an existing addon for modification before publishing.
+   *
+   * @example
+   * ```ts
+   * const addon = await client.v1.addons.createDraft('x');
+   * ```
    */
   createDraft(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post(path`/api/v1/addons/${id}/draft`, options);
@@ -74,20 +111,38 @@ export class Addons extends APIResource {
 
   /**
    * Retrieves the list of charges configured on an addon.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const addonListChargesResponse of client.v1.addons.listCharges(
+   *   'x',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   listCharges(
     id: string,
     query: AddonListChargesParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<ChargeListDataMyCursorIDPage, ChargeList.Data> {
-    return this._client.getAPIList(path`/api/v1/addons/${id}/charges`, MyCursorIDPage<ChargeList.Data>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<AddonListChargesResponsesMyCursorIDPage, AddonListChargesResponse> {
+    return this._client.getAPIList(
+      path`/api/v1/addons/${id}/charges`,
+      MyCursorIDPage<AddonListChargesResponse>,
+      { query, ...options },
+    );
   }
 
   /**
    * Publishes a draft addon, making it available for use in subscriptions.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.addons.publish('x', {
+   *   migrationType: 'NEW_CUSTOMERS',
+   * });
+   * ```
    */
   publish(id: string, body: AddonPublishParams, options?: RequestOptions): APIPromise<AddonPublishResponse> {
     return this._client.post(path`/api/v1/addons/${id}/publish`, { body, ...options });
@@ -95,6 +150,11 @@ export class Addons extends APIResource {
 
   /**
    * Removes a draft version of an addon.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.addons.removeDraft('x');
+   * ```
    */
   removeDraft(id: string, options?: RequestOptions): APIPromise<AddonRemoveDraftResponse> {
     return this._client.delete(path`/api/v1/addons/${id}/draft`, options);
@@ -103,7 +163,7 @@ export class Addons extends APIResource {
 
 export type AddonListResponsesMyCursorIDPage = MyCursorIDPage<AddonListResponse>;
 
-export type ChargeListDataMyCursorIDPage = MyCursorIDPage<ChargeList.Data>;
+export type AddonListChargesResponsesMyCursorIDPage = MyCursorIDPage<AddonListChargesResponse>;
 
 /**
  * Response object
@@ -212,150 +272,383 @@ export namespace Addon {
 }
 
 /**
- * Response list object
+ * Addon configuration object
  */
-export interface ChargeList {
-  data: Array<ChargeList.Data>;
+export interface AddonListResponse {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
 
   /**
-   * Pagination metadata including cursors for navigating through results
+   * The unique identifier for the entity in the billing provider
    */
-  pagination: ChargeList.Pagination;
+  billingId: string | null;
+
+  /**
+   * Timestamp of when the record was created
+   */
+  createdAt: string;
+
+  /**
+   * List of addons the addon is dependant on
+   */
+  dependencies: Array<string> | null;
+
+  /**
+   * The description of the package
+   */
+  description: string | null;
+
+  /**
+   * The display name of the package
+   */
+  displayName: string;
+
+  /**
+   * List of entitlements of the package
+   */
+  entitlements: Array<AddonListResponse.Entitlement>;
+
+  /**
+   * Indicates if the package is the latest version
+   */
+  isLatest: boolean | null;
+
+  /**
+   * The maximum quantity of this addon that can be added to a subscription
+   */
+  maxQuantity: number | null;
+
+  /**
+   * Metadata associated with the entity
+   */
+  metadata: { [key: string]: string };
+
+  /**
+   * The pricing type of the package
+   */
+  pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
+
+  /**
+   * The product id of the package
+   */
+  productId: string;
+
+  /**
+   * The status of the package
+   */
+  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+
+  /**
+   * Timestamp of when the record was last updated
+   */
+  updatedAt: string;
+
+  /**
+   * The version number of the package
+   */
+  versionNumber: number;
 }
 
-export namespace ChargeList {
+export namespace AddonListResponse {
   /**
-   * A single pricing row on a plan or addon. Each charge encodes one (billingPeriod,
-   * billingModel, billingCadence, billingCountryCode) combination. Plans and addons
-   * own many of these — one per currency / billing period / feature.
+   * Entitlement reference with type and identifier
    */
-  export interface Data {
+  export interface Entitlement {
     /**
-     * Unique identifier of the charge
+     * The unique identifier for the entity
      */
     id: string;
 
+    type: 'FEATURE' | 'CREDIT';
+  }
+}
+
+/**
+ * A single pricing row on a plan or addon. Each charge encodes one (billingPeriod,
+ * billingModel, billingCadence, billingCountryCode) combination. Plans and addons
+ * own many of these — one per currency / billing period / feature.
+ */
+export interface AddonListChargesResponse {
+  /**
+   * Unique identifier of the charge
+   */
+  id: string;
+
+  /**
+   * The billing cadence (RECURRING or ONE_OFF)
+   */
+  billingCadence: 'RECURRING' | 'ONE_OFF';
+
+  /**
+   * The billing model (FLAT_FEE, PER_UNIT, USAGE_BASED, CREDIT_BASED, MINIMUM_SPEND)
+   */
+  billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
+
+  /**
+   * The billing period (MONTHLY or ANNUALLY)
+   */
+  billingPeriod: 'MONTHLY' | 'ANNUALLY';
+
+  /**
+   * Timestamp when the charge was created
+   */
+  createdAt: string;
+
+  /**
+   * ISO country code for localized pricing, if any
+   */
+  billingCountryCode?: string | null;
+
+  /**
+   * Identifier in the external billing integration (e.g. Stripe price id), if any
+   */
+  billingId?: string | null;
+
+  /**
+   * Block size for usage-based pricing
+   */
+  blockSize?: number | null;
+
+  /**
+   * When credits are granted (for credit-based pricing)
+   */
+  creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY' | null;
+
+  /**
+   * Credit rate configuration for credit-based pricing
+   */
+  creditRate?: AddonListChargesResponse.CreditRate | null;
+
+  /**
+   * Identifier in the linked CRM, if any
+   */
+  crmId?: string | null;
+
+  /**
+   * Deep link to the charge in the linked CRM, if any
+   */
+  crmLinkUrl?: string | null;
+
+  /**
+   * The feature this charge meters, if metered
+   */
+  featureId?: string | null;
+
+  /**
+   * Maximum unit quantity that can be purchased
+   */
+  maxUnitQuantity?: number | null;
+
+  /**
+   * Minimum unit quantity that can be purchased
+   */
+  minUnitQuantity?: number | null;
+
+  /**
+   * The flat price amount and currency, when applicable
+   */
+  price?: AddonListChargesResponse.Price | null;
+
+  /**
+   * Tiered pricing rows when the charge is tiered
+   */
+  tiers?: Array<AddonListChargesResponse.Tier> | null;
+
+  /**
+   * Tiered pricing mode (VOLUME or GRADUATED) when the charge is tiered
+   */
+  tiersMode?: 'VOLUME' | 'GRADUATED' | null;
+
+  /**
+   * Custom currency identifier for top-up pricing, if any
+   */
+  topUpCustomCurrencyId?: string | null;
+
+  /**
+   * True if this charge is referenced by at least one subscription
+   */
+  usedInSubscriptions?: boolean | null;
+}
+
+export namespace AddonListChargesResponse {
+  /**
+   * Credit rate configuration for credit-based pricing
+   */
+  export interface CreditRate {
     /**
-     * The billing cadence (RECURRING or ONE_OFF)
+     * Credit rate amount
      */
-    billingCadence: 'RECURRING' | 'ONE_OFF';
+    amount: number;
 
     /**
-     * The billing model (FLAT_FEE, PER_UNIT, USAGE_BASED, CREDIT_BASED, MINIMUM_SPEND)
+     * Custom currency identifier
      */
-    billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
+    currencyId: string;
 
     /**
-     * The billing period (MONTHLY or ANNUALLY)
+     * Optional cost formula expression
      */
-    billingPeriod: 'MONTHLY' | 'ANNUALLY';
-
-    /**
-     * Timestamp when the charge was created
-     */
-    createdAt: string;
-
-    /**
-     * ISO country code for localized pricing, if any
-     */
-    billingCountryCode?: string | null;
-
-    /**
-     * Identifier in the external billing integration (e.g. Stripe price id), if any
-     */
-    billingId?: string | null;
-
-    /**
-     * Block size for usage-based pricing
-     */
-    blockSize?: number | null;
-
-    /**
-     * When credits are granted (for credit-based pricing)
-     */
-    creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY' | null;
-
-    /**
-     * Credit rate configuration for credit-based pricing
-     */
-    creditRate?: Data.CreditRate | null;
-
-    /**
-     * Identifier in the linked CRM, if any
-     */
-    crmId?: string | null;
-
-    /**
-     * Deep link to the charge in the linked CRM, if any
-     */
-    crmLinkUrl?: string | null;
-
-    /**
-     * The feature this charge meters, if metered
-     */
-    featureId?: string | null;
-
-    /**
-     * Maximum unit quantity that can be purchased
-     */
-    maxUnitQuantity?: number | null;
-
-    /**
-     * Minimum unit quantity that can be purchased
-     */
-    minUnitQuantity?: number | null;
-
-    /**
-     * The flat price amount and currency, when applicable
-     */
-    price?: Data.Price | null;
-
-    /**
-     * Tiered pricing rows when the charge is tiered
-     */
-    tiers?: Array<Data.Tier> | null;
-
-    /**
-     * Tiered pricing mode (VOLUME or GRADUATED) when the charge is tiered
-     */
-    tiersMode?: 'VOLUME' | 'GRADUATED' | null;
-
-    /**
-     * Custom currency identifier for top-up pricing, if any
-     */
-    topUpCustomCurrencyId?: string | null;
-
-    /**
-     * True if this charge is referenced by at least one subscription
-     */
-    usedInSubscriptions?: boolean | null;
+    costFormula?: string | null;
   }
 
-  export namespace Data {
+  /**
+   * The flat price amount and currency, when applicable
+   */
+  export interface Price {
     /**
-     * Credit rate configuration for credit-based pricing
+     * The price amount
      */
-    export interface CreditRate {
-      /**
-       * Credit rate amount
-       */
-      amount: number;
-
-      /**
-       * Custom currency identifier
-       */
-      currencyId: string;
-
-      /**
-       * Optional cost formula expression
-       */
-      costFormula?: string | null;
-    }
+    amount: number;
 
     /**
-     * The flat price amount and currency, when applicable
+     * ISO 4217 currency code
      */
-    export interface Price {
+    currency:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
+  }
+
+  /**
+   * A single tier within a tiered charge
+   */
+  export interface Tier {
+    /**
+     * Flat price for this tier
+     */
+    flatPrice?: Tier.FlatPrice | null;
+
+    /**
+     * Per-unit price in this tier
+     */
+    unitPrice?: Tier.UnitPrice | null;
+
+    /**
+     * Upper bound of this tier (null for unlimited)
+     */
+    upTo?: number | null;
+  }
+
+  export namespace Tier {
+    /**
+     * Flat price for this tier
+     */
+    export interface FlatPrice {
       /**
        * The price amount
        */
@@ -484,398 +777,135 @@ export namespace ChargeList {
     }
 
     /**
-     * A single tier within a tiered charge
+     * Per-unit price in this tier
      */
-    export interface Tier {
+    export interface UnitPrice {
       /**
-       * Flat price for this tier
+       * The price amount
        */
-      flatPrice?: Tier.FlatPrice | null;
+      amount: number;
 
       /**
-       * Per-unit price in this tier
+       * ISO 4217 currency code
        */
-      unitPrice?: Tier.UnitPrice | null;
-
-      /**
-       * Upper bound of this tier (null for unlimited)
-       */
-      upTo?: number | null;
+      currency:
+        | 'usd'
+        | 'aed'
+        | 'all'
+        | 'amd'
+        | 'ang'
+        | 'aud'
+        | 'awg'
+        | 'azn'
+        | 'bam'
+        | 'bbd'
+        | 'bdt'
+        | 'bgn'
+        | 'bif'
+        | 'bmd'
+        | 'bnd'
+        | 'bsd'
+        | 'bwp'
+        | 'byn'
+        | 'bzd'
+        | 'brl'
+        | 'cad'
+        | 'cdf'
+        | 'chf'
+        | 'cny'
+        | 'czk'
+        | 'dkk'
+        | 'dop'
+        | 'dzd'
+        | 'egp'
+        | 'etb'
+        | 'eur'
+        | 'fjd'
+        | 'gbp'
+        | 'gel'
+        | 'gip'
+        | 'gmd'
+        | 'gyd'
+        | 'hkd'
+        | 'hrk'
+        | 'htg'
+        | 'idr'
+        | 'ils'
+        | 'inr'
+        | 'isk'
+        | 'jmd'
+        | 'jpy'
+        | 'kes'
+        | 'kgs'
+        | 'khr'
+        | 'kmf'
+        | 'krw'
+        | 'kyd'
+        | 'kzt'
+        | 'lbp'
+        | 'lkr'
+        | 'lrd'
+        | 'lsl'
+        | 'mad'
+        | 'mdl'
+        | 'mga'
+        | 'mkd'
+        | 'mmk'
+        | 'mnt'
+        | 'mop'
+        | 'mro'
+        | 'mvr'
+        | 'mwk'
+        | 'mxn'
+        | 'myr'
+        | 'mzn'
+        | 'nad'
+        | 'ngn'
+        | 'nok'
+        | 'npr'
+        | 'nzd'
+        | 'pgk'
+        | 'php'
+        | 'pkr'
+        | 'pln'
+        | 'qar'
+        | 'ron'
+        | 'rsd'
+        | 'rub'
+        | 'rwf'
+        | 'sar'
+        | 'sbd'
+        | 'scr'
+        | 'sek'
+        | 'sgd'
+        | 'sle'
+        | 'sll'
+        | 'sos'
+        | 'szl'
+        | 'thb'
+        | 'tjs'
+        | 'top'
+        | 'try'
+        | 'ttd'
+        | 'tzs'
+        | 'uah'
+        | 'uzs'
+        | 'vnd'
+        | 'vuv'
+        | 'wst'
+        | 'xaf'
+        | 'xcd'
+        | 'yer'
+        | 'zar'
+        | 'zmw'
+        | 'clp'
+        | 'djf'
+        | 'gnf'
+        | 'ugx'
+        | 'pyg'
+        | 'xof'
+        | 'xpf';
     }
-
-    export namespace Tier {
-      /**
-       * Flat price for this tier
-       */
-      export interface FlatPrice {
-        /**
-         * The price amount
-         */
-        amount: number;
-
-        /**
-         * ISO 4217 currency code
-         */
-        currency:
-          | 'usd'
-          | 'aed'
-          | 'all'
-          | 'amd'
-          | 'ang'
-          | 'aud'
-          | 'awg'
-          | 'azn'
-          | 'bam'
-          | 'bbd'
-          | 'bdt'
-          | 'bgn'
-          | 'bif'
-          | 'bmd'
-          | 'bnd'
-          | 'bsd'
-          | 'bwp'
-          | 'byn'
-          | 'bzd'
-          | 'brl'
-          | 'cad'
-          | 'cdf'
-          | 'chf'
-          | 'cny'
-          | 'czk'
-          | 'dkk'
-          | 'dop'
-          | 'dzd'
-          | 'egp'
-          | 'etb'
-          | 'eur'
-          | 'fjd'
-          | 'gbp'
-          | 'gel'
-          | 'gip'
-          | 'gmd'
-          | 'gyd'
-          | 'hkd'
-          | 'hrk'
-          | 'htg'
-          | 'idr'
-          | 'ils'
-          | 'inr'
-          | 'isk'
-          | 'jmd'
-          | 'jpy'
-          | 'kes'
-          | 'kgs'
-          | 'khr'
-          | 'kmf'
-          | 'krw'
-          | 'kyd'
-          | 'kzt'
-          | 'lbp'
-          | 'lkr'
-          | 'lrd'
-          | 'lsl'
-          | 'mad'
-          | 'mdl'
-          | 'mga'
-          | 'mkd'
-          | 'mmk'
-          | 'mnt'
-          | 'mop'
-          | 'mro'
-          | 'mvr'
-          | 'mwk'
-          | 'mxn'
-          | 'myr'
-          | 'mzn'
-          | 'nad'
-          | 'ngn'
-          | 'nok'
-          | 'npr'
-          | 'nzd'
-          | 'pgk'
-          | 'php'
-          | 'pkr'
-          | 'pln'
-          | 'qar'
-          | 'ron'
-          | 'rsd'
-          | 'rub'
-          | 'rwf'
-          | 'sar'
-          | 'sbd'
-          | 'scr'
-          | 'sek'
-          | 'sgd'
-          | 'sle'
-          | 'sll'
-          | 'sos'
-          | 'szl'
-          | 'thb'
-          | 'tjs'
-          | 'top'
-          | 'try'
-          | 'ttd'
-          | 'tzs'
-          | 'uah'
-          | 'uzs'
-          | 'vnd'
-          | 'vuv'
-          | 'wst'
-          | 'xaf'
-          | 'xcd'
-          | 'yer'
-          | 'zar'
-          | 'zmw'
-          | 'clp'
-          | 'djf'
-          | 'gnf'
-          | 'ugx'
-          | 'pyg'
-          | 'xof'
-          | 'xpf';
-      }
-
-      /**
-       * Per-unit price in this tier
-       */
-      export interface UnitPrice {
-        /**
-         * The price amount
-         */
-        amount: number;
-
-        /**
-         * ISO 4217 currency code
-         */
-        currency:
-          | 'usd'
-          | 'aed'
-          | 'all'
-          | 'amd'
-          | 'ang'
-          | 'aud'
-          | 'awg'
-          | 'azn'
-          | 'bam'
-          | 'bbd'
-          | 'bdt'
-          | 'bgn'
-          | 'bif'
-          | 'bmd'
-          | 'bnd'
-          | 'bsd'
-          | 'bwp'
-          | 'byn'
-          | 'bzd'
-          | 'brl'
-          | 'cad'
-          | 'cdf'
-          | 'chf'
-          | 'cny'
-          | 'czk'
-          | 'dkk'
-          | 'dop'
-          | 'dzd'
-          | 'egp'
-          | 'etb'
-          | 'eur'
-          | 'fjd'
-          | 'gbp'
-          | 'gel'
-          | 'gip'
-          | 'gmd'
-          | 'gyd'
-          | 'hkd'
-          | 'hrk'
-          | 'htg'
-          | 'idr'
-          | 'ils'
-          | 'inr'
-          | 'isk'
-          | 'jmd'
-          | 'jpy'
-          | 'kes'
-          | 'kgs'
-          | 'khr'
-          | 'kmf'
-          | 'krw'
-          | 'kyd'
-          | 'kzt'
-          | 'lbp'
-          | 'lkr'
-          | 'lrd'
-          | 'lsl'
-          | 'mad'
-          | 'mdl'
-          | 'mga'
-          | 'mkd'
-          | 'mmk'
-          | 'mnt'
-          | 'mop'
-          | 'mro'
-          | 'mvr'
-          | 'mwk'
-          | 'mxn'
-          | 'myr'
-          | 'mzn'
-          | 'nad'
-          | 'ngn'
-          | 'nok'
-          | 'npr'
-          | 'nzd'
-          | 'pgk'
-          | 'php'
-          | 'pkr'
-          | 'pln'
-          | 'qar'
-          | 'ron'
-          | 'rsd'
-          | 'rub'
-          | 'rwf'
-          | 'sar'
-          | 'sbd'
-          | 'scr'
-          | 'sek'
-          | 'sgd'
-          | 'sle'
-          | 'sll'
-          | 'sos'
-          | 'szl'
-          | 'thb'
-          | 'tjs'
-          | 'top'
-          | 'try'
-          | 'ttd'
-          | 'tzs'
-          | 'uah'
-          | 'uzs'
-          | 'vnd'
-          | 'vuv'
-          | 'wst'
-          | 'xaf'
-          | 'xcd'
-          | 'yer'
-          | 'zar'
-          | 'zmw'
-          | 'clp'
-          | 'djf'
-          | 'gnf'
-          | 'ugx'
-          | 'pyg'
-          | 'xof'
-          | 'xpf';
-      }
-    }
-  }
-
-  /**
-   * Pagination metadata including cursors for navigating through results
-   */
-  export interface Pagination {
-    /**
-     * Cursor for fetching the next page of results, or null if no additional pages
-     * exist
-     */
-    next: string | null;
-
-    /**
-     * Cursor for fetching the previous page of results, or null if at the beginning
-     */
-    prev: string | null;
-  }
-}
-
-/**
- * Addon configuration object
- */
-export interface AddonListResponse {
-  /**
-   * The unique identifier for the entity
-   */
-  id: string;
-
-  /**
-   * The unique identifier for the entity in the billing provider
-   */
-  billingId: string | null;
-
-  /**
-   * Timestamp of when the record was created
-   */
-  createdAt: string;
-
-  /**
-   * List of addons the addon is dependant on
-   */
-  dependencies: Array<string> | null;
-
-  /**
-   * The description of the package
-   */
-  description: string | null;
-
-  /**
-   * The display name of the package
-   */
-  displayName: string;
-
-  /**
-   * List of entitlements of the package
-   */
-  entitlements: Array<AddonListResponse.Entitlement>;
-
-  /**
-   * Indicates if the package is the latest version
-   */
-  isLatest: boolean | null;
-
-  /**
-   * The maximum quantity of this addon that can be added to a subscription
-   */
-  maxQuantity: number | null;
-
-  /**
-   * Metadata associated with the entity
-   */
-  metadata: { [key: string]: string };
-
-  /**
-   * The pricing type of the package
-   */
-  pricingType: 'FREE' | 'PAID' | 'CUSTOM' | null;
-
-  /**
-   * The product id of the package
-   */
-  productId: string;
-
-  /**
-   * The status of the package
-   */
-  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
-
-  /**
-   * Timestamp of when the record was last updated
-   */
-  updatedAt: string;
-
-  /**
-   * The version number of the package
-   */
-  versionNumber: number;
-}
-
-export namespace AddonListResponse {
-  /**
-   * Entitlement reference with type and identifier
-   */
-  export interface Entitlement {
-    /**
-     * The unique identifier for the entity
-     */
-    id: string;
-
-    type: 'FEATURE' | 'CREDIT';
   }
 }
 
@@ -2426,12 +2456,12 @@ Addons.Entitlements = Entitlements;
 export declare namespace Addons {
   export {
     type Addon as Addon,
-    type ChargeList as ChargeList,
     type AddonListResponse as AddonListResponse,
+    type AddonListChargesResponse as AddonListChargesResponse,
     type AddonPublishResponse as AddonPublishResponse,
     type AddonRemoveDraftResponse as AddonRemoveDraftResponse,
     type AddonListResponsesMyCursorIDPage as AddonListResponsesMyCursorIDPage,
-    type ChargeListDataMyCursorIDPage as ChargeListDataMyCursorIDPage,
+    type AddonListChargesResponsesMyCursorIDPage as AddonListChargesResponsesMyCursorIDPage,
     type AddonCreateParams as AddonCreateParams,
     type AddonUpdateParams as AddonUpdateParams,
     type AddonListParams as AddonListParams,
