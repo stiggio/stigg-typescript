@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.12 (2026-05-29)
+
+Full Changelog: [v0.1.0-beta.11...v0.1.0-beta.12](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.11...v0.1.0-beta.12)
+
+### Bug Fixes
+
+* **mcp:** use `pure-lockfile` when building mcp server ([19baa7b](https://github.com/stiggio/stigg-typescript/commit/19baa7b32e4e91a13e6117b8e660bed6e803e332))
+
 ## 0.1.0-beta.11 (2026-05-28)
 
 Full Changelog: [v0.1.0-beta.10...v0.1.0-beta.11](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.10...v0.1.0-beta.11)
