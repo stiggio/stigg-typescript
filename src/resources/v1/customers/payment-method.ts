@@ -72,7 +72,8 @@ export interface PaymentMethodAttachParams {
     | 'BIG_QUERY'
     | 'OPEN_FGA'
     | 'APP_STORE'
-    | 'RECEIVED';
+    | 'RECEIVED'
+    | 'PREQUEL';
 
   /**
    * Customers selected currency

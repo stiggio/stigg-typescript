@@ -267,7 +267,8 @@ export namespace CustomerIntegrationResponse {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE'
-      | 'RECEIVED';
+      | 'RECEIVED'
+      | 'PREQUEL';
 
     /**
      * Price billing sync revision data containing billing ID, link URL, and price
@@ -596,7 +597,8 @@ export namespace CustomerResponse {
         | 'BIG_QUERY'
         | 'OPEN_FGA'
         | 'APP_STORE'
-        | 'RECEIVED';
+        | 'RECEIVED'
+        | 'PREQUEL';
     }
 
     /**
@@ -1179,7 +1181,8 @@ export namespace CustomerListResponse {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE'
-      | 'RECEIVED';
+      | 'RECEIVED'
+      | 'PREQUEL';
   }
 
   /**
@@ -2131,7 +2134,8 @@ export namespace CustomerUpdateParams {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE'
-      | 'RECEIVED';
+      | 'RECEIVED'
+      | 'PREQUEL';
   }
 
   /**
@@ -2826,7 +2830,8 @@ export namespace CustomerProvisionParams {
       | 'BIG_QUERY'
       | 'OPEN_FGA'
       | 'APP_STORE'
-      | 'RECEIVED';
+      | 'RECEIVED'
+      | 'PREQUEL';
   }
 
   /**
