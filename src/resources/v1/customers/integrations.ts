@@ -154,7 +154,8 @@ export interface IntegrationListResponse {
     | 'BIG_QUERY'
     | 'OPEN_FGA'
     | 'APP_STORE'
-    | 'RECEIVED';
+    | 'RECEIVED'
+    | 'PREQUEL';
 
   /**
    * Price billing sync revision data containing billing ID, link URL, and price
@@ -251,6 +252,7 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
     | 'OPEN_FGA'
     | 'APP_STORE'
     | 'RECEIVED'
+    | 'PREQUEL'
   >;
 }
 
@@ -279,7 +281,8 @@ export interface IntegrationLinkParams {
     | 'BIG_QUERY'
     | 'OPEN_FGA'
     | 'APP_STORE'
-    | 'RECEIVED';
+    | 'RECEIVED'
+    | 'PREQUEL';
 }
 
 export interface IntegrationUnlinkParams {
