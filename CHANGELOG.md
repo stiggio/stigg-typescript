@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.13 (2026-06-01)
+
+Full Changelog: [v0.1.0-beta.12...v0.1.0-beta.13](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.12...v0.1.0-beta.13)
+
+### Features
+
+* **STIGG-8001:** add VendorIdentifier.DATA_EXPORT + [@deprecated](https://github.com/deprecated) on SNOWFLAKE / BIG_QUERY ([1919bb4](https://github.com/stiggio/stigg-typescript/commit/1919bb455ecc749d945e156334693f9ccbd125d2))
+
 ## 0.1.0-beta.12 (2026-05-29)
 
 Full Changelog: [v0.1.0-beta.11...v0.1.0-beta.12](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.11...v0.1.0-beta.12)
