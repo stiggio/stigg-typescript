@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.15 (2026-06-02)
+
+Full Changelog: [v0.1.0-beta.14...v0.1.0-beta.15](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.14...v0.1.0-beta.15)
+
+### Features
+
+* **api:** add pagination support to credits.getUsage ([629cef1](https://github.com/stiggio/stigg-typescript/commit/629cef15d7f1bbf53a4b3a9eb401ad6b5751eccf))
+
 ## 0.1.0-beta.14 (2026-06-02)
 
 Full Changelog: [v0.1.0-beta.13...v0.1.0-beta.14](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.13...v0.1.0-beta.14)
