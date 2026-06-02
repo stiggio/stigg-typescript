@@ -34,6 +34,14 @@ export class Credits extends APIResource {
   /**
    * Retrieves the automatic recharge configuration for a customer and currency.
    * Returns default settings if no configuration exists.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.credits.getAutoRecharge({
+   *   currencyId: 'currencyId',
+   *   customerId: 'customerId',
+   * });
+   * ```
    */
   getAutoRecharge(
     query: CreditGetAutoRechargeParams,
@@ -45,6 +53,13 @@ export class Credits extends APIResource {
   /**
    * Retrieves credit usage time-series data for a customer, grouped by feature, over
    * a specified time range.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.credits.getUsage({
+   *   customerId: 'customerId',
+   * });
+   * ```
    */
   getUsage(query: CreditGetUsageParams, options?: RequestOptions): APIPromise<CreditGetUsageResponse> {
     return this._client.get('/api/v1/credits/usage', { query, ...options });
@@ -52,6 +67,16 @@ export class Credits extends APIResource {
 
   /**
    * Retrieves a paginated list of credit ledger events for a customer.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const creditListLedgerResponse of client.v1.credits.listLedger(
+   *   { customerId: 'customerId' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   listLedger(
     query: CreditListLedgerParams,
@@ -159,6 +184,13 @@ export namespace CreditGetUsageResponse {
     currency: Data.Currency | null;
 
     /**
+     * Cursor-based pagination for the returned series. `next`/`prev` are opaque
+     * cursors; pass them back as `after`/`before` to traverse pages. The series axis
+     * is `groupBy` when provided, otherwise `featureId`
+     */
+    pagination: Data.Pagination;
+
+    /**
      * Credit usage series grouped by feature
      */
     series: Array<Data.Series>;
@@ -193,6 +225,24 @@ export namespace CreditGetUsageResponse {
        * The currency symbol
        */
       symbol: string | null;
+    }
+
+    /**
+     * Cursor-based pagination for the returned series. `next`/`prev` are opaque
+     * cursors; pass them back as `after`/`before` to traverse pages. The series axis
+     * is `groupBy` when provided, otherwise `featureId`
+     */
+    export interface Pagination {
+      /**
+       * Cursor for fetching the next page of results, or null if no additional pages
+       * exist
+       */
+      next: string | null;
+
+      /**
+       * Cursor for fetching the previous page of results, or null if at the beginning
+       */
+      prev: string | null;
     }
 
     /**
@@ -335,6 +385,16 @@ export interface CreditGetUsageParams {
   customerId: string;
 
   /**
+   * Return items that come after this cursor
+   */
+  after?: string;
+
+  /**
+   * Return items that come before this cursor
+   */
+  before?: string;
+
+  /**
    * Filter by currency ID
    */
   currencyId?: string;
@@ -350,6 +410,11 @@ export interface CreditGetUsageParams {
    * 3). Each key matches /^[a-zA-Z0-9_$-]+$/
    */
   groupBy?: string;
+
+  /**
+   * Maximum number of items to return
+   */
+  limit?: number;
 
   /**
    * Filter by resource ID

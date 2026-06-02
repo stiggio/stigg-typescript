@@ -13,6 +13,18 @@ export class Grants extends APIResource {
   /**
    * Creates a new credit grant for a customer with specified amount, type, and
    * optional billing configuration.
+   *
+   * @example
+   * ```ts
+   * const creditGrantResponse =
+   *   await client.v1.credits.grants.create({
+   *     amount: 0,
+   *     currencyId: 'currencyId',
+   *     customerId: 'customerId',
+   *     displayName: 'displayName',
+   *     grantType: 'PAID',
+   *   });
+   * ```
    */
   create(body: GrantCreateParams, options?: RequestOptions): APIPromise<CreditGrantResponse> {
     return this._client.post('/api/v1/credits/grants', { body, ...options });
@@ -20,6 +32,16 @@ export class Grants extends APIResource {
 
   /**
    * Retrieves a paginated list of credit grants for a customer.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const grantListResponse of client.v1.credits.grants.list(
+   *   { customerId: 'customerId' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: GrantListParams,
@@ -34,6 +56,12 @@ export class Grants extends APIResource {
   /**
    * Voids an existing credit grant, preventing further consumption of the remaining
    * credits.
+   *
+   * @example
+   * ```ts
+   * const creditGrantResponse =
+   *   await client.v1.credits.grants.void('x');
+   * ```
    */
   void(id: string, options?: RequestOptions): APIPromise<CreditGrantResponse> {
     return this._client.post(path`/api/v1/credits/grants/${id}/void`, options);

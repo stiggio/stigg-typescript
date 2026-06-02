@@ -7,10 +7,10 @@ const client = new Stigg({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource entityTypes', () => {
+describe('resource assignments', () => {
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.v1Beta.entityTypes.list();
+    const responsePromise = client.v1.events.beta.customers.assignments.list('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +24,13 @@ describe('resource entityTypes', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1Beta.entityTypes.list(
+      client.v1.events.beta.customers.assignments.list(
+        'id',
         {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          capabilityId: 'capabilityId',
+          entityId: 'entityId',
           limit: 1,
         },
         { path: '/_stainless_unknown_path' },
@@ -37,18 +40,10 @@ describe('resource entityTypes', () => {
 
   // Mock server tests are disabled
   test.skip('upsert: only required params', async () => {
-    const responsePromise = client.v1Beta.entityTypes.upsert({
-      types: [
-        {
-          id: 'org',
-          attributionKeys: ['organizationId'],
-          displayName: 'Organization',
-        },
-        {
-          id: 'team',
-          attributionKeys: ['teamId'],
-          displayName: 'Team',
-        },
+    const responsePromise = client.v1.events.beta.customers.assignments.upsert('id', {
+      assignments: [
+        { capabilityId: 'compute-minutes', entityId: 'workspace-001' },
+        { capabilityId: 'compute-minutes', entityId: 'workspace-002' },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,17 +57,19 @@ describe('resource entityTypes', () => {
 
   // Mock server tests are disabled
   test.skip('upsert: required and optional params', async () => {
-    const response = await client.v1Beta.entityTypes.upsert({
-      types: [
+    const response = await client.v1.events.beta.customers.assignments.upsert('id', {
+      assignments: [
         {
-          id: 'org',
-          attributionKeys: ['organizationId'],
-          displayName: 'Organization',
+          capabilityId: 'compute-minutes',
+          entityId: 'workspace-001',
+          cadence: 'MONTH',
+          usageLimit: 1000,
         },
         {
-          id: 'team',
-          attributionKeys: ['teamId'],
-          displayName: 'Team',
+          capabilityId: 'compute-minutes',
+          entityId: 'workspace-002',
+          cadence: 'MONTH',
+          usageLimit: 2000,
         },
       ],
     });
