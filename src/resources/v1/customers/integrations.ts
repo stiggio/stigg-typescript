@@ -10,15 +10,6 @@ import { path } from '../../../internal/utils/path';
 export class Integrations extends APIResource {
   /**
    * Retrieves a specific integration for a customer by integration ID.
-   *
-   * @example
-   * ```ts
-   * const customerIntegrationResponse =
-   *   await client.v1.customers.integrations.retrieve(
-   *     'integrationId',
-   *     { id: 'id' },
-   *   );
-   * ```
    */
   retrieve(
     integrationID: string,
@@ -32,15 +23,6 @@ export class Integrations extends APIResource {
   /**
    * Updates a customer's integration link, such as changing the synced external
    * entity ID.
-   *
-   * @example
-   * ```ts
-   * const customerIntegrationResponse =
-   *   await client.v1.customers.integrations.update(
-   *     'integrationId',
-   *     { id: 'id', syncedEntityId: 'syncedEntityId' },
-   *   );
-   * ```
    */
   update(
     integrationID: string,
@@ -57,16 +39,6 @@ export class Integrations extends APIResource {
   /**
    * Retrieves a paginated list of a customer's external integrations (billing, CRM,
    * etc.).
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const integrationListResponse of client.v1.customers.integrations.list(
-   *   'x',
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     id: string,
@@ -83,16 +55,6 @@ export class Integrations extends APIResource {
   /**
    * Links a customer to an external integration by specifying the vendor and
    * external entity ID.
-   *
-   * @example
-   * ```ts
-   * const customerIntegrationResponse =
-   *   await client.v1.customers.integrations.link('x', {
-   *     id: 'id',
-   *     syncedEntityId: 'syncedEntityId',
-   *     vendorIdentifier: 'AUTH0',
-   *   });
-   * ```
    */
   link(
     id: string,
@@ -104,15 +66,6 @@ export class Integrations extends APIResource {
 
   /**
    * Removes the link between a customer and an external integration.
-   *
-   * @example
-   * ```ts
-   * const customerIntegrationResponse =
-   *   await client.v1.customers.integrations.unlink(
-   *     'integrationId',
-   *     { id: 'id' },
-   *   );
-   * ```
    */
   unlink(
     integrationID: string,

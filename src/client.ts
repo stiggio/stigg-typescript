@@ -19,6 +19,7 @@ import { AbstractPage, type MyCursorIDPageParams, MyCursorIDPageResponse } from 
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { V1Beta } from './resources/v1-beta/v1-beta';
 import { V1 } from './resources/v1/v1';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -754,9 +755,11 @@ export class Stigg {
   static toFile = Uploads.toFile;
 
   v1: API.V1 = new API.V1(this);
+  v1Beta: API.V1Beta = new API.V1Beta(this);
 }
 
 Stigg.V1 = V1;
+Stigg.V1Beta = V1Beta;
 
 export declare namespace Stigg {
   export type RequestOptions = Opts.RequestOptions;
@@ -768,4 +771,6 @@ export declare namespace Stigg {
   };
 
   export { V1 as V1 };
+
+  export { V1Beta as V1Beta };
 }
