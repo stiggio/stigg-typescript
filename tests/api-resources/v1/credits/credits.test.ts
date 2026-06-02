@@ -47,9 +47,12 @@ describe('resource credits', () => {
   test.skip('getUsage: required and optional params', async () => {
     const response = await client.v1.credits.getUsage({
       customerId: 'customerId',
+      after: 'after',
+      before: 'before',
       currencyId: 'currencyId',
       endDate: '2019-12-27T18:11:19.117Z',
       groupBy: 'groupBy',
+      limit: 1,
       resourceId: 'resourceId',
       startDate: '2019-12-27T18:11:19.117Z',
       timeRange: 'LAST_DAY',
