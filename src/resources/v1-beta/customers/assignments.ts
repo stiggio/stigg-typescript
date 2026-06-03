@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../core/resource';
-import { APIPromise } from '../../../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../../core/pagination';
-import { RequestOptions } from '../../../../../internal/request-options';
-import { path } from '../../../../../internal/utils/path';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Assignments extends APIResource {
   /**
@@ -15,7 +15,7 @@ export class Assignments extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const assignmentListResponse of client.v1.events.beta.customers.assignments.list(
+   * for await (const assignmentListResponse of client.v1Beta.customers.assignments.list(
    *   'id',
    * )) {
    *   // ...
@@ -43,25 +43,22 @@ export class Assignments extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.events.beta.customers.assignments.upsert(
-   *     'id',
-   *     {
-   *       assignments: [
-   *         {
-   *           entityId: 'workspace-001',
-   *           capabilityId: 'compute-minutes',
-   *           usageLimit: 1000,
-   *           cadence: 'MONTH',
-   *         },
-   *         {
-   *           entityId: 'workspace-002',
-   *           capabilityId: 'compute-minutes',
-   *           usageLimit: 2000,
-   *           cadence: 'MONTH',
-   *         },
-   *       ],
-   *     },
-   *   );
+   *   await client.v1Beta.customers.assignments.upsert('id', {
+   *     assignments: [
+   *       {
+   *         entityId: 'workspace-001',
+   *         capabilityId: 'compute-minutes',
+   *         usageLimit: 1000,
+   *         cadence: 'MONTH',
+   *       },
+   *       {
+   *         entityId: 'workspace-002',
+   *         capabilityId: 'compute-minutes',
+   *         usageLimit: 2000,
+   *         cadence: 'MONTH',
+   *       },
+   *     ],
+   *   });
    * ```
    */
   upsert(

@@ -11,14 +11,6 @@ import { path } from '../../../internal/utils/path';
 export class FutureUpdate extends APIResource {
   /**
    * Cancels a subscription update that is pending payment completion.
-   *
-   * @example
-   * ```ts
-   * const cancelSubscription =
-   *   await client.v1.subscriptions.futureUpdate.cancelPendingPayment(
-   *     'x',
-   *   );
-   * ```
    */
   cancelPendingPayment(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/pending-payment`, options);
@@ -27,14 +19,6 @@ export class FutureUpdate extends APIResource {
   /**
    * Cancels a scheduled subscription update, such as a future downgrade or plan
    * change.
-   *
-   * @example
-   * ```ts
-   * const cancelSubscription =
-   *   await client.v1.subscriptions.futureUpdate.cancelSchedule(
-   *     'x',
-   *   );
-   * ```
    */
   cancelSchedule(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
     return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/schedule`, options);

@@ -12,13 +12,6 @@ import { path } from '../../internal/utils/path';
 export class Features extends APIResource {
   /**
    * Archives a feature, preventing it from being used in new entitlements.
-   *
-   * @example
-   * ```ts
-   * const feature = await client.v1.features.archiveFeature(
-   *   'x',
-   * );
-   * ```
    */
   archiveFeature(id: string, options?: RequestOptions): APIPromise<Feature> {
     return this._client.post(path`/api/v1/features/${id}/archive`, options);
@@ -26,15 +19,6 @@ export class Features extends APIResource {
 
   /**
    * Creates a new feature with the specified type, metering, and configuration.
-   *
-   * @example
-   * ```ts
-   * const feature = await client.v1.features.createFeature({
-   *   id: 'id',
-   *   displayName: 'displayName',
-   *   featureType: 'BOOLEAN',
-   * });
-   * ```
    */
   createFeature(body: FeatureCreateFeatureParams, options?: RequestOptions): APIPromise<Feature> {
     return this._client.post('/api/v1/features', { body, ...options });
@@ -42,14 +26,6 @@ export class Features extends APIResource {
 
   /**
    * Retrieves a paginated list of features in the environment.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {
-   *   // ...
-   * }
-   * ```
    */
   listFeatures(
     query: FeatureListFeaturesParams | null | undefined = {},
@@ -63,13 +39,6 @@ export class Features extends APIResource {
 
   /**
    * Retrieves a feature by its unique identifier.
-   *
-   * @example
-   * ```ts
-   * const feature = await client.v1.features.retrieveFeature(
-   *   'x',
-   * );
-   * ```
    */
   retrieveFeature(id: string, options?: RequestOptions): APIPromise<Feature> {
     return this._client.get(path`/api/v1/features/${id}`, options);
@@ -77,13 +46,6 @@ export class Features extends APIResource {
 
   /**
    * Restores an archived feature, allowing it to be used in entitlements again.
-   *
-   * @example
-   * ```ts
-   * const feature = await client.v1.features.unarchiveFeature(
-   *   'x',
-   * );
-   * ```
    */
   unarchiveFeature(id: string, options?: RequestOptions): APIPromise<Feature> {
     return this._client.post(path`/api/v1/features/${id}/unarchive`, options);
@@ -92,11 +54,6 @@ export class Features extends APIResource {
   /**
    * Updates an existing feature's properties such as display name, description, and
    * configuration.
-   *
-   * @example
-   * ```ts
-   * const feature = await client.v1.features.updateFeature('x');
-   * ```
    */
   updateFeature(id: string, body: FeatureUpdateFeatureParams, options?: RequestOptions): APIPromise<Feature> {
     return this._client.patch(path`/api/v1/features/${id}`, { body, ...options });

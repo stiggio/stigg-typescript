@@ -8,14 +8,6 @@ import { path } from '../../../internal/utils/path';
 export class Entitlements extends APIResource {
   /**
    * Creates one or more entitlements (feature or credit) on a draft addon.
-   *
-   * @example
-   * ```ts
-   * const entitlement =
-   *   await client.v1.addons.entitlements.create('addonId', {
-   *     entitlements: [{ id: 'id', type: 'FEATURE' }],
-   *   });
-   * ```
    */
   create(
     addonID: string,
@@ -27,15 +19,6 @@ export class Entitlements extends APIResource {
 
   /**
    * Updates an existing entitlement on a draft addon.
-   *
-   * @example
-   * ```ts
-   * const addonPackageEntitlement =
-   *   await client.v1.addons.entitlements.update('id', {
-   *     addonId: 'addonId',
-   *     type: 'FEATURE',
-   *   });
-   * ```
    */
   update(
     id: string,
@@ -48,12 +31,6 @@ export class Entitlements extends APIResource {
 
   /**
    * Retrieves a list of entitlements for an addon.
-   *
-   * @example
-   * ```ts
-   * const entitlements =
-   *   await client.v1.addons.entitlements.list('addonId');
-   * ```
    */
   list(addonID: string, options?: RequestOptions): APIPromise<EntitlementListResponse> {
     return this._client.get(path`/api/v1/addons/${addonID}/entitlements`, options);
@@ -61,14 +38,6 @@ export class Entitlements extends APIResource {
 
   /**
    * Deletes an entitlement from a draft addon.
-   *
-   * @example
-   * ```ts
-   * const addonPackageEntitlement =
-   *   await client.v1.addons.entitlements.delete('id', {
-   *     addonId: 'addonId',
-   *   });
-   * ```
    */
   delete(
     id: string,
