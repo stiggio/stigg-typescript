@@ -39,13 +39,6 @@ export class Customers extends APIResource {
   /**
    * Retrieves a customer by their unique identifier, including billing information
    * and subscription status.
-   *
-   * @example
-   * ```ts
-   * const customerResponse = await client.v1.customers.retrieve(
-   *   'x',
-   * );
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.get(path`/api/v1/customers/${id}`, options);
@@ -54,13 +47,6 @@ export class Customers extends APIResource {
   /**
    * Updates an existing customer's properties such as name, email, and billing
    * information.
-   *
-   * @example
-   * ```ts
-   * const customerResponse = await client.v1.customers.update(
-   *   'x',
-   * );
-   * ```
    */
   update(id: string, body: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.patch(path`/api/v1/customers/${id}`, { body, ...options });
@@ -68,14 +54,6 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves a paginated list of customers in the environment.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const customerListResponse of client.v1.customers.list()) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     query: CustomerListParams | null | undefined = {},
@@ -90,13 +68,6 @@ export class Customers extends APIResource {
   /**
    * Archives a customer, preventing new subscriptions. Optionally cancels existing
    * subscriptions.
-   *
-   * @example
-   * ```ts
-   * const customerResponse = await client.v1.customers.archive(
-   *   'x',
-   * );
-   * ```
    */
   archive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/archive`, options);
@@ -111,13 +82,6 @@ export class Customers extends APIResource {
    * mechanisms, and low-latency guarantees. It is not recommended for hot-path
    * entitlement checks. For production use, consider using the Stigg Node Server SDK
    * with caching or the Sidecar for low-latency cached responses.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.customers.checkEntitlement(
-   *   'x',
-   * );
-   * ```
    */
   checkEntitlement(
     id: string,
@@ -130,19 +94,6 @@ export class Customers extends APIResource {
   /**
    * Imports multiple customers in bulk. Used for migrating customer data from
    * external systems.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.customers.import({
-   *   customers: [
-   *     {
-   *       id: 'id',
-   *       email: 'dev@stainless.com',
-   *       name: 'name',
-   *     },
-   *   ],
-   * });
-   * ```
    */
   import(body: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
     return this._client.post('/api/v1/customers/import', { body, ...options });
@@ -150,16 +101,6 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves a paginated list of resources within the same customer.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const customerListResourcesResponse of client.v1.customers.listResources(
-   *   'x',
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   listResources(
     id: string,
@@ -176,12 +117,6 @@ export class Customers extends APIResource {
   /**
    * Creates a new customer and optionally provisions an initial subscription in a
    * single operation.
-   *
-   * @example
-   * ```ts
-   * const customerResponse =
-   *   await client.v1.customers.provision({ id: 'id' });
-   * ```
    */
   provision(body: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post('/api/v1/customers', { body, ...options });
@@ -195,12 +130,6 @@ export class Customers extends APIResource {
    * mechanisms, and low-latency guarantees. It is not recommended for hot-path
    * entitlement checks. For production use, consider using the Stigg Node Server SDK
    * with caching or the Sidecar for low-latency cached responses.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.customers.retrieveEntitlements('x');
-   * ```
    */
   retrieveEntitlements(
     id: string,
@@ -212,12 +141,6 @@ export class Customers extends APIResource {
 
   /**
    * Restores an archived customer, allowing them to create new subscriptions again.
-   *
-   * @example
-   * ```ts
-   * const customerResponse =
-   *   await client.v1.customers.unarchive('x');
-   * ```
    */
   unarchive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
     return this._client.post(path`/api/v1/customers/${id}/unarchive`, options);
