@@ -24,15 +24,6 @@ export class Addons extends APIResource {
 
   /**
    * Creates a new addon in draft status, associated with a specific product.
-   *
-   * @example
-   * ```ts
-   * const addon = await client.v1.addons.create({
-   *   id: 'id',
-   *   displayName: 'displayName',
-   *   productId: 'productId',
-   * });
-   * ```
    */
   create(body: AddonCreateParams, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post('/api/v1/addons', { body, ...options });
@@ -41,11 +32,6 @@ export class Addons extends APIResource {
   /**
    * Retrieves an addon by its unique identifier, including entitlements and pricing
    * details.
-   *
-   * @example
-   * ```ts
-   * const addon = await client.v1.addons.retrieve('x');
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.get(path`/api/v1/addons/${id}`, options);
@@ -54,11 +40,6 @@ export class Addons extends APIResource {
   /**
    * Updates an existing addon's properties such as display name, description, and
    * metadata.
-   *
-   * @example
-   * ```ts
-   * const addon = await client.v1.addons.update('x');
-   * ```
    */
   update(id: string, body: AddonUpdateParams, options?: RequestOptions): APIPromise<Addon> {
     return this._client.patch(path`/api/v1/addons/${id}`, { body, ...options });
@@ -66,14 +47,6 @@ export class Addons extends APIResource {
 
   /**
    * Retrieves a paginated list of addons in the environment.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const addonListResponse of client.v1.addons.list()) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     query: AddonListParams | null | undefined = {},
@@ -87,11 +60,6 @@ export class Addons extends APIResource {
 
   /**
    * Archives an addon, preventing it from being used in new subscriptions.
-   *
-   * @example
-   * ```ts
-   * const addon = await client.v1.addons.archive('x');
-   * ```
    */
   archive(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post(path`/api/v1/addons/${id}/archive`, options);
@@ -99,11 +67,6 @@ export class Addons extends APIResource {
 
   /**
    * Creates a draft version of an existing addon for modification before publishing.
-   *
-   * @example
-   * ```ts
-   * const addon = await client.v1.addons.createDraft('x');
-   * ```
    */
   createDraft(id: string, options?: RequestOptions): APIPromise<Addon> {
     return this._client.post(path`/api/v1/addons/${id}/draft`, options);
@@ -111,16 +74,6 @@ export class Addons extends APIResource {
 
   /**
    * Retrieves the list of charges configured on an addon.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const addonListChargesResponse of client.v1.addons.listCharges(
-   *   'x',
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   listCharges(
     id: string,
@@ -136,13 +89,6 @@ export class Addons extends APIResource {
 
   /**
    * Publishes a draft addon, making it available for use in subscriptions.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.addons.publish('x', {
-   *   migrationType: 'NEW_CUSTOMERS',
-   * });
-   * ```
    */
   publish(id: string, body: AddonPublishParams, options?: RequestOptions): APIPromise<AddonPublishResponse> {
     return this._client.post(path`/api/v1/addons/${id}/publish`, { body, ...options });
@@ -150,11 +96,6 @@ export class Addons extends APIResource {
 
   /**
    * Removes a draft version of an addon.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.addons.removeDraft('x');
-   * ```
    */
   removeDraft(id: string, options?: RequestOptions): APIPromise<AddonRemoveDraftResponse> {
     return this._client.delete(path`/api/v1/addons/${id}/draft`, options);
