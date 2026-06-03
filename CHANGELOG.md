@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.16 (2026-06-03)
+
+Full Changelog: [v0.1.0-beta.15...v0.1.0-beta.16](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.15...v0.1.0-beta.16)
+
+### Features
+
+* **api:** manual updates ([b465dfa](https://github.com/stiggio/stigg-typescript/commit/b465dfae34a569a065a9836ef0820bc6d83d01cd))
+
 ## 0.1.0-beta.15 (2026-06-02)
 
 Full Changelog: [v0.1.0-beta.14...v0.1.0-beta.15](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.14...v0.1.0-beta.15)
