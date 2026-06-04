@@ -197,6 +197,30 @@ Methods:
 - <code title="get /api/v1-beta/entity-types">client.v1.events.beta.entityTypes.<a href="./src/resources/v1/events/beta/entity-types.ts">list</a>({ ...params }) -> EntityTypeListResponsesMyCursorIDPage</code>
 - <code title="put /api/v1-beta/entity-types">client.v1.events.beta.entityTypes.<a href="./src/resources/v1/events/beta/entity-types.ts">upsert</a>({ ...params }) -> EntityTypeUpsertResponse</code>
 
+### DataExport
+
+Types:
+
+- <code><a href="./src/resources/v1/events/data-export/data-export.ts">DataExportMintScopedTokenResponse</a></code>
+- <code><a href="./src/resources/v1/events/data-export/data-export.ts">DataExportTriggerSyncResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/data-export/scoped-token">client.v1.events.dataExport.<a href="./src/resources/v1/events/data-export/data-export.ts">mintScopedToken</a>({ ...params }) -> DataExportMintScopedTokenResponse</code>
+- <code title="post /api/v1/data-export/sync">client.v1.events.dataExport.<a href="./src/resources/v1/events/data-export/data-export.ts">triggerSync</a>({ ...params }) -> DataExportTriggerSyncResponse</code>
+
+#### Destinations
+
+Types:
+
+- <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationCreateResponse</a></code>
+- <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/data-export/destinations">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
+- <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID) -> DestinationDeleteResponse</code>
+
 ## Credits
 
 Types:
