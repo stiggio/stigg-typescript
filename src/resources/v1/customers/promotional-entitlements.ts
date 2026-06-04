@@ -13,6 +13,38 @@ export class PromotionalEntitlements extends APIResource {
   /**
    * Grants promotional entitlements to a customer, providing feature access outside
    * their subscription. Entitlements can be time-limited or permanent.
+   *
+   * @example
+   * ```ts
+   * const promotionalEntitlement =
+   *   await client.v1.customers.promotionalEntitlements.create(
+   *     'x',
+   *     {
+   *       promotionalEntitlements: [
+   *         {
+   *           customEndDate: '2019-12-27T18:11:19.117Z',
+   *           enumValues: ['string'],
+   *           featureId: 'featureId',
+   *           hasSoftLimit: true,
+   *           hasUnlimitedUsage: true,
+   *           isVisible: true,
+   *           monthlyResetPeriodConfiguration: {
+   *             accordingTo: 'SubscriptionStart',
+   *           },
+   *           period: '1 week',
+   *           resetPeriod: 'YEAR',
+   *           usageLimit: -9007199254740991,
+   *           weeklyResetPeriodConfiguration: {
+   *             accordingTo: 'SubscriptionStart',
+   *           },
+   *           yearlyResetPeriodConfiguration: {
+   *             accordingTo: 'SubscriptionStart',
+   *           },
+   *         },
+   *       ],
+   *     },
+   *   );
+   * ```
    */
   create(
     id: string,
@@ -24,6 +56,16 @@ export class PromotionalEntitlements extends APIResource {
 
   /**
    * Retrieves a paginated list of a customer's promotional entitlements.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list(
+   *   'x',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     id: string,
@@ -40,6 +82,15 @@ export class PromotionalEntitlements extends APIResource {
   /**
    * Revokes a previously granted promotional entitlement from a customer for a
    * specific feature.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.customers.promotionalEntitlements.revoke(
+   *     'featureId',
+   *     { id: 'id' },
+   *   );
+   * ```
    */
   revoke(
     featureID: string,
