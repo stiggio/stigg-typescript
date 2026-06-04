@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.18 (2026-06-04)
+
+Full Changelog: [v0.1.0-beta.17...v0.1.0-beta.18](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.17...v0.1.0-beta.18)
+
+### Features
+
+* **api:** add mintScopedToken/triggerSync/destinations to events.dataExport ([a25cc96](https://github.com/stiggio/stigg-typescript/commit/a25cc96df65cf1fcc750fc1451101113c4a72dab))
+
 ## 0.1.0-beta.17 (2026-06-04)
 
 Full Changelog: [v0.1.0-beta.16...v0.1.0-beta.17](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.16...v0.1.0-beta.17)
