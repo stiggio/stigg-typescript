@@ -13,6 +13,13 @@ export class Products extends APIResource {
   /**
    * Archives a product, preventing new subscriptions. All plans and addons are
    * archived.
+   *
+   * @example
+   * ```ts
+   * const product = await client.v1.products.archiveProduct(
+   *   'x',
+   * );
+   * ```
    */
   archiveProduct(id: string, options?: RequestOptions): APIPromise<Product> {
     return this._client.post(path`/api/v1/products/${id}/archive`, options);
@@ -20,6 +27,14 @@ export class Products extends APIResource {
 
   /**
    * Creates a new product.
+   *
+   * @example
+   * ```ts
+   * const product = await client.v1.products.createProduct({
+   *   id: 'id',
+   *   displayName: 'displayName',
+   * });
+   * ```
    */
   createProduct(body: ProductCreateProductParams, options?: RequestOptions): APIPromise<Product> {
     return this._client.post('/api/v1/products', { body, ...options });
@@ -27,6 +42,14 @@ export class Products extends APIResource {
 
   /**
    * Duplicates an existing product, including its plans, addons, and configuration.
+   *
+   * @example
+   * ```ts
+   * const product = await client.v1.products.duplicateProduct(
+   *   'x',
+   *   { targetId: 'targetId' },
+   * );
+   * ```
    */
   duplicateProduct(
     id: string,
@@ -38,6 +61,14 @@ export class Products extends APIResource {
 
   /**
    * Retrieves a paginated list of products in the environment.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const productListProductsResponse of client.v1.products.listProducts()) {
+   *   // ...
+   * }
+   * ```
    */
   listProducts(
     query: ProductListProductsParams | null | undefined = {},
@@ -51,6 +82,13 @@ export class Products extends APIResource {
 
   /**
    * Restores an archived product, allowing new subscriptions to be created.
+   *
+   * @example
+   * ```ts
+   * const product = await client.v1.products.unarchiveProduct(
+   *   'x',
+   * );
+   * ```
    */
   unarchiveProduct(id: string, options?: RequestOptions): APIPromise<Product> {
     return this._client.post(path`/api/v1/products/${id}/unarchive`, options);
@@ -59,6 +97,11 @@ export class Products extends APIResource {
   /**
    * Updates an existing product's properties such as display name, description, and
    * metadata.
+   *
+   * @example
+   * ```ts
+   * const product = await client.v1.products.updateProduct('x');
+   * ```
    */
   updateProduct(id: string, body: ProductUpdateProductParams, options?: RequestOptions): APIPromise<Product> {
     return this._client.patch(path`/api/v1/products/${id}`, { body, ...options });

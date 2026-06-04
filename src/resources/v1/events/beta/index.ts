@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Beta } from './beta';
 export { Customers } from './customers/index';
 export {
   EntityTypes,
@@ -9,4 +10,3 @@ export {
   type EntityTypeUpsertParams,
   type EntityTypeListResponsesMyCursorIDPage,
 } from './entity-types';
-export { V1Beta } from './v1-beta';

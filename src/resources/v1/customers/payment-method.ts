@@ -13,6 +13,16 @@ export class PaymentMethod extends APIResource {
   /**
    * Attaches a payment method to a customer for billing. Required for paid
    * subscriptions when integrated with a billing provider.
+   *
+   * @example
+   * ```ts
+   * const customerResponse =
+   *   await client.v1.customers.paymentMethod.attach('x', {
+   *     integrationId: 'integrationId',
+   *     paymentMethodId: 'paymentMethodId',
+   *     vendorIdentifier: 'AUTH0',
+   *   });
+   * ```
    */
   attach(
     id: string,
@@ -25,6 +35,12 @@ export class PaymentMethod extends APIResource {
   /**
    * Removes the payment method from a customer. Ensure active paid subscriptions
    * have an alternative payment method.
+   *
+   * @example
+   * ```ts
+   * const customerResponse =
+   *   await client.v1.customers.paymentMethod.detach('x');
+   * ```
    */
   detach(id: string, options?: RequestOptions): APIPromise<CustomersAPI.CustomerResponse> {
     return this._client.delete(path`/api/v1/customers/${id}/payment-method`, options);
