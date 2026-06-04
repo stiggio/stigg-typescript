@@ -317,6 +317,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1-beta/entity-types',
   },
   {
+    clientCallName: 'client.v1.events.dataExport.mintScopedToken',
+    fullyQualifiedName: 'v1.events.dataExport.mintScopedToken',
+    httpMethod: 'post',
+    httpPath: '/api/v1/data-export/scoped-token',
+  },
+  {
+    clientCallName: 'client.v1.events.dataExport.triggerSync',
+    fullyQualifiedName: 'v1.events.dataExport.triggerSync',
+    httpMethod: 'post',
+    httpPath: '/api/v1/data-export/sync',
+  },
+  {
+    clientCallName: 'client.v1.events.dataExport.destinations.create',
+    fullyQualifiedName: 'v1.events.dataExport.destinations.create',
+    httpMethod: 'post',
+    httpPath: '/api/v1/data-export/destinations',
+  },
+  {
+    clientCallName: 'client.v1.events.dataExport.destinations.delete',
+    fullyQualifiedName: 'v1.events.dataExport.destinations.delete',
+    httpMethod: 'delete',
+    httpPath: '/api/v1/data-export/destinations/{destinationId}',
+  },
+  {
     clientCallName: 'client.v1.credits.getAutoRecharge',
     fullyQualifiedName: 'v1.credits.getAutoRecharge',
     httpMethod: 'get',

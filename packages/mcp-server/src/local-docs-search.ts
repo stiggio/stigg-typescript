@@ -3030,6 +3030,224 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'trigger_sync',
+    endpoint: '/api/v1/data-export/sync',
+    httpMethod: 'post',
+    summary: 'Trigger data-export sync',
+    description: 'Trigger a sync for one destination or all destinations under the provider entity.',
+    stainlessPath: '(resource) v1.events.data_export > (method) trigger_sync',
+    qualified: 'client.v1.events.dataExport.triggerSync',
+    params: ['destinationId?: string;'],
+    response:
+      '{ data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }; }',
+    markdown:
+      "## trigger_sync\n\n`client.v1.events.dataExport.triggerSync(destinationId?: string): { data: object; }`\n\n**post** `/api/v1/data-export/sync`\n\nTrigger a sync for one destination or all destinations under the provider entity.\n\n### Parameters\n\n- `destinationId?: string`\n  Provider destination ID to sync. Omit to sync all destinations.\n\n### Returns\n\n- `{ data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }; }`\n  Response object\n\n  - `data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.triggerSync();\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.dataExport.triggerSync',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.dataExport.triggerSync();\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.data_export.trigger_sync',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.data_export.trigger_sync()\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().dataExport().triggerSync',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.DataExportTriggerSyncParams;\nimport io.stigg.models.v1.events.dataexport.DataExportTriggerSyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DataExportTriggerSyncResponse response = client.v1().events().dataExport().triggerSync();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.TriggerSync',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.TriggerSync(context.TODO(), stigg.V1EventDataExportTriggerSyncParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.data_export.trigger_sync',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.data_export.trigger_sync\n\nputs(response)',
+      },
+      cli: {
+        method: 'data_export trigger_sync',
+        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1.Events.DataExport.TriggerSync',
+        example:
+          'DataExportTriggerSyncParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.TriggerSync(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          "curl https://api.stigg.io/api/v1/data-export/sync \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+      },
+    },
+  },
+  {
+    name: 'mint_scoped_token',
+    endpoint: '/api/v1/data-export/scoped-token',
+    httpMethod: 'post',
+    summary: 'Mint data-export scoped token',
+    description:
+      'Mint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.',
+    stainlessPath: '(resource) v1.events.data_export > (method) mint_scoped_token',
+    qualified: 'client.v1.events.dataExport.mintScopedToken',
+    params: ['applicationOrigin: string;', 'destinationType?: string;'],
+    response: '{ data: { token: string; expiresAt: string; providerMetadata: object; }; }',
+    markdown:
+      "## mint_scoped_token\n\n`client.v1.events.dataExport.mintScopedToken(applicationOrigin: string, destinationType?: string): { data: object; }`\n\n**post** `/api/v1/data-export/scoped-token`\n\nMint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.\n\n### Parameters\n\n- `applicationOrigin: string`\n  FE origin the resulting JWT is bound to (provider-side anti-fraud)\n\n- `destinationType?: string`\n  Pin the token to a specific warehouse connect flow\n\n### Returns\n\n- `{ data: { token: string; expiresAt: string; providerMetadata: object; }; }`\n  Response object\n\n  - `data: { token: string; expiresAt: string; providerMetadata: object; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.dataExport.mintScopedToken',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.data_export.mint_scoped_token',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.data_export.mint_scoped_token(\n    application_origin="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().dataExport().mintScopedToken',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.DataExportMintScopedTokenParams;\nimport io.stigg.models.v1.events.dataexport.DataExportMintScopedTokenResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DataExportMintScopedTokenParams params = DataExportMintScopedTokenParams.builder()\n            .applicationOrigin("x")\n            .build();\n        DataExportMintScopedTokenResponse response = client.v1().events().dataExport().mintScopedToken(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.MintScopedToken',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.MintScopedToken(context.TODO(), stigg.V1EventDataExportMintScopedTokenParams{\n\t\tApplicationOrigin: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.data_export.mint_scoped_token',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.data_export.mint_scoped_token(application_origin: "x")\n\nputs(response)',
+      },
+      cli: {
+        method: 'data_export mint_scoped_token',
+        example:
+          "stigg v1:events:data-export mint-scoped-token \\\n  --api-key 'My API Key' \\\n  --application-origin x",
+      },
+      csharp: {
+        method: 'V1.Events.DataExport.MintScopedToken',
+        example:
+          'DataExportMintScopedTokenParams parameters = new() { ApplicationOrigin = "x" };\n\nvar response = await client.V1.Events.DataExport.MintScopedToken(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/data-export/scoped-token \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "applicationOrigin": "x"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'create',
+    endpoint: '/api/v1/data-export/destinations',
+    httpMethod: 'post',
+    summary: 'Add data-export destination',
+    description:
+      "Register a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.",
+    stainlessPath: '(resource) v1.events.data_export.destinations > (method) create',
+    qualified: 'client.v1.events.dataExport.destinations.create',
+    params: ['destinationId: string;', 'destinationType: string;'],
+    response: '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; }[]; }; }',
+    markdown:
+      "## create\n\n`client.v1.events.dataExport.destinations.create(destinationId: string, destinationType: string): { data: object; }`\n\n**post** `/api/v1/data-export/destinations`\n\nRegister a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.\n\n### Parameters\n\n- `destinationId: string`\n  The provider destination ID returned by the embedded SDK on connect\n\n- `destinationType: string`\n  The destination type (e.g. snowflake, bigquery)\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.create({ destinationId: 'x', destinationType: 'x' });\n\nconsole.log(destination);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.dataExport.destinations.create',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst destination = await client.v1.events.dataExport.destinations.create({\n  destinationId: 'x',\n  destinationType: 'x',\n});\n\nconsole.log(destination.data);",
+      },
+      python: {
+        method: 'v1.events.data_export.destinations.create',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ndestination = client.v1.events.data_export.destinations.create(\n    destination_id="x",\n    destination_type="x",\n)\nprint(destination.data)',
+      },
+      java: {
+        method: 'v1().events().dataExport().destinations().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationCreateParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationCreateParams params = DestinationCreateParams.builder()\n            .destinationId("x")\n            .destinationType("x")\n            .build();\n        DestinationCreateResponse destination = client.v1().events().dataExport().destinations().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.Destinations.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.New(context.TODO(), stigg.V1EventDataExportDestinationNewParams{\n\t\tDestinationID:   "x",\n\t\tDestinationType: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.data_export.destinations.create',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ndestination = stigg.v1.events.data_export.destinations.create(destination_id: "x", destination_type: "x")\n\nputs(destination)',
+      },
+      cli: {
+        method: 'destinations create',
+        example:
+          "stigg v1:events:data-export:destinations create \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --destination-type x",
+      },
+      csharp: {
+        method: 'V1.Events.DataExport.Destinations.Create',
+        example:
+          'DestinationCreateParams parameters = new()\n{\n    DestinationID = "x",\n    DestinationType = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Create(parameters);\n\nConsole.WriteLine(destination);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/data-export/destinations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationId": "x",\n          "destinationType": "x"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'delete',
+    endpoint: '/api/v1/data-export/destinations/{destinationId}',
+    httpMethod: 'delete',
+    summary: 'Remove data-export destination',
+    description: 'Remove a destination from the DATA_EXPORT integration metadata. Idempotent.',
+    stainlessPath: '(resource) v1.events.data_export.destinations > (method) delete',
+    qualified: 'client.v1.events.dataExport.destinations.delete',
+    params: ['destinationId: string;'],
+    response: '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; }[]; }; }',
+    markdown:
+      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nRemove a destination from the DATA_EXPORT integration metadata. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.dataExport.destinations.delete',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination.data);",
+      },
+      python: {
+        method: 'v1.events.data_export.destinations.delete',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ndestination = client.v1.events.data_export.destinations.delete(\n    "x",\n)\nprint(destination.data)',
+      },
+      java: {
+        method: 'v1().events().dataExport().destinations().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationDeleteParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationDeleteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationDeleteResponse destination = client.v1().events().dataExport().destinations().delete("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.Destinations.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Delete(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.data_export.destinations.delete',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ndestination = stigg.v1.events.data_export.destinations.delete("x")\n\nputs(destination)',
+      },
+      cli: {
+        method: 'destinations delete',
+        example:
+          "stigg v1:events:data-export:destinations delete \\\n  --api-key 'My API Key' \\\n  --destination-id x",
+      },
+      csharp: {
+        method: 'V1.Events.DataExport.Destinations.Delete',
+        example:
+          'DestinationDeleteParams parameters = new() { DestinationID = "x" };\n\nvar destination = await client.V1.Events.DataExport.Destinations.Delete(parameters);\n\nConsole.WriteLine(destination);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'get_usage',
     endpoint: '/api/v1/credits/usage',
     httpMethod: 'get',
