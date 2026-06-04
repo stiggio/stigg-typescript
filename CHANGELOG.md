@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.17 (2026-06-04)
+
+Full Changelog: [v0.1.0-beta.16...v0.1.0-beta.17](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.16...v0.1.0-beta.17)
+
+### Bug Fixes
+
+* **STIGG-7921:** block syncing plans with package pricing model to Zuora ([cb67ed6](https://github.com/stiggio/stigg-typescript/commit/cb67ed670c61a979150b60adee7a1fe64aa7c55e))
+
 ## 0.1.0-beta.16 (2026-06-03)
 
 Full Changelog: [v0.1.0-beta.15...v0.1.0-beta.16](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.15...v0.1.0-beta.16)
