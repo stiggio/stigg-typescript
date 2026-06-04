@@ -1,11 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Beta } from './beta/index';
 export {
   DataExport,
   type DataExportMintScopedTokenResponse,
   type DataExportTriggerSyncResponse,
   type DataExportMintScopedTokenParams,
   type DataExportTriggerSyncParams,
-} from './data-export/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events';
+} from './data-export';
+export {
+  Destinations,
+  type DestinationCreateResponse,
+  type DestinationDeleteResponse,
+  type DestinationCreateParams,
+} from './destinations';

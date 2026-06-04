@@ -3,6 +3,14 @@
 import { APIResource } from '../../../core/resource';
 import * as BetaAPI from './beta/beta';
 import { Beta } from './beta/beta';
+import * as DataExportAPI from './data-export/data-export';
+import {
+  DataExport,
+  DataExportMintScopedTokenParams,
+  DataExportMintScopedTokenResponse,
+  DataExportTriggerSyncParams,
+  DataExportTriggerSyncResponse,
+} from './data-export/data-export';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -11,6 +19,7 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class Events extends APIResource {
   beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
+  dataExport: DataExportAPI.DataExport = new DataExportAPI.DataExport(this._client);
 
   /**
    * Reports raw usage events for event-based metering. Events are ingested
@@ -90,9 +99,18 @@ export namespace EventReportParams {
 }
 
 Events.Beta = Beta;
+Events.DataExport = DataExport;
 
 export declare namespace Events {
   export { type EventReportResponse as EventReportResponse, type EventReportParams as EventReportParams };
 
   export { Beta as Beta };
+
+  export {
+    DataExport as DataExport,
+    type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
+    type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
+    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
+    type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
+  };
 }
