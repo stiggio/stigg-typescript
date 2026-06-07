@@ -292,6 +292,7 @@ describe('resource subscriptions', () => {
       },
       billingPeriod: 'MONTHLY',
       budget: { hasSoftLimit: true, limit: 0 },
+      cancellationDate: '2019-12-27T18:11:19.117Z',
       charges: [
         {
           id: 'id',
