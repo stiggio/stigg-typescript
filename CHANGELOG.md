@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.19 (2026-06-07)
+
+Full Changelog: [v0.1.0-beta.18...v0.1.0-beta.19](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.18...v0.1.0-beta.19)
+
+### Features
+
+* **api:** add cancellationDate parameter to subscriptions provision/update methods ([62716a5](https://github.com/stiggio/stigg-typescript/commit/62716a5f01d2ad39ec774f1dbd161f601df31805))
+
 ## 0.1.0-beta.18 (2026-06-04)
 
 Full Changelog: [v0.1.0-beta.17...v0.1.0-beta.18](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.17...v0.1.0-beta.18)
