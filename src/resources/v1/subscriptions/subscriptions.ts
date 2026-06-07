@@ -3982,6 +3982,11 @@ export interface SubscriptionUpdateParams {
 
   budget?: SubscriptionUpdateParams.Budget | null;
 
+  /**
+   * Subscription cancellation date
+   */
+  cancellationDate?: string | null;
+
   charges?: Array<SubscriptionUpdateParams.Charge>;
 
   entitlements?: Array<SubscriptionUpdateParams.Feature | SubscriptionUpdateParams.Credit>;
@@ -5392,6 +5397,11 @@ export interface SubscriptionProvisionParams {
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
 
   budget?: SubscriptionProvisionParams.Budget | null;
+
+  /**
+   * Subscription cancellation date
+   */
+  cancellationDate?: string;
 
   charges?: Array<SubscriptionProvisionParams.Charge>;
 
