@@ -28,6 +28,8 @@ describe('resource credits', () => {
     const response = await client.v1.credits.getAutoRecharge({
       currencyId: 'currencyId',
       customerId: 'customerId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -56,6 +58,8 @@ describe('resource credits', () => {
       resourceId: 'resourceId',
       startDate: '2019-12-27T18:11:19.117Z',
       timeRange: 'LAST_DAY',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -80,6 +84,8 @@ describe('resource credits', () => {
       currencyId: 'currencyId',
       limit: 1,
       resourceId: 'resourceId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 });

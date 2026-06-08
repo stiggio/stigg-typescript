@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -20,8 +21,22 @@ export class Features extends APIResource {
    * );
    * ```
    */
-  archiveFeature(id: string, options?: RequestOptions): APIPromise<Feature> {
-    return this._client.post(path`/api/v1/features/${id}/archive`, options);
+  archiveFeature(
+    id: string,
+    params: FeatureArchiveFeatureParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Feature> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/features/${id}/archive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -36,8 +51,19 @@ export class Features extends APIResource {
    * });
    * ```
    */
-  createFeature(body: FeatureCreateFeatureParams, options?: RequestOptions): APIPromise<Feature> {
-    return this._client.post('/api/v1/features', { body, ...options });
+  createFeature(params: FeatureCreateFeatureParams, options?: RequestOptions): APIPromise<Feature> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/features', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -52,12 +78,20 @@ export class Features extends APIResource {
    * ```
    */
   listFeatures(
-    query: FeatureListFeaturesParams | null | undefined = {},
+    params: FeatureListFeaturesParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<FeatureListFeaturesResponsesMyCursorIDPage, FeatureListFeaturesResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList('/api/v1/features', MyCursorIDPage<FeatureListFeaturesResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -71,8 +105,22 @@ export class Features extends APIResource {
    * );
    * ```
    */
-  retrieveFeature(id: string, options?: RequestOptions): APIPromise<Feature> {
-    return this._client.get(path`/api/v1/features/${id}`, options);
+  retrieveFeature(
+    id: string,
+    params: FeatureRetrieveFeatureParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Feature> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/features/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -85,8 +133,22 @@ export class Features extends APIResource {
    * );
    * ```
    */
-  unarchiveFeature(id: string, options?: RequestOptions): APIPromise<Feature> {
-    return this._client.post(path`/api/v1/features/${id}/unarchive`, options);
+  unarchiveFeature(
+    id: string,
+    params: FeatureUnarchiveFeatureParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Feature> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/features/${id}/unarchive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -98,8 +160,23 @@ export class Features extends APIResource {
    * const feature = await client.v1.features.updateFeature('x');
    * ```
    */
-  updateFeature(id: string, body: FeatureUpdateFeatureParams, options?: RequestOptions): APIPromise<Feature> {
-    return this._client.patch(path`/api/v1/features/${id}`, { body, ...options });
+  updateFeature(
+    id: string,
+    params: FeatureUpdateFeatureParams,
+    options?: RequestOptions,
+  ): APIPromise<Feature> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/features/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -335,61 +412,89 @@ export namespace FeatureListFeaturesResponse {
   }
 }
 
+export interface FeatureArchiveFeatureParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface FeatureCreateFeatureParams {
   /**
-   * The unique identifier for the feature
+   * Body param: The unique identifier for the feature
    */
   id: string;
 
   /**
-   * The display name for the feature
+   * Body param: The display name for the feature
    */
   displayName: string;
 
   /**
-   * The type of the feature
+   * Body param: The type of the feature
    */
   featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
 
   /**
-   * The description for the feature
+   * Body param: The description for the feature
    */
   description?: string;
 
   /**
-   * The configuration data for the feature
+   * Body param: The configuration data for the feature
    */
   enumConfiguration?: Array<FeatureCreateFeatureParams.EnumConfiguration>;
 
   /**
-   * The status of the feature
+   * Body param: The status of the feature
    */
   featureStatus?: 'NEW' | 'SUSPENDED' | 'ACTIVE';
 
   /**
-   * The units for the feature
+   * Body param: The units for the feature
    */
   featureUnits?: string;
 
   /**
-   * The plural units for the feature
+   * Body param: The plural units for the feature
    */
   featureUnitsPlural?: string;
 
   /**
-   * The additional metadata for the feature
+   * Body param: The additional metadata for the feature
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The meter type for the feature
+   * Body param: The meter type for the feature
    */
   meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
 
   /**
-   * Unit transformation to be applied to the reported usage
+   * Body param: Unit transformation to be applied to the reported usage
    */
   unitTransformation?: FeatureCreateFeatureParams.UnitTransformation | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace FeatureCreateFeatureParams {
@@ -433,29 +538,45 @@ export namespace FeatureCreateFeatureParams {
 
 export interface FeatureListFeaturesParams extends MyCursorIDPageParams {
   /**
-   * Filter by entity ID
+   * Query param: Filter by entity ID
    */
   id?: string;
 
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: FeatureListFeaturesParams.CreatedAt;
 
   /**
-   * Filter by feature type. Supports comma-separated values for multiple types
+   * Query param: Filter by feature type. Supports comma-separated values for
+   * multiple types
    */
   featureType?: Array<'BOOLEAN' | 'NUMBER' | 'ENUM'>;
 
   /**
-   * Filter by meter type. Supports comma-separated values for multiple types
+   * Query param: Filter by meter type. Supports comma-separated values for multiple
+   * types
    */
   meterType?: Array<'None' | 'FLUCTUATING' | 'INCREMENTAL'>;
 
   /**
-   * Filter by feature status. Supports comma-separated values for multiple statuses
+   * Query param: Filter by feature status. Supports comma-separated values for
+   * multiple statuses
    */
   status?: Array<'NEW' | 'SUSPENDED' | 'ACTIVE'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace FeatureListFeaturesParams {
@@ -485,43 +606,89 @@ export namespace FeatureListFeaturesParams {
   }
 }
 
+export interface FeatureRetrieveFeatureParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface FeatureUnarchiveFeatureParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface FeatureUpdateFeatureParams {
   /**
-   * The description for the feature
+   * Body param: The description for the feature
    */
   description?: string;
 
   /**
-   * The display name for the feature
+   * Body param: The display name for the feature
    */
   displayName?: string;
 
   /**
-   * The configuration data for the feature
+   * Body param: The configuration data for the feature
    */
   enumConfiguration?: Array<FeatureUpdateFeatureParams.EnumConfiguration>;
 
   /**
-   * The units for the feature
+   * Body param: The units for the feature
    */
   featureUnits?: string;
 
   /**
-   * The plural units for the feature
+   * Body param: The plural units for the feature
    */
   featureUnitsPlural?: string;
 
   /**
-   * The additional metadata for the feature
+   * Body param: The additional metadata for the feature
    */
   metadata?: { [key: string]: string };
 
+  /**
+   * Body param
+   */
   meter?: FeatureUpdateFeatureParams.Meter;
 
   /**
-   * Unit transformation to be applied to the reported usage
+   * Body param: Unit transformation to be applied to the reported usage
    */
   unitTransformation?: FeatureUpdateFeatureParams.UnitTransformation | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace FeatureUpdateFeatureParams {
@@ -619,8 +786,11 @@ export declare namespace Features {
     type Feature as Feature,
     type FeatureListFeaturesResponse as FeatureListFeaturesResponse,
     type FeatureListFeaturesResponsesMyCursorIDPage as FeatureListFeaturesResponsesMyCursorIDPage,
+    type FeatureArchiveFeatureParams as FeatureArchiveFeatureParams,
     type FeatureCreateFeatureParams as FeatureCreateFeatureParams,
     type FeatureListFeaturesParams as FeatureListFeaturesParams,
+    type FeatureRetrieveFeatureParams as FeatureRetrieveFeatureParams,
+    type FeatureUnarchiveFeatureParams as FeatureUnarchiveFeatureParams,
     type FeatureUpdateFeatureParams as FeatureUpdateFeatureParams,
   };
 }

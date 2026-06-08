@@ -22,7 +22,11 @@ describe('resource entities', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.v1.events.beta.customers.entities.retrieve('x', { id: 'id' });
+    const response = await client.v1.events.beta.customers.entities.retrieve('x', {
+      id: 'id',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 
   // Mock server tests are disabled
@@ -49,6 +53,8 @@ describe('resource entities', () => {
           includeArchived: 'true',
           limit: 1,
           typeRefId: 'typeRefId',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -73,6 +79,8 @@ describe('resource entities', () => {
   test.skip('archive: required and optional params', async () => {
     const response = await client.v1.events.beta.customers.entities.archive('id', {
       ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -94,6 +102,8 @@ describe('resource entities', () => {
   test.skip('unarchive: required and optional params', async () => {
     const response = await client.v1.events.beta.customers.entities.unarchive('id', {
       ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -126,6 +136,8 @@ describe('resource entities', () => {
           typeRefId: 'user',
         },
       ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 });

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
+import { buildHeaders } from '../../../../../internal/headers';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
@@ -21,10 +22,21 @@ export class Entitlements extends APIResource {
    */
   check(
     id: string,
-    query: EntitlementCheckParams | null | undefined = {},
+    params: EntitlementCheckParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EntitlementCheckResponse> {
-    return this._client.get(path`/api/v1-beta/customers/${id}/entitlements/check`, { query, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.get(path`/api/v1-beta/customers/${id}/entitlements/check`, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -286,37 +298,52 @@ export namespace EntitlementCheckResponse {
 
 export interface EntitlementCheckParams {
   /**
-   * Currency ID (refId) to check for credit entitlements. Mutually exclusive with
-   * `featureId`.
+   * Query param: Currency ID (refId) to check for credit entitlements. Mutually
+   * exclusive with `featureId`.
    */
   currencyId?: string;
 
   /**
-   * Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the
-   * response includes a `chains` array with per-entity governance limits.
+   * Query param: Optional attribution map (e.g. `dimensions[userId]=u1`). When
+   * provided, the response includes a `chains` array with per-entity governance
+   * limits.
    */
   dimensions?: { [key: string]: string };
 
   /**
-   * Feature ID (refId) to check. Mutually exclusive with `currencyId`.
+   * Query param: Feature ID (refId) to check. Mutually exclusive with `currencyId`.
    */
   featureId?: string;
 
   /**
-   * Requested usage amount to evaluate against the entitlement limit (numeric
-   * features only)
+   * Query param: Requested usage amount to evaluate against the entitlement limit
+   * (numeric features only)
    */
   requestedUsage?: number;
 
   /**
-   * Requested values to evaluate against allowed values (enum features only)
+   * Query param: Requested values to evaluate against allowed values (enum features
+   * only)
    */
   requestedValues?: Array<string>;
 
   /**
-   * Resource ID to scope the entitlement check to a specific resource
+   * Query param: Resource ID to scope the entitlement check to a specific resource
    */
   resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace Entitlements {

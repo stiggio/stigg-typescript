@@ -21,6 +21,18 @@ describe('resource products', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('archiveProduct: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.products.archiveProduct(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('createProduct: only required params', async () => {
     const responsePromise = client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });
     const rawResponse = await responsePromise.asResponse();
@@ -40,6 +52,8 @@ describe('resource products', () => {
       description: 'description',
       metadata: { foo: 'string' },
       multipleSubscriptions: true,
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -61,6 +75,8 @@ describe('resource products', () => {
       targetId: 'targetId',
       description: 'description',
       displayName: 'displayName',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -93,6 +109,8 @@ describe('resource products', () => {
           },
           limit: 1,
           status: ['PUBLISHED'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -109,6 +127,18 @@ describe('resource products', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unarchiveProduct: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.products.unarchiveProduct(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 
   // Mock server tests are disabled

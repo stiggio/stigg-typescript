@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../core/pagination';
+import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class EntityTypes extends APIResource {
@@ -20,12 +21,20 @@ export class EntityTypes extends APIResource {
    * ```
    */
   list(
-    query: EntityTypeListParams | null | undefined = {},
+    params: EntityTypeListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EntityTypeListResponsesMyCursorIDPage, EntityTypeListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList('/api/v1-beta/entity-types', MyCursorIDPage<EntityTypeListResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -53,8 +62,19 @@ export class EntityTypes extends APIResource {
    *   });
    * ```
    */
-  upsert(body: EntityTypeUpsertParams, options?: RequestOptions): APIPromise<EntityTypeUpsertResponse> {
-    return this._client.put('/api/v1-beta/entity-types', { body, ...options });
+  upsert(params: EntityTypeUpsertParams, options?: RequestOptions): APIPromise<EntityTypeUpsertResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.put('/api/v1-beta/entity-types', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -137,13 +157,39 @@ export namespace EntityTypeUpsertResponse {
   }
 }
 
-export interface EntityTypeListParams extends MyCursorIDPageParams {}
+export interface EntityTypeListParams extends MyCursorIDPageParams {
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
 
 export interface EntityTypeUpsertParams {
   /**
-   * Entity types to upsert (1–100 per request)
+   * Body param: Entity types to upsert (1–100 per request)
    */
   types: Array<EntityTypeUpsertParams.Type>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace EntityTypeUpsertParams {

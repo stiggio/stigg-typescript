@@ -12,6 +12,7 @@ import {
   DataExportTriggerSyncResponse,
 } from './data-export/data-export';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
 /**
@@ -38,8 +39,19 @@ export class Events extends APIResource {
    * });
    * ```
    */
-  report(body: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
-    return this._client.post('/api/v1/events', { body, ...options });
+  report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/events', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -56,9 +68,22 @@ export interface EventReportResponse {
 
 export interface EventReportParams {
   /**
-   * A list of usage events to report
+   * Body param: A list of usage events to report
    */
   events: Array<EventReportParams.Event>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace EventReportParams {

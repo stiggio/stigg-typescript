@@ -4,31 +4,38 @@ import { APIResource } from '../../core/resource';
 import * as CouponsAPI from './coupons';
 import {
   Coupon,
+  CouponArchiveCouponParams,
   CouponCreateParams,
   CouponListParams,
   CouponListResponse,
   CouponListResponsesMyCursorIDPage,
+  CouponRetrieveParams,
   CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
 import * as FeaturesAPI from './features';
 import {
   Feature,
+  FeatureArchiveFeatureParams,
   FeatureCreateFeatureParams,
   FeatureListFeaturesParams,
   FeatureListFeaturesResponse,
   FeatureListFeaturesResponsesMyCursorIDPage,
+  FeatureRetrieveFeatureParams,
+  FeatureUnarchiveFeatureParams,
   FeatureUpdateFeatureParams,
   Features,
 } from './features';
 import * as ProductsAPI from './products';
 import {
   Product,
+  ProductArchiveProductParams,
   ProductCreateProductParams,
   ProductDuplicateProductParams,
   ProductListProductsParams,
   ProductListProductsResponse,
   ProductListProductsResponsesMyCursorIDPage,
+  ProductUnarchiveProductParams,
   ProductUpdateProductParams,
   Products,
 } from './products';
@@ -43,6 +50,8 @@ import {
 import * as AddonsAPI from './addons/addons';
 import {
   Addon,
+  AddonArchiveParams,
+  AddonCreateDraftParams,
   AddonCreateParams,
   AddonListChargesParams,
   AddonListChargesResponse,
@@ -52,7 +61,9 @@ import {
   AddonListResponsesMyCursorIDPage,
   AddonPublishParams,
   AddonPublishResponse,
+  AddonRemoveDraftParams,
   AddonRemoveDraftResponse,
+  AddonRetrieveParams,
   AddonUpdateParams,
   Addons,
 } from './addons/addons';
@@ -69,6 +80,7 @@ import {
 } from './credits/credits';
 import * as CustomersAPI from './customers/customers';
 import {
+  CustomerArchiveParams,
   CustomerCheckEntitlementParams,
   CustomerCheckEntitlementResponse,
   CustomerImportParams,
@@ -84,6 +96,8 @@ import {
   CustomerResponse,
   CustomerRetrieveEntitlementsParams,
   CustomerRetrieveEntitlementsResponse,
+  CustomerRetrieveParams,
+  CustomerUnarchiveParams,
   CustomerUpdateParams,
   Customers,
 } from './customers/customers';
@@ -92,6 +106,8 @@ import { EventReportParams, EventReportResponse, Events } from './events/events'
 import * as PlansAPI from './plans/plans';
 import {
   Plan,
+  PlanArchiveParams,
+  PlanCreateDraftParams,
   PlanCreateParams,
   PlanListChargesParams,
   PlanListChargesResponse,
@@ -104,7 +120,9 @@ import {
   PlanListResponsesMyCursorIDPage,
   PlanPublishParams,
   PlanPublishResponse,
+  PlanRemoveDraftParams,
   PlanRemoveDraftResponse,
+  PlanRetrieveParams,
   PlanUpdateParams,
   Plans,
 } from './plans/plans';
@@ -123,6 +141,7 @@ import {
   SubscriptionPreviewResponse,
   SubscriptionProvisionParams,
   SubscriptionProvisionResponse,
+  SubscriptionRetrieveParams,
   SubscriptionTransferParams,
   SubscriptionUpdateParams,
   Subscriptions,
@@ -164,13 +183,16 @@ export declare namespace V1 {
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
+    type CustomerRetrieveParams as CustomerRetrieveParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
+    type CustomerArchiveParams as CustomerArchiveParams,
     type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
     type CustomerImportParams as CustomerImportParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
     type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
+    type CustomerUnarchiveParams as CustomerUnarchiveParams,
   };
 
   export {
@@ -181,6 +203,7 @@ export declare namespace V1 {
     type SubscriptionPreviewResponse as SubscriptionPreviewResponse,
     type SubscriptionProvisionResponse as SubscriptionProvisionResponse,
     type SubscriptionListResponsesMyCursorIDPage as SubscriptionListResponsesMyCursorIDPage,
+    type SubscriptionRetrieveParams as SubscriptionRetrieveParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionListParams as SubscriptionListParams,
     type SubscriptionCancelParams as SubscriptionCancelParams,
@@ -198,7 +221,9 @@ export declare namespace V1 {
     type CouponListResponse as CouponListResponse,
     type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
+    type CouponRetrieveParams as CouponRetrieveParams,
     type CouponListParams as CouponListParams,
+    type CouponArchiveCouponParams as CouponArchiveCouponParams,
     type CouponUpdateCouponParams as CouponUpdateCouponParams,
   };
 
@@ -224,8 +249,11 @@ export declare namespace V1 {
     type Feature as Feature,
     type FeatureListFeaturesResponse as FeatureListFeaturesResponse,
     type FeatureListFeaturesResponsesMyCursorIDPage as FeatureListFeaturesResponsesMyCursorIDPage,
+    type FeatureArchiveFeatureParams as FeatureArchiveFeatureParams,
     type FeatureCreateFeatureParams as FeatureCreateFeatureParams,
     type FeatureListFeaturesParams as FeatureListFeaturesParams,
+    type FeatureRetrieveFeatureParams as FeatureRetrieveFeatureParams,
+    type FeatureUnarchiveFeatureParams as FeatureUnarchiveFeatureParams,
     type FeatureUpdateFeatureParams as FeatureUpdateFeatureParams,
   };
 
@@ -239,10 +267,14 @@ export declare namespace V1 {
     type AddonListResponsesMyCursorIDPage as AddonListResponsesMyCursorIDPage,
     type AddonListChargesResponsesMyCursorIDPage as AddonListChargesResponsesMyCursorIDPage,
     type AddonCreateParams as AddonCreateParams,
+    type AddonRetrieveParams as AddonRetrieveParams,
     type AddonUpdateParams as AddonUpdateParams,
     type AddonListParams as AddonListParams,
+    type AddonArchiveParams as AddonArchiveParams,
+    type AddonCreateDraftParams as AddonCreateDraftParams,
     type AddonListChargesParams as AddonListChargesParams,
     type AddonPublishParams as AddonPublishParams,
+    type AddonRemoveDraftParams as AddonRemoveDraftParams,
   };
 
   export {
@@ -257,11 +289,15 @@ export declare namespace V1 {
     type PlanListChargesResponsesMyCursorIDPage as PlanListChargesResponsesMyCursorIDPage,
     type PlanListOverageChargesResponsesMyCursorIDPage as PlanListOverageChargesResponsesMyCursorIDPage,
     type PlanCreateParams as PlanCreateParams,
+    type PlanRetrieveParams as PlanRetrieveParams,
     type PlanUpdateParams as PlanUpdateParams,
     type PlanListParams as PlanListParams,
+    type PlanArchiveParams as PlanArchiveParams,
+    type PlanCreateDraftParams as PlanCreateDraftParams,
     type PlanListChargesParams as PlanListChargesParams,
     type PlanListOverageChargesParams as PlanListOverageChargesParams,
     type PlanPublishParams as PlanPublishParams,
+    type PlanRemoveDraftParams as PlanRemoveDraftParams,
   };
 
   export {
@@ -277,9 +313,11 @@ export declare namespace V1 {
     type Product as Product,
     type ProductListProductsResponse as ProductListProductsResponse,
     type ProductListProductsResponsesMyCursorIDPage as ProductListProductsResponsesMyCursorIDPage,
+    type ProductArchiveProductParams as ProductArchiveProductParams,
     type ProductCreateProductParams as ProductCreateProductParams,
     type ProductDuplicateProductParams as ProductDuplicateProductParams,
     type ProductListProductsParams as ProductListProductsParams,
+    type ProductUnarchiveProductParams as ProductUnarchiveProductParams,
     type ProductUpdateProductParams as ProductUpdateProductParams,
   };
 }

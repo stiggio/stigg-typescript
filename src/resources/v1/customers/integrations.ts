@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as CustomersAPI from './customers';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -25,8 +26,17 @@ export class Integrations extends APIResource {
     params: IntegrationRetrieveParams,
     options?: RequestOptions,
   ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
-    const { id } = params;
-    return this._client.get(path`/api/v1/customers/${id}/integrations/${integrationID}`, options);
+    const { id, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
+    return this._client.get(path`/api/v1/customers/${id}/integrations/${integrationID}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -47,10 +57,17 @@ export class Integrations extends APIResource {
     params: IntegrationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
-    const { id, ...body } = params;
+    const { id, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.patch(path`/api/v1/customers/${id}/integrations/${integrationID}`, {
       body,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -70,13 +87,24 @@ export class Integrations extends APIResource {
    */
   list(
     id: string,
-    query: IntegrationListParams | null | undefined = {},
+    params: IntegrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IntegrationListResponsesMyCursorIDPage, IntegrationListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/api/v1/customers/${id}/integrations`,
       MyCursorIDPage<IntegrationListResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -96,10 +124,21 @@ export class Integrations extends APIResource {
    */
   link(
     id: string,
-    body: IntegrationLinkParams,
+    params: IntegrationLinkParams,
     options?: RequestOptions,
   ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
-    return this._client.post(path`/api/v1/customers/${id}/integrations`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/customers/${id}/integrations`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -119,8 +158,17 @@ export class Integrations extends APIResource {
     params: IntegrationUnlinkParams,
     options?: RequestOptions,
   ): APIPromise<CustomersAPI.CustomerIntegrationResponse> {
-    const { id } = params;
-    return this._client.delete(path`/api/v1/customers/${id}/integrations/${integrationID}`, options);
+    const { id, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
+    return this._client.delete(path`/api/v1/customers/${id}/integrations/${integrationID}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -218,9 +266,22 @@ export namespace IntegrationListResponse {
 
 export interface IntegrationRetrieveParams {
   /**
-   * Customer slug
+   * Path param: Customer slug
    */
   id: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface IntegrationUpdateParams {
@@ -233,12 +294,25 @@ export interface IntegrationUpdateParams {
    * Body param: Synced entity id
    */
   syncedEntityId: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface IntegrationListParams extends MyCursorIDPageParams {
   /**
-   * Filter by vendor identifier. Supports comma-separated values for multiple
-   * vendors (e.g., STRIPE,HUBSPOT)
+   * Query param: Filter by vendor identifier. Supports comma-separated values for
+   * multiple vendors (e.g., STRIPE,HUBSPOT)
    */
   vendorIdentifier?: Array<
     | 'AUTH0'
@@ -254,21 +328,34 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
     | 'RECEIVED'
     | 'PREQUEL'
   >;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface IntegrationLinkParams {
   /**
-   * Integration details
+   * Body param: Integration details
    */
   id: string;
 
   /**
-   * Synced entity id
+   * Body param: Synced entity id
    */
   syncedEntityId: string;
 
   /**
-   * The vendor identifier of integration
+   * Body param: The vendor identifier of integration
    */
   vendorIdentifier:
     | 'AUTH0'
@@ -283,13 +370,39 @@ export interface IntegrationLinkParams {
     | 'APP_STORE'
     | 'RECEIVED'
     | 'PREQUEL';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface IntegrationUnlinkParams {
   /**
-   * Customer slug
+   * Path param: Customer slug
    */
   id: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace Integrations {

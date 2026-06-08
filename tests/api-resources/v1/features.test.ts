@@ -21,6 +21,18 @@ describe('resource features', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('archiveFeature: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.features.archiveFeature(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('createFeature: only required params', async () => {
     const responsePromise = client.v1.features.createFeature({
       id: 'id',
@@ -55,6 +67,8 @@ describe('resource features', () => {
         featureUnitsPlural: 'featureUnitsPlural',
         round: 'UP',
       },
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -89,6 +103,8 @@ describe('resource features', () => {
           limit: 1,
           meterType: ['None'],
           status: ['NEW'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -108,6 +124,18 @@ describe('resource features', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieveFeature: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.features.retrieveFeature(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('unarchiveFeature', async () => {
     const responsePromise = client.v1.features.unarchiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
@@ -117,6 +145,18 @@ describe('resource features', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unarchiveFeature: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.features.unarchiveFeature(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 
   // Mock server tests are disabled

@@ -6,6 +6,7 @@ import {
   EntitlementCreateParams,
   EntitlementCreateResponse,
   EntitlementDeleteParams,
+  EntitlementListParams,
   EntitlementListResponse,
   EntitlementUpdateParams,
   Entitlements,
@@ -13,6 +14,7 @@ import {
 } from './entitlements';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -34,8 +36,19 @@ export class Plans extends APIResource {
    * });
    * ```
    */
-  create(body: PlanCreateParams, options?: RequestOptions): APIPromise<Plan> {
-    return this._client.post('/api/v1/plans', { body, ...options });
+  create(params: PlanCreateParams, options?: RequestOptions): APIPromise<Plan> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/plans', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -47,8 +60,22 @@ export class Plans extends APIResource {
    * const plan = await client.v1.plans.retrieve('x');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Plan> {
-    return this._client.get(path`/api/v1/plans/${id}`, options);
+  retrieve(
+    id: string,
+    params: PlanRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Plan> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/plans/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -60,8 +87,19 @@ export class Plans extends APIResource {
    * const plan = await client.v1.plans.update('x');
    * ```
    */
-  update(id: string, body: PlanUpdateParams, options?: RequestOptions): APIPromise<Plan> {
-    return this._client.patch(path`/api/v1/plans/${id}`, { body, ...options });
+  update(id: string, params: PlanUpdateParams, options?: RequestOptions): APIPromise<Plan> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/plans/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -76,10 +114,21 @@ export class Plans extends APIResource {
    * ```
    */
   list(
-    query: PlanListParams | null | undefined = {},
+    params: PlanListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PlanListResponsesMyCursorIDPage, PlanListResponse> {
-    return this._client.getAPIList('/api/v1/plans', MyCursorIDPage<PlanListResponse>, { query, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.getAPIList('/api/v1/plans', MyCursorIDPage<PlanListResponse>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -90,8 +139,22 @@ export class Plans extends APIResource {
    * const plan = await client.v1.plans.archive('x');
    * ```
    */
-  archive(id: string, options?: RequestOptions): APIPromise<Plan> {
-    return this._client.post(path`/api/v1/plans/${id}/archive`, options);
+  archive(
+    id: string,
+    params: PlanArchiveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Plan> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/plans/${id}/archive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -102,8 +165,22 @@ export class Plans extends APIResource {
    * const plan = await client.v1.plans.createDraft('x');
    * ```
    */
-  createDraft(id: string, options?: RequestOptions): APIPromise<Plan> {
-    return this._client.post(path`/api/v1/plans/${id}/draft`, options);
+  createDraft(
+    id: string,
+    params: PlanCreateDraftParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Plan> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/plans/${id}/draft`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -121,13 +198,24 @@ export class Plans extends APIResource {
    */
   listCharges(
     id: string,
-    query: PlanListChargesParams | null | undefined = {},
+    params: PlanListChargesParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PlanListChargesResponsesMyCursorIDPage, PlanListChargesResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/api/v1/plans/${id}/charges`,
       MyCursorIDPage<PlanListChargesResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -146,13 +234,24 @@ export class Plans extends APIResource {
    */
   listOverageCharges(
     id: string,
-    query: PlanListOverageChargesParams | null | undefined = {},
+    params: PlanListOverageChargesParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PlanListOverageChargesResponsesMyCursorIDPage, PlanListOverageChargesResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/api/v1/plans/${id}/overage-charges`,
       MyCursorIDPage<PlanListOverageChargesResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -166,8 +265,19 @@ export class Plans extends APIResource {
    * });
    * ```
    */
-  publish(id: string, body: PlanPublishParams, options?: RequestOptions): APIPromise<PlanPublishResponse> {
-    return this._client.post(path`/api/v1/plans/${id}/publish`, { body, ...options });
+  publish(id: string, params: PlanPublishParams, options?: RequestOptions): APIPromise<PlanPublishResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/plans/${id}/publish`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -178,8 +288,22 @@ export class Plans extends APIResource {
    * const response = await client.v1.plans.removeDraft('x');
    * ```
    */
-  removeDraft(id: string, options?: RequestOptions): APIPromise<PlanRemoveDraftResponse> {
-    return this._client.delete(path`/api/v1/plans/${id}/draft`, options);
+  removeDraft(
+    id: string,
+    params: PlanRemoveDraftParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PlanRemoveDraftResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/plans/${id}/draft`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -1599,54 +1723,67 @@ export namespace PlanRemoveDraftResponse {
 
 export interface PlanCreateParams {
   /**
-   * The unique identifier for the entity
+   * Body param: The unique identifier for the entity
    */
   id: string;
 
   /**
-   * The display name of the package
+   * Body param: The display name of the package
    */
   displayName: string;
 
   /**
-   * The product ID to associate the plan with
+   * Body param: The product ID to associate the plan with
    */
   productId: string;
 
   /**
-   * The unique identifier for the entity in the billing provider
+   * Body param: The unique identifier for the entity in the billing provider
    */
   billingId?: string | null;
 
   /**
-   * Default trial configuration for the plan
+   * Body param: Default trial configuration for the plan
    */
   defaultTrialConfig?: PlanCreateParams.DefaultTrialConfig | null;
 
   /**
-   * The description of the package
+   * Body param: The description of the package
    */
   description?: string | null;
 
   /**
-   * Metadata associated with the entity
+   * Body param: Metadata associated with the entity
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The ID of the parent plan, if applicable
+   * Body param: The ID of the parent plan, if applicable
    */
   parentPlanId?: string | null;
 
   /**
-   * The pricing type of the package
+   * Body param: The pricing type of the package
    */
   pricingType?: 'FREE' | 'PAID' | 'CUSTOM' | null;
 
   /**
-   * The status of the package
+   * Body param: The status of the package
    */
   status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace PlanCreateParams {
@@ -1693,43 +1830,74 @@ export namespace PlanCreateParams {
   }
 }
 
+export interface PlanRetrieveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface PlanUpdateParams {
   /**
-   * The unique identifier for the entity in the billing provider
+   * Body param: The unique identifier for the entity in the billing provider
    */
   billingId?: string | null;
 
   /**
-   * Pricing configuration to set on the plan draft
+   * Body param: Pricing configuration to set on the plan draft
    */
   charges?: PlanUpdateParams.Charges;
 
+  /**
+   * Body param
+   */
   compatibleAddonIds?: Array<string> | null;
 
   /**
-   * Default trial configuration for the plan
+   * Body param: Default trial configuration for the plan
    */
   defaultTrialConfig?: PlanUpdateParams.DefaultTrialConfig | null;
 
   /**
-   * The description of the package
+   * Body param: The description of the package
    */
   description?: string | null;
 
   /**
-   * The display name of the package
+   * Body param: The display name of the package
    */
   displayName?: string;
 
   /**
-   * Metadata associated with the entity
+   * Body param: Metadata associated with the entity
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The ID of the parent plan, if applicable
+   * Body param: The ID of the parent plan, if applicable
    */
   parentPlanId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace PlanUpdateParams {
@@ -3144,19 +3312,33 @@ export namespace PlanUpdateParams {
 
 export interface PlanListParams extends MyCursorIDPageParams {
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: PlanListParams.CreatedAt;
 
   /**
-   * Filter by product ID
+   * Query param: Filter by product ID
    */
   productId?: string;
 
   /**
-   * Filter by status. Supports comma-separated values for multiple statuses
+   * Query param: Filter by status. Supports comma-separated values for multiple
+   * statuses
    */
   status?: Array<'DRAFT' | 'PUBLISHED' | 'ARCHIVED'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace PlanListParams {
@@ -3186,15 +3368,99 @@ export namespace PlanListParams {
   }
 }
 
-export interface PlanListChargesParams extends MyCursorIDPageParams {}
+export interface PlanArchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
 
-export interface PlanListOverageChargesParams extends MyCursorIDPageParams {}
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface PlanCreateDraftParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface PlanListChargesParams extends MyCursorIDPageParams {
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface PlanListOverageChargesParams extends MyCursorIDPageParams {
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
 
 export interface PlanPublishParams {
   /**
-   * The migration type of the package
+   * Body param: The migration type of the package
    */
   migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface PlanRemoveDraftParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 Plans.Entitlements = Entitlements;
@@ -3211,11 +3477,15 @@ export declare namespace Plans {
     type PlanListChargesResponsesMyCursorIDPage as PlanListChargesResponsesMyCursorIDPage,
     type PlanListOverageChargesResponsesMyCursorIDPage as PlanListOverageChargesResponsesMyCursorIDPage,
     type PlanCreateParams as PlanCreateParams,
+    type PlanRetrieveParams as PlanRetrieveParams,
     type PlanUpdateParams as PlanUpdateParams,
     type PlanListParams as PlanListParams,
+    type PlanArchiveParams as PlanArchiveParams,
+    type PlanCreateDraftParams as PlanCreateDraftParams,
     type PlanListChargesParams as PlanListChargesParams,
     type PlanListOverageChargesParams as PlanListOverageChargesParams,
     type PlanPublishParams as PlanPublishParams,
+    type PlanRemoveDraftParams as PlanRemoveDraftParams,
   };
 
   export {
@@ -3225,6 +3495,7 @@ export declare namespace Plans {
     type EntitlementListResponse as EntitlementListResponse,
     type EntitlementCreateParams as EntitlementCreateParams,
     type EntitlementUpdateParams as EntitlementUpdateParams,
+    type EntitlementListParams as EntitlementListParams,
     type EntitlementDeleteParams as EntitlementDeleteParams,
   };
 }

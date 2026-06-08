@@ -2,13 +2,25 @@
 
 import { APIResource } from '../../../core/resource';
 import * as FutureUpdateAPI from './future-update';
-import { CancelSubscription, FutureUpdate as FutureUpdateAPIFutureUpdate } from './future-update';
+import {
+  CancelSubscription,
+  FutureUpdate as FutureUpdateAPIFutureUpdate,
+  FutureUpdateCancelPendingPaymentParams,
+  FutureUpdateCancelScheduleParams,
+} from './future-update';
 import * as InvoiceAPI from './invoice';
-import { Invoice, InvoiceMarkAsPaidResponse } from './invoice';
+import { Invoice, InvoiceMarkAsPaidParams, InvoiceMarkAsPaidResponse } from './invoice';
 import * as UsageAPI from './usage';
-import { Usage, UsageChargeUsageParams, UsageChargeUsageResponse, UsageSyncResponse } from './usage';
+import {
+  Usage,
+  UsageChargeUsageParams,
+  UsageChargeUsageResponse,
+  UsageSyncParams,
+  UsageSyncResponse,
+} from './usage';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -28,8 +40,22 @@ export class Subscriptions extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Subscription> {
-    return this._client.get(path`/api/v1/subscriptions/${id}`, options);
+  retrieve(
+    id: string,
+    params: SubscriptionRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/subscriptions/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -43,8 +69,19 @@ export class Subscriptions extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
-    return this._client.patch(path`/api/v1/subscriptions/${id}`, { body, ...options });
+  update(id: string, params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/subscriptions/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -60,12 +97,20 @@ export class Subscriptions extends APIResource {
    * ```
    */
   list(
-    query: SubscriptionListParams | null | undefined = {},
+    params: SubscriptionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SubscriptionListResponsesMyCursorIDPage, SubscriptionListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList('/api/v1/subscriptions', MyCursorIDPage<SubscriptionListResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -80,8 +125,19 @@ export class Subscriptions extends APIResource {
    * );
    * ```
    */
-  cancel(id: string, body: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/cancel`, { body, ...options });
+  cancel(id: string, params: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/cancel`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -96,8 +152,23 @@ export class Subscriptions extends APIResource {
    * );
    * ```
    */
-  delegate(id: string, body: SubscriptionDelegateParams, options?: RequestOptions): APIPromise<Subscription> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/delegate`, { body, ...options });
+  delegate(
+    id: string,
+    params: SubscriptionDelegateParams,
+    options?: RequestOptions,
+  ): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/delegate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -117,8 +188,19 @@ export class Subscriptions extends APIResource {
    * });
    * ```
    */
-  import(body: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
-    return this._client.post('/api/v1/subscriptions/import', { body, ...options });
+  import(params: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/subscriptions/import', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -132,8 +214,19 @@ export class Subscriptions extends APIResource {
    * );
    * ```
    */
-  migrate(id: string, body: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/migrate`, { body, ...options });
+  migrate(id: string, params: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/migrate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -149,10 +242,21 @@ export class Subscriptions extends APIResource {
    * ```
    */
   preview(
-    body: SubscriptionPreviewParams,
+    params: SubscriptionPreviewParams,
     options?: RequestOptions,
   ): APIPromise<SubscriptionPreviewResponse> {
-    return this._client.post('/api/v1/subscriptions/preview', { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/subscriptions/preview', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -168,10 +272,21 @@ export class Subscriptions extends APIResource {
    * ```
    */
   provision(
-    body: SubscriptionProvisionParams,
+    params: SubscriptionProvisionParams,
     options?: RequestOptions,
   ): APIPromise<SubscriptionProvisionResponse> {
-    return this._client.post('/api/v1/subscriptions', { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/subscriptions', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -186,8 +301,23 @@ export class Subscriptions extends APIResource {
    * );
    * ```
    */
-  transfer(id: string, body: SubscriptionTransferParams, options?: RequestOptions): APIPromise<Subscription> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/transfer`, { body, ...options });
+  transfer(
+    id: string,
+    params: SubscriptionTransferParams,
+    options?: RequestOptions,
+  ): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/transfer`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -3964,56 +4094,114 @@ export namespace SubscriptionProvisionResponse {
   }
 }
 
+export interface SubscriptionRetrieveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface SubscriptionUpdateParams {
+  /**
+   * Body param
+   */
   addons?: Array<SubscriptionUpdateParams.Addon>;
 
+  /**
+   * Body param
+   */
   appliedCoupon?: SubscriptionUpdateParams.AppliedCoupon;
 
   /**
-   * Await payment confirmation
+   * Body param: Await payment confirmation
    */
   awaitPaymentConfirmation?: boolean;
 
+  /**
+   * Body param
+   */
   billingCycleAnchor?: 'UNCHANGED' | 'NOW';
 
+  /**
+   * Body param
+   */
   billingInformation?: SubscriptionUpdateParams.BillingInformation;
 
+  /**
+   * Body param
+   */
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
 
+  /**
+   * Body param
+   */
   budget?: SubscriptionUpdateParams.Budget | null;
 
   /**
-   * Subscription cancellation date
+   * Body param: Subscription cancellation date
    */
   cancellationDate?: string | null;
 
+  /**
+   * Body param
+   */
   charges?: Array<SubscriptionUpdateParams.Charge>;
 
+  /**
+   * Body param
+   */
   entitlements?: Array<SubscriptionUpdateParams.Feature | SubscriptionUpdateParams.Credit>;
 
   /**
-   * Additional metadata for the subscription
+   * Body param: Additional metadata for the subscription
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Minimum spend amount
+   * Body param: Minimum spend amount
    */
   minimumSpend?: SubscriptionUpdateParams.MinimumSpend | null;
 
+  /**
+   * Body param
+   */
   priceOverrides?: Array<SubscriptionUpdateParams.PriceOverride>;
 
   /**
-   * Promotion code
+   * Body param: Promotion code
    */
   promotionCode?: string;
 
+  /**
+   * Body param
+   */
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
 
   /**
-   * Subscription trial end date
+   * Body param: Subscription trial end date
    */
   trialEndDate?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace SubscriptionUpdateParams {
@@ -4696,35 +4884,49 @@ export namespace SubscriptionUpdateParams {
 
 export interface SubscriptionListParams extends MyCursorIDPageParams {
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: SubscriptionListParams.CreatedAt;
 
   /**
-   * Filter by customer ID
+   * Query param: Filter by customer ID
    */
   customerId?: string;
 
   /**
-   * Filter by plan ID
+   * Query param: Filter by plan ID
    */
   planId?: string;
 
   /**
-   * Filter by pricing type. Supports comma-separated values for multiple types
+   * Query param: Filter by pricing type. Supports comma-separated values for
+   * multiple types
    */
   pricingType?: Array<'FREE' | 'PAID' | 'CUSTOM'>;
 
   /**
-   * Filter by resource ID
+   * Query param: Filter by resource ID
    */
   resourceId?: string;
 
   /**
-   * Filter by subscription status. Supports comma-separated values for multiple
-   * statuses
+   * Query param: Filter by subscription status. Supports comma-separated values for
+   * multiple statuses
    */
   status?: Array<'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace SubscriptionListParams {
@@ -4756,45 +4958,86 @@ export namespace SubscriptionListParams {
 
 export interface SubscriptionCancelParams {
   /**
-   * Action on cancellation (downgrade or revoke)
+   * Body param: Action on cancellation (downgrade or revoke)
    */
   cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS';
 
   /**
-   * When to cancel (immediate, period end, or date)
+   * Body param: When to cancel (immediate, period end, or date)
    */
   cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE';
 
   /**
-   * Subscription end date
+   * Body param: Subscription end date
    */
   endDate?: string;
 
   /**
-   * If set, enables or disables prorating of credits on subscription cancellation.
+   * Body param: If set, enables or disables prorating of credits on subscription
+   * cancellation.
    */
   prorate?: boolean;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface SubscriptionDelegateParams {
   /**
-   * The unique identifier of the customer who will assume payment responsibility for
-   * this subscription. This customer must already exist in your Stigg account and
-   * have a valid payment method if the subscription requires payment.
+   * Body param: The unique identifier of the customer who will assume payment
+   * responsibility for this subscription. This customer must already exist in your
+   * Stigg account and have a valid payment method if the subscription requires
+   * payment.
    */
   targetCustomerId: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface SubscriptionImportParams {
   /**
-   * List of subscription objects to import
+   * Body param: List of subscription objects to import
    */
   subscriptions: Array<SubscriptionImportParams.Subscription>;
 
   /**
-   * Integration ID to use for importing subscriptions
+   * Body param: Integration ID to use for importing subscriptions
    */
   integrationId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace SubscriptionImportParams {
@@ -4890,91 +5133,117 @@ export namespace SubscriptionImportParams {
 
 export interface SubscriptionMigrateParams {
   /**
-   * When to migrate (immediate or period end)
+   * Body param: When to migrate (immediate or period end)
    */
   subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface SubscriptionPreviewParams {
   /**
-   * Customer ID
+   * Body param: Customer ID
    */
   customerId: string;
 
   /**
-   * Plan ID
+   * Body param: Plan ID
    */
   planId: string;
 
   /**
-   * Addons to include
+   * Body param: Addons to include
    */
   addons?: Array<SubscriptionPreviewParams.Addon>;
 
   /**
-   * Coupon or discount to apply
+   * Body param: Coupon or discount to apply
    */
   appliedCoupon?: SubscriptionPreviewParams.AppliedCoupon;
 
   /**
-   * Billable features with quantities
+   * Body param: Billable features with quantities
    */
   billableFeatures?: Array<SubscriptionPreviewParams.BillableFeature>;
 
   /**
-   * ISO 3166-1 country code for localization
+   * Body param: ISO 3166-1 country code for localization
    */
   billingCountryCode?: string;
 
   /**
-   * Billing cycle anchor behavior for the subscription
+   * Body param: Billing cycle anchor behavior for the subscription
    */
   billingCycleAnchor?: 'UNCHANGED' | 'NOW';
 
   /**
-   * Billing and tax configuration
+   * Body param: Billing and tax configuration
    */
   billingInformation?: SubscriptionPreviewParams.BillingInformation;
 
   /**
-   * Billing period (MONTHLY or ANNUALLY)
+   * Body param: Billing period (MONTHLY or ANNUALLY)
    */
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
 
   /**
-   * One-time or recurring charges
+   * Body param: One-time or recurring charges
    */
   charges?: Array<SubscriptionPreviewParams.Charge>;
 
   /**
-   * Paying customer ID for delegated billing
+   * Body param: Paying customer ID for delegated billing
    */
   payingCustomerId?: string;
 
   /**
-   * Resource ID for multi-instance subscriptions
+   * Body param: Resource ID for multi-instance subscriptions
    */
   resourceId?: string;
 
   /**
-   * When to apply subscription changes
+   * Body param: When to apply subscription changes
    */
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
 
   /**
-   * Subscription start date
+   * Body param: Subscription start date
    */
   startDate?: string;
 
   /**
-   * Trial period override settings
+   * Body param: Trial period override settings
    */
   trialOverrideConfiguration?: SubscriptionPreviewParams.TrialOverrideConfiguration;
 
   /**
-   * Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
+   * Body param: Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
    */
   unitQuantity?: number;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace SubscriptionPreviewParams {
@@ -5348,121 +5617,153 @@ export namespace SubscriptionPreviewParams {
 
 export interface SubscriptionProvisionParams {
   /**
-   * Customer ID to provision the subscription for
+   * Body param: Customer ID to provision the subscription for
    */
   customerId: string;
 
   /**
-   * Plan ID to provision
+   * Body param: Plan ID to provision
    */
   planId: string;
 
   /**
-   * Unique identifier for the subscription
+   * Body param: Unique identifier for the subscription
    */
   id?: string;
 
+  /**
+   * Body param
+   */
   addons?: Array<SubscriptionProvisionParams.Addon>;
 
   /**
-   * Coupon configuration
+   * Body param: Coupon configuration
    */
   appliedCoupon?: SubscriptionProvisionParams.AppliedCoupon;
 
   /**
-   * Whether to wait for payment confirmation before returning the subscription
+   * Body param: Whether to wait for payment confirmation before returning the
+   * subscription
    */
   awaitPaymentConfirmation?: boolean;
 
   /**
-   * The ISO 3166-1 alpha-2 country code for billing
+   * Body param: The ISO 3166-1 alpha-2 country code for billing
    */
   billingCountryCode?: string | null;
 
   /**
-   * Billing cycle anchor behavior for the subscription
+   * Body param: Billing cycle anchor behavior for the subscription
    */
   billingCycleAnchor?: 'UNCHANGED' | 'NOW';
 
   /**
-   * External billing system identifier
+   * Body param: External billing system identifier
    */
   billingId?: string | null;
 
+  /**
+   * Body param
+   */
   billingInformation?: SubscriptionProvisionParams.BillingInformation;
 
   /**
-   * Billing period (MONTHLY or ANNUALLY)
+   * Body param: Billing period (MONTHLY or ANNUALLY)
    */
   billingPeriod?: 'MONTHLY' | 'ANNUALLY';
 
+  /**
+   * Body param
+   */
   budget?: SubscriptionProvisionParams.Budget | null;
 
   /**
-   * Subscription cancellation date
+   * Body param: Subscription cancellation date
    */
   cancellationDate?: string;
 
+  /**
+   * Body param
+   */
   charges?: Array<SubscriptionProvisionParams.Charge>;
 
   /**
-   * Checkout page configuration for payment collection
+   * Body param: Checkout page configuration for payment collection
    */
   checkoutOptions?: SubscriptionProvisionParams.CheckoutOptions;
 
+  /**
+   * Body param
+   */
   entitlements?: Array<SubscriptionProvisionParams.Feature | SubscriptionProvisionParams.Credit>;
 
   /**
-   * Additional metadata for the subscription
+   * Body param: Additional metadata for the subscription
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Minimum spend amount
+   * Body param: Minimum spend amount
    */
   minimumSpend?: SubscriptionProvisionParams.MinimumSpend | null;
 
   /**
-   * Optional paying customer ID for split billing scenarios
+   * Body param: Optional paying customer ID for split billing scenarios
    */
   payingCustomerId?: string | null;
 
   /**
-   * How payments should be collected for this subscription
+   * Body param: How payments should be collected for this subscription
    */
   paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE';
 
+  /**
+   * Body param
+   */
   priceOverrides?: Array<SubscriptionProvisionParams.PriceOverride>;
 
   /**
-   * Optional resource ID for multi-instance subscriptions
+   * Body param: Optional resource ID for multi-instance subscriptions
    */
   resourceId?: string | null;
 
   /**
-   * Salesforce ID
+   * Body param: Salesforce ID
    */
   salesforceId?: string | null;
 
   /**
-   * Strategy for scheduling subscription changes
+   * Body param: Strategy for scheduling subscription changes
    */
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
 
   /**
-   * Subscription start date
+   * Body param: Subscription start date
    */
   startDate?: string;
 
   /**
-   * Trial period override settings
+   * Body param: Trial period override settings
    */
   trialOverrideConfiguration?: SubscriptionProvisionParams.TrialOverrideConfiguration;
 
   /**
-   * Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
+   * Body param: Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
    */
   unitQuantity?: number;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace SubscriptionProvisionParams {
@@ -6578,9 +6879,22 @@ export namespace SubscriptionProvisionParams {
 
 export interface SubscriptionTransferParams {
   /**
-   * Resource ID to transfer the subscription to
+   * Body param: Resource ID to transfer the subscription to
    */
   destinationResourceId: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 Subscriptions.FutureUpdate = FutureUpdateAPIFutureUpdate;
@@ -6595,6 +6909,7 @@ export declare namespace Subscriptions {
     type SubscriptionPreviewResponse as SubscriptionPreviewResponse,
     type SubscriptionProvisionResponse as SubscriptionProvisionResponse,
     type SubscriptionListResponsesMyCursorIDPage as SubscriptionListResponsesMyCursorIDPage,
+    type SubscriptionRetrieveParams as SubscriptionRetrieveParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionListParams as SubscriptionListParams,
     type SubscriptionCancelParams as SubscriptionCancelParams,
@@ -6606,14 +6921,24 @@ export declare namespace Subscriptions {
     type SubscriptionTransferParams as SubscriptionTransferParams,
   };
 
-  export { FutureUpdateAPIFutureUpdate as FutureUpdate, type CancelSubscription as CancelSubscription };
+  export {
+    FutureUpdateAPIFutureUpdate as FutureUpdate,
+    type CancelSubscription as CancelSubscription,
+    type FutureUpdateCancelPendingPaymentParams as FutureUpdateCancelPendingPaymentParams,
+    type FutureUpdateCancelScheduleParams as FutureUpdateCancelScheduleParams,
+  };
 
   export {
     Usage as Usage,
     type UsageChargeUsageResponse as UsageChargeUsageResponse,
     type UsageSyncResponse as UsageSyncResponse,
     type UsageChargeUsageParams as UsageChargeUsageParams,
+    type UsageSyncParams as UsageSyncParams,
   };
 
-  export { Invoice as Invoice, type InvoiceMarkAsPaidResponse as InvoiceMarkAsPaidResponse };
+  export {
+    Invoice as Invoice,
+    type InvoiceMarkAsPaidResponse as InvoiceMarkAsPaidResponse,
+    type InvoiceMarkAsPaidParams as InvoiceMarkAsPaidParams,
+  };
 }

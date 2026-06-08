@@ -1,7 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { FutureUpdate, type CancelSubscription } from './future-update';
-export { Invoice, type InvoiceMarkAsPaidResponse } from './invoice';
+export {
+  FutureUpdate,
+  type CancelSubscription,
+  type FutureUpdateCancelPendingPaymentParams,
+  type FutureUpdateCancelScheduleParams,
+} from './future-update';
+export { Invoice, type InvoiceMarkAsPaidResponse, type InvoiceMarkAsPaidParams } from './invoice';
 export {
   Subscriptions,
   type Subscription,
@@ -9,6 +14,7 @@ export {
   type SubscriptionImportResponse,
   type SubscriptionPreviewResponse,
   type SubscriptionProvisionResponse,
+  type SubscriptionRetrieveParams,
   type SubscriptionUpdateParams,
   type SubscriptionListParams,
   type SubscriptionCancelParams,
@@ -25,4 +31,5 @@ export {
   type UsageChargeUsageResponse,
   type UsageSyncResponse,
   type UsageChargeUsageParams,
+  type UsageSyncParams,
 } from './usage';

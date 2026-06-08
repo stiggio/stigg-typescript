@@ -33,6 +33,8 @@ describe('resource entitlements', () => {
           requestedUsage: 0,
           requestedValues: ['string'],
           resourceId: 'x',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),

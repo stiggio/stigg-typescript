@@ -14,23 +14,23 @@ Types:
 
 Methods:
 
-- <code title="get /api/v1/customers/{id}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieve</a>(id) -> CustomerResponse</code>
+- <code title="get /api/v1/customers/{id}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieve</a>(id, { ...params }) -> CustomerResponse</code>
 - <code title="patch /api/v1/customers/{id}">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">update</a>(id, { ...params }) -> CustomerResponse</code>
 - <code title="get /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">list</a>({ ...params }) -> CustomerListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/customers/{id}/archive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">archive</a>(id) -> CustomerResponse</code>
+- <code title="post /api/v1/customers/{id}/archive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">archive</a>(id, { ...params }) -> CustomerResponse</code>
 - <code title="get /api/v1/customers/{id}/entitlements/check">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">checkEntitlement</a>(id, { ...params }) -> CustomerCheckEntitlementResponse</code>
 - <code title="post /api/v1/customers/import">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">import</a>({ ...params }) -> CustomerImportResponse</code>
 - <code title="get /api/v1/customers/{id}/resources">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listResources</a>(id, { ...params }) -> CustomerListResourcesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">provision</a>({ ...params }) -> CustomerResponse</code>
 - <code title="get /api/v1/customers/{id}/entitlements">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieveEntitlements</a>(id, { ...params }) -> CustomerRetrieveEntitlementsResponse</code>
-- <code title="post /api/v1/customers/{id}/unarchive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">unarchive</a>(id) -> CustomerResponse</code>
+- <code title="post /api/v1/customers/{id}/unarchive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">unarchive</a>(id, { ...params }) -> CustomerResponse</code>
 
 ### PaymentMethod
 
 Methods:
 
 - <code title="post /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">attach</a>(id, { ...params }) -> CustomerResponse</code>
-- <code title="delete /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">detach</a>(id) -> CustomerResponse</code>
+- <code title="delete /api/v1/customers/{id}/payment-method">client.v1.customers.paymentMethod.<a href="./src/resources/v1/customers/payment-method.ts">detach</a>(id, { ...params }) -> CustomerResponse</code>
 
 ### PromotionalEntitlements
 
@@ -72,7 +72,7 @@ Types:
 
 Methods:
 
-- <code title="get /api/v1/subscriptions/{id}">client.v1.subscriptions.<a href="./src/resources/v1/subscriptions/subscriptions.ts">retrieve</a>(id) -> Subscription</code>
+- <code title="get /api/v1/subscriptions/{id}">client.v1.subscriptions.<a href="./src/resources/v1/subscriptions/subscriptions.ts">retrieve</a>(id, { ...params }) -> Subscription</code>
 - <code title="patch /api/v1/subscriptions/{id}">client.v1.subscriptions.<a href="./src/resources/v1/subscriptions/subscriptions.ts">update</a>(id, { ...params }) -> Subscription</code>
 - <code title="get /api/v1/subscriptions">client.v1.subscriptions.<a href="./src/resources/v1/subscriptions/subscriptions.ts">list</a>({ ...params }) -> SubscriptionListResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/subscriptions/{id}/cancel">client.v1.subscriptions.<a href="./src/resources/v1/subscriptions/subscriptions.ts">cancel</a>(id, { ...params }) -> Subscription</code>
@@ -91,8 +91,8 @@ Types:
 
 Methods:
 
-- <code title="delete /api/v1/subscriptions/{id}/future-update/pending-payment">client.v1.subscriptions.futureUpdate.<a href="./src/resources/v1/subscriptions/future-update.ts">cancelPendingPayment</a>(id) -> CancelSubscription</code>
-- <code title="delete /api/v1/subscriptions/{id}/future-update/schedule">client.v1.subscriptions.futureUpdate.<a href="./src/resources/v1/subscriptions/future-update.ts">cancelSchedule</a>(id) -> CancelSubscription</code>
+- <code title="delete /api/v1/subscriptions/{id}/future-update/pending-payment">client.v1.subscriptions.futureUpdate.<a href="./src/resources/v1/subscriptions/future-update.ts">cancelPendingPayment</a>(id, { ...params }) -> CancelSubscription</code>
+- <code title="delete /api/v1/subscriptions/{id}/future-update/schedule">client.v1.subscriptions.futureUpdate.<a href="./src/resources/v1/subscriptions/future-update.ts">cancelSchedule</a>(id, { ...params }) -> CancelSubscription</code>
 
 ### Usage
 
@@ -104,7 +104,7 @@ Types:
 Methods:
 
 - <code title="post /api/v1/subscriptions/{id}/usage/charge">client.v1.subscriptions.usage.<a href="./src/resources/v1/subscriptions/usage.ts">chargeUsage</a>(id, { ...params }) -> UsageChargeUsageResponse</code>
-- <code title="post /api/v1/subscriptions/{id}/usage/sync">client.v1.subscriptions.usage.<a href="./src/resources/v1/subscriptions/usage.ts">sync</a>(id) -> UsageSyncResponse</code>
+- <code title="post /api/v1/subscriptions/{id}/usage/sync">client.v1.subscriptions.usage.<a href="./src/resources/v1/subscriptions/usage.ts">sync</a>(id, { ...params }) -> UsageSyncResponse</code>
 
 ### Invoice
 
@@ -114,7 +114,7 @@ Types:
 
 Methods:
 
-- <code title="post /api/v1/subscriptions/{id}/invoice/paid">client.v1.subscriptions.invoice.<a href="./src/resources/v1/subscriptions/invoice.ts">markAsPaid</a>(id) -> InvoiceMarkAsPaidResponse</code>
+- <code title="post /api/v1/subscriptions/{id}/invoice/paid">client.v1.subscriptions.invoice.<a href="./src/resources/v1/subscriptions/invoice.ts">markAsPaid</a>(id, { ...params }) -> InvoiceMarkAsPaidResponse</code>
 
 ## Coupons
 
@@ -126,9 +126,9 @@ Types:
 Methods:
 
 - <code title="post /api/v1/coupons">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">create</a>({ ...params }) -> Coupon</code>
-- <code title="get /api/v1/coupons/{id}">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">retrieve</a>(id) -> Coupon</code>
+- <code title="get /api/v1/coupons/{id}">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">retrieve</a>(id, { ...params }) -> Coupon</code>
 - <code title="get /api/v1/coupons">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">list</a>({ ...params }) -> CouponListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/coupons/{id}/archive">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">archiveCoupon</a>(id) -> Coupon</code>
+- <code title="post /api/v1/coupons/{id}/archive">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">archiveCoupon</a>(id, { ...params }) -> Coupon</code>
 - <code title="patch /api/v1/coupons/{id}">client.v1.coupons.<a href="./src/resources/v1/coupons.ts">updateCoupon</a>(id, { ...params }) -> Coupon</code>
 
 ## Events
@@ -246,7 +246,7 @@ Methods:
 
 - <code title="post /api/v1/credits/grants">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">create</a>({ ...params }) -> CreditGrantResponse</code>
 - <code title="get /api/v1/credits/grants">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">list</a>({ ...params }) -> GrantListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/credits/grants/{id}/void">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">void</a>(id) -> CreditGrantResponse</code>
+- <code title="post /api/v1/credits/grants/{id}/void">client.v1.credits.grants.<a href="./src/resources/v1/credits/grants.ts">void</a>(id, { ...params }) -> CreditGrantResponse</code>
 
 ### CustomCurrencies
 
@@ -261,9 +261,9 @@ Methods:
 - <code title="post /api/v1/credits/custom-currencies">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">create</a>({ ...params }) -> CustomCurrencyResponse</code>
 - <code title="patch /api/v1/credits/custom-currencies/{currencyId}">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">update</a>(currencyID, { ...params }) -> CustomCurrencyResponse</code>
 - <code title="get /api/v1/credits/custom-currencies">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">list</a>({ ...params }) -> CustomCurrencyListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/credits/custom-currencies/{currencyId}/archive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">archive</a>(currencyID) -> CustomCurrencyResponse</code>
-- <code title="get /api/v1/credits/custom-currencies/{currencyId}/associated-entities">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">listAssociatedEntities</a>(currencyID) -> CustomCurrencyListAssociatedEntitiesResponse</code>
-- <code title="post /api/v1/credits/custom-currencies/{currencyId}/unarchive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">unarchive</a>(currencyID) -> CustomCurrencyResponse</code>
+- <code title="post /api/v1/credits/custom-currencies/{currencyId}/archive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">archive</a>(currencyID, { ...params }) -> CustomCurrencyResponse</code>
+- <code title="get /api/v1/credits/custom-currencies/{currencyId}/associated-entities">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">listAssociatedEntities</a>(currencyID, { ...params }) -> CustomCurrencyListAssociatedEntitiesResponse</code>
+- <code title="post /api/v1/credits/custom-currencies/{currencyId}/unarchive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">unarchive</a>(currencyID, { ...params }) -> CustomCurrencyResponse</code>
 
 ## Features
 
@@ -274,11 +274,11 @@ Types:
 
 Methods:
 
-- <code title="post /api/v1/features/{id}/archive">client.v1.features.<a href="./src/resources/v1/features.ts">archiveFeature</a>(id) -> Feature</code>
+- <code title="post /api/v1/features/{id}/archive">client.v1.features.<a href="./src/resources/v1/features.ts">archiveFeature</a>(id, { ...params }) -> Feature</code>
 - <code title="post /api/v1/features">client.v1.features.<a href="./src/resources/v1/features.ts">createFeature</a>({ ...params }) -> Feature</code>
 - <code title="get /api/v1/features">client.v1.features.<a href="./src/resources/v1/features.ts">listFeatures</a>({ ...params }) -> FeatureListFeaturesResponsesMyCursorIDPage</code>
-- <code title="get /api/v1/features/{id}">client.v1.features.<a href="./src/resources/v1/features.ts">retrieveFeature</a>(id) -> Feature</code>
-- <code title="post /api/v1/features/{id}/unarchive">client.v1.features.<a href="./src/resources/v1/features.ts">unarchiveFeature</a>(id) -> Feature</code>
+- <code title="get /api/v1/features/{id}">client.v1.features.<a href="./src/resources/v1/features.ts">retrieveFeature</a>(id, { ...params }) -> Feature</code>
+- <code title="post /api/v1/features/{id}/unarchive">client.v1.features.<a href="./src/resources/v1/features.ts">unarchiveFeature</a>(id, { ...params }) -> Feature</code>
 - <code title="patch /api/v1/features/{id}">client.v1.features.<a href="./src/resources/v1/features.ts">updateFeature</a>(id, { ...params }) -> Feature</code>
 
 ## Addons
@@ -294,14 +294,14 @@ Types:
 Methods:
 
 - <code title="post /api/v1/addons">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">create</a>({ ...params }) -> Addon</code>
-- <code title="get /api/v1/addons/{id}">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">retrieve</a>(id) -> Addon</code>
+- <code title="get /api/v1/addons/{id}">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">retrieve</a>(id, { ...params }) -> Addon</code>
 - <code title="patch /api/v1/addons/{id}">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">update</a>(id, { ...params }) -> Addon</code>
 - <code title="get /api/v1/addons">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">list</a>({ ...params }) -> AddonListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/addons/{id}/archive">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">archive</a>(id) -> Addon</code>
-- <code title="post /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">createDraft</a>(id) -> Addon</code>
+- <code title="post /api/v1/addons/{id}/archive">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">archive</a>(id, { ...params }) -> Addon</code>
+- <code title="post /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">createDraft</a>(id, { ...params }) -> Addon</code>
 - <code title="get /api/v1/addons/{id}/charges">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">listCharges</a>(id, { ...params }) -> AddonListChargesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/addons/{id}/publish">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">publish</a>(id, { ...params }) -> AddonPublishResponse</code>
-- <code title="delete /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">removeDraft</a>(id) -> AddonRemoveDraftResponse</code>
+- <code title="delete /api/v1/addons/{id}/draft">client.v1.addons.<a href="./src/resources/v1/addons/addons.ts">removeDraft</a>(id, { ...params }) -> AddonRemoveDraftResponse</code>
 
 ### Entitlements
 
@@ -315,7 +315,7 @@ Methods:
 
 - <code title="post /api/v1/addons/{addonId}/entitlements">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">create</a>(addonID, { ...params }) -> EntitlementCreateResponse</code>
 - <code title="patch /api/v1/addons/{addonId}/entitlements/{id}">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">update</a>(id, { ...params }) -> AddonPackageEntitlement</code>
-- <code title="get /api/v1/addons/{addonId}/entitlements">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">list</a>(addonID) -> EntitlementListResponse</code>
+- <code title="get /api/v1/addons/{addonId}/entitlements">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">list</a>(addonID, { ...params }) -> EntitlementListResponse</code>
 - <code title="delete /api/v1/addons/{addonId}/entitlements/{id}">client.v1.addons.entitlements.<a href="./src/resources/v1/addons/entitlements.ts">delete</a>(id, { ...params }) -> AddonPackageEntitlement</code>
 
 ## Plans
@@ -332,15 +332,15 @@ Types:
 Methods:
 
 - <code title="post /api/v1/plans">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">create</a>({ ...params }) -> Plan</code>
-- <code title="get /api/v1/plans/{id}">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">retrieve</a>(id) -> Plan</code>
+- <code title="get /api/v1/plans/{id}">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">retrieve</a>(id, { ...params }) -> Plan</code>
 - <code title="patch /api/v1/plans/{id}">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">update</a>(id, { ...params }) -> Plan</code>
 - <code title="get /api/v1/plans">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">list</a>({ ...params }) -> PlanListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/plans/{id}/archive">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">archive</a>(id) -> Plan</code>
-- <code title="post /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">createDraft</a>(id) -> Plan</code>
+- <code title="post /api/v1/plans/{id}/archive">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">archive</a>(id, { ...params }) -> Plan</code>
+- <code title="post /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">createDraft</a>(id, { ...params }) -> Plan</code>
 - <code title="get /api/v1/plans/{id}/charges">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">listCharges</a>(id, { ...params }) -> PlanListChargesResponsesMyCursorIDPage</code>
 - <code title="get /api/v1/plans/{id}/overage-charges">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">listOverageCharges</a>(id, { ...params }) -> PlanListOverageChargesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/plans/{id}/publish">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">publish</a>(id, { ...params }) -> PlanPublishResponse</code>
-- <code title="delete /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">removeDraft</a>(id) -> PlanRemoveDraftResponse</code>
+- <code title="delete /api/v1/plans/{id}/draft">client.v1.plans.<a href="./src/resources/v1/plans/plans.ts">removeDraft</a>(id, { ...params }) -> PlanRemoveDraftResponse</code>
 
 ### Entitlements
 
@@ -354,7 +354,7 @@ Methods:
 
 - <code title="post /api/v1/plans/{planId}/entitlements">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">create</a>(planID, { ...params }) -> EntitlementCreateResponse</code>
 - <code title="patch /api/v1/plans/{planId}/entitlements/{id}">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">update</a>(id, { ...params }) -> PlanEntitlement</code>
-- <code title="get /api/v1/plans/{planId}/entitlements">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">list</a>(planID) -> EntitlementListResponse</code>
+- <code title="get /api/v1/plans/{planId}/entitlements">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">list</a>(planID, { ...params }) -> EntitlementListResponse</code>
 - <code title="delete /api/v1/plans/{planId}/entitlements/{id}">client.v1.plans.entitlements.<a href="./src/resources/v1/plans/entitlements.ts">delete</a>(id, { ...params }) -> PlanEntitlement</code>
 
 ## Usage
@@ -378,9 +378,9 @@ Types:
 
 Methods:
 
-- <code title="post /api/v1/products/{id}/archive">client.v1.products.<a href="./src/resources/v1/products.ts">archiveProduct</a>(id) -> Product</code>
+- <code title="post /api/v1/products/{id}/archive">client.v1.products.<a href="./src/resources/v1/products.ts">archiveProduct</a>(id, { ...params }) -> Product</code>
 - <code title="post /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">createProduct</a>({ ...params }) -> Product</code>
 - <code title="post /api/v1/products/{id}/duplicate">client.v1.products.<a href="./src/resources/v1/products.ts">duplicateProduct</a>(id, { ...params }) -> Product</code>
 - <code title="get /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">listProducts</a>({ ...params }) -> ProductListProductsResponsesMyCursorIDPage</code>
-- <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id) -> Product</code>
+- <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id, { ...params }) -> Product</code>
 - <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> Product</code>

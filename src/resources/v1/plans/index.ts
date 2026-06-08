@@ -7,6 +7,7 @@ export {
   type EntitlementListResponse,
   type EntitlementCreateParams,
   type EntitlementUpdateParams,
+  type EntitlementListParams,
   type EntitlementDeleteParams,
 } from './entitlements';
 export {
@@ -18,11 +19,15 @@ export {
   type PlanPublishResponse,
   type PlanRemoveDraftResponse,
   type PlanCreateParams,
+  type PlanRetrieveParams,
   type PlanUpdateParams,
   type PlanListParams,
+  type PlanArchiveParams,
+  type PlanCreateDraftParams,
   type PlanListChargesParams,
   type PlanListOverageChargesParams,
   type PlanPublishParams,
+  type PlanRemoveDraftParams,
   type PlanListResponsesMyCursorIDPage,
   type PlanListChargesResponsesMyCursorIDPage,
   type PlanListOverageChargesResponsesMyCursorIDPage,
