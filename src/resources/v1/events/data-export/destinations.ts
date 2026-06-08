@@ -80,6 +80,53 @@ export namespace DestinationCreateResponse {
        * Destination type (snowflake, bigquery, ...)
        */
       type: string;
+
+      /**
+       * Connection status of the destination (connected, failed)
+       */
+      connectionStatus?: string;
+
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      lastSyncStatus?: Destination.LastSyncStatus;
+    }
+
+    export namespace Destination {
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      export interface LastSyncStatus {
+        /**
+         * ISO8601 timestamp of when the latest sync finished
+         */
+        finishedAt: string;
+
+        /**
+         * Sync status (PENDING, RUNNING, INCOMPLETE, FAILED, SUCCEEDED, CANCELLED)
+         */
+        status: string;
+
+        /**
+         * Provider transfer ID of the latest sync
+         */
+        transferId: string;
+
+        /**
+         * Party responsible for a failed sync, as reported by the data-export provider
+         */
+        blamedParty?: string;
+
+        /**
+         * Customer-friendly failure message, when the latest sync failed
+         */
+        failureMessage?: string;
+
+        /**
+         * Number of rows transferred in the latest sync
+         */
+        rowsTransferred?: number;
+      }
     }
   }
 }
@@ -124,6 +171,53 @@ export namespace DestinationDeleteResponse {
        * Destination type (snowflake, bigquery, ...)
        */
       type: string;
+
+      /**
+       * Connection status of the destination (connected, failed)
+       */
+      connectionStatus?: string;
+
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      lastSyncStatus?: Destination.LastSyncStatus;
+    }
+
+    export namespace Destination {
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      export interface LastSyncStatus {
+        /**
+         * ISO8601 timestamp of when the latest sync finished
+         */
+        finishedAt: string;
+
+        /**
+         * Sync status (PENDING, RUNNING, INCOMPLETE, FAILED, SUCCEEDED, CANCELLED)
+         */
+        status: string;
+
+        /**
+         * Provider transfer ID of the latest sync
+         */
+        transferId: string;
+
+        /**
+         * Party responsible for a failed sync, as reported by the data-export provider
+         */
+        blamedParty?: string;
+
+        /**
+         * Customer-friendly failure message, when the latest sync failed
+         */
+        failureMessage?: string;
+
+        /**
+         * Number of rows transferred in the latest sync
+         */
+        rowsTransferred?: number;
+      }
     }
   }
 }
