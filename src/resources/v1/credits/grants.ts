@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -26,8 +27,19 @@ export class Grants extends APIResource {
    *   });
    * ```
    */
-  create(body: GrantCreateParams, options?: RequestOptions): APIPromise<CreditGrantResponse> {
-    return this._client.post('/api/v1/credits/grants', { body, ...options });
+  create(params: GrantCreateParams, options?: RequestOptions): APIPromise<CreditGrantResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/credits/grants', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -44,12 +56,20 @@ export class Grants extends APIResource {
    * ```
    */
   list(
-    query: GrantListParams,
+    params: GrantListParams,
     options?: RequestOptions,
   ): PagePromise<GrantListResponsesMyCursorIDPage, GrantListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
     return this._client.getAPIList('/api/v1/credits/grants', MyCursorIDPage<GrantListResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -63,8 +83,22 @@ export class Grants extends APIResource {
    *   await client.v1.credits.grants.void('x');
    * ```
    */
-  void(id: string, options?: RequestOptions): APIPromise<CreditGrantResponse> {
-    return this._client.post(path`/api/v1/credits/grants/${id}/void`, options);
+  void(
+    id: string,
+    params: GrantVoidParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CreditGrantResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/credits/grants/${id}/void`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -498,79 +532,93 @@ export namespace GrantListResponse {
 
 export interface GrantCreateParams {
   /**
-   * The credit amount to grant
+   * Body param: The credit amount to grant
    */
   amount: number;
 
   /**
-   * The credit currency ID (required)
+   * Body param: The credit currency ID (required)
    */
   currencyId: string;
 
   /**
-   * The customer ID to grant credits to (required)
+   * Body param: The customer ID to grant credits to (required)
    */
   customerId: string;
 
   /**
-   * The display name for the credit grant
+   * Body param: The display name for the credit grant
    */
   displayName: string;
 
   /**
-   * The type of credit grant (PAID, PROMOTIONAL)
+   * Body param: The type of credit grant (PAID, PROMOTIONAL)
    */
   grantType: 'PAID' | 'PROMOTIONAL';
 
   /**
-   * Whether to wait for payment confirmation before returning (default: true)
+   * Body param: Whether to wait for payment confirmation before returning (default:
+   * true)
    */
   awaitPaymentConfirmation?: boolean;
 
   /**
-   * Billing information for the credit grant
+   * Body param: Billing information for the credit grant
    */
   billingInformation?: GrantCreateParams.BillingInformation;
 
   /**
-   * An optional comment on the credit grant
+   * Body param: An optional comment on the credit grant
    */
   comment?: string;
 
   /**
-   * The monetary cost of the credit grant
+   * Body param: The monetary cost of the credit grant
    */
   cost?: GrantCreateParams.Cost;
 
   /**
-   * The date when the credit grant becomes effective
+   * Body param: The date when the credit grant becomes effective
    */
   effectiveAt?: string;
 
   /**
-   * The date when the credit grant expires
+   * Body param: The date when the credit grant expires
    */
   expireAt?: string;
 
   /**
-   * Additional metadata for the credit grant
+   * Body param: Additional metadata for the credit grant
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The payment collection method (CHARGE, INVOICE, NONE)
+   * Body param: The payment collection method (CHARGE, INVOICE, NONE)
    */
   paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE';
 
   /**
-   * The priority of the credit grant (lower number = higher priority)
+   * Body param: The priority of the credit grant (lower number = higher priority)
    */
   priority?: number;
 
   /**
-   * The resource ID to scope the grant to
+   * Body param: The resource ID to scope the grant to
    */
   resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace GrantCreateParams {
@@ -765,24 +813,38 @@ export namespace GrantCreateParams {
 
 export interface GrantListParams extends MyCursorIDPageParams {
   /**
-   * Filter by customer ID (required)
+   * Query param: Filter by customer ID (required)
    */
   customerId: string;
 
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: GrantListParams.CreatedAt;
 
   /**
-   * Filter by currency ID
+   * Query param: Filter by currency ID
    */
   currencyId?: string;
 
   /**
-   * Filter by resource ID. When omitted, only grants without a resource are returned
+   * Query param: Filter by resource ID. When omitted, only grants without a resource
+   * are returned
    */
   resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace GrantListParams {
@@ -812,6 +874,21 @@ export namespace GrantListParams {
   }
 }
 
+export interface GrantVoidParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export declare namespace Grants {
   export {
     type CreditGrantResponse as CreditGrantResponse,
@@ -819,5 +896,6 @@ export declare namespace Grants {
     type GrantListResponsesMyCursorIDPage as GrantListResponsesMyCursorIDPage,
     type GrantCreateParams as GrantCreateParams,
     type GrantListParams as GrantListParams,
+    type GrantVoidParams as GrantVoidParams,
   };
 }

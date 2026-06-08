@@ -46,6 +46,8 @@ describe('resource entitlements', () => {
           yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
         },
       ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -84,6 +86,8 @@ describe('resource entitlements', () => {
       usageLimit: 0,
       weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
       yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -100,6 +104,18 @@ describe('resource entitlements', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.addons.entitlements.list(
+        'addonId',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.v1.addons.entitlements.delete('id', { addonId: 'addonId' });
     const rawResponse = await responsePromise.asResponse();
@@ -113,6 +129,10 @@ describe('resource entitlements', () => {
 
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.v1.addons.entitlements.delete('id', { addonId: 'addonId' });
+    const response = await client.v1.addons.entitlements.delete('id', {
+      addonId: 'addonId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 });

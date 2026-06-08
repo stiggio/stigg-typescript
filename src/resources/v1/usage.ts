@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -28,8 +29,18 @@ export class Usage extends APIResource {
     params: UsageHistoryParams,
     options?: RequestOptions,
   ): APIPromise<UsageHistoryResponse> {
-    const { customerId, ...query } = params;
-    return this._client.get(path`/api/v1/usage/${customerId}/history/${featureID}`, { query, ...options });
+    const { customerId, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
+    return this._client.get(path`/api/v1/usage/${customerId}/history/${featureID}`, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -49,8 +60,19 @@ export class Usage extends APIResource {
    * });
    * ```
    */
-  report(body: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
-    return this._client.post('/api/v1/usage', { body, ...options });
+  report(params: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/usage', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -250,13 +272,39 @@ export interface UsageHistoryParams {
    * Query param: Resource id
    */
   resourceId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface UsageReportParams {
   /**
-   * A list of usage reports to be submitted in bulk
+   * Body param: A list of usage reports to be submitted in bulk
    */
   usages: Array<UsageReportParams.Usage>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace UsageReportParams {

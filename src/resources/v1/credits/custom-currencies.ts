@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -22,8 +23,19 @@ export class CustomCurrencies extends APIResource {
    *   });
    * ```
    */
-  create(body: CustomCurrencyCreateParams, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
-    return this._client.post('/api/v1/credits/custom-currencies', { body, ...options });
+  create(params: CustomCurrencyCreateParams, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/credits/custom-currencies', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -39,10 +51,21 @@ export class CustomCurrencies extends APIResource {
    */
   update(
     currencyID: string,
-    body: CustomCurrencyUpdateParams,
+    params: CustomCurrencyUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CustomCurrencyResponse> {
-    return this._client.patch(path`/api/v1/credits/custom-currencies/${currencyID}`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/credits/custom-currencies/${currencyID}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -59,13 +82,24 @@ export class CustomCurrencies extends APIResource {
    * ```
    */
   list(
-    query: CustomCurrencyListParams | null | undefined = {},
+    params: CustomCurrencyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomCurrencyListResponsesMyCursorIDPage, CustomCurrencyListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       '/api/v1/credits/custom-currencies',
       MyCursorIDPage<CustomCurrencyListResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -82,8 +116,22 @@ export class CustomCurrencies extends APIResource {
    *   );
    * ```
    */
-  archive(currencyID: string, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
-    return this._client.post(path`/api/v1/credits/custom-currencies/${currencyID}/archive`, options);
+  archive(
+    currencyID: string,
+    params: CustomCurrencyArchiveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomCurrencyResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/credits/custom-currencies/${currencyID}/archive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -100,12 +148,20 @@ export class CustomCurrencies extends APIResource {
    */
   listAssociatedEntities(
     currencyID: string,
+    params: CustomCurrencyListAssociatedEntitiesParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomCurrencyListAssociatedEntitiesResponse> {
-    return this._client.get(
-      path`/api/v1/credits/custom-currencies/${currencyID}/associated-entities`,
-      options,
-    );
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/credits/custom-currencies/${currencyID}/associated-entities`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -120,8 +176,22 @@ export class CustomCurrencies extends APIResource {
    *   );
    * ```
    */
-  unarchive(currencyID: string, options?: RequestOptions): APIPromise<CustomCurrencyResponse> {
-    return this._client.post(path`/api/v1/credits/custom-currencies/${currencyID}/unarchive`, options);
+  unarchive(
+    currencyID: string,
+    params: CustomCurrencyUnarchiveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomCurrencyResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/credits/custom-currencies/${currencyID}/unarchive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -304,35 +374,48 @@ export namespace CustomCurrencyListAssociatedEntitiesResponse {
 
 export interface CustomCurrencyCreateParams {
   /**
-   * The unique identifier for the new custom currency
+   * Body param: The unique identifier for the new custom currency
    */
   id: string;
 
   /**
-   * The display name of the custom currency
+   * Body param: The display name of the custom currency
    */
   displayName: string;
 
   /**
-   * Description of the currency
+   * Body param: Description of the currency
    */
   description?: string;
 
   /**
-   * Additional metadata to attach to the custom currency
+   * Body param: Additional metadata to attach to the custom currency
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The symbol used to represent the custom currency
+   * Body param: The symbol used to represent the custom currency
    */
   symbol?: string;
 
   /**
-   * Singular and plural unit labels for a custom currency. Both fields are required
-   * when supplied.
+   * Body param: Singular and plural unit labels for a custom currency. Both fields
+   * are required when supplied.
    */
   units?: CustomCurrencyCreateParams.Units;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace CustomCurrencyCreateParams {
@@ -355,31 +438,45 @@ export namespace CustomCurrencyCreateParams {
 
 export interface CustomCurrencyUpdateParams {
   /**
-   * A human-readable description of the custom currency. Send an empty string to
-   * clear.
+   * Body param: A human-readable description of the custom currency. Send an empty
+   * string to clear.
    */
   description?: string | null;
 
   /**
-   * The display name of the custom currency
+   * Body param: The display name of the custom currency
    */
   displayName?: string;
 
   /**
-   * Additional metadata to attach to the custom currency
+   * Body param: Additional metadata to attach to the custom currency
    */
   metadata?: { [key: string]: string } | null;
 
   /**
-   * The symbol used to represent the custom currency. Send an empty string to clear.
+   * Body param: The symbol used to represent the custom currency. Send an empty
+   * string to clear.
    */
   symbol?: string | null;
 
   /**
-   * Singular and plural unit labels for a custom currency. Both fields are required
-   * when supplied.
+   * Body param: Singular and plural unit labels for a custom currency. Both fields
+   * are required when supplied.
    */
   units?: CustomCurrencyUpdateParams.Units;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace CustomCurrencyUpdateParams {
@@ -402,10 +499,68 @@ export namespace CustomCurrencyUpdateParams {
 
 export interface CustomCurrencyListParams extends MyCursorIDPageParams {
   /**
-   * Filter by custom currency status. Supports comma-separated values (e.g.,
-   * `ACTIVE,ARCHIVED`). Defaults to `ACTIVE`.
+   * Query param: Filter by custom currency status. Supports comma-separated values
+   * (e.g., `ACTIVE,ARCHIVED`). Defaults to `ACTIVE`.
    */
   status?: Array<'ACTIVE' | 'ARCHIVED'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomCurrencyArchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomCurrencyListAssociatedEntitiesParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomCurrencyUnarchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace CustomCurrencies {
@@ -417,5 +572,8 @@ export declare namespace CustomCurrencies {
     type CustomCurrencyCreateParams as CustomCurrencyCreateParams,
     type CustomCurrencyUpdateParams as CustomCurrencyUpdateParams,
     type CustomCurrencyListParams as CustomCurrencyListParams,
+    type CustomCurrencyArchiveParams as CustomCurrencyArchiveParams,
+    type CustomCurrencyListAssociatedEntitiesParams as CustomCurrencyListAssociatedEntitiesParams,
+    type CustomCurrencyUnarchiveParams as CustomCurrencyUnarchiveParams,
   };
 }

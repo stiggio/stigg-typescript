@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -20,8 +21,22 @@ export class FutureUpdate extends APIResource {
    *   );
    * ```
    */
-  cancelPendingPayment(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
-    return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/pending-payment`, options);
+  cancelPendingPayment(
+    id: string,
+    params: FutureUpdateCancelPendingPaymentParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CancelSubscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/pending-payment`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -36,8 +51,22 @@ export class FutureUpdate extends APIResource {
    *   );
    * ```
    */
-  cancelSchedule(id: string, options?: RequestOptions): APIPromise<CancelSubscription> {
-    return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/schedule`, options);
+  cancelSchedule(
+    id: string,
+    params: FutureUpdateCancelScheduleParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CancelSubscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/subscriptions/${id}/future-update/schedule`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -57,6 +86,40 @@ export namespace CancelSubscription {
   }
 }
 
+export interface FutureUpdateCancelPendingPaymentParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface FutureUpdateCancelScheduleParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export declare namespace FutureUpdate {
-  export { type CancelSubscription as CancelSubscription };
+  export {
+    type CancelSubscription as CancelSubscription,
+    type FutureUpdateCancelPendingPaymentParams as FutureUpdateCancelPendingPaymentParams,
+    type FutureUpdateCancelScheduleParams as FutureUpdateCancelScheduleParams,
+  };
 }

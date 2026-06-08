@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -21,8 +22,22 @@ export class Products extends APIResource {
    * );
    * ```
    */
-  archiveProduct(id: string, options?: RequestOptions): APIPromise<Product> {
-    return this._client.post(path`/api/v1/products/${id}/archive`, options);
+  archiveProduct(
+    id: string,
+    params: ProductArchiveProductParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Product> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/products/${id}/archive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -36,8 +51,19 @@ export class Products extends APIResource {
    * });
    * ```
    */
-  createProduct(body: ProductCreateProductParams, options?: RequestOptions): APIPromise<Product> {
-    return this._client.post('/api/v1/products', { body, ...options });
+  createProduct(params: ProductCreateProductParams, options?: RequestOptions): APIPromise<Product> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/products', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -53,10 +79,21 @@ export class Products extends APIResource {
    */
   duplicateProduct(
     id: string,
-    body: ProductDuplicateProductParams,
+    params: ProductDuplicateProductParams,
     options?: RequestOptions,
   ): APIPromise<Product> {
-    return this._client.post(path`/api/v1/products/${id}/duplicate`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/products/${id}/duplicate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -71,12 +108,20 @@ export class Products extends APIResource {
    * ```
    */
   listProducts(
-    query: ProductListProductsParams | null | undefined = {},
+    params: ProductListProductsParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ProductListProductsResponsesMyCursorIDPage, ProductListProductsResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList('/api/v1/products', MyCursorIDPage<ProductListProductsResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -90,8 +135,22 @@ export class Products extends APIResource {
    * );
    * ```
    */
-  unarchiveProduct(id: string, options?: RequestOptions): APIPromise<Product> {
-    return this._client.post(path`/api/v1/products/${id}/unarchive`, options);
+  unarchiveProduct(
+    id: string,
+    params: ProductUnarchiveProductParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Product> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/products/${id}/unarchive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -103,8 +162,23 @@ export class Products extends APIResource {
    * const product = await client.v1.products.updateProduct('x');
    * ```
    */
-  updateProduct(id: string, body: ProductUpdateProductParams, options?: RequestOptions): APIPromise<Product> {
-    return this._client.patch(path`/api/v1/products/${id}`, { body, ...options });
+  updateProduct(
+    id: string,
+    params: ProductUpdateProductParams,
+    options?: RequestOptions,
+  ): APIPromise<Product> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/products/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -298,65 +372,120 @@ export namespace ProductListProductsResponse {
   }
 }
 
+export interface ProductArchiveProductParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface ProductCreateProductParams {
   /**
-   * The unique identifier for the entity
+   * Body param: The unique identifier for the entity
    */
   id: string;
 
   /**
-   * Display name of the product
+   * Body param: Display name of the product
    */
   displayName: string;
 
   /**
-   * Description of the product
+   * Body param: Description of the product
    */
   description?: string | null;
 
   /**
-   * Additional metadata for the product
+   * Body param: Additional metadata for the product
    */
   metadata?: { [key: string]: string } | null;
 
   /**
-   * Indicates if multiple subscriptions to this product are allowed
+   * Body param: Indicates if multiple subscriptions to this product are allowed
    */
   multipleSubscriptions?: boolean;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface ProductDuplicateProductParams {
   /**
-   * The unique identifier for the entity
+   * Body param: The unique identifier for the entity
    */
   targetId: string;
 
   /**
-   * Description of the product
+   * Body param: Description of the product
    */
   description?: string | null;
 
   /**
-   * Display name of the product
+   * Body param: Display name of the product
    */
   displayName?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface ProductListProductsParams extends MyCursorIDPageParams {
   /**
-   * Filter by entity ID
+   * Query param: Filter by entity ID
    */
   id?: string;
 
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: ProductListProductsParams.CreatedAt;
 
   /**
-   * Filter by product status. Supports comma-separated values for multiple statuses
+   * Query param: Filter by product status. Supports comma-separated values for
+   * multiple statuses
    */
   status?: Array<'PUBLISHED' | 'ARCHIVED'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace ProductListProductsParams {
@@ -386,33 +515,64 @@ export namespace ProductListProductsParams {
   }
 }
 
+export interface ProductUnarchiveProductParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface ProductUpdateProductParams {
   /**
-   * Description of the product
+   * Body param: Description of the product
    */
   description?: string | null;
 
   /**
-   * Display name of the product
+   * Body param: Display name of the product
    */
   displayName?: string;
 
   /**
-   * Additional metadata for the product
+   * Body param: Additional metadata for the product
    */
   metadata?: { [key: string]: string } | null;
 
   /**
-   * Indicates if multiple subscriptions to this product are allowed
+   * Body param: Indicates if multiple subscriptions to this product are allowed
    */
   multipleSubscriptions?: boolean;
 
+  /**
+   * Body param
+   */
   productSettings?: ProductUpdateProductParams.ProductSettings;
 
   /**
-   * Rule defining when usage resets upon subscription update.
+   * Body param: Rule defining when usage resets upon subscription update.
    */
   usageResetCutoffRule?: ProductUpdateProductParams.UsageResetCutoffRule;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace ProductUpdateProductParams {
@@ -465,9 +625,11 @@ export declare namespace Products {
     type Product as Product,
     type ProductListProductsResponse as ProductListProductsResponse,
     type ProductListProductsResponsesMyCursorIDPage as ProductListProductsResponsesMyCursorIDPage,
+    type ProductArchiveProductParams as ProductArchiveProductParams,
     type ProductCreateProductParams as ProductCreateProductParams,
     type ProductDuplicateProductParams as ProductDuplicateProductParams,
     type ProductListProductsParams as ProductListProductsParams,
+    type ProductUnarchiveProductParams as ProductUnarchiveProductParams,
     type ProductUpdateProductParams as ProductUpdateProductParams,
   };
 }

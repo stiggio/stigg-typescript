@@ -4,12 +4,15 @@ import { APIResource } from '../../../core/resource';
 import * as CustomCurrenciesAPI from './custom-currencies';
 import {
   CustomCurrencies,
+  CustomCurrencyArchiveParams,
   CustomCurrencyCreateParams,
+  CustomCurrencyListAssociatedEntitiesParams,
   CustomCurrencyListAssociatedEntitiesResponse,
   CustomCurrencyListParams,
   CustomCurrencyListResponse,
   CustomCurrencyListResponsesMyCursorIDPage,
   CustomCurrencyResponse,
+  CustomCurrencyUnarchiveParams,
   CustomCurrencyUpdateParams,
 } from './custom-currencies';
 import * as GrantsAPI from './grants';
@@ -19,10 +22,12 @@ import {
   GrantListParams,
   GrantListResponse,
   GrantListResponsesMyCursorIDPage,
+  GrantVoidParams,
   Grants,
 } from './grants';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class Credits extends APIResource {
@@ -44,10 +49,21 @@ export class Credits extends APIResource {
    * ```
    */
   getAutoRecharge(
-    query: CreditGetAutoRechargeParams,
+    params: CreditGetAutoRechargeParams,
     options?: RequestOptions,
   ): APIPromise<CreditGetAutoRechargeResponse> {
-    return this._client.get('/api/v1/credits/auto-recharge', { query, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
+    return this._client.get('/api/v1/credits/auto-recharge', {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -61,8 +77,19 @@ export class Credits extends APIResource {
    * });
    * ```
    */
-  getUsage(query: CreditGetUsageParams, options?: RequestOptions): APIPromise<CreditGetUsageResponse> {
-    return this._client.get('/api/v1/credits/usage', { query, ...options });
+  getUsage(params: CreditGetUsageParams, options?: RequestOptions): APIPromise<CreditGetUsageResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
+    return this._client.get('/api/v1/credits/usage', {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -79,12 +106,20 @@ export class Credits extends APIResource {
    * ```
    */
   listLedger(
-    query: CreditListLedgerParams,
+    params: CreditListLedgerParams,
     options?: RequestOptions,
   ): PagePromise<CreditListLedgerResponsesMyCursorIDPage, CreditListLedgerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
     return this._client.getAPIList('/api/v1/credits/ledger', MyCursorIDPage<CreditListLedgerResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 }
@@ -368,87 +403,126 @@ export interface CreditListLedgerResponse {
 
 export interface CreditGetAutoRechargeParams {
   /**
-   * Filter by currency ID (required)
+   * Query param: Filter by currency ID (required)
    */
   currencyId: string;
 
   /**
-   * Filter by customer ID (required)
+   * Query param: Filter by customer ID (required)
    */
   customerId: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface CreditGetUsageParams {
   /**
-   * Filter by customer ID (required)
+   * Query param: Filter by customer ID (required)
    */
   customerId: string;
 
   /**
-   * Return items that come after this cursor
+   * Query param: Return items that come after this cursor
    */
   after?: string;
 
   /**
-   * Return items that come before this cursor
+   * Query param: Return items that come before this cursor
    */
   before?: string;
 
   /**
-   * Filter by currency ID
+   * Query param: Filter by currency ID
    */
   currencyId?: string;
 
   /**
-   * End date for the credit usage time range (ISO 8601). Defaults to now when
-   * startDate is provided
+   * Query param: End date for the credit usage time range (ISO 8601). Defaults to
+   * now when startDate is provided
    */
   endDate?: string;
 
   /**
-   * Comma-separated list of feature dimension keys to group usage series by (up to
-   * 3). Each key matches /^[a-zA-Z0-9_$-]+$/
+   * Query param: Comma-separated list of feature dimension keys to group usage
+   * series by (up to 3). Each key matches /^[a-zA-Z0-9_$-]+$/
    */
   groupBy?: string;
 
   /**
-   * Maximum number of items to return
+   * Query param: Maximum number of items to return
    */
   limit?: number;
 
   /**
-   * Filter by resource ID
+   * Query param: Filter by resource ID
    */
   resourceId?: string;
 
   /**
-   * Start date for the credit usage time range (ISO 8601). Takes precedence over
-   * timeRange when provided
+   * Query param: Start date for the credit usage time range (ISO 8601). Takes
+   * precedence over timeRange when provided
    */
   startDate?: string;
 
   /**
-   * Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults
-   * to LAST_MONTH
+   * Query param: Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH,
+   * LAST_YEAR). Defaults to LAST_MONTH
    */
   timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface CreditListLedgerParams extends MyCursorIDPageParams {
   /**
-   * Filter by customer ID (required)
+   * Query param: Filter by customer ID (required)
    */
   customerId: string;
 
   /**
-   * Filter by currency ID
+   * Query param: Filter by currency ID
    */
   currencyId?: string;
 
   /**
-   * Filter by resource ID
+   * Query param: Filter by resource ID
    */
   resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 Credits.Grants = Grants;
@@ -472,6 +546,7 @@ export declare namespace Credits {
     type GrantListResponsesMyCursorIDPage as GrantListResponsesMyCursorIDPage,
     type GrantCreateParams as GrantCreateParams,
     type GrantListParams as GrantListParams,
+    type GrantVoidParams as GrantVoidParams,
   };
 
   export {
@@ -483,5 +558,8 @@ export declare namespace Credits {
     type CustomCurrencyCreateParams as CustomCurrencyCreateParams,
     type CustomCurrencyUpdateParams as CustomCurrencyUpdateParams,
     type CustomCurrencyListParams as CustomCurrencyListParams,
+    type CustomCurrencyArchiveParams as CustomCurrencyArchiveParams,
+    type CustomCurrencyListAssociatedEntitiesParams as CustomCurrencyListAssociatedEntitiesParams,
+    type CustomCurrencyUnarchiveParams as CustomCurrencyUnarchiveParams,
   };
 }

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -19,8 +20,22 @@ export class Invoice extends APIResource {
    *   await client.v1.subscriptions.invoice.markAsPaid('x');
    * ```
    */
-  markAsPaid(id: string, options?: RequestOptions): APIPromise<InvoiceMarkAsPaidResponse> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/invoice/paid`, options);
+  markAsPaid(
+    id: string,
+    params: InvoiceMarkAsPaidParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InvoiceMarkAsPaidResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/subscriptions/${id}/invoice/paid`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -46,6 +61,24 @@ export namespace InvoiceMarkAsPaidResponse {
   }
 }
 
+export interface InvoiceMarkAsPaidParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export declare namespace Invoice {
-  export { type InvoiceMarkAsPaidResponse as InvoiceMarkAsPaidResponse };
+  export {
+    type InvoiceMarkAsPaidResponse as InvoiceMarkAsPaidResponse,
+    type InvoiceMarkAsPaidParams as InvoiceMarkAsPaidParams,
+  };
 }

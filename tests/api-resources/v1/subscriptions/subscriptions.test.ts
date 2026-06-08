@@ -21,6 +21,18 @@ describe('resource subscriptions', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.subscriptions.retrieve(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.v1.subscriptions.update('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -64,6 +76,8 @@ describe('resource subscriptions', () => {
           pricingType: ['FREE'],
           resourceId: 'resourceId',
           status: ['PAYMENT_PENDING'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -96,7 +110,11 @@ describe('resource subscriptions', () => {
 
   // Mock server tests are disabled
   test.skip('delegate: required and optional params', async () => {
-    const response = await client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });
+    const response = await client.v1.subscriptions.delegate('x', {
+      targetCustomerId: 'targetCustomerId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 
   // Mock server tests are disabled
@@ -144,6 +162,8 @@ describe('resource subscriptions', () => {
         },
       ],
       integrationId: 'integrationId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -231,6 +251,8 @@ describe('resource subscriptions', () => {
         trialEndDate: '2019-12-27T18:11:19.117Z',
       },
       unitQuantity: 0,
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -360,6 +382,8 @@ describe('resource subscriptions', () => {
         trialEndDate: '2019-12-27T18:11:19.117Z',
       },
       unitQuantity: 0,
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -381,6 +405,8 @@ describe('resource subscriptions', () => {
   test.skip('transfer: required and optional params', async () => {
     const response = await client.v1.subscriptions.transfer('x', {
       destinationResourceId: 'destinationResourceId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 });

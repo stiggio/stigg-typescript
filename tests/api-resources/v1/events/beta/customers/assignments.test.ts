@@ -32,6 +32,8 @@ describe('resource assignments', () => {
           capabilityId: 'capabilityId',
           entityId: 'entityId',
           limit: 1,
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -72,6 +74,8 @@ describe('resource assignments', () => {
           usageLimit: 2000,
         },
       ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 });
