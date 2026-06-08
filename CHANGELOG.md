@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.21 (2026-06-08)
+
+Full Changelog: [v0.1.0-beta.20...v0.1.0-beta.21](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.20...v0.1.0-beta.21)
+
+### Features
+
+* **STIGG-8103:** support user JWT (Bearer) auth on REST API ([92dcd41](https://github.com/stiggio/stigg-typescript/commit/92dcd4191998bb67ae567b63c32ff8c3e9dd44c4))
+
 ## 0.1.0-beta.20 (2026-06-08)
 
 Full Changelog: [v0.1.0-beta.19...v0.1.0-beta.20](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.19...v0.1.0-beta.20)
