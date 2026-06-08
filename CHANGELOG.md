@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.20 (2026-06-08)
+
+Full Changelog: [v0.1.0-beta.19...v0.1.0-beta.20](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.19...v0.1.0-beta.20)
+
+### Features
+
+* **api:** add connectionStatus and lastSyncStatus fields to destinations responses ([0913722](https://github.com/stiggio/stigg-typescript/commit/09137220f0a7aa541d1c6361a8b6bb5f40d61f72))
+
 ## 0.1.0-beta.19 (2026-06-07)
 
 Full Changelog: [v0.1.0-beta.18...v0.1.0-beta.19](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.18...v0.1.0-beta.19)
