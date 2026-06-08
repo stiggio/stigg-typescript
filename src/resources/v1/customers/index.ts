@@ -9,13 +9,16 @@ export {
   type CustomerImportResponse,
   type CustomerListResourcesResponse,
   type CustomerRetrieveEntitlementsResponse,
+  type CustomerRetrieveParams,
   type CustomerUpdateParams,
   type CustomerListParams,
+  type CustomerArchiveParams,
   type CustomerCheckEntitlementParams,
   type CustomerImportParams,
   type CustomerListResourcesParams,
   type CustomerProvisionParams,
   type CustomerRetrieveEntitlementsParams,
+  type CustomerUnarchiveParams,
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers';
@@ -29,7 +32,11 @@ export {
   type IntegrationUnlinkParams,
   type IntegrationListResponsesMyCursorIDPage,
 } from './integrations';
-export { PaymentMethod, type PaymentMethodAttachParams } from './payment-method';
+export {
+  PaymentMethod,
+  type PaymentMethodAttachParams,
+  type PaymentMethodDetachParams,
+} from './payment-method';
 export {
   PromotionalEntitlements,
   type PromotionalEntitlementCreateResponse,

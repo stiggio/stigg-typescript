@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -19,10 +20,21 @@ export class Entitlements extends APIResource {
    */
   create(
     addonID: string,
-    body: EntitlementCreateParams,
+    params: EntitlementCreateParams,
     options?: RequestOptions,
   ): APIPromise<EntitlementCreateResponse> {
-    return this._client.post(path`/api/v1/addons/${addonID}/entitlements`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/addons/${addonID}/entitlements`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -42,8 +54,18 @@ export class Entitlements extends APIResource {
     params: EntitlementUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AddonPackageEntitlement> {
-    const { addonId, ...body } = params;
-    return this._client.patch(path`/api/v1/addons/${addonId}/entitlements/${id}`, { body, ...options });
+    const { addonId, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/addons/${addonId}/entitlements/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -55,8 +77,22 @@ export class Entitlements extends APIResource {
    *   await client.v1.addons.entitlements.list('addonId');
    * ```
    */
-  list(addonID: string, options?: RequestOptions): APIPromise<EntitlementListResponse> {
-    return this._client.get(path`/api/v1/addons/${addonID}/entitlements`, options);
+  list(
+    addonID: string,
+    params: EntitlementListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EntitlementListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/addons/${addonID}/entitlements`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -75,8 +111,17 @@ export class Entitlements extends APIResource {
     params: EntitlementDeleteParams,
     options?: RequestOptions,
   ): APIPromise<AddonPackageEntitlement> {
-    const { addonId } = params;
-    return this._client.delete(path`/api/v1/addons/${addonId}/entitlements/${id}`, options);
+    const { addonId, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
+    return this._client.delete(path`/api/v1/addons/${addonId}/entitlements/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -766,9 +811,22 @@ export namespace EntitlementListResponse {
 
 export interface EntitlementCreateParams {
   /**
-   * Entitlements to create
+   * Body param: Entitlements to create
    */
   entitlements: Array<EntitlementCreateParams.Feature | EntitlementCreateParams.Credit>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace EntitlementCreateParams {
@@ -1059,6 +1117,19 @@ export declare namespace EntitlementUpdateParams {
      * Body param: Configuration for yearly reset period
      */
     yearlyResetPeriodConfiguration?: UpdateFeatureEntitlementRequest.YearlyResetPeriodConfiguration | null;
+
+    /**
+     * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+     * token); falls back to the user's first membership. Ignored for API-key auth.
+     */
+    'X-ACCOUNT-ID'?: string;
+
+    /**
+     * Header param: Environment ID — required when authenticating with a user JWT
+     * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+     * intrinsic to the key).
+     */
+    'X-ENVIRONMENT-ID'?: string;
   }
 
   export namespace UpdateFeatureEntitlementRequest {
@@ -1162,14 +1233,55 @@ export declare namespace EntitlementUpdateParams {
      * Body param: Display order of the entitlement
      */
     order?: number;
+
+    /**
+     * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+     * token); falls back to the user's first membership. Ignored for API-key auth.
+     */
+    'X-ACCOUNT-ID'?: string;
+
+    /**
+     * Header param: Environment ID — required when authenticating with a user JWT
+     * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+     * intrinsic to the key).
+     */
+    'X-ENVIRONMENT-ID'?: string;
   }
+}
+
+export interface EntitlementListParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface EntitlementDeleteParams {
   /**
-   * The addon ID
+   * Path param: The addon ID
    */
   addonId: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace Entitlements {
@@ -1179,6 +1291,7 @@ export declare namespace Entitlements {
     type EntitlementListResponse as EntitlementListResponse,
     type EntitlementCreateParams as EntitlementCreateParams,
     type EntitlementUpdateParams as EntitlementUpdateParams,
+    type EntitlementListParams as EntitlementListParams,
     type EntitlementDeleteParams as EntitlementDeleteParams,
   };
 }

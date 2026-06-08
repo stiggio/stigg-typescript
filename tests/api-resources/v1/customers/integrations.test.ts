@@ -22,7 +22,11 @@ describe('resource integrations', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });
+    const response = await client.v1.customers.integrations.retrieve('integrationId', {
+      id: 'id',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 
   // Mock server tests are disabled
@@ -45,6 +49,8 @@ describe('resource integrations', () => {
     const response = await client.v1.customers.integrations.update('integrationId', {
       id: 'id',
       syncedEntityId: 'syncedEntityId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -71,6 +77,8 @@ describe('resource integrations', () => {
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit: 1,
           vendorIdentifier: ['AUTH0'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -99,6 +107,8 @@ describe('resource integrations', () => {
       id: 'id',
       syncedEntityId: 'syncedEntityId',
       vendorIdentifier: 'AUTH0',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -116,6 +126,10 @@ describe('resource integrations', () => {
 
   // Mock server tests are disabled
   test.skip('unlink: required and optional params', async () => {
-    const response = await client.v1.customers.integrations.unlink('integrationId', { id: 'id' });
+    const response = await client.v1.customers.integrations.unlink('integrationId', {
+      id: 'id',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 });

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -48,10 +49,21 @@ export class PromotionalEntitlements extends APIResource {
    */
   create(
     id: string,
-    body: PromotionalEntitlementCreateParams,
+    params: PromotionalEntitlementCreateParams,
     options?: RequestOptions,
   ): APIPromise<PromotionalEntitlementCreateResponse> {
-    return this._client.post(path`/api/v1/customers/${id}/promotional-entitlements`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/customers/${id}/promotional-entitlements`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -69,13 +81,24 @@ export class PromotionalEntitlements extends APIResource {
    */
   list(
     id: string,
-    query: PromotionalEntitlementListParams | null | undefined = {},
+    params: PromotionalEntitlementListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PromotionalEntitlementListResponsesMyCursorIDPage, PromotionalEntitlementListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/api/v1/customers/${id}/promotional-entitlements`,
       MyCursorIDPage<PromotionalEntitlementListResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -97,8 +120,17 @@ export class PromotionalEntitlements extends APIResource {
     params: PromotionalEntitlementRevokeParams,
     options?: RequestOptions,
   ): APIPromise<PromotionalEntitlementRevokeResponse> {
-    const { id } = params;
-    return this._client.delete(path`/api/v1/customers/${id}/promotional-entitlements/${featureID}`, options);
+    const { id, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
+    return this._client.delete(path`/api/v1/customers/${id}/promotional-entitlements/${featureID}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -545,9 +577,22 @@ export namespace PromotionalEntitlementRevokeResponse {
 
 export interface PromotionalEntitlementCreateParams {
   /**
-   * Promotional entitlements to grant
+   * Body param: Promotional entitlements to grant
    */
   promotionalEntitlements: Array<PromotionalEntitlementCreateParams.PromotionalEntitlement>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace PromotionalEntitlementCreateParams {
@@ -665,15 +710,28 @@ export namespace PromotionalEntitlementCreateParams {
 
 export interface PromotionalEntitlementListParams extends MyCursorIDPageParams {
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: PromotionalEntitlementListParams.CreatedAt;
 
   /**
-   * Filter by promotional entitlement status. Supports comma-separated values for
-   * multiple statuses
+   * Query param: Filter by promotional entitlement status. Supports comma-separated
+   * values for multiple statuses
    */
   status?: Array<'Active' | 'Expired' | 'Paused'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace PromotionalEntitlementListParams {
@@ -705,9 +763,22 @@ export namespace PromotionalEntitlementListParams {
 
 export interface PromotionalEntitlementRevokeParams {
   /**
-   * The unique identifier of the customer
+   * Path param: The unique identifier of the customer
    */
   id: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace PromotionalEntitlements {

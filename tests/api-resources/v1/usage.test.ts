@@ -31,6 +31,8 @@ describe('resource usage', () => {
       endDate: '2019-12-27T18:11:19.117Z',
       groupBy: 'groupBy',
       resourceId: 'resourceId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -68,6 +70,8 @@ describe('resource usage', () => {
           updateBehavior: 'DELTA',
         },
       ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 });

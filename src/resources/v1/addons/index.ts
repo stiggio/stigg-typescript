@@ -8,10 +8,14 @@ export {
   type AddonPublishResponse,
   type AddonRemoveDraftResponse,
   type AddonCreateParams,
+  type AddonRetrieveParams,
   type AddonUpdateParams,
   type AddonListParams,
+  type AddonArchiveParams,
+  type AddonCreateDraftParams,
   type AddonListChargesParams,
   type AddonPublishParams,
+  type AddonRemoveDraftParams,
   type AddonListResponsesMyCursorIDPage,
   type AddonListChargesResponsesMyCursorIDPage,
 } from './addons';
@@ -22,5 +26,6 @@ export {
   type EntitlementListResponse,
   type EntitlementCreateParams,
   type EntitlementUpdateParams,
+  type EntitlementListParams,
   type EntitlementDeleteParams,
 } from './entitlements';

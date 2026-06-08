@@ -36,6 +36,8 @@ describe('resource addons', () => {
       metadata: { foo: 'string' },
       pricingType: 'FREE',
       status: 'DRAFT',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -49,6 +51,18 @@ describe('resource addons', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.addons.retrieve(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -92,6 +106,8 @@ describe('resource addons', () => {
           limit: 1,
           productId: 'productId',
           status: ['DRAFT'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -111,6 +127,18 @@ describe('resource addons', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('archive: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.addons.archive(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('createDraft', async () => {
     const responsePromise = client.v1.addons.createDraft('x');
     const rawResponse = await responsePromise.asResponse();
@@ -120,6 +148,18 @@ describe('resource addons', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createDraft: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.addons.createDraft(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -144,6 +184,8 @@ describe('resource addons', () => {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit: 1,
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -164,7 +206,11 @@ describe('resource addons', () => {
 
   // Mock server tests are disabled
   test.skip('publish: required and optional params', async () => {
-    const response = await client.v1.addons.publish('x', { migrationType: 'NEW_CUSTOMERS' });
+    const response = await client.v1.addons.publish('x', {
+      migrationType: 'NEW_CUSTOMERS',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 
   // Mock server tests are disabled
@@ -177,5 +223,17 @@ describe('resource addons', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('removeDraft: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.addons.removeDraft(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 });

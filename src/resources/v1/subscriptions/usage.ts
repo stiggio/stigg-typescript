@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -21,10 +22,21 @@ export class Usage extends APIResource {
    */
   chargeUsage(
     id: string,
-    body: UsageChargeUsageParams,
+    params: UsageChargeUsageParams,
     options?: RequestOptions,
   ): APIPromise<UsageChargeUsageResponse> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/usage/charge`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/usage/charge`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -38,8 +50,22 @@ export class Usage extends APIResource {
    * );
    * ```
    */
-  sync(id: string, options?: RequestOptions): APIPromise<UsageSyncResponse> {
-    return this._client.post(path`/api/v1/subscriptions/${id}/usage/sync`, options);
+  sync(
+    id: string,
+    params: UsageSyncParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UsageSyncResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/subscriptions/${id}/usage/sync`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -128,9 +154,38 @@ export namespace UsageSyncResponse {
 
 export interface UsageChargeUsageParams {
   /**
-   * Cutoff date for usage calculation. If not provided, the current time is used.
+   * Body param: Cutoff date for usage calculation. If not provided, the current time
+   * is used.
    */
   untilDate?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface UsageSyncParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace Usage {
@@ -138,5 +193,6 @@ export declare namespace Usage {
     type UsageChargeUsageResponse as UsageChargeUsageResponse,
     type UsageSyncResponse as UsageSyncResponse,
     type UsageChargeUsageParams as UsageChargeUsageParams,
+    type UsageSyncParams as UsageSyncParams,
   };
 }

@@ -21,6 +21,18 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.retrieve(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.v1.customers.update('x', {});
     const rawResponse = await responsePromise.asResponse();
@@ -61,6 +73,8 @@ describe('resource customers', () => {
           email: 'email',
           limit: 1,
           name: 'name',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -77,6 +91,18 @@ describe('resource customers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('archive: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.archive(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -103,6 +129,8 @@ describe('resource customers', () => {
           requestedUsage: 0,
           requestedValues: ['string'],
           resourceId: 'x',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -145,6 +173,8 @@ describe('resource customers', () => {
         },
       ],
       integrationId: 'integrationId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -170,6 +200,8 @@ describe('resource customers', () => {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit: 1,
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -252,6 +284,8 @@ describe('resource customers', () => {
         },
       },
       timezone: 'timezone',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -273,7 +307,11 @@ describe('resource customers', () => {
     await expect(
       client.v1.customers.retrieveEntitlements(
         'x',
-        { resourceId: 'resourceId' },
+        {
+          resourceId: 'resourceId',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
@@ -289,5 +327,17 @@ describe('resource customers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unarchive: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.unarchive(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
   });
 });

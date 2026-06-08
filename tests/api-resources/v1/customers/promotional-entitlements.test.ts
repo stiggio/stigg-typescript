@@ -56,6 +56,8 @@ describe('resource promotionalEntitlements', () => {
           yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },
         },
       ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
@@ -88,6 +90,8 @@ describe('resource promotionalEntitlements', () => {
           },
           limit: 1,
           status: ['Active'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -108,6 +112,10 @@ describe('resource promotionalEntitlements', () => {
 
   // Mock server tests are disabled
   test.skip('revoke: required and optional params', async () => {
-    const response = await client.v1.customers.promotionalEntitlements.revoke('featureId', { id: 'id' });
+    const response = await client.v1.customers.promotionalEntitlements.revoke('featureId', {
+      id: 'id',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 });

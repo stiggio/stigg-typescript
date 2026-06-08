@@ -13,7 +13,7 @@ import {
   Integrations,
 } from './integrations';
 import * as PaymentMethodAPI from './payment-method';
-import { PaymentMethod, PaymentMethodAttachParams } from './payment-method';
+import { PaymentMethod, PaymentMethodAttachParams, PaymentMethodDetachParams } from './payment-method';
 import * as PromotionalEntitlementsAPI from './promotional-entitlements';
 import {
   PromotionalEntitlementCreateParams,
@@ -27,6 +27,7 @@ import {
 } from './promotional-entitlements';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -47,8 +48,22 @@ export class Customers extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
-    return this._client.get(path`/api/v1/customers/${id}`, options);
+  retrieve(
+    id: string,
+    params: CustomerRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/customers/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -62,8 +77,19 @@ export class Customers extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
-    return this._client.patch(path`/api/v1/customers/${id}`, { body, ...options });
+  update(id: string, params: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/customers/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -78,12 +104,20 @@ export class Customers extends APIResource {
    * ```
    */
   list(
-    query: CustomerListParams | null | undefined = {},
+    params: CustomerListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomerListResponsesMyCursorIDPage, CustomerListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList('/api/v1/customers', MyCursorIDPage<CustomerListResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -98,8 +132,22 @@ export class Customers extends APIResource {
    * );
    * ```
    */
-  archive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
-    return this._client.post(path`/api/v1/customers/${id}/archive`, options);
+  archive(
+    id: string,
+    params: CustomerArchiveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/customers/${id}/archive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -121,10 +169,21 @@ export class Customers extends APIResource {
    */
   checkEntitlement(
     id: string,
-    query: CustomerCheckEntitlementParams | null | undefined = {},
+    params: CustomerCheckEntitlementParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomerCheckEntitlementResponse> {
-    return this._client.get(path`/api/v1/customers/${id}/entitlements/check`, { query, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.get(path`/api/v1/customers/${id}/entitlements/check`, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -144,8 +203,19 @@ export class Customers extends APIResource {
    * });
    * ```
    */
-  import(body: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
-    return this._client.post('/api/v1/customers/import', { body, ...options });
+  import(params: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/customers/import', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -163,13 +233,24 @@ export class Customers extends APIResource {
    */
   listResources(
     id: string,
-    query: CustomerListResourcesParams | null | undefined = {},
+    params: CustomerListResourcesParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomerListResourcesResponsesMyCursorIDPage, CustomerListResourcesResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/api/v1/customers/${id}/resources`,
       MyCursorIDPage<CustomerListResourcesResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -183,8 +264,19 @@ export class Customers extends APIResource {
    *   await client.v1.customers.provision({ id: 'id' });
    * ```
    */
-  provision(body: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
-    return this._client.post('/api/v1/customers', { body, ...options });
+  provision(params: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/customers', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -204,10 +296,21 @@ export class Customers extends APIResource {
    */
   retrieveEntitlements(
     id: string,
-    query: CustomerRetrieveEntitlementsParams | null | undefined = {},
+    params: CustomerRetrieveEntitlementsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomerRetrieveEntitlementsResponse> {
-    return this._client.get(path`/api/v1/customers/${id}/entitlements`, { query, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.get(path`/api/v1/customers/${id}/entitlements`, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -219,8 +322,22 @@ export class Customers extends APIResource {
    *   await client.v1.customers.unarchive('x');
    * ```
    */
-  unarchive(id: string, options?: RequestOptions): APIPromise<CustomerResponse> {
-    return this._client.post(path`/api/v1/customers/${id}/unarchive`, options);
+  unarchive(
+    id: string,
+    params: CustomerUnarchiveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/customers/${id}/unarchive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -1936,9 +2053,24 @@ export namespace CustomerRetrieveEntitlementsResponse {
   }
 }
 
+export interface CustomerRetrieveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface CustomerUpdateParams {
   /**
-   * The billing currency of the customer
+   * Body param: The billing currency of the customer
    */
   billingCurrency?:
     | 'usd'
@@ -2060,49 +2192,62 @@ export interface CustomerUpdateParams {
     | null;
 
   /**
-   * The unique identifier for the entity in the billing provider
+   * Body param: The unique identifier for the entity in the billing provider
    */
   billingId?: string | null;
 
   /**
-   * Customer level coupon
+   * Body param: Customer level coupon
    */
   couponId?: (string & {}) | '' | null;
 
   /**
-   * The email of the customer
+   * Body param: The email of the customer
    */
   email?: string | null;
 
   /**
-   * List of integrations
+   * Body param: List of integrations
    */
   integrations?: Array<CustomerUpdateParams.Integration>;
 
   /**
-   * Language to use for this customer
+   * Body param: Language to use for this customer
    */
   language?: string | null;
 
   /**
-   * Additional metadata
+   * Body param: Additional metadata
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The name of the customer
+   * Body param: The name of the customer
    */
   name?: string | null;
 
   /**
-   * Vendor-specific billing passthrough fields.
+   * Body param: Vendor-specific billing passthrough fields.
    */
   passthrough?: CustomerUpdateParams.Passthrough;
 
   /**
-   * Timezone to use for this customer
+   * Body param: Timezone to use for this customer
    */
   timezone?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace CustomerUpdateParams {
@@ -2463,19 +2608,32 @@ export namespace CustomerUpdateParams {
 
 export interface CustomerListParams extends MyCursorIDPageParams {
   /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
    */
   createdAt?: CustomerListParams.CreatedAt;
 
   /**
-   * Filter by exact customer email address
+   * Query param: Filter by exact customer email address
    */
   email?: string;
 
   /**
-   * Filter by exact customer name
+   * Query param: Filter by exact customer name
    */
   name?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace CustomerListParams {
@@ -2505,45 +2663,87 @@ export namespace CustomerListParams {
   }
 }
 
+export interface CustomerArchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface CustomerCheckEntitlementParams {
   /**
-   * Currency ID (refId) to check for credit entitlements. Mutually exclusive with
-   * `featureId`.
+   * Query param: Currency ID (refId) to check for credit entitlements. Mutually
+   * exclusive with `featureId`.
    */
   currencyId?: string;
 
   /**
-   * Feature ID (refId) to check. Mutually exclusive with `currencyId`.
+   * Query param: Feature ID (refId) to check. Mutually exclusive with `currencyId`.
    */
   featureId?: string;
 
   /**
-   * Requested usage amount to evaluate against the entitlement limit (numeric
-   * features only)
+   * Query param: Requested usage amount to evaluate against the entitlement limit
+   * (numeric features only)
    */
   requestedUsage?: number;
 
   /**
-   * Requested values to evaluate against allowed values (enum features only)
+   * Query param: Requested values to evaluate against allowed values (enum features
+   * only)
    */
   requestedValues?: Array<string>;
 
   /**
-   * Resource ID to scope the entitlement check to a specific resource
+   * Query param: Resource ID to scope the entitlement check to a specific resource
    */
   resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface CustomerImportParams {
   /**
-   * List of customer objects to import
+   * Body param: List of customer objects to import
    */
   customers: Array<CustomerImportParams.Customer>;
 
   /**
-   * Integration details
+   * Body param: Integration details
    */
   integrationId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace CustomerImportParams {
@@ -2590,16 +2790,29 @@ export namespace CustomerImportParams {
   }
 }
 
-export interface CustomerListResourcesParams extends MyCursorIDPageParams {}
+export interface CustomerListResourcesParams extends MyCursorIDPageParams {
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
 
 export interface CustomerProvisionParams {
   /**
-   * Customer slug
+   * Body param: Customer slug
    */
   id: string;
 
   /**
-   * The billing currency of the customer
+   * Body param: The billing currency of the customer
    */
   billingCurrency?:
     | 'usd'
@@ -2721,54 +2934,67 @@ export interface CustomerProvisionParams {
     | null;
 
   /**
-   * The unique identifier for the entity in the billing provider
+   * Body param: The unique identifier for the entity in the billing provider
    */
   billingId?: string | null;
 
   /**
-   * Customer level coupon
+   * Body param: Customer level coupon
    */
   couponId?: (string & {}) | '' | null;
 
   /**
-   * The default payment method details
+   * Body param: The default payment method details
    */
   defaultPaymentMethod?: CustomerProvisionParams.DefaultPaymentMethod | null;
 
   /**
-   * The email of the customer
+   * Body param: The email of the customer
    */
   email?: string | null;
 
   /**
-   * List of integrations
+   * Body param: List of integrations
    */
   integrations?: Array<CustomerProvisionParams.Integration>;
 
   /**
-   * Language to use for this customer
+   * Body param: Language to use for this customer
    */
   language?: string | null;
 
   /**
-   * Additional metadata
+   * Body param: Additional metadata
    */
   metadata?: { [key: string]: string };
 
   /**
-   * The name of the customer
+   * Body param: The name of the customer
    */
   name?: string | null;
 
   /**
-   * Vendor-specific billing passthrough fields.
+   * Body param: Vendor-specific billing passthrough fields.
    */
   passthrough?: CustomerProvisionParams.Passthrough;
 
   /**
-   * Timezone to use for this customer
+   * Body param: Timezone to use for this customer
    */
   timezone?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace CustomerProvisionParams {
@@ -3159,9 +3385,37 @@ export namespace CustomerProvisionParams {
 
 export interface CustomerRetrieveEntitlementsParams {
   /**
-   * Resource ID to scope entitlements to a specific resource
+   * Query param: Resource ID to scope entitlements to a specific resource
    */
   resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomerUnarchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 Customers.PaymentMethod = PaymentMethod;
@@ -3179,16 +3433,23 @@ export declare namespace Customers {
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
+    type CustomerRetrieveParams as CustomerRetrieveParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
+    type CustomerArchiveParams as CustomerArchiveParams,
     type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
     type CustomerImportParams as CustomerImportParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
     type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
+    type CustomerUnarchiveParams as CustomerUnarchiveParams,
   };
 
-  export { PaymentMethod as PaymentMethod, type PaymentMethodAttachParams as PaymentMethodAttachParams };
+  export {
+    PaymentMethod as PaymentMethod,
+    type PaymentMethodAttachParams as PaymentMethodAttachParams,
+    type PaymentMethodDetachParams as PaymentMethodDetachParams,
+  };
 
   export {
     PromotionalEntitlements as PromotionalEntitlements,

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CustomersAPI from './customers';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -26,10 +27,21 @@ export class PaymentMethod extends APIResource {
    */
   attach(
     id: string,
-    body: PaymentMethodAttachParams,
+    params: PaymentMethodAttachParams,
     options?: RequestOptions,
   ): APIPromise<CustomersAPI.CustomerResponse> {
-    return this._client.post(path`/api/v1/customers/${id}/payment-method`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/customers/${id}/payment-method`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -42,24 +54,38 @@ export class PaymentMethod extends APIResource {
    *   await client.v1.customers.paymentMethod.detach('x');
    * ```
    */
-  detach(id: string, options?: RequestOptions): APIPromise<CustomersAPI.CustomerResponse> {
-    return this._client.delete(path`/api/v1/customers/${id}/payment-method`, options);
+  detach(
+    id: string,
+    params: PaymentMethodDetachParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomersAPI.CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/customers/${id}/payment-method`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
 export interface PaymentMethodAttachParams {
   /**
-   * Integration details
+   * Body param: Integration details
    */
   integrationId: string;
 
   /**
-   * Billing provider payment method id
+   * Body param: Billing provider payment method id
    */
   paymentMethodId: string;
 
   /**
-   * The vendor identifier of integration
+   * Body param: The vendor identifier of integration
    */
   vendorIdentifier:
     | 'AUTH0'
@@ -76,7 +102,7 @@ export interface PaymentMethodAttachParams {
     | 'PREQUEL';
 
   /**
-   * Customers selected currency
+   * Body param: Customers selected currency
    */
   billingCurrency?:
     | 'usd'
@@ -196,8 +222,39 @@ export interface PaymentMethodAttachParams {
     | 'xof'
     | 'xpf'
     | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface PaymentMethodDetachParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace PaymentMethod {
-  export { type PaymentMethodAttachParams as PaymentMethodAttachParams };
+  export {
+    type PaymentMethodAttachParams as PaymentMethodAttachParams,
+    type PaymentMethodDetachParams as PaymentMethodDetachParams,
+  };
 }

@@ -18,6 +18,9 @@ export {
   type CustomCurrencyCreateParams,
   type CustomCurrencyUpdateParams,
   type CustomCurrencyListParams,
+  type CustomCurrencyArchiveParams,
+  type CustomCurrencyListAssociatedEntitiesParams,
+  type CustomCurrencyUnarchiveParams,
   type CustomCurrencyListResponsesMyCursorIDPage,
 } from './custom-currencies';
 export {
@@ -26,5 +29,6 @@ export {
   type GrantListResponse,
   type GrantCreateParams,
   type GrantListParams,
+  type GrantVoidParams,
   type GrantListResponsesMyCursorIDPage,
 } from './grants';

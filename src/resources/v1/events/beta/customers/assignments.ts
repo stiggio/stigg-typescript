@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../../core/pagination';
+import { buildHeaders } from '../../../../../internal/headers';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
@@ -24,13 +25,24 @@ export class Assignments extends APIResource {
    */
   list(
     id: string,
-    query: AssignmentListParams | null | undefined = {},
+    params: AssignmentListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AssignmentListResponsesMyCursorIDPage, AssignmentListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/api/v1-beta/customers/${id}/assignments`,
       MyCursorIDPage<AssignmentListResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
     );
   }
 
@@ -66,10 +78,21 @@ export class Assignments extends APIResource {
    */
   upsert(
     id: string,
-    body: AssignmentUpsertParams,
+    params: AssignmentUpsertParams,
     options?: RequestOptions,
   ): APIPromise<AssignmentUpsertResponse> {
-    return this._client.put(path`/api/v1-beta/customers/${id}/assignments`, { body, ...options });
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.put(path`/api/v1-beta/customers/${id}/assignments`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -170,21 +193,47 @@ export namespace AssignmentUpsertResponse {
 
 export interface AssignmentListParams extends MyCursorIDPageParams {
   /**
-   * Filter assignments to a specific capability refId
+   * Query param: Filter assignments to a specific capability refId
    */
   capabilityId?: string;
 
   /**
-   * Filter assignments to a specific entity refId
+   * Query param: Filter assignments to a specific entity refId
    */
   entityId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export interface AssignmentUpsertParams {
   /**
-   * Assignments to upsert (1–100 per request)
+   * Body param: Assignments to upsert (1–100 per request)
    */
   assignments: Array<AssignmentUpsertParams.Assignment>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export namespace AssignmentUpsertParams {
