@@ -12,17 +12,6 @@ import { path } from '../../internal/utils/path';
 export class Usage extends APIResource {
   /**
    * Retrieves historical usage data for a customer's metered feature over time.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.usage.history(
-   *   'featureId',
-   *   {
-   *     customerId: 'customerId',
-   *     startDate: '2019-12-27T18:11:19.117Z',
-   *   },
-   * );
-   * ```
    */
   history(
     featureID: string,
@@ -46,19 +35,6 @@ export class Usage extends APIResource {
   /**
    * Reports usage measurements for metered features. The reported usage is used to
    * track, limit, and bill customer consumption.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.usage.report({
-   *   usages: [
-   *     {
-   *       customerId: 'customerId',
-   *       featureId: 'featureId',
-   *       value: -9007199254740991,
-   *     },
-   *   ],
-   * });
-   * ```
    */
   report(params: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

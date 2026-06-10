@@ -141,62 +141,6 @@ Methods:
 
 - <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
 
-### Beta
-
-#### Customers
-
-##### Entitlements
-
-Types:
-
-- <code><a href="./src/resources/v1/events/beta/customers/entitlements.ts">EntitlementCheckResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1-beta/customers/{id}/entitlements/check">client.v1.events.beta.customers.entitlements.<a href="./src/resources/v1/events/beta/customers/entitlements.ts">check</a>(id, { ...params }) -> EntitlementCheckResponse</code>
-
-##### Entities
-
-Types:
-
-- <code><a href="./src/resources/v1/events/beta/customers/entities.ts">EntityRetrieveResponse</a></code>
-- <code><a href="./src/resources/v1/events/beta/customers/entities.ts">EntityListResponse</a></code>
-- <code><a href="./src/resources/v1/events/beta/customers/entities.ts">EntityArchiveResponse</a></code>
-- <code><a href="./src/resources/v1/events/beta/customers/entities.ts">EntityUnarchiveResponse</a></code>
-- <code><a href="./src/resources/v1/events/beta/customers/entities.ts">EntityUpsertResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1-beta/customers/{id}/entities/{entityId}">client.v1.events.beta.customers.entities.<a href="./src/resources/v1/events/beta/customers/entities.ts">retrieve</a>(entityID, { ...params }) -> EntityRetrieveResponse</code>
-- <code title="get /api/v1-beta/customers/{id}/entities">client.v1.events.beta.customers.entities.<a href="./src/resources/v1/events/beta/customers/entities.ts">list</a>(id, { ...params }) -> EntityListResponsesMyCursorIDPage</code>
-- <code title="post /api/v1-beta/customers/{id}/entities/archive">client.v1.events.beta.customers.entities.<a href="./src/resources/v1/events/beta/customers/entities.ts">archive</a>(id, { ...params }) -> EntityArchiveResponse</code>
-- <code title="post /api/v1-beta/customers/{id}/entities/unarchive">client.v1.events.beta.customers.entities.<a href="./src/resources/v1/events/beta/customers/entities.ts">unarchive</a>(id, { ...params }) -> EntityUnarchiveResponse</code>
-- <code title="put /api/v1-beta/customers/{id}/entities">client.v1.events.beta.customers.entities.<a href="./src/resources/v1/events/beta/customers/entities.ts">upsert</a>(id, { ...params }) -> EntityUpsertResponse</code>
-
-##### Assignments
-
-Types:
-
-- <code><a href="./src/resources/v1/events/beta/customers/assignments.ts">AssignmentListResponse</a></code>
-- <code><a href="./src/resources/v1/events/beta/customers/assignments.ts">AssignmentUpsertResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1-beta/customers/{id}/assignments">client.v1.events.beta.customers.assignments.<a href="./src/resources/v1/events/beta/customers/assignments.ts">list</a>(id, { ...params }) -> AssignmentListResponsesMyCursorIDPage</code>
-- <code title="put /api/v1-beta/customers/{id}/assignments">client.v1.events.beta.customers.assignments.<a href="./src/resources/v1/events/beta/customers/assignments.ts">upsert</a>(id, { ...params }) -> AssignmentUpsertResponse</code>
-
-#### EntityTypes
-
-Types:
-
-- <code><a href="./src/resources/v1/events/beta/entity-types.ts">EntityTypeListResponse</a></code>
-- <code><a href="./src/resources/v1/events/beta/entity-types.ts">EntityTypeUpsertResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1-beta/entity-types">client.v1.events.beta.entityTypes.<a href="./src/resources/v1/events/beta/entity-types.ts">list</a>({ ...params }) -> EntityTypeListResponsesMyCursorIDPage</code>
-- <code title="put /api/v1-beta/entity-types">client.v1.events.beta.entityTypes.<a href="./src/resources/v1/events/beta/entity-types.ts">upsert</a>({ ...params }) -> EntityTypeUpsertResponse</code>
-
 ### DataExport
 
 Types:
@@ -219,7 +163,7 @@ Types:
 Methods:
 
 - <code title="post /api/v1/data-export/destinations">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
-- <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID) -> DestinationDeleteResponse</code>
+- <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID, { ...params }) -> DestinationDeleteResponse</code>
 
 ## Credits
 
@@ -384,3 +328,59 @@ Methods:
 - <code title="get /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">listProducts</a>({ ...params }) -> ProductListProductsResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id, { ...params }) -> Product</code>
 - <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> Product</code>
+
+# V1Beta
+
+## Customers
+
+### Entitlements
+
+Types:
+
+- <code><a href="./src/resources/v1-beta/customers/entitlements.ts">EntitlementCheckResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/entitlements/check">client.v1Beta.customers.entitlements.<a href="./src/resources/v1-beta/customers/entitlements.ts">check</a>(id, { ...params }) -> EntitlementCheckResponse</code>
+
+### Entities
+
+Types:
+
+- <code><a href="./src/resources/v1-beta/customers/entities.ts">EntityRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1-beta/customers/entities.ts">EntityListResponse</a></code>
+- <code><a href="./src/resources/v1-beta/customers/entities.ts">EntityArchiveResponse</a></code>
+- <code><a href="./src/resources/v1-beta/customers/entities.ts">EntityUnarchiveResponse</a></code>
+- <code><a href="./src/resources/v1-beta/customers/entities.ts">EntityUpsertResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/entities/{entityId}">client.v1Beta.customers.entities.<a href="./src/resources/v1-beta/customers/entities.ts">retrieve</a>(entityID, { ...params }) -> EntityRetrieveResponse</code>
+- <code title="get /api/v1-beta/customers/{id}/entities">client.v1Beta.customers.entities.<a href="./src/resources/v1-beta/customers/entities.ts">list</a>(id, { ...params }) -> EntityListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1-beta/customers/{id}/entities/archive">client.v1Beta.customers.entities.<a href="./src/resources/v1-beta/customers/entities.ts">archive</a>(id, { ...params }) -> EntityArchiveResponse</code>
+- <code title="post /api/v1-beta/customers/{id}/entities/unarchive">client.v1Beta.customers.entities.<a href="./src/resources/v1-beta/customers/entities.ts">unarchive</a>(id, { ...params }) -> EntityUnarchiveResponse</code>
+- <code title="put /api/v1-beta/customers/{id}/entities">client.v1Beta.customers.entities.<a href="./src/resources/v1-beta/customers/entities.ts">upsert</a>(id, { ...params }) -> EntityUpsertResponse</code>
+
+### Assignments
+
+Types:
+
+- <code><a href="./src/resources/v1-beta/customers/assignments.ts">AssignmentListResponse</a></code>
+- <code><a href="./src/resources/v1-beta/customers/assignments.ts">AssignmentUpsertResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/assignments">client.v1Beta.customers.assignments.<a href="./src/resources/v1-beta/customers/assignments.ts">list</a>(id, { ...params }) -> AssignmentListResponsesMyCursorIDPage</code>
+- <code title="put /api/v1-beta/customers/{id}/assignments">client.v1Beta.customers.assignments.<a href="./src/resources/v1-beta/customers/assignments.ts">upsert</a>(id, { ...params }) -> AssignmentUpsertResponse</code>
+
+## EntityTypes
+
+Types:
+
+- <code><a href="./src/resources/v1-beta/entity-types.ts">EntityTypeListResponse</a></code>
+- <code><a href="./src/resources/v1-beta/entity-types.ts">EntityTypeUpsertResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/entity-types">client.v1Beta.entityTypes.<a href="./src/resources/v1-beta/entity-types.ts">list</a>({ ...params }) -> EntityTypeListResponsesMyCursorIDPage</code>
+- <code title="put /api/v1-beta/entity-types">client.v1Beta.entityTypes.<a href="./src/resources/v1-beta/entity-types.ts">upsert</a>({ ...params }) -> EntityTypeUpsertResponse</code>

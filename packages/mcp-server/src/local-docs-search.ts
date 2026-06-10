@@ -2535,604 +2535,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
-    name: 'check',
-    endpoint: '/api/v1-beta/customers/{id}/entitlements/check',
-    httpMethod: 'get',
-    summary: 'Check entitlement (beta)',
-    description:
-      'Experimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.',
-    stainlessPath: '(resource) v1.events.beta.customers.entitlements > (method) check',
-    qualified: 'client.v1.events.beta.customers.entitlements.check',
-    params: [
-      'id: string;',
-      'currencyId?: string;',
-      'dimensions?: object;',
-      'featureId?: string;',
-      'requestedUsage?: number;',
-      'requestedValues?: string[];',
-      'resourceId?: string;',
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      "{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }",
-    markdown:
-      "## check\n\n`client.v1.events.beta.customers.entitlements.check(id: string, currencyId?: string, dimensions?: object, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object; }`\n\n**get** `/api/v1-beta/customers/{id}/entitlements/check`\n\nExperimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `dimensions?: object`\n  Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the response includes a `chains` array with per-entity governance limits.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.entitlements.check('x');\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entitlements.check',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.entitlements.check('x');\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entitlements.check',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.entitlements.check(\n    id="x",\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entitlements().check',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entitlements.EntitlementCheckParams;\nimport io.stigg.models.v1.events.beta.customers.entitlements.EntitlementCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCheckResponse response = client.v1().events().beta().customers().entitlements().check("x");\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entitlements.Check',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventBetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entitlements.check',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.entitlements.check("x")\n\nputs(response)',
-      },
-      cli: {
-        method: 'entitlements check',
-        example:
-          "stigg v1:events:beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entitlements.Check',
-        example:
-          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Events.Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
-    name: 'list',
-    endpoint: '/api/v1-beta/customers/{id}/entities',
-    httpMethod: 'get',
-    summary: 'Get a list of entitys',
-    description: 'Retrieves a paginated list of entities for the given customer.',
-    stainlessPath: '(resource) v1.events.beta.customers.entities > (method) list',
-    qualified: 'client.v1.events.beta.customers.entities.list',
-    params: [
-      'id: string;',
-      'after?: string;',
-      'before?: string;',
-      "includeArchived?: 'true' | 'false';",
-      'limit?: number;',
-      'typeRefId?: string;',
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      '{ id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }',
-    markdown:
-      "## list\n\n`client.v1.events.beta.customers.entities.list(id: string, after?: string, before?: string, includeArchived?: 'true' | 'false', limit?: number, typeRefId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }`\n\n**get** `/api/v1-beta/customers/{id}/entities`\n\nRetrieves a paginated list of entities for the given customer.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `includeArchived?: 'true' | 'false'`\n  Whether to include archived entities. One of: true, false\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `typeRefId?: string`\n  Filter results to entities of a specific entity type, by the type's refId\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }`\n  A stored entity instance tracked by the governance service for a given customer\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `metadata: object`\n  - `typeId: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityListResponse of client.v1.events.beta.customers.entities.list('id')) {\n  console.log(entityListResponse);\n}\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entities.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const entityListResponse of client.v1.events.beta.customers.entities.list('id')) {\n  console.log(entityListResponse.id);\n}",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entities.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.beta.customers.entities.list(\n    id="id",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entities().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityListPage;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityListPage page = client.v1().events().beta().customers().entities().list("id");\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entities.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Beta.Customers.Entities.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerEntityListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entities.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.beta.customers.entities.list("id")\n\nputs(page)',
-      },
-      cli: {
-        method: 'entities list',
-        example: "stigg v1:events:beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entities.List',
-        example:
-          'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1.Events.Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
-    name: 'upsert',
-    endpoint: '/api/v1-beta/customers/{id}/entities',
-    httpMethod: 'put',
-    summary: 'Upsert entities',
-    description:
-      'Creates or updates entities in bulk for the given customer. Existing entities matched by id are updated; new ids are created.',
-    stainlessPath: '(resource) v1.events.beta.customers.entities > (method) upsert',
-    qualified: 'client.v1.events.beta.customers.entities.upsert',
-    params: [
-      'id: string;',
-      'entities: { id: string; metadata?: object; typeRefId?: string; }[];',
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      '{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }[]; }',
-    markdown:
-      "## upsert\n\n`client.v1.events.beta.customers.entities.upsert(id: string, entities: { id: string; metadata?: object; typeRefId?: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/customers/{id}/entities`\n\nCreates or updates entities in bulk for the given customer. Existing entities matched by id are updated; new ids are created.\n\n### Parameters\n\n- `id: string`\n\n- `entities: { id: string; metadata?: object; typeRefId?: string; }[]`\n  List of entities to create or update (1-100 entries)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }[]; }`\n  List of entities created or updated by an upsert request\n\n  - `data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.entities.upsert('id', { entities: [{ id: 'user-7f3a0c1d' }, { id: 'user-c4d1b2e9' }] });\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entities.upsert',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.entities.upsert('id', {\n  entities: [\n    {\n      id: 'user-7f3a0c1d',\n      typeRefId: 'user',\n      metadata: { email: 'jane@acme.com', role: 'admin' },\n    },\n    {\n      id: 'user-c4d1b2e9',\n      typeRefId: 'user',\n      metadata: { email: 'john@acme.com' },\n    },\n  ],\n});\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entities.upsert',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.entities.upsert(\n    id="id",\n    entities=[{\n        "id": "user-7f3a0c1d",\n        "type_ref_id": "user",\n        "metadata": {\n            "email": "jane@acme.com",\n            "role": "admin",\n        },\n    }, {\n        "id": "user-c4d1b2e9",\n        "type_ref_id": "user",\n        "metadata": {\n            "email": "john@acme.com"\n        },\n    }],\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entities().upsert',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityUpsertParams;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUpsertParams params = EntityUpsertParams.builder()\n            .id("id")\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-7f3a0c1d")\n                .build())\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-c4d1b2e9")\n                .build())\n            .build();\n        EntityUpsertResponse response = client.v1().events().beta().customers().entities().upsert(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entities.Upsert',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Entities.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerEntityUpsertParams{\n\t\t\tEntities: []stigg.V1EventBetaCustomerEntityUpsertParamsEntity{{\n\t\t\t\tID:        "user-7f3a0c1d",\n\t\t\t\tTypeRefID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "jane@acme.com",\n\t\t\t\t\t"role":  "admin",\n\t\t\t\t},\n\t\t\t}, {\n\t\t\t\tID:        "user-c4d1b2e9",\n\t\t\t\tTypeRefID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "john@acme.com",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entities.upsert',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.entities.upsert(\n  "id",\n  entities: [{id: "user-7f3a0c1d"}, {id: "user-c4d1b2e9"}]\n)\n\nputs(response)',
-      },
-      cli: {
-        method: 'entities upsert',
-        example:
-          "stigg v1:events:beta:customers:entities upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity '{id: user-7f3a0c1d}' \\\n  --entity '{id: user-c4d1b2e9}'",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entities.Upsert',
-        example:
-          'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n            TypeRefID = "user",\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n            TypeRefID = "user",\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              },\n              "typeRefId": "user"\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "metadata": {\n                "email": "john@acme.com"\n              },\n              "typeRefId": "user"\n            }\n          ]\n        }\'',
-      },
-    },
-  },
-  {
-    name: 'retrieve',
-    endpoint: '/api/v1-beta/customers/{id}/entities/{entityId}',
-    httpMethod: 'get',
-    summary: 'Get a single entity by ID',
-    description: 'Retrieves a single entity for the given customer by its identifier.',
-    stainlessPath: '(resource) v1.events.beta.customers.entities > (method) retrieve',
-    qualified: 'client.v1.events.beta.customers.entities.retrieve',
-    params: ['id: string;', 'entityId: string;', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
-    response:
-      '{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }; }',
-    markdown:
-      "## retrieve\n\n`client.v1.events.beta.customers.entities.retrieve(id: string, entityId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1-beta/customers/{id}/entities/{entityId}`\n\nRetrieves a single entity for the given customer by its identifier.\n\n### Parameters\n\n- `id: string`\n\n- `entityId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entity = await client.v1.events.beta.customers.entities.retrieve('x', { id: 'id' });\n\nconsole.log(entity);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entities.retrieve',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entity = await client.v1.events.beta.customers.entities.retrieve('x', { id: 'id' });\n\nconsole.log(entity.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entities.retrieve',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentity = client.v1.events.beta.customers.entities.retrieve(\n    entity_id="x",\n    id="id",\n)\nprint(entity.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entities().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityRetrieveParams;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityRetrieveParams params = EntityRetrieveParams.builder()\n            .id("id")\n            .entityId("x")\n            .build();\n        EntityRetrieveResponse entity = client.v1().events().beta().customers().entities().retrieve(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entities.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentity, err := client.V1.Events.Beta.Customers.Entities.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventBetaCustomerEntityGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entities.retrieve',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentity = stigg.v1.events.beta.customers.entities.retrieve("x", id: "id")\n\nputs(entity)',
-      },
-      cli: {
-        method: 'entities retrieve',
-        example:
-          "stigg v1:events:beta:customers:entities retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity-id x",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entities.Retrieve',
-        example:
-          'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1.Events.Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
-    name: 'archive',
-    endpoint: '/api/v1-beta/customers/{id}/entities/archive',
-    httpMethod: 'post',
-    summary: 'Archive entities',
-    description: 'Archives entities in bulk for the given customer by id.',
-    stainlessPath: '(resource) v1.events.beta.customers.entities > (method) archive',
-    qualified: 'client.v1.events.beta.customers.entities.archive',
-    params: ['id: string;', 'ids: string[];', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
-    response: '{ data: { ids: string[]; }; }',
-    markdown:
-      "## archive\n\n`client.v1.events.beta.customers.entities.archive(id: string, ids: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1-beta/customers/{id}/entities/archive`\n\nArchives entities in bulk for the given customer by id.\n\n### Parameters\n\n- `id: string`\n\n- `ids: string[]`\n  Entity identifiers to act on\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { ids: string[]; }; }`\n  Wrapped response echoing the ids that were acted on by an archive/unarchive call\n\n  - `data: { ids: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.entities.archive('id', { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] });\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entities.archive',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.entities.archive('id', {\n  ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],\n});\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entities.archive',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.entities.archive(\n    id="id",\n    ids=["user-7f3a0c1d", "user-c4d1b2e9"],\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entities().archive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityArchiveParams;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityArchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityArchiveParams params = EntityArchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityArchiveResponse response = client.v1().events().beta().customers().entities().archive(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entities.Archive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Entities.Archive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerEntityArchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entities.archive',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.entities.archive("id", ids: ["user-7f3a0c1d", "user-c4d1b2e9"])\n\nputs(response)',
-      },
-      cli: {
-        method: 'entities archive',
-        example:
-          "stigg v1:events:beta:customers:entities archive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entities.Archive',
-        example:
-          'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1.Events.Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
-      },
-    },
-  },
-  {
-    name: 'unarchive',
-    endpoint: '/api/v1-beta/customers/{id}/entities/unarchive',
-    httpMethod: 'post',
-    summary: 'Unarchive entities',
-    description: 'Restores previously archived entities in bulk for the given customer by id.',
-    stainlessPath: '(resource) v1.events.beta.customers.entities > (method) unarchive',
-    qualified: 'client.v1.events.beta.customers.entities.unarchive',
-    params: ['id: string;', 'ids: string[];', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
-    response: '{ data: { ids: string[]; }; }',
-    markdown:
-      "## unarchive\n\n`client.v1.events.beta.customers.entities.unarchive(id: string, ids: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1-beta/customers/{id}/entities/unarchive`\n\nRestores previously archived entities in bulk for the given customer by id.\n\n### Parameters\n\n- `id: string`\n\n- `ids: string[]`\n  Entity identifiers to act on\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { ids: string[]; }; }`\n  Wrapped response echoing the ids that were acted on by an archive/unarchive call\n\n  - `data: { ids: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.entities.unarchive('id', { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] });\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.entities.unarchive',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.entities.unarchive('id', {\n  ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],\n});\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.entities.unarchive',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.entities.unarchive(\n    id="id",\n    ids=["user-7f3a0c1d", "user-c4d1b2e9"],\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().entities().unarchive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityUnarchiveParams;\nimport io.stigg.models.v1.events.beta.customers.entities.EntityUnarchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUnarchiveParams params = EntityUnarchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityUnarchiveResponse response = client.v1().events().beta().customers().entities().unarchive(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Entities.Unarchive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Entities.Unarchive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerEntityUnarchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.entities.unarchive',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.entities.unarchive("id", ids: ["user-7f3a0c1d", "user-c4d1b2e9"])\n\nputs(response)',
-      },
-      cli: {
-        method: 'entities unarchive',
-        example:
-          "stigg v1:events:beta:customers:entities unarchive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Entities.Unarchive',
-        example:
-          'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1.Events.Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
-      },
-    },
-  },
-  {
-    name: 'list',
-    endpoint: '/api/v1-beta/customers/{id}/assignments',
-    httpMethod: 'get',
-    summary: 'Get a list of assignments',
-    description:
-      'Returns a cursor-paginated list of capability assignments for the given customer. An assignment ties an entity to a capability with a usage limit and reset cadence.',
-    stainlessPath: '(resource) v1.events.beta.customers.assignments > (method) list',
-    qualified: 'client.v1.events.beta.customers.assignments.list',
-    params: [
-      'id: string;',
-      'after?: string;',
-      'before?: string;',
-      'capabilityId?: string;',
-      'entityId?: string;',
-      'limit?: number;',
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      "{ id: string; cadence: 'MONTH'; capabilityId: string; createdAt: string; entityId: string; updatedAt: string; usageLimit: number; }",
-    markdown:
-      "## list\n\n`client.v1.events.beta.customers.assignments.list(id: string, after?: string, before?: string, capabilityId?: string, entityId?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; cadence: 'MONTH'; capabilityId: string; createdAt: string; entityId: string; updatedAt: string; usageLimit: number; }`\n\n**get** `/api/v1-beta/customers/{id}/assignments`\n\nReturns a cursor-paginated list of capability assignments for the given customer. An assignment ties an entity to a capability with a usage limit and reset cadence.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `capabilityId?: string`\n  Filter assignments to a specific capability refId\n\n- `entityId?: string`\n  Filter assignments to a specific entity refId\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; cadence: 'MONTH'; capabilityId: string; createdAt: string; entityId: string; updatedAt: string; usageLimit: number; }`\n  A capability assignment for an entity belonging to a customer. Defines how much of the capability the entity may consume (`usageLimit`) and how often the counter resets (`cadence`).\n\n  - `id: string`\n  - `cadence: 'MONTH'`\n  - `capabilityId: string`\n  - `createdAt: string`\n  - `entityId: string`\n  - `updatedAt: string`\n  - `usageLimit: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const assignmentListResponse of client.v1.events.beta.customers.assignments.list('id')) {\n  console.log(assignmentListResponse);\n}\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.assignments.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const assignmentListResponse of client.v1.events.beta.customers.assignments.list('id')) {\n  console.log(assignmentListResponse.id);\n}",
-      },
-      python: {
-        method: 'v1.events.beta.customers.assignments.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.beta.customers.assignments.list(\n    id="id",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().assignments().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.assignments.AssignmentListPage;\nimport io.stigg.models.v1.events.beta.customers.assignments.AssignmentListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentListPage page = client.v1().events().beta().customers().assignments().list("id");\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Assignments.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Beta.Customers.Assignments.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerAssignmentListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.assignments.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.beta.customers.assignments.list("id")\n\nputs(page)',
-      },
-      cli: {
-        method: 'assignments list',
-        example: "stigg v1:events:beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Assignments.List',
-        example:
-          'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1.Events.Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
-    name: 'upsert',
-    endpoint: '/api/v1-beta/customers/{id}/assignments',
-    httpMethod: 'put',
-    summary: 'Upsert assignments',
-    description:
-      'Batched create-or-update of capability assignments. Existing assignments matched by (entityId, capabilityId) are updated; new pairs are created. On update, omitted fields (usageLimit, cadence) are preserved; on create both are required by the governance service.',
-    stainlessPath: '(resource) v1.events.beta.customers.assignments > (method) upsert',
-    qualified: 'client.v1.events.beta.customers.assignments.upsert',
-    params: [
-      'id: string;',
-      "assignments: { capabilityId: string; entityId: string; cadence?: 'MONTH'; usageLimit?: number; }[];",
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      "{ data: { id: string; cadence: 'MONTH'; capabilityId: string; createdAt: string; entityId: string; updatedAt: string; usageLimit: number; }[]; }",
-    markdown:
-      "## upsert\n\n`client.v1.events.beta.customers.assignments.upsert(id: string, assignments: { capabilityId: string; entityId: string; cadence?: 'MONTH'; usageLimit?: number; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/customers/{id}/assignments`\n\nBatched create-or-update of capability assignments. Existing assignments matched by (entityId, capabilityId) are updated; new pairs are created. On update, omitted fields (usageLimit, cadence) are preserved; on create both are required by the governance service.\n\n### Parameters\n\n- `id: string`\n\n- `assignments: { capabilityId: string; entityId: string; cadence?: 'MONTH'; usageLimit?: number; }[]`\n  Assignments to upsert (1–100 per request)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; cadence: 'MONTH'; capabilityId: string; createdAt: string; entityId: string; updatedAt: string; usageLimit: number; }[]; }`\n  Assignments after upsert.\n\n  - `data: { id: string; cadence: 'MONTH'; capabilityId: string; createdAt: string; entityId: string; updatedAt: string; usageLimit: number; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.assignments.upsert('id', { assignments: [{ capabilityId: 'compute-minutes', entityId: 'workspace-001' }, { capabilityId: 'compute-minutes', entityId: 'workspace-002' }] });\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.assignments.upsert',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.assignments.upsert('id', {\n  assignments: [\n    {\n      entityId: 'workspace-001',\n      capabilityId: 'compute-minutes',\n      usageLimit: 1000,\n      cadence: 'MONTH',\n    },\n    {\n      entityId: 'workspace-002',\n      capabilityId: 'compute-minutes',\n      usageLimit: 2000,\n      cadence: 'MONTH',\n    },\n  ],\n});\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.assignments.upsert',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.assignments.upsert(\n    id="id",\n    assignments=[{\n        "entity_id": "workspace-001",\n        "capability_id": "compute-minutes",\n        "usage_limit": 1000,\n        "cadence": "MONTH",\n    }, {\n        "entity_id": "workspace-002",\n        "capability_id": "compute-minutes",\n        "usage_limit": 2000,\n        "cadence": "MONTH",\n    }],\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().assignments().upsert',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.assignments.AssignmentUpsertParams;\nimport io.stigg.models.v1.events.beta.customers.assignments.AssignmentUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentUpsertParams params = AssignmentUpsertParams.builder()\n            .id("id")\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .capabilityId("compute-minutes")\n                .entityId("workspace-001")\n                .build())\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .capabilityId("compute-minutes")\n                .entityId("workspace-002")\n                .build())\n            .build();\n        AssignmentUpsertResponse response = client.v1().events().beta().customers().assignments().upsert(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.Assignments.Upsert',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.Assignments.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerAssignmentUpsertParams{\n\t\t\tAssignments: []stigg.V1EventBetaCustomerAssignmentUpsertParamsAssignment{{\n\t\t\t\tEntityID:     "workspace-001",\n\t\t\t\tCapabilityID: "compute-minutes",\n\t\t\t\tUsageLimit:   stigg.Float(1000),\n\t\t\t\tCadence:      "MONTH",\n\t\t\t}, {\n\t\t\t\tEntityID:     "workspace-002",\n\t\t\t\tCapabilityID: "compute-minutes",\n\t\t\t\tUsageLimit:   stigg.Float(2000),\n\t\t\t\tCadence:      "MONTH",\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.assignments.upsert',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.assignments.upsert(\n  "id",\n  assignments: [\n    {capabilityId: "compute-minutes", entityId: "workspace-001"},\n    {capabilityId: "compute-minutes", entityId: "workspace-002"}\n  ]\n)\n\nputs(response)',
-      },
-      cli: {
-        method: 'assignments upsert',
-        example:
-          "stigg v1:events:beta:customers:assignments upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --assignment '{capabilityId: compute-minutes, entityId: workspace-001}' \\\n  --assignment '{capabilityId: compute-minutes, entityId: workspace-002}'",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.Assignments.Upsert',
-        example:
-          'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            CapabilityID = "compute-minutes",\n            EntityID = "workspace-001",\n            Cadence = Cadence.Month,\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            CapabilityID = "compute-minutes",\n            EntityID = "workspace-002",\n            Cadence = Cadence.Month,\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "capabilityId": "compute-minutes",\n              "entityId": "workspace-001",\n              "cadence": "MONTH",\n              "usageLimit": 1000\n            },\n            {\n              "capabilityId": "compute-minutes",\n              "entityId": "workspace-002",\n              "cadence": "MONTH",\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
-      },
-    },
-  },
-  {
-    name: 'list',
-    endpoint: '/api/v1-beta/entity-types',
-    httpMethod: 'get',
-    summary: 'Get a list of entity types',
-    description:
-      'Returns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).',
-    stainlessPath: '(resource) v1.events.beta.entity_types > (method) list',
-    qualified: 'client.v1.events.beta.entityTypes.list',
-    params: [
-      'after?: string;',
-      'before?: string;',
-      'limit?: number;',
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      '{ id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }',
-    markdown:
-      "## list\n\n`client.v1.events.beta.entityTypes.list(after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }`\n\n**get** `/api/v1-beta/entity-types`\n\nReturns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }`\n  A vendor-defined category of resource that can be governed (e.g. Org, Team, User). Vendors define entity types once per environment; their customers create instances (entities) of these types and the governance engine tracks usage and enforces limits per instance.\n\n  - `id: string`\n  - `attributionKeys: string[]`\n  - `createdAt: string`\n  - `displayName: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1.events.beta.entityTypes.list()) {\n  console.log(entityTypeListResponse);\n}\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.entityTypes.list',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1.events.beta.entityTypes.list()) {\n  console.log(entityTypeListResponse.id);\n}",
-      },
-      python: {
-        method: 'v1.events.beta.entity_types.list',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1.events.beta.entity_types.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      java: {
-        method: 'v1().events().beta().entityTypes().list',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.entitytypes.EntityTypeListPage;\nimport io.stigg.models.v1.events.beta.entitytypes.EntityTypeListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeListPage page = client.v1().events().beta().entityTypes().list();\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.EntityTypes.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Events.Beta.EntityTypes.List(context.TODO(), stigg.V1EventBetaEntityTypeListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.entity_types.list',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1.events.beta.entity_types.list\n\nputs(page)',
-      },
-      cli: {
-        method: 'entity_types list',
-        example: "stigg v1:events:beta:entity-types list \\\n  --api-key 'My API Key'",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.EntityTypes.List',
-        example:
-          'EntityTypeListParams parameters = new();\n\nvar page = await client.V1.Events.Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      http: {
-        example: 'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
-    name: 'upsert',
-    endpoint: '/api/v1-beta/entity-types',
-    httpMethod: 'put',
-    summary: 'Upsert entity types',
-    description:
-      'Batched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.',
-    stainlessPath: '(resource) v1.events.beta.entity_types > (method) upsert',
-    qualified: 'client.v1.events.beta.entityTypes.upsert',
-    params: [
-      'types: { id: string; attributionKeys: string[]; displayName: string; }[];',
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      '{ data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]; }',
-    markdown:
-      "## upsert\n\n`client.v1.events.beta.entityTypes.upsert(types: { id: string; attributionKeys: string[]; displayName: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/entity-types`\n\nBatched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.\n\n### Parameters\n\n- `types: { id: string; attributionKeys: string[]; displayName: string; }[]`\n  Entity types to upsert (1–100 per request)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]; }`\n  Entity types after upsert.\n\n  - `data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.entityTypes.upsert({ types: [{\n  id: 'org',\n  attributionKeys: ['organizationId'],\n  displayName: 'Organization',\n}, {\n  id: 'team',\n  attributionKeys: ['teamId'],\n  displayName: 'Team',\n}] });\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.entityTypes.upsert',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.entityTypes.upsert({\n  types: [\n    {\n      id: 'org',\n      displayName: 'Organization',\n      attributionKeys: ['organizationId'],\n    },\n    {\n      id: 'team',\n      displayName: 'Team',\n      attributionKeys: ['teamId'],\n    },\n  ],\n});\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.entity_types.upsert',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.entity_types.upsert(\n    types=[{\n        "id": "org",\n        "display_name": "Organization",\n        "attribution_keys": ["organizationId"],\n    }, {\n        "id": "team",\n        "display_name": "Team",\n        "attribution_keys": ["teamId"],\n    }],\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().entityTypes().upsert',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.entitytypes.EntityTypeUpsertParams;\nimport io.stigg.models.v1.events.beta.entitytypes.EntityTypeUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeUpsertParams params = EntityTypeUpsertParams.builder()\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("org")\n                .addAttributionKey("organizationId")\n                .displayName("Organization")\n                .build())\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("team")\n                .addAttributionKey("teamId")\n                .displayName("Team")\n                .build())\n            .build();\n        EntityTypeUpsertResponse response = client.v1().events().beta().entityTypes().upsert(params);\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.EntityTypes.Upsert',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.EntityTypes.Upsert(context.TODO(), stigg.V1EventBetaEntityTypeUpsertParams{\n\t\tTypes: []stigg.V1EventBetaEntityTypeUpsertParamsType{{\n\t\t\tID:              "org",\n\t\t\tDisplayName:     "Organization",\n\t\t\tAttributionKeys: []string{"organizationId"},\n\t\t}, {\n\t\t\tID:              "team",\n\t\t\tDisplayName:     "Team",\n\t\t\tAttributionKeys: []string{"teamId"},\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.entity_types.upsert',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.entity_types.upsert(\n  types: [\n    {id: "org", attributionKeys: ["organizationId"], displayName: "Organization"},\n    {id: "team", attributionKeys: ["teamId"], displayName: "Team"}\n  ]\n)\n\nputs(response)',
-      },
-      cli: {
-        method: 'entity_types upsert',
-        example:
-          "stigg v1:events:beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.EntityTypes.Upsert',
-        example:
-          'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization"\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
-      },
-    },
-  },
-  {
     name: 'trigger_sync',
     endpoint: '/api/v1/data-export/sync',
     httpMethod: 'post',
@@ -3140,11 +2542,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     description: 'Trigger a sync for one destination or all destinations under the provider entity.',
     stainlessPath: '(resource) v1.events.data_export > (method) trigger_sync',
     qualified: 'client.v1.events.dataExport.triggerSync',
-    params: ['destinationId?: string;'],
+    params: ['destinationId?: string;', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
     response:
       '{ data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }; }',
     markdown:
-      "## trigger_sync\n\n`client.v1.events.dataExport.triggerSync(destinationId?: string): { data: object; }`\n\n**post** `/api/v1/data-export/sync`\n\nTrigger a sync for one destination or all destinations under the provider entity.\n\n### Parameters\n\n- `destinationId?: string`\n  Provider destination ID to sync. Omit to sync all destinations.\n\n### Returns\n\n- `{ data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }; }`\n  Response object\n\n  - `data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.triggerSync();\n\nconsole.log(response);\n```",
+      "## trigger_sync\n\n`client.v1.events.dataExport.triggerSync(destinationId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/sync`\n\nTrigger a sync for one destination or all destinations under the provider entity.\n\n### Parameters\n\n- `destinationId?: string`\n  Provider destination ID to sync. Omit to sync all destinations.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }; }`\n  Response object\n\n  - `data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.triggerSync();\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.triggerSync',
@@ -3195,10 +2597,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'Mint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.',
     stainlessPath: '(resource) v1.events.data_export > (method) mint_scoped_token',
     qualified: 'client.v1.events.dataExport.mintScopedToken',
-    params: ['applicationOrigin: string;', 'destinationType?: string;'],
+    params: [
+      'applicationOrigin: string;',
+      'destinationType?: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
     response: '{ data: { token: string; expiresAt: string; providerMetadata: object; }; }',
     markdown:
-      "## mint_scoped_token\n\n`client.v1.events.dataExport.mintScopedToken(applicationOrigin: string, destinationType?: string): { data: object; }`\n\n**post** `/api/v1/data-export/scoped-token`\n\nMint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.\n\n### Parameters\n\n- `applicationOrigin: string`\n  FE origin the resulting JWT is bound to (provider-side anti-fraud)\n\n- `destinationType?: string`\n  Pin the token to a specific warehouse connect flow\n\n### Returns\n\n- `{ data: { token: string; expiresAt: string; providerMetadata: object; }; }`\n  Response object\n\n  - `data: { token: string; expiresAt: string; providerMetadata: object; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response);\n```",
+      "## mint_scoped_token\n\n`client.v1.events.dataExport.mintScopedToken(applicationOrigin: string, destinationType?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/scoped-token`\n\nMint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.\n\n### Parameters\n\n- `applicationOrigin: string`\n  FE origin the resulting JWT is bound to (provider-side anti-fraud)\n\n- `destinationType?: string`\n  Pin the token to a specific warehouse connect flow\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { token: string; expiresAt: string; providerMetadata: object; }; }`\n  Response object\n\n  - `data: { token: string; expiresAt: string; providerMetadata: object; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.mintScopedToken',
@@ -3250,11 +2657,16 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       "Register a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.",
     stainlessPath: '(resource) v1.events.data_export.destinations > (method) create',
     qualified: 'client.v1.events.dataExport.destinations.create',
-    params: ['destinationId: string;', 'destinationType: string;'],
+    params: [
+      'destinationId: string;',
+      'destinationType: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
     response:
       '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }',
     markdown:
-      "## create\n\n`client.v1.events.dataExport.destinations.create(destinationId: string, destinationType: string): { data: object; }`\n\n**post** `/api/v1/data-export/destinations`\n\nRegister a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.\n\n### Parameters\n\n- `destinationId: string`\n  The provider destination ID returned by the embedded SDK on connect\n\n- `destinationType: string`\n  The destination type (e.g. snowflake, bigquery)\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.create({ destinationId: 'x', destinationType: 'x' });\n\nconsole.log(destination);\n```",
+      "## create\n\n`client.v1.events.dataExport.destinations.create(destinationId: string, destinationType: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/destinations`\n\nRegister a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.\n\n### Parameters\n\n- `destinationId: string`\n  The provider destination ID returned by the embedded SDK on connect\n\n- `destinationType: string`\n  The destination type (e.g. snowflake, bigquery)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.create({ destinationId: 'x', destinationType: 'x' });\n\nconsole.log(destination);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.destinations.create',
@@ -3305,11 +2717,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     description: 'Remove a destination from the DATA_EXPORT integration metadata. Idempotent.',
     stainlessPath: '(resource) v1.events.data_export.destinations > (method) delete',
     qualified: 'client.v1.events.dataExport.destinations.delete',
-    params: ['destinationId: string;'],
+    params: ['destinationId: string;', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
     response:
       '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }',
     markdown:
-      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nRemove a destination from the DATA_EXPORT integration metadata. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
+      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nRemove a destination from the DATA_EXPORT integration metadata. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.destinations.delete',
@@ -3319,7 +2731,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       python: {
         method: 'v1.events.data_export.destinations.delete',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ndestination = client.v1.events.data_export.destinations.delete(\n    "x",\n)\nprint(destination.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ndestination = client.v1.events.data_export.destinations.delete(\n    destination_id="x",\n)\nprint(destination.data)',
       },
       java: {
         method: 'v1().events().dataExport().destinations().delete',
@@ -3329,7 +2741,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       go: {
         method: 'client.V1.Events.DataExport.Destinations.Delete',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Delete(context.TODO(), "x")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Delete(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationDeleteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
       },
       ruby: {
         method: 'v1.events.data_export.destinations.delete',
@@ -6505,6 +5917,603 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'check',
+    endpoint: '/api/v1-beta/customers/{id}/entitlements/check',
+    httpMethod: 'get',
+    summary: 'Check entitlement (beta)',
+    description:
+      'Experimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.',
+    stainlessPath: '(resource) v1-beta.customers.entitlements > (method) check',
+    qualified: 'client.v1Beta.customers.entitlements.check',
+    params: [
+      'id: string;',
+      'currencyId?: string;',
+      'dimensions?: object;',
+      'featureId?: string;',
+      'requestedUsage?: number;',
+      'requestedValues?: string[];',
+      'resourceId?: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      "{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }",
+    markdown:
+      "## check\n\n`client.v1Beta.customers.entitlements.check(id: string, currencyId?: string, dimensions?: object, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object; }`\n\n**get** `/api/v1-beta/customers/{id}/entitlements/check`\n\nExperimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `dimensions?: object`\n  Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the response includes a `chains` array with per-entity governance limits.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entitlements.check('x');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entitlements.check',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.entitlements.check('x');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.entitlements.check',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.entitlements.check(\n    id="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().entitlements().check',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entitlements.EntitlementCheckParams;\nimport io.stigg.models.v1beta.customers.entitlements.EntitlementCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCheckResponse response = client.v1Beta().customers().entitlements().check("x");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entitlements.Check',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entitlements.check',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.entitlements.check("x")\n\nputs(response)',
+      },
+      cli: {
+        method: 'entitlements check',
+        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entitlements.Check',
+        example:
+          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list',
+    endpoint: '/api/v1-beta/customers/{id}/entities',
+    httpMethod: 'get',
+    summary: 'Get a list of entitys',
+    description: 'Retrieves a paginated list of entities for the given customer.',
+    stainlessPath: '(resource) v1-beta.customers.entities > (method) list',
+    qualified: 'client.v1Beta.customers.entities.list',
+    params: [
+      'id: string;',
+      'after?: string;',
+      'before?: string;',
+      "includeArchived?: 'true' | 'false';",
+      'limit?: number;',
+      'typeRefId?: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }',
+    markdown:
+      "## list\n\n`client.v1Beta.customers.entities.list(id: string, after?: string, before?: string, includeArchived?: 'true' | 'false', limit?: number, typeRefId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }`\n\n**get** `/api/v1-beta/customers/{id}/entities`\n\nRetrieves a paginated list of entities for the given customer.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `includeArchived?: 'true' | 'false'`\n  Whether to include archived entities. One of: true, false\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `typeRefId?: string`\n  Filter results to entities of a specific entity type, by the type's refId\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }`\n  A stored entity instance tracked by the governance service for a given customer\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `metadata: object`\n  - `typeId: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityListResponse of client.v1Beta.customers.entities.list('id')) {\n  console.log(entityListResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entities.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const entityListResponse of client.v1Beta.customers.entities.list('id')) {\n  console.log(entityListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1_beta.customers.entities.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1_beta.customers.entities.list(\n    id="id",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1Beta().customers().entities().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityListPage;\nimport io.stigg.models.v1beta.customers.entities.EntityListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityListPage page = client.v1Beta().customers().entities().list("id");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Entities.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entities.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1_beta.customers.entities.list("id")\n\nputs(page)',
+      },
+      cli: {
+        method: 'entities list',
+        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entities.List',
+        example:
+          'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'upsert',
+    endpoint: '/api/v1-beta/customers/{id}/entities',
+    httpMethod: 'put',
+    summary: 'Upsert entities',
+    description:
+      'Creates or updates entities in bulk for the given customer. Existing entities matched by id are updated; new ids are created.',
+    stainlessPath: '(resource) v1-beta.customers.entities > (method) upsert',
+    qualified: 'client.v1Beta.customers.entities.upsert',
+    params: [
+      'id: string;',
+      'entities: { id: string; metadata?: object; typeRefId?: string; }[];',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }[]; }',
+    markdown:
+      "## upsert\n\n`client.v1Beta.customers.entities.upsert(id: string, entities: { id: string; metadata?: object; typeRefId?: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/customers/{id}/entities`\n\nCreates or updates entities in bulk for the given customer. Existing entities matched by id are updated; new ids are created.\n\n### Parameters\n\n- `id: string`\n\n- `entities: { id: string; metadata?: object; typeRefId?: string; }[]`\n  List of entities to create or update (1-100 entries)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }[]; }`\n  List of entities created or updated by an upsert request\n\n  - `data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entities.upsert('id', { entities: [{ id: 'user-7f3a0c1d' }, { id: 'user-c4d1b2e9' }] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entities.upsert',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.entities.upsert('id', {\n  entities: [\n    {\n      id: 'user-7f3a0c1d',\n      typeRefId: 'user',\n      metadata: { email: 'jane@acme.com', role: 'admin' },\n    },\n    {\n      id: 'user-c4d1b2e9',\n      typeRefId: 'user',\n      metadata: { email: 'john@acme.com' },\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.entities.upsert',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.entities.upsert(\n    id="id",\n    entities=[{\n        "id": "user-7f3a0c1d",\n        "type_ref_id": "user",\n        "metadata": {\n            "email": "jane@acme.com",\n            "role": "admin",\n        },\n    }, {\n        "id": "user-c4d1b2e9",\n        "type_ref_id": "user",\n        "metadata": {\n            "email": "john@acme.com"\n        },\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().entities().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityUpsertParams;\nimport io.stigg.models.v1beta.customers.entities.EntityUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUpsertParams params = EntityUpsertParams.builder()\n            .id("id")\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-7f3a0c1d")\n                .build())\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-c4d1b2e9")\n                .build())\n            .build();\n        EntityUpsertResponse response = client.v1Beta().customers().entities().upsert(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUpsertParams{\n\t\t\tEntities: []stigg.V1BetaCustomerEntityUpsertParamsEntity{{\n\t\t\t\tID:        "user-7f3a0c1d",\n\t\t\t\tTypeRefID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "jane@acme.com",\n\t\t\t\t\t"role":  "admin",\n\t\t\t\t},\n\t\t\t}, {\n\t\t\t\tID:        "user-c4d1b2e9",\n\t\t\t\tTypeRefID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "john@acme.com",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entities.upsert',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.entities.upsert("id", entities: [{id: "user-7f3a0c1d"}, {id: "user-c4d1b2e9"}])\n\nputs(response)',
+      },
+      cli: {
+        method: 'entities upsert',
+        example:
+          "stigg v1-beta:customers:entities upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity '{id: user-7f3a0c1d}' \\\n  --entity '{id: user-c4d1b2e9}'",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Upsert',
+        example:
+          'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n            TypeRefID = "user",\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n            TypeRefID = "user",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              },\n              "typeRefId": "user"\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "metadata": {\n                "email": "john@acme.com"\n              },\n              "typeRefId": "user"\n            }\n          ]\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'retrieve',
+    endpoint: '/api/v1-beta/customers/{id}/entities/{entityId}',
+    httpMethod: 'get',
+    summary: 'Get a single entity by ID',
+    description: 'Retrieves a single entity for the given customer by its identifier.',
+    stainlessPath: '(resource) v1-beta.customers.entities > (method) retrieve',
+    qualified: 'client.v1Beta.customers.entities.retrieve',
+    params: ['id: string;', 'entityId: string;', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
+    response:
+      '{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }; }',
+    markdown:
+      "## retrieve\n\n`client.v1Beta.customers.entities.retrieve(id: string, entityId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1-beta/customers/{id}/entities/{entityId}`\n\nRetrieves a single entity for the given customer by its identifier.\n\n### Parameters\n\n- `id: string`\n\n- `entityId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; metadata: object; typeId: string; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entity = await client.v1Beta.customers.entities.retrieve('x', { id: 'id' });\n\nconsole.log(entity);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entities.retrieve',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst entity = await client.v1Beta.customers.entities.retrieve('x', { id: 'id' });\n\nconsole.log(entity.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.entities.retrieve',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nentity = client.v1_beta.customers.entities.retrieve(\n    entity_id="x",\n    id="id",\n)\nprint(entity.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().entities().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityRetrieveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityRetrieveParams params = EntityRetrieveParams.builder()\n            .id("id")\n            .entityId("x")\n            .build();\n        EntityRetrieveResponse entity = client.v1Beta().customers().entities().retrieve(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentity, err := client.V1Beta.Customers.Entities.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntityGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entities.retrieve',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nentity = stigg.v1_beta.customers.entities.retrieve("x", id: "id")\n\nputs(entity)',
+      },
+      cli: {
+        method: 'entities retrieve',
+        example:
+          "stigg v1-beta:customers:entities retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity-id x",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Retrieve',
+        example:
+          'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'archive',
+    endpoint: '/api/v1-beta/customers/{id}/entities/archive',
+    httpMethod: 'post',
+    summary: 'Archive entities',
+    description: 'Archives entities in bulk for the given customer by id.',
+    stainlessPath: '(resource) v1-beta.customers.entities > (method) archive',
+    qualified: 'client.v1Beta.customers.entities.archive',
+    params: ['id: string;', 'ids: string[];', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
+    response: '{ data: { ids: string[]; }; }',
+    markdown:
+      "## archive\n\n`client.v1Beta.customers.entities.archive(id: string, ids: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1-beta/customers/{id}/entities/archive`\n\nArchives entities in bulk for the given customer by id.\n\n### Parameters\n\n- `id: string`\n\n- `ids: string[]`\n  Entity identifiers to act on\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { ids: string[]; }; }`\n  Wrapped response echoing the ids that were acted on by an archive/unarchive call\n\n  - `data: { ids: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entities.archive('id', { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entities.archive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.entities.archive('id', {\n  ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.entities.archive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.entities.archive(\n    id="id",\n    ids=["user-7f3a0c1d", "user-c4d1b2e9"],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().entities().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityArchiveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityArchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityArchiveParams params = EntityArchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityArchiveResponse response = client.v1Beta().customers().entities().archive(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Archive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityArchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entities.archive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.entities.archive("id", ids: ["user-7f3a0c1d", "user-c4d1b2e9"])\n\nputs(response)',
+      },
+      cli: {
+        method: 'entities archive',
+        example:
+          "stigg v1-beta:customers:entities archive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Archive',
+        example:
+          'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'unarchive',
+    endpoint: '/api/v1-beta/customers/{id}/entities/unarchive',
+    httpMethod: 'post',
+    summary: 'Unarchive entities',
+    description: 'Restores previously archived entities in bulk for the given customer by id.',
+    stainlessPath: '(resource) v1-beta.customers.entities > (method) unarchive',
+    qualified: 'client.v1Beta.customers.entities.unarchive',
+    params: ['id: string;', 'ids: string[];', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
+    response: '{ data: { ids: string[]; }; }',
+    markdown:
+      "## unarchive\n\n`client.v1Beta.customers.entities.unarchive(id: string, ids: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1-beta/customers/{id}/entities/unarchive`\n\nRestores previously archived entities in bulk for the given customer by id.\n\n### Parameters\n\n- `id: string`\n\n- `ids: string[]`\n  Entity identifiers to act on\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { ids: string[]; }; }`\n  Wrapped response echoing the ids that were acted on by an archive/unarchive call\n\n  - `data: { ids: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entities.unarchive('id', { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.entities.unarchive',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.entities.unarchive('id', {\n  ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.entities.unarchive',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.entities.unarchive(\n    id="id",\n    ids=["user-7f3a0c1d", "user-c4d1b2e9"],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().entities().unarchive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityUnarchiveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityUnarchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUnarchiveParams params = EntityUnarchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityUnarchiveResponse response = client.v1Beta().customers().entities().unarchive(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Unarchive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Unarchive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUnarchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.entities.unarchive',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.entities.unarchive("id", ids: ["user-7f3a0c1d", "user-c4d1b2e9"])\n\nputs(response)',
+      },
+      cli: {
+        method: 'entities unarchive',
+        example:
+          "stigg v1-beta:customers:entities unarchive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Unarchive',
+        example:
+          'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'list',
+    endpoint: '/api/v1-beta/customers/{id}/assignments',
+    httpMethod: 'get',
+    summary: 'Get a list of assignments',
+    description:
+      'Returns a cursor-paginated list of capability assignments for the given customer. An assignment ties an entity to a capability with a usage limit and reset cadence.',
+    stainlessPath: '(resource) v1-beta.customers.assignments > (method) list',
+    qualified: 'client.v1Beta.customers.assignments.list',
+    params: [
+      'id: string;',
+      'after?: string;',
+      'before?: string;',
+      'capabilityId?: string;',
+      'entityId?: string;',
+      'limit?: number;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      "{ id: string; cadence: 'MONTH'; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }",
+    markdown:
+      "## list\n\n`client.v1Beta.customers.assignments.list(id: string, after?: string, before?: string, capabilityId?: string, entityId?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; cadence: 'MONTH'; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }`\n\n**get** `/api/v1-beta/customers/{id}/assignments`\n\nReturns a cursor-paginated list of capability assignments for the given customer. An assignment ties an entity to a capability with a usage limit and reset cadence.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `capabilityId?: string`\n  Filter assignments to a specific capability refId\n\n- `entityId?: string`\n  Filter assignments to a specific entity refId\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; cadence: 'MONTH'; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }`\n  A capability assignment for an entity belonging to a customer. Defines how much of the capability the entity may consume (`usageLimit`) and how often the counter resets (`cadence`).\n\n  - `id: string`\n  - `cadence: 'MONTH'`\n  - `createdAt: string`\n  - `entityId: string`\n  - `parentId: string`\n  - `scopeEntityIds: string[]`\n  - `updatedAt: string`\n  - `usageLimit: number`\n  - `currencyId?: string`\n  - `featureId?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const assignmentListResponse of client.v1Beta.customers.assignments.list('id')) {\n  console.log(assignmentListResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.assignments.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const assignmentListResponse of client.v1Beta.customers.assignments.list('id')) {\n  console.log(assignmentListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1_beta.customers.assignments.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1_beta.customers.assignments.list(\n    id="id",\n)\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1Beta().customers().assignments().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentListPage;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentListPage page = client.v1Beta().customers().assignments().list("id");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Assignments.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Assignments.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.assignments.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1_beta.customers.assignments.list("id")\n\nputs(page)',
+      },
+      cli: {
+        method: 'assignments list',
+        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Assignments.List',
+        example:
+          'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'upsert',
+    endpoint: '/api/v1-beta/customers/{id}/assignments',
+    httpMethod: 'put',
+    summary: 'Upsert assignments',
+    description:
+      'Batched create-or-update of capability assignments. Existing assignments matched by (entityId, capabilityId) are updated; new pairs are created. On update, omitted fields (usageLimit, cadence) are preserved; on create both are required by the governance service.',
+    stainlessPath: '(resource) v1-beta.customers.assignments > (method) upsert',
+    qualified: 'client.v1Beta.customers.assignments.upsert',
+    params: [
+      'id: string;',
+      "assignments: { entityId: string; cadence?: 'MONTH'; currencyId?: string; featureId?: string; parentId?: string; scopeEntityIds?: string[]; usageLimit?: number; }[];",
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      "{ data: { id: string; cadence: 'MONTH'; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }[]; }",
+    markdown:
+      "## upsert\n\n`client.v1Beta.customers.assignments.upsert(id: string, assignments: { entityId: string; cadence?: 'MONTH'; currencyId?: string; featureId?: string; parentId?: string; scopeEntityIds?: string[]; usageLimit?: number; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/customers/{id}/assignments`\n\nBatched create-or-update of capability assignments. Existing assignments matched by (entityId, capabilityId) are updated; new pairs are created. On update, omitted fields (usageLimit, cadence) are preserved; on create both are required by the governance service.\n\n### Parameters\n\n- `id: string`\n\n- `assignments: { entityId: string; cadence?: 'MONTH'; currencyId?: string; featureId?: string; parentId?: string; scopeEntityIds?: string[]; usageLimit?: number; }[]`\n  Assignments to upsert (1–100 per request)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; cadence: 'MONTH'; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }[]; }`\n  Assignments after upsert.\n\n  - `data: { id: string; cadence: 'MONTH'; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.assignments.upsert('id', { assignments: [{ entityId: 'workspace-001' }, { entityId: 'workspace-002' }] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.assignments.upsert',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.assignments.upsert('id', {\n  assignments: [\n    {\n      entityId: 'workspace-001',\n      featureId: 'compute-minutes',\n      usageLimit: 1000,\n      cadence: 'MONTH',\n    },\n    {\n      entityId: 'workspace-002',\n      currencyId: 'cred-type-tokens',\n      usageLimit: 2000,\n      cadence: 'MONTH',\n      parentId: 'workspace-001',\n      scopeEntityIds: ['user-1'],\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.assignments.upsert',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.assignments.upsert(\n    id="id",\n    assignments=[{\n        "entity_id": "workspace-001",\n        "feature_id": "compute-minutes",\n        "usage_limit": 1000,\n        "cadence": "MONTH",\n    }, {\n        "entity_id": "workspace-002",\n        "currency_id": "cred-type-tokens",\n        "usage_limit": 2000,\n        "cadence": "MONTH",\n        "parent_id": "workspace-001",\n        "scope_entity_ids": ["user-1"],\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().assignments().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentUpsertParams;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentUpsertParams params = AssignmentUpsertParams.builder()\n            .id("id")\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .entityId("workspace-001")\n                .build())\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .entityId("workspace-002")\n                .build())\n            .build();\n        AssignmentUpsertResponse response = client.v1Beta().customers().assignments().upsert(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Assignments.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Assignments.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentUpsertParams{\n\t\t\tAssignments: []stigg.V1BetaCustomerAssignmentUpsertParamsAssignment{{\n\t\t\t\tEntityID:   "workspace-001",\n\t\t\t\tFeatureID:  stigg.String("compute-minutes"),\n\t\t\t\tUsageLimit: stigg.Float(1000),\n\t\t\t\tCadence:    "MONTH",\n\t\t\t}, {\n\t\t\t\tEntityID:       "workspace-002",\n\t\t\t\tCurrencyID:     stigg.String("cred-type-tokens"),\n\t\t\t\tUsageLimit:     stigg.Float(2000),\n\t\t\t\tCadence:        "MONTH",\n\t\t\t\tParentID:       stigg.String("workspace-001"),\n\t\t\t\tScopeEntityIDs: []string{"user-1"},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.assignments.upsert',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.assignments.upsert(\n  "id",\n  assignments: [{entityId: "workspace-001"}, {entityId: "workspace-002"}]\n)\n\nputs(response)',
+      },
+      cli: {
+        method: 'assignments upsert',
+        example:
+          "stigg v1-beta:customers:assignments upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --assignment '{entityId: workspace-001}' \\\n  --assignment '{entityId: workspace-002}'",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.Assignments.Upsert',
+        example:
+          'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            EntityID = "workspace-001",\n            Cadence = Cadence.Month,\n            CurrencyID = "currencyId",\n            FeatureID = "compute-minutes",\n            ParentID = "parentId",\n            ScopeEntityIds =\n            [\n                "NxI"\n            ],\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            EntityID = "workspace-002",\n            Cadence = Cadence.Month,\n            CurrencyID = "cred-type-tokens",\n            FeatureID = "featureId",\n            ParentID = "workspace-001",\n            ScopeEntityIds =\n            [\n                "user-1"\n            ],\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "entityId": "workspace-001",\n              "cadence": "MONTH",\n              "featureId": "compute-minutes",\n              "usageLimit": 1000\n            },\n            {\n              "entityId": "workspace-002",\n              "cadence": "MONTH",\n              "currencyId": "cred-type-tokens",\n              "parentId": "workspace-001",\n              "scopeEntityIds": [\n                "user-1"\n              ],\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'list',
+    endpoint: '/api/v1-beta/entity-types',
+    httpMethod: 'get',
+    summary: 'Get a list of entity types',
+    description:
+      'Returns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).',
+    stainlessPath: '(resource) v1-beta.entity_types > (method) list',
+    qualified: 'client.v1Beta.entityTypes.list',
+    params: [
+      'after?: string;',
+      'before?: string;',
+      'limit?: number;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }',
+    markdown:
+      "## list\n\n`client.v1Beta.entityTypes.list(after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }`\n\n**get** `/api/v1-beta/entity-types`\n\nReturns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }`\n  A vendor-defined category of resource that can be governed (e.g. Org, Team, User). Vendors define entity types once per environment; their customers create instances (entities) of these types and the governance engine tracks usage and enforces limits per instance.\n\n  - `id: string`\n  - `attributionKeys: string[]`\n  - `createdAt: string`\n  - `displayName: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {\n  console.log(entityTypeListResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.entityTypes.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {\n  console.log(entityTypeListResponse.id);\n}",
+      },
+      python: {
+        method: 'v1_beta.entity_types.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1_beta.entity_types.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      java: {
+        method: 'v1Beta().entityTypes().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeListPage;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeListPage page = client.v1Beta().entityTypes().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.EntityTypes.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.EntityTypes.List(context.TODO(), stigg.V1BetaEntityTypeListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.entity_types.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1_beta.entity_types.list\n\nputs(page)',
+      },
+      cli: {
+        method: 'entity_types list',
+        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1Beta.EntityTypes.List',
+        example:
+          'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      http: {
+        example: 'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'upsert',
+    endpoint: '/api/v1-beta/entity-types',
+    httpMethod: 'put',
+    summary: 'Upsert entity types',
+    description:
+      'Batched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.',
+    stainlessPath: '(resource) v1-beta.entity_types > (method) upsert',
+    qualified: 'client.v1Beta.entityTypes.upsert',
+    params: [
+      'types: { id: string; attributionKeys: string[]; displayName: string; }[];',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]; }',
+    markdown:
+      "## upsert\n\n`client.v1Beta.entityTypes.upsert(types: { id: string; attributionKeys: string[]; displayName: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/entity-types`\n\nBatched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.\n\n### Parameters\n\n- `types: { id: string; attributionKeys: string[]; displayName: string; }[]`\n  Entity types to upsert (1–100 per request)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]; }`\n  Entity types after upsert.\n\n  - `data: { id: string; attributionKeys: string[]; createdAt: string; displayName: string; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.entityTypes.upsert({ types: [{\n  id: 'org',\n  attributionKeys: ['organizationId'],\n  displayName: 'Organization',\n}, {\n  id: 'team',\n  attributionKeys: ['teamId'],\n  displayName: 'Team',\n}] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.entityTypes.upsert',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.entityTypes.upsert({\n  types: [\n    {\n      id: 'org',\n      displayName: 'Organization',\n      attributionKeys: ['organizationId'],\n    },\n    {\n      id: 'team',\n      displayName: 'Team',\n      attributionKeys: ['teamId'],\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.entity_types.upsert',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.entity_types.upsert(\n    types=[{\n        "id": "org",\n        "display_name": "Organization",\n        "attribution_keys": ["organizationId"],\n    }, {\n        "id": "team",\n        "display_name": "Team",\n        "attribution_keys": ["teamId"],\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().entityTypes().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertParams;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeUpsertParams params = EntityTypeUpsertParams.builder()\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("org")\n                .addAttributionKey("organizationId")\n                .displayName("Organization")\n                .build())\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("team")\n                .addAttributionKey("teamId")\n                .displayName("Team")\n                .build())\n            .build();\n        EntityTypeUpsertResponse response = client.v1Beta().entityTypes().upsert(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.EntityTypes.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.EntityTypes.Upsert(context.TODO(), stigg.V1BetaEntityTypeUpsertParams{\n\t\tTypes: []stigg.V1BetaEntityTypeUpsertParamsType{{\n\t\t\tID:              "org",\n\t\t\tDisplayName:     "Organization",\n\t\t\tAttributionKeys: []string{"organizationId"},\n\t\t}, {\n\t\t\tID:              "team",\n\t\t\tDisplayName:     "Team",\n\t\t\tAttributionKeys: []string{"teamId"},\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.entity_types.upsert',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.entity_types.upsert(\n  types: [\n    {id: "org", attributionKeys: ["organizationId"], displayName: "Organization"},\n    {id: "team", attributionKeys: ["teamId"], displayName: "Team"}\n  ]\n)\n\nputs(response)',
+      },
+      cli: {
+        method: 'entity_types upsert',
+        example:
+          "stigg v1-beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
+      },
+      csharp: {
+        method: 'V1Beta.EntityTypes.Upsert',
+        example:
+          'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization"\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
       },
     },
   },

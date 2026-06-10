@@ -14,19 +14,6 @@ export class Coupons extends APIResource {
   /**
    * Creates a new discount coupon with percentage or fixed amount off, applicable to
    * customer subscriptions.
-   *
-   * @example
-   * ```ts
-   * const coupon = await client.v1.coupons.create({
-   *   id: 'id',
-   *   amountsOff: [{ amount: 0, currency: 'usd' }],
-   *   description: 'description',
-   *   durationInMonths: 1,
-   *   metadata: { foo: 'string' },
-   *   name: 'name',
-   *   percentOff: 1,
-   * });
-   * ```
    */
   create(params: CouponCreateParams, options?: RequestOptions): APIPromise<Coupon> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -45,11 +32,6 @@ export class Coupons extends APIResource {
 
   /**
    * Retrieves a coupon by its unique identifier.
-   *
-   * @example
-   * ```ts
-   * const coupon = await client.v1.coupons.retrieve('x');
-   * ```
    */
   retrieve(
     id: string,
@@ -71,14 +53,6 @@ export class Coupons extends APIResource {
 
   /**
    * Retrieves a paginated list of coupons in the environment.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const couponListResponse of client.v1.coupons.list()) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     params: CouponListParams | null | undefined = {},
@@ -100,11 +74,6 @@ export class Coupons extends APIResource {
 
   /**
    * Archives a coupon, preventing it from being applied to new subscriptions.
-   *
-   * @example
-   * ```ts
-   * const coupon = await client.v1.coupons.archiveCoupon('x');
-   * ```
    */
   archiveCoupon(
     id: string,
@@ -126,11 +95,6 @@ export class Coupons extends APIResource {
 
   /**
    * Updates an existing coupon's properties such as name, description, and metadata.
-   *
-   * @example
-   * ```ts
-   * const coupon = await client.v1.coupons.updateCoupon('x');
-   * ```
    */
   updateCoupon(id: string, params: CouponUpdateCouponParams, options?: RequestOptions): APIPromise<Coupon> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

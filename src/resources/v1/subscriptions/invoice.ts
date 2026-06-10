@@ -13,12 +13,6 @@ export class Invoice extends APIResource {
   /**
    * Marks the latest invoice of a subscription as paid in the billing provider. The
    * invoice must exist and have an OPEN status.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.subscriptions.invoice.markAsPaid('x');
-   * ```
    */
   markAsPaid(
     id: string,
