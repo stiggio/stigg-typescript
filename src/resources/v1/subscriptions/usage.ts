@@ -13,12 +13,6 @@ export class Usage extends APIResource {
   /**
    * Immediately charges usage for a subscription via the billing integration.
    * Calculates usage since the last charge and creates an invoice.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.subscriptions.usage.chargeUsage('x');
-   * ```
    */
   chargeUsage(
     id: string,
@@ -42,13 +36,6 @@ export class Usage extends APIResource {
   /**
    * Triggers a usage sync for a subscription, reporting current usage to the billing
    * provider.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.subscriptions.usage.sync(
-   *   'x',
-   * );
-   * ```
    */
   sync(
     id: string,

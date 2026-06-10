@@ -39,14 +39,6 @@ export class Credits extends APIResource {
   /**
    * Retrieves the automatic recharge configuration for a customer and currency.
    * Returns default settings if no configuration exists.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.credits.getAutoRecharge({
-   *   currencyId: 'currencyId',
-   *   customerId: 'customerId',
-   * });
-   * ```
    */
   getAutoRecharge(
     params: CreditGetAutoRechargeParams,
@@ -69,13 +61,6 @@ export class Credits extends APIResource {
   /**
    * Retrieves credit usage time-series data for a customer, grouped by feature, over
    * a specified time range.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.credits.getUsage({
-   *   customerId: 'customerId',
-   * });
-   * ```
    */
   getUsage(params: CreditGetUsageParams, options?: RequestOptions): APIPromise<CreditGetUsageResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
@@ -94,16 +79,6 @@ export class Credits extends APIResource {
 
   /**
    * Retrieves a paginated list of credit ledger events for a customer.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const creditListLedgerResponse of client.v1.credits.listLedger(
-   *   { customerId: 'customerId' },
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   listLedger(
     params: CreditListLedgerParams,

@@ -12,4 +12,5 @@ export {
   type DestinationCreateResponse,
   type DestinationDeleteResponse,
   type DestinationCreateParams,
+  type DestinationDeleteParams,
 } from './destinations';
