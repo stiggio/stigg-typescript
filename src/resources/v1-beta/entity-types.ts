@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
-import { APIPromise } from '../../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../core/pagination';
-import { buildHeaders } from '../../../../internal/headers';
-import { RequestOptions } from '../../../../internal/request-options';
+import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
 
 export class EntityTypes extends APIResource {
   /**
@@ -15,7 +15,7 @@ export class EntityTypes extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const entityTypeListResponse of client.v1.events.beta.entityTypes.list()) {
+   * for await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {
    *   // ...
    * }
    * ```
@@ -45,21 +45,20 @@ export class EntityTypes extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
-   *   await client.v1.events.beta.entityTypes.upsert({
-   *     types: [
-   *       {
-   *         id: 'org',
-   *         displayName: 'Organization',
-   *         attributionKeys: ['organizationId'],
-   *       },
-   *       {
-   *         id: 'team',
-   *         displayName: 'Team',
-   *         attributionKeys: ['teamId'],
-   *       },
-   *     ],
-   *   });
+   * const response = await client.v1Beta.entityTypes.upsert({
+   *   types: [
+   *     {
+   *       id: 'org',
+   *       displayName: 'Organization',
+   *       attributionKeys: ['organizationId'],
+   *     },
+   *     {
+   *       id: 'team',
+   *       displayName: 'Team',
+   *       attributionKeys: ['teamId'],
+   *     },
+   *   ],
+   * });
    * ```
    */
   upsert(params: EntityTypeUpsertParams, options?: RequestOptions): APIPromise<EntityTypeUpsertResponse> {

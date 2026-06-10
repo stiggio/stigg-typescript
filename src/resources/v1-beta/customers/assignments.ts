@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../core/resource';
-import { APIPromise } from '../../../../../core/api-promise';
-import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../../../core/pagination';
-import { buildHeaders } from '../../../../../internal/headers';
-import { RequestOptions } from '../../../../../internal/request-options';
-import { path } from '../../../../../internal/utils/path';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Assignments extends APIResource {
   /**
@@ -16,7 +16,7 @@ export class Assignments extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const assignmentListResponse of client.v1.events.beta.customers.assignments.list(
+   * for await (const assignmentListResponse of client.v1Beta.customers.assignments.list(
    *   'id',
    * )) {
    *   // ...
@@ -55,25 +55,24 @@ export class Assignments extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.events.beta.customers.assignments.upsert(
-   *     'id',
-   *     {
-   *       assignments: [
-   *         {
-   *           entityId: 'workspace-001',
-   *           capabilityId: 'compute-minutes',
-   *           usageLimit: 1000,
-   *           cadence: 'MONTH',
-   *         },
-   *         {
-   *           entityId: 'workspace-002',
-   *           capabilityId: 'compute-minutes',
-   *           usageLimit: 2000,
-   *           cadence: 'MONTH',
-   *         },
-   *       ],
-   *     },
-   *   );
+   *   await client.v1Beta.customers.assignments.upsert('id', {
+   *     assignments: [
+   *       {
+   *         entityId: 'workspace-001',
+   *         featureId: 'compute-minutes',
+   *         usageLimit: 1000,
+   *         cadence: 'MONTH',
+   *       },
+   *       {
+   *         entityId: 'workspace-002',
+   *         currencyId: 'cred-type-tokens',
+   *         usageLimit: 2000,
+   *         cadence: 'MONTH',
+   *         parentId: 'workspace-001',
+   *         scopeEntityIds: ['user-1'],
+   *       },
+   *     ],
+   *   });
    * ```
    */
   upsert(
@@ -115,11 +114,6 @@ export interface AssignmentListResponse {
   cadence: 'MONTH';
 
   /**
-   * The capability refId this assignment grants
-   */
-  capabilityId: string;
-
-  /**
    * Timestamp of when the record was created
    */
   createdAt: string;
@@ -130,6 +124,19 @@ export interface AssignmentListResponse {
   entityId: string;
 
   /**
+   * Parent entity refId in the hierarchy, or `null` for a root.
+   */
+  parentId: string | null;
+
+  /**
+   * Dimension-scoped sub-budget key: the set of entity refIds this budget applies
+   * to. Empty is the node-wide budget that always matches; a non-empty set only
+   * applies when every listed entity is present in the resolved set
+   * (order-insensitive).
+   */
+  scopeEntityIds: Array<string>;
+
+  /**
    * Timestamp of when the record was last updated
    */
   updatedAt: string;
@@ -138,6 +145,16 @@ export interface AssignmentListResponse {
    * Maximum usage allowed within one cadence window
    */
   usageLimit: number;
+
+  /**
+   * Currency refId this assignment grants (present for credit capabilities).
+   */
+  currencyId?: string;
+
+  /**
+   * Feature refId this assignment grants (present for feature capabilities).
+   */
+  featureId?: string;
 }
 
 /**
@@ -165,11 +182,6 @@ export namespace AssignmentUpsertResponse {
     cadence: 'MONTH';
 
     /**
-     * The capability refId this assignment grants
-     */
-    capabilityId: string;
-
-    /**
      * Timestamp of when the record was created
      */
     createdAt: string;
@@ -180,6 +192,19 @@ export namespace AssignmentUpsertResponse {
     entityId: string;
 
     /**
+     * Parent entity refId in the hierarchy, or `null` for a root.
+     */
+    parentId: string | null;
+
+    /**
+     * Dimension-scoped sub-budget key: the set of entity refIds this budget applies
+     * to. Empty is the node-wide budget that always matches; a non-empty set only
+     * applies when every listed entity is present in the resolved set
+     * (order-insensitive).
+     */
+    scopeEntityIds: Array<string>;
+
+    /**
      * Timestamp of when the record was last updated
      */
     updatedAt: string;
@@ -188,6 +213,16 @@ export namespace AssignmentUpsertResponse {
      * Maximum usage allowed within one cadence window
      */
     usageLimit: number;
+
+    /**
+     * Currency refId this assignment grants (present for credit capabilities).
+     */
+    currencyId?: string;
+
+    /**
+     * Feature refId this assignment grants (present for feature capabilities).
+     */
+    featureId?: string;
   }
 }
 
@@ -238,17 +273,13 @@ export interface AssignmentUpsertParams {
 
 export namespace AssignmentUpsertParams {
   /**
-   * A single assignment to create or update. The natural key is the
-   * `(entityId, capabilityId)` pair. On create both `usageLimit` and `cadence` are
-   * required; on update they may be omitted individually to preserve the existing
-   * value.
+   * A single assignment to create or update. Identify the capability with exactly
+   * one of `featureId` or `currencyId`. The natural key is the
+   * `(entityId, capability, scopeEntityIds)` triple. On create both `usageLimit` and
+   * `cadence` are required; on update they may be omitted individually to preserve
+   * the existing value.
    */
   export interface Assignment {
-    /**
-     * The capability refId this assignment grants
-     */
-    capabilityId: string;
-
     /**
      * The entity refId this assignment is attached to
      */
@@ -258,6 +289,26 @@ export namespace AssignmentUpsertParams {
      * Usage-reset cadence (required on create). Currently only `MONTH` is supported
      */
     cadence?: 'MONTH';
+
+    /**
+     * Currency refId this assignment grants (credit budgets). Mutually exclusive with
+     * `featureId`.
+     */
+    currencyId?: string;
+
+    /**
+     * Feature refId this assignment grants. Mutually exclusive with `currencyId`.
+     */
+    featureId?: string;
+
+    /**
+     * Parent entity refId in the hierarchy. Omit to leave the current parent untouched
+     * (a new node defaults to a root); `null` detaches to a root; a refId sets or
+     * changes the parent. Reparenting an existing node is leaf-only.
+     */
+    parentId?: string | null;
+
+    scopeEntityIds?: Array<string>;
 
     /**
      * Maximum usage allowed within one cadence window (required on create)

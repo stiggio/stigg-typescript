@@ -40,13 +40,6 @@ export class Customers extends APIResource {
   /**
    * Retrieves a customer by their unique identifier, including billing information
    * and subscription status.
-   *
-   * @example
-   * ```ts
-   * const customerResponse = await client.v1.customers.retrieve(
-   *   'x',
-   * );
-   * ```
    */
   retrieve(
     id: string,
@@ -69,13 +62,6 @@ export class Customers extends APIResource {
   /**
    * Updates an existing customer's properties such as name, email, and billing
    * information.
-   *
-   * @example
-   * ```ts
-   * const customerResponse = await client.v1.customers.update(
-   *   'x',
-   * );
-   * ```
    */
   update(id: string, params: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -94,14 +80,6 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves a paginated list of customers in the environment.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const customerListResponse of client.v1.customers.list()) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     params: CustomerListParams | null | undefined = {},
@@ -124,13 +102,6 @@ export class Customers extends APIResource {
   /**
    * Archives a customer, preventing new subscriptions. Optionally cancels existing
    * subscriptions.
-   *
-   * @example
-   * ```ts
-   * const customerResponse = await client.v1.customers.archive(
-   *   'x',
-   * );
-   * ```
    */
   archive(
     id: string,
@@ -159,13 +130,6 @@ export class Customers extends APIResource {
    * mechanisms, and low-latency guarantees. It is not recommended for hot-path
    * entitlement checks. For production use, consider using the Stigg Node Server SDK
    * with caching or the Sidecar for low-latency cached responses.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.customers.checkEntitlement(
-   *   'x',
-   * );
-   * ```
    */
   checkEntitlement(
     id: string,
@@ -189,19 +153,6 @@ export class Customers extends APIResource {
   /**
    * Imports multiple customers in bulk. Used for migrating customer data from
    * external systems.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.customers.import({
-   *   customers: [
-   *     {
-   *       id: 'id',
-   *       email: 'dev@stainless.com',
-   *       name: 'name',
-   *     },
-   *   ],
-   * });
-   * ```
    */
   import(params: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -220,16 +171,6 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves a paginated list of resources within the same customer.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const customerListResourcesResponse of client.v1.customers.listResources(
-   *   'x',
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   listResources(
     id: string,
@@ -257,12 +198,6 @@ export class Customers extends APIResource {
   /**
    * Creates a new customer and optionally provisions an initial subscription in a
    * single operation.
-   *
-   * @example
-   * ```ts
-   * const customerResponse =
-   *   await client.v1.customers.provision({ id: 'id' });
-   * ```
    */
   provision(params: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -287,12 +222,6 @@ export class Customers extends APIResource {
    * mechanisms, and low-latency guarantees. It is not recommended for hot-path
    * entitlement checks. For production use, consider using the Stigg Node Server SDK
    * with caching or the Sidecar for low-latency cached responses.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.customers.retrieveEntitlements('x');
-   * ```
    */
   retrieveEntitlements(
     id: string,
@@ -315,12 +244,6 @@ export class Customers extends APIResource {
 
   /**
    * Restores an archived customer, allowing them to create new subscriptions again.
-   *
-   * @example
-   * ```ts
-   * const customerResponse =
-   *   await client.v1.customers.unarchive('x');
-   * ```
    */
   unarchive(
     id: string,

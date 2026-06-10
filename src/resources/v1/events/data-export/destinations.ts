@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
+import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -10,33 +11,41 @@ export class Destinations extends APIResource {
    * Register a destination on the environment's DATA_EXPORT integration.
    * Lazy-creates the integration row + provider recipient on first call. Idempotent
    * on destinationId.
-   *
-   * @example
-   * ```ts
-   * const destination =
-   *   await client.v1.events.dataExport.destinations.create({
-   *     destinationId: 'x',
-   *     destinationType: 'x',
-   *   });
-   * ```
    */
-  create(body: DestinationCreateParams, options?: RequestOptions): APIPromise<DestinationCreateResponse> {
-    return this._client.post('/api/v1/data-export/destinations', { body, ...options });
+  create(params: DestinationCreateParams, options?: RequestOptions): APIPromise<DestinationCreateResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/data-export/destinations', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
    * Remove a destination from the DATA_EXPORT integration metadata. Idempotent.
-   *
-   * @example
-   * ```ts
-   * const destination =
-   *   await client.v1.events.dataExport.destinations.delete(
-   *     'x',
-   *   );
-   * ```
    */
-  delete(destinationID: string, options?: RequestOptions): APIPromise<DestinationDeleteResponse> {
-    return this._client.delete(path`/api/v1/data-export/destinations/${destinationID}`, options);
+  delete(
+    destinationID: string,
+    params: DestinationDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DestinationDeleteResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/data-export/destinations/${destinationID}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -224,14 +233,42 @@ export namespace DestinationDeleteResponse {
 
 export interface DestinationCreateParams {
   /**
-   * The provider destination ID returned by the embedded SDK on connect
+   * Body param: The provider destination ID returned by the embedded SDK on connect
    */
   destinationId: string;
 
   /**
-   * The destination type (e.g. snowflake, bigquery)
+   * Body param: The destination type (e.g. snowflake, bigquery)
    */
   destinationType: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface DestinationDeleteParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
 }
 
 export declare namespace Destinations {
@@ -239,5 +276,6 @@ export declare namespace Destinations {
     type DestinationCreateResponse as DestinationCreateResponse,
     type DestinationDeleteResponse as DestinationDeleteResponse,
     type DestinationCreateParams as DestinationCreateParams,
+    type DestinationDeleteParams as DestinationDeleteParams,
   };
 }

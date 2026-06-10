@@ -25,6 +25,8 @@ describe('resource dataExport', () => {
     const response = await client.v1.events.dataExport.mintScopedToken({
       applicationOrigin: 'x',
       destinationType: 'destinationType',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
   });
 
