@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.23 (2026-06-11)
+
+Full Changelog: [v0.1.0-beta.22...v0.1.0-beta.23](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.22...v0.1.0-beta.23)
+
+### Features
+
+* **api:** add scopeEntityIds field to entitlements check response chains ([573fff2](https://github.com/stiggio/stigg-typescript/commit/573fff2a0efd8f923f38ba98e05b87f07f5821ab))
+
 ## 0.1.0-beta.22 (2026-06-10)
 
 Full Changelog: [v0.1.0-beta.21...v0.1.0-beta.22](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.21...v0.1.0-beta.22)
