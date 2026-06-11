@@ -141,6 +141,13 @@ export namespace EntitlementCheckResponse {
       isGranted: boolean;
 
       /**
+       * External ids of the entities this budget is scoped to. Empty (`[]`) is the
+       * node-wide budget; a non-empty set is the dimension-scoped budget that matched
+       * this request — use it to tell apart multiple budgets on the same entity.
+       */
+      scopeEntityIds: Array<string>;
+
+      /**
        * Hard usage limit for this node; null when no assignment is configured.
        */
       usageLimit: number | null;
@@ -285,6 +292,13 @@ export namespace EntitlementCheckResponse {
        * Whether this node alone permits the requested usage.
        */
       isGranted: boolean;
+
+      /**
+       * External ids of the entities this budget is scoped to. Empty (`[]`) is the
+       * node-wide budget; a non-empty set is the dimension-scoped budget that matched
+       * this request — use it to tell apart multiple budgets on the same entity.
+       */
+      scopeEntityIds: Array<string>;
 
       /**
        * Hard usage limit for this node; null when no assignment is configured.
