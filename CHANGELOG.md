@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.24 (2026-06-17)
+
+Full Changelog: [v0.1.0-beta.23...v0.1.0-beta.24](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.23...v0.1.0-beta.24)
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([4568ff0](https://github.com/stiggio/stigg-typescript/commit/4568ff0e4bf6ddef55037cd95cd5a1a866593a2f))
+
 ## 0.1.0-beta.23 (2026-06-11)
 
 Full Changelog: [v0.1.0-beta.22...v0.1.0-beta.23](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.22...v0.1.0-beta.23)
