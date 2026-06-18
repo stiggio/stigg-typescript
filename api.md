@@ -165,6 +165,18 @@ Methods:
 - <code title="post /api/v1/data-export/destinations">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
 - <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID, { ...params }) -> DestinationDeleteResponse</code>
 
+### Beta
+
+#### Customers
+
+Types:
+
+- <code><a href="./src/resources/v1/events/beta/customers.ts">CustomerRetrieveGovernanceResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/governance">client.v1.events.beta.customers.<a href="./src/resources/v1/events/beta/customers.ts">retrieveGovernance</a>(id, { ...params }) -> CustomerRetrieveGovernanceResponse</code>
+
 ## Credits
 
 Types:
