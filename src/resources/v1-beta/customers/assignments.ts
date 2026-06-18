@@ -144,7 +144,7 @@ export interface AssignmentListResponse {
   /**
    * Maximum usage allowed within one cadence window
    */
-  usageLimit: number;
+  usageLimit: number | null;
 
   /**
    * Currency refId this assignment grants (present for credit capabilities).
@@ -212,7 +212,7 @@ export namespace AssignmentUpsertResponse {
     /**
      * Maximum usage allowed within one cadence window
      */
-    usageLimit: number;
+    usageLimit: number | null;
 
     /**
      * Currency refId this assignment grants (present for credit capabilities).
@@ -313,7 +313,7 @@ export namespace AssignmentUpsertParams {
     /**
      * Maximum usage allowed within one cadence window (required on create)
      */
-    usageLimit?: number;
+    usageLimit?: number | null;
   }
 }
 
