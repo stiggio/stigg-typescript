@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.26 (2026-06-18)
+
+Full Changelog: [v0.1.0-beta.25...v0.1.0-beta.26](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.25...v0.1.0-beta.26)
+
+### Bug Fixes
+
+* **types:** make usageLimit nullable in assignments ([e3354ca](https://github.com/stiggio/stigg-typescript/commit/e3354ca97b716b45f9cb49359486406feb065792))
+
 ## 0.1.0-beta.25 (2026-06-18)
 
 Full Changelog: [v0.1.0-beta.24...v0.1.0-beta.25](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.24...v0.1.0-beta.25)
