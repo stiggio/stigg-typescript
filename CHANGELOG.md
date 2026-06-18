@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.25 (2026-06-18)
+
+Full Changelog: [v0.1.0-beta.24...v0.1.0-beta.25](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.24...v0.1.0-beta.25)
+
+### Features
+
+* **api:** add retrieveGovernance method to v1.events.beta.customers ([1ac7cef](https://github.com/stiggio/stigg-typescript/commit/1ac7cef39f76059aa9d0f48ec6f8000aafafcc36))
+
 ## 0.1.0-beta.24 (2026-06-17)
 
 Full Changelog: [v0.1.0-beta.23...v0.1.0-beta.24](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.23...v0.1.0-beta.24)
