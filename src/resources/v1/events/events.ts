@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as BetaAPI from './beta/beta';
+import { Beta } from './beta/beta';
 import * as DataExportAPI from './data-export/data-export';
 import {
   DataExport,
@@ -18,6 +20,7 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class Events extends APIResource {
   dataExport: DataExportAPI.DataExport = new DataExportAPI.DataExport(this._client);
+  beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
 
   /**
    * Reports raw usage events for event-based metering. Events are ingested
@@ -108,6 +111,7 @@ export namespace EventReportParams {
 }
 
 Events.DataExport = DataExport;
+Events.Beta = Beta;
 
 export declare namespace Events {
   export { type EventReportResponse as EventReportResponse, type EventReportParams as EventReportParams };
@@ -119,4 +123,6 @@ export declare namespace Events {
     type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
   };
+
+  export { Beta as Beta };
 }
