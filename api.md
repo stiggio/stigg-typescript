@@ -145,11 +145,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/events/data-export/data-export.ts">DataExportListModelsResponse</a></code>
 - <code><a href="./src/resources/v1/events/data-export/data-export.ts">DataExportMintScopedTokenResponse</a></code>
 - <code><a href="./src/resources/v1/events/data-export/data-export.ts">DataExportTriggerSyncResponse</a></code>
 
 Methods:
 
+- <code title="get /api/v1/data-export/models">client.v1.events.dataExport.<a href="./src/resources/v1/events/data-export/data-export.ts">listModels</a>({ ...params }) -> DataExportListModelsResponse</code>
 - <code title="post /api/v1/data-export/scoped-token">client.v1.events.dataExport.<a href="./src/resources/v1/events/data-export/data-export.ts">mintScopedToken</a>({ ...params }) -> DataExportMintScopedTokenResponse</code>
 - <code title="post /api/v1/data-export/sync">client.v1.events.dataExport.<a href="./src/resources/v1/events/data-export/data-export.ts">triggerSync</a>({ ...params }) -> DataExportTriggerSyncResponse</code>
 

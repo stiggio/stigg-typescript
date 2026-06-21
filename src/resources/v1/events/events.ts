@@ -6,6 +6,8 @@ import { Beta } from './beta/beta';
 import * as DataExportAPI from './data-export/data-export';
 import {
   DataExport,
+  DataExportListModelsParams,
+  DataExportListModelsResponse,
   DataExportMintScopedTokenParams,
   DataExportMintScopedTokenResponse,
   DataExportTriggerSyncParams,
@@ -118,8 +120,10 @@ export declare namespace Events {
 
   export {
     DataExport as DataExport,
+    type DataExportListModelsResponse as DataExportListModelsResponse,
     type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
     type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
+    type DataExportListModelsParams as DataExportListModelsParams,
     type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
   };

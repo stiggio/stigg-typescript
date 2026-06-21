@@ -17,6 +17,27 @@ export class DataExport extends APIResource {
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
 
   /**
+   * List the catalog of data-export models the customer can opt into when connecting
+   * a destination.
+   */
+  listModels(
+    params: DataExportListModelsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DataExportListModelsResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get('/api/v1/data-export/models', {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Mint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT
    * integration if needed.
    */
@@ -58,6 +79,68 @@ export class DataExport extends APIResource {
         options?.headers,
       ]),
     });
+  }
+}
+
+/**
+ * Response object
+ */
+export interface DataExportListModelsResponse {
+  /**
+   * Grouped catalog of every data-export model a destination can opt into.
+   */
+  data: DataExportListModelsResponse.Data;
+}
+
+export namespace DataExportListModelsResponse {
+  /**
+   * Grouped catalog of every data-export model a destination can opt into.
+   */
+  export interface Data {
+    /**
+     * Groups of data-export models, in display order
+     */
+    groups: Array<Data.Group>;
+  }
+
+  export namespace Data {
+    /**
+     * A group of related data-export models, mirroring the public docs taxonomy.
+     */
+    export interface Group {
+      /**
+       * Stable group identifier
+       */
+      id: string;
+
+      /**
+       * Customer-facing group label
+       */
+      displayName: string;
+
+      /**
+       * Models in this group
+       */
+      models: Array<Group.Model>;
+    }
+
+    export namespace Group {
+      /**
+       * A single data-export model the customer can opt into.
+       */
+      export interface Model {
+        /**
+         * Wire identifier — what gets persisted on the destination and registered with the
+         * provider
+         */
+        id: string;
+
+        /**
+         * Customer-facing label for the model
+         */
+        displayName: string;
+      }
+    }
   }
 }
 
@@ -142,6 +225,21 @@ export namespace DataExportTriggerSyncResponse {
   }
 }
 
+export interface DataExportListModelsParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface DataExportMintScopedTokenParams {
   /**
    * Body param: FE origin the resulting JWT is bound to (provider-side anti-fraud)
@@ -152,6 +250,11 @@ export interface DataExportMintScopedTokenParams {
    * Body param: Pin the token to a specific warehouse connect flow
    */
   destinationType?: string;
+
+  /**
+   * Body param
+   */
+  enabledModels?: Array<string>;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
@@ -191,8 +294,10 @@ DataExport.Destinations = Destinations;
 
 export declare namespace DataExport {
   export {
+    type DataExportListModelsResponse as DataExportListModelsResponse,
     type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
     type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
+    type DataExportListModelsParams as DataExportListModelsParams,
     type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
   };

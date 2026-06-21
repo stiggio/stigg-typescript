@@ -149,6 +149,7 @@ const fuse = new Fuse(
     'client.v1.coupons.retrieve',
     'client.v1.coupons.updateCoupon',
     'client.v1.events.report',
+    'client.v1.events.dataExport.listModels',
     'client.v1.events.dataExport.mintScopedToken',
     'client.v1.events.dataExport.triggerSync',
     'client.v1.events.dataExport.destinations.create',

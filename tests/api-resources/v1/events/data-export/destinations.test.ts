@@ -28,6 +28,7 @@ describe('resource destinations', () => {
     const response = await client.v1.events.dataExport.destinations.create({
       destinationId: 'x',
       destinationType: 'x',
+      enabledModels: ['x'],
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
