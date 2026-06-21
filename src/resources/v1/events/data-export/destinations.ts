@@ -95,6 +95,8 @@ export namespace DestinationCreateResponse {
        */
       connectionStatus?: string;
 
+      enabledModels?: Array<string>;
+
       /**
        * Latest sync snapshot for the destination, refreshed by the provider webhook
        */
@@ -186,6 +188,8 @@ export namespace DestinationDeleteResponse {
        */
       connectionStatus?: string;
 
+      enabledModels?: Array<string>;
+
       /**
        * Latest sync snapshot for the destination, refreshed by the provider webhook
        */
@@ -241,6 +245,11 @@ export interface DestinationCreateParams {
    * Body param: The destination type (e.g. snowflake, bigquery)
    */
   destinationType: string;
+
+  /**
+   * Body param
+   */
+  enabledModels?: Array<string>;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer

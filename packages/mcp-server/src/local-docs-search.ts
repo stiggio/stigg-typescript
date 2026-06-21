@@ -2600,12 +2600,13 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     params: [
       'applicationOrigin: string;',
       'destinationType?: string;',
+      'enabledModels?: string[];',
       'X-ACCOUNT-ID?: string;',
       'X-ENVIRONMENT-ID?: string;',
     ],
     response: '{ data: { token: string; expiresAt: string; providerMetadata: object; }; }',
     markdown:
-      "## mint_scoped_token\n\n`client.v1.events.dataExport.mintScopedToken(applicationOrigin: string, destinationType?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/scoped-token`\n\nMint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.\n\n### Parameters\n\n- `applicationOrigin: string`\n  FE origin the resulting JWT is bound to (provider-side anti-fraud)\n\n- `destinationType?: string`\n  Pin the token to a specific warehouse connect flow\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { token: string; expiresAt: string; providerMetadata: object; }; }`\n  Response object\n\n  - `data: { token: string; expiresAt: string; providerMetadata: object; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response);\n```",
+      "## mint_scoped_token\n\n`client.v1.events.dataExport.mintScopedToken(applicationOrigin: string, destinationType?: string, enabledModels?: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/scoped-token`\n\nMint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.\n\n### Parameters\n\n- `applicationOrigin: string`\n  FE origin the resulting JWT is bound to (provider-side anti-fraud)\n\n- `destinationType?: string`\n  Pin the token to a specific warehouse connect flow\n\n- `enabledModels?: string[]`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { token: string; expiresAt: string; providerMetadata: object; }; }`\n  Response object\n\n  - `data: { token: string; expiresAt: string; providerMetadata: object; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.mintScopedToken',
@@ -2649,6 +2650,59 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list_models',
+    endpoint: '/api/v1/data-export/models',
+    httpMethod: 'get',
+    summary: 'List data-export models',
+    description:
+      'List the catalog of data-export models the customer can opt into when connecting a destination.',
+    stainlessPath: '(resource) v1.events.data_export > (method) list_models',
+    qualified: 'client.v1.events.dataExport.listModels',
+    params: ['X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
+    response: '{ data: { groups: { id: string; displayName: string; models: object[]; }[]; }; }',
+    markdown:
+      "## list_models\n\n`client.v1.events.dataExport.listModels(X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/data-export/models`\n\nList the catalog of data-export models the customer can opt into when connecting a destination.\n\n### Parameters\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { groups: { id: string; displayName: string; models: object[]; }[]; }; }`\n  Response object\n\n  - `data: { groups: { id: string; displayName: string; models: { id: string; displayName: string; }[]; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.listModels();\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.dataExport.listModels',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.dataExport.listModels();\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.data_export.list_models',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.data_export.list_models()\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().dataExport().listModels',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.DataExportListModelsParams;\nimport io.stigg.models.v1.events.dataexport.DataExportListModelsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DataExportListModelsResponse response = client.v1().events().dataExport().listModels();\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.ListModels',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.ListModels(context.TODO(), stigg.V1EventDataExportListModelsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.data_export.list_models',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.data_export.list_models\n\nputs(response)',
+      },
+      cli: {
+        method: 'data_export list_models',
+        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
+      },
+      csharp: {
+        method: 'V1.Events.DataExport.ListModels',
+        example:
+          'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example: 'curl https://api.stigg.io/api/v1/data-export/models \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'create',
     endpoint: '/api/v1/data-export/destinations',
     httpMethod: 'post',
@@ -2660,13 +2714,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     params: [
       'destinationId: string;',
       'destinationType: string;',
+      'enabledModels?: string[];',
       'X-ACCOUNT-ID?: string;',
       'X-ENVIRONMENT-ID?: string;',
     ],
     response:
-      '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }',
+      '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }',
     markdown:
-      "## create\n\n`client.v1.events.dataExport.destinations.create(destinationId: string, destinationType: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/destinations`\n\nRegister a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.\n\n### Parameters\n\n- `destinationId: string`\n  The provider destination ID returned by the embedded SDK on connect\n\n- `destinationType: string`\n  The destination type (e.g. snowflake, bigquery)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.create({ destinationId: 'x', destinationType: 'x' });\n\nconsole.log(destination);\n```",
+      "## create\n\n`client.v1.events.dataExport.destinations.create(destinationId: string, destinationType: string, enabledModels?: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/destinations`\n\nRegister a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.\n\n### Parameters\n\n- `destinationId: string`\n  The provider destination ID returned by the embedded SDK on connect\n\n- `destinationType: string`\n  The destination type (e.g. snowflake, bigquery)\n\n- `enabledModels?: string[]`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.create({ destinationId: 'x', destinationType: 'x' });\n\nconsole.log(destination);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.destinations.create',
@@ -2719,9 +2774,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     qualified: 'client.v1.events.dataExport.destinations.delete',
     params: ['destinationId: string;', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
     response:
-      '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }',
+      '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }',
     markdown:
-      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nRemove a destination from the DATA_EXPORT integration metadata. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
+      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nRemove a destination from the DATA_EXPORT integration metadata. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.destinations.delete',
