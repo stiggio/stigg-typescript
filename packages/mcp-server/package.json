@@ -12,6 +12,9 @@
     "directory": "packages/mcp-server"
   },
   "homepage": "https://github.com/stiggio/stigg-typescript/tree/main/packages/mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/stiggio/stigg-typescript/issues"
+  },
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "private": false,
