@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.28 (2026-06-21)
+
+Full Changelog: [v0.1.0-beta.27...v0.1.0-beta.28](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.27...v0.1.0-beta.28)
+
+### Features
+
+* **api:** add listModels method, enabledModels param/field to data export ([5c35499](https://github.com/stiggio/stigg-typescript/commit/5c35499279b632f8d159e3a2011d7ae6be6cb1d7))
+
 ## 0.1.0-beta.27 (2026-06-21)
 
 Full Changelog: [v0.1.0-beta.26...v0.1.0-beta.27](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.26...v0.1.0-beta.27)
