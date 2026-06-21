@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.27 (2026-06-21)
+
+Full Changelog: [v0.1.0-beta.26...v0.1.0-beta.27](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.26...v0.1.0-beta.27)
+
+### Bug Fixes
+
+* **types:** change cadence from 'MONTH' literal to string in assignments ([e5a9cb7](https://github.com/stiggio/stigg-typescript/commit/e5a9cb7e5e451ae30c5f4abb3ea8998b67ea184f))
+
 ## 0.1.0-beta.26 (2026-06-18)
 
 Full Changelog: [v0.1.0-beta.25...v0.1.0-beta.26](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.25...v0.1.0-beta.26)
