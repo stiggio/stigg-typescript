@@ -61,13 +61,13 @@ export class Assignments extends APIResource {
    *         entityId: 'workspace-001',
    *         featureId: 'compute-minutes',
    *         usageLimit: 1000,
-   *         cadence: 'MONTH',
+   *         cadence: 'P1M',
    *       },
    *       {
    *         entityId: 'workspace-002',
    *         currencyId: 'cred-type-tokens',
    *         usageLimit: 2000,
-   *         cadence: 'MONTH',
+   *         cadence: 'P1M',
    *         parentId: 'workspace-001',
    *         scopeEntityIds: ['user-1'],
    *       },
@@ -109,9 +109,10 @@ export interface AssignmentListResponse {
   id: string;
 
   /**
-   * Usage-reset cadence. Currently only `MONTH` is supported
+   * Usage-reset cadence as an ISO-8601 single-unit duration, e.g. `P1M`, `P30D`,
+   * `PT1M`.
    */
-  cadence: 'MONTH';
+  cadence: string;
 
   /**
    * Timestamp of when the record was created
@@ -177,9 +178,10 @@ export namespace AssignmentUpsertResponse {
     id: string;
 
     /**
-     * Usage-reset cadence. Currently only `MONTH` is supported
+     * Usage-reset cadence as an ISO-8601 single-unit duration, e.g. `P1M`, `P30D`,
+     * `PT1M`.
      */
-    cadence: 'MONTH';
+    cadence: string;
 
     /**
      * Timestamp of when the record was created
@@ -286,9 +288,10 @@ export namespace AssignmentUpsertParams {
     entityId: string;
 
     /**
-     * Usage-reset cadence (required on create). Currently only `MONTH` is supported
+     * Usage-reset cadence (required on create) as an ISO-8601 single-unit duration,
+     * e.g. `P1M`, `P30D`, `PT1M`.
      */
-    cadence?: 'MONTH';
+    cadence?: string;
 
     /**
      * Currency refId this assignment grants (credit budgets). Mutually exclusive with

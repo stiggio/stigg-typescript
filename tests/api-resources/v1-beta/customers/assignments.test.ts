@@ -60,7 +60,7 @@ describe('resource assignments', () => {
       assignments: [
         {
           entityId: 'workspace-001',
-          cadence: 'MONTH',
+          cadence: 'P1M',
           currencyId: 'currencyId',
           featureId: 'compute-minutes',
           parentId: 'parentId',
@@ -69,7 +69,7 @@ describe('resource assignments', () => {
         },
         {
           entityId: 'workspace-002',
-          cadence: 'MONTH',
+          cadence: 'P1M',
           currencyId: 'cred-type-tokens',
           featureId: 'featureId',
           parentId: 'workspace-001',

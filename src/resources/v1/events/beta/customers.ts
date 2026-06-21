@@ -53,9 +53,10 @@ export namespace CustomerRetrieveGovernanceResponse {
    */
   export interface Data {
     /**
-     * Usage-reset cadence. Currently only `MONTH` is supported.
+     * Usage-reset cadence as an ISO-8601 single-unit duration, e.g. `P1M`, `P30D`,
+     * `PT1M`; `null` when the node has no usage configuration.
      */
-    cadence: 'MONTH' | null;
+    cadence: string | null;
 
     /**
      * Usage consumed in the current cadence period (may lag the live counter by a
