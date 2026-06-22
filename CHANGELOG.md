@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.29 (2026-06-22)
+
+Full Changelog: [v0.1.0-beta.28...v0.1.0-beta.29](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.28...v0.1.0-beta.29)
+
+### Features
+
+* **api:** add credit field to usage report response ([6f31eea](https://github.com/stiggio/stigg-typescript/commit/6f31eeadd58cec8cde8673d6695ca7ad34257b75))
+
 ## 0.1.0-beta.28 (2026-06-21)
 
 Full Changelog: [v0.1.0-beta.27...v0.1.0-beta.28](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.27...v0.1.0-beta.28)
