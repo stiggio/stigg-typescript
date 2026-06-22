@@ -195,6 +195,11 @@ export namespace UsageReportResponse {
     value: number;
 
     /**
+     * Optimistic credit balance for a credit-backed feature
+     */
+    credit?: Data.Credit | null;
+
+    /**
      * The current measured usage value
      */
     currentUsage?: number | null;
@@ -220,6 +225,34 @@ export namespace UsageReportResponse {
      * entitlements with a reset period)
      */
     usagePeriodStart?: string | null;
+  }
+
+  export namespace Data {
+    /**
+     * Optimistic credit balance for a credit-backed feature
+     */
+    export interface Credit {
+      /**
+       * The credit currency identifier
+       */
+      currencyId: string;
+
+      /**
+       * The credits consumed (optimistic — includes not-yet-reconciled usage)
+       */
+      currentUsage: number;
+
+      /**
+       * The grant-version timestamp of this balance, used by the SDK for last-write-wins
+       * reconciliation
+       */
+      timestamp: string;
+
+      /**
+       * The total credits granted
+       */
+      usageLimit: number;
+    }
   }
 }
 
