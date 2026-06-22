@@ -4100,6 +4100,11 @@ export interface SubscriptionUpdateParams {
   promotionCode?: string;
 
   /**
+   * Body param: Salesforce ID
+   */
+  salesforceId?: string | null;
+
+  /**
    * Body param
    */
   scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
