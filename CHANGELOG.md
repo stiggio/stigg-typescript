@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.30 (2026-06-22)
+
+Full Changelog: [v0.1.0-beta.29...v0.1.0-beta.30](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.29...v0.1.0-beta.30)
+
+### Features
+
+* **api:** add salesforceId parameter to subscriptions update method ([c5e79fa](https://github.com/stiggio/stigg-typescript/commit/c5e79fadec98917d78e1d998294cc1aac4d09214))
+
 ## 0.1.0-beta.29 (2026-06-22)
 
 Full Changelog: [v0.1.0-beta.28...v0.1.0-beta.29](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.28...v0.1.0-beta.29)
