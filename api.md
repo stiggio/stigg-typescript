@@ -160,11 +160,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationCreateResponse</a></code>
+- <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationUpdateResponse</a></code>
 - <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /api/v1/data-export/destinations">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
+- <code title="patch /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">update</a>(destinationID, { ...params }) -> DestinationUpdateResponse</code>
 - <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID, { ...params }) -> DestinationDeleteResponse</code>
 
 ### Beta

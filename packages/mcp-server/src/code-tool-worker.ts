@@ -154,6 +154,7 @@ const fuse = new Fuse(
     'client.v1.events.dataExport.triggerSync',
     'client.v1.events.dataExport.destinations.create',
     'client.v1.events.dataExport.destinations.delete',
+    'client.v1.events.dataExport.destinations.update',
     'client.v1.events.beta.customers.retrieveGovernance',
     'client.v1.credits.getAutoRecharge',
     'client.v1.credits.getUsage',
