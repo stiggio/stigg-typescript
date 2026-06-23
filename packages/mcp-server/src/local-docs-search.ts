@@ -2821,6 +2821,68 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'update',
+    endpoint: '/api/v1/data-export/destinations/{destinationId}',
+    httpMethod: 'patch',
+    summary: 'Update data-export destination selection',
+    description:
+      "Update a destination's entity selection. Pushes the new enabled_models to the provider first, then persists the selection. Applies on the next scheduled transfer.",
+    stainlessPath: '(resource) v1.events.data_export.destinations > (method) update',
+    qualified: 'client.v1.events.dataExport.destinations.update',
+    params: [
+      'destinationId: string;',
+      'enabledModels: string[];',
+      'integrationId: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }',
+    markdown:
+      "## update\n\n`client.v1.events.dataExport.destinations.update(destinationId: string, enabledModels: string[], integrationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/data-export/destinations/{destinationId}`\n\nUpdate a destination's entity selection. Pushes the new enabled_models to the provider first, then persists the selection. Applies on the next scheduled transfer.\n\n### Parameters\n\n- `destinationId: string`\n\n- `enabledModels: string[]`\n\n- `integrationId: string`\n  Target integration row hosting the destination\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.update('x', { enabledModels: ['x'], integrationId: 'x' });\n\nconsole.log(destination);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.dataExport.destinations.update',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst destination = await client.v1.events.dataExport.destinations.update('x', {\n  enabledModels: ['x'],\n  integrationId: 'x',\n});\n\nconsole.log(destination.data);",
+      },
+      python: {
+        method: 'v1.events.data_export.destinations.update',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ndestination = client.v1.events.data_export.destinations.update(\n    destination_id="x",\n    enabled_models=["x"],\n    integration_id="x",\n)\nprint(destination.data)',
+      },
+      java: {
+        method: 'v1().events().dataExport().destinations().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationUpdateParams params = DestinationUpdateParams.builder()\n            .destinationId("x")\n            .addEnabledModel("x")\n            .integrationId("x")\n            .build();\n        DestinationUpdateResponse destination = client.v1().events().dataExport().destinations().update(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.Destinations.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationUpdateParams{\n\t\t\tEnabledModels: []string{"x"},\n\t\t\tIntegrationID: "x",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.data_export.destinations.update',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ndestination = stigg.v1.events.data_export.destinations.update("x", enabled_models: ["x"], integration_id: "x")\n\nputs(destination)',
+      },
+      cli: {
+        method: 'destinations update',
+        example:
+          "stigg v1:events:data-export:destinations update \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
+      },
+      csharp: {
+        method: 'V1.Events.DataExport.Destinations.Update',
+        example:
+          'DestinationUpdateParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Update(parameters);\n\nConsole.WriteLine(destination);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "enabledModels": [\n            "x"\n          ],\n          "integrationId": "x"\n        }\'',
+      },
+    },
+  },
+  {
     name: 'retrieve_governance',
     endpoint: '/api/v1-beta/customers/{id}/governance',
     httpMethod: 'get',
