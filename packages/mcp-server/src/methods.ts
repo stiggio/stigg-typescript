@@ -281,6 +281,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/data-export/destinations',
   },
   {
+    clientCallName: 'client.v1.events.dataExport.destinations.update',
+    fullyQualifiedName: 'v1.events.dataExport.destinations.update',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/data-export/destinations/{destinationId}',
+  },
+  {
     clientCallName: 'client.v1.events.dataExport.destinations.delete',
     fullyQualifiedName: 'v1.events.dataExport.destinations.delete',
     httpMethod: 'delete',
