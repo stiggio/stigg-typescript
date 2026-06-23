@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.31 (2026-06-23)
+
+Full Changelog: [v0.1.0-beta.30...v0.1.0-beta.31](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.30...v0.1.0-beta.31)
+
+### Features
+
+* **api:** add hasSoftLimit field to credit entitlements in addons/plans ([6bfaf17](https://github.com/stiggio/stigg-typescript/commit/6bfaf175b3be4755c74e24ad98747c01547d9e97))
+
 ## 0.1.0-beta.30 (2026-06-22)
 
 Full Changelog: [v0.1.0-beta.29...v0.1.0-beta.30](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.29...v0.1.0-beta.30)
