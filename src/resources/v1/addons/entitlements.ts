@@ -279,6 +279,13 @@ export namespace AddonPackageEntitlement {
     displayNameOverride: string | null;
 
     /**
+     * Whether the credit wallet is soft-limited. When true, getEntitlement returns
+     * hasAccess=true past the limit; vendors decide whether to enforce. Defaults to
+     * false.
+     */
+    hasSoftLimit: boolean | null;
+
+    /**
      * Widget types where this entitlement is hidden
      */
     hiddenFromWidgets: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
@@ -497,6 +504,13 @@ export namespace EntitlementCreateResponse {
      * Override display name for the entitlement
      */
     displayNameOverride: string | null;
+
+    /**
+     * Whether the credit wallet is soft-limited. When true, getEntitlement returns
+     * hasAccess=true past the limit; vendors decide whether to enforce. Defaults to
+     * false.
+     */
+    hasSoftLimit: boolean | null;
 
     /**
      * Widget types where this entitlement is hidden
@@ -722,6 +736,13 @@ export namespace EntitlementListResponse {
      * Override display name for the entitlement
      */
     displayNameOverride: string | null;
+
+    /**
+     * Whether the credit wallet is soft-limited. When true, getEntitlement returns
+     * hasAccess=true past the limit; vendors decide whether to enforce. Defaults to
+     * false.
+     */
+    hasSoftLimit: boolean | null;
 
     /**
      * Widget types where this entitlement is hidden
@@ -975,6 +996,13 @@ export namespace EntitlementCreateParams {
     displayNameOverride?: string;
 
     /**
+     * Whether the credit wallet is soft-limited. When true, getEntitlement returns
+     * hasAccess=true past the limit; vendors decide whether to enforce. Defaults to
+     * false.
+     */
+    hasSoftLimit?: boolean;
+
+    /**
      * Widget types where this entitlement is hidden
      */
     hiddenFromWidgets?: Array<'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'>;
@@ -1182,6 +1210,13 @@ export declare namespace EntitlementUpdateParams {
      * Body param: Override display name for the entitlement
      */
     displayNameOverride?: string;
+
+    /**
+     * Body param: Whether the credit wallet is soft-limited. When true, getEntitlement
+     * returns hasAccess=true past the limit; vendors decide whether to enforce.
+     * Defaults to false.
+     */
+    hasSoftLimit?: boolean;
 
     /**
      * Body param: Widget types where this entitlement is hidden
