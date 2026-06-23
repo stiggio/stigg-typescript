@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.32 (2026-06-23)
+
+Full Changelog: [v0.1.0-beta.31...v0.1.0-beta.32](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.31...v0.1.0-beta.32)
+
+### Features
+
+* **api:** add usagePeriodEnd to usage report credit response ([64bba7d](https://github.com/stiggio/stigg-typescript/commit/64bba7d07d0cebc0e3d271f073103ba06d6bdb57))
+
 ## 0.1.0-beta.31 (2026-06-23)
 
 Full Changelog: [v0.1.0-beta.30...v0.1.0-beta.31](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.30...v0.1.0-beta.31)
