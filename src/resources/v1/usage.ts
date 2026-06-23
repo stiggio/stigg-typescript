@@ -252,6 +252,12 @@ export namespace UsageReportResponse {
        * The total credits granted
        */
       usageLimit: number;
+
+      /**
+       * End of the current credit grant period (when recurring credits reset), if
+       * applicable
+       */
+      usagePeriodEnd?: string | null;
     }
   }
 }
