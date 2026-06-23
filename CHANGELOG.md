@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.33 (2026-06-23)
+
+Full Changelog: [v0.1.0-beta.32...v0.1.0-beta.33](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.32...v0.1.0-beta.33)
+
+### Features
+
+* **api:** add update method to data export destinations ([2297fc9](https://github.com/stiggio/stigg-typescript/commit/2297fc96531dc05aa49861f3a63e1c4a293b5b8d))
+
 ## 0.1.0-beta.32 (2026-06-23)
 
 Full Changelog: [v0.1.0-beta.31...v0.1.0-beta.32](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.31...v0.1.0-beta.32)
