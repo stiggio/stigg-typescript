@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.34 (2026-06-28)
+
+Full Changelog: [v0.1.0-beta.33...v0.1.0-beta.34](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.33...v0.1.0-beta.34)
+
+### Features
+
+* **stainless:** update production server to edge.api.stigg.io ([fadc808](https://github.com/stiggio/stigg-typescript/commit/fadc808f8db201abce6ad5a5d382e1ac5d69ba6a))
+
 ## 0.1.0-beta.33 (2026-06-23)
 
 Full Changelog: [v0.1.0-beta.32...v0.1.0-beta.33](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.32...v0.1.0-beta.33)
