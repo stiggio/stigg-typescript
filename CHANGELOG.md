@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.35 (2026-06-30)
+
+Full Changelog: [v0.1.0-beta.34...v0.1.0-beta.35](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.34...v0.1.0-beta.35)
+
+### Features
+
+* **api:** add AIRWALLEX integration type to customers and integrations ([995ba24](https://github.com/stiggio/stigg-typescript/commit/995ba24439cfdc38b2cdda1311d3b66a66622e45))
+
 ## 0.1.0-beta.34 (2026-06-28)
 
 Full Changelog: [v0.1.0-beta.33...v0.1.0-beta.34](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.33...v0.1.0-beta.34)
