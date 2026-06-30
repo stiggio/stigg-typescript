@@ -156,7 +156,8 @@ export interface IntegrationListResponse {
     | 'OPEN_FGA'
     | 'APP_STORE'
     | 'RECEIVED'
-    | 'PREQUEL';
+    | 'PREQUEL'
+    | 'AIRWALLEX';
 
   /**
    * Price billing sync revision data containing billing ID, link URL, and price
@@ -280,6 +281,7 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
     | 'APP_STORE'
     | 'RECEIVED'
     | 'PREQUEL'
+    | 'AIRWALLEX'
   >;
 
   /**
@@ -322,7 +324,8 @@ export interface IntegrationLinkParams {
     | 'OPEN_FGA'
     | 'APP_STORE'
     | 'RECEIVED'
-    | 'PREQUEL';
+    | 'PREQUEL'
+    | 'AIRWALLEX';
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
