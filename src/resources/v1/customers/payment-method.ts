@@ -83,7 +83,8 @@ export interface PaymentMethodAttachParams {
     | 'OPEN_FGA'
     | 'APP_STORE'
     | 'RECEIVED'
-    | 'PREQUEL';
+    | 'PREQUEL'
+    | 'AIRWALLEX';
 
   /**
    * Body param: Customers selected currency

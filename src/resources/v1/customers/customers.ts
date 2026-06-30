@@ -308,7 +308,8 @@ export namespace CustomerIntegrationResponse {
       | 'OPEN_FGA'
       | 'APP_STORE'
       | 'RECEIVED'
-      | 'PREQUEL';
+      | 'PREQUEL'
+      | 'AIRWALLEX';
 
     /**
      * Price billing sync revision data containing billing ID, link URL, and price
@@ -638,7 +639,8 @@ export namespace CustomerResponse {
         | 'OPEN_FGA'
         | 'APP_STORE'
         | 'RECEIVED'
-        | 'PREQUEL';
+        | 'PREQUEL'
+        | 'AIRWALLEX';
     }
 
     /**
@@ -1222,7 +1224,8 @@ export namespace CustomerListResponse {
       | 'OPEN_FGA'
       | 'APP_STORE'
       | 'RECEIVED'
-      | 'PREQUEL';
+      | 'PREQUEL'
+      | 'AIRWALLEX';
   }
 
   /**
@@ -2203,7 +2206,8 @@ export namespace CustomerUpdateParams {
       | 'OPEN_FGA'
       | 'APP_STORE'
       | 'RECEIVED'
-      | 'PREQUEL';
+      | 'PREQUEL'
+      | 'AIRWALLEX';
   }
 
   /**
@@ -2980,7 +2984,8 @@ export namespace CustomerProvisionParams {
       | 'OPEN_FGA'
       | 'APP_STORE'
       | 'RECEIVED'
-      | 'PREQUEL';
+      | 'PREQUEL'
+      | 'AIRWALLEX';
   }
 
   /**
