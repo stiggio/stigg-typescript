@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.36 (2026-07-01)
+
+Full Changelog: [v0.1.0-beta.35...v0.1.0-beta.36](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.35...v0.1.0-beta.36)
+
+### Features
+
+* **api:** add consume/consumeAsync methods to credits consumption ([00153e8](https://github.com/stiggio/stigg-typescript/commit/00153e86e1b6081511999f9efc79d76fff154965))
+
 ## 0.1.0-beta.35 (2026-06-30)
 
 Full Changelog: [v0.1.0-beta.34...v0.1.0-beta.35](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.34...v0.1.0-beta.35)
