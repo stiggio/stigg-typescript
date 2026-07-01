@@ -371,6 +371,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/credits/custom-currencies/{currencyId}/unarchive',
   },
   {
+    clientCallName: 'client.v1.credits.consumption.consume',
+    fullyQualifiedName: 'v1.credits.consumption.consume',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/consumption',
+  },
+  {
+    clientCallName: 'client.v1.credits.consumption.consumeAsync',
+    fullyQualifiedName: 'v1.credits.consumption.consumeAsync',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/consumption/async',
+  },
+  {
     clientCallName: 'client.v1.features.archiveFeature',
     fullyQualifiedName: 'v1.features.archiveFeature',
     httpMethod: 'post',

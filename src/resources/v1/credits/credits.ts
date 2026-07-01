@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ConsumptionAPI from './consumption';
+import {
+  Consumption,
+  ConsumptionConsumeAsyncParams,
+  ConsumptionConsumeAsyncResponse,
+  ConsumptionConsumeParams,
+  ConsumptionConsumeResponse,
+} from './consumption';
 import * as CustomCurrenciesAPI from './custom-currencies';
 import {
   CustomCurrencies,
@@ -35,6 +43,7 @@ export class Credits extends APIResource {
   customCurrencies: CustomCurrenciesAPI.CustomCurrencies = new CustomCurrenciesAPI.CustomCurrencies(
     this._client,
   );
+  consumption: ConsumptionAPI.Consumption = new ConsumptionAPI.Consumption(this._client);
 
   /**
    * Retrieves the automatic recharge configuration for a customer and currency.
@@ -502,6 +511,7 @@ export interface CreditListLedgerParams extends MyCursorIDPageParams {
 
 Credits.Grants = Grants;
 Credits.CustomCurrencies = CustomCurrencies;
+Credits.Consumption = Consumption;
 
 export declare namespace Credits {
   export {
@@ -536,5 +546,13 @@ export declare namespace Credits {
     type CustomCurrencyArchiveParams as CustomCurrencyArchiveParams,
     type CustomCurrencyListAssociatedEntitiesParams as CustomCurrencyListAssociatedEntitiesParams,
     type CustomCurrencyUnarchiveParams as CustomCurrencyUnarchiveParams,
+  };
+
+  export {
+    Consumption as Consumption,
+    type ConsumptionConsumeResponse as ConsumptionConsumeResponse,
+    type ConsumptionConsumeAsyncResponse as ConsumptionConsumeAsyncResponse,
+    type ConsumptionConsumeParams as ConsumptionConsumeParams,
+    type ConsumptionConsumeAsyncParams as ConsumptionConsumeAsyncParams,
   };
 }
