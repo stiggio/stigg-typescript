@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Consumption,
+  type ConsumptionConsumeResponse,
+  type ConsumptionConsumeAsyncResponse,
+  type ConsumptionConsumeParams,
+  type ConsumptionConsumeAsyncParams,
+} from './consumption';
+export {
   Credits,
   type CreditGetAutoRechargeResponse,
   type CreditGetUsageResponse,
