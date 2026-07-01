@@ -3691,6 +3691,131 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'consume',
+    endpoint: '/api/v1/credits/consumption',
+    httpMethod: 'post',
+    summary: 'Consume credits',
+    description:
+      'Consumes a specified amount of credits directly from a customer wallet, with no feature mapping. Returns the optimistic balance.',
+    stainlessPath: '(resource) v1.credits.consumption > (method) consume',
+    qualified: 'client.v1.credits.consumption.consume',
+    params: [
+      'amount: number;',
+      'currencyId: string;',
+      'customerId: string;',
+      'idempotencyKey: string;',
+      'createdAt?: string;',
+      'dimensions?: object;',
+      'resourceId?: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ data: { amount: number; currencyId: string; customerId: string; timestamp: string; credit?: { currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; resourceId?: string; }; }',
+    markdown:
+      "## consume\n\n`client.v1.credits.consumption.consume(amount: number, currencyId: string, customerId: string, idempotencyKey: string, createdAt?: string, dimensions?: object, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/consumption`\n\nConsumes a specified amount of credits directly from a customer wallet, with no feature mapping. Returns the optimistic balance.\n\n### Parameters\n\n- `amount: number`\n  The amount of credits to consume\n\n- `currencyId: string`\n  The credit currency to consume from (required)\n\n- `customerId: string`\n  The customer to consume credits from (required)\n\n- `idempotencyKey: string`\n  A unique key used to deduplicate the consumption (required)\n\n- `createdAt?: string`\n  Optional timestamp the consumption is attributed to\n\n- `dimensions?: object`\n  Optional dimensions describing the consumption\n\n- `resourceId?: string`\n  Optional resource the consumption is attributed to\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { amount: number; currencyId: string; customerId: string; timestamp: string; credit?: { currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; resourceId?: string; }; }`\n  Response object\n\n  - `data: { amount: number; currencyId: string; customerId: string; timestamp: string; credit?: { currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; resourceId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.consumption.consume({\n  amount: 1,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  idempotencyKey: 'x',\n});\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.credits.consumption.consume',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.credits.consumption.consume({\n  amount: 1,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  idempotencyKey: 'x',\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.credits.consumption.consume',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.credits.consumption.consume(\n    amount=1,\n    currency_id="currencyId",\n    customer_id="customerId",\n    idempotency_key="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().credits().consumption().consume',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeParams;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ConsumptionConsumeParams params = ConsumptionConsumeParams.builder()\n            .amount(1.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .idempotencyKey("x")\n            .build();\n        ConsumptionConsumeResponse response = client.v1().credits().consumption().consume(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Credits.Consumption.Consume',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.Consume(context.TODO(), stigg.V1CreditConsumptionConsumeParams{\n\t\tAmount:         1,\n\t\tCurrencyID:     "currencyId",\n\t\tCustomerID:     "customerId",\n\t\tIdempotencyKey: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.credits.consumption.consume',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.credits.consumption.consume(\n  amount: 1,\n  currency_id: "currencyId",\n  customer_id: "customerId",\n  idempotency_key: "x"\n)\n\nputs(response)',
+      },
+      cli: {
+        method: 'consumption consume',
+        example:
+          "stigg v1:credits:consumption consume \\\n  --api-key 'My API Key' \\\n  --amount 1 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --idempotency-key x",
+      },
+      csharp: {
+        method: 'V1.Credits.Consumption.Consume',
+        example:
+          'ConsumptionConsumeParams parameters = new()\n{\n    Amount = 1,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    IdempotencyKey = "x",\n};\n\nvar response = await client.V1.Credits.Consumption.Consume(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/consumption \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 1,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "idempotencyKey": "x"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'consume_async',
+    endpoint: '/api/v1/credits/consumption/async',
+    httpMethod: 'post',
+    summary: 'Consume credits asynchronously',
+    description:
+      'Consumes credits directly from customer wallets asynchronously. Consumptions are reconciled asynchronously into the credit balances.',
+    stainlessPath: '(resource) v1.credits.consumption > (method) consume_async',
+    qualified: 'client.v1.credits.consumption.consumeAsync',
+    params: [
+      'consumptions: { amount: number; currencyId: string; customerId: string; idempotencyKey: string; createdAt?: string; dimensions?: object; resourceId?: string; }[];',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response: '{ data: object; }',
+    markdown:
+      "## consume_async\n\n`client.v1.credits.consumption.consumeAsync(consumptions: { amount: number; currencyId: string; customerId: string; idempotencyKey: string; createdAt?: string; dimensions?: object; resourceId?: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/consumption/async`\n\nConsumes credits directly from customer wallets asynchronously. Consumptions are reconciled asynchronously into the credit balances.\n\n### Parameters\n\n- `consumptions: { amount: number; currencyId: string; customerId: string; idempotencyKey: string; createdAt?: string; dimensions?: object; resourceId?: string; }[]`\n  The credit consumptions to report (up to 1000)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: object; }`\n  Response object\n\n  - `data: object`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.consumption.consumeAsync({ consumptions: [{\n  amount: 1,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  idempotencyKey: 'x',\n}] });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.credits.consumption.consumeAsync',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.credits.consumption.consumeAsync({\n  consumptions: [\n    {\n      amount: 1,\n      currencyId: 'currencyId',\n      customerId: 'customerId',\n      idempotencyKey: 'x',\n    },\n  ],\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.credits.consumption.consume_async',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.credits.consumption.consume_async(\n    consumptions=[{\n        "amount": 1,\n        "currency_id": "currencyId",\n        "customer_id": "customerId",\n        "idempotency_key": "x",\n    }],\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().credits().consumption().consumeAsync',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeAsyncParams;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeAsyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ConsumptionConsumeAsyncParams params = ConsumptionConsumeAsyncParams.builder()\n            .addConsumption(ConsumptionConsumeAsyncParams.Consumption.builder()\n                .amount(1.0)\n                .currencyId("currencyId")\n                .customerId("customerId")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        ConsumptionConsumeAsyncResponse response = client.v1().credits().consumption().consumeAsync(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Credits.Consumption.ConsumeAsync',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.ConsumeAsync(context.TODO(), stigg.V1CreditConsumptionConsumeAsyncParams{\n\t\tConsumptions: []stigg.V1CreditConsumptionConsumeAsyncParamsConsumption{{\n\t\t\tAmount:         1,\n\t\t\tCurrencyID:     "currencyId",\n\t\t\tCustomerID:     "customerId",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.credits.consumption.consume_async',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.credits.consumption.consume_async(\n  consumptions: [{amount: 1, currencyId: "currencyId", customerId: "customerId", idempotencyKey: "x"}]\n)\n\nputs(response)',
+      },
+      cli: {
+        method: 'consumption consume_async',
+        example:
+          "stigg v1:credits:consumption consume-async \\\n  --api-key 'My API Key' \\\n  --consumption '{amount: 1, currencyId: currencyId, customerId: customerId, idempotencyKey: x}'",
+      },
+      csharp: {
+        method: 'V1.Credits.Consumption.ConsumeAsync',
+        example:
+          'ConsumptionConsumeAsyncParams parameters = new()\n{\n    Consumptions =\n    [\n        new()\n        {\n            Amount = 1,\n            CurrencyID = "currencyId",\n            CustomerID = "customerId",\n            IdempotencyKey = "x",\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n        },\n    ],\n};\n\nvar response = await client.V1.Credits.Consumption.ConsumeAsync(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1/credits/consumption/async \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumptions": [\n            {\n              "amount": 1,\n              "currencyId": "currencyId",\n              "customerId": "customerId",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
+      },
+    },
+  },
+  {
     name: 'retrieve_feature',
     endpoint: '/api/v1/features/{id}',
     httpMethod: 'get',

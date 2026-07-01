@@ -225,6 +225,18 @@ Methods:
 - <code title="get /api/v1/credits/custom-currencies/{currencyId}/associated-entities">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">listAssociatedEntities</a>(currencyID, { ...params }) -> CustomCurrencyListAssociatedEntitiesResponse</code>
 - <code title="post /api/v1/credits/custom-currencies/{currencyId}/unarchive">client.v1.credits.customCurrencies.<a href="./src/resources/v1/credits/custom-currencies.ts">unarchive</a>(currencyID, { ...params }) -> CustomCurrencyResponse</code>
 
+### Consumption
+
+Types:
+
+- <code><a href="./src/resources/v1/credits/consumption.ts">ConsumptionConsumeResponse</a></code>
+- <code><a href="./src/resources/v1/credits/consumption.ts">ConsumptionConsumeAsyncResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/credits/consumption">client.v1.credits.consumption.<a href="./src/resources/v1/credits/consumption.ts">consume</a>({ ...params }) -> ConsumptionConsumeResponse</code>
+- <code title="post /api/v1/credits/consumption/async">client.v1.credits.consumption.<a href="./src/resources/v1/credits/consumption.ts">consumeAsync</a>({ ...params }) -> ConsumptionConsumeAsyncResponse</code>
+
 ## Features
 
 Types:

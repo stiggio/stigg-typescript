@@ -168,6 +168,8 @@ const fuse = new Fuse(
     'client.v1.credits.customCurrencies.listAssociatedEntities',
     'client.v1.credits.customCurrencies.unarchive',
     'client.v1.credits.customCurrencies.update',
+    'client.v1.credits.consumption.consume',
+    'client.v1.credits.consumption.consumeAsync',
     'client.v1.features.archiveFeature',
     'client.v1.features.createFeature',
     'client.v1.features.listFeatures',
