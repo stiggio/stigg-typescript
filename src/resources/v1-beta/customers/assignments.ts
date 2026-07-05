@@ -120,20 +120,19 @@ export interface AssignmentListResponse {
   createdAt: string;
 
   /**
-   * The entity refId this assignment is attached to
+   * The entity ID this assignment is attached to
    */
   entityId: string;
 
   /**
-   * Parent entity refId in the hierarchy, or `null` for a root.
+   * Parent entity ID in the hierarchy, or `null` for a root.
    */
   parentId: string | null;
 
   /**
-   * Dimension-scoped sub-budget key: the set of entity refIds this budget applies
-   * to. Empty is the node-wide budget that always matches; a non-empty set only
-   * applies when every listed entity is present in the resolved set
-   * (order-insensitive).
+   * Dimension-scoped sub-budget key: the set of entity IDs this budget applies to.
+   * Empty is the node-wide budget that always matches; a non-empty set only applies
+   * when every listed entity is present in the resolved set (order-insensitive).
    */
   scopeEntityIds: Array<string>;
 
@@ -148,12 +147,12 @@ export interface AssignmentListResponse {
   usageLimit: number | null;
 
   /**
-   * Currency refId this assignment grants (present for credit capabilities).
+   * Currency ID this assignment grants (present for credit capabilities).
    */
   currencyId?: string;
 
   /**
-   * Feature refId this assignment grants (present for feature capabilities).
+   * Feature ID this assignment grants (present for feature capabilities).
    */
   featureId?: string;
 }
@@ -189,20 +188,19 @@ export namespace AssignmentUpsertResponse {
     createdAt: string;
 
     /**
-     * The entity refId this assignment is attached to
+     * The entity ID this assignment is attached to
      */
     entityId: string;
 
     /**
-     * Parent entity refId in the hierarchy, or `null` for a root.
+     * Parent entity ID in the hierarchy, or `null` for a root.
      */
     parentId: string | null;
 
     /**
-     * Dimension-scoped sub-budget key: the set of entity refIds this budget applies
-     * to. Empty is the node-wide budget that always matches; a non-empty set only
-     * applies when every listed entity is present in the resolved set
-     * (order-insensitive).
+     * Dimension-scoped sub-budget key: the set of entity IDs this budget applies to.
+     * Empty is the node-wide budget that always matches; a non-empty set only applies
+     * when every listed entity is present in the resolved set (order-insensitive).
      */
     scopeEntityIds: Array<string>;
 
@@ -217,12 +215,12 @@ export namespace AssignmentUpsertResponse {
     usageLimit: number | null;
 
     /**
-     * Currency refId this assignment grants (present for credit capabilities).
+     * Currency ID this assignment grants (present for credit capabilities).
      */
     currencyId?: string;
 
     /**
-     * Feature refId this assignment grants (present for feature capabilities).
+     * Feature ID this assignment grants (present for feature capabilities).
      */
     featureId?: string;
   }
@@ -230,12 +228,12 @@ export namespace AssignmentUpsertResponse {
 
 export interface AssignmentListParams extends MyCursorIDPageParams {
   /**
-   * Query param: Filter assignments to a specific capability refId
+   * Query param: Filter assignments to a specific capability ID
    */
   capabilityId?: string;
 
   /**
-   * Query param: Filter assignments to a specific entity refId
+   * Query param: Filter assignments to a specific entity ID
    */
   entityId?: string;
 
@@ -283,7 +281,7 @@ export namespace AssignmentUpsertParams {
    */
   export interface Assignment {
     /**
-     * The entity refId this assignment is attached to
+     * The entity ID this assignment is attached to
      */
     entityId: string;
 
@@ -294,20 +292,20 @@ export namespace AssignmentUpsertParams {
     cadence?: string;
 
     /**
-     * Currency refId this assignment grants (credit budgets). Mutually exclusive with
+     * Currency ID this assignment grants (credit budgets). Mutually exclusive with
      * `featureId`.
      */
     currencyId?: string;
 
     /**
-     * Feature refId this assignment grants. Mutually exclusive with `currencyId`.
+     * Feature ID this assignment grants. Mutually exclusive with `currencyId`.
      */
     featureId?: string;
 
     /**
-     * Parent entity refId in the hierarchy. Omit to leave the current parent untouched
-     * (a new node defaults to a root); `null` detaches to a root; a refId sets or
-     * changes the parent. Reparenting an existing node is leaf-only.
+     * Parent entity ID in the hierarchy. Omit to leave the current parent untouched (a
+     * new node defaults to a root); `null` detaches to a root; an ID sets or changes
+     * the parent. Reparenting an existing node is leaf-only.
      */
     parentId?: string | null;
 

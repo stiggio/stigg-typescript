@@ -131,7 +131,7 @@ export class Stigg {
    * API Client for interfacing with the Stigg API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['STIGG_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['STIGG_BASE_URL'] ?? https://api.stigg.io] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['STIGG_BASE_URL'] ?? https://edge.api.stigg.io] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -153,7 +153,7 @@ export class Stigg {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.stigg.io`,
+      baseURL: baseURL || `https://edge.api.stigg.io`,
     };
 
     this.baseURL = options.baseURL!;
@@ -211,7 +211,7 @@ export class Stigg {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://api.stigg.io';
+    return this.baseURL !== 'https://edge.api.stigg.io';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {

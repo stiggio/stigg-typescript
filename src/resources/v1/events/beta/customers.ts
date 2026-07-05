@@ -72,7 +72,7 @@ export namespace CustomerRetrieveGovernanceResponse {
     /**
      * External id of the entity type (e.g. `team`, `user`).
      */
-    entityType: string;
+    entityTypeId: string;
 
     /**
      * External id of the parent entity in the tree; `null` for a root. Use it to
@@ -110,13 +110,13 @@ export namespace CustomerRetrieveGovernanceResponse {
     utilization: number | null;
 
     /**
-     * The metered currency refId (present when the configured capability is a credit
+     * The metered currency ID (present when the configured capability is a credit
      * currency).
      */
     currencyId?: string;
 
     /**
-     * The metered feature refId (present when the configured capability is a feature).
+     * The metered feature ID (present when the configured capability is a feature).
      */
     featureId?: string;
   }

@@ -50,9 +50,9 @@ describe('resource entities', () => {
         {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          entityTypeId: 'entityTypeId',
           includeArchived: 'true',
           limit: 1,
-          typeRefId: 'typeRefId',
           'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
           'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
@@ -127,13 +127,13 @@ describe('resource entities', () => {
       entities: [
         {
           id: 'user-7f3a0c1d',
+          entityTypeId: 'user',
           metadata: { email: 'jane@acme.com', role: 'admin' },
-          typeRefId: 'user',
         },
         {
           id: 'user-c4d1b2e9',
+          entityTypeId: 'user',
           metadata: { email: 'john@acme.com' },
-          typeRefId: 'user',
         },
       ],
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
