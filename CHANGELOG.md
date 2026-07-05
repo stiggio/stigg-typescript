@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.38 (2026-07-05)
+
+Full Changelog: [v0.1.0-beta.37...v0.1.0-beta.38](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.37...v0.1.0-beta.38)
+
+### Features
+
+* **api:** replace capabilityId with currencyId/featureId in assignments list ([b8218bc](https://github.com/stiggio/stigg-typescript/commit/b8218bcb3b8ac95f995e7e7867702ff8491c1234))
+
 ## 0.1.0-beta.37 (2026-07-05)
 
 Full Changelog: [v0.1.0-beta.36...v0.1.0-beta.37](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.36...v0.1.0-beta.37)
