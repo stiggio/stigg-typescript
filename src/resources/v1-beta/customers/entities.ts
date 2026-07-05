@@ -144,12 +144,12 @@ export class Entities extends APIResource {
    *     entities: [
    *       {
    *         id: 'user-7f3a0c1d',
-   *         typeRefId: 'user',
+   *         entityTypeId: 'user',
    *         metadata: { email: 'jane@acme.com', role: 'admin' },
    *       },
    *       {
    *         id: 'user-c4d1b2e9',
-   *         typeRefId: 'user',
+   *         entityTypeId: 'user',
    *         metadata: { email: 'john@acme.com' },
    *       },
    *     ],
@@ -205,14 +205,14 @@ export namespace EntityRetrieveResponse {
     createdAt: string;
 
     /**
+     * The entity type identifier this entity instantiates
+     */
+    entityTypeId: string;
+
+    /**
      * Free-form key/value metadata attached to the entity
      */
     metadata: { [key: string]: string };
-
-    /**
-     * The entity type identifier this entity instantiates
-     */
-    typeId: string;
 
     /**
      * Timestamp of when the record was last updated
@@ -241,14 +241,14 @@ export interface EntityListResponse {
   createdAt: string;
 
   /**
+   * The entity type identifier this entity instantiates
+   */
+  entityTypeId: string;
+
+  /**
    * Free-form key/value metadata attached to the entity
    */
   metadata: { [key: string]: string };
-
-  /**
-   * The entity type identifier this entity instantiates
-   */
-  typeId: string;
 
   /**
    * Timestamp of when the record was last updated
@@ -328,14 +328,14 @@ export namespace EntityUpsertResponse {
     createdAt: string;
 
     /**
+     * The entity type identifier this entity instantiates
+     */
+    entityTypeId: string;
+
+    /**
      * Free-form key/value metadata attached to the entity
      */
     metadata: { [key: string]: string };
-
-    /**
-     * The entity type identifier this entity instantiates
-     */
-    typeId: string;
 
     /**
      * Timestamp of when the record was last updated
@@ -366,15 +366,15 @@ export interface EntityRetrieveParams {
 
 export interface EntityListParams extends MyCursorIDPageParams {
   /**
+   * Query param: Filter results to entities of a specific entity type, by the type's
+   * ID
+   */
+  entityTypeId?: string;
+
+  /**
    * Query param: Whether to include archived entities. One of: true, false
    */
   includeArchived?: 'true' | 'false';
-
-  /**
-   * Query param: Filter results to entities of a specific entity type, by the type's
-   * refId
-   */
-  typeRefId?: string;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
@@ -461,17 +461,17 @@ export namespace EntityUpsertParams {
     id: string;
 
     /**
+     * The entity type ID this entity instantiates. Required when creating a new
+     * entity; on a re-upsert may be omitted to preserve the existing type. Governance
+     * returns 400 if missing on create.
+     */
+    entityTypeId?: string;
+
+    /**
      * Free-form key/value metadata. Patch semantics: empty-string value removes a key,
      * omitted keys are preserved.
      */
     metadata?: { [key: string]: string };
-
-    /**
-     * The entity type refId this entity instantiates. Required when creating a new
-     * entity; on a re-upsert may be omitted to preserve the existing type. Governance
-     * returns 400 if missing on create.
-     */
-    typeRefId?: string;
   }
 }
 
