@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.37 (2026-07-05)
+
+Full Changelog: [v0.1.0-beta.36...v0.1.0-beta.37](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.36...v0.1.0-beta.37)
+
+### Bug Fixes
+
+* **types:** rename entityType/typeId/typeRefId to entityTypeId in entities/governance ([490833f](https://github.com/stiggio/stigg-typescript/commit/490833f134c0ea5d697b64ed10f51cb2ab6d5e1c))
+
 ## 0.1.0-beta.36 (2026-07-01)
 
 Full Changelog: [v0.1.0-beta.35...v0.1.0-beta.36](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.35...v0.1.0-beta.36)
