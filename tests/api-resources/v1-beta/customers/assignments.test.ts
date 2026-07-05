@@ -29,8 +29,9 @@ describe('resource assignments', () => {
         {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-          capabilityId: 'capabilityId',
+          currencyId: 'currencyId',
           entityId: 'entityId',
+          featureId: 'featureId',
           limit: 1,
           'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
           'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',

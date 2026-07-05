@@ -228,14 +228,21 @@ export namespace AssignmentUpsertResponse {
 
 export interface AssignmentListParams extends MyCursorIDPageParams {
   /**
-   * Query param: Filter assignments to a specific capability ID
+   * Query param: Filter assignments to a specific currency, by its ID. Mutually
+   * exclusive with `featureId`.
    */
-  capabilityId?: string;
+  currencyId?: string;
 
   /**
    * Query param: Filter assignments to a specific entity ID
    */
   entityId?: string;
+
+  /**
+   * Query param: Filter assignments to a specific feature, by its ID. Mutually
+   * exclusive with `currencyId`.
+   */
+  featureId?: string;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
