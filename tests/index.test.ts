@@ -322,13 +322,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['STIGG_BASE_URL'] = ''; // empty
       const client = new Stigg({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.stigg.io');
+      expect(client.baseURL).toEqual('https://edge.api.stigg.io');
     });
 
     test('blank env variable', () => {
       process.env['STIGG_BASE_URL'] = '  '; // blank
       const client = new Stigg({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.stigg.io');
+      expect(client.baseURL).toEqual('https://edge.api.stigg.io');
     });
 
     test('in request options', () => {
