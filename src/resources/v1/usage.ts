@@ -353,6 +353,11 @@ export namespace UsageReportParams {
     dimensions?: { [key: string]: string | number | boolean };
 
     /**
+     * Idempotency key
+     */
+    idempotencyKey?: string;
+
+    /**
      * Resource id
      */
     resourceId?: string | null;
