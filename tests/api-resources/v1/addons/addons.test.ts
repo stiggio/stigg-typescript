@@ -32,7 +32,7 @@ describe('resource addons', () => {
       productId: 'productId',
       billingId: 'billingId',
       description: 'description',
-      maxQuantity: 0,
+      maxQuantity: 1,
       metadata: { foo: 'string' },
       pricingType: 'FREE',
       status: 'DRAFT',
