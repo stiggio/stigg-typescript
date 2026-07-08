@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.39 (2026-07-08)
+
+Full Changelog: [v0.1.0-beta.38...v0.1.0-beta.39](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.38...v0.1.0-beta.39)
+
+### Features
+
+* **api:** add idempotencyKey parameter to usage report method ([911d74a](https://github.com/stiggio/stigg-typescript/commit/911d74a4fd3509d10084d1ded7a31ffad46c5a5e))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([1132a5b](https://github.com/stiggio/stigg-typescript/commit/1132a5bde5ecb33bb16a4fb3767c24a2edbcac42))
+* **tests:** update maxQuantity test fixture in addons ([3a3a280](https://github.com/stiggio/stigg-typescript/commit/3a3a280c33c7f5a7bdd1fd41c2e451f487849eb3))
+
 ## 0.1.0-beta.38 (2026-07-05)
 
 Full Changelog: [v0.1.0-beta.37...v0.1.0-beta.38](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.37...v0.1.0-beta.38)
