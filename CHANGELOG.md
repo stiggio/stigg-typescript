@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.40 (2026-07-11)
+
+Full Changelog: [v0.1.0-beta.39...v0.1.0-beta.40](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.39...v0.1.0-beta.40)
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([aebdebe](https://github.com/stiggio/stigg-typescript/commit/aebdebec6106be8042dccaf4a0b1766c15c254b0))
+
 ## 0.1.0-beta.39 (2026-07-08)
 
 Full Changelog: [v0.1.0-beta.38...v0.1.0-beta.39](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.38...v0.1.0-beta.39)
