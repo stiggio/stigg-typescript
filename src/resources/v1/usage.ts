@@ -233,12 +233,23 @@ export namespace UsageReportResponse {
      */
     export interface Credit {
       /**
+       * The credits this single reportUsage call deducted, in credit units — scoped to
+       * this one measurement (0 for idempotency duplicates). Contrast `currentUsage`,
+       * which is the wallet-wide running total shared across all features on this
+       * currency. Use it to reconcile expected per-call deductions.
+       */
+      consumed: number;
+
+      /**
        * The credit currency identifier
        */
       currencyId: string;
 
       /**
-       * The credits consumed (optimistic — includes not-yet-reconciled usage)
+       * The wallet's total consumed credits for this currency (optimistic — includes
+       * not-yet-reconciled usage), shared across every feature that draws on the
+       * currency. This is the running balance, not this call's deduction — see
+       * `consumed` for that.
        */
       currentUsage: number;
 
