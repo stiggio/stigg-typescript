@@ -110,7 +110,10 @@ export namespace ConsumptionConsumeResponse {
       currencyId: string;
 
       /**
-       * The credits consumed (optimistic — includes not-yet-reconciled usage)
+       * The wallet's total consumed credits for this currency (optimistic — includes
+       * not-yet-reconciled usage), shared across every feature that draws on the
+       * currency. This is the running balance, not this call's deduction — see
+       * `consumed` for that.
        */
       currentUsage: number;
 
