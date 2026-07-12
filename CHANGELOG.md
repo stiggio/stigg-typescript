@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.41 (2026-07-12)
+
+Full Changelog: [v0.1.0-beta.40...v0.1.0-beta.41](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.40...v0.1.0-beta.41)
+
+### Features
+
+* **api:** add consumed field to credit responses in consumption/usage ([8dfa83e](https://github.com/stiggio/stigg-typescript/commit/8dfa83e3549542de254d2443e777723d2334790a))
+
 ## 0.1.0-beta.40 (2026-07-11)
 
 Full Changelog: [v0.1.0-beta.39...v0.1.0-beta.40](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.39...v0.1.0-beta.40)
