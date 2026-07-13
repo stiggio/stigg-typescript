@@ -196,8 +196,7 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Creates a new customer and optionally provisions an initial subscription in a
-   * single operation.
+   * Creates a new customer.
    */
   provision(params: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
