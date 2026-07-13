@@ -52,7 +52,9 @@ export class Destinations extends APIResource {
   }
 
   /**
-   * Remove a destination from the DATA_EXPORT integration metadata. Idempotent.
+   * Disconnect a destination: stops the provider sync (deletes the provider
+   * destination) and removes it from the DATA_EXPORT integration. Non-destructive —
+   * the warehouse table is left intact. Idempotent.
    */
   delete(
     destinationID: string,

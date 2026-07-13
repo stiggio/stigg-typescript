@@ -2772,14 +2772,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     endpoint: '/api/v1/data-export/destinations/{destinationId}',
     httpMethod: 'delete',
     summary: 'Remove data-export destination',
-    description: 'Remove a destination from the DATA_EXPORT integration metadata. Idempotent.',
+    description:
+      'Disconnect a destination: stops the provider sync (deletes the provider destination) and removes it from the DATA_EXPORT integration. Non-destructive — the warehouse table is left intact. Idempotent.',
     stainlessPath: '(resource) v1.events.data_export.destinations > (method) delete',
     qualified: 'client.v1.events.dataExport.destinations.delete',
     params: ['destinationId: string;', 'X-ACCOUNT-ID?: string;', 'X-ENVIRONMENT-ID?: string;'],
     response:
       '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }',
     markdown:
-      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nRemove a destination from the DATA_EXPORT integration metadata. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
+      "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nDisconnect a destination: stops the provider sync (deletes the provider destination) and removes it from the DATA_EXPORT integration. Non-destructive — the warehouse table is left intact. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.events.dataExport.destinations.delete',
