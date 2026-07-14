@@ -157,7 +157,8 @@ export interface IntegrationListResponse {
     | 'APP_STORE'
     | 'RECEIVED'
     | 'PREQUEL'
-    | 'AIRWALLEX';
+    | 'AIRWALLEX'
+    | 'STRIPE_INVOICING';
 
   /**
    * Price billing sync revision data containing billing ID, link URL, and price
@@ -282,6 +283,7 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
     | 'RECEIVED'
     | 'PREQUEL'
     | 'AIRWALLEX'
+    | 'STRIPE_INVOICING'
   >;
 
   /**
@@ -325,7 +327,8 @@ export interface IntegrationLinkParams {
     | 'APP_STORE'
     | 'RECEIVED'
     | 'PREQUEL'
-    | 'AIRWALLEX';
+    | 'AIRWALLEX'
+    | 'STRIPE_INVOICING';
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
