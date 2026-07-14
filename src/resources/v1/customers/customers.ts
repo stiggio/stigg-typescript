@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as EventsAPI from './events';
+import { Events } from './events';
 import * as IntegrationsAPI from './integrations';
 import {
   IntegrationLinkParams,
@@ -25,6 +27,8 @@ import {
   PromotionalEntitlementRevokeResponse,
   PromotionalEntitlements,
 } from './promotional-entitlements';
+import * as UsageAPI from './usage';
+import { Usage } from './usage';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -36,6 +40,8 @@ export class Customers extends APIResource {
   promotionalEntitlements: PromotionalEntitlementsAPI.PromotionalEntitlements =
     new PromotionalEntitlementsAPI.PromotionalEntitlements(this._client);
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
 
   /**
    * Retrieves a customer by their unique identifier, including billing information
@@ -3348,6 +3354,8 @@ export interface CustomerUnarchiveParams {
 Customers.PaymentMethod = PaymentMethod;
 Customers.PromotionalEntitlements = PromotionalEntitlements;
 Customers.Integrations = Integrations;
+Customers.Events = Events;
+Customers.Usage = Usage;
 
 export declare namespace Customers {
   export {
@@ -3399,4 +3407,8 @@ export declare namespace Customers {
     type IntegrationLinkParams as IntegrationLinkParams,
     type IntegrationUnlinkParams as IntegrationUnlinkParams,
   };
+
+  export { Events as Events };
+
+  export { Usage as Usage };
 }

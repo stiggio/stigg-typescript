@@ -10,4 +10,10 @@ export {
   type DataExportMintScopedTokenParams,
   type DataExportTriggerSyncParams,
 } from './data-export/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events';
+export {
+  Events,
+  type EventEstimateCostResponse,
+  type EventReportResponse,
+  type EventEstimateCostParams,
+  type EventReportParams,
+} from './events';
