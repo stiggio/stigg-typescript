@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.42 (2026-07-14)
+
+Full Changelog: [v0.1.0-beta.41...v0.1.0-beta.42](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.41...v0.1.0-beta.42)
+
+### Features
+
+* **api:** add estimate methods to customers events/usage ([b78b512](https://github.com/stiggio/stigg-typescript/commit/b78b5121bf3d27f43820c4c16f71da9052c91c6e))
+
+
+### Documentation
+
+* **api:** update delete method description in data-export destinations ([8ad963f](https://github.com/stiggio/stigg-typescript/commit/8ad963f0582f11a035a678e4d2922c3a4f889032))
+* **api:** update description for customers.provision method ([2c697d4](https://github.com/stiggio/stigg-typescript/commit/2c697d457b4d2bf9de69c8b00e5c3c75a57d7d16))
+
 ## 0.1.0-beta.41 (2026-07-12)
 
 Full Changelog: [v0.1.0-beta.40...v0.1.0-beta.41](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.40...v0.1.0-beta.41)
