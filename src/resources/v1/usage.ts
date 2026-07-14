@@ -11,6 +11,29 @@ import { path } from '../../internal/utils/path';
  */
 export class Usage extends APIResource {
   /**
+   * Estimates the credit cost of a usage report without recording it. Returns the
+   * estimated cost per credit currency, the current balance, and the balance after
+   * the estimated consumption.
+   */
+  estimateCost(
+    params: UsageEstimateCostParams,
+    options?: RequestOptions,
+  ): APIPromise<UsageEstimateCostResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/usage/estimate', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Retrieves historical usage data for a customer's metered feature over time.
    */
   history(
@@ -49,6 +72,86 @@ export class Usage extends APIResource {
         options?.headers,
       ]),
     });
+  }
+}
+
+/**
+ * Response object
+ */
+export interface UsageEstimateCostResponse {
+  /**
+   * Estimated credit cost, current balance and balance after
+   */
+  data: UsageEstimateCostResponse.Data;
+}
+
+export namespace UsageEstimateCostResponse {
+  /**
+   * Estimated credit cost, current balance and balance after
+   */
+  export interface Data {
+    /**
+     * Per-currency cost estimates
+     */
+    estimates: Array<Data.Estimate>;
+
+    /**
+     * Request-level warnings about the estimation context
+     */
+    warnings: Array<'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'>;
+  }
+
+  export namespace Data {
+    export interface Estimate {
+      /**
+       * The credit balance after subtracting the estimated cost
+       */
+      balanceAfterEstimate: number;
+
+      /**
+       * Estimated cost contribution per feature
+       */
+      breakdown: Array<Estimate.Breakdown>;
+
+      /**
+       * The credit currency identifier
+       */
+      currencyId: string;
+
+      /**
+       * The current credit balance, including not-yet-reconciled consumption
+       */
+      currentBalance: number;
+
+      /**
+       * The estimated credit cost of the reported event or usage
+       */
+      estimatedCost: number;
+
+      /**
+       * Whether the estimated consumption would bring the balance below zero
+       */
+      wouldOverdraft: boolean;
+    }
+
+    export namespace Estimate {
+      export interface Breakdown {
+        /**
+         * The estimated credit cost contributed by this feature
+         */
+        cost: number;
+
+        /**
+         * The feature whose meter contributed this cost
+         */
+        featureId: string;
+
+        /**
+         * Warning explaining why this cost may be inaccurate, if any
+         */
+        warningCode: 'UNSUPPORTED_AGGREGATION' | null;
+      }
+    }
   }
 }
 
@@ -273,6 +376,51 @@ export namespace UsageReportResponse {
   }
 }
 
+export interface UsageEstimateCostParams {
+  /**
+   * Body param: Customer id
+   */
+  customerId: string;
+
+  /**
+   * Body param: Feature id
+   */
+  featureId: string;
+
+  /**
+   * Body param: The value to report for usage
+   */
+  value: number;
+
+  /**
+   * Body param: Additional dimensions for the usage report
+   */
+  dimensions?: { [key: string]: string | number | boolean };
+
+  /**
+   * Body param: Resource id
+   */
+  resourceId?: string | null;
+
+  /**
+   * Body param: The method by which the usage value should be updated
+   */
+  updateBehavior?: 'DELTA' | 'SET';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface UsageHistoryParams {
   /**
    * Path param: Customer id
@@ -382,8 +530,10 @@ export namespace UsageReportParams {
 
 export declare namespace Usage {
   export {
+    type UsageEstimateCostResponse as UsageEstimateCostResponse,
     type UsageHistoryResponse as UsageHistoryResponse,
     type UsageReportResponse as UsageReportResponse,
+    type UsageEstimateCostParams as UsageEstimateCostParams,
     type UsageHistoryParams as UsageHistoryParams,
     type UsageReportParams as UsageReportParams,
   };

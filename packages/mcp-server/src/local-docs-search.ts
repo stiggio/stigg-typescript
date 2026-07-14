@@ -2536,6 +2536,69 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'estimate_cost',
+    endpoint: '/api/v1/events/estimate',
+    httpMethod: 'post',
+    summary: 'Estimate event credit cost',
+    description:
+      'Estimates the credit cost of a usage event without ingesting it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.',
+    stainlessPath: '(resource) v1.events > (method) estimate_cost',
+    qualified: 'client.v1.events.estimateCost',
+    params: [
+      'customerId: string;',
+      'eventName: string;',
+      'dimensions?: object;',
+      'resourceId?: string;',
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      "{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }",
+    markdown:
+      "## estimate_cost\n\n`client.v1.events.estimateCost(customerId: string, eventName: string, dimensions?: object, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/events/estimate`\n\nEstimates the credit cost of a usage event without ingesting it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `eventName: string`\n  The name of the usage event\n\n- `dimensions?: object`\n  Dimensions associated with the usage event\n\n- `resourceId?: string`\n  Resource id\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.estimateCost({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.estimateCost',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.estimateCost({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.estimate_cost',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.estimate_cost(\n    customer_id="customerId",\n    event_name="x",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().estimateCost',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventEstimateCostParams;\nimport io.stigg.models.v1.events.EventEstimateCostResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventEstimateCostParams params = EventEstimateCostParams.builder()\n            .customerId("customerId")\n            .eventName("x")\n            .build();\n        EventEstimateCostResponse response = client.v1().events().estimateCost(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.EstimateCost',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.EstimateCost(context.TODO(), stigg.V1EventEstimateCostParams{\n\t\tCustomerID: "customerId",\n\t\tEventName:  "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.estimate_cost',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.estimate_cost(customer_id: "customerId", event_name: "x")\n\nputs(response)',
+      },
+      cli: {
+        method: 'events estimate_cost',
+        example:
+          "stigg v1:events estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
+      },
+      csharp: {
+        method: 'V1.Events.EstimateCost',
+        example:
+          'EventEstimateCostParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.EstimateCost(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://edge.api.stigg.io/api/v1/events/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "eventName": "x"\n        }\'',
+      },
+    },
+  },
+  {
     name: 'trigger_sync',
     endpoint: '/api/v1/data-export/sync',
     httpMethod: 'post',
@@ -5877,6 +5940,71 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'estimate_cost',
+    endpoint: '/api/v1/usage/estimate',
+    httpMethod: 'post',
+    summary: 'Estimate usage credit cost',
+    description:
+      'Estimates the credit cost of a usage report without recording it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.',
+    stainlessPath: '(resource) v1.usage > (method) estimate_cost',
+    qualified: 'client.v1.usage.estimateCost',
+    params: [
+      'customerId: string;',
+      'featureId: string;',
+      'value: number;',
+      'dimensions?: object;',
+      'resourceId?: string;',
+      "updateBehavior?: 'DELTA' | 'SET';",
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      "{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }",
+    markdown:
+      "## estimate_cost\n\n`client.v1.usage.estimateCost(customerId: string, featureId: string, value: number, dimensions?: object, resourceId?: string, updateBehavior?: 'DELTA' | 'SET', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/usage/estimate`\n\nEstimates the credit cost of a usage report without recording it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `featureId: string`\n  Feature id\n\n- `value: number`\n  The value to report for usage\n\n- `dimensions?: object`\n  Additional dimensions for the usage report\n\n- `resourceId?: string`\n  Resource id\n\n- `updateBehavior?: 'DELTA' | 'SET'`\n  The method by which the usage value should be updated\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.estimateCost({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.usage.estimateCost',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.estimateCost({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.usage.estimate_cost',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.estimate_cost(\n    customer_id="customerId",\n    feature_id="featureId",\n    value=-9007199254740991,\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().usage().estimateCost',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageEstimateCostParams;\nimport io.stigg.models.v1.usage.UsageEstimateCostResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageEstimateCostParams params = UsageEstimateCostParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .value(-9007199254740991L)\n            .build();\n        UsageEstimateCostResponse response = client.v1().usage().estimateCost(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Usage.EstimateCost',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.EstimateCost(context.TODO(), stigg.V1UsageEstimateCostParams{\n\t\tCustomerID: "customerId",\n\t\tFeatureID:  "featureId",\n\t\tValue:      -9007199254740991,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.usage.estimate_cost',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.estimate_cost(customer_id: "customerId", feature_id: "featureId", value: -9007199254740991)\n\nputs(response)',
+      },
+      cli: {
+        method: 'usage estimate_cost',
+        example:
+          "stigg v1:usage estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
+      },
+      csharp: {
+        method: 'V1.Usage.EstimateCost',
+        example:
+          'UsageEstimateCostParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.EstimateCost(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://edge.api.stigg.io/api/v1/usage/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "featureId": "featureId",\n          "value": -9007199254740991\n        }\'',
       },
     },
   },

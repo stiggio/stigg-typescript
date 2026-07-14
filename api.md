@@ -60,6 +60,10 @@ Methods:
 - <code title="post /api/v1/customers/{id}/integrations">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">link</a>(id, { ...params }) -> CustomerIntegrationResponse</code>
 - <code title="delete /api/v1/customers/{id}/integrations/{integrationId}">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">unlink</a>(integrationID, { ...params }) -> CustomerIntegrationResponse</code>
 
+### Events
+
+### Usage
+
 ## Subscriptions
 
 Types:
@@ -135,10 +139,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/events/events.ts">EventEstimateCostResponse</a></code>
 - <code><a href="./src/resources/v1/events/events.ts">EventReportResponse</a></code>
 
 Methods:
 
+- <code title="post /api/v1/events/estimate">client.v1.events.<a href="./src/resources/v1/events/events.ts">estimateCost</a>({ ...params }) -> EventEstimateCostResponse</code>
 - <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
 
 ### DataExport
@@ -333,11 +339,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/usage.ts">UsageEstimateCostResponse</a></code>
 - <code><a href="./src/resources/v1/usage.ts">UsageHistoryResponse</a></code>
 - <code><a href="./src/resources/v1/usage.ts">UsageReportResponse</a></code>
 
 Methods:
 
+- <code title="post /api/v1/usage/estimate">client.v1.usage.<a href="./src/resources/v1/usage.ts">estimateCost</a>({ ...params }) -> UsageEstimateCostResponse</code>
 - <code title="get /api/v1/usage/{customerId}/history/{featureId}">client.v1.usage.<a href="./src/resources/v1/usage.ts">history</a>(featureID, { ...params }) -> UsageHistoryResponse</code>
 - <code title="post /api/v1/usage">client.v1.usage.<a href="./src/resources/v1/usage.ts">report</a>({ ...params }) -> UsageReportResponse</code>
 
