@@ -60,10 +60,6 @@ Methods:
 - <code title="post /api/v1/customers/{id}/integrations">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">link</a>(id, { ...params }) -> CustomerIntegrationResponse</code>
 - <code title="delete /api/v1/customers/{id}/integrations/{integrationId}">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">unlink</a>(integrationID, { ...params }) -> CustomerIntegrationResponse</code>
 
-### Events
-
-### Usage
-
 ## Subscriptions
 
 Types:
