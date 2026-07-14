@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as BetaAPI from './beta/beta';
-import { Beta } from './beta/beta';
 import * as DataExportAPI from './data-export/data-export';
 import {
   DataExport,
@@ -22,7 +20,6 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class Events extends APIResource {
   dataExport: DataExportAPI.DataExport = new DataExportAPI.DataExport(this._client);
-  beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
 
   /**
    * Estimates the credit cost of a usage event without ingesting it. Returns the
@@ -251,7 +248,6 @@ export namespace EventReportParams {
 }
 
 Events.DataExport = DataExport;
-Events.Beta = Beta;
 
 export declare namespace Events {
   export {
@@ -270,6 +266,4 @@ export declare namespace Events {
     type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
   };
-
-  export { Beta as Beta };
 }

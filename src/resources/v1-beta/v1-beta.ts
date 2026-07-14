@@ -11,7 +11,11 @@ import {
   EntityTypes,
 } from './entity-types';
 import * as CustomersAPI from './customers/customers';
-import { Customers } from './customers/customers';
+import {
+  CustomerRetrieveGovernanceParams,
+  CustomerRetrieveGovernanceResponse,
+  Customers,
+} from './customers/customers';
 
 export class V1Beta extends APIResource {
   customers: CustomersAPI.Customers = new CustomersAPI.Customers(this._client);
@@ -22,7 +26,11 @@ V1Beta.Customers = Customers;
 V1Beta.EntityTypes = EntityTypes;
 
 export declare namespace V1Beta {
-  export { Customers as Customers };
+  export {
+    Customers as Customers,
+    type CustomerRetrieveGovernanceResponse as CustomerRetrieveGovernanceResponse,
+    type CustomerRetrieveGovernanceParams as CustomerRetrieveGovernanceParams,
+  };
 
   export {
     EntityTypes as EntityTypes,

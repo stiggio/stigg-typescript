@@ -171,18 +171,6 @@ Methods:
 - <code title="patch /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">update</a>(destinationID, { ...params }) -> DestinationUpdateResponse</code>
 - <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID, { ...params }) -> DestinationDeleteResponse</code>
 
-### Beta
-
-#### Customers
-
-Types:
-
-- <code><a href="./src/resources/v1/events/beta/customers.ts">CustomerRetrieveGovernanceResponse</a></code>
-
-Methods:
-
-- <code title="get /api/v1-beta/customers/{id}/governance">client.v1.events.beta.customers.<a href="./src/resources/v1/events/beta/customers.ts">retrieveGovernance</a>(id, { ...params }) -> CustomerRetrieveGovernanceResponse</code>
-
 ## Credits
 
 Types:
@@ -364,6 +352,14 @@ Methods:
 # V1Beta
 
 ## Customers
+
+Types:
+
+- <code><a href="./src/resources/v1-beta/customers/customers.ts">CustomerRetrieveGovernanceResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/governance">client.v1Beta.customers.<a href="./src/resources/v1-beta/customers/customers.ts">retrieveGovernance</a>(id, { ...params }) -> CustomerRetrieveGovernanceResponse</code>
 
 ### Entitlements
 

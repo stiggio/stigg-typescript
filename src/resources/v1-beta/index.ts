@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Customers } from './customers/index';
+export {
+  Customers,
+  type CustomerRetrieveGovernanceResponse,
+  type CustomerRetrieveGovernanceParams,
+} from './customers/index';
 export {
   EntityTypes,
   type EntityTypeListResponse,
