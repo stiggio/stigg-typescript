@@ -22,7 +22,6 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers';
-export { Events } from './events';
 export {
   Integrations,
   type IntegrationListResponse,
@@ -48,4 +47,3 @@ export {
   type PromotionalEntitlementRevokeParams,
   type PromotionalEntitlementListResponsesMyCursorIDPage,
 } from './promotional-entitlements';
-export { Usage } from './usage';

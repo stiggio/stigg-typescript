@@ -84,7 +84,8 @@ export interface PaymentMethodAttachParams {
     | 'APP_STORE'
     | 'RECEIVED'
     | 'PREQUEL'
-    | 'AIRWALLEX';
+    | 'AIRWALLEX'
+    | 'STRIPE_INVOICING';
 
   /**
    * Body param: Customers selected currency
