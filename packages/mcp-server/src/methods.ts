@@ -299,12 +299,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/data-export/destinations/{destinationId}',
   },
   {
-    clientCallName: 'client.v1.events.beta.customers.retrieveGovernance',
-    fullyQualifiedName: 'v1.events.beta.customers.retrieveGovernance',
-    httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/governance',
-  },
-  {
     clientCallName: 'client.v1.credits.getAutoRecharge',
     fullyQualifiedName: 'v1.credits.getAutoRecharge',
     httpMethod: 'get',
@@ -639,6 +633,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.products.updateProduct',
     httpMethod: 'patch',
     httpPath: '/api/v1/products/{id}',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.retrieveGovernance',
+    fullyQualifiedName: 'v1Beta.customers.retrieveGovernance',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/governance',
   },
   {
     clientCallName: 'client.v1Beta.customers.entitlements.check',
