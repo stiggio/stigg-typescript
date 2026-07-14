@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.43 (2026-07-14)
+
+Full Changelog: [v0.1.0-beta.42...v0.1.0-beta.43](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.42...v0.1.0-beta.43)
+
+### Features
+
+* **api:** add STRIPE_INVOICING integration type to customers and integrations ([7e3e5ae](https://github.com/stiggio/stigg-typescript/commit/7e3e5ae2d57612ef5d800c7a9fa50915d678c126))
+
 ## 0.1.0-beta.42 (2026-07-14)
 
 Full Changelog: [v0.1.0-beta.41...v0.1.0-beta.42](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.41...v0.1.0-beta.42)
