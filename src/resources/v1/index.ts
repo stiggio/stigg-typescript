@@ -62,7 +62,13 @@ export {
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
-export { Events, type EventReportResponse, type EventReportParams } from './events/index';
+export {
+  Events,
+  type EventEstimateCostResponse,
+  type EventReportResponse,
+  type EventEstimateCostParams,
+  type EventReportParams,
+} from './events/index';
 export {
   Features,
   type Feature,
@@ -130,8 +136,10 @@ export {
 } from './subscriptions/index';
 export {
   Usage,
+  type UsageEstimateCostResponse,
   type UsageHistoryResponse,
   type UsageReportResponse,
+  type UsageEstimateCostParams,
   type UsageHistoryParams,
   type UsageReportParams,
 } from './usage';

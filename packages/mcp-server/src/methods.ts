@@ -251,6 +251,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/coupons/{id}',
   },
   {
+    clientCallName: 'client.v1.events.estimateCost',
+    fullyQualifiedName: 'v1.events.estimateCost',
+    httpMethod: 'post',
+    httpPath: '/api/v1/events/estimate',
+  },
+  {
     clientCallName: 'client.v1.events.report',
     fullyQualifiedName: 'v1.events.report',
     httpMethod: 'post',
@@ -579,6 +585,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.plans.entitlements.delete',
     httpMethod: 'delete',
     httpPath: '/api/v1/plans/{planId}/entitlements/{id}',
+  },
+  {
+    clientCallName: 'client.v1.usage.estimateCost',
+    fullyQualifiedName: 'v1.usage.estimateCost',
+    httpMethod: 'post',
+    httpPath: '/api/v1/usage/estimate',
   },
   {
     clientCallName: 'client.v1.usage.history',
