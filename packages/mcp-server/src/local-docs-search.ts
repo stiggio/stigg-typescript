@@ -2948,76 +2948,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
-    name: 'retrieve_governance',
-    endpoint: '/api/v1-beta/customers/{id}/governance',
-    httpMethod: 'get',
-    summary: 'Get a list of governance nodes',
-    description:
-      "Queries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.",
-    stainlessPath: '(resource) v1.events.beta.customers > (method) retrieve_governance',
-    qualified: 'client.v1.events.beta.customers.retrieveGovernance',
-    params: [
-      'id: string;',
-      'after?: string;',
-      'currencyIds?: string[];',
-      'entityIdSearch?: string;',
-      'entityTypeIds?: string[];',
-      'featureIds?: string[];',
-      'limit?: number;',
-      'minUtilization?: number;',
-      "order?: 'asc' | 'desc';",
-      "scope?: 'all' | 'nodeWide' | 'scoped';",
-      "sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt';",
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      '{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }',
-    markdown:
-      "## retrieve_governance\n\n`client.v1.events.beta.customers.retrieveGovernance(id: string, after?: string, currencyIds?: string[], entityIdSearch?: string, entityTypeIds?: string[], featureIds?: string[], limit?: number, minUtilization?: number, order?: 'asc' | 'desc', scope?: 'all' | 'nodeWide' | 'scoped', sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; pagination: object; }`\n\n**get** `/api/v1-beta/customers/{id}/governance`\n\nQueries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `currencyIds?: string[]`\n  Currency ids to include, repeated per value (e.g. `?currencyIds=credits`). Omit both featureIds and currencyIds for tree mode.\n\n- `entityIdSearch?: string`\n  Case-insensitive substring match on the entity id (`%`/`_` matched literally).\n\n- `entityTypeIds?: string[]`\n  Filter to one or more entity types, repeated per value (e.g. `?entityTypeIds=team&entityTypeIds=user`).\n\n- `featureIds?: string[]`\n  Feature ids to include, repeated per value (e.g. `?featureIds=ai-tokens&featureIds=seats`). Omit both featureIds and currencyIds for tree mode — every node in the hierarchy with no usage configuration attached.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `minUtilization?: number`\n  Only nodes with utilization ≥ this value (e.g. 0.8 for ≥80%, 1 for at/over limit).\n\n- `order?: 'asc' | 'desc'`\n  Sort direction: `asc` or `desc` (default `desc`).\n\n- `scope?: 'all' | 'nodeWide' | 'scoped'`\n  Filter by configuration scope: `all` (default), `nodeWide` (`[]` only), or `scoped` (non-empty only).\n\n- `sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt'`\n  Sort key: `utilization` (default, cross-capability-safe), `currentUsage`, `usageLimit`, `scopeSize`, `id`, or `createdAt`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }`\n  Paginated list of governance tree nodes, each with its usage configuration and current usage.\n\n  - `data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]`\n  - `pagination: { next: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.retrieveGovernance('id');\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1.events.beta.customers.retrieveGovernance',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.retrieveGovernance('id');\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1.events.beta.customers.retrieve_governance',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.retrieve_governance(\n    id="id",\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1().events().beta().customers().retrieveGovernance',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceParams;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveGovernanceResponse response = client.v1().events().beta().customers().retrieveGovernance("id");\n    }\n}',
-      },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.GetGovernance',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1.events.beta.customers.retrieve_governance',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.retrieve_governance("id")\n\nputs(response)',
-      },
-      cli: {
-        method: 'customers retrieve_governance',
-        example:
-          "stigg v1:events:beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.RetrieveGovernance',
-        example:
-          'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Events.Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
-      },
-    },
-  },
-  {
     name: 'get_usage',
     endpoint: '/api/v1/credits/usage',
     httpMethod: 'get',
@@ -6364,6 +6294,75 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'retrieve_governance',
+    endpoint: '/api/v1-beta/customers/{id}/governance',
+    httpMethod: 'get',
+    summary: 'Get a list of governance nodes',
+    description:
+      "Queries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.",
+    stainlessPath: '(resource) v1-beta.customers > (method) retrieve_governance',
+    qualified: 'client.v1Beta.customers.retrieveGovernance',
+    params: [
+      'id: string;',
+      'after?: string;',
+      'currencyIds?: string[];',
+      'entityIdSearch?: string;',
+      'entityTypeIds?: string[];',
+      'featureIds?: string[];',
+      'limit?: number;',
+      'minUtilization?: number;',
+      "order?: 'asc' | 'desc';",
+      "scope?: 'all' | 'nodeWide' | 'scoped';",
+      "sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt';",
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }',
+    markdown:
+      "## retrieve_governance\n\n`client.v1Beta.customers.retrieveGovernance(id: string, after?: string, currencyIds?: string[], entityIdSearch?: string, entityTypeIds?: string[], featureIds?: string[], limit?: number, minUtilization?: number, order?: 'asc' | 'desc', scope?: 'all' | 'nodeWide' | 'scoped', sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; pagination: object; }`\n\n**get** `/api/v1-beta/customers/{id}/governance`\n\nQueries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `currencyIds?: string[]`\n  Currency ids to include, repeated per value (e.g. `?currencyIds=credits`). Omit both featureIds and currencyIds for tree mode.\n\n- `entityIdSearch?: string`\n  Case-insensitive substring match on the entity id (`%`/`_` matched literally).\n\n- `entityTypeIds?: string[]`\n  Filter to one or more entity types, repeated per value (e.g. `?entityTypeIds=team&entityTypeIds=user`).\n\n- `featureIds?: string[]`\n  Feature ids to include, repeated per value (e.g. `?featureIds=ai-tokens&featureIds=seats`). Omit both featureIds and currencyIds for tree mode — every node in the hierarchy with no usage configuration attached.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `minUtilization?: number`\n  Only nodes with utilization ≥ this value (e.g. 0.8 for ≥80%, 1 for at/over limit).\n\n- `order?: 'asc' | 'desc'`\n  Sort direction: `asc` or `desc` (default `desc`).\n\n- `scope?: 'all' | 'nodeWide' | 'scoped'`\n  Filter by configuration scope: `all` (default), `nodeWide` (`[]` only), or `scoped` (non-empty only).\n\n- `sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt'`\n  Sort key: `utilization` (default, cross-capability-safe), `currentUsage`, `usageLimit`, `scopeSize`, `id`, or `createdAt`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }`\n  Paginated list of governance tree nodes, each with its usage configuration and current usage.\n\n  - `data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]`\n  - `pagination: { next: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.retrieveGovernance('id');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1Beta.customers.retrieveGovernance',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.retrieveGovernance('id');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1_beta.customers.retrieve_governance',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.retrieve_governance(\n    id="id",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1Beta().customers().retrieveGovernance',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.CustomerRetrieveGovernanceParams;\nimport io.stigg.models.v1beta.customers.CustomerRetrieveGovernanceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveGovernanceResponse response = client.v1Beta().customers().retrieveGovernance("id");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.GetGovernance',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1_beta.customers.retrieve_governance',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.retrieve_governance("id")\n\nputs(response)',
+      },
+      cli: {
+        method: 'customers retrieve_governance',
+        example: "stigg v1-beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      csharp: {
+        method: 'V1Beta.Customers.RetrieveGovernance',
+        example:
+          'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
