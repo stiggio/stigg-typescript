@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-beta.44 (2026-07-18)
+
+Full Changelog: [v0.1.0-beta.43...v0.1.0-beta.44](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.43...v0.1.0-beta.44)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([fcb6401](https://github.com/stiggio/stigg-typescript/commit/fcb6401d6939a2fd90d1dffc39c39a28324a6ca7))
+
+
+### Chores
+
+* **api:** move retrieveGovernance from v1.events.beta.customers to v1Beta.customers ([67e2a81](https://github.com/stiggio/stigg-typescript/commit/67e2a81c0ba0c18995ebb280d5ad6c8cb7e4c94b))
+
 ## 0.1.0-beta.43 (2026-07-14)
 
 Full Changelog: [v0.1.0-beta.42...v0.1.0-beta.43](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.42...v0.1.0-beta.43)
