@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.46 (2026-07-21)
+
+Full Changelog: [v0.1.0-beta.45...v0.1.0-beta.46](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.45...v0.1.0-beta.46)
+
+### Features
+
+* **api:** add syncStates field to credits grants responses ([64ef980](https://github.com/stiggio/stigg-typescript/commit/64ef98043eaa6286e7e132dad248f2b6426edb5a))
+
 ## 0.1.0-beta.45 (2026-07-21)
 
 Full Changelog: [v0.1.0-beta.44...v0.1.0-beta.45](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.44...v0.1.0-beta.45)
