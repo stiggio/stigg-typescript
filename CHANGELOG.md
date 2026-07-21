@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.45 (2026-07-21)
+
+Full Changelog: [v0.1.0-beta.44...v0.1.0-beta.45](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.44...v0.1.0-beta.45)
+
+### Features
+
+* **api:** add eventType parameter to list_ledger in credits ([4810f46](https://github.com/stiggio/stigg-typescript/commit/4810f467f7709122fa35910c9f928a4c0a9014ee))
+
 ## 0.1.0-beta.44 (2026-07-18)
 
 Full Changelog: [v0.1.0-beta.43...v0.1.0-beta.44](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.43...v0.1.0-beta.44)
