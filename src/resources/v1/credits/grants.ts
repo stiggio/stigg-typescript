@@ -192,6 +192,11 @@ export namespace CreditGrantResponse {
     status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED';
 
     /**
+     * The synchronization states of the entity with external systems
+     */
+    syncStates: Array<Data.SyncState> | null;
+
+    /**
      * Timestamp of when the record was last updated
      */
     updatedAt: string;
@@ -291,6 +296,37 @@ export namespace CreditGrantResponse {
        * The invoice last update date
        */
       updatedAt: string;
+    }
+
+    export interface SyncState {
+      /**
+       * Status of the integration sync
+       */
+      status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED';
+
+      /**
+       * Synced entity id
+       */
+      syncedEntityId: string | null;
+
+      /**
+       * The vendor identifier of integration
+       */
+      vendorIdentifier:
+        | 'AUTH0'
+        | 'ZUORA'
+        | 'STRIPE'
+        | 'HUBSPOT'
+        | 'AWS_MARKETPLACE'
+        | 'SNOWFLAKE'
+        | 'SALESFORCE'
+        | 'BIG_QUERY'
+        | 'OPEN_FGA'
+        | 'APP_STORE'
+        | 'RECEIVED'
+        | 'PREQUEL'
+        | 'AIRWALLEX'
+        | 'STRIPE_INVOICING';
     }
   }
 }
@@ -400,6 +436,11 @@ export interface GrantListResponse {
   status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED';
 
   /**
+   * The synchronization states of the entity with external systems
+   */
+  syncStates: Array<GrantListResponse.SyncState> | null;
+
+  /**
    * Timestamp of when the record was last updated
    */
   updatedAt: string;
@@ -499,6 +540,37 @@ export namespace GrantListResponse {
      * The invoice last update date
      */
     updatedAt: string;
+  }
+
+  export interface SyncState {
+    /**
+     * Status of the integration sync
+     */
+    status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED';
+
+    /**
+     * Synced entity id
+     */
+    syncedEntityId: string | null;
+
+    /**
+     * The vendor identifier of integration
+     */
+    vendorIdentifier:
+      | 'AUTH0'
+      | 'ZUORA'
+      | 'STRIPE'
+      | 'HUBSPOT'
+      | 'AWS_MARKETPLACE'
+      | 'SNOWFLAKE'
+      | 'SALESFORCE'
+      | 'BIG_QUERY'
+      | 'OPEN_FGA'
+      | 'APP_STORE'
+      | 'RECEIVED'
+      | 'PREQUEL'
+      | 'AIRWALLEX'
+      | 'STRIPE_INVOICING';
   }
 }
 
