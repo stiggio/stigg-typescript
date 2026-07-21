@@ -491,6 +491,11 @@ export interface CreditListLedgerParams extends MyCursorIDPageParams {
   currencyId?: string;
 
   /**
+   * Query param: Filter by event type(s), comma-separated
+   */
+  eventType?: string;
+
+  /**
    * Query param: Filter by resource ID
    */
   resourceId?: string;
