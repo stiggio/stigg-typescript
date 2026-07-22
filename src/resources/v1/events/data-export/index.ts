@@ -5,9 +5,9 @@ export {
   type DataExportListModelsResponse,
   type DataExportMintScopedTokenResponse,
   type DataExportTriggerSyncResponse,
-  type DataExportListModelsParams,
-  type DataExportMintScopedTokenParams,
   type DataExportTriggerSyncParams,
+  type DataExportMintScopedTokenParams,
+  type DataExportListModelsParams,
 } from './data-export';
 export {
   Destinations,
@@ -15,6 +15,6 @@ export {
   type DestinationUpdateResponse,
   type DestinationDeleteResponse,
   type DestinationCreateParams,
-  type DestinationUpdateParams,
   type DestinationDeleteParams,
+  type DestinationUpdateParams,
 } from './destinations';

@@ -9,6 +9,38 @@ const client = new Stigg({
 
 describe('resource grants', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.v1.credits.grants.list({ customerId: 'customerId' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.v1.credits.grants.list({
+      customerId: 'customerId',
+      after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      createdAt: {
+        gt: '2019-12-27T18:11:19.117Z',
+        gte: '2019-12-27T18:11:19.117Z',
+        lt: '2019-12-27T18:11:19.117Z',
+        lte: '2019-12-27T18:11:19.117Z',
+      },
+      currencyId: 'currencyId',
+      limit: 1,
+      resourceId: 'resourceId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.v1.credits.grants.create({
       amount: 0,
@@ -54,38 +86,6 @@ describe('resource grants', () => {
       metadata: { foo: 'string' },
       paymentCollectionMethod: 'CHARGE',
       priority: 0,
-      resourceId: 'resourceId',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.v1.credits.grants.list({ customerId: 'customerId' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.v1.credits.grants.list({
-      customerId: 'customerId',
-      after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      createdAt: {
-        gt: '2019-12-27T18:11:19.117Z',
-        gte: '2019-12-27T18:11:19.117Z',
-        lt: '2019-12-27T18:11:19.117Z',
-        lte: '2019-12-27T18:11:19.117Z',
-      },
-      currencyId: 'currencyId',
-      limit: 1,
       resourceId: 'resourceId',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',

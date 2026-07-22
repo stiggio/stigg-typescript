@@ -20,11 +20,11 @@ export {
   type EntityArchiveResponse,
   type EntityUnarchiveResponse,
   type EntityUpsertResponse,
-  type EntityRetrieveParams,
   type EntityListParams,
+  type EntityUpsertParams,
+  type EntityRetrieveParams,
   type EntityArchiveParams,
   type EntityUnarchiveParams,
-  type EntityUpsertParams,
   type EntityListResponsesMyCursorIDPage,
 } from './entities';
 export { Entitlements, type EntitlementCheckResponse, type EntitlementCheckParams } from './entitlements';

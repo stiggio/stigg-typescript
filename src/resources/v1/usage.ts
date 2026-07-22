@@ -11,16 +11,12 @@ import { path } from '../../internal/utils/path';
  */
 export class Usage extends APIResource {
   /**
-   * Estimates the credit cost of a usage report without recording it. Returns the
-   * estimated cost per credit currency, the current balance, and the balance after
-   * the estimated consumption.
+   * Reports usage measurements for metered features. The reported usage is used to
+   * track, limit, and bill customer consumption.
    */
-  estimateCost(
-    params: UsageEstimateCostParams,
-    options?: RequestOptions,
-  ): APIPromise<UsageEstimateCostResponse> {
+  report(params: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/usage/estimate', {
+    return this._client.post('/api/v1/usage', {
       body,
       ...options,
       headers: buildHeaders([
@@ -56,12 +52,16 @@ export class Usage extends APIResource {
   }
 
   /**
-   * Reports usage measurements for metered features. The reported usage is used to
-   * track, limit, and bill customer consumption.
+   * Estimates the credit cost of a usage report without recording it. Returns the
+   * estimated cost per credit currency, the current balance, and the balance after
+   * the estimated consumption.
    */
-  report(params: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
+  estimateCost(
+    params: UsageEstimateCostParams,
+    options?: RequestOptions,
+  ): APIPromise<UsageEstimateCostResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/usage', {
+    return this._client.post('/api/v1/usage/estimate', {
       body,
       ...options,
       headers: buildHeaders([
@@ -376,91 +376,6 @@ export namespace UsageReportResponse {
   }
 }
 
-export interface UsageEstimateCostParams {
-  /**
-   * Body param: Customer id
-   */
-  customerId: string;
-
-  /**
-   * Body param: Feature id
-   */
-  featureId: string;
-
-  /**
-   * Body param: The value to report for usage
-   */
-  value: number;
-
-  /**
-   * Body param: Additional dimensions for the usage report
-   */
-  dimensions?: { [key: string]: string | number | boolean };
-
-  /**
-   * Body param: Resource id
-   */
-  resourceId?: string | null;
-
-  /**
-   * Body param: The method by which the usage value should be updated
-   */
-  updateBehavior?: 'DELTA' | 'SET';
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface UsageHistoryParams {
-  /**
-   * Path param: Customer id
-   */
-  customerId: string;
-
-  /**
-   * Query param: The start date of the range
-   */
-  startDate: string;
-
-  /**
-   * Query param: The end date of the range
-   */
-  endDate?: string;
-
-  /**
-   * Query param: Criteria by which to group the usage history
-   */
-  groupBy?: string;
-
-  /**
-   * Query param: Resource id
-   */
-  resourceId?: string | null;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface UsageReportParams {
   /**
    * Body param: A list of usage reports to be submitted in bulk
@@ -528,13 +443,98 @@ export namespace UsageReportParams {
   }
 }
 
+export interface UsageHistoryParams {
+  /**
+   * Path param: Customer id
+   */
+  customerId: string;
+
+  /**
+   * Query param: The start date of the range
+   */
+  startDate: string;
+
+  /**
+   * Query param: The end date of the range
+   */
+  endDate?: string;
+
+  /**
+   * Query param: Criteria by which to group the usage history
+   */
+  groupBy?: string;
+
+  /**
+   * Query param: Resource id
+   */
+  resourceId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface UsageEstimateCostParams {
+  /**
+   * Body param: Customer id
+   */
+  customerId: string;
+
+  /**
+   * Body param: Feature id
+   */
+  featureId: string;
+
+  /**
+   * Body param: The value to report for usage
+   */
+  value: number;
+
+  /**
+   * Body param: Additional dimensions for the usage report
+   */
+  dimensions?: { [key: string]: string | number | boolean };
+
+  /**
+   * Body param: Resource id
+   */
+  resourceId?: string | null;
+
+  /**
+   * Body param: The method by which the usage value should be updated
+   */
+  updateBehavior?: 'DELTA' | 'SET';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export declare namespace Usage {
   export {
     type UsageEstimateCostResponse as UsageEstimateCostResponse,
     type UsageHistoryResponse as UsageHistoryResponse,
     type UsageReportResponse as UsageReportResponse,
-    type UsageEstimateCostParams as UsageEstimateCostParams,
-    type UsageHistoryParams as UsageHistoryParams,
     type UsageReportParams as UsageReportParams,
+    type UsageHistoryParams as UsageHistoryParams,
+    type UsageEstimateCostParams as UsageEstimateCostParams,
   };
 }

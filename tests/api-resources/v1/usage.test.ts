@@ -9,64 +9,6 @@ const client = new Stigg({
 
 describe('resource usage', () => {
   // Mock server tests are disabled
-  test.skip('estimateCost: only required params', async () => {
-    const responsePromise = client.v1.usage.estimateCost({
-      customerId: 'customerId',
-      featureId: 'featureId',
-      value: -9007199254740991,
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('estimateCost: required and optional params', async () => {
-    const response = await client.v1.usage.estimateCost({
-      customerId: 'customerId',
-      featureId: 'featureId',
-      value: -9007199254740991,
-      dimensions: { foo: 'string' },
-      resourceId: 'resourceId',
-      updateBehavior: 'DELTA',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('history: only required params', async () => {
-    const responsePromise = client.v1.usage.history('featureId', {
-      customerId: 'customerId',
-      startDate: '2019-12-27T18:11:19.117Z',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('history: required and optional params', async () => {
-    const response = await client.v1.usage.history('featureId', {
-      customerId: 'customerId',
-      startDate: '2019-12-27T18:11:19.117Z',
-      endDate: '2019-12-27T18:11:19.117Z',
-      groupBy: 'groupBy',
-      resourceId: 'resourceId',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('report: only required params', async () => {
     const responsePromise = client.v1.usage.report({
       usages: [
@@ -101,6 +43,64 @@ describe('resource usage', () => {
           updateBehavior: 'DELTA',
         },
       ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('history: only required params', async () => {
+    const responsePromise = client.v1.usage.history('featureId', {
+      customerId: 'customerId',
+      startDate: '2019-12-27T18:11:19.117Z',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('history: required and optional params', async () => {
+    const response = await client.v1.usage.history('featureId', {
+      customerId: 'customerId',
+      startDate: '2019-12-27T18:11:19.117Z',
+      endDate: '2019-12-27T18:11:19.117Z',
+      groupBy: 'groupBy',
+      resourceId: 'resourceId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('estimateCost: only required params', async () => {
+    const responsePromise = client.v1.usage.estimateCost({
+      customerId: 'customerId',
+      featureId: 'featureId',
+      value: -9007199254740991,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('estimateCost: required and optional params', async () => {
+    const response = await client.v1.usage.estimateCost({
+      customerId: 'customerId',
+      featureId: 'featureId',
+      value: -9007199254740991,
+      dimensions: { foo: 'string' },
+      resourceId: 'resourceId',
+      updateBehavior: 'DELTA',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

@@ -19,15 +19,16 @@ export class DataExport extends APIResource {
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
 
   /**
-   * List the catalog of data-export models the customer can opt into when connecting
-   * a destination.
+   * Trigger a sync for one destination or all destinations under the provider
+   * entity.
    */
-  listModels(
-    params: DataExportListModelsParams | null | undefined = {},
+  triggerSync(
+    params: DataExportTriggerSyncParams,
     options?: RequestOptions,
-  ): APIPromise<DataExportListModelsResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.get('/api/v1/data-export/models', {
+  ): APIPromise<DataExportTriggerSyncResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/data-export/sync', {
+      body,
       ...options,
       headers: buildHeaders([
         {
@@ -62,16 +63,15 @@ export class DataExport extends APIResource {
   }
 
   /**
-   * Trigger a sync for one destination or all destinations under the provider
-   * entity.
+   * List the catalog of data-export models the customer can opt into when connecting
+   * a destination.
    */
-  triggerSync(
-    params: DataExportTriggerSyncParams,
+  listModels(
+    params: DataExportListModelsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<DataExportTriggerSyncResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/data-export/sync', {
-      body,
+  ): APIPromise<DataExportListModelsResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get('/api/v1/data-export/models', {
       ...options,
       headers: buildHeaders([
         {
@@ -227,17 +227,22 @@ export namespace DataExportTriggerSyncResponse {
   }
 }
 
-export interface DataExportListModelsParams {
+export interface DataExportTriggerSyncParams {
   /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
+   * Body param: Provider destination ID to sync. Omit to sync all destinations.
+   */
+  destinationId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
    */
   'X-ACCOUNT-ID'?: string;
 
   /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
    */
   'X-ENVIRONMENT-ID'?: string;
 }
@@ -272,22 +277,17 @@ export interface DataExportMintScopedTokenParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface DataExportTriggerSyncParams {
+export interface DataExportListModelsParams {
   /**
-   * Body param: Provider destination ID to sync. Omit to sync all destinations.
-   */
-  destinationId?: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
    */
   'X-ACCOUNT-ID'?: string;
 
   /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
    */
   'X-ENVIRONMENT-ID'?: string;
 }
@@ -299,9 +299,9 @@ export declare namespace DataExport {
     type DataExportListModelsResponse as DataExportListModelsResponse,
     type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
     type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
-    type DataExportListModelsParams as DataExportListModelsParams,
-    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
+    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
+    type DataExportListModelsParams as DataExportListModelsParams,
   };
 
   export {
@@ -310,7 +310,7 @@ export declare namespace DataExport {
     type DestinationUpdateResponse as DestinationUpdateResponse,
     type DestinationDeleteResponse as DestinationDeleteResponse,
     type DestinationCreateParams as DestinationCreateParams,
-    type DestinationUpdateParams as DestinationUpdateParams,
     type DestinationDeleteParams as DestinationDeleteParams,
+    type DestinationUpdateParams as DestinationUpdateParams,
   };
 }

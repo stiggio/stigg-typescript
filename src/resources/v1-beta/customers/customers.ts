@@ -264,11 +264,11 @@ export declare namespace Customers {
     type EntityUnarchiveResponse as EntityUnarchiveResponse,
     type EntityUpsertResponse as EntityUpsertResponse,
     type EntityListResponsesMyCursorIDPage as EntityListResponsesMyCursorIDPage,
-    type EntityRetrieveParams as EntityRetrieveParams,
     type EntityListParams as EntityListParams,
+    type EntityUpsertParams as EntityUpsertParams,
+    type EntityRetrieveParams as EntityRetrieveParams,
     type EntityArchiveParams as EntityArchiveParams,
     type EntityUnarchiveParams as EntityUnarchiveParams,
-    type EntityUpsertParams as EntityUpsertParams,
   };
 
   export {

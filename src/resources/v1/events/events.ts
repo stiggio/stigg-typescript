@@ -22,16 +22,12 @@ export class Events extends APIResource {
   dataExport: DataExportAPI.DataExport = new DataExportAPI.DataExport(this._client);
 
   /**
-   * Estimates the credit cost of a usage event without ingesting it. Returns the
-   * estimated cost per credit currency, the current balance, and the balance after
-   * the estimated consumption.
+   * Reports raw usage events for event-based metering. Events are ingested
+   * asynchronously and aggregated into usage totals.
    */
-  estimateCost(
-    params: EventEstimateCostParams,
-    options?: RequestOptions,
-  ): APIPromise<EventEstimateCostResponse> {
+  report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/events/estimate', {
+    return this._client.post('/api/v1/events', {
       body,
       ...options,
       headers: buildHeaders([
@@ -45,12 +41,16 @@ export class Events extends APIResource {
   }
 
   /**
-   * Reports raw usage events for event-based metering. Events are ingested
-   * asynchronously and aggregated into usage totals.
+   * Estimates the credit cost of a usage event without ingesting it. Returns the
+   * estimated cost per credit currency, the current balance, and the balance after
+   * the estimated consumption.
    */
-  report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
+  estimateCost(
+    params: EventEstimateCostParams,
+    options?: RequestOptions,
+  ): APIPromise<EventEstimateCostResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/events', {
+    return this._client.post('/api/v1/events/estimate', {
       body,
       ...options,
       headers: buildHeaders([
@@ -155,41 +155,6 @@ export interface EventReportResponse {
   data: unknown;
 }
 
-export interface EventEstimateCostParams {
-  /**
-   * Body param: Customer id
-   */
-  customerId: string;
-
-  /**
-   * Body param: The name of the usage event
-   */
-  eventName: string;
-
-  /**
-   * Body param: Dimensions associated with the usage event
-   */
-  dimensions?: { [key: string]: string | number | boolean };
-
-  /**
-   * Body param: Resource id
-   */
-  resourceId?: string | null;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface EventReportParams {
   /**
    * Body param: A list of usage events to report
@@ -247,14 +212,49 @@ export namespace EventReportParams {
   }
 }
 
+export interface EventEstimateCostParams {
+  /**
+   * Body param: Customer id
+   */
+  customerId: string;
+
+  /**
+   * Body param: The name of the usage event
+   */
+  eventName: string;
+
+  /**
+   * Body param: Dimensions associated with the usage event
+   */
+  dimensions?: { [key: string]: string | number | boolean };
+
+  /**
+   * Body param: Resource id
+   */
+  resourceId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 Events.DataExport = DataExport;
 
 export declare namespace Events {
   export {
     type EventEstimateCostResponse as EventEstimateCostResponse,
     type EventReportResponse as EventReportResponse,
-    type EventEstimateCostParams as EventEstimateCostParams,
     type EventReportParams as EventReportParams,
+    type EventEstimateCostParams as EventEstimateCostParams,
   };
 
   export {
@@ -262,8 +262,8 @@ export declare namespace Events {
     type DataExportListModelsResponse as DataExportListModelsResponse,
     type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
     type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
-    type DataExportListModelsParams as DataExportListModelsParams,
-    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
+    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
+    type DataExportListModelsParams as DataExportListModelsParams,
   };
 }

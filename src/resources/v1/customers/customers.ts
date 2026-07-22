@@ -100,6 +100,24 @@ export class Customers extends APIResource {
   }
 
   /**
+   * Creates a new customer.
+   */
+  provision(params: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/customers', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Archives a customer, preventing new subscriptions. Optionally cancels existing
    * subscriptions.
    */
@@ -122,23 +140,15 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Checks a single entitlement (feature or credit) for a customer or resource.
-   * Supports `requestedUsage` and `requestedValues` to evaluate against limits or
-   * enum values.
-   *
-   * **Warning:** This REST API endpoint lacks built-in client-side caching, fallback
-   * mechanisms, and low-latency guarantees. It is not recommended for hot-path
-   * entitlement checks. For production use, consider using the Stigg Node Server SDK
-   * with caching or the Sidecar for low-latency cached responses.
+   * Restores an archived customer, allowing them to create new subscriptions again.
    */
-  checkEntitlement(
+  unarchive(
     id: string,
-    params: CustomerCheckEntitlementParams | null | undefined = {},
+    params: CustomerUnarchiveParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CustomerCheckEntitlementResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
-    return this._client.get(path`/api/v1/customers/${id}/entitlements/check`, {
-      query,
+  ): APIPromise<CustomerResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/customers/${id}/unarchive`, {
       ...options,
       headers: buildHeaders([
         {
@@ -196,24 +206,6 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Creates a new customer.
-   */
-  provision(params: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/customers', {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Retrieves the effective entitlements for a customer or resource, including
    * feature and credit entitlements.
    *
@@ -242,15 +234,23 @@ export class Customers extends APIResource {
   }
 
   /**
-   * Restores an archived customer, allowing them to create new subscriptions again.
+   * Checks a single entitlement (feature or credit) for a customer or resource.
+   * Supports `requestedUsage` and `requestedValues` to evaluate against limits or
+   * enum values.
+   *
+   * **Warning:** This REST API endpoint lacks built-in client-side caching, fallback
+   * mechanisms, and low-latency guarantees. It is not recommended for hot-path
+   * entitlement checks. For production use, consider using the Stigg Node Server SDK
+   * with caching or the Sidecar for low-latency cached responses.
    */
-  unarchive(
+  checkEntitlement(
     id: string,
-    params: CustomerUnarchiveParams | null | undefined = {},
+    params: CustomerCheckEntitlementParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CustomerResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.post(path`/api/v1/customers/${id}/unarchive`, {
+  ): APIPromise<CustomerCheckEntitlementResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.get(path`/api/v1/customers/${id}/entitlements/check`, {
+      query,
       ...options,
       headers: buildHeaders([
         {
@@ -2593,148 +2593,6 @@ export namespace CustomerListParams {
   }
 }
 
-export interface CustomerArchiveParams {
-  /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface CustomerCheckEntitlementParams {
-  /**
-   * Query param: Currency ID (refId) to check for credit entitlements. Mutually
-   * exclusive with `featureId`.
-   */
-  currencyId?: string;
-
-  /**
-   * Query param: Feature ID (refId) to check. Mutually exclusive with `currencyId`.
-   */
-  featureId?: string;
-
-  /**
-   * Query param: Requested usage amount to evaluate against the entitlement limit
-   * (numeric features only)
-   */
-  requestedUsage?: number;
-
-  /**
-   * Query param: Requested values to evaluate against allowed values (enum features
-   * only)
-   */
-  requestedValues?: Array<string>;
-
-  /**
-   * Query param: Resource ID to scope the entitlement check to a specific resource
-   */
-  resourceId?: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface CustomerImportParams {
-  /**
-   * Body param: List of customer objects to import
-   */
-  customers: Array<CustomerImportParams.Customer>;
-
-  /**
-   * Body param: Integration details
-   */
-  integrationId?: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export namespace CustomerImportParams {
-  export interface Customer {
-    /**
-     * Customer slug
-     */
-    id: string;
-
-    /**
-     * The email of the customer
-     */
-    email: string | null;
-
-    /**
-     * The name of the customer
-     */
-    name: string | null;
-
-    /**
-     * Id in the billing provider
-     */
-    billingId?: string;
-
-    /**
-     * Additional metadata
-     */
-    metadata?: { [key: string]: string };
-
-    /**
-     * Billing provider payment method id
-     */
-    paymentMethodId?: string;
-
-    /**
-     * The unique identifier for the customer in Salesforce integration
-     */
-    salesforceId?: string;
-
-    /**
-     * Timestamp of when the record was last updated
-     */
-    updatedAt?: string;
-  }
-}
-
-export interface CustomerListResourcesParams extends MyCursorIDPageParams {
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface CustomerProvisionParams {
   /**
    * Body param: Customer slug
@@ -3315,6 +3173,120 @@ export namespace CustomerProvisionParams {
   }
 }
 
+export interface CustomerArchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomerUnarchiveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomerImportParams {
+  /**
+   * Body param: List of customer objects to import
+   */
+  customers: Array<CustomerImportParams.Customer>;
+
+  /**
+   * Body param: Integration details
+   */
+  integrationId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export namespace CustomerImportParams {
+  export interface Customer {
+    /**
+     * Customer slug
+     */
+    id: string;
+
+    /**
+     * The email of the customer
+     */
+    email: string | null;
+
+    /**
+     * The name of the customer
+     */
+    name: string | null;
+
+    /**
+     * Id in the billing provider
+     */
+    billingId?: string;
+
+    /**
+     * Additional metadata
+     */
+    metadata?: { [key: string]: string };
+
+    /**
+     * Billing provider payment method id
+     */
+    paymentMethodId?: string;
+
+    /**
+     * The unique identifier for the customer in Salesforce integration
+     */
+    salesforceId?: string;
+
+    /**
+     * Timestamp of when the record was last updated
+     */
+    updatedAt?: string;
+  }
+}
+
+export interface CustomerListResourcesParams extends MyCursorIDPageParams {
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface CustomerRetrieveEntitlementsParams {
   /**
    * Query param: Resource ID to scope entitlements to a specific resource
@@ -3335,17 +3307,45 @@ export interface CustomerRetrieveEntitlementsParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface CustomerUnarchiveParams {
+export interface CustomerCheckEntitlementParams {
   /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
+   * Query param: Currency ID (refId) to check for credit entitlements. Mutually
+   * exclusive with `featureId`.
+   */
+  currencyId?: string;
+
+  /**
+   * Query param: Feature ID (refId) to check. Mutually exclusive with `currencyId`.
+   */
+  featureId?: string;
+
+  /**
+   * Query param: Requested usage amount to evaluate against the entitlement limit
+   * (numeric features only)
+   */
+  requestedUsage?: number;
+
+  /**
+   * Query param: Requested values to evaluate against allowed values (enum features
+   * only)
+   */
+  requestedValues?: Array<string>;
+
+  /**
+   * Query param: Resource ID to scope the entitlement check to a specific resource
+   */
+  resourceId?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
    */
   'X-ACCOUNT-ID'?: string;
 
   /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
    */
   'X-ENVIRONMENT-ID'?: string;
 }
@@ -3368,13 +3368,13 @@ export declare namespace Customers {
     type CustomerRetrieveParams as CustomerRetrieveParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
+    type CustomerProvisionParams as CustomerProvisionParams,
     type CustomerArchiveParams as CustomerArchiveParams,
-    type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
+    type CustomerUnarchiveParams as CustomerUnarchiveParams,
     type CustomerImportParams as CustomerImportParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
-    type CustomerProvisionParams as CustomerProvisionParams,
     type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
-    type CustomerUnarchiveParams as CustomerUnarchiveParams,
+    type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
   };
 
   export {
@@ -3389,8 +3389,8 @@ export declare namespace Customers {
     type PromotionalEntitlementListResponse as PromotionalEntitlementListResponse,
     type PromotionalEntitlementRevokeResponse as PromotionalEntitlementRevokeResponse,
     type PromotionalEntitlementListResponsesMyCursorIDPage as PromotionalEntitlementListResponsesMyCursorIDPage,
-    type PromotionalEntitlementCreateParams as PromotionalEntitlementCreateParams,
     type PromotionalEntitlementListParams as PromotionalEntitlementListParams,
+    type PromotionalEntitlementCreateParams as PromotionalEntitlementCreateParams,
     type PromotionalEntitlementRevokeParams as PromotionalEntitlementRevokeParams,
   };
 
@@ -3398,10 +3398,10 @@ export declare namespace Customers {
     Integrations as Integrations,
     type IntegrationListResponse as IntegrationListResponse,
     type IntegrationListResponsesMyCursorIDPage as IntegrationListResponsesMyCursorIDPage,
-    type IntegrationRetrieveParams as IntegrationRetrieveParams,
-    type IntegrationUpdateParams as IntegrationUpdateParams,
     type IntegrationListParams as IntegrationListParams,
     type IntegrationLinkParams as IntegrationLinkParams,
+    type IntegrationRetrieveParams as IntegrationRetrieveParams,
+    type IntegrationUpdateParams as IntegrationUpdateParams,
     type IntegrationUnlinkParams as IntegrationUnlinkParams,
   };
 }

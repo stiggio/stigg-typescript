@@ -9,78 +9,6 @@ const client = new Stigg({
 
 describe('resource products', () => {
   // Mock server tests are disabled
-  test.skip('archiveProduct', async () => {
-    const responsePromise = client.v1.products.archiveProduct('x');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('archiveProduct: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.products.archiveProduct(
-        'x',
-        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createProduct: only required params', async () => {
-    const responsePromise = client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createProduct: required and optional params', async () => {
-    const response = await client.v1.products.createProduct({
-      id: 'id',
-      displayName: 'displayName',
-      description: 'description',
-      metadata: { foo: 'string' },
-      multipleSubscriptions: true,
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('duplicateProduct: only required params', async () => {
-    const responsePromise = client.v1.products.duplicateProduct('x', { targetId: 'targetId' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('duplicateProduct: required and optional params', async () => {
-    const response = await client.v1.products.duplicateProduct('x', {
-      targetId: 'targetId',
-      description: 'description',
-      displayName: 'displayName',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('listProducts', async () => {
     const responsePromise = client.v1.products.listProducts();
     const rawResponse = await responsePromise.asResponse();
@@ -118,6 +46,67 @@ describe('resource products', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('createProduct: only required params', async () => {
+    const responsePromise = client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createProduct: required and optional params', async () => {
+    const response = await client.v1.products.createProduct({
+      id: 'id',
+      displayName: 'displayName',
+      description: 'description',
+      metadata: { foo: 'string' },
+      multipleSubscriptions: true,
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateProduct', async () => {
+    const responsePromise = client.v1.products.updateProduct('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('archiveProduct', async () => {
+    const responsePromise = client.v1.products.archiveProduct('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('archiveProduct: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.products.archiveProduct(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('unarchiveProduct', async () => {
     const responsePromise = client.v1.products.unarchiveProduct('x');
     const rawResponse = await responsePromise.asResponse();
@@ -142,8 +131,8 @@ describe('resource products', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('updateProduct', async () => {
-    const responsePromise = client.v1.products.updateProduct('x', {});
+  test.skip('duplicateProduct: only required params', async () => {
+    const responsePromise = client.v1.products.duplicateProduct('x', { targetId: 'targetId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -151,5 +140,16 @@ describe('resource products', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('duplicateProduct: required and optional params', async () => {
+    const response = await client.v1.products.duplicateProduct('x', {
+      targetId: 'targetId',
+      description: 'description',
+      displayName: 'displayName',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 });

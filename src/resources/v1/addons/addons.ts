@@ -25,6 +25,27 @@ export class Addons extends APIResource {
   entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
 
   /**
+   * Retrieves a paginated list of addons in the environment.
+   */
+  list(
+    params: AddonListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AddonListResponsesMyCursorIDPage, AddonListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.getAPIList('/api/v1/addons', MyCursorIDPage<AddonListResponse>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Creates a new addon in draft status, associated with a specific product.
    */
   create(params: AddonCreateParams, options?: RequestOptions): APIPromise<Addon> {
@@ -84,27 +105,6 @@ export class Addons extends APIResource {
   }
 
   /**
-   * Retrieves a paginated list of addons in the environment.
-   */
-  list(
-    params: AddonListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AddonListResponsesMyCursorIDPage, AddonListResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
-    return this._client.getAPIList('/api/v1/addons', MyCursorIDPage<AddonListResponse>, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Archives an addon, preventing it from being used in new subscriptions.
    */
   archive(
@@ -126,6 +126,28 @@ export class Addons extends APIResource {
   }
 
   /**
+   * Publishes a draft addon, making it available for use in subscriptions.
+   */
+  publish(
+    id: string,
+    params: AddonPublishParams,
+    options?: RequestOptions,
+  ): APIPromise<AddonPublishResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/addons/${id}/publish`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Creates a draft version of an existing addon for modification before publishing.
    */
   createDraft(
@@ -135,6 +157,27 @@ export class Addons extends APIResource {
   ): APIPromise<Addon> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
     return this._client.post(path`/api/v1/addons/${id}/draft`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Removes a draft version of an addon.
+   */
+  removeDraft(
+    id: string,
+    params: AddonRemoveDraftParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AddonRemoveDraftResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/addons/${id}/draft`, {
       ...options,
       headers: buildHeaders([
         {
@@ -170,49 +213,6 @@ export class Addons extends APIResource {
         ]),
       },
     );
-  }
-
-  /**
-   * Publishes a draft addon, making it available for use in subscriptions.
-   */
-  publish(
-    id: string,
-    params: AddonPublishParams,
-    options?: RequestOptions,
-  ): APIPromise<AddonPublishResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post(path`/api/v1/addons/${id}/publish`, {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Removes a draft version of an addon.
-   */
-  removeDraft(
-    id: string,
-    params: AddonRemoveDraftParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AddonRemoveDraftResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.delete(path`/api/v1/addons/${id}/draft`, {
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
   }
 }
 
@@ -993,6 +993,64 @@ export namespace AddonRemoveDraftResponse {
      * The unique identifier for the entity
      */
     id: string;
+  }
+}
+
+export interface AddonListParams extends MyCursorIDPageParams {
+  /**
+   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  createdAt?: AddonListParams.CreatedAt;
+
+  /**
+   * Query param: Filter by product ID
+   */
+  productId?: string;
+
+  /**
+   * Query param: Filter by status. Supports comma-separated values for multiple
+   * statuses
+   */
+  status?: Array<'DRAFT' | 'PUBLISHED' | 'ARCHIVED'>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export namespace AddonListParams {
+  /**
+   * Filter by creation date using range operators: gt, gte, lt, lte
+   */
+  export interface CreatedAt {
+    /**
+     * Greater than the specified createdAt value
+     */
+    gt?: string;
+
+    /**
+     * Greater than or equal to the specified createdAt value
+     */
+    gte?: string;
+
+    /**
+     * Less than the specified createdAt value
+     */
+    lt?: string;
+
+    /**
+     * Less than or equal to the specified createdAt value
+     */
+    lte?: string;
   }
 }
 
@@ -2496,64 +2554,6 @@ export namespace AddonUpdateParams {
   }
 }
 
-export interface AddonListParams extends MyCursorIDPageParams {
-  /**
-   * Query param: Filter by creation date using range operators: gt, gte, lt, lte
-   */
-  createdAt?: AddonListParams.CreatedAt;
-
-  /**
-   * Query param: Filter by product ID
-   */
-  productId?: string;
-
-  /**
-   * Query param: Filter by status. Supports comma-separated values for multiple
-   * statuses
-   */
-  status?: Array<'DRAFT' | 'PUBLISHED' | 'ARCHIVED'>;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export namespace AddonListParams {
-  /**
-   * Filter by creation date using range operators: gt, gte, lt, lte
-   */
-  export interface CreatedAt {
-    /**
-     * Greater than the specified createdAt value
-     */
-    gt?: string;
-
-    /**
-     * Greater than or equal to the specified createdAt value
-     */
-    gte?: string;
-
-    /**
-     * Less than the specified createdAt value
-     */
-    lt?: string;
-
-    /**
-     * Less than or equal to the specified createdAt value
-     */
-    lte?: string;
-  }
-}
-
 export interface AddonArchiveParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
@@ -2569,7 +2569,42 @@ export interface AddonArchiveParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
+export interface AddonPublishParams {
+  /**
+   * Body param: The migration type of the package
+   */
+  migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface AddonCreateDraftParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface AddonRemoveDraftParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
    * back to the user's first membership. Ignored for API-key auth.
@@ -2599,41 +2634,6 @@ export interface AddonListChargesParams extends MyCursorIDPageParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface AddonPublishParams {
-  /**
-   * Body param: The migration type of the package
-   */
-  migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS';
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface AddonRemoveDraftParams {
-  /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 Addons.Entitlements = Entitlements;
 
 export declare namespace Addons {
@@ -2645,15 +2645,15 @@ export declare namespace Addons {
     type AddonRemoveDraftResponse as AddonRemoveDraftResponse,
     type AddonListResponsesMyCursorIDPage as AddonListResponsesMyCursorIDPage,
     type AddonListChargesResponsesMyCursorIDPage as AddonListChargesResponsesMyCursorIDPage,
+    type AddonListParams as AddonListParams,
     type AddonCreateParams as AddonCreateParams,
     type AddonRetrieveParams as AddonRetrieveParams,
     type AddonUpdateParams as AddonUpdateParams,
-    type AddonListParams as AddonListParams,
     type AddonArchiveParams as AddonArchiveParams,
-    type AddonCreateDraftParams as AddonCreateDraftParams,
-    type AddonListChargesParams as AddonListChargesParams,
     type AddonPublishParams as AddonPublishParams,
+    type AddonCreateDraftParams as AddonCreateDraftParams,
     type AddonRemoveDraftParams as AddonRemoveDraftParams,
+    type AddonListChargesParams as AddonListChargesParams,
   };
 
   export {
@@ -2661,9 +2661,9 @@ export declare namespace Addons {
     type AddonPackageEntitlement as AddonPackageEntitlement,
     type EntitlementCreateResponse as EntitlementCreateResponse,
     type EntitlementListResponse as EntitlementListResponse,
+    type EntitlementListParams as EntitlementListParams,
     type EntitlementCreateParams as EntitlementCreateParams,
     type EntitlementUpdateParams as EntitlementUpdateParams,
-    type EntitlementListParams as EntitlementListParams,
     type EntitlementDeleteParams as EntitlementDeleteParams,
   };
 }

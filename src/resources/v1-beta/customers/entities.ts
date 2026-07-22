@@ -9,35 +9,6 @@ import { path } from '../../../internal/utils/path';
 
 export class Entities extends APIResource {
   /**
-   * Retrieves a single entity for the given customer by its identifier.
-   *
-   * @example
-   * ```ts
-   * const entity =
-   *   await client.v1Beta.customers.entities.retrieve('x', {
-   *     id: 'id',
-   *   });
-   * ```
-   */
-  retrieve(
-    entityID: string,
-    params: EntityRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<EntityRetrieveResponse> {
-    const { id, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
-    return this._client.get(path`/api/v1-beta/customers/${id}/entities/${entityID}`, {
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Retrieves a paginated list of entities for the given customer.
    *
    * @example
@@ -71,6 +42,73 @@ export class Entities extends APIResource {
         ]),
       },
     );
+  }
+
+  /**
+   * Creates or updates entities in bulk for the given customer. Existing entities
+   * matched by id are updated; new ids are created.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1Beta.customers.entities.upsert('id', {
+   *     entities: [
+   *       {
+   *         id: 'user-7f3a0c1d',
+   *         entityTypeId: 'user',
+   *         metadata: { email: 'jane@acme.com', role: 'admin' },
+   *       },
+   *       {
+   *         id: 'user-c4d1b2e9',
+   *         entityTypeId: 'user',
+   *         metadata: { email: 'john@acme.com' },
+   *       },
+   *     ],
+   *   });
+   * ```
+   */
+  upsert(id: string, params: EntityUpsertParams, options?: RequestOptions): APIPromise<EntityUpsertResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.put(path`/api/v1-beta/customers/${id}/entities`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Retrieves a single entity for the given customer by its identifier.
+   *
+   * @example
+   * ```ts
+   * const entity =
+   *   await client.v1Beta.customers.entities.retrieve('x', {
+   *     id: 'id',
+   *   });
+   * ```
+   */
+  retrieve(
+    entityID: string,
+    params: EntityRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<EntityRetrieveResponse> {
+    const { id, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;
+    return this._client.get(path`/api/v1-beta/customers/${id}/entities/${entityID}`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -121,44 +159,6 @@ export class Entities extends APIResource {
   ): APIPromise<EntityUnarchiveResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.post(path`/api/v1-beta/customers/${id}/entities/unarchive`, {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Creates or updates entities in bulk for the given customer. Existing entities
-   * matched by id are updated; new ids are created.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1Beta.customers.entities.upsert('id', {
-   *     entities: [
-   *       {
-   *         id: 'user-7f3a0c1d',
-   *         entityTypeId: 'user',
-   *         metadata: { email: 'jane@acme.com', role: 'admin' },
-   *       },
-   *       {
-   *         id: 'user-c4d1b2e9',
-   *         entityTypeId: 'user',
-   *         metadata: { email: 'john@acme.com' },
-   *       },
-   *     ],
-   *   });
-   * ```
-   */
-  upsert(id: string, params: EntityUpsertParams, options?: RequestOptions): APIPromise<EntityUpsertResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.put(path`/api/v1-beta/customers/${id}/entities`, {
       body,
       ...options,
       headers: buildHeaders([
@@ -344,26 +344,6 @@ export namespace EntityUpsertResponse {
   }
 }
 
-export interface EntityRetrieveParams {
-  /**
-   * Path param: The customer identifier (owner) the entity belongs to
-   */
-  id: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface EntityListParams extends MyCursorIDPageParams {
   /**
    * Query param: Filter results to entities of a specific entity type, by the type's
@@ -375,46 +355,6 @@ export interface EntityListParams extends MyCursorIDPageParams {
    * Query param: Whether to include archived entities. One of: true, false
    */
   includeArchived?: 'true' | 'false';
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface EntityArchiveParams {
-  /**
-   * Body param: Entity identifiers to act on
-   */
-  ids: Array<string>;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface EntityUnarchiveParams {
-  /**
-   * Body param: Entity identifiers to act on
-   */
-  ids: Array<string>;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
@@ -475,6 +415,66 @@ export namespace EntityUpsertParams {
   }
 }
 
+export interface EntityRetrieveParams {
+  /**
+   * Path param: The customer identifier (owner) the entity belongs to
+   */
+  id: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface EntityArchiveParams {
+  /**
+   * Body param: Entity identifiers to act on
+   */
+  ids: Array<string>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface EntityUnarchiveParams {
+  /**
+   * Body param: Entity identifiers to act on
+   */
+  ids: Array<string>;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export declare namespace Entities {
   export {
     type EntityRetrieveResponse as EntityRetrieveResponse,
@@ -483,10 +483,10 @@ export declare namespace Entities {
     type EntityUnarchiveResponse as EntityUnarchiveResponse,
     type EntityUpsertResponse as EntityUpsertResponse,
     type EntityListResponsesMyCursorIDPage as EntityListResponsesMyCursorIDPage,
-    type EntityRetrieveParams as EntityRetrieveParams,
     type EntityListParams as EntityListParams,
+    type EntityUpsertParams as EntityUpsertParams,
+    type EntityRetrieveParams as EntityRetrieveParams,
     type EntityArchiveParams as EntityArchiveParams,
     type EntityUnarchiveParams as EntityUnarchiveParams,
-    type EntityUpsertParams as EntityUpsertParams,
   };
 }

@@ -28,18 +28,17 @@ export class Destinations extends APIResource {
   }
 
   /**
-   * Update a destination's entity selection. Pushes the new enabled_models to the
-   * provider first, then persists the selection. Applies on the next scheduled
-   * transfer.
+   * Disconnect a destination: stops the provider sync (deletes the provider
+   * destination) and removes it from the DATA_EXPORT integration. Non-destructive —
+   * the warehouse table is left intact. Idempotent.
    */
-  update(
+  delete(
     destinationID: string,
-    params: DestinationUpdateParams,
+    params: DestinationDeleteParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<DestinationUpdateResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.patch(path`/api/v1/data-export/destinations/${destinationID}`, {
-      body,
+  ): APIPromise<DestinationDeleteResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/data-export/destinations/${destinationID}`, {
       ...options,
       headers: buildHeaders([
         {
@@ -52,17 +51,18 @@ export class Destinations extends APIResource {
   }
 
   /**
-   * Disconnect a destination: stops the provider sync (deletes the provider
-   * destination) and removes it from the DATA_EXPORT integration. Non-destructive —
-   * the warehouse table is left intact. Idempotent.
+   * Update a destination's entity selection. Pushes the new enabled_models to the
+   * provider first, then persists the selection. Applies on the next scheduled
+   * transfer.
    */
-  delete(
+  update(
     destinationID: string,
-    params: DestinationDeleteParams | null | undefined = {},
+    params: DestinationUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<DestinationDeleteResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.delete(path`/api/v1/data-export/destinations/${destinationID}`, {
+  ): APIPromise<DestinationUpdateResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/data-export/destinations/${destinationID}`, {
+      body,
       ...options,
       headers: buildHeaders([
         {
@@ -384,6 +384,21 @@ export interface DestinationCreateParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
+export interface DestinationDeleteParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface DestinationUpdateParams {
   /**
    * Body param
@@ -409,28 +424,13 @@ export interface DestinationUpdateParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface DestinationDeleteParams {
-  /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export declare namespace Destinations {
   export {
     type DestinationCreateResponse as DestinationCreateResponse,
     type DestinationUpdateResponse as DestinationUpdateResponse,
     type DestinationDeleteResponse as DestinationDeleteResponse,
     type DestinationCreateParams as DestinationCreateParams,
-    type DestinationUpdateParams as DestinationUpdateParams,
     type DestinationDeleteParams as DestinationDeleteParams,
+    type DestinationUpdateParams as DestinationUpdateParams,
   };
 }

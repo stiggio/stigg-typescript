@@ -9,8 +9,8 @@ const client = new Stigg({
 
 describe('resource features', () => {
   // Mock server tests are disabled
-  test.skip('archiveFeature', async () => {
-    const responsePromise = client.v1.features.archiveFeature('x');
+  test.skip('retrieveFeature', async () => {
+    const responsePromise = client.v1.features.retrieveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,15 +21,27 @@ describe('resource features', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('archiveFeature: request options and params are passed correctly', async () => {
+  test.skip('retrieveFeature: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.features.archiveFeature(
+      client.v1.features.retrieveFeature(
         'x',
         { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateFeature', async () => {
+    const responsePromise = client.v1.features.updateFeature('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
@@ -112,8 +124,8 @@ describe('resource features', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieveFeature', async () => {
-    const responsePromise = client.v1.features.retrieveFeature('x');
+  test.skip('archiveFeature', async () => {
+    const responsePromise = client.v1.features.archiveFeature('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,10 +136,10 @@ describe('resource features', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieveFeature: request options and params are passed correctly', async () => {
+  test.skip('archiveFeature: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.features.retrieveFeature(
+      client.v1.features.archiveFeature(
         'x',
         { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
         { path: '/_stainless_unknown_path' },
@@ -157,17 +169,5 @@ describe('resource features', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('updateFeature', async () => {
-    const responsePromise = client.v1.features.updateFeature('x', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

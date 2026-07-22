@@ -31,27 +31,6 @@ export class Coupons extends APIResource {
   }
 
   /**
-   * Retrieves a coupon by its unique identifier.
-   */
-  retrieve(
-    id: string,
-    params: CouponRetrieveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Coupon> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.get(path`/api/v1/coupons/${id}`, {
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Retrieves a paginated list of coupons in the environment.
    */
   list(
@@ -73,15 +52,15 @@ export class Coupons extends APIResource {
   }
 
   /**
-   * Archives a coupon, preventing it from being applied to new subscriptions.
+   * Retrieves a coupon by its unique identifier.
    */
-  archiveCoupon(
+  retrieve(
     id: string,
-    params: CouponArchiveCouponParams | null | undefined = {},
+    params: CouponRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Coupon> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.post(path`/api/v1/coupons/${id}/archive`, {
+    return this._client.get(path`/api/v1/coupons/${id}`, {
       ...options,
       headers: buildHeaders([
         {
@@ -100,6 +79,27 @@ export class Coupons extends APIResource {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.patch(path`/api/v1/coupons/${id}`, {
       body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Archives a coupon, preventing it from being applied to new subscriptions.
+   */
+  archiveCoupon(
+    id: string,
+    params: CouponArchiveCouponParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Coupon> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.post(path`/api/v1/coupons/${id}/archive`, {
       ...options,
       headers: buildHeaders([
         {
@@ -725,21 +725,6 @@ export namespace CouponCreateParams {
   }
 }
 
-export interface CouponRetrieveParams {
-  /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface CouponListParams extends MyCursorIDPageParams {
   /**
    * Query param: Filter by entity ID
@@ -803,7 +788,7 @@ export namespace CouponListParams {
   }
 }
 
-export interface CouponArchiveCouponParams {
+export interface CouponRetrieveParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
    * back to the user's first membership. Ignored for API-key auth.
@@ -848,15 +833,30 @@ export interface CouponUpdateCouponParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
+export interface CouponArchiveCouponParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export declare namespace Coupons {
   export {
     type Coupon as Coupon,
     type CouponListResponse as CouponListResponse,
     type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
-    type CouponRetrieveParams as CouponRetrieveParams,
     type CouponListParams as CouponListParams,
-    type CouponArchiveCouponParams as CouponArchiveCouponParams,
+    type CouponRetrieveParams as CouponRetrieveParams,
     type CouponUpdateCouponParams as CouponUpdateCouponParams,
+    type CouponArchiveCouponParams as CouponArchiveCouponParams,
   };
 }
