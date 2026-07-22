@@ -70,10 +70,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      cli: {
-        method: 'customers retrieve',
-        example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Customers.Get',
         example:
@@ -101,6 +97,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/customers/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'customers retrieve',
+        example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -137,10 +137,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      cli: {
-        method: 'customers update',
-        example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Customers.Update',
         example:
@@ -169,6 +165,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           "curl https://edge.api.stigg.io/api/v1/customers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+      },
+      cli: {
+        method: 'customers update',
+        example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -200,10 +200,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'customers list',
-        example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Customers.List',
         example:
@@ -231,6 +227,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/customers \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'customers list',
+        example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
       },
     },
   },
@@ -268,10 +268,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      cli: {
-        method: 'customers provision',
-        example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
       go: {
         method: 'client.V1.Customers.Provision',
         example:
@@ -301,6 +297,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id"\n        }\'',
       },
+      cli: {
+        method: 'customers provision',
+        example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
     },
   },
   {
@@ -322,10 +322,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Archive',
         example:
           'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
-      },
-      cli: {
-        method: 'customers archive',
-        example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Archive',
@@ -356,6 +352,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'customers archive',
+        example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -376,10 +376,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Unarchive',
         example:
           'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
-      },
-      cli: {
-        method: 'customers unarchive',
-        example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Unarchive',
@@ -410,6 +406,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'customers unarchive',
+        example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -435,11 +435,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Import',
         example:
           'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'customers import',
-        example:
-          "stigg v1:customers import \\\n  --api-key 'My API Key' \\\n  --customer '{id: id, email: dev@stainless.com, name: name}'",
       },
       go: {
         method: 'client.V1.Customers.Import',
@@ -470,6 +465,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customers": [\n            {\n              "id": "id",\n              "email": "dev@stainless.com",\n              "name": "name"\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'customers import',
+        example:
+          "stigg v1:customers import \\\n  --api-key 'My API Key' \\\n  --customer '{id: id, email: dev@stainless.com, name: name}'",
+      },
     },
   },
   {
@@ -496,10 +496,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.ListResources',
         example:
           'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      cli: {
-        method: 'customers list_resources',
-        example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.ListResources',
@@ -530,6 +526,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/resources \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'customers list_resources',
+        example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -551,10 +551,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.RetrieveEntitlements',
         example:
           'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'customers retrieve_entitlements',
-        example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.GetEntitlements',
@@ -584,6 +580,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'customers retrieve_entitlements',
+        example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -616,10 +616,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerCheckEntitlementParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.CheckEntitlement(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'customers check_entitlement',
-        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Customers.CheckEntitlement',
         example:
@@ -648,6 +644,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'customers check_entitlement',
+        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -679,11 +679,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      cli: {
-        method: 'payment_method attach',
-        example:
-          "stigg v1:customers:payment-method attach \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --integration-id integrationId \\\n  --payment-method-id paymentMethodId \\\n  --vendor-identifier AUTH0",
-      },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Attach',
         example:
@@ -713,6 +708,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "integrationId": "integrationId",\n          "paymentMethodId": "paymentMethodId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
       },
+      cli: {
+        method: 'payment_method attach',
+        example:
+          "stigg v1:customers:payment-method attach \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --integration-id integrationId \\\n  --payment-method-id paymentMethodId \\\n  --vendor-identifier AUTH0",
+      },
     },
   },
   {
@@ -734,10 +734,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.PaymentMethod.Detach',
         example:
           'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
-      },
-      cli: {
-        method: 'payment_method detach',
-        example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Detach',
@@ -767,6 +763,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'payment_method detach',
+        example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -798,10 +798,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'promotional_entitlements list',
-        example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.List',
         example:
@@ -831,6 +827,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'promotional_entitlements list',
+        example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -857,11 +857,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.PromotionalEntitlements.Create',
         example:
           'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
-      },
-      cli: {
-        method: 'promotional_entitlements create',
-        example:
-          "stigg v1:customers:promotional-entitlements create \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --promotional-entitlement \"{customEndDate: '2019-12-27T18:11:19.117Z', enumValues: [string], featureId: featureId, hasSoftLimit: true, hasUnlimitedUsage: true, isVisible: true, monthlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, period: 1 week, resetPeriod: YEAR, usageLimit: -9007199254740991, weeklyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, yearlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}}\"",
       },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.New',
@@ -892,6 +887,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "promotionalEntitlements": [\n            {\n              "customEndDate": "2019-12-27T18:11:19.117Z",\n              "enumValues": [\n                "string"\n              ],\n              "featureId": "featureId",\n              "hasSoftLimit": true,\n              "hasUnlimitedUsage": true,\n              "isVisible": true,\n              "monthlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "period": "1 week",\n              "resetPeriod": "YEAR",\n              "usageLimit": -9007199254740991,\n              "weeklyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "yearlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              }\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'promotional_entitlements create',
+        example:
+          "stigg v1:customers:promotional-entitlements create \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --promotional-entitlement \"{customEndDate: '2019-12-27T18:11:19.117Z', enumValues: [string], featureId: featureId, hasSoftLimit: true, hasUnlimitedUsage: true, isVisible: true, monthlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, period: 1 week, resetPeriod: YEAR, usageLimit: -9007199254740991, weeklyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, yearlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}}\"",
+      },
     },
   },
   {
@@ -913,11 +913,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.PromotionalEntitlements.Revoke',
         example:
           'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'promotional_entitlements revoke',
-        example:
-          "stigg v1:customers:promotional-entitlements revoke \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --feature-id featureId",
       },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
@@ -948,6 +943,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements/$FEATURE_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'promotional_entitlements revoke',
+        example:
+          "stigg v1:customers:promotional-entitlements revoke \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --feature-id featureId",
+      },
     },
   },
   {
@@ -976,10 +976,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Integrations.List',
         example:
           'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      cli: {
-        method: 'integrations list',
-        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Integrations.List',
@@ -1010,6 +1006,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'integrations list',
+        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -1038,11 +1038,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Integrations.Link',
         example:
           'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
-      },
-      cli: {
-        method: 'integrations link',
-        example:
-          "stigg v1:customers:integrations link \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --id id \\\n  --synced-entity-id syncedEntityId \\\n  --vendor-identifier AUTH0",
       },
       go: {
         method: 'client.V1.Customers.Integrations.Link',
@@ -1073,6 +1068,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
       },
+      cli: {
+        method: 'integrations link',
+        example:
+          "stigg v1:customers:integrations link \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --id id \\\n  --synced-entity-id syncedEntityId \\\n  --vendor-identifier AUTH0",
+      },
     },
   },
   {
@@ -1093,11 +1093,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Integrations.Retrieve',
         example:
           'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
-      },
-      cli: {
-        method: 'integrations retrieve',
-        example:
-          "stigg v1:customers:integrations retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
       },
       go: {
         method: 'client.V1.Customers.Integrations.Get',
@@ -1128,6 +1123,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'integrations retrieve',
+        example:
+          "stigg v1:customers:integrations retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
     },
   },
   {
@@ -1154,11 +1154,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Integrations.Update',
         example:
           'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
-      },
-      cli: {
-        method: 'integrations update',
-        example:
-          "stigg v1:customers:integrations update \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId \\\n  --synced-entity-id syncedEntityId",
       },
       go: {
         method: 'client.V1.Customers.Integrations.Update',
@@ -1189,6 +1184,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
       },
+      cli: {
+        method: 'integrations update',
+        example:
+          "stigg v1:customers:integrations update \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId \\\n  --synced-entity-id syncedEntityId",
+      },
     },
   },
   {
@@ -1209,11 +1209,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Customers.Integrations.Unlink',
         example:
           'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
-      },
-      cli: {
-        method: 'integrations unlink',
-        example:
-          "stigg v1:customers:integrations unlink \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
       },
       go: {
         method: 'client.V1.Customers.Integrations.Unlink',
@@ -1244,6 +1239,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'integrations unlink',
+        example:
+          "stigg v1:customers:integrations unlink \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
     },
   },
   {
@@ -1265,10 +1265,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Retrieve',
         example:
           'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
-      },
-      cli: {
-        method: 'subscriptions retrieve',
-        example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Get',
@@ -1298,6 +1294,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'subscriptions retrieve',
+        example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -1333,10 +1333,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'subscriptions list',
-        example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Subscriptions.List',
         example:
@@ -1364,6 +1360,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/subscriptions \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'subscriptions list',
+        example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
       },
     },
   },
@@ -1417,11 +1417,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'subscriptions provision',
-        example:
-          "stigg v1:subscriptions provision \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
-      },
       go: {
         method: 'client.V1.Subscriptions.Provision',
         example:
@@ -1451,6 +1446,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
       },
+      cli: {
+        method: 'subscriptions provision',
+        example:
+          "stigg v1:subscriptions provision \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
+      },
     },
   },
   {
@@ -1477,11 +1477,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Transfer',
         example:
           'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
-      },
-      cli: {
-        method: 'subscriptions transfer',
-        example:
-          "stigg v1:subscriptions transfer \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --destination-resource-id destinationResourceId",
       },
       go: {
         method: 'client.V1.Subscriptions.Transfer',
@@ -1512,6 +1507,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/transfer \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationResourceId": "destinationResourceId"\n        }\'',
       },
+      cli: {
+        method: 'subscriptions transfer',
+        example:
+          "stigg v1:subscriptions transfer \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --destination-resource-id destinationResourceId",
+      },
     },
   },
   {
@@ -1538,10 +1538,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Migrate',
         example:
           'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
-      },
-      cli: {
-        method: 'subscriptions migrate',
-        example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Migrate',
@@ -1572,6 +1568,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/migrate \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'subscriptions migrate',
+        example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -1598,11 +1598,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Delegate',
         example:
           'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
-      },
-      cli: {
-        method: 'subscriptions delegate',
-        example:
-          "stigg v1:subscriptions delegate \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-customer-id targetCustomerId",
       },
       go: {
         method: 'client.V1.Subscriptions.Delegate',
@@ -1632,6 +1627,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/delegate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetCustomerId": "targetCustomerId"\n        }\'',
+      },
+      cli: {
+        method: 'subscriptions delegate',
+        example:
+          "stigg v1:subscriptions delegate \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-customer-id targetCustomerId",
       },
     },
   },
@@ -1674,11 +1674,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'subscriptions preview',
-        example:
-          "stigg v1:subscriptions preview \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
-      },
       go: {
         method: 'client.V1.Subscriptions.Preview',
         example:
@@ -1707,6 +1702,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/preview \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
+      },
+      cli: {
+        method: 'subscriptions preview',
+        example:
+          "stigg v1:subscriptions preview \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
       },
     },
   },
@@ -1751,10 +1751,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      cli: {
-        method: 'subscriptions update',
-        example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Subscriptions.Update',
         example:
@@ -1784,6 +1780,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'subscriptions update',
+        example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -1809,11 +1809,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Import',
         example:
           'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'subscriptions import',
-        example:
-          "stigg v1:subscriptions import \\\n  --api-key 'My API Key' \\\n  --subscription '{id: id, customerId: customerId, planId: planId}'",
       },
       go: {
         method: 'client.V1.Subscriptions.Import',
@@ -1843,6 +1838,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "subscriptions": [\n            {\n              "id": "id",\n              "customerId": "customerId",\n              "planId": "planId"\n            }\n          ]\n        }\'',
+      },
+      cli: {
+        method: 'subscriptions import',
+        example:
+          "stigg v1:subscriptions import \\\n  --api-key 'My API Key' \\\n  --subscription '{id: id, customerId: customerId, planId: planId}'",
       },
     },
   },
@@ -1874,10 +1874,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      cli: {
-        method: 'subscriptions cancel',
-        example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Subscriptions.Cancel',
         example:
@@ -1907,6 +1903,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'subscriptions cancel',
+        example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -1926,11 +1926,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.FutureUpdate.CancelPendingPayment',
         example:
           'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
-      },
-      cli: {
-        method: 'future_update cancel_pending_payment',
-        example:
-          "stigg v1:subscriptions:future-update cancel-pending-payment \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
@@ -1961,6 +1956,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/future-update/pending-payment \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'future_update cancel_pending_payment',
+        example:
+          "stigg v1:subscriptions:future-update cancel-pending-payment \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -1980,11 +1980,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.FutureUpdate.CancelSchedule',
         example:
           'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
-      },
-      cli: {
-        method: 'future_update cancel_schedule',
-        example:
-          "stigg v1:subscriptions:future-update cancel-schedule \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
@@ -2015,6 +2010,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/future-update/schedule \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'future_update cancel_schedule',
+        example:
+          "stigg v1:subscriptions:future-update cancel-schedule \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -2036,10 +2036,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Usage.ChargeUsage',
         example:
           'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'usage charge_usage',
-        example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Usage.ChargeUsage',
@@ -2070,6 +2066,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/usage/charge \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'usage charge_usage',
+        example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -2089,10 +2089,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Usage.Sync',
         example:
           'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'usage sync',
-        example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Usage.Sync',
@@ -2123,6 +2119,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/usage/sync \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'usage sync',
+        example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -2143,10 +2143,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Subscriptions.Invoice.MarkAsPaid',
         example:
           'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'invoice mark_as_paid',
-        example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
@@ -2176,6 +2172,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/invoice/paid \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'invoice mark_as_paid',
+        example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -2209,11 +2209,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      cli: {
-        method: 'coupons create',
-        example:
-          "stigg v1:coupons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --amounts-off '{amount: 0, currency: usd}' \\\n  --description description \\\n  --duration-in-months 1 \\\n  --metadata '{foo: string}' \\\n  --name name \\\n  --percent-off 1",
-      },
       go: {
         method: 'client.V1.Coupons.New',
         example:
@@ -2242,6 +2237,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/coupons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "amountsOff": [\n            {\n              "amount": 0,\n              "currency": "usd"\n            }\n          ],\n          "description": "description",\n          "durationInMonths": 1,\n          "metadata": {\n            "foo": "string"\n          },\n          "name": "name",\n          "percentOff": 1\n        }\'',
+      },
+      cli: {
+        method: 'coupons create',
+        example:
+          "stigg v1:coupons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --amounts-off '{amount: 0, currency: usd}' \\\n  --description description \\\n  --duration-in-months 1 \\\n  --metadata '{foo: string}' \\\n  --name name \\\n  --percent-off 1",
       },
     },
   },
@@ -2274,10 +2274,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'coupons list',
-        example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Coupons.List',
         example:
@@ -2306,6 +2302,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/coupons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'coupons list',
+        example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
+      },
     },
   },
   {
@@ -2326,10 +2326,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Coupons.Retrieve',
         example:
           'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
-      },
-      cli: {
-        method: 'coupons retrieve',
-        example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Coupons.Get',
@@ -2359,6 +2355,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/coupons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'coupons retrieve',
+        example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -2386,10 +2386,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Coupons.UpdateCoupon',
         example:
           'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
-      },
-      cli: {
-        method: 'coupons update_coupon',
-        example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Coupons.UpdateCoupon',
@@ -2420,6 +2416,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/coupons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'coupons update_coupon',
+        example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -2440,10 +2440,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Coupons.ArchiveCoupon',
         example:
           'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
-      },
-      cli: {
-        method: 'coupons archive_coupon',
-        example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Coupons.ArchiveCoupon',
@@ -2474,6 +2470,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/coupons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'coupons archive_coupon',
+        example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -2498,11 +2498,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.Report',
         example:
           'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'events report',
-        example:
-          "stigg v1:events report \\\n  --api-key 'My API Key' \\\n  --event '{customerId: customerId, eventName: x, idempotencyKey: x}'",
       },
       go: {
         method: 'client.V1.Events.Report',
@@ -2533,6 +2528,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/events \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "events": [\n            {\n              "customerId": "customerId",\n              "eventName": "x",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'events report',
+        example:
+          "stigg v1:events report \\\n  --api-key 'My API Key' \\\n  --event '{customerId: customerId, eventName: x, idempotencyKey: x}'",
+      },
     },
   },
   {
@@ -2561,11 +2561,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.EstimateCost',
         example:
           'EventEstimateCostParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.EstimateCost(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'events estimate_cost',
-        example:
-          "stigg v1:events estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
       },
       go: {
         method: 'client.V1.Events.EstimateCost',
@@ -2596,6 +2591,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/events/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "eventName": "x"\n        }\'',
       },
+      cli: {
+        method: 'events estimate_cost',
+        example:
+          "stigg v1:events estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
+      },
     },
   },
   {
@@ -2616,10 +2616,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.DataExport.TriggerSync',
         example:
           'DataExportTriggerSyncParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.TriggerSync(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'data_export trigger_sync',
-        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Events.DataExport.TriggerSync',
@@ -2650,6 +2646,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/data-export/sync \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'data_export trigger_sync',
+        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
+      },
     },
   },
   {
@@ -2676,11 +2676,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.DataExport.MintScopedToken',
         example:
           'DataExportMintScopedTokenParams parameters = new() { ApplicationOrigin = "x" };\n\nvar response = await client.V1.Events.DataExport.MintScopedToken(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'data_export mint_scoped_token',
-        example:
-          "stigg v1:events:data-export mint-scoped-token \\\n  --api-key 'My API Key' \\\n  --application-origin x",
       },
       go: {
         method: 'client.V1.Events.DataExport.MintScopedToken',
@@ -2711,6 +2706,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/data-export/scoped-token \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "applicationOrigin": "x"\n        }\'',
       },
+      cli: {
+        method: 'data_export mint_scoped_token',
+        example:
+          "stigg v1:events:data-export mint-scoped-token \\\n  --api-key 'My API Key' \\\n  --application-origin x",
+      },
     },
   },
   {
@@ -2731,10 +2731,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.DataExport.ListModels',
         example:
           'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'data_export list_models',
-        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Events.DataExport.ListModels',
@@ -2765,6 +2761,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/data-export/models \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'data_export list_models',
+        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
+      },
     },
   },
   {
@@ -2792,11 +2792,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.DataExport.Destinations.Create',
         example:
           'DestinationCreateParams parameters = new()\n{\n    DestinationID = "x",\n    DestinationType = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Create(parameters);\n\nConsole.WriteLine(destination);',
-      },
-      cli: {
-        method: 'destinations create',
-        example:
-          "stigg v1:events:data-export:destinations create \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --destination-type x",
       },
       go: {
         method: 'client.V1.Events.DataExport.Destinations.New',
@@ -2827,6 +2822,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/data-export/destinations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationId": "x",\n          "destinationType": "x"\n        }\'',
       },
+      cli: {
+        method: 'destinations create',
+        example:
+          "stigg v1:events:data-export:destinations create \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --destination-type x",
+      },
     },
   },
   {
@@ -2848,11 +2848,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.DataExport.Destinations.Delete',
         example:
           'DestinationDeleteParams parameters = new() { DestinationID = "x" };\n\nvar destination = await client.V1.Events.DataExport.Destinations.Delete(parameters);\n\nConsole.WriteLine(destination);',
-      },
-      cli: {
-        method: 'destinations delete',
-        example:
-          "stigg v1:events:data-export:destinations delete \\\n  --api-key 'My API Key' \\\n  --destination-id x",
       },
       go: {
         method: 'client.V1.Events.DataExport.Destinations.Delete',
@@ -2883,6 +2878,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'destinations delete',
+        example:
+          "stigg v1:events:data-export:destinations delete \\\n  --api-key 'My API Key' \\\n  --destination-id x",
+      },
     },
   },
   {
@@ -2910,11 +2910,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Events.DataExport.Destinations.Update',
         example:
           'DestinationUpdateParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Update(parameters);\n\nConsole.WriteLine(destination);',
-      },
-      cli: {
-        method: 'destinations update',
-        example:
-          "stigg v1:events:data-export:destinations update \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
       },
       go: {
         method: 'client.V1.Events.DataExport.Destinations.Update',
@@ -2944,6 +2939,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "enabledModels": [\n            "x"\n          ],\n          "integrationId": "x"\n        }\'',
+      },
+      cli: {
+        method: 'destinations update',
+        example:
+          "stigg v1:events:data-export:destinations update \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
       },
     },
   },
@@ -2980,10 +2980,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'credits get_usage',
-        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
-      },
       go: {
         method: 'client.V1.Credits.GetUsage',
         example:
@@ -3012,6 +3008,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'credits get_usage',
+        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
     },
   },
   {
@@ -3038,11 +3038,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Credits.GetAutoRecharge',
         example:
           'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'credits get_auto_recharge',
-        example:
-          "stigg v1:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
       },
       go: {
         method: 'client.V1.Credits.GetAutoRecharge',
@@ -3072,6 +3067,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/auto-recharge \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'credits get_auto_recharge',
+        example:
+          "stigg v1:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
       },
     },
   },
@@ -3104,10 +3104,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'credits list_ledger',
-        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
-      },
       go: {
         method: 'client.V1.Credits.ListLedger',
         example:
@@ -3136,6 +3132,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'credits list_ledger',
+        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
     },
   },
@@ -3168,10 +3168,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'grants list',
-        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
-      },
       go: {
         method: 'client.V1.Credits.Grants.List',
         example:
@@ -3200,6 +3196,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'grants list',
+        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
     },
   },
@@ -3241,11 +3241,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
-      cli: {
-        method: 'grants create',
-        example:
-          "stigg v1:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
-      },
       go: {
         method: 'client.V1.Credits.Grants.New',
         example:
@@ -3275,6 +3270,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/grants \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "displayName": "displayName",\n          "grantType": "PAID"\n        }\'',
       },
+      cli: {
+        method: 'grants create',
+        example:
+          "stigg v1:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
+      },
     },
   },
   {
@@ -3295,10 +3295,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Credits.Grants.Void',
         example:
           'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
-      },
-      cli: {
-        method: 'grants void',
-        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Credits.Grants.Void',
@@ -3329,6 +3325,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/grants/$ID/void \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'grants void',
+        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -3358,10 +3358,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'custom_currencies list',
-        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.List',
         example:
@@ -3390,6 +3386,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'custom_currencies list',
+        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
       },
     },
   },
@@ -3421,11 +3421,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      cli: {
-        method: 'custom_currencies create',
-        example:
-          "stigg v1:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
-      },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.New',
         example:
@@ -3454,6 +3449,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+      },
+      cli: {
+        method: 'custom_currencies create',
+        example:
+          "stigg v1:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
       },
     },
   },
@@ -3485,11 +3485,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      cli: {
-        method: 'custom_currencies update',
-        example:
-          "stigg v1:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
-      },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.Update',
         example:
@@ -3519,6 +3514,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'custom_currencies update',
+        example:
+          "stigg v1:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
     },
   },
   {
@@ -3540,11 +3540,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Credits.CustomCurrencies.Archive',
         example:
           'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
-      },
-      cli: {
-        method: 'custom_currencies archive',
-        example:
-          "stigg v1:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.Archive',
@@ -3575,6 +3570,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'custom_currencies archive',
+        example:
+          "stigg v1:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
     },
   },
   {
@@ -3596,11 +3596,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Credits.CustomCurrencies.Unarchive',
         example:
           'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
-      },
-      cli: {
-        method: 'custom_currencies unarchive',
-        example:
-          "stigg v1:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.Unarchive',
@@ -3631,6 +3626,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'custom_currencies unarchive',
+        example:
+          "stigg v1:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
     },
   },
   {
@@ -3651,11 +3651,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Credits.CustomCurrencies.ListAssociatedEntities',
         example:
           'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'custom_currencies list_associated_entities',
-        example:
-          "stigg v1:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.ListAssociatedEntities',
@@ -3685,6 +3680,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/associated-entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'custom_currencies list_associated_entities',
+        example:
+          "stigg v1:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
       },
     },
   },
@@ -3718,11 +3718,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ConsumptionConsumeParams parameters = new()\n{\n    Amount = 1,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    IdempotencyKey = "x",\n};\n\nvar response = await client.V1.Credits.Consumption.Consume(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'consumption consume',
-        example:
-          "stigg v1:credits:consumption consume \\\n  --api-key 'My API Key' \\\n  --amount 1 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --idempotency-key x",
-      },
       go: {
         method: 'client.V1.Credits.Consumption.Consume',
         example:
@@ -3752,6 +3747,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/consumption \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 1,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "idempotencyKey": "x"\n        }\'',
       },
+      cli: {
+        method: 'consumption consume',
+        example:
+          "stigg v1:credits:consumption consume \\\n  --api-key 'My API Key' \\\n  --amount 1 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --idempotency-key x",
+      },
     },
   },
   {
@@ -3776,11 +3776,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Credits.Consumption.ConsumeAsync',
         example:
           'ConsumptionConsumeAsyncParams parameters = new()\n{\n    Consumptions =\n    [\n        new()\n        {\n            Amount = 1,\n            CurrencyID = "currencyId",\n            CustomerID = "customerId",\n            IdempotencyKey = "x",\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n        },\n    ],\n};\n\nvar response = await client.V1.Credits.Consumption.ConsumeAsync(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'consumption consume_async',
-        example:
-          "stigg v1:credits:consumption consume-async \\\n  --api-key 'My API Key' \\\n  --consumption '{amount: 1, currencyId: currencyId, customerId: customerId, idempotencyKey: x}'",
       },
       go: {
         method: 'client.V1.Credits.Consumption.ConsumeAsync',
@@ -3811,6 +3806,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/credits/consumption/async \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumptions": [\n            {\n              "amount": 1,\n              "currencyId": "currencyId",\n              "customerId": "customerId",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'consumption consume_async',
+        example:
+          "stigg v1:credits:consumption consume-async \\\n  --api-key 'My API Key' \\\n  --consumption '{amount: 1, currencyId: currencyId, customerId: customerId, idempotencyKey: x}'",
+      },
     },
   },
   {
@@ -3831,10 +3831,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Features.RetrieveFeature',
         example:
           'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
-      },
-      cli: {
-        method: 'features retrieve_feature',
-        example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.GetFeature',
@@ -3863,6 +3859,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/features/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'features retrieve_feature',
+        example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -3898,10 +3898,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      cli: {
-        method: 'features update_feature',
-        example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Features.UpdateFeature',
         example:
@@ -3930,6 +3926,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           "curl https://edge.api.stigg.io/api/v1/features/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+      },
+      cli: {
+        method: 'features update_feature',
+        example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -3966,11 +3966,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      cli: {
-        method: 'features create_feature',
-        example:
-          "stigg v1:features create-feature \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --feature-type BOOLEAN",
-      },
       go: {
         method: 'client.V1.Features.NewFeature',
         example:
@@ -3999,6 +3994,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/features \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "featureType": "BOOLEAN"\n        }\'',
+      },
+      cli: {
+        method: 'features create_feature',
+        example:
+          "stigg v1:features create-feature \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --feature-type BOOLEAN",
       },
     },
   },
@@ -4032,10 +4032,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'features list_features',
-        example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Features.ListFeatures',
         example:
@@ -4064,6 +4060,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/features \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'features list_features',
+        example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
+      },
     },
   },
   {
@@ -4084,10 +4084,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Features.ArchiveFeature',
         example:
           'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
-      },
-      cli: {
-        method: 'features archive_feature',
-        example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.ArchiveFeature',
@@ -4118,6 +4114,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/features/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'features archive_feature',
+        example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -4138,10 +4138,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Features.UnarchiveFeature',
         example:
           'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
-      },
-      cli: {
-        method: 'features unarchive_feature',
-        example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.UnarchiveFeature',
@@ -4171,6 +4167,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/features/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'features unarchive_feature',
+        example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -4202,10 +4202,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'addons list',
-        example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Addons.List',
         example:
@@ -4233,6 +4229,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/addons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'addons list',
+        example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
       },
     },
   },
@@ -4267,11 +4267,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
       },
-      cli: {
-        method: 'addons create',
-        example:
-          "stigg v1:addons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
-      },
       go: {
         method: 'client.V1.Addons.New',
         example:
@@ -4301,6 +4296,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
       },
+      cli: {
+        method: 'addons create',
+        example:
+          "stigg v1:addons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
+      },
     },
   },
   {
@@ -4321,10 +4321,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Retrieve',
         example:
           'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
-      },
-      cli: {
-        method: 'addons retrieve',
-        example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.Get',
@@ -4353,6 +4349,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/addons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'addons retrieve',
+        example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -4387,10 +4387,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
       },
-      cli: {
-        method: 'addons update',
-        example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Addons.Update',
         example:
@@ -4420,6 +4416,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/addons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'addons update',
+        example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -4440,10 +4440,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Archive',
         example:
           'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
-      },
-      cli: {
-        method: 'addons archive',
-        example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.Archive',
@@ -4474,6 +4470,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'addons archive',
+        example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -4498,11 +4498,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Publish',
         example:
           'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'addons publish',
-        example:
-          "stigg v1:addons publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
       },
       go: {
         method: 'client.V1.Addons.Publish',
@@ -4533,6 +4528,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
       },
+      cli: {
+        method: 'addons publish',
+        example:
+          "stigg v1:addons publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
+      },
     },
   },
   {
@@ -4553,10 +4553,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.CreateDraft',
         example:
           'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
-      },
-      cli: {
-        method: 'addons create_draft',
-        example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.NewDraft',
@@ -4587,6 +4583,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'addons create_draft',
+        example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -4606,10 +4606,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.RemoveDraft',
         example:
           'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'addons remove_draft',
-        example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.RemoveDraft',
@@ -4640,6 +4636,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'addons remove_draft',
+        example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -4667,10 +4667,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.ListCharges',
         example:
           'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      cli: {
-        method: 'addons list_charges',
-        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.ListCharges',
@@ -4701,6 +4697,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'addons list_charges',
+        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -4721,10 +4721,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Entitlements.List',
         example:
           'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
-      },
-      cli: {
-        method: 'entitlements list',
-        example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
       },
       go: {
         method: 'client.V1.Addons.Entitlements.List',
@@ -4755,6 +4751,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'entitlements list',
+        example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
+      },
     },
   },
   {
@@ -4780,11 +4780,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Entitlements.Create',
         example:
           'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
-      },
-      cli: {
-        method: 'entitlements create',
-        example:
-          "stigg v1:addons:entitlements create \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --entitlement '{id: id, type: FEATURE}'",
       },
       go: {
         method: 'client.V1.Addons.Entitlements.New',
@@ -4815,6 +4810,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'entitlements create',
+        example:
+          "stigg v1:addons:entitlements create \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --entitlement '{id: id, type: FEATURE}'",
+      },
     },
   },
   {
@@ -4839,11 +4839,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Entitlements.Update',
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
-      },
-      cli: {
-        method: 'entitlements update',
-        example:
-          "stigg v1:addons:entitlements update \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id \\\n  --type FEATURE",
       },
       go: {
         method: 'client.V1.Addons.Entitlements.Update',
@@ -4874,6 +4869,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
       },
+      cli: {
+        method: 'entitlements update',
+        example:
+          "stigg v1:addons:entitlements update \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id \\\n  --type FEATURE",
+      },
     },
   },
   {
@@ -4894,11 +4894,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Addons.Entitlements.Delete',
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
-      },
-      cli: {
-        method: 'entitlements delete',
-        example:
-          "stigg v1:addons:entitlements delete \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id",
       },
       go: {
         method: 'client.V1.Addons.Entitlements.Delete',
@@ -4928,6 +4923,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'entitlements delete',
+        example:
+          "stigg v1:addons:entitlements delete \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id",
       },
     },
   },
@@ -4963,11 +4963,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
       },
-      cli: {
-        method: 'plans create',
-        example:
-          "stigg v1:plans create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
-      },
       go: {
         method: 'client.V1.Plans.New',
         example:
@@ -4996,6 +4991,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
+      },
+      cli: {
+        method: 'plans create',
+        example:
+          "stigg v1:plans create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
       },
     },
   },
@@ -5027,10 +5027,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'plans list',
-        example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Plans.List',
         example:
@@ -5059,6 +5055,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/plans \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'plans list',
+        example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
+      },
     },
   },
   {
@@ -5079,10 +5079,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Retrieve',
         example:
           'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
-      },
-      cli: {
-        method: 'plans retrieve',
-        example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.Get',
@@ -5111,6 +5107,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/plans/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'plans retrieve',
+        example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -5145,10 +5145,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
       },
-      cli: {
-        method: 'plans update',
-        example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Plans.Update',
         example:
@@ -5178,6 +5174,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'plans update',
+        example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -5198,10 +5198,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Archive',
         example:
           'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
-      },
-      cli: {
-        method: 'plans archive',
-        example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.Archive',
@@ -5232,6 +5228,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'plans archive',
+        example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -5256,11 +5256,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Publish',
         example:
           'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'plans publish',
-        example:
-          "stigg v1:plans publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
       },
       go: {
         method: 'client.V1.Plans.Publish',
@@ -5291,6 +5286,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
       },
+      cli: {
+        method: 'plans publish',
+        example:
+          "stigg v1:plans publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
+      },
     },
   },
   {
@@ -5311,10 +5311,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.CreateDraft',
         example:
           'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
-      },
-      cli: {
-        method: 'plans create_draft',
-        example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.NewDraft',
@@ -5345,6 +5341,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'plans create_draft',
+        example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -5364,10 +5364,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.RemoveDraft',
         example:
           'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'plans remove_draft',
-        example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.RemoveDraft',
@@ -5398,6 +5394,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'plans remove_draft',
+        example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -5425,10 +5425,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.ListCharges',
         example:
           'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      cli: {
-        method: 'plans list_charges',
-        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.ListCharges',
@@ -5459,6 +5455,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'plans list_charges',
+        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -5486,10 +5486,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.ListOverageCharges',
         example:
           'PlanListOverageChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListOverageCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      cli: {
-        method: 'plans list_overage_charges',
-        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.ListOverageCharges',
@@ -5520,6 +5516,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$ID/overage-charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'plans list_overage_charges',
+        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -5540,10 +5540,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Entitlements.List',
         example:
           'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
-      },
-      cli: {
-        method: 'entitlements list',
-        example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
       },
       go: {
         method: 'client.V1.Plans.Entitlements.List',
@@ -5574,6 +5570,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'entitlements list',
+        example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
+      },
     },
   },
   {
@@ -5599,11 +5599,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Entitlements.Create',
         example:
           'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
-      },
-      cli: {
-        method: 'entitlements create',
-        example:
-          "stigg v1:plans:entitlements create \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --entitlement '{id: id, type: FEATURE}'",
       },
       go: {
         method: 'client.V1.Plans.Entitlements.New',
@@ -5634,6 +5629,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'entitlements create',
+        example:
+          "stigg v1:plans:entitlements create \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --entitlement '{id: id, type: FEATURE}'",
+      },
     },
   },
   {
@@ -5658,11 +5658,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Entitlements.Update',
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
-      },
-      cli: {
-        method: 'entitlements update',
-        example:
-          "stigg v1:plans:entitlements update \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id \\\n  --type FEATURE",
       },
       go: {
         method: 'client.V1.Plans.Entitlements.Update',
@@ -5693,6 +5688,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
       },
+      cli: {
+        method: 'entitlements update',
+        example:
+          "stigg v1:plans:entitlements update \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id \\\n  --type FEATURE",
+      },
     },
   },
   {
@@ -5713,11 +5713,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Plans.Entitlements.Delete',
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
-      },
-      cli: {
-        method: 'entitlements delete',
-        example:
-          "stigg v1:plans:entitlements delete \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id",
       },
       go: {
         method: 'client.V1.Plans.Entitlements.Delete',
@@ -5748,6 +5743,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'entitlements delete',
+        example:
+          "stigg v1:plans:entitlements delete \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id",
+      },
     },
   },
   {
@@ -5773,11 +5773,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Usage.Report',
         example:
           'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'usage report',
-        example:
-          "stigg v1:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
       },
       go: {
         method: 'client.V1.Usage.Report',
@@ -5807,6 +5802,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
+      },
+      cli: {
+        method: 'usage report',
+        example:
+          "stigg v1:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
       },
     },
   },
@@ -5838,11 +5838,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'usage history',
-        example:
-          "stigg v1:usage history \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --start-date \"'2019-12-27T18:11:19.117Z'\"",
-      },
       go: {
         method: 'client.V1.Usage.History',
         example:
@@ -5871,6 +5866,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'usage history',
+        example:
+          "stigg v1:usage history \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --start-date \"'2019-12-27T18:11:19.117Z'\"",
       },
     },
   },
@@ -5903,11 +5903,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageEstimateCostParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.EstimateCost(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'usage estimate_cost',
-        example:
-          "stigg v1:usage estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
-      },
       go: {
         method: 'client.V1.Usage.EstimateCost',
         example:
@@ -5936,6 +5931,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/usage/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "featureId": "featureId",\n          "value": -9007199254740991\n        }\'',
+      },
+      cli: {
+        method: 'usage estimate_cost',
+        example:
+          "stigg v1:usage estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
       },
     },
   },
@@ -5967,10 +5967,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'products list_products',
-        example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
-      },
       go: {
         method: 'client.V1.Products.ListProducts',
         example:
@@ -5998,6 +5994,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://edge.api.stigg.io/api/v1/products \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'products list_products',
+        example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
       },
     },
   },
@@ -6028,11 +6028,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      cli: {
-        method: 'products create_product',
-        example:
-          "stigg v1:products create-product \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
-      },
       go: {
         method: 'client.V1.Products.NewProduct',
         example:
@@ -6061,6 +6056,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+      },
+      cli: {
+        method: 'products create_product',
+        example:
+          "stigg v1:products create-product \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
       },
     },
   },
@@ -6093,10 +6093,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      cli: {
-        method: 'products update_product',
-        example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1.Products.UpdateProduct',
         example:
@@ -6126,6 +6122,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://edge.api.stigg.io/api/v1/products/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
+      cli: {
+        method: 'products update_product',
+        example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -6146,10 +6146,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Products.ArchiveProduct',
         example:
           'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
-      },
-      cli: {
-        method: 'products archive_product',
-        example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Products.ArchiveProduct',
@@ -6180,6 +6176,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/products/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'products archive_product',
+        example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -6200,10 +6200,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Products.UnarchiveProduct',
         example:
           'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
-      },
-      cli: {
-        method: 'products unarchive_product',
-        example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Products.UnarchiveProduct',
@@ -6234,6 +6230,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1/products/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'products unarchive_product',
+        example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
     },
   },
   {
@@ -6261,11 +6261,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1.Products.DuplicateProduct',
         example:
           'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
-      },
-      cli: {
-        method: 'products duplicate_product',
-        example:
-          "stigg v1:products duplicate-product \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-id targetId",
       },
       go: {
         method: 'client.V1.Products.DuplicateProduct',
@@ -6295,6 +6290,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
+      },
+      cli: {
+        method: 'products duplicate_product',
+        example:
+          "stigg v1:products duplicate-product \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-id targetId",
       },
     },
   },
@@ -6332,10 +6332,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'customers retrieve_governance',
-        example: "stigg v1-beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
       go: {
         method: 'client.V1Beta.Customers.GetGovernance',
         example:
@@ -6364,6 +6360,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'customers retrieve_governance',
+        example: "stigg v1-beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
       },
     },
   },
@@ -6397,10 +6397,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
       },
-      cli: {
-        method: 'entitlements check',
-        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
-      },
       go: {
         method: 'client.V1Beta.Customers.Entitlements.Check',
         example:
@@ -6429,6 +6425,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+      cli: {
+        method: 'entitlements check',
+        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
       },
     },
   },
@@ -6460,10 +6460,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'entities list',
-        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
       go: {
         method: 'client.V1Beta.Customers.Entities.List',
         example:
@@ -6493,6 +6489,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'entities list',
+        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
     },
   },
   {
@@ -6519,11 +6519,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.Customers.Entities.Upsert',
         example:
           'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'entities upsert',
-        example:
-          "stigg v1-beta:customers:entities upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity '{id: user-7f3a0c1d}' \\\n  --entity '{id: user-c4d1b2e9}'",
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Upsert',
@@ -6554,6 +6549,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              }\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "john@acme.com"\n              }\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'entities upsert',
+        example:
+          "stigg v1-beta:customers:entities upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity '{id: user-7f3a0c1d}' \\\n  --entity '{id: user-c4d1b2e9}'",
+      },
     },
   },
   {
@@ -6574,11 +6574,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.Customers.Entities.Retrieve',
         example:
           'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
-      },
-      cli: {
-        method: 'entities retrieve',
-        example:
-          "stigg v1-beta:customers:entities retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity-id x",
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Get',
@@ -6609,6 +6604,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'entities retrieve',
+        example:
+          "stigg v1-beta:customers:entities retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity-id x",
+      },
     },
   },
   {
@@ -6628,11 +6628,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.Customers.Entities.Archive',
         example:
           'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'entities archive',
-        example:
-          "stigg v1-beta:customers:entities archive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Archive',
@@ -6663,6 +6658,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
       },
+      cli: {
+        method: 'entities archive',
+        example:
+          "stigg v1-beta:customers:entities archive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
     },
   },
   {
@@ -6682,11 +6682,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.Customers.Entities.Unarchive',
         example:
           'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'entities unarchive',
-        example:
-          "stigg v1-beta:customers:entities unarchive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Unarchive',
@@ -6716,6 +6711,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+      },
+      cli: {
+        method: 'entities unarchive',
+        example:
+          "stigg v1-beta:customers:entities unarchive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
       },
     },
   },
@@ -6749,10 +6749,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
-      cli: {
-        method: 'assignments list',
-        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
       go: {
         method: 'client.V1Beta.Customers.Assignments.List',
         example:
@@ -6782,6 +6778,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'assignments list',
+        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
     },
   },
   {
@@ -6808,11 +6808,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.Customers.Assignments.Upsert',
         example:
           'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            EntityID = "workspace-001",\n            Cadence = "P1M",\n            CurrencyID = "currencyId",\n            FeatureID = "compute-minutes",\n            ParentID = "parentId",\n            ScopeEntityIds =\n            [\n                "NxI"\n            ],\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            EntityID = "workspace-002",\n            Cadence = "P1M",\n            CurrencyID = "cred-type-tokens",\n            FeatureID = "featureId",\n            ParentID = "workspace-001",\n            ScopeEntityIds =\n            [\n                "user-1"\n            ],\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'assignments upsert',
-        example:
-          "stigg v1-beta:customers:assignments upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --assignment '{entityId: workspace-001}' \\\n  --assignment '{entityId: workspace-002}'",
       },
       go: {
         method: 'client.V1Beta.Customers.Assignments.Upsert',
@@ -6843,6 +6838,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "entityId": "workspace-001",\n              "cadence": "P1M",\n              "featureId": "compute-minutes",\n              "usageLimit": 1000\n            },\n            {\n              "entityId": "workspace-002",\n              "cadence": "P1M",\n              "currencyId": "cred-type-tokens",\n              "parentId": "workspace-001",\n              "scopeEntityIds": [\n                "user-1"\n              ],\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'assignments upsert',
+        example:
+          "stigg v1-beta:customers:assignments upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --assignment '{entityId: workspace-001}' \\\n  --assignment '{entityId: workspace-002}'",
+      },
     },
   },
   {
@@ -6870,10 +6870,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.EntityTypes.List',
         example:
           'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
-      },
-      cli: {
-        method: 'entity_types list',
-        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1Beta.EntityTypes.List',
@@ -6904,6 +6900,10 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
+      cli: {
+        method: 'entity_types list',
+        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
+      },
     },
   },
   {
@@ -6929,11 +6929,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'V1Beta.EntityTypes.Upsert',
         example:
           'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
-      },
-      cli: {
-        method: 'entity_types upsert',
-        example:
-          "stigg v1-beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
       },
       go: {
         method: 'client.V1Beta.EntityTypes.Upsert',
@@ -6964,6 +6959,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://edge.api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization"\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
       },
+      cli: {
+        method: 'entity_types upsert',
+        example:
+          "stigg v1-beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
+      },
     },
   },
 ];
@@ -6973,11 +6973,6 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'csharp',
     content:
       '# Stigg C# API Library\n\nThe Stigg C# SDK provides convenient access to the Stigg REST API from applications written in   C#.\n\n## Installation\n\nInstall the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):\n\n```bash\ndotnet add package Stigg.Client\n```\n\n## Requirements\n\nThis library requires .NET Standard 2.0 or later.\n\n## Usage\n\nSee the [`examples`](examples) directory for complete and runnable examples.\n\n```csharp\nStiggClient client = new();\n\nCustomerRetrieveParams parameters = new() { ID = "REPLACE_ME" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);\n```',
-  },
-  {
-    language: 'cli',
-    content:
-      "# Stigg CLI\n\nThe official CLI for the Stigg REST API.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n<!-- x-release-please-start-version -->\n\n## Installation\n\n### Installing with Homebrew\n\n~~~sh\nbrew install stiggio/tools/stigg\n~~~\n\n### Installing with Go\n\nTo test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.\n\n~~~sh\ngo install 'github.com/stiggio/stigg-cli/cmd/stigg@latest'\n~~~\n\nOnce you have run `go install`, the binary is placed in your Go bin directory:\n\n- **Default location**: `$HOME/go/bin` (or `$GOPATH/bin` if GOPATH is set)\n- **Check your path**: Run `go env GOPATH` to see the base directory\n\nIf commands aren't found after installation, add the Go bin directory to your PATH:\n\n~~~sh\n# Add to your shell profile (.zshrc, .bashrc, etc.)\nexport PATH=\"$PATH:$(go env GOPATH)/bin\"\n~~~\n\n<!-- x-release-please-end -->\n\n### Running Locally\n\nAfter cloning the git repository for this project, you can use the\n`scripts/run` script to run the tool locally:\n\n~~~sh\n./scripts/run args...\n~~~\n\n## Usage\n\nThe CLI follows a resource-based command structure:\n\n~~~sh\nstigg [resource] <command> [flags...]\n~~~\n\n~~~sh\nstigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id REPLACE_ME\n~~~\n\nFor details about specific commands, use the `--help` flag.\n\n### Environment variables\n\n| Environment variable | Required |\n| -------------------- | -------- |\n| `STIGG_API_KEY`      | yes      |\n\n### Global flags\n\n- `--api-key` (can also be set with `STIGG_API_KEY` env var)\n- `--help` - Show command line usage\n- `--debug` - Enable debug logging (includes HTTP request/response details)\n- `--version`, `-v` - Show the CLI version\n- `--base-url` - Use a custom API backend URL\n- `--format` - Change the output format (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--format-error` - Change the output format for errors (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--transform` - Transform the data output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n- `--transform-error` - Transform the error output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n\n### Passing files as arguments\n\nTo pass files to your API, you can use the `@myfile.ext` syntax:\n\n~~~bash\nstigg <command> --arg @abe.jpg\n~~~\n\nFiles can also be passed inside JSON or YAML blobs:\n\n~~~bash\nstigg <command> --arg '{image: \"@abe.jpg\"}'\n# Equivalent:\nstigg <command> <<YAML\narg:\n  image: \"@abe.jpg\"\nYAML\n~~~\n\nIf you need to pass a string literal that begins with an `@` sign, you can\nescape the `@` sign to avoid accidentally passing a file.\n\n~~~bash\nstigg <command> --username '\\@abe'\n~~~\n\n#### Explicit encoding\n\nFor JSON endpoints, the CLI tool does filetype sniffing to determine whether the\nfile contents should be sent as a string literal (for plain text files) or as a\nbase64-encoded string literal (for binary files). If you need to explicitly send\nthe file as either plain text or base64-encoded data, you can use\n`@file://myfile.txt` (for string encoding) or `@data://myfile.dat` (for\nbase64-encoding). Note that absolute paths will begin with `@file://` or\n`@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).\n\n~~~bash\nstigg <command> --arg @data://file.txt\n~~~\n\n## Linking different Go SDK versions\n\nYou can link the CLI against a different version of the Stigg Go SDK\nfor development purposes using the `./scripts/link` script.\n\nTo link to a specific version from a repository (version can be a branch,\ngit tag, or commit hash):\n\n~~~bash\n./scripts/link github.com/org/repo@version\n~~~\n\nTo link to a local copy of the SDK:\n\n~~~bash\n./scripts/link ../path/to/stigg-go\n~~~\n\nIf you run the link script without any arguments, it will default to `../stigg-go`.\n",
   },
   {
     language: 'go',
@@ -7003,6 +6998,11 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'typescript',
     content:
       "# Stigg TypeScript API Library\n\n[![NPM version](https://img.shields.io/npm/v/@stigg/typescript.svg?label=npm%20(stable))](https://npmjs.org/package/@stigg/typescript) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@stigg/typescript)\n\nThis library provides convenient access to the Stigg REST API from server-side TypeScript or JavaScript.\n\n\n\nThe full API of this library can be found in [api.md](api.md).\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Installation\n\n```sh\nnpm install @stigg/typescript\n```\n\n\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n<!-- prettier-ignore -->\n```js\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.retrieve('REPLACE_ME');\n\nconsole.log(customerResponse.data);\n```\n\n\n\n### Request & Response types\n\nThis library includes TypeScript definitions for all request params and response fields. You may import and use them like so:\n\n<!-- prettier-ignore -->\n```ts\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse: Stigg.V1.CustomerResponse = await client.v1.customers.retrieve(\n  'REPLACE_ME',\n);\n```\n\nDocumentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.\n\n\n\n\n\n## Handling errors\n\nWhen the library is unable to connect to the API,\nor if the API returns a non-success status code (i.e., 4xx or 5xx response),\na subclass of `APIError` will be thrown:\n\n<!-- prettier-ignore -->\n```ts\nconst customerResponse = await client.v1.customers.retrieve('REPLACE_ME').catch(async (err) => {\n  if (err instanceof Stigg.APIError) {\n    console.log(err.status); // 400\n    console.log(err.name); // BadRequestError\n    console.log(err.headers); // {server: 'nginx', ...}\n  } else {\n    throw err;\n  }\n});\n```\n\nError codes are as follows:\n\n| Status Code | Error Type                 |\n| ----------- | -------------------------- |\n| 400         | `BadRequestError`          |\n| 401         | `AuthenticationError`      |\n| 403         | `PermissionDeniedError`    |\n| 404         | `NotFoundError`            |\n| 422         | `UnprocessableEntityError` |\n| 429         | `RateLimitError`           |\n| >=500       | `InternalServerError`      |\n| N/A         | `APIConnectionError`       |\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\nConnection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,\n429 Rate Limit, and >=500 Internal errors will all be retried by default.\n\nYou can use the `maxRetries` option to configure or disable this:\n\n<!-- prettier-ignore -->\n```js\n// Configure the default for all requests:\nconst client = new Stigg({\n  maxRetries: 0, // default is 2\n});\n\n// Or, configure per-request:\nawait client.v1.customers.retrieve('REPLACE_ME', {\n  maxRetries: 5,\n});\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default. You can configure this with a `timeout` option:\n\n<!-- prettier-ignore -->\n```ts\n// Configure the default for all requests:\nconst client = new Stigg({\n  timeout: 20 * 1000, // 20 seconds (default is 1 minute)\n});\n\n// Override per-request:\nawait client.v1.customers.retrieve('REPLACE_ME', {\n  timeout: 5 * 1000,\n});\n```\n\nOn timeout, an `APIConnectionTimeoutError` is thrown.\n\nNote that requests which time out will be [retried twice by default](#retries).\n\n## Auto-pagination\n\nList methods in the Stigg API are paginated.\nYou can use the `for await … of` syntax to iterate through items across all pages:\n\n```ts\nasync function fetchAllCustomerListResponses(params) {\n  const allCustomerListResponses = [];\n  // Automatically fetches more pages as needed.\n  for await (const customerListResponse of client.v1.customers.list({ limit: 30 })) {\n    allCustomerListResponses.push(customerListResponse);\n  }\n  return allCustomerListResponses;\n}\n```\n\nAlternatively, you can request a single page at a time:\n\n```ts\nlet page = await client.v1.customers.list({ limit: 30 });\nfor (const customerListResponse of page.data) {\n  console.log(customerListResponse);\n}\n\n// Convenience methods are provided for manually paginating:\nwhile (page.hasNextPage()) {\n  page = await page.getNextPage();\n  // ...\n}\n```\n\n\n\n## Advanced Usage\n\n### Accessing raw Response data (e.g., headers)\n\nThe \"raw\" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.\nThis method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.\n\nYou can also use the `.withResponse()` method to get the raw `Response` along with the parsed data.\nUnlike `.asResponse()` this method consumes the body, returning once it is parsed.\n\n<!-- prettier-ignore -->\n```ts\nconst client = new Stigg();\n\nconst response = await client.v1.customers.retrieve('REPLACE_ME').asResponse();\nconsole.log(response.headers.get('X-My-Header'));\nconsole.log(response.statusText); // access the underlying Response object\n\nconst { data: customerResponse, response: raw } = await client.v1.customers\n  .retrieve('REPLACE_ME')\n  .withResponse();\nconsole.log(raw.headers.get('X-My-Header'));\nconsole.log(customerResponse.data);\n```\n\n### Logging\n\n> [!IMPORTANT]\n> All log messages are intended for debugging only. The format and content of log messages\n> may change between releases.\n\n#### Log levels\n\nThe log level can be configured in two ways:\n\n1. Via the `STIGG_LOG` environment variable\n2. Using the `logLevel` client option (overrides the environment variable if set)\n\n```ts\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  logLevel: 'debug', // Show all log messages\n});\n```\n\nAvailable log levels, from most to least verbose:\n\n- `'debug'` - Show debug messages, info, warnings, and errors\n- `'info'` - Show info messages, warnings, and errors\n- `'warn'` - Show warnings and errors (default)\n- `'error'` - Show only errors\n- `'off'` - Disable all logging\n\nAt the `'debug'` level, all HTTP requests and responses are logged, including headers and bodies.\nSome authentication-related headers are redacted, but sensitive data in request and response bodies\nmay still be visible.\n\n#### Custom logger\n\nBy default, this library logs to `globalThis.console`. You can also provide a custom logger.\nMost logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.\n\nWhen providing a custom logger, the `logLevel` option still controls which messages are emitted, messages\nbelow the configured level will not be sent to your logger.\n\n```ts\nimport Stigg from '@stigg/typescript';\nimport pino from 'pino';\n\nconst logger = pino();\n\nconst client = new Stigg({\n  logger: logger.child({ name: 'Stigg' }),\n  logLevel: 'debug', // Send all messages to pino, allowing it to filter\n});\n```\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API. If you need to access undocumented\nendpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can use `client.get`, `client.post`, and other HTTP verbs.\nOptions on the client, such as retries, will be respected when making these requests.\n\n```ts\nawait client.post('/some/path', {\n  body: { some_prop: 'foo' },\n  query: { some_query_arg: 'bar' },\n});\n```\n\n#### Undocumented request params\n\nTo make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented\nparameter. This library doesn't validate at runtime that the request matches the type, so any extra values you\nsend will be sent as-is.\n\n```ts\nclient.v1.customers.retrieve({\n  // ...\n  // @ts-expect-error baz is not yet public\n  baz: 'undocumented option',\n});\n```\n\nFor requests with the `GET` verb, any extra params will be in the query, all other requests will send the\nextra param in the body.\n\nIf you want to explicitly send an extra argument, you can do so with the `query`, `body`, and `headers` request\noptions.\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you may access the response object with `// @ts-expect-error` on\nthe response object, or cast the response object to the requisite type. Like the request params, we do not\nvalidate or strip extra properties from the response from the API.\n\n### Customizing the fetch client\n\nBy default, this library expects a global `fetch` function is defined.\n\nIf you want to use a different `fetch` function, you can either polyfill the global:\n\n```ts\nimport fetch from 'my-fetch';\n\nglobalThis.fetch = fetch;\n```\n\nOr pass it to the client:\n\n```ts\nimport Stigg from '@stigg/typescript';\nimport fetch from 'my-fetch';\n\nconst client = new Stigg({ fetch });\n```\n\n### Fetch options\n\nIf you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)\n\n```ts\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  fetchOptions: {\n    // `RequestInit` options\n  },\n});\n```\n\n#### Configuring proxies\n\nTo modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy\noptions to requests:\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg\" align=\"top\" width=\"18\" height=\"21\"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>\n\n```ts\nimport Stigg from '@stigg/typescript';\nimport * as undici from 'undici';\n\nconst proxyAgent = new undici.ProxyAgent('http://localhost:8888');\nconst client = new Stigg({\n  fetchOptions: {\n    dispatcher: proxyAgent,\n  },\n});\n```\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg\" align=\"top\" width=\"18\" height=\"21\"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>\n\n```ts\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  fetchOptions: {\n    proxy: 'http://localhost:8888',\n  },\n});\n```\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg\" align=\"top\" width=\"18\" height=\"21\"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>\n\n```ts\nimport Stigg from 'npm:@stigg/typescript';\n\nconst httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });\nconst client = new Stigg({\n  fetchOptions: {\n    client: httpClient,\n  },\n});\n```\n\n## Frequently Asked Questions\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes that only affect static types, without breaking runtime behavior.\n2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n3. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-typescript/issues) with questions, bugs, or suggestions.\n\n## Requirements\n\nTypeScript >= 4.9 is supported.\n\nThe following runtimes are supported:\n\n- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)\n- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.\n- Deno v1.28.0 or higher.\n- Bun 1.0 or later.\n- Cloudflare Workers.\n- Vercel Edge Runtime.\n- Jest 28 or greater with the `\"node\"` environment (`\"jsdom\"` is not supported at this time).\n- Nitro v2.6 or greater.\n\nNote that React Native is not supported at this time.\n\nIf you are interested in other runtime environments, please open or upvote an issue on GitHub.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n",
+  },
+  {
+    language: 'cli',
+    content:
+      "# Stigg CLI\n\nThe official CLI for the Stigg REST API.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n<!-- x-release-please-start-version -->\n\n## Installation\n\n### Installing with Homebrew\n\n~~~sh\nbrew install stiggio/tools/stigg\n~~~\n\n### Installing with Go\n\nTo test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.\n\n~~~sh\ngo install 'github.com/stiggio/stigg-cli/cmd/stigg@latest'\n~~~\n\nOnce you have run `go install`, the binary is placed in your Go bin directory:\n\n- **Default location**: `$HOME/go/bin` (or `$GOPATH/bin` if GOPATH is set)\n- **Check your path**: Run `go env GOPATH` to see the base directory\n\nIf commands aren't found after installation, add the Go bin directory to your PATH:\n\n~~~sh\n# Add to your shell profile (.zshrc, .bashrc, etc.)\nexport PATH=\"$PATH:$(go env GOPATH)/bin\"\n~~~\n\n<!-- x-release-please-end -->\n\n### Running Locally\n\nAfter cloning the git repository for this project, you can use the\n`scripts/run` script to run the tool locally:\n\n~~~sh\n./scripts/run args...\n~~~\n\n## Usage\n\nThe CLI follows a resource-based command structure:\n\n~~~sh\nstigg [resource] <command> [flags...]\n~~~\n\n~~~sh\nstigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id REPLACE_ME\n~~~\n\nFor details about specific commands, use the `--help` flag.\n\n### Environment variables\n\n| Environment variable | Required |\n| -------------------- | -------- |\n| `STIGG_API_KEY`      | yes      |\n\n### Global flags\n\n- `--api-key` (can also be set with `STIGG_API_KEY` env var)\n- `--help` - Show command line usage\n- `--debug` - Enable debug logging (includes HTTP request/response details)\n- `--version`, `-v` - Show the CLI version\n- `--base-url` - Use a custom API backend URL\n- `--format` - Change the output format (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--format-error` - Change the output format for errors (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--transform` - Transform the data output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n- `--transform-error` - Transform the error output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n\n### Passing files as arguments\n\nTo pass files to your API, you can use the `@myfile.ext` syntax:\n\n~~~bash\nstigg <command> --arg @abe.jpg\n~~~\n\nFiles can also be passed inside JSON or YAML blobs:\n\n~~~bash\nstigg <command> --arg '{image: \"@abe.jpg\"}'\n# Equivalent:\nstigg <command> <<YAML\narg:\n  image: \"@abe.jpg\"\nYAML\n~~~\n\nIf you need to pass a string literal that begins with an `@` sign, you can\nescape the `@` sign to avoid accidentally passing a file.\n\n~~~bash\nstigg <command> --username '\\@abe'\n~~~\n\n#### Explicit encoding\n\nFor JSON endpoints, the CLI tool does filetype sniffing to determine whether the\nfile contents should be sent as a string literal (for plain text files) or as a\nbase64-encoded string literal (for binary files). If you need to explicitly send\nthe file as either plain text or base64-encoded data, you can use\n`@file://myfile.txt` (for string encoding) or `@data://myfile.dat` (for\nbase64-encoding). Note that absolute paths will begin with `@file://` or\n`@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).\n\n~~~bash\nstigg <command> --arg @data://file.txt\n~~~\n\n## Linking different Go SDK versions\n\nYou can link the CLI against a different version of the Stigg Go SDK\nfor development purposes using the `./scripts/link` script.\n\nTo link to a specific version from a repository (version can be a branch,\ngit tag, or commit hash):\n\n~~~bash\n./scripts/link github.com/org/repo@version\n~~~\n\nTo link to a local copy of the SDK:\n\n~~~bash\n./scripts/link ../path/to/stigg-go\n~~~\n\nIf you run the link script without any arguments, it will default to `../stigg-go`.\n",
   },
 ];
 
