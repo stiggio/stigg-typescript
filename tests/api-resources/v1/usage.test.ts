@@ -9,8 +9,8 @@ const client = new Stigg({
 
 describe('resource usage', () => {
   // Mock server tests are disabled
-  test.skip('estimateCost: only required params', async () => {
-    const responsePromise = client.v1.usage.estimateCost({
+  test.skip('estimate: only required params', async () => {
+    const responsePromise = client.v1.usage.estimate({
       customerId: 'customerId',
       featureId: 'featureId',
       value: -9007199254740991,
@@ -25,8 +25,8 @@ describe('resource usage', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('estimateCost: required and optional params', async () => {
-    const response = await client.v1.usage.estimateCost({
+  test.skip('estimate: required and optional params', async () => {
+    const response = await client.v1.usage.estimate({
       customerId: 'customerId',
       featureId: 'featureId',
       value: -9007199254740991,

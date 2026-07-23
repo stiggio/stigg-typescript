@@ -9,8 +9,8 @@ const client = new Stigg({
 
 describe('resource events', () => {
   // Mock server tests are disabled
-  test.skip('estimateCost: only required params', async () => {
-    const responsePromise = client.v1.events.estimateCost({ customerId: 'customerId', eventName: 'x' });
+  test.skip('estimate: only required params', async () => {
+    const responsePromise = client.v1.events.estimate({ customerId: 'customerId', eventName: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource events', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('estimateCost: required and optional params', async () => {
-    const response = await client.v1.events.estimateCost({
+  test.skip('estimate: required and optional params', async () => {
+    const response = await client.v1.events.estimate({
       customerId: 'customerId',
       eventName: 'x',
       dimensions: { foo: 'string' },

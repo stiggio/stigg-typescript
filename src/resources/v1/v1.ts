@@ -42,8 +42,8 @@ import {
 import * as UsageAPI from './usage';
 import {
   Usage,
-  UsageEstimateCostParams,
-  UsageEstimateCostResponse,
+  UsageEstimateParams,
+  UsageEstimateResponse,
   UsageHistoryParams,
   UsageHistoryResponse,
   UsageReportParams,
@@ -105,8 +105,8 @@ import {
 } from './customers/customers';
 import * as EventsAPI from './events/events';
 import {
-  EventEstimateCostParams,
-  EventEstimateCostResponse,
+  EventEstimateParams,
+  EventEstimateResponse,
   EventReportParams,
   EventReportResponse,
   Events,
@@ -237,9 +237,9 @@ export declare namespace V1 {
 
   export {
     Events as Events,
-    type EventEstimateCostResponse as EventEstimateCostResponse,
+    type EventEstimateResponse as EventEstimateResponse,
     type EventReportResponse as EventReportResponse,
-    type EventEstimateCostParams as EventEstimateCostParams,
+    type EventEstimateParams as EventEstimateParams,
     type EventReportParams as EventReportParams,
   };
 
@@ -312,10 +312,10 @@ export declare namespace V1 {
 
   export {
     Usage as Usage,
-    type UsageEstimateCostResponse as UsageEstimateCostResponse,
+    type UsageEstimateResponse as UsageEstimateResponse,
     type UsageHistoryResponse as UsageHistoryResponse,
     type UsageReportResponse as UsageReportResponse,
-    type UsageEstimateCostParams as UsageEstimateCostParams,
+    type UsageEstimateParams as UsageEstimateParams,
     type UsageHistoryParams as UsageHistoryParams,
     type UsageReportParams as UsageReportParams,
   };

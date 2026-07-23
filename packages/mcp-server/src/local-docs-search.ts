@@ -100,7 +100,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/customers/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/customers/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -168,7 +168,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/customers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/customers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -230,7 +230,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/customers \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/customers \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -299,7 +299,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id"\n        }\'',
+          'curl https://api.stigg.io/api/v1/customers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id"\n        }\'',
       },
     },
   },
@@ -354,7 +354,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -408,7 +408,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -468,7 +468,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customers": [\n            {\n              "id": "id",\n              "email": "dev@stainless.com",\n              "name": "name"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/customers/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customers": [\n            {\n              "id": "id",\n              "email": "dev@stainless.com",\n              "name": "name"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -528,7 +528,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/resources \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/resources \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -583,7 +583,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -647,7 +647,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -711,7 +711,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "integrationId": "integrationId",\n          "paymentMethodId": "paymentMethodId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
+          'curl https://api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "integrationId": "integrationId",\n          "paymentMethodId": "paymentMethodId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
       },
     },
   },
@@ -766,7 +766,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -829,7 +829,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -890,7 +890,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "promotionalEntitlements": [\n            {\n              "customEndDate": "2019-12-27T18:11:19.117Z",\n              "enumValues": [\n                "string"\n              ],\n              "featureId": "featureId",\n              "hasSoftLimit": true,\n              "hasUnlimitedUsage": true,\n              "isVisible": true,\n              "monthlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "period": "1 week",\n              "resetPeriod": "YEAR",\n              "usageLimit": -9007199254740991,\n              "weeklyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "yearlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              }\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "promotionalEntitlements": [\n            {\n              "customEndDate": "2019-12-27T18:11:19.117Z",\n              "enumValues": [\n                "string"\n              ],\n              "featureId": "featureId",\n              "hasSoftLimit": true,\n              "hasUnlimitedUsage": true,\n              "isVisible": true,\n              "monthlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "period": "1 week",\n              "resetPeriod": "YEAR",\n              "usageLimit": -9007199254740991,\n              "weeklyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "yearlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              }\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -946,7 +946,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements/$FEATURE_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements/$FEATURE_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1008,7 +1008,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1071,7 +1071,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
       },
     },
   },
@@ -1126,7 +1126,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1187,7 +1187,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
       },
     },
   },
@@ -1242,7 +1242,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1296,8 +1296,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/subscriptions/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1363,7 +1362,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/subscriptions \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/subscriptions \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1449,7 +1448,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/subscriptions \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
       },
     },
   },
@@ -1510,7 +1509,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/transfer \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationResourceId": "destinationResourceId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/subscriptions/$ID/transfer \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationResourceId": "destinationResourceId"\n        }\'',
       },
     },
   },
@@ -1570,7 +1569,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/migrate \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/subscriptions/$ID/migrate \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -1631,7 +1630,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/delegate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetCustomerId": "targetCustomerId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/subscriptions/$ID/delegate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetCustomerId": "targetCustomerId"\n        }\'',
       },
     },
   },
@@ -1706,7 +1705,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/preview \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/subscriptions/preview \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
       },
     },
   },
@@ -1782,7 +1781,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/subscriptions/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -1842,7 +1841,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "subscriptions": [\n            {\n              "id": "id",\n              "customerId": "customerId",\n              "planId": "planId"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/subscriptions/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "subscriptions": [\n            {\n              "id": "id",\n              "customerId": "customerId",\n              "planId": "planId"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -1905,7 +1904,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/subscriptions/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -1959,7 +1958,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/future-update/pending-payment \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/subscriptions/$ID/future-update/pending-payment \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2013,7 +2012,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/future-update/schedule \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/subscriptions/$ID/future-update/schedule \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2068,7 +2067,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/usage/charge \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/subscriptions/$ID/usage/charge \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2121,7 +2120,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/usage/sync \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/subscriptions/$ID/usage/sync \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2175,7 +2174,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/invoice/paid \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/subscriptions/$ID/invoice/paid \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2241,7 +2240,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/coupons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "amountsOff": [\n            {\n              "amount": 0,\n              "currency": "usd"\n            }\n          ],\n          "description": "description",\n          "durationInMonths": 1,\n          "metadata": {\n            "foo": "string"\n          },\n          "name": "name",\n          "percentOff": 1\n        }\'',
+          'curl https://api.stigg.io/api/v1/coupons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "amountsOff": [\n            {\n              "amount": 0,\n              "currency": "usd"\n            }\n          ],\n          "description": "description",\n          "durationInMonths": 1,\n          "metadata": {\n            "foo": "string"\n          },\n          "name": "name",\n          "percentOff": 1\n        }\'',
       },
     },
   },
@@ -2304,7 +2303,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/coupons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/coupons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2357,7 +2356,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/coupons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/coupons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2418,7 +2417,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/coupons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/coupons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2472,7 +2471,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/coupons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/coupons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2531,19 +2530,19 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/events \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "events": [\n            {\n              "customerId": "customerId",\n              "eventName": "x",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/events \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "events": [\n            {\n              "customerId": "customerId",\n              "eventName": "x",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
       },
     },
   },
   {
-    name: 'estimate_cost',
+    name: 'estimate',
     endpoint: '/api/v1/events/estimate',
     httpMethod: 'post',
     summary: 'Estimate event credit cost',
     description:
       'Estimates the credit cost of a usage event without ingesting it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.',
-    stainlessPath: '(resource) v1.events > (method) estimate_cost',
-    qualified: 'client.v1.events.estimateCost',
+    stainlessPath: '(resource) v1.events > (method) estimate',
+    qualified: 'client.v1.events.estimate',
     params: [
       'customerId: string;',
       'eventName: string;',
@@ -2555,46 +2554,46 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }",
     markdown:
-      "## estimate_cost\n\n`client.v1.events.estimateCost(customerId: string, eventName: string, dimensions?: object, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/events/estimate`\n\nEstimates the credit cost of a usage event without ingesting it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `eventName: string`\n  The name of the usage event\n\n- `dimensions?: object`\n  Dimensions associated with the usage event\n\n- `resourceId?: string`\n  Resource id\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.estimateCost({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response);\n```",
+      "## estimate\n\n`client.v1.events.estimate(customerId: string, eventName: string, dimensions?: object, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/events/estimate`\n\nEstimates the credit cost of a usage event without ingesting it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `eventName: string`\n  The name of the usage event\n\n- `dimensions?: object`\n  Dimensions associated with the usage event\n\n- `resourceId?: string`\n  Resource id\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.estimate({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.estimateCost',
+        method: 'client.v1.events.estimate',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.estimateCost({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.estimate({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response.data);",
       },
       python: {
-        method: 'v1.events.estimate_cost',
+        method: 'v1.events.estimate',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.estimate_cost(\n    customer_id="customerId",\n    event_name="x",\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.estimate(\n    customer_id="customerId",\n    event_name="x",\n)\nprint(response.data)',
       },
       java: {
-        method: 'v1().events().estimateCost',
+        method: 'v1().events().estimate',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventEstimateCostParams;\nimport io.stigg.models.v1.events.EventEstimateCostResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventEstimateCostParams params = EventEstimateCostParams.builder()\n            .customerId("customerId")\n            .eventName("x")\n            .build();\n        EventEstimateCostResponse response = client.v1().events().estimateCost(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventEstimateParams;\nimport io.stigg.models.v1.events.EventEstimateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventEstimateParams params = EventEstimateParams.builder()\n            .customerId("customerId")\n            .eventName("x")\n            .build();\n        EventEstimateResponse response = client.v1().events().estimate(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.EstimateCost',
+        method: 'client.V1.Events.Estimate',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.EstimateCost(context.TODO(), stigg.V1EventEstimateCostParams{\n\t\tCustomerID: "customerId",\n\t\tEventName:  "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Estimate(context.TODO(), stigg.V1EventEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tEventName:  "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.estimate_cost',
+        method: 'v1.events.estimate',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.estimate_cost(customer_id: "customerId", event_name: "x")\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.estimate(customer_id: "customerId", event_name: "x")\n\nputs(response)',
       },
       cli: {
-        method: 'events estimate_cost',
+        method: 'events estimate',
         example:
-          "stigg v1:events estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
+          "stigg v1:events estimate \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
       },
       csharp: {
-        method: 'V1.Events.EstimateCost',
+        method: 'V1.Events.Estimate',
         example:
-          'EventEstimateCostParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.EstimateCost(parameters);\n\nConsole.WriteLine(response);',
+          'EventEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/events/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "eventName": "x"\n        }\'',
+          'curl https://api.stigg.io/api/v1/events/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "eventName": "x"\n        }\'',
       },
     },
   },
@@ -2648,7 +2647,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/data-export/sync \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/data-export/sync \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2709,7 +2708,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/data-export/scoped-token \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "applicationOrigin": "x"\n        }\'',
+          'curl https://api.stigg.io/api/v1/data-export/scoped-token \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "applicationOrigin": "x"\n        }\'',
       },
     },
   },
@@ -2762,8 +2761,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1/data-export/models \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/data-export/models \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2825,7 +2823,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/data-export/destinations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationId": "x",\n          "destinationType": "x"\n        }\'',
+          'curl https://api.stigg.io/api/v1/data-export/destinations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationId": "x",\n          "destinationType": "x"\n        }\'',
       },
     },
   },
@@ -2881,19 +2879,19 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
   {
-    name: 'update',
+    name: 'update_selection',
     endpoint: '/api/v1/data-export/destinations/{destinationId}',
     httpMethod: 'patch',
     summary: 'Update data-export destination selection',
     description:
       "Update a destination's entity selection. Pushes the new enabled_models to the provider first, then persists the selection. Applies on the next scheduled transfer.",
-    stainlessPath: '(resource) v1.events.data_export.destinations > (method) update',
-    qualified: 'client.v1.events.dataExport.destinations.update',
+    stainlessPath: '(resource) v1.events.data_export.destinations > (method) update_selection',
+    qualified: 'client.v1.events.dataExport.destinations.updateSelection',
     params: [
       'destinationId: string;',
       'enabledModels: string[];',
@@ -2904,46 +2902,116 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       '{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }',
     markdown:
-      "## update\n\n`client.v1.events.dataExport.destinations.update(destinationId: string, enabledModels: string[], integrationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/data-export/destinations/{destinationId}`\n\nUpdate a destination's entity selection. Pushes the new enabled_models to the provider first, then persists the selection. Applies on the next scheduled transfer.\n\n### Parameters\n\n- `destinationId: string`\n\n- `enabledModels: string[]`\n\n- `integrationId: string`\n  Target integration row hosting the destination\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.update('x', { enabledModels: ['x'], integrationId: 'x' });\n\nconsole.log(destination);\n```",
+      "## update_selection\n\n`client.v1.events.dataExport.destinations.updateSelection(destinationId: string, enabledModels: string[], integrationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/data-export/destinations/{destinationId}`\n\nUpdate a destination's entity selection. Pushes the new enabled_models to the provider first, then persists the selection. Applies on the next scheduled transfer.\n\n### Parameters\n\n- `destinationId: string`\n\n- `enabledModels: string[]`\n\n- `integrationId: string`\n  Target integration row hosting the destination\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.destinations.updateSelection('x', { enabledModels: ['x'], integrationId: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.events.dataExport.destinations.update',
+        method: 'client.v1.events.dataExport.destinations.updateSelection',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst destination = await client.v1.events.dataExport.destinations.update('x', {\n  enabledModels: ['x'],\n  integrationId: 'x',\n});\n\nconsole.log(destination.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.dataExport.destinations.updateSelection('x', {\n  enabledModels: ['x'],\n  integrationId: 'x',\n});\n\nconsole.log(response.data);",
       },
       python: {
-        method: 'v1.events.data_export.destinations.update',
+        method: 'v1.events.data_export.destinations.update_selection',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\ndestination = client.v1.events.data_export.destinations.update(\n    destination_id="x",\n    enabled_models=["x"],\n    integration_id="x",\n)\nprint(destination.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.data_export.destinations.update_selection(\n    destination_id="x",\n    enabled_models=["x"],\n    integration_id="x",\n)\nprint(response.data)',
       },
       java: {
-        method: 'v1().events().dataExport().destinations().update',
+        method: 'v1().events().dataExport().destinations().updateSelection',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationUpdateParams params = DestinationUpdateParams.builder()\n            .destinationId("x")\n            .addEnabledModel("x")\n            .integrationId("x")\n            .build();\n        DestinationUpdateResponse destination = client.v1().events().dataExport().destinations().update(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateSelectionParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateSelectionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationUpdateSelectionParams params = DestinationUpdateSelectionParams.builder()\n            .destinationId("x")\n            .addEnabledModel("x")\n            .integrationId("x")\n            .build();\n        DestinationUpdateSelectionResponse response = client.v1().events().dataExport().destinations().updateSelection(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Events.DataExport.Destinations.Update',
+        method: 'client.V1.Events.DataExport.Destinations.UpdateSelection',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationUpdateParams{\n\t\t\tEnabledModels: []string{"x"},\n\t\t\tIntegrationID: "x",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.Destinations.UpdateSelection(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationUpdateSelectionParams{\n\t\t\tEnabledModels: []string{"x"},\n\t\t\tIntegrationID: "x",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.events.data_export.destinations.update',
+        method: 'v1.events.data_export.destinations.update_selection',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\ndestination = stigg.v1.events.data_export.destinations.update("x", enabled_models: ["x"], integration_id: "x")\n\nputs(destination)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.data_export.destinations.update_selection("x", enabled_models: ["x"], integration_id: "x")\n\nputs(response)',
       },
       cli: {
-        method: 'destinations update',
+        method: 'destinations update_selection',
         example:
-          "stigg v1:events:data-export:destinations update \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
+          "stigg v1:events:data-export:destinations update-selection \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
       },
       csharp: {
-        method: 'V1.Events.DataExport.Destinations.Update',
+        method: 'V1.Events.DataExport.Destinations.UpdateSelection',
         example:
-          'DestinationUpdateParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Update(parameters);\n\nConsole.WriteLine(destination);',
+          'DestinationUpdateSelectionParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar response = await client.V1.Events.DataExport.Destinations.UpdateSelection(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "enabledModels": [\n            "x"\n          ],\n          "integrationId": "x"\n        }\'',
+          'curl https://api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "enabledModels": [\n            "x"\n          ],\n          "integrationId": "x"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'retrieve_governance',
+    endpoint: '/api/v1-beta/customers/{id}/governance',
+    httpMethod: 'get',
+    summary: 'Get a list of governance nodes',
+    description:
+      "Queries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.",
+    stainlessPath: '(resource) v1.events.beta.customers > (method) retrieve_governance',
+    qualified: 'client.v1.events.beta.customers.retrieveGovernance',
+    params: [
+      'id: string;',
+      'after?: string;',
+      'currencyIds?: string[];',
+      'entityIdSearch?: string;',
+      'entityTypeIds?: string[];',
+      'featureIds?: string[];',
+      'limit?: number;',
+      'minUtilization?: number;',
+      "order?: 'asc' | 'desc';",
+      "scope?: 'all' | 'nodeWide' | 'scoped';",
+      "sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt';",
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }',
+    markdown:
+      "## retrieve_governance\n\n`client.v1.events.beta.customers.retrieveGovernance(id: string, after?: string, currencyIds?: string[], entityIdSearch?: string, entityTypeIds?: string[], featureIds?: string[], limit?: number, minUtilization?: number, order?: 'asc' | 'desc', scope?: 'all' | 'nodeWide' | 'scoped', sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; pagination: object; }`\n\n**get** `/api/v1-beta/customers/{id}/governance`\n\nQueries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `currencyIds?: string[]`\n  Currency ids to include, repeated per value (e.g. `?currencyIds=credits`). Omit both featureIds and currencyIds for tree mode.\n\n- `entityIdSearch?: string`\n  Case-insensitive substring match on the entity id (`%`/`_` matched literally).\n\n- `entityTypeIds?: string[]`\n  Filter to one or more entity types, repeated per value (e.g. `?entityTypeIds=team&entityTypeIds=user`).\n\n- `featureIds?: string[]`\n  Feature ids to include, repeated per value (e.g. `?featureIds=ai-tokens&featureIds=seats`). Omit both featureIds and currencyIds for tree mode — every node in the hierarchy with no usage configuration attached.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `minUtilization?: number`\n  Only nodes with utilization ≥ this value (e.g. 0.8 for ≥80%, 1 for at/over limit).\n\n- `order?: 'asc' | 'desc'`\n  Sort direction: `asc` or `desc` (default `desc`).\n\n- `scope?: 'all' | 'nodeWide' | 'scoped'`\n  Filter by configuration scope: `all` (default), `nodeWide` (`[]` only), or `scoped` (non-empty only).\n\n- `sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt'`\n  Sort key: `utilization` (default, cross-capability-safe), `currentUsage`, `usageLimit`, `scopeSize`, `id`, or `createdAt`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }`\n  Paginated list of governance tree nodes, each with its usage configuration and current usage.\n\n  - `data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]`\n  - `pagination: { next: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.retrieveGovernance('id');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.v1.events.beta.customers.retrieveGovernance',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.beta.customers.retrieveGovernance('id');\n\nconsole.log(response.data);",
+      },
+      python: {
+        method: 'v1.events.beta.customers.retrieve_governance',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.events.beta.customers.retrieve_governance(\n    id="id",\n)\nprint(response.data)',
+      },
+      java: {
+        method: 'v1().events().beta().customers().retrieveGovernance',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceParams;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveGovernanceResponse response = client.v1().events().beta().customers().retrieveGovernance("id");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1.Events.Beta.Customers.GetGovernance',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+      },
+      ruby: {
+        method: 'v1.events.beta.customers.retrieve_governance',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.events.beta.customers.retrieve_governance("id")\n\nputs(response)',
+      },
+      cli: {
+        method: 'customers retrieve_governance',
+        example:
+          "stigg v1:events:beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      csharp: {
+        method: 'V1.Events.Beta.Customers.RetrieveGovernance',
+        example:
+          'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Events.Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3010,7 +3078,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3071,7 +3139,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/auto-recharge \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/credits/auto-recharge \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3134,8 +3202,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3198,8 +3265,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3273,7 +3339,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/grants \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "displayName": "displayName",\n          "grantType": "PAID"\n        }\'',
+          'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "displayName": "displayName",\n          "grantType": "PAID"\n        }\'',
       },
     },
   },
@@ -3327,7 +3393,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/grants/$ID/void \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/credits/grants/$ID/void \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3389,7 +3455,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3453,7 +3519,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
       },
     },
   },
@@ -3517,7 +3583,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -3573,7 +3639,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3629,7 +3695,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3684,7 +3750,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/associated-entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/associated-entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3750,7 +3816,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/consumption \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 1,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "idempotencyKey": "x"\n        }\'',
+          'curl https://api.stigg.io/api/v1/credits/consumption \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 1,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "idempotencyKey": "x"\n        }\'',
       },
     },
   },
@@ -3809,7 +3875,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/credits/consumption/async \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumptions": [\n            {\n              "amount": 1,\n              "currencyId": "currencyId",\n              "customerId": "customerId",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/credits/consumption/async \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumptions": [\n            {\n              "amount": 1,\n              "currencyId": "currencyId",\n              "customerId": "customerId",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -3862,7 +3928,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/features/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/features/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3929,7 +3995,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/features/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/features/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -3998,7 +4064,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/features \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "featureType": "BOOLEAN"\n        }\'',
+          'curl https://api.stigg.io/api/v1/features \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "featureType": "BOOLEAN"\n        }\'',
       },
     },
   },
@@ -4062,7 +4128,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/features \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/features \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4116,7 +4182,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/features/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/features/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4170,7 +4236,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/features/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/features/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4232,7 +4298,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/addons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/addons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4299,7 +4365,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/addons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
       },
     },
   },
@@ -4352,7 +4418,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/addons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/addons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4367,7 +4433,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     params: [
       'id: string;',
       'billingId?: string;',
-      "charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; };",
+      "charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; };",
       'dependencies?: string[];',
       'description?: string;',
       'displayName?: string;',
@@ -4380,7 +4446,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }",
     markdown:
-      "## update\n\n`client.v1.addons.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: object; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, dependencies?: string[], description?: string, displayName?: string, maxQuantity?: number, metadata?: object, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/addons/{id}`\n\nUpdates an existing addon's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the addon draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `dependencies?: string[]`\n  List of addons the addon is dependant on\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `maxQuantity?: number`\n  The maximum quantity of this addon that can be added to a subscription\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.update('x');\n\nconsole.log(addon);\n```",
+      "## update\n\n`client.v1.addons.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: object; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, dependencies?: string[], description?: string, displayName?: string, maxQuantity?: number, metadata?: object, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/addons/{id}`\n\nUpdates an existing addon's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the addon draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `dependencies?: string[]`\n  List of addons the addon is dependant on\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `maxQuantity?: number`\n  The maximum quantity of this addon that can be added to a subscription\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.update('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.addons.update',
@@ -4418,7 +4484,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/addons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/addons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -4472,7 +4538,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/addons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4531,7 +4597,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
+          'curl https://api.stigg.io/api/v1/addons/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
       },
     },
   },
@@ -4585,7 +4651,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/addons/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4638,7 +4704,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/addons/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4698,8 +4764,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/addons/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4753,7 +4818,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4813,7 +4878,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -4872,7 +4937,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
+          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
       },
     },
   },
@@ -4927,7 +4992,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4995,7 +5060,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
+          'curl https://api.stigg.io/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
       },
     },
   },
@@ -5057,7 +5122,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/plans \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/plans \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5110,7 +5175,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/plans/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/plans/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5125,7 +5190,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     params: [
       'id: string;',
       'billingId?: string;',
-      "charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; };",
+      "charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; };",
       'compatibleAddonIds?: string[];',
       "defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; };",
       'description?: string;',
@@ -5138,7 +5203,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }",
     markdown:
-      "## update\n\n`client.v1.plans.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: object; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, compatibleAddonIds?: string[], defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }, description?: string, displayName?: string, metadata?: object, parentPlanId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/plans/{id}`\n\nUpdates an existing plan's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the plan draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; topUpCustomCurrencyId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `compatibleAddonIds?: string[]`\n\n- `defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  Default trial configuration for the plan\n  - `duration: number`\n    The duration of the trial in the specified units\n  - `units: 'DAY' | 'MONTH'`\n    The time unit for the trial duration (DAY or MONTH)\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n    Budget configuration for the trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `parentPlanId?: string`\n  The ID of the parent plan, if applicable\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.update('x');\n\nconsole.log(plan);\n```",
+      "## update\n\n`client.v1.plans.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: object; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, compatibleAddonIds?: string[], defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }, description?: string, displayName?: string, metadata?: object, parentPlanId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/plans/{id}`\n\nUpdates an existing plan's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the plan draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `compatibleAddonIds?: string[]`\n\n- `defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  Default trial configuration for the plan\n  - `duration: number`\n    The duration of the trial in the specified units\n  - `units: 'DAY' | 'MONTH'`\n    The time unit for the trial duration (DAY or MONTH)\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n    Budget configuration for the trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `parentPlanId?: string`\n  The ID of the parent plan, if applicable\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.update('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
       typescript: {
         method: 'client.v1.plans.update',
@@ -5176,7 +5241,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -5230,7 +5295,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/plans/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5289,7 +5354,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
+          'curl https://api.stigg.io/api/v1/plans/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
       },
     },
   },
@@ -5343,7 +5408,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5396,7 +5461,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5456,8 +5521,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/plans/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5518,7 +5582,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$ID/overage-charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/plans/$ID/overage-charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5572,7 +5636,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5632,7 +5696,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -5691,7 +5755,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
+          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
       },
     },
   },
@@ -5746,7 +5810,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5806,7 +5870,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -5870,19 +5934,19 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
   {
-    name: 'estimate_cost',
+    name: 'estimate',
     endpoint: '/api/v1/usage/estimate',
     httpMethod: 'post',
     summary: 'Estimate usage credit cost',
     description:
       'Estimates the credit cost of a usage report without recording it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.',
-    stainlessPath: '(resource) v1.usage > (method) estimate_cost',
-    qualified: 'client.v1.usage.estimateCost',
+    stainlessPath: '(resource) v1.usage > (method) estimate',
+    qualified: 'client.v1.usage.estimate',
     params: [
       'customerId: string;',
       'featureId: string;',
@@ -5896,46 +5960,46 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }",
     markdown:
-      "## estimate_cost\n\n`client.v1.usage.estimateCost(customerId: string, featureId: string, value: number, dimensions?: object, resourceId?: string, updateBehavior?: 'DELTA' | 'SET', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/usage/estimate`\n\nEstimates the credit cost of a usage report without recording it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `featureId: string`\n  Feature id\n\n- `value: number`\n  The value to report for usage\n\n- `dimensions?: object`\n  Additional dimensions for the usage report\n\n- `resourceId?: string`\n  Resource id\n\n- `updateBehavior?: 'DELTA' | 'SET'`\n  The method by which the usage value should be updated\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.estimateCost({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response);\n```",
+      "## estimate\n\n`client.v1.usage.estimate(customerId: string, featureId: string, value: number, dimensions?: object, resourceId?: string, updateBehavior?: 'DELTA' | 'SET', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/usage/estimate`\n\nEstimates the credit cost of a usage report without recording it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `featureId: string`\n  Feature id\n\n- `value: number`\n  The value to report for usage\n\n- `dimensions?: object`\n  Additional dimensions for the usage report\n\n- `resourceId?: string`\n  Resource id\n\n- `updateBehavior?: 'DELTA' | 'SET'`\n  The method by which the usage value should be updated\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.estimate({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
-        method: 'client.v1.usage.estimateCost',
+        method: 'client.v1.usage.estimate',
         example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.estimateCost({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response.data);",
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.usage.estimate({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response.data);",
       },
       python: {
-        method: 'v1.usage.estimate_cost',
+        method: 'v1.usage.estimate',
         example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.estimate_cost(\n    customer_id="customerId",\n    feature_id="featureId",\n    value=-9007199254740991,\n)\nprint(response.data)',
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1.usage.estimate(\n    customer_id="customerId",\n    feature_id="featureId",\n    value=-9007199254740991,\n)\nprint(response.data)',
       },
       java: {
-        method: 'v1().usage().estimateCost',
+        method: 'v1().usage().estimate',
         example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageEstimateCostParams;\nimport io.stigg.models.v1.usage.UsageEstimateCostResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageEstimateCostParams params = UsageEstimateCostParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .value(-9007199254740991L)\n            .build();\n        UsageEstimateCostResponse response = client.v1().usage().estimateCost(params);\n    }\n}',
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageEstimateParams;\nimport io.stigg.models.v1.usage.UsageEstimateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageEstimateParams params = UsageEstimateParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .value(-9007199254740991L)\n            .build();\n        UsageEstimateResponse response = client.v1().usage().estimate(params);\n    }\n}',
       },
       go: {
-        method: 'client.V1.Usage.EstimateCost',
+        method: 'client.V1.Usage.Estimate',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.EstimateCost(context.TODO(), stigg.V1UsageEstimateCostParams{\n\t\tCustomerID: "customerId",\n\t\tFeatureID:  "featureId",\n\t\tValue:      -9007199254740991,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Estimate(context.TODO(), stigg.V1UsageEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tFeatureID:  "featureId",\n\t\tValue:      -9007199254740991,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       ruby: {
-        method: 'v1.usage.estimate_cost',
+        method: 'v1.usage.estimate',
         example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.estimate_cost(customer_id: "customerId", feature_id: "featureId", value: -9007199254740991)\n\nputs(response)',
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1.usage.estimate(customer_id: "customerId", feature_id: "featureId", value: -9007199254740991)\n\nputs(response)',
       },
       cli: {
-        method: 'usage estimate_cost',
+        method: 'usage estimate',
         example:
-          "stigg v1:usage estimate-cost \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
+          "stigg v1:usage estimate \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
       },
       csharp: {
-        method: 'V1.Usage.EstimateCost',
+        method: 'V1.Usage.Estimate',
         example:
-          'UsageEstimateCostParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.EstimateCost(parameters);\n\nConsole.WriteLine(response);',
+          'UsageEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/usage/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "featureId": "featureId",\n          "value": -9007199254740991\n        }\'',
+          'curl https://api.stigg.io/api/v1/usage/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "featureId": "featureId",\n          "value": -9007199254740991\n        }\'',
       },
     },
   },
@@ -5997,7 +6061,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example: 'curl https://edge.api.stigg.io/api/v1/products \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1/products \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6060,7 +6124,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+          'curl https://api.stigg.io/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
       },
     },
   },
@@ -6124,7 +6188,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://edge.api.stigg.io/api/v1/products/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://api.stigg.io/api/v1/products/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -6178,7 +6242,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/products/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/products/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6232,7 +6296,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/products/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/products/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6294,76 +6358,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
-      },
-    },
-  },
-  {
-    name: 'retrieve_governance',
-    endpoint: '/api/v1-beta/customers/{id}/governance',
-    httpMethod: 'get',
-    summary: 'Get a list of governance nodes',
-    description:
-      "Queries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.",
-    stainlessPath: '(resource) v1-beta.customers > (method) retrieve_governance',
-    qualified: 'client.v1Beta.customers.retrieveGovernance',
-    params: [
-      'id: string;',
-      'after?: string;',
-      'currencyIds?: string[];',
-      'entityIdSearch?: string;',
-      'entityTypeIds?: string[];',
-      'featureIds?: string[];',
-      'limit?: number;',
-      'minUtilization?: number;',
-      "order?: 'asc' | 'desc';",
-      "scope?: 'all' | 'nodeWide' | 'scoped';",
-      "sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt';",
-      'X-ACCOUNT-ID?: string;',
-      'X-ENVIRONMENT-ID?: string;',
-    ],
-    response:
-      '{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }',
-    markdown:
-      "## retrieve_governance\n\n`client.v1Beta.customers.retrieveGovernance(id: string, after?: string, currencyIds?: string[], entityIdSearch?: string, entityTypeIds?: string[], featureIds?: string[], limit?: number, minUtilization?: number, order?: 'asc' | 'desc', scope?: 'all' | 'nodeWide' | 'scoped', sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; pagination: object; }`\n\n**get** `/api/v1-beta/customers/{id}/governance`\n\nQueries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `currencyIds?: string[]`\n  Currency ids to include, repeated per value (e.g. `?currencyIds=credits`). Omit both featureIds and currencyIds for tree mode.\n\n- `entityIdSearch?: string`\n  Case-insensitive substring match on the entity id (`%`/`_` matched literally).\n\n- `entityTypeIds?: string[]`\n  Filter to one or more entity types, repeated per value (e.g. `?entityTypeIds=team&entityTypeIds=user`).\n\n- `featureIds?: string[]`\n  Feature ids to include, repeated per value (e.g. `?featureIds=ai-tokens&featureIds=seats`). Omit both featureIds and currencyIds for tree mode — every node in the hierarchy with no usage configuration attached.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `minUtilization?: number`\n  Only nodes with utilization ≥ this value (e.g. 0.8 for ≥80%, 1 for at/over limit).\n\n- `order?: 'asc' | 'desc'`\n  Sort direction: `asc` or `desc` (default `desc`).\n\n- `scope?: 'all' | 'nodeWide' | 'scoped'`\n  Filter by configuration scope: `all` (default), `nodeWide` (`[]` only), or `scoped` (non-empty only).\n\n- `sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt'`\n  Sort key: `utilization` (default, cross-capability-safe), `currentUsage`, `usageLimit`, `scopeSize`, `id`, or `createdAt`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }`\n  Paginated list of governance tree nodes, each with its usage configuration and current usage.\n\n  - `data: { cadence: string; currentUsage: number; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]`\n  - `pagination: { next: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.retrieveGovernance('id');\n\nconsole.log(response);\n```",
-    perLanguage: {
-      typescript: {
-        method: 'client.v1Beta.customers.retrieveGovernance',
-        example:
-          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1Beta.customers.retrieveGovernance('id');\n\nconsole.log(response.data);",
-      },
-      python: {
-        method: 'v1_beta.customers.retrieve_governance',
-        example:
-          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.v1_beta.customers.retrieve_governance(\n    id="id",\n)\nprint(response.data)',
-      },
-      java: {
-        method: 'v1Beta().customers().retrieveGovernance',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.CustomerRetrieveGovernanceParams;\nimport io.stigg.models.v1beta.customers.CustomerRetrieveGovernanceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveGovernanceResponse response = client.v1Beta().customers().retrieveGovernance("id");\n    }\n}',
-      },
-      go: {
-        method: 'client.V1Beta.Customers.GetGovernance',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      ruby: {
-        method: 'v1_beta.customers.retrieve_governance',
-        example:
-          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\nresponse = stigg.v1_beta.customers.retrieve_governance("id")\n\nputs(response)',
-      },
-      cli: {
-        method: 'customers retrieve_governance',
-        example: "stigg v1-beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
-      },
-      csharp: {
-        method: 'V1Beta.Customers.RetrieveGovernance',
-        example:
-          'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
-      },
-      http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
       },
     },
   },
@@ -6428,7 +6423,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6491,7 +6486,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6552,7 +6547,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              }\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "john@acme.com"\n              }\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              }\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "john@acme.com"\n              }\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -6607,7 +6602,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6661,7 +6656,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
       },
     },
   },
@@ -6715,7 +6710,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
       },
     },
   },
@@ -6780,7 +6775,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6841,7 +6836,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "entityId": "workspace-001",\n              "cadence": "P1M",\n              "featureId": "compute-minutes",\n              "usageLimit": 1000\n            },\n            {\n              "entityId": "workspace-002",\n              "cadence": "P1M",\n              "currencyId": "cred-type-tokens",\n              "parentId": "workspace-001",\n              "scopeEntityIds": [\n                "user-1"\n              ],\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "entityId": "workspace-001",\n              "cadence": "P1M",\n              "featureId": "compute-minutes",\n              "usageLimit": 1000\n            },\n            {\n              "entityId": "workspace-002",\n              "cadence": "P1M",\n              "currencyId": "cred-type-tokens",\n              "parentId": "workspace-001",\n              "scopeEntityIds": [\n                "user-1"\n              ],\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -6901,8 +6896,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       http: {
-        example:
-          'curl https://edge.api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6962,7 +6956,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://edge.api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization"\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
+          'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization"\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -6987,7 +6981,7 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
   {
     language: 'java',
     content:
-      '# Stigg Java API Library\n\n<!-- x-release-please-start-version -->\n[![Maven Central](https://img.shields.io/maven-central/v/io.stigg/stigg-java)](https://central.sonatype.com/artifact/io.stigg/stigg-java/0.0.1)\n[![javadoc](https://javadoc.io/badge2/io.stigg/stigg-java/0.0.1/javadoc.svg)](https://javadoc.io/doc/io.stigg/stigg-java/0.0.1)\n<!-- x-release-please-end -->\n\nThe Stigg Java SDK provides convenient access to the Stigg REST API   from applications written in Java.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJuYW1lIjoiQHN0aWdnL3R5cGVzY3JpcHQtbWNwIiwidHJhbnNwb3J0IjoiaHR0cCIsInVybCI6Imh0dHBzOi8vc3RpZ2ctbWNwLnN0bG1jcC5jb20iLCJoZWFkZXJzIjp7IlgtQVBJLUtFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fstigg-mcp.stlmcp.com%22%2C%22headers%22%3A%7B%22X-API-KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n<!-- x-release-please-start-version -->\n\nJavadocs are available on [javadoc.io](https://javadoc.io/doc/io.stigg/stigg-java/0.0.1).\n\n<!-- x-release-please-end -->\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n### Gradle\n\n~~~kotlin\nimplementation("io.stigg:stigg-java:0.0.1")\n~~~\n\n### Maven\n\n~~~xml\n<dependency>\n  <groupId>io.stigg</groupId>\n  <artifactId>stigg-java</artifactId>\n  <version>0.0.1</version>\n</dependency>\n~~~\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Java 8 or later.\n\n## Usage\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCustomerResponse customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\n## Client configuration\n\nConfigure the client using system properties or environment variables:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n```\n\nOr manually:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .apiKey("My API Key")\n    .build();\n```\n\nOr using a combination of the two approaches:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    // Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n    // Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\n    .fromEnv()\n    .apiKey("My API Key")\n    .build();\n```\n\nSee this table for the available options:\n\n| Setter    | System property | Environment variable | Required | Default value                 |\n| --------- | --------------- | -------------------- | -------- | ----------------------------- |\n| `apiKey`  | `stigg.apiKey`  | `STIGG_API_KEY`      | true     | -                             |\n| `baseUrl` | `stigg.baseUrl` | `STIGG_BASE_URL`     | true     | `"https://edge.api.stigg.io"` |\n\nSystem properties take precedence over environment variables.\n\n> [!TIP]\n> Don\'t create more than one client in the same application. Each client has a connection pool and\n> thread pools, which are more efficient to share between requests.\n\n### Modifying configuration\n\nTo temporarily use a modified client configuration, while reusing the same connection and thread       pools, call `withOptions()` on any client or service:\n\n```java\nimport io.stigg.client.StiggClient;\n\nStiggClient clientWithOptions = client.withOptions(optionsBuilder -> {\n    optionsBuilder.baseUrl("https://example.com");\n    optionsBuilder.maxRetries(42);\n});\n```\n\nThe `withOptions()` method does not affect the original client or service.\n\n## Requests and responses\n\nTo send a request to the Stigg API, build an instance of some `Params` class and pass it to the     corresponding client method. When the response is received, it will be deserialized into an instance of     a Java class.\n\nFor example, `client.v1().customers().retrieve(...)` should be called with an instance of `CustomerRetrieveParams`, and it     will return an instance of `CustomerResponse`.\n\n## Immutability\n\nEach class in the SDK has an associated   [builder](https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java)   or factory method for constructing it.\n\nEach class is [immutable](https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html)   once constructed. If the class has an associated builder, then it has a `toBuilder()` method, which can   be used to convert it back to a builder for making a modified copy.\n\nBecause each class is immutable, builder modification will _never_ affect already built class instances.\n\n## Asynchronous execution\n\nThe default client is synchronous. To switch to asynchronous execution, call the `async()` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.async().v1().customers().retrieve("REPLACE_ME");\n```\n\nOr create an asynchronous client from the beginning:\n\n```java\nimport io.stigg.client.StiggClientAsync;\nimport io.stigg.client.okhttp.StiggOkHttpClientAsync;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClientAsync client = StiggOkHttpClientAsync.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\nThe asynchronous client supports the same options as the synchronous one, except most methods return `CompletableFuture`s.\n\n\n\n\n\n\n\n## Raw responses\n\nThe SDK defines methods that deserialize responses into instances of Java classes.       However, these methods don\'t provide access to the response headers, status code, or the raw response       body.\n\nTo access this data, prefix any HTTP method call on a client or service with `withRawResponse()`:\n\n```java\nimport io.stigg.core.http.Headers;\nimport io.stigg.core.http.HttpResponseFor;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nHttpResponseFor<CustomerResponse> customerResponse = client.v1().customers().withRawResponse().retrieve("REPLACE_ME");\n\nint statusCode = customerResponse.statusCode();\nHeaders headers = customerResponse.headers();\n```\n\nYou can still deserialize the response into an instance of a Java class if needed:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse parsedCustomerResponse = customerResponse.parse();\n```\n\n## Error handling\n\nThe SDK throws custom unchecked exception types:\n\n- [`StiggServiceException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggServiceException.kt): Base class for HTTP errors. See this table for which exception       subclass is thrown for each HTTP status code:\n\n  | Status | Exception                                          |\n  | ------ | -------------------------------------------------- |\n  | 400    | [`BadRequestException`](stigg-java-core/src/main/kotlin/io/stigg/errors/BadRequestException.kt)           |\n  | 401    | [`UnauthorizedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnauthorizedException.kt)         |\n  | 403    | [`PermissionDeniedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/PermissionDeniedException.kt)     |\n  | 404    | [`NotFoundException`](stigg-java-core/src/main/kotlin/io/stigg/errors/NotFoundException.kt)             |\n  | 422    | [`UnprocessableEntityException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnprocessableEntityException.kt)  |\n  | 429    | [`RateLimitException`](stigg-java-core/src/main/kotlin/io/stigg/errors/RateLimitException.kt)            |\n  | 5xx    | [`InternalServerException`](stigg-java-core/src/main/kotlin/io/stigg/errors/InternalServerException.kt)       |\n  | others | [`UnexpectedStatusCodeException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnexpectedStatusCodeException.kt) |\n\n- [`StiggIoException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggIoException.kt): I/O networking errors.\n\n- [`StiggRetryableException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggRetryableException.kt): Generic error indicating a failure that could be retried by the client.\n\n- [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt): Failure to interpret successfully parsed data. For example,       when accessing a property that\'s supposed to be required, but the API unexpectedly omitted it from the       response.\n\n- [`StiggException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggException.kt): Base class for all exceptions. Most errors will result in one of the       previously mentioned ones, but completely generic errors may be thrown using the base class.\n\n## Pagination\n\nThe SDK defines methods that return a paginated lists of results. It provides convenient ways to access     the results either one page at a time or item-by-item across all pages.\n\n### Auto-pagination\n\nTo iterate through all results across all pages, use the `autoPager()` method, which automatically     fetches more pages as needed.\n\nWhen using the synchronous client, the method returns an [`Iterable`](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\n\n// Process as an Iterable\nfor (CustomerListResponse customer : page.autoPager()) {\n    System.out.println(customer);\n}\n\n// Process as a Stream\npage.autoPager()\n    .stream()\n    .limit(50)\n    .forEach(customer -> System.out.println(customer));\n```\n\nWhen using the asynchronous client, the method returns an [`AsyncStreamResponse`](stigg-java-core/src/main/kotlin/io/stigg/core/http/AsyncStreamResponse.kt):\n\n```java\nimport io.stigg.core.http.AsyncStreamResponse;\nimport io.stigg.models.v1.customers.CustomerListPageAsync;\nimport io.stigg.models.v1.customers.CustomerListResponse;\nimport java.util.Optional;\nimport java.util.concurrent.CompletableFuture;\n\nCompletableFuture<CustomerListPageAsync> pageFuture = client.async().v1().customers().list();\n\npageFuture.thenRun(page -> page.autoPager().subscribe(customer -> {\n    System.out.println(customer);\n}));\n\n// If you need to handle errors or completion of the stream\npageFuture.thenRun(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {\n    @Override\n    public void onNext(CustomerListResponse customer) {\n        System.out.println(customer);\n    }\n\n    @Override\n    public void onComplete(Optional<Throwable> error) {\n        if (error.isPresent()) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error.get());\n        } else {\n            System.out.println("No more!");\n        }\n    }\n}));\n\n// Or use futures\npageFuture.thenRun(page -> page.autoPager()\n    .subscribe(customer -> {\n        System.out.println(customer);\n    })\n    .onCompleteFuture()\n    .whenComplete((unused, error) -> {\n        if (error != null) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error);\n        } else {\n            System.out.println("No more!");\n        }\n    }));\n```\n\n### Manual pagination\n\nTo access individual page items and manually request the next page, use the `items()`,\n`hasNextPage()`, and `nextPage()` methods:\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\nwhile (true) {\n    for (CustomerListResponse customer : page.items()) {\n        System.out.println(customer);\n    }\n\n    if (!page.hasNextPage()) {\n        break;\n    }\n\n    page = page.nextPage();\n}\n```\n\n## Logging\n\nEnable logging by setting the `STIGG_LOG` environment variable to   `info`:\n\n```sh\nexport STIGG_LOG=info\n```\n\nOr to `debug` for more verbose logging:\n\n```sh\nexport STIGG_LOG=debug\n```\n\nOr configure the client manually using the `logLevel` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.LogLevel;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .logLevel(LogLevel.INFO)\n    .build();\n```\n\n## ProGuard and R8\n\nAlthough the SDK uses reflection, it is still usable with     [ProGuard](https://github.com/Guardsquare/proguard) and     [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because     `stigg-java-core` is published with a     [configuration file](stigg-java-core/src/main/resources/META-INF/proguard/stigg-java-core.pro) containing     [keep rules](https://www.guardsquare.com/manual/configuration/usage).\n\nProGuard and R8 should automatically detect and use the published rules, but you can also manually copy     the keep rules if necessary.\n\n\n\n\n\n## Jackson\n\nThe SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON     serialization/deserialization. It is compatible with version 2.13.4 or higher,     but depends on version 2.18.2 by default.\n\nThe SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the     default version was overridden in your Maven or Gradle config).\n\nIf the SDK threw an exception, but you\'re _certain_ the version is compatible, then disable the version     check using the `checkJacksonVersionCompatibility` on [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or     [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt).\n\n> [!CAUTION]\n> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.\n\nAlso note that there are bugs in older Jackson versions that can affect the SDK. We don\'t work around all     Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to     upgrade Jackson for those instead.\n\n## Network options\n\n### Retries\n\nThe SDK automatically retries 2 times by default, with a short exponential backoff between requests.\n\nOnly the following error types are retried:\n- Connection errors (for example, due to a network connectivity problem)\n- 408 Request Timeout\n- 409 Conflict\n- 429 Rate Limit\n- 5xx Internal\n\nThe API may also explicitly instruct the SDK to retry or not retry a request.\n\nTo set a custom number of retries, configure the client using the `maxRetries` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .maxRetries(4)\n    .build();\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default.\n\nTo set a custom timeout, configure the method call using the `timeout` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .timeout(Duration.ofSeconds(30))\n    .build();\n```\n\n### Proxies\n\nTo route requests through a proxy, configure the client using the `proxy` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.net.InetSocketAddress;\nimport java.net.Proxy;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(new Proxy(\n      Proxy.Type.HTTP, new InetSocketAddress(\n        "https://example.com", 8080\n      )\n    ))\n    .build();\n```\n\nIf the proxy responds with `407 Proxy Authentication Required`, supply credentials by also   configuring `proxyAuthenticator`:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.http.ProxyAuthenticator;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(...)\n    // Or a custom implementation of `ProxyAuthenticator`.\n    .proxyAuthenticator(ProxyAuthenticator.basic("username", "password"))\n    .build();\n```\n\n### Connection pooling\n\nTo customize the underlying OkHttp connection pool, configure the client using the   `maxIdleConnections` and `keepAliveDuration` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.\n    .maxIdleConnections(10)\n    .keepAliveDuration(Duration.ofMinutes(2))\n    .build();\n```\n\nIf both options are unset, OkHttp\'s default connection pool settings are used.\n\n### HTTPS\n\n> [!NOTE]\n> Most applications should not call these methods, and instead use the system defaults. The defaults include\n> special optimizations that can be lost if the implementations are modified.\n\nTo configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`,   `trustManager`, and `hostnameVerifier` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.\n    .sslSocketFactory(yourSSLSocketFactory)\n    .trustManager(yourTrustManager)\n    .hostnameVerifier(yourHostnameVerifier)\n    .build();\n```\n\n\n\n### Custom HTTP client\n\nThe SDK consists of three artifacts:\n- `stigg-java-core`\n  - Contains core SDK logic\n  - Does not depend on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggClient`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClient.kt), [`StiggClientAsync`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsync.kt),             [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt), and [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), all of which can             work with any HTTP client\n- `stigg-java-client-okhttp`\n  - Depends on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) and [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), which             provide a way to construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) and             [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), respectively, using OkHttp\n- `stigg-java`\n  - Depends on and exposes the APIs of both `stigg-java-core` and `stigg-java-client-okhttp`\n  - Does not have its own logic\n\nThis structure allows replacing the SDK\'s default HTTP client without pulling in unnecessary dependencies.\n\n#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)\n\n> [!TIP]\n> Try the available [network options](#network-options) before replacing the default client.\n\nTo use a customized `OkHttpClient`:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Copy `stigg-java-client-okhttp`\'s [`OkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/OkHttpClient.kt) class into your code and        customize it\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your        customized client\n\n### Completely custom HTTP client\n\nTo use a completely custom HTTP client:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Write a class that implements the [`HttpClient`](stigg-java-core/src/main/kotlin/io/stigg/core/http/HttpClient.kt) interface\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your new        client class\n\n## Undocumented API functionality\n\nThe SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.\n\n### Parameters\n\nTo set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQueryParam`, or       `putAdditionalBodyProperty` methods on any `Params` class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .putAdditionalHeader("Secret-Header", "42")\n    .putAdditionalQueryParam("secret_query_param", "42")\n    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))\n    .build();\n```\n\nThese can be accessed on the built object later using the `_additionalHeaders()`,       `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.\n\nTo set undocumented parameters on _nested_ headers, query params, or body classes, call the         `putAdditionalProperty` method on the nested class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\nCustomerUpdateParams params = CustomerUpdateParams.builder()\n    .passthrough(CustomerUpdateParams.Passthrough.builder()\n        .putAdditionalProperty("secretProperty", JsonValue.from("42"))\n        .build())\n    .build();\n```\n\nThese properties can be accessed on the nested built object later using the         `_additionalProperties()` method.\n\nTo set a documented parameter or property to an undocumented or not yet supported _value_, pass a       [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) object to its setter:\n\n```java\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder().build();\n```\n\nThe most straightforward way to create a [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) is using its       `from(...)` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.List;\nimport java.util.Map;\n\n// Create primitive JSON values\nJsonValue nullValue = JsonValue.from(null);\nJsonValue booleanValue = JsonValue.from(true);\nJsonValue numberValue = JsonValue.from(42);\nJsonValue stringValue = JsonValue.from("Hello World!");\n\n// Create a JSON array value equivalent to `["Hello", "World"]`\nJsonValue arrayValue = JsonValue.from(List.of(\n  "Hello", "World"\n));\n\n// Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`\nJsonValue objectValue = JsonValue.from(Map.of(\n  "a", 1,\n  "b", 2\n));\n\n// Create an arbitrarily nested JSON equivalent to:\n// {\n//   "a": [1, 2],\n//   "b": [3, 4]\n// }\nJsonValue complexValue = JsonValue.from(Map.of(\n  "a", List.of(\n    1, 2\n  ),\n  "b", List.of(\n    3, 4\n  )\n));\n```\n\nNormally a `Builder` class\'s `build` method will throw         [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html)         if any required parameter or property is unset.\n\nTo forcibly omit a required parameter or property, pass [`JsonMissing`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt):\n\n```java\nimport io.stigg.core.JsonMissing;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .id(JsonMissing.of())\n    .build();\n```\n\n### Response properties\n\nTo access undocumented response properties, call the `_additionalProperties()` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.Map;\n\nMap<String, JsonValue> additionalProperties = client.v1().customers().retrieve(params)._additionalProperties();\nJsonValue secretPropertyValue = additionalProperties.get("secretProperty");\n\nString result = secretPropertyValue.accept(new JsonValue.Visitor<>() {\n    @Override\n    public String visitNull() {\n        return "It\'s null!";\n    }\n\n    @Override\n    public String visitBoolean(boolean value) {\n        return "It\'s a boolean!";\n    }\n\n    @Override\n    public String visitNumber(Number value) {\n        return "It\'s a number!";\n    }\n\n    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`\n    // The default implementation of each unimplemented method delegates to `visitDefault`, which throws by default, but can also be overridden\n});\n```\n\nTo access a property\'s raw JSON value, which may be undocumented, call its `_` prefixed method:\n\n```java\nimport io.stigg.core.JsonField;\nimport java.util.Optional;\n\nJsonField<Object> field = client.v1().customers().retrieve(params)._field();\n\nif (field.isMissing()) {\n  // The property is absent from the JSON response\n} else if (field.isNull()) {\n  // The property was set to literal null\n} else {\n  // Check if value was provided as a string\n  // Other methods include `asNumber()`, `asBoolean()`, etc.\n  Optional<String> jsonString = field.asString();\n\n  // Try to deserialize into a custom type\n  MyClass myObject = field.asUnknown().orElseThrow().convert(MyClass.class);\n}\n```\n\n### Response validation\n\nIn rare cases, the API may return a response that doesn\'t match the expected type. For example, the SDK     may expect a property to contain a `String`, but the API could return something else.\n\nBy default, the SDK will not throw an exception in this case. It will throw     [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt) only if you directly access the property.\n\nValidating the response is _not_ forwards compatible with new types from the API for existing fields.\n\nIf you would still prefer to check that the response is completely well-typed upfront, then either call     `validate()`:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(params).validate();\n```\n\nOr configure the method call to validate the response using the `responseValidation` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().responseValidation(true).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .responseValidation(true)\n    .build();\n```\n\n## FAQ\n\n### Why don\'t you use plain `enum` classes?\n\nJava `enum` classes are not trivially   [forwards compatible](https://www.stainless.com/blog/making-java-enums-forwards-compatible). Using them in   the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.\n\n### Why do you represent fields using `JsonField<T>` instead of just plain `T`?\n\nUsing `JsonField<T>` enables a few features:\n\n- Allowing usage of [undocumented API functionality](#undocumented-api-functionality)\n- Lazily [validating the API response against the expected shape](#response-validation)\n- Representing absent vs explicitly null values\n\n### Why don\'t you use [`data` classes](https://kotlinlang.org/docs/data-classes.html)?\n\nIt is not [backwards compatible to add new fields to a data class](https://kotlinlang.org/docs/api-guidelines-backward-compatibility.html#avoid-using-data-classes-in-your-api)   and we don\'t want to introduce a breaking change every time we add a field to a class.\n\n### Why don\'t you use checked exceptions?\n\nChecked exceptions are widely considered a mistake in the Java programming language. In fact, they were   omitted from Kotlin for this reason.\n\nChecked exceptions:\n\n- Are verbose to handle\n- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error\n- Are tedious to propagate due to the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function)\n- Don\'t play well with lambdas (also due to the function coloring problem)\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-java/issues) with questions, bugs, or suggestions.\n',
+      '# Stigg Java API Library\n\n<!-- x-release-please-start-version -->\n[![Maven Central](https://img.shields.io/maven-central/v/io.stigg/stigg-java)](https://central.sonatype.com/artifact/io.stigg/stigg-java/0.0.1)\n[![javadoc](https://javadoc.io/badge2/io.stigg/stigg-java/0.0.1/javadoc.svg)](https://javadoc.io/doc/io.stigg/stigg-java/0.0.1)\n<!-- x-release-please-end -->\n\nThe Stigg Java SDK provides convenient access to the Stigg REST API   from applications written in Java.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJuYW1lIjoiQHN0aWdnL3R5cGVzY3JpcHQtbWNwIiwidHJhbnNwb3J0IjoiaHR0cCIsInVybCI6Imh0dHBzOi8vc3RpZ2ctbWNwLnN0bG1jcC5jb20iLCJoZWFkZXJzIjp7IlgtQVBJLUtFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fstigg-mcp.stlmcp.com%22%2C%22headers%22%3A%7B%22X-API-KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n<!-- x-release-please-start-version -->\n\nJavadocs are available on [javadoc.io](https://javadoc.io/doc/io.stigg/stigg-java/0.0.1).\n\n<!-- x-release-please-end -->\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n### Gradle\n\n~~~kotlin\nimplementation("io.stigg:stigg-java:0.0.1")\n~~~\n\n### Maven\n\n~~~xml\n<dependency>\n  <groupId>io.stigg</groupId>\n  <artifactId>stigg-java</artifactId>\n  <version>0.0.1</version>\n</dependency>\n~~~\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Java 8 or later.\n\n## Usage\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCustomerResponse customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\n## Client configuration\n\nConfigure the client using system properties or environment variables:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n```\n\nOr manually:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .apiKey("My API Key")\n    .build();\n```\n\nOr using a combination of the two approaches:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    // Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n    // Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\n    .fromEnv()\n    .apiKey("My API Key")\n    .build();\n```\n\nSee this table for the available options:\n\n| Setter    | System property | Environment variable | Required | Default value            |\n| --------- | --------------- | -------------------- | -------- | ------------------------ |\n| `apiKey`  | `stigg.apiKey`  | `STIGG_API_KEY`      | true     | -                        |\n| `baseUrl` | `stigg.baseUrl` | `STIGG_BASE_URL`     | true     | `"https://api.stigg.io"` |\n\nSystem properties take precedence over environment variables.\n\n> [!TIP]\n> Don\'t create more than one client in the same application. Each client has a connection pool and\n> thread pools, which are more efficient to share between requests.\n\n### Modifying configuration\n\nTo temporarily use a modified client configuration, while reusing the same connection and thread       pools, call `withOptions()` on any client or service:\n\n```java\nimport io.stigg.client.StiggClient;\n\nStiggClient clientWithOptions = client.withOptions(optionsBuilder -> {\n    optionsBuilder.baseUrl("https://example.com");\n    optionsBuilder.maxRetries(42);\n});\n```\n\nThe `withOptions()` method does not affect the original client or service.\n\n## Requests and responses\n\nTo send a request to the Stigg API, build an instance of some `Params` class and pass it to the     corresponding client method. When the response is received, it will be deserialized into an instance of     a Java class.\n\nFor example, `client.v1().customers().retrieve(...)` should be called with an instance of `CustomerRetrieveParams`, and it     will return an instance of `CustomerResponse`.\n\n## Immutability\n\nEach class in the SDK has an associated   [builder](https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java)   or factory method for constructing it.\n\nEach class is [immutable](https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html)   once constructed. If the class has an associated builder, then it has a `toBuilder()` method, which can   be used to convert it back to a builder for making a modified copy.\n\nBecause each class is immutable, builder modification will _never_ affect already built class instances.\n\n## Asynchronous execution\n\nThe default client is synchronous. To switch to asynchronous execution, call the `async()` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.async().v1().customers().retrieve("REPLACE_ME");\n```\n\nOr create an asynchronous client from the beginning:\n\n```java\nimport io.stigg.client.StiggClientAsync;\nimport io.stigg.client.okhttp.StiggOkHttpClientAsync;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClientAsync client = StiggOkHttpClientAsync.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\nThe asynchronous client supports the same options as the synchronous one, except most methods return `CompletableFuture`s.\n\n\n\n\n\n\n\n## Raw responses\n\nThe SDK defines methods that deserialize responses into instances of Java classes.       However, these methods don\'t provide access to the response headers, status code, or the raw response       body.\n\nTo access this data, prefix any HTTP method call on a client or service with `withRawResponse()`:\n\n```java\nimport io.stigg.core.http.Headers;\nimport io.stigg.core.http.HttpResponseFor;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nHttpResponseFor<CustomerResponse> customerResponse = client.v1().customers().withRawResponse().retrieve("REPLACE_ME");\n\nint statusCode = customerResponse.statusCode();\nHeaders headers = customerResponse.headers();\n```\n\nYou can still deserialize the response into an instance of a Java class if needed:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse parsedCustomerResponse = customerResponse.parse();\n```\n\n## Error handling\n\nThe SDK throws custom unchecked exception types:\n\n- [`StiggServiceException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggServiceException.kt): Base class for HTTP errors. See this table for which exception       subclass is thrown for each HTTP status code:\n\n  | Status | Exception                                          |\n  | ------ | -------------------------------------------------- |\n  | 400    | [`BadRequestException`](stigg-java-core/src/main/kotlin/io/stigg/errors/BadRequestException.kt)           |\n  | 401    | [`UnauthorizedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnauthorizedException.kt)         |\n  | 403    | [`PermissionDeniedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/PermissionDeniedException.kt)     |\n  | 404    | [`NotFoundException`](stigg-java-core/src/main/kotlin/io/stigg/errors/NotFoundException.kt)             |\n  | 422    | [`UnprocessableEntityException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnprocessableEntityException.kt)  |\n  | 429    | [`RateLimitException`](stigg-java-core/src/main/kotlin/io/stigg/errors/RateLimitException.kt)            |\n  | 5xx    | [`InternalServerException`](stigg-java-core/src/main/kotlin/io/stigg/errors/InternalServerException.kt)       |\n  | others | [`UnexpectedStatusCodeException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnexpectedStatusCodeException.kt) |\n\n- [`StiggIoException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggIoException.kt): I/O networking errors.\n\n- [`StiggRetryableException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggRetryableException.kt): Generic error indicating a failure that could be retried by the client.\n\n- [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt): Failure to interpret successfully parsed data. For example,       when accessing a property that\'s supposed to be required, but the API unexpectedly omitted it from the       response.\n\n- [`StiggException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggException.kt): Base class for all exceptions. Most errors will result in one of the       previously mentioned ones, but completely generic errors may be thrown using the base class.\n\n## Pagination\n\nThe SDK defines methods that return a paginated lists of results. It provides convenient ways to access     the results either one page at a time or item-by-item across all pages.\n\n### Auto-pagination\n\nTo iterate through all results across all pages, use the `autoPager()` method, which automatically     fetches more pages as needed.\n\nWhen using the synchronous client, the method returns an [`Iterable`](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\n\n// Process as an Iterable\nfor (CustomerListResponse customer : page.autoPager()) {\n    System.out.println(customer);\n}\n\n// Process as a Stream\npage.autoPager()\n    .stream()\n    .limit(50)\n    .forEach(customer -> System.out.println(customer));\n```\n\nWhen using the asynchronous client, the method returns an [`AsyncStreamResponse`](stigg-java-core/src/main/kotlin/io/stigg/core/http/AsyncStreamResponse.kt):\n\n```java\nimport io.stigg.core.http.AsyncStreamResponse;\nimport io.stigg.models.v1.customers.CustomerListPageAsync;\nimport io.stigg.models.v1.customers.CustomerListResponse;\nimport java.util.Optional;\nimport java.util.concurrent.CompletableFuture;\n\nCompletableFuture<CustomerListPageAsync> pageFuture = client.async().v1().customers().list();\n\npageFuture.thenRun(page -> page.autoPager().subscribe(customer -> {\n    System.out.println(customer);\n}));\n\n// If you need to handle errors or completion of the stream\npageFuture.thenRun(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {\n    @Override\n    public void onNext(CustomerListResponse customer) {\n        System.out.println(customer);\n    }\n\n    @Override\n    public void onComplete(Optional<Throwable> error) {\n        if (error.isPresent()) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error.get());\n        } else {\n            System.out.println("No more!");\n        }\n    }\n}));\n\n// Or use futures\npageFuture.thenRun(page -> page.autoPager()\n    .subscribe(customer -> {\n        System.out.println(customer);\n    })\n    .onCompleteFuture()\n    .whenComplete((unused, error) -> {\n        if (error != null) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error);\n        } else {\n            System.out.println("No more!");\n        }\n    }));\n```\n\n### Manual pagination\n\nTo access individual page items and manually request the next page, use the `items()`,\n`hasNextPage()`, and `nextPage()` methods:\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\nwhile (true) {\n    for (CustomerListResponse customer : page.items()) {\n        System.out.println(customer);\n    }\n\n    if (!page.hasNextPage()) {\n        break;\n    }\n\n    page = page.nextPage();\n}\n```\n\n## Logging\n\nEnable logging by setting the `STIGG_LOG` environment variable to   `info`:\n\n```sh\nexport STIGG_LOG=info\n```\n\nOr to `debug` for more verbose logging:\n\n```sh\nexport STIGG_LOG=debug\n```\n\nOr configure the client manually using the `logLevel` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.LogLevel;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .logLevel(LogLevel.INFO)\n    .build();\n```\n\n## ProGuard and R8\n\nAlthough the SDK uses reflection, it is still usable with     [ProGuard](https://github.com/Guardsquare/proguard) and     [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because     `stigg-java-core` is published with a     [configuration file](stigg-java-core/src/main/resources/META-INF/proguard/stigg-java-core.pro) containing     [keep rules](https://www.guardsquare.com/manual/configuration/usage).\n\nProGuard and R8 should automatically detect and use the published rules, but you can also manually copy     the keep rules if necessary.\n\n\n\n\n\n## Jackson\n\nThe SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON     serialization/deserialization. It is compatible with version 2.13.4 or higher,     but depends on version 2.18.2 by default.\n\nThe SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the     default version was overridden in your Maven or Gradle config).\n\nIf the SDK threw an exception, but you\'re _certain_ the version is compatible, then disable the version     check using the `checkJacksonVersionCompatibility` on [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or     [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt).\n\n> [!CAUTION]\n> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.\n\nAlso note that there are bugs in older Jackson versions that can affect the SDK. We don\'t work around all     Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to     upgrade Jackson for those instead.\n\n## Network options\n\n### Retries\n\nThe SDK automatically retries 2 times by default, with a short exponential backoff between requests.\n\nOnly the following error types are retried:\n- Connection errors (for example, due to a network connectivity problem)\n- 408 Request Timeout\n- 409 Conflict\n- 429 Rate Limit\n- 5xx Internal\n\nThe API may also explicitly instruct the SDK to retry or not retry a request.\n\nTo set a custom number of retries, configure the client using the `maxRetries` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .maxRetries(4)\n    .build();\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default.\n\nTo set a custom timeout, configure the method call using the `timeout` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .timeout(Duration.ofSeconds(30))\n    .build();\n```\n\n### Proxies\n\nTo route requests through a proxy, configure the client using the `proxy` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.net.InetSocketAddress;\nimport java.net.Proxy;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(new Proxy(\n      Proxy.Type.HTTP, new InetSocketAddress(\n        "https://example.com", 8080\n      )\n    ))\n    .build();\n```\n\nIf the proxy responds with `407 Proxy Authentication Required`, supply credentials by also   configuring `proxyAuthenticator`:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.http.ProxyAuthenticator;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(...)\n    // Or a custom implementation of `ProxyAuthenticator`.\n    .proxyAuthenticator(ProxyAuthenticator.basic("username", "password"))\n    .build();\n```\n\n### Connection pooling\n\nTo customize the underlying OkHttp connection pool, configure the client using the   `maxIdleConnections` and `keepAliveDuration` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.\n    .maxIdleConnections(10)\n    .keepAliveDuration(Duration.ofMinutes(2))\n    .build();\n```\n\nIf both options are unset, OkHttp\'s default connection pool settings are used.\n\n### HTTPS\n\n> [!NOTE]\n> Most applications should not call these methods, and instead use the system defaults. The defaults include\n> special optimizations that can be lost if the implementations are modified.\n\nTo configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`,   `trustManager`, and `hostnameVerifier` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.\n    .sslSocketFactory(yourSSLSocketFactory)\n    .trustManager(yourTrustManager)\n    .hostnameVerifier(yourHostnameVerifier)\n    .build();\n```\n\n\n\n### Custom HTTP client\n\nThe SDK consists of three artifacts:\n- `stigg-java-core`\n  - Contains core SDK logic\n  - Does not depend on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggClient`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClient.kt), [`StiggClientAsync`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsync.kt),             [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt), and [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), all of which can             work with any HTTP client\n- `stigg-java-client-okhttp`\n  - Depends on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) and [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), which             provide a way to construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) and             [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), respectively, using OkHttp\n- `stigg-java`\n  - Depends on and exposes the APIs of both `stigg-java-core` and `stigg-java-client-okhttp`\n  - Does not have its own logic\n\nThis structure allows replacing the SDK\'s default HTTP client without pulling in unnecessary dependencies.\n\n#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)\n\n> [!TIP]\n> Try the available [network options](#network-options) before replacing the default client.\n\nTo use a customized `OkHttpClient`:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Copy `stigg-java-client-okhttp`\'s [`OkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/OkHttpClient.kt) class into your code and        customize it\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your        customized client\n\n### Completely custom HTTP client\n\nTo use a completely custom HTTP client:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Write a class that implements the [`HttpClient`](stigg-java-core/src/main/kotlin/io/stigg/core/http/HttpClient.kt) interface\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your new        client class\n\n## Undocumented API functionality\n\nThe SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.\n\n### Parameters\n\nTo set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQueryParam`, or       `putAdditionalBodyProperty` methods on any `Params` class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .putAdditionalHeader("Secret-Header", "42")\n    .putAdditionalQueryParam("secret_query_param", "42")\n    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))\n    .build();\n```\n\nThese can be accessed on the built object later using the `_additionalHeaders()`,       `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.\n\nTo set undocumented parameters on _nested_ headers, query params, or body classes, call the         `putAdditionalProperty` method on the nested class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\nCustomerUpdateParams params = CustomerUpdateParams.builder()\n    .passthrough(CustomerUpdateParams.Passthrough.builder()\n        .putAdditionalProperty("secretProperty", JsonValue.from("42"))\n        .build())\n    .build();\n```\n\nThese properties can be accessed on the nested built object later using the         `_additionalProperties()` method.\n\nTo set a documented parameter or property to an undocumented or not yet supported _value_, pass a       [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) object to its setter:\n\n```java\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder().build();\n```\n\nThe most straightforward way to create a [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) is using its       `from(...)` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.List;\nimport java.util.Map;\n\n// Create primitive JSON values\nJsonValue nullValue = JsonValue.from(null);\nJsonValue booleanValue = JsonValue.from(true);\nJsonValue numberValue = JsonValue.from(42);\nJsonValue stringValue = JsonValue.from("Hello World!");\n\n// Create a JSON array value equivalent to `["Hello", "World"]`\nJsonValue arrayValue = JsonValue.from(List.of(\n  "Hello", "World"\n));\n\n// Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`\nJsonValue objectValue = JsonValue.from(Map.of(\n  "a", 1,\n  "b", 2\n));\n\n// Create an arbitrarily nested JSON equivalent to:\n// {\n//   "a": [1, 2],\n//   "b": [3, 4]\n// }\nJsonValue complexValue = JsonValue.from(Map.of(\n  "a", List.of(\n    1, 2\n  ),\n  "b", List.of(\n    3, 4\n  )\n));\n```\n\nNormally a `Builder` class\'s `build` method will throw         [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html)         if any required parameter or property is unset.\n\nTo forcibly omit a required parameter or property, pass [`JsonMissing`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt):\n\n```java\nimport io.stigg.core.JsonMissing;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .id(JsonMissing.of())\n    .build();\n```\n\n### Response properties\n\nTo access undocumented response properties, call the `_additionalProperties()` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.Map;\n\nMap<String, JsonValue> additionalProperties = client.v1().customers().retrieve(params)._additionalProperties();\nJsonValue secretPropertyValue = additionalProperties.get("secretProperty");\n\nString result = secretPropertyValue.accept(new JsonValue.Visitor<>() {\n    @Override\n    public String visitNull() {\n        return "It\'s null!";\n    }\n\n    @Override\n    public String visitBoolean(boolean value) {\n        return "It\'s a boolean!";\n    }\n\n    @Override\n    public String visitNumber(Number value) {\n        return "It\'s a number!";\n    }\n\n    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`\n    // The default implementation of each unimplemented method delegates to `visitDefault`, which throws by default, but can also be overridden\n});\n```\n\nTo access a property\'s raw JSON value, which may be undocumented, call its `_` prefixed method:\n\n```java\nimport io.stigg.core.JsonField;\nimport java.util.Optional;\n\nJsonField<Object> field = client.v1().customers().retrieve(params)._field();\n\nif (field.isMissing()) {\n  // The property is absent from the JSON response\n} else if (field.isNull()) {\n  // The property was set to literal null\n} else {\n  // Check if value was provided as a string\n  // Other methods include `asNumber()`, `asBoolean()`, etc.\n  Optional<String> jsonString = field.asString();\n\n  // Try to deserialize into a custom type\n  MyClass myObject = field.asUnknown().orElseThrow().convert(MyClass.class);\n}\n```\n\n### Response validation\n\nIn rare cases, the API may return a response that doesn\'t match the expected type. For example, the SDK     may expect a property to contain a `String`, but the API could return something else.\n\nBy default, the SDK will not throw an exception in this case. It will throw     [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt) only if you directly access the property.\n\nValidating the response is _not_ forwards compatible with new types from the API for existing fields.\n\nIf you would still prefer to check that the response is completely well-typed upfront, then either call     `validate()`:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(params).validate();\n```\n\nOr configure the method call to validate the response using the `responseValidation` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().responseValidation(true).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .responseValidation(true)\n    .build();\n```\n\n## FAQ\n\n### Why don\'t you use plain `enum` classes?\n\nJava `enum` classes are not trivially   [forwards compatible](https://www.stainless.com/blog/making-java-enums-forwards-compatible). Using them in   the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.\n\n### Why do you represent fields using `JsonField<T>` instead of just plain `T`?\n\nUsing `JsonField<T>` enables a few features:\n\n- Allowing usage of [undocumented API functionality](#undocumented-api-functionality)\n- Lazily [validating the API response against the expected shape](#response-validation)\n- Representing absent vs explicitly null values\n\n### Why don\'t you use [`data` classes](https://kotlinlang.org/docs/data-classes.html)?\n\nIt is not [backwards compatible to add new fields to a data class](https://kotlinlang.org/docs/api-guidelines-backward-compatibility.html#avoid-using-data-classes-in-your-api)   and we don\'t want to introduce a breaking change every time we add a field to a class.\n\n### Why don\'t you use checked exceptions?\n\nChecked exceptions are widely considered a mistake in the Java programming language. In fact, they were   omitted from Kotlin for this reason.\n\nChecked exceptions:\n\n- Are verbose to handle\n- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error\n- Are tedious to propagate due to the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function)\n- Don\'t play well with lambdas (also due to the function coloring problem)\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-java/issues) with questions, bugs, or suggestions.\n',
   },
   {
     language: 'python',

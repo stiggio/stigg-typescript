@@ -7,8 +7,8 @@ import {
   DestinationCreateResponse,
   DestinationDeleteParams,
   DestinationDeleteResponse,
-  DestinationUpdateParams,
-  DestinationUpdateResponse,
+  DestinationUpdateSelectionParams,
+  DestinationUpdateSelectionResponse,
   Destinations,
 } from './destinations';
 import { APIPromise } from '../../../../core/api-promise';
@@ -307,10 +307,10 @@ export declare namespace DataExport {
   export {
     Destinations as Destinations,
     type DestinationCreateResponse as DestinationCreateResponse,
-    type DestinationUpdateResponse as DestinationUpdateResponse,
     type DestinationDeleteResponse as DestinationDeleteResponse,
+    type DestinationUpdateSelectionResponse as DestinationUpdateSelectionResponse,
     type DestinationCreateParams as DestinationCreateParams,
-    type DestinationUpdateParams as DestinationUpdateParams,
     type DestinationDeleteParams as DestinationDeleteParams,
+    type DestinationUpdateSelectionParams as DestinationUpdateSelectionParams,
   };
 }

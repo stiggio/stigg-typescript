@@ -64,9 +64,9 @@ export {
 } from './customers/index';
 export {
   Events,
-  type EventEstimateCostResponse,
+  type EventEstimateResponse,
   type EventReportResponse,
-  type EventEstimateCostParams,
+  type EventEstimateParams,
   type EventReportParams,
 } from './events/index';
 export {
@@ -136,10 +136,10 @@ export {
 } from './subscriptions/index';
 export {
   Usage,
-  type UsageEstimateCostResponse,
+  type UsageEstimateResponse,
   type UsageHistoryResponse,
   type UsageReportResponse,
-  type UsageEstimateCostParams,
+  type UsageEstimateParams,
   type UsageHistoryParams,
   type UsageReportParams,
 } from './usage';
