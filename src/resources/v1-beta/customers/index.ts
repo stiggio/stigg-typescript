@@ -8,11 +8,7 @@ export {
   type AssignmentUpsertParams,
   type AssignmentListResponsesMyCursorIDPage,
 } from './assignments';
-export {
-  Customers,
-  type CustomerRetrieveGovernanceResponse,
-  type CustomerRetrieveGovernanceParams,
-} from './customers';
+export { Customers } from './customers';
 export {
   Entities,
   type EntityRetrieveResponse,

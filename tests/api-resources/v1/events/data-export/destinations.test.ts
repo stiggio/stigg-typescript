@@ -35,31 +35,6 @@ describe('resource destinations', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.v1.events.dataExport.destinations.update('x', {
-      enabledModels: ['x'],
-      integrationId: 'x',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.v1.events.dataExport.destinations.update('x', {
-      enabledModels: ['x'],
-      integrationId: 'x',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.v1.events.dataExport.destinations.delete('x');
     const rawResponse = await responsePromise.asResponse();
@@ -81,5 +56,30 @@ describe('resource destinations', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateSelection: only required params', async () => {
+    const responsePromise = client.v1.events.dataExport.destinations.updateSelection('x', {
+      enabledModels: ['x'],
+      integrationId: 'x',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateSelection: required and optional params', async () => {
+    const response = await client.v1.events.dataExport.destinations.updateSelection('x', {
+      enabledModels: ['x'],
+      integrationId: 'x',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 });
