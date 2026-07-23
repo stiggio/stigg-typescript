@@ -28,18 +28,17 @@ export class Destinations extends APIResource {
   }
 
   /**
-   * Update a destination's entity selection. Pushes the new enabled_models to the
-   * provider first, then persists the selection. Applies on the next scheduled
-   * transfer.
+   * Disconnect a destination: stops the provider sync (deletes the provider
+   * destination) and removes it from the DATA_EXPORT integration. Non-destructive —
+   * the warehouse table is left intact. Idempotent.
    */
-  update(
+  delete(
     destinationID: string,
-    params: DestinationUpdateParams,
+    params: DestinationDeleteParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<DestinationUpdateResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.patch(path`/api/v1/data-export/destinations/${destinationID}`, {
-      body,
+  ): APIPromise<DestinationDeleteResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.delete(path`/api/v1/data-export/destinations/${destinationID}`, {
       ...options,
       headers: buildHeaders([
         {
@@ -52,17 +51,18 @@ export class Destinations extends APIResource {
   }
 
   /**
-   * Disconnect a destination: stops the provider sync (deletes the provider
-   * destination) and removes it from the DATA_EXPORT integration. Non-destructive —
-   * the warehouse table is left intact. Idempotent.
+   * Update a destination's entity selection. Pushes the new enabled_models to the
+   * provider first, then persists the selection. Applies on the next scheduled
+   * transfer.
    */
-  delete(
+  updateSelection(
     destinationID: string,
-    params: DestinationDeleteParams | null | undefined = {},
+    params: DestinationUpdateSelectionParams,
     options?: RequestOptions,
-  ): APIPromise<DestinationDeleteResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.delete(path`/api/v1/data-export/destinations/${destinationID}`, {
+  ): APIPromise<DestinationUpdateSelectionResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/data-export/destinations/${destinationID}`, {
+      body,
       ...options,
       headers: buildHeaders([
         {
@@ -86,99 +86,6 @@ export interface DestinationCreateResponse {
 }
 
 export namespace DestinationCreateResponse {
-  /**
-   * Current destinations under the DATA_EXPORT integration.
-   */
-  export interface Data {
-    /**
-     * Current destinations under the DATA_EXPORT integration
-     */
-    destinations: Array<Data.Destination>;
-  }
-
-  export namespace Data {
-    /**
-     * A single destination entry under the DATA_EXPORT integration.
-     */
-    export interface Destination {
-      /**
-       * ISO8601 timestamp of when the destination was connected
-       */
-      connectedAt: string;
-
-      /**
-       * Provider destination ID
-       */
-      destinationId: string;
-
-      /**
-       * Destination type (snowflake, bigquery, ...)
-       */
-      type: string;
-
-      /**
-       * Connection status of the destination (connected, failed)
-       */
-      connectionStatus?: string;
-
-      enabledModels?: Array<string>;
-
-      /**
-       * Latest sync snapshot for the destination, refreshed by the provider webhook
-       */
-      lastSyncStatus?: Destination.LastSyncStatus;
-    }
-
-    export namespace Destination {
-      /**
-       * Latest sync snapshot for the destination, refreshed by the provider webhook
-       */
-      export interface LastSyncStatus {
-        /**
-         * ISO8601 timestamp of when the latest sync finished
-         */
-        finishedAt: string;
-
-        /**
-         * Sync status (PENDING, RUNNING, INCOMPLETE, FAILED, SUCCEEDED, CANCELLED)
-         */
-        status: string;
-
-        /**
-         * Provider transfer ID of the latest sync
-         */
-        transferId: string;
-
-        /**
-         * Party responsible for a failed sync, as reported by the data-export provider
-         */
-        blamedParty?: string;
-
-        /**
-         * Customer-friendly failure message, when the latest sync failed
-         */
-        failureMessage?: string;
-
-        /**
-         * Number of rows transferred in the latest sync
-         */
-        rowsTransferred?: number;
-      }
-    }
-  }
-}
-
-/**
- * Response object
- */
-export interface DestinationUpdateResponse {
-  /**
-   * Current destinations under the DATA_EXPORT integration.
-   */
-  data: DestinationUpdateResponse.Data;
-}
-
-export namespace DestinationUpdateResponse {
   /**
    * Current destinations under the DATA_EXPORT integration.
    */
@@ -354,6 +261,99 @@ export namespace DestinationDeleteResponse {
   }
 }
 
+/**
+ * Response object
+ */
+export interface DestinationUpdateSelectionResponse {
+  /**
+   * Current destinations under the DATA_EXPORT integration.
+   */
+  data: DestinationUpdateSelectionResponse.Data;
+}
+
+export namespace DestinationUpdateSelectionResponse {
+  /**
+   * Current destinations under the DATA_EXPORT integration.
+   */
+  export interface Data {
+    /**
+     * Current destinations under the DATA_EXPORT integration
+     */
+    destinations: Array<Data.Destination>;
+  }
+
+  export namespace Data {
+    /**
+     * A single destination entry under the DATA_EXPORT integration.
+     */
+    export interface Destination {
+      /**
+       * ISO8601 timestamp of when the destination was connected
+       */
+      connectedAt: string;
+
+      /**
+       * Provider destination ID
+       */
+      destinationId: string;
+
+      /**
+       * Destination type (snowflake, bigquery, ...)
+       */
+      type: string;
+
+      /**
+       * Connection status of the destination (connected, failed)
+       */
+      connectionStatus?: string;
+
+      enabledModels?: Array<string>;
+
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      lastSyncStatus?: Destination.LastSyncStatus;
+    }
+
+    export namespace Destination {
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      export interface LastSyncStatus {
+        /**
+         * ISO8601 timestamp of when the latest sync finished
+         */
+        finishedAt: string;
+
+        /**
+         * Sync status (PENDING, RUNNING, INCOMPLETE, FAILED, SUCCEEDED, CANCELLED)
+         */
+        status: string;
+
+        /**
+         * Provider transfer ID of the latest sync
+         */
+        transferId: string;
+
+        /**
+         * Party responsible for a failed sync, as reported by the data-export provider
+         */
+        blamedParty?: string;
+
+        /**
+         * Customer-friendly failure message, when the latest sync failed
+         */
+        failureMessage?: string;
+
+        /**
+         * Number of rows transferred in the latest sync
+         */
+        rowsTransferred?: number;
+      }
+    }
+  }
+}
+
 export interface DestinationCreateParams {
   /**
    * Body param: The provider destination ID returned by the embedded SDK on connect
@@ -384,7 +384,22 @@ export interface DestinationCreateParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface DestinationUpdateParams {
+export interface DestinationDeleteParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface DestinationUpdateSelectionParams {
   /**
    * Body param
    */
@@ -409,28 +424,13 @@ export interface DestinationUpdateParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface DestinationDeleteParams {
-  /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export declare namespace Destinations {
   export {
     type DestinationCreateResponse as DestinationCreateResponse,
-    type DestinationUpdateResponse as DestinationUpdateResponse,
     type DestinationDeleteResponse as DestinationDeleteResponse,
+    type DestinationUpdateSelectionResponse as DestinationUpdateSelectionResponse,
     type DestinationCreateParams as DestinationCreateParams,
-    type DestinationUpdateParams as DestinationUpdateParams,
     type DestinationDeleteParams as DestinationDeleteParams,
+    type DestinationUpdateSelectionParams as DestinationUpdateSelectionParams,
   };
 }

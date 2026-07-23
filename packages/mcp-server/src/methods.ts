@@ -251,8 +251,8 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/coupons/{id}',
   },
   {
-    clientCallName: 'client.v1.events.estimateCost',
-    fullyQualifiedName: 'v1.events.estimateCost',
+    clientCallName: 'client.v1.events.estimate',
+    fullyQualifiedName: 'v1.events.estimate',
     httpMethod: 'post',
     httpPath: '/api/v1/events/estimate',
   },
@@ -287,16 +287,22 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/data-export/destinations',
   },
   {
-    clientCallName: 'client.v1.events.dataExport.destinations.update',
-    fullyQualifiedName: 'v1.events.dataExport.destinations.update',
-    httpMethod: 'patch',
-    httpPath: '/api/v1/data-export/destinations/{destinationId}',
-  },
-  {
     clientCallName: 'client.v1.events.dataExport.destinations.delete',
     fullyQualifiedName: 'v1.events.dataExport.destinations.delete',
     httpMethod: 'delete',
     httpPath: '/api/v1/data-export/destinations/{destinationId}',
+  },
+  {
+    clientCallName: 'client.v1.events.dataExport.destinations.updateSelection',
+    fullyQualifiedName: 'v1.events.dataExport.destinations.updateSelection',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/data-export/destinations/{destinationId}',
+  },
+  {
+    clientCallName: 'client.v1.events.beta.customers.retrieveGovernance',
+    fullyQualifiedName: 'v1.events.beta.customers.retrieveGovernance',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/governance',
   },
   {
     clientCallName: 'client.v1.credits.getAutoRecharge',
@@ -581,8 +587,8 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/plans/{planId}/entitlements/{id}',
   },
   {
-    clientCallName: 'client.v1.usage.estimateCost',
-    fullyQualifiedName: 'v1.usage.estimateCost',
+    clientCallName: 'client.v1.usage.estimate',
+    fullyQualifiedName: 'v1.usage.estimate',
     httpMethod: 'post',
     httpPath: '/api/v1/usage/estimate',
   },
@@ -633,12 +639,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.products.updateProduct',
     httpMethod: 'patch',
     httpPath: '/api/v1/products/{id}',
-  },
-  {
-    clientCallName: 'client.v1Beta.customers.retrieveGovernance',
-    fullyQualifiedName: 'v1Beta.customers.retrieveGovernance',
-    httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/governance',
   },
   {
     clientCallName: 'client.v1Beta.customers.entitlements.check',
