@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.47 (2026-07-23)
+
+Full Changelog: [v0.1.0-beta.46...v0.1.0-beta.47](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.46...v0.1.0-beta.47)
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([0e0483e](https://github.com/stiggio/stigg-typescript/commit/0e0483e34f3b69c0ccd85aa0a4cf2fa1e52a9bbd))
+
 ## 0.1.0-beta.46 (2026-07-21)
 
 Full Changelog: [v0.1.0-beta.45...v0.1.0-beta.46](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.45...v0.1.0-beta.46)
