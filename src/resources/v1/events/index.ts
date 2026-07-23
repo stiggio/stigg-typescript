@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Beta } from './beta/index';
 export {
   DataExport,
   type DataExportListModelsResponse,
@@ -11,8 +12,8 @@ export {
 } from './data-export/index';
 export {
   Events,
-  type EventEstimateCostResponse,
+  type EventEstimateResponse,
   type EventReportResponse,
-  type EventEstimateCostParams,
+  type EventEstimateParams,
   type EventReportParams,
 } from './events';

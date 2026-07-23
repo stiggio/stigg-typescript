@@ -1333,6 +1333,11 @@ export namespace AddonUpdateParams {
       billingCadence?: 'RECURRING' | 'ONE_OFF';
 
       /**
+       * The refId of the custom currency this credit overage applies to
+       */
+      currencyId?: string;
+
+      /**
        * Entitlement configuration for the overage feature
        */
       entitlement?: OveragePricingModel.Entitlement;
@@ -1341,11 +1346,6 @@ export namespace AddonUpdateParams {
        * The feature ID for overage pricing
        */
       featureId?: string;
-
-      /**
-       * Custom currency ID for overage top-up
-       */
-      topUpCustomCurrencyId?: string;
     }
 
     export namespace OveragePricingModel {
