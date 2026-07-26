@@ -1333,6 +1333,12 @@ export namespace AddonUpdateParams {
       billingCadence?: 'RECURRING' | 'ONE_OFF';
 
       /**
+       * Credit entitlement to grant when a credit overage targets a currency not yet
+       * granted on the plan
+       */
+      creditEntitlement?: OveragePricingModel.CreditEntitlement;
+
+      /**
        * The refId of the custom currency this credit overage applies to
        */
       currencyId?: string;
@@ -1824,6 +1830,27 @@ export namespace AddonUpdateParams {
               | 'xpf';
           }
         }
+      }
+
+      /**
+       * Credit entitlement to grant when a credit overage targets a currency not yet
+       * granted on the plan
+       */
+      export interface CreditEntitlement {
+        /**
+         * The base credit balance granted per cadence
+         */
+        amount: number;
+
+        /**
+         * The credit grant cadence (MONTH or YEAR)
+         */
+        cadence: 'MONTH' | 'YEAR';
+
+        /**
+         * The refId of the custom currency to grant
+         */
+        customCurrencyId: string;
       }
 
       /**
