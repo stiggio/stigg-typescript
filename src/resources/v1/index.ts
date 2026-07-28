@@ -20,6 +20,20 @@ export {
   type AddonListChargesResponsesMyCursorIDPage,
 } from './addons/index';
 export {
+  Contracts,
+  type ContractCreateResponse,
+  type ContractRetrieveResponse,
+  type ContractUpdateResponse,
+  type ContractListResponse,
+  type ContractDeleteResponse,
+  type ContractCreateParams,
+  type ContractRetrieveParams,
+  type ContractUpdateParams,
+  type ContractListParams,
+  type ContractDeleteParams,
+  type ContractListResponsesMyCursorIDPage,
+} from './contracts';
+export {
   Coupons,
   type Coupon,
   type CouponListResponse,
@@ -47,6 +61,8 @@ export {
   type CustomerListResponse,
   type CustomerCheckEntitlementResponse,
   type CustomerImportResponse,
+  type CustomerListContractsResponse,
+  type CustomerListInvoicesResponse,
   type CustomerListResourcesResponse,
   type CustomerRetrieveEntitlementsResponse,
   type CustomerRetrieveParams,
@@ -55,11 +71,14 @@ export {
   type CustomerArchiveParams,
   type CustomerCheckEntitlementParams,
   type CustomerImportParams,
+  type CustomerListContractsParams,
+  type CustomerListInvoicesParams,
   type CustomerListResourcesParams,
   type CustomerProvisionParams,
   type CustomerRetrieveEntitlementsParams,
   type CustomerUnarchiveParams,
   type CustomerListResponsesMyCursorIDPage,
+  type CustomerListInvoicesResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
 export {

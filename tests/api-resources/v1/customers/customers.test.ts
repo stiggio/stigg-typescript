@@ -179,6 +179,66 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('listContracts', async () => {
+    const responsePromise = client.v1.customers.listContracts('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listContracts: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.listContracts(
+        'id',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listInvoices', async () => {
+    const responsePromise = client.v1.customers.listInvoices('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listInvoices: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.listInvoices(
+        'id',
+        {
+          after: 'after',
+          before: 'before',
+          contractExternalId: 'contractExternalId',
+          issuedAfter: '2019-12-27T18:11:19.117Z',
+          issuedBefore: '2019-12-27T18:11:19.117Z',
+          limit: 1,
+          orderBy: 'issueDate',
+          orderDir: 'ASC',
+          stateIn: 'stateIn',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('listResources', async () => {
     const responsePromise = client.v1.customers.listResources('x');
     const rawResponse = await responsePromise.asResponse();

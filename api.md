@@ -9,6 +9,8 @@ Types:
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerCheckEntitlementResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerImportResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerListContractsResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerListInvoicesResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResourcesResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerRetrieveEntitlementsResponse</a></code>
 
@@ -20,6 +22,8 @@ Methods:
 - <code title="post /api/v1/customers/{id}/archive">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">archive</a>(id, { ...params }) -> CustomerResponse</code>
 - <code title="get /api/v1/customers/{id}/entitlements/check">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">checkEntitlement</a>(id, { ...params }) -> CustomerCheckEntitlementResponse</code>
 - <code title="post /api/v1/customers/import">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">import</a>({ ...params }) -> CustomerImportResponse</code>
+- <code title="get /api/v1/customers/{id}/contracts">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listContracts</a>(id, { ...params }) -> CustomerListContractsResponse</code>
+- <code title="get /api/v1/customers/{id}/invoices">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listInvoices</a>(id, { ...params }) -> CustomerListInvoicesResponsesMyCursorIDPage</code>
 - <code title="get /api/v1/customers/{id}/resources">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listResources</a>(id, { ...params }) -> CustomerListResourcesResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/customers">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">provision</a>({ ...params }) -> CustomerResponse</code>
 - <code title="get /api/v1/customers/{id}/entitlements">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieveEntitlements</a>(id, { ...params }) -> CustomerRetrieveEntitlementsResponse</code>
@@ -360,6 +364,24 @@ Methods:
 - <code title="get /api/v1/products">client.v1.products.<a href="./src/resources/v1/products.ts">listProducts</a>({ ...params }) -> ProductListProductsResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id, { ...params }) -> Product</code>
 - <code title="patch /api/v1/products/{id}">client.v1.products.<a href="./src/resources/v1/products.ts">updateProduct</a>(id, { ...params }) -> Product</code>
+
+## Contracts
+
+Types:
+
+- <code><a href="./src/resources/v1/contracts.ts">ContractCreateResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractUpdateResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractListResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/contracts">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">create</a>({ ...params }) -> ContractCreateResponse</code>
+- <code title="get /api/v1/contracts/{id}">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">retrieve</a>(id, { ...params }) -> ContractRetrieveResponse</code>
+- <code title="patch /api/v1/contracts/{id}">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">update</a>(id, { ...params }) -> ContractUpdateResponse</code>
+- <code title="get /api/v1/contracts">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">list</a>({ ...params }) -> ContractListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/contracts/{id}/archive">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">delete</a>(id, { ...params }) -> ContractDeleteResponse</code>
 
 # V1Beta
 

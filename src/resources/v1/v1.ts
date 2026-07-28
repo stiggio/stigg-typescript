@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as ContractsAPI from './contracts';
+import {
+  ContractCreateParams,
+  ContractCreateResponse,
+  ContractDeleteParams,
+  ContractDeleteResponse,
+  ContractListParams,
+  ContractListResponse,
+  ContractListResponsesMyCursorIDPage,
+  ContractRetrieveParams,
+  ContractRetrieveResponse,
+  ContractUpdateParams,
+  ContractUpdateResponse,
+  Contracts,
+} from './contracts';
 import * as CouponsAPI from './coupons';
 import {
   Coupon,
@@ -88,6 +103,11 @@ import {
   CustomerImportParams,
   CustomerImportResponse,
   CustomerIntegrationResponse,
+  CustomerListContractsParams,
+  CustomerListContractsResponse,
+  CustomerListInvoicesParams,
+  CustomerListInvoicesResponse,
+  CustomerListInvoicesResponsesMyCursorIDPage,
   CustomerListParams,
   CustomerListResourcesParams,
   CustomerListResourcesResponse,
@@ -166,6 +186,7 @@ export class V1 extends APIResource {
   plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
+  contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
 }
 
 V1.Customers = Customers;
@@ -178,6 +199,7 @@ V1.Addons = Addons;
 V1.Plans = Plans;
 V1.Usage = Usage;
 V1.Products = Products;
+V1.Contracts = Contracts;
 
 export declare namespace V1 {
   export {
@@ -187,9 +209,12 @@ export declare namespace V1 {
     type CustomerListResponse as CustomerListResponse,
     type CustomerCheckEntitlementResponse as CustomerCheckEntitlementResponse,
     type CustomerImportResponse as CustomerImportResponse,
+    type CustomerListContractsResponse as CustomerListContractsResponse,
+    type CustomerListInvoicesResponse as CustomerListInvoicesResponse,
     type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
+    type CustomerListInvoicesResponsesMyCursorIDPage as CustomerListInvoicesResponsesMyCursorIDPage,
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerRetrieveParams as CustomerRetrieveParams,
     type CustomerUpdateParams as CustomerUpdateParams,
@@ -197,6 +222,8 @@ export declare namespace V1 {
     type CustomerArchiveParams as CustomerArchiveParams,
     type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
     type CustomerImportParams as CustomerImportParams,
+    type CustomerListContractsParams as CustomerListContractsParams,
+    type CustomerListInvoicesParams as CustomerListInvoicesParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
     type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
@@ -331,5 +358,20 @@ export declare namespace V1 {
     type ProductListProductsParams as ProductListProductsParams,
     type ProductUnarchiveProductParams as ProductUnarchiveProductParams,
     type ProductUpdateProductParams as ProductUpdateProductParams,
+  };
+
+  export {
+    Contracts as Contracts,
+    type ContractCreateResponse as ContractCreateResponse,
+    type ContractRetrieveResponse as ContractRetrieveResponse,
+    type ContractUpdateResponse as ContractUpdateResponse,
+    type ContractListResponse as ContractListResponse,
+    type ContractDeleteResponse as ContractDeleteResponse,
+    type ContractListResponsesMyCursorIDPage as ContractListResponsesMyCursorIDPage,
+    type ContractCreateParams as ContractCreateParams,
+    type ContractRetrieveParams as ContractRetrieveParams,
+    type ContractUpdateParams as ContractUpdateParams,
+    type ContractListParams as ContractListParams,
+    type ContractDeleteParams as ContractDeleteParams,
   };
 }
