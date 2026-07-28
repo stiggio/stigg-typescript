@@ -170,6 +170,61 @@ export class Customers extends APIResource {
   }
 
   /**
+   * Retrieves a customer's contracts, fetched live from the connected billing
+   * provider, each enriched with a preview of its upcoming (next) invoice when
+   * available. Returns an empty list when no billing provider is connected or the
+   * customer is not synced.
+   */
+  listContracts(
+    id: string,
+    params: CustomerListContractsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomerListContractsResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
+    return this._client.get(path`/api/v1/customers/${id}/contracts`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Retrieves a cursor-paginated list of a customer's invoices, fetched live from
+   * the connected billing provider. Ordered by issue date ascending by default;
+   * override with orderBy (issueDate | dueDate | total) and orderDir (ASC | DESC).
+   * Optionally narrowed to one contract, an issue-date range, and/or a set of
+   * invoice states. Returns an empty list when no billing provider is connected or
+   * the customer is not synced.
+   */
+  listInvoices(
+    id: string,
+    params: CustomerListInvoicesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CustomerListInvoicesResponsesMyCursorIDPage, CustomerListInvoicesResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.getAPIList(
+      path`/api/v1/customers/${id}/invoices`,
+      MyCursorIDPage<CustomerListInvoicesResponse>,
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          {
+            ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+            ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+          },
+          options?.headers,
+        ]),
+      },
+    );
+  }
+
+  /**
    * Retrieves a paginated list of resources within the same customer.
    */
   listResources(
@@ -264,6 +319,8 @@ export class Customers extends APIResource {
 }
 
 export type CustomerListResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResponse>;
+
+export type CustomerListInvoicesResponsesMyCursorIDPage = MyCursorIDPage<CustomerListInvoicesResponse>;
 
 export type CustomerListResourcesResponsesMyCursorIDPage = MyCursorIDPage<CustomerListResourcesResponse>;
 
@@ -1759,6 +1816,453 @@ export namespace CustomerImportResponse {
 }
 
 /**
+ * A list of a customer's contracts
+ */
+export interface CustomerListContractsResponse {
+  data: Array<CustomerListContractsResponse.Data>;
+}
+
+export namespace CustomerListContractsResponse {
+  /**
+   * A billing contract as reported by the connected billing provider.
+   */
+  export interface Data {
+    /**
+     * The persisted Stigg contract id (matches a subscription’s contractId; present
+     * for Stigg-managed contracts)
+     */
+    id: string | null;
+
+    /**
+     * The date the contract activation ends
+     */
+    activationEndDate: string | null;
+
+    /**
+     * The date the contract becomes active
+     */
+    activationStartDate: string | null;
+
+    /**
+     * The billing provider (Received) contract ID; null until the contract has synced
+     * to the billing provider
+     */
+    billingId: string | null;
+
+    /**
+     * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
+     */
+    contractId: string;
+
+    /**
+     * The date the contract was created
+     */
+    createdAt: string | null;
+
+    /**
+     * The external identifier of the customer the contract belongs to
+     */
+    customerExternalId: string | null;
+
+    /**
+     * The external identifier of the contract
+     */
+    externalId: string;
+
+    /**
+     * The most recent non-draft invoice for this contract (open, paid, or canceled),
+     * or null when none exists
+     */
+    latestInvoice: Data.LatestInvoice | null;
+
+    /**
+     * The contract name (the purchase-order number when set, otherwise the
+     * contract/customer name)
+     */
+    name: string | null;
+
+    /**
+     * A preview of the contract's upcoming invoice, or null when none is available
+     */
+    nextInvoice: Data.NextInvoice | null;
+
+    /**
+     * Purchase-order number, when set on the contract
+     */
+    poNumber: string | null;
+
+    /**
+     * The Stigg contract ref ID (present for Stigg-managed contracts; the key used to
+     * update/delete)
+     */
+    refId: string | null;
+
+    /**
+     * The current state of the contract
+     */
+    state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING';
+
+    /**
+     * The custom subscriptions attached to this contract (empty when none)
+     */
+    subscriptions: Array<Data.Subscription>;
+  }
+
+  export namespace Data {
+    /**
+     * The most recent non-draft invoice for this contract (open, paid, or canceled),
+     * or null when none exists
+     */
+    export interface LatestInvoice {
+      /**
+       * Invoice billing ID
+       */
+      billingId: string;
+
+      /**
+       * Invoice creation date
+       */
+      createdAt: string;
+
+      /**
+       * Whether payment requires action
+       */
+      requiresAction: boolean;
+
+      /**
+       * Invoice status
+       */
+      status: 'OPEN' | 'CANCELED' | 'PAID';
+
+      /**
+       * Amount due
+       */
+      amountDue?: number | null;
+
+      /**
+       * Billing reason
+       */
+      billingReason?:
+        | 'BILLING_CYCLE'
+        | 'SUBSCRIPTION_CREATION'
+        | 'SUBSCRIPTION_UPDATE'
+        | 'MANUAL'
+        | 'MINIMUM_INVOICE_AMOUNT_EXCEEDED'
+        | 'OTHER'
+        | null;
+
+      /**
+       * Invoice currency
+       */
+      currency?: string | null;
+
+      /**
+       * Invoice PDF URL
+       */
+      pdfUrl?: string | null;
+
+      /**
+       * Total amount
+       */
+      total?: number | null;
+    }
+
+    /**
+     * A preview of the contract's upcoming invoice, or null when none is available
+     */
+    export interface NextInvoice {
+      /**
+       * The total amount of the upcoming invoice
+       */
+      amount: NextInvoice.Amount;
+
+      /**
+       * The date the upcoming invoice is due
+       */
+      dueDate: string | null;
+
+      /**
+       * The end of the billing period the upcoming invoice covers
+       */
+      periodEnd: string | null;
+
+      /**
+       * The start of the billing period the upcoming invoice covers
+       */
+      periodStart: string | null;
+    }
+
+    export namespace NextInvoice {
+      /**
+       * The total amount of the upcoming invoice
+       */
+      export interface Amount {
+        /**
+         * The price amount
+         */
+        amount: number;
+
+        /**
+         * ISO 4217 currency code
+         */
+        currency:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+    }
+
+    /**
+     * A custom subscription attached to a contract.
+     */
+    export interface Subscription {
+      /**
+       * Display name of the subscription plan
+       */
+      planDisplayName: string | null;
+
+      /**
+       * Display name of the product the subscription plan belongs to
+       */
+      productDisplayName: string | null;
+
+      /**
+       * The subscription ref ID (use it to deep-link to the subscription)
+       */
+      subscriptionId: string;
+    }
+  }
+}
+
+/**
+ * A customer invoice as reported by the connected billing provider.
+ */
+export interface CustomerListInvoicesResponse {
+  /**
+   * External ID of the contract the invoice belongs to: your contract ref when
+   * mapped, otherwise the Received contract ID
+   */
+  contractExternalId: string | null;
+
+  /**
+   * The ISO-4217 currency code of the invoice
+   */
+  currency: string | null;
+
+  /**
+   * External ID of the customer the invoice belongs to: your customer ref when
+   * mapped, otherwise the Received customer ID
+   */
+  customerExternalId: string | null;
+
+  /**
+   * The total discount amount
+   */
+  discount: number | null;
+
+  /**
+   * The date payment is due
+   */
+  dueDate: string | null;
+
+  /**
+   * External ID for the invoice: the mapped external ID when one exists, otherwise
+   * the invoice ID
+   */
+  invoiceExternalId: string | null;
+
+  /**
+   * The billing provider (Received) invoice ID
+   */
+  invoiceId: string;
+
+  /**
+   * The invoice document number (or draft number while the invoice is unissued)
+   */
+  invoiceNumber: string | null;
+
+  /**
+   * The date the invoice was issued
+   */
+  issueDate: string | null;
+
+  /**
+   * The invoice line items
+   */
+  lineItems: Array<CustomerListInvoicesResponse.LineItem>;
+
+  /**
+   * The date the invoice was reconciled as paid; present once reconciled
+   */
+  paidDate: string | null;
+
+  /**
+   * The invoice status (open, paid, or canceled)
+   */
+  state: 'OPEN' | 'CANCELED' | 'PAID';
+
+  /**
+   * The pre-tax subtotal
+   */
+  subtotal: number | null;
+
+  /**
+   * The total tax amount
+   */
+  tax: number | null;
+
+  /**
+   * The total amount due
+   */
+  total: number | null;
+}
+
+export namespace CustomerListInvoicesResponse {
+  /**
+   * A single line item on an invoice.
+   */
+  export interface LineItem {
+    /**
+     * Total amount for this line (unit price × quantity)
+     */
+    amount: number | null;
+
+    /**
+     * Human-readable description of the line item
+     */
+    description: string | null;
+
+    /**
+     * External ID of the product this line item relates to, when one is mapped
+     */
+    productExternalId: string | null;
+
+    /**
+     * Quantity billed on this line
+     */
+    quantity: number | null;
+
+    /**
+     * Price per unit for this line
+     */
+    unitPrice: number | null;
+  }
+}
+
+/**
  * Resource object that belongs to a customer
  */
 export interface CustomerListResourcesResponse {
@@ -2720,6 +3224,70 @@ export namespace CustomerImportParams {
   }
 }
 
+export interface CustomerListContractsParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface CustomerListInvoicesParams extends MyCursorIDPageParams {
+  /**
+   * Query param: Filter to invoices for this contract only (contract external ID or
+   * Received contract ID). Omit for all contracts.
+   */
+  contractExternalId?: string;
+
+  /**
+   * Query param: Filter to invoices issued on or after this date, inclusive
+   * (ISO 8601)
+   */
+  issuedAfter?: string;
+
+  /**
+   * Query param: Filter to invoices issued on or before this date, inclusive
+   * (ISO 8601)
+   */
+  issuedBefore?: string;
+
+  /**
+   * Query param: Field to sort by: issueDate (default), dueDate, or total
+   */
+  orderBy?: 'issueDate' | 'dueDate' | 'total';
+
+  /**
+   * Query param: Sort direction: ASC (default) or DESC
+   */
+  orderDir?: 'ASC' | 'DESC';
+
+  /**
+   * Query param: Filter by invoice state. Supports comma-separated values for
+   * multiple states
+   */
+  stateIn?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface CustomerListResourcesParams extends MyCursorIDPageParams {
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
@@ -3361,9 +3929,12 @@ export declare namespace Customers {
     type CustomerListResponse as CustomerListResponse,
     type CustomerCheckEntitlementResponse as CustomerCheckEntitlementResponse,
     type CustomerImportResponse as CustomerImportResponse,
+    type CustomerListContractsResponse as CustomerListContractsResponse,
+    type CustomerListInvoicesResponse as CustomerListInvoicesResponse,
     type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
+    type CustomerListInvoicesResponsesMyCursorIDPage as CustomerListInvoicesResponsesMyCursorIDPage,
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
     type CustomerRetrieveParams as CustomerRetrieveParams,
     type CustomerUpdateParams as CustomerUpdateParams,
@@ -3371,6 +3942,8 @@ export declare namespace Customers {
     type CustomerArchiveParams as CustomerArchiveParams,
     type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
     type CustomerImportParams as CustomerImportParams,
+    type CustomerListContractsParams as CustomerListContractsParams,
+    type CustomerListInvoicesParams as CustomerListInvoicesParams,
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerProvisionParams as CustomerProvisionParams,
     type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
