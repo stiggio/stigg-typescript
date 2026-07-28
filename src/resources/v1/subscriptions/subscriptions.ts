@@ -337,6 +337,11 @@ export namespace Subscription {
       | null;
 
     /**
+     * The Stigg contract this subscription is linked to, when any
+     */
+    contractId?: string | null;
+
+    /**
      * Coupons applied to the subscription
      */
     coupons?: Array<Data.Coupon>;
@@ -1391,6 +1396,11 @@ export interface SubscriptionListResponse {
     | 'CustomerArchived'
     | 'AutoCancellationRule'
     | null;
+
+  /**
+   * The Stigg contract this subscription is linked to, when any
+   */
+  contractId?: string | null;
 
   /**
    * Coupons applied to the subscription
@@ -3038,6 +3048,11 @@ export namespace SubscriptionProvisionResponse {
         | 'CustomerArchived'
         | 'AutoCancellationRule'
         | null;
+
+      /**
+       * The Stigg contract this subscription is linked to, when any
+       */
+      contractId?: string | null;
 
       /**
        * Coupons applied to the subscription

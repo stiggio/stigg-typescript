@@ -47,6 +47,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/import',
   },
   {
+    clientCallName: 'client.v1.customers.listContracts',
+    fullyQualifiedName: 'v1.customers.listContracts',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/contracts',
+  },
+  {
+    clientCallName: 'client.v1.customers.listInvoices',
+    fullyQualifiedName: 'v1.customers.listInvoices',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/invoices',
+  },
+  {
     clientCallName: 'client.v1.customers.listResources',
     fullyQualifiedName: 'v1.customers.listResources',
     httpMethod: 'get',
@@ -639,6 +651,36 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.products.updateProduct',
     httpMethod: 'patch',
     httpPath: '/api/v1/products/{id}',
+  },
+  {
+    clientCallName: 'client.v1.contracts.create',
+    fullyQualifiedName: 'v1.contracts.create',
+    httpMethod: 'post',
+    httpPath: '/api/v1/contracts',
+  },
+  {
+    clientCallName: 'client.v1.contracts.retrieve',
+    fullyQualifiedName: 'v1.contracts.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1/contracts/{id}',
+  },
+  {
+    clientCallName: 'client.v1.contracts.update',
+    fullyQualifiedName: 'v1.contracts.update',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/contracts/{id}',
+  },
+  {
+    clientCallName: 'client.v1.contracts.list',
+    fullyQualifiedName: 'v1.contracts.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/contracts',
+  },
+  {
+    clientCallName: 'client.v1.contracts.delete',
+    fullyQualifiedName: 'v1.contracts.delete',
+    httpMethod: 'post',
+    httpPath: '/api/v1/contracts/{id}/archive',
   },
   {
     clientCallName: 'client.v1Beta.customers.entitlements.check',
