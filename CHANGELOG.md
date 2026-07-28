@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.48 (2026-07-28)
+
+Full Changelog: [v0.1.0-beta.47...v0.1.0-beta.48](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.47...v0.1.0-beta.48)
+
+### Features
+
+* **api:** add contracts resource, retrieveContracts to customers, syncStates to grants ([2a432eb](https://github.com/stiggio/stigg-typescript/commit/2a432ebbb47105123de3136b370a0fa87789157f))
+
 ## 0.1.0-beta.47 (2026-07-26)
 
 Full Changelog: [v0.1.0-beta.46...v0.1.0-beta.47](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.46...v0.1.0-beta.47)
