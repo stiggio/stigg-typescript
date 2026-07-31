@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.49 (2026-07-31)
+
+Full Changelog: [v0.1.0-beta.48...v0.1.0-beta.49](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.48...v0.1.0-beta.49)
+
+### Bug Fixes
+
+* **stlc:** stop hand-edited CI workflows from blocking seals and builds ([9692ed6](https://github.com/stiggio/stigg-typescript/commit/9692ed6211ef42208c819b03e06b644c60beaab9))
+
 ## 0.1.0-beta.48 (2026-07-28)
 
 Full Changelog: [v0.1.0-beta.47...v0.1.0-beta.48](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.47...v0.1.0-beta.48)
