@@ -71,6 +71,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/entitlements/check',
   },
   {
+    clientCallName: 'client.v1.customers.listContracts',
+    fullyQualifiedName: 'v1.customers.listContracts',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/contracts',
+  },
+  {
+    clientCallName: 'client.v1.customers.listInvoices',
+    fullyQualifiedName: 'v1.customers.listInvoices',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/invoices',
+  },
+  {
     clientCallName: 'client.v1.customers.paymentMethod.attach',
     fullyQualifiedName: 'v1.customers.paymentMethod.attach',
     httpMethod: 'post',
@@ -257,8 +269,8 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/events',
   },
   {
-    clientCallName: 'client.v1.events.estimateCost',
-    fullyQualifiedName: 'v1.events.estimateCost',
+    clientCallName: 'client.v1.events.estimate',
+    fullyQualifiedName: 'v1.events.estimate',
     httpMethod: 'post',
     httpPath: '/api/v1/events/estimate',
   },
@@ -293,10 +305,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/data-export/destinations/{destinationId}',
   },
   {
-    clientCallName: 'client.v1.events.dataExport.destinations.update',
-    fullyQualifiedName: 'v1.events.dataExport.destinations.update',
+    clientCallName: 'client.v1.events.dataExport.destinations.updateSelection',
+    fullyQualifiedName: 'v1.events.dataExport.destinations.updateSelection',
     httpMethod: 'patch',
     httpPath: '/api/v1/data-export/destinations/{destinationId}',
+  },
+  {
+    clientCallName: 'client.v1.events.beta.customers.retrieveGovernance',
+    fullyQualifiedName: 'v1.events.beta.customers.retrieveGovernance',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/governance',
   },
   {
     clientCallName: 'client.v1.credits.getUsage',
@@ -593,8 +611,8 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/usage/{customerId}/history/{featureId}',
   },
   {
-    clientCallName: 'client.v1.usage.estimateCost',
-    fullyQualifiedName: 'v1.usage.estimateCost',
+    clientCallName: 'client.v1.usage.estimate',
+    fullyQualifiedName: 'v1.usage.estimate',
     httpMethod: 'post',
     httpPath: '/api/v1/usage/estimate',
   },
@@ -635,10 +653,34 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/products/{id}/duplicate',
   },
   {
-    clientCallName: 'client.v1Beta.customers.retrieveGovernance',
-    fullyQualifiedName: 'v1Beta.customers.retrieveGovernance',
+    clientCallName: 'client.v1.contracts.list',
+    fullyQualifiedName: 'v1.contracts.list',
     httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/governance',
+    httpPath: '/api/v1/contracts',
+  },
+  {
+    clientCallName: 'client.v1.contracts.create',
+    fullyQualifiedName: 'v1.contracts.create',
+    httpMethod: 'post',
+    httpPath: '/api/v1/contracts',
+  },
+  {
+    clientCallName: 'client.v1.contracts.retrieve',
+    fullyQualifiedName: 'v1.contracts.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1/contracts/{id}',
+  },
+  {
+    clientCallName: 'client.v1.contracts.update',
+    fullyQualifiedName: 'v1.contracts.update',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/contracts/{id}',
+  },
+  {
+    clientCallName: 'client.v1.contracts.delete',
+    fullyQualifiedName: 'v1.contracts.delete',
+    httpMethod: 'post',
+    httpPath: '/api/v1/contracts/{id}/archive',
   },
   {
     clientCallName: 'client.v1Beta.customers.entitlements.check',

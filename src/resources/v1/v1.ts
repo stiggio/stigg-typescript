@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as ContractsAPI from './contracts';
+import {
+  ContractCreateParams,
+  ContractCreateResponse,
+  ContractDeleteParams,
+  ContractDeleteResponse,
+  ContractListParams,
+  ContractListResponse,
+  ContractListResponsesMyCursorIDPage,
+  ContractRetrieveParams,
+  ContractRetrieveResponse,
+  ContractUpdateParams,
+  ContractUpdateResponse,
+  Contracts,
+} from './contracts';
 import * as CouponsAPI from './coupons';
 import {
   Coupon,
@@ -42,8 +57,8 @@ import {
 import * as UsageAPI from './usage';
 import {
   Usage,
-  UsageEstimateCostParams,
-  UsageEstimateCostResponse,
+  UsageEstimateParams,
+  UsageEstimateResponse,
   UsageHistoryParams,
   UsageHistoryResponse,
   UsageReportParams,
@@ -88,6 +103,11 @@ import {
   CustomerImportParams,
   CustomerImportResponse,
   CustomerIntegrationResponse,
+  CustomerListContractsParams,
+  CustomerListContractsResponse,
+  CustomerListInvoicesParams,
+  CustomerListInvoicesResponse,
+  CustomerListInvoicesResponsesMyCursorIDPage,
   CustomerListParams,
   CustomerListResourcesParams,
   CustomerListResourcesResponse,
@@ -105,8 +125,8 @@ import {
 } from './customers/customers';
 import * as EventsAPI from './events/events';
 import {
-  EventEstimateCostParams,
-  EventEstimateCostResponse,
+  EventEstimateParams,
+  EventEstimateResponse,
   EventReportParams,
   EventReportResponse,
   Events,
@@ -166,6 +186,7 @@ export class V1 extends APIResource {
   plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
+  contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
 }
 
 V1.Customers = Customers;
@@ -178,6 +199,7 @@ V1.Addons = Addons;
 V1.Plans = Plans;
 V1.Usage = Usage;
 V1.Products = Products;
+V1.Contracts = Contracts;
 
 export declare namespace V1 {
   export {
@@ -187,10 +209,13 @@ export declare namespace V1 {
     type CustomerListResponse as CustomerListResponse,
     type CustomerCheckEntitlementResponse as CustomerCheckEntitlementResponse,
     type CustomerImportResponse as CustomerImportResponse,
+    type CustomerListContractsResponse as CustomerListContractsResponse,
+    type CustomerListInvoicesResponse as CustomerListInvoicesResponse,
     type CustomerListResourcesResponse as CustomerListResourcesResponse,
     type CustomerRetrieveEntitlementsResponse as CustomerRetrieveEntitlementsResponse,
     type CustomerListResponsesMyCursorIDPage as CustomerListResponsesMyCursorIDPage,
     type CustomerListResourcesResponsesMyCursorIDPage as CustomerListResourcesResponsesMyCursorIDPage,
+    type CustomerListInvoicesResponsesMyCursorIDPage as CustomerListInvoicesResponsesMyCursorIDPage,
     type CustomerRetrieveParams as CustomerRetrieveParams,
     type CustomerUpdateParams as CustomerUpdateParams,
     type CustomerListParams as CustomerListParams,
@@ -201,6 +226,8 @@ export declare namespace V1 {
     type CustomerListResourcesParams as CustomerListResourcesParams,
     type CustomerRetrieveEntitlementsParams as CustomerRetrieveEntitlementsParams,
     type CustomerCheckEntitlementParams as CustomerCheckEntitlementParams,
+    type CustomerListContractsParams as CustomerListContractsParams,
+    type CustomerListInvoicesParams as CustomerListInvoicesParams,
   };
 
   export {
@@ -237,10 +264,10 @@ export declare namespace V1 {
 
   export {
     Events as Events,
-    type EventEstimateCostResponse as EventEstimateCostResponse,
+    type EventEstimateResponse as EventEstimateResponse,
     type EventReportResponse as EventReportResponse,
     type EventReportParams as EventReportParams,
-    type EventEstimateCostParams as EventEstimateCostParams,
+    type EventEstimateParams as EventEstimateParams,
   };
 
   export {
@@ -312,12 +339,12 @@ export declare namespace V1 {
 
   export {
     Usage as Usage,
-    type UsageEstimateCostResponse as UsageEstimateCostResponse,
+    type UsageEstimateResponse as UsageEstimateResponse,
     type UsageHistoryResponse as UsageHistoryResponse,
     type UsageReportResponse as UsageReportResponse,
     type UsageReportParams as UsageReportParams,
     type UsageHistoryParams as UsageHistoryParams,
-    type UsageEstimateCostParams as UsageEstimateCostParams,
+    type UsageEstimateParams as UsageEstimateParams,
   };
 
   export {
@@ -331,5 +358,20 @@ export declare namespace V1 {
     type ProductArchiveProductParams as ProductArchiveProductParams,
     type ProductUnarchiveProductParams as ProductUnarchiveProductParams,
     type ProductDuplicateProductParams as ProductDuplicateProductParams,
+  };
+
+  export {
+    Contracts as Contracts,
+    type ContractCreateResponse as ContractCreateResponse,
+    type ContractRetrieveResponse as ContractRetrieveResponse,
+    type ContractUpdateResponse as ContractUpdateResponse,
+    type ContractListResponse as ContractListResponse,
+    type ContractDeleteResponse as ContractDeleteResponse,
+    type ContractListResponsesMyCursorIDPage as ContractListResponsesMyCursorIDPage,
+    type ContractListParams as ContractListParams,
+    type ContractCreateParams as ContractCreateParams,
+    type ContractRetrieveParams as ContractRetrieveParams,
+    type ContractUpdateParams as ContractUpdateParams,
+    type ContractDeleteParams as ContractDeleteParams,
   };
 }

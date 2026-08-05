@@ -9,6 +9,8 @@ Types:
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerCheckEntitlementResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerImportResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerListContractsResponse</a></code>
+- <code><a href="./src/resources/v1/customers/customers.ts">CustomerListInvoicesResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerListResourcesResponse</a></code>
 - <code><a href="./src/resources/v1/customers/customers.ts">CustomerRetrieveEntitlementsResponse</a></code>
 
@@ -24,6 +26,8 @@ Methods:
 - <code title="get /api/v1/customers/{id}/resources">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listResources</a>(id, { ...params }) -> CustomerListResourcesResponsesMyCursorIDPage</code>
 - <code title="get /api/v1/customers/{id}/entitlements">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">retrieveEntitlements</a>(id, { ...params }) -> CustomerRetrieveEntitlementsResponse</code>
 - <code title="get /api/v1/customers/{id}/entitlements/check">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">checkEntitlement</a>(id, { ...params }) -> CustomerCheckEntitlementResponse</code>
+- <code title="get /api/v1/customers/{id}/contracts">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listContracts</a>(id, { ...params }) -> CustomerListContractsResponse</code>
+- <code title="get /api/v1/customers/{id}/invoices">client.v1.customers.<a href="./src/resources/v1/customers/customers.ts">listInvoices</a>(id, { ...params }) -> CustomerListInvoicesResponsesMyCursorIDPage</code>
 
 ### PaymentMethod
 
@@ -135,13 +139,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/events/events.ts">EventEstimateCostResponse</a></code>
+- <code><a href="./src/resources/v1/events/events.ts">EventEstimateResponse</a></code>
 - <code><a href="./src/resources/v1/events/events.ts">EventReportResponse</a></code>
 
 Methods:
 
 - <code title="post /api/v1/events">client.v1.events.<a href="./src/resources/v1/events/events.ts">report</a>({ ...params }) -> EventReportResponse</code>
-- <code title="post /api/v1/events/estimate">client.v1.events.<a href="./src/resources/v1/events/events.ts">estimateCost</a>({ ...params }) -> EventEstimateCostResponse</code>
+- <code title="post /api/v1/events/estimate">client.v1.events.<a href="./src/resources/v1/events/events.ts">estimate</a>({ ...params }) -> EventEstimateResponse</code>
 
 ### DataExport
 
@@ -162,14 +166,26 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationCreateResponse</a></code>
-- <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationUpdateResponse</a></code>
 - <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationDeleteResponse</a></code>
+- <code><a href="./src/resources/v1/events/data-export/destinations.ts">DestinationUpdateSelectionResponse</a></code>
 
 Methods:
 
 - <code title="post /api/v1/data-export/destinations">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
 - <code title="delete /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">delete</a>(destinationID, { ...params }) -> DestinationDeleteResponse</code>
-- <code title="patch /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">update</a>(destinationID, { ...params }) -> DestinationUpdateResponse</code>
+- <code title="patch /api/v1/data-export/destinations/{destinationId}">client.v1.events.dataExport.destinations.<a href="./src/resources/v1/events/data-export/destinations.ts">updateSelection</a>(destinationID, { ...params }) -> DestinationUpdateSelectionResponse</code>
+
+### Beta
+
+#### Customers
+
+Types:
+
+- <code><a href="./src/resources/v1/events/beta/customers.ts">CustomerRetrieveGovernanceResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/governance">client.v1.events.beta.customers.<a href="./src/resources/v1/events/beta/customers.ts">retrieveGovernance</a>(id, { ...params }) -> CustomerRetrieveGovernanceResponse</code>
 
 ## Credits
 
@@ -323,7 +339,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/usage.ts">UsageEstimateCostResponse</a></code>
+- <code><a href="./src/resources/v1/usage.ts">UsageEstimateResponse</a></code>
 - <code><a href="./src/resources/v1/usage.ts">UsageHistoryResponse</a></code>
 - <code><a href="./src/resources/v1/usage.ts">UsageReportResponse</a></code>
 
@@ -331,7 +347,7 @@ Methods:
 
 - <code title="post /api/v1/usage">client.v1.usage.<a href="./src/resources/v1/usage.ts">report</a>({ ...params }) -> UsageReportResponse</code>
 - <code title="get /api/v1/usage/{customerId}/history/{featureId}">client.v1.usage.<a href="./src/resources/v1/usage.ts">history</a>(featureID, { ...params }) -> UsageHistoryResponse</code>
-- <code title="post /api/v1/usage/estimate">client.v1.usage.<a href="./src/resources/v1/usage.ts">estimateCost</a>({ ...params }) -> UsageEstimateCostResponse</code>
+- <code title="post /api/v1/usage/estimate">client.v1.usage.<a href="./src/resources/v1/usage.ts">estimate</a>({ ...params }) -> UsageEstimateResponse</code>
 
 ## Products
 
@@ -349,17 +365,27 @@ Methods:
 - <code title="post /api/v1/products/{id}/unarchive">client.v1.products.<a href="./src/resources/v1/products.ts">unarchiveProduct</a>(id, { ...params }) -> Product</code>
 - <code title="post /api/v1/products/{id}/duplicate">client.v1.products.<a href="./src/resources/v1/products.ts">duplicateProduct</a>(id, { ...params }) -> Product</code>
 
-# V1Beta
-
-## Customers
+## Contracts
 
 Types:
 
-- <code><a href="./src/resources/v1-beta/customers/customers.ts">CustomerRetrieveGovernanceResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractCreateResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractUpdateResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractListResponse</a></code>
+- <code><a href="./src/resources/v1/contracts.ts">ContractDeleteResponse</a></code>
 
 Methods:
 
-- <code title="get /api/v1-beta/customers/{id}/governance">client.v1Beta.customers.<a href="./src/resources/v1-beta/customers/customers.ts">retrieveGovernance</a>(id, { ...params }) -> CustomerRetrieveGovernanceResponse</code>
+- <code title="get /api/v1/contracts">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">list</a>({ ...params }) -> ContractListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/contracts">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">create</a>({ ...params }) -> ContractCreateResponse</code>
+- <code title="get /api/v1/contracts/{id}">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">retrieve</a>(id, { ...params }) -> ContractRetrieveResponse</code>
+- <code title="patch /api/v1/contracts/{id}">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">update</a>(id, { ...params }) -> ContractUpdateResponse</code>
+- <code title="post /api/v1/contracts/{id}/archive">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">delete</a>(id, { ...params }) -> ContractDeleteResponse</code>
+
+# V1Beta
+
+## Customers
 
 ### Entitlements
 

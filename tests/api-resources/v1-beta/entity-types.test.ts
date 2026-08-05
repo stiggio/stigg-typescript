@@ -70,11 +70,13 @@ describe('resource entityTypes', () => {
           id: 'org',
           attributionKeys: ['organizationId'],
           displayName: 'Organization',
+          description: 'A customer organization — the top of the hierarchy, holding the account-wide budget.',
         },
         {
           id: 'team',
           attributionKeys: ['teamId'],
           displayName: 'Team',
+          description: 'description',
         },
       ],
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',

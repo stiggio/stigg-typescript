@@ -59,8 +59,8 @@ describe('resource destinations', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.v1.events.dataExport.destinations.update('x', {
+  test.skip('updateSelection: only required params', async () => {
+    const responsePromise = client.v1.events.dataExport.destinations.updateSelection('x', {
       enabledModels: ['x'],
       integrationId: 'x',
     });
@@ -74,8 +74,8 @@ describe('resource destinations', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.v1.events.dataExport.destinations.update('x', {
+  test.skip('updateSelection: required and optional params', async () => {
+    const response = await client.v1.events.dataExport.destinations.updateSelection('x', {
       enabledModels: ['x'],
       integrationId: 'x',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',

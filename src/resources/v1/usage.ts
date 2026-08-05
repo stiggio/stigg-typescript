@@ -56,10 +56,7 @@ export class Usage extends APIResource {
    * estimated cost per credit currency, the current balance, and the balance after
    * the estimated consumption.
    */
-  estimateCost(
-    params: UsageEstimateCostParams,
-    options?: RequestOptions,
-  ): APIPromise<UsageEstimateCostResponse> {
+  estimate(params: UsageEstimateParams, options?: RequestOptions): APIPromise<UsageEstimateResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.post('/api/v1/usage/estimate', {
       body,
@@ -78,14 +75,14 @@ export class Usage extends APIResource {
 /**
  * Response object
  */
-export interface UsageEstimateCostResponse {
+export interface UsageEstimateResponse {
   /**
    * Estimated credit cost, current balance and balance after
    */
-  data: UsageEstimateCostResponse.Data;
+  data: UsageEstimateResponse.Data;
 }
 
-export namespace UsageEstimateCostResponse {
+export namespace UsageEstimateResponse {
   /**
    * Estimated credit cost, current balance and balance after
    */
@@ -483,7 +480,7 @@ export interface UsageHistoryParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface UsageEstimateCostParams {
+export interface UsageEstimateParams {
   /**
    * Body param: Customer id
    */
@@ -530,11 +527,11 @@ export interface UsageEstimateCostParams {
 
 export declare namespace Usage {
   export {
-    type UsageEstimateCostResponse as UsageEstimateCostResponse,
+    type UsageEstimateResponse as UsageEstimateResponse,
     type UsageHistoryResponse as UsageHistoryResponse,
     type UsageReportResponse as UsageReportResponse,
     type UsageReportParams as UsageReportParams,
     type UsageHistoryParams as UsageHistoryParams,
-    type UsageEstimateCostParams as UsageEstimateCostParams,
+    type UsageEstimateParams as UsageEstimateParams,
   };
 }

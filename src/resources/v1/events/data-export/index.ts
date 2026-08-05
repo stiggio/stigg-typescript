@@ -12,9 +12,9 @@ export {
 export {
   Destinations,
   type DestinationCreateResponse,
-  type DestinationUpdateResponse,
   type DestinationDeleteResponse,
+  type DestinationUpdateSelectionResponse,
   type DestinationCreateParams,
   type DestinationDeleteParams,
-  type DestinationUpdateParams,
+  type DestinationUpdateSelectionParams,
 } from './destinations';

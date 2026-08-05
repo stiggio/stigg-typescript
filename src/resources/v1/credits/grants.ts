@@ -147,7 +147,7 @@ export namespace CreditGrantResponse {
     expireAt: string | null;
 
     /**
-     * The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+     * The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
      */
     grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT';
 
@@ -391,7 +391,7 @@ export interface GrantListResponse {
   expireAt: string | null;
 
   /**
-   * The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+   * The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
    */
   grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT';
 

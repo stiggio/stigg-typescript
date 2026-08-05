@@ -55,11 +55,11 @@ export class Destinations extends APIResource {
    * provider first, then persists the selection. Applies on the next scheduled
    * transfer.
    */
-  update(
+  updateSelection(
     destinationID: string,
-    params: DestinationUpdateParams,
+    params: DestinationUpdateSelectionParams,
     options?: RequestOptions,
-  ): APIPromise<DestinationUpdateResponse> {
+  ): APIPromise<DestinationUpdateSelectionResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.patch(path`/api/v1/data-export/destinations/${destinationID}`, {
       body,
@@ -86,99 +86,6 @@ export interface DestinationCreateResponse {
 }
 
 export namespace DestinationCreateResponse {
-  /**
-   * Current destinations under the DATA_EXPORT integration.
-   */
-  export interface Data {
-    /**
-     * Current destinations under the DATA_EXPORT integration
-     */
-    destinations: Array<Data.Destination>;
-  }
-
-  export namespace Data {
-    /**
-     * A single destination entry under the DATA_EXPORT integration.
-     */
-    export interface Destination {
-      /**
-       * ISO8601 timestamp of when the destination was connected
-       */
-      connectedAt: string;
-
-      /**
-       * Provider destination ID
-       */
-      destinationId: string;
-
-      /**
-       * Destination type (snowflake, bigquery, ...)
-       */
-      type: string;
-
-      /**
-       * Connection status of the destination (connected, failed)
-       */
-      connectionStatus?: string;
-
-      enabledModels?: Array<string>;
-
-      /**
-       * Latest sync snapshot for the destination, refreshed by the provider webhook
-       */
-      lastSyncStatus?: Destination.LastSyncStatus;
-    }
-
-    export namespace Destination {
-      /**
-       * Latest sync snapshot for the destination, refreshed by the provider webhook
-       */
-      export interface LastSyncStatus {
-        /**
-         * ISO8601 timestamp of when the latest sync finished
-         */
-        finishedAt: string;
-
-        /**
-         * Sync status (PENDING, RUNNING, INCOMPLETE, FAILED, SUCCEEDED, CANCELLED)
-         */
-        status: string;
-
-        /**
-         * Provider transfer ID of the latest sync
-         */
-        transferId: string;
-
-        /**
-         * Party responsible for a failed sync, as reported by the data-export provider
-         */
-        blamedParty?: string;
-
-        /**
-         * Customer-friendly failure message, when the latest sync failed
-         */
-        failureMessage?: string;
-
-        /**
-         * Number of rows transferred in the latest sync
-         */
-        rowsTransferred?: number;
-      }
-    }
-  }
-}
-
-/**
- * Response object
- */
-export interface DestinationUpdateResponse {
-  /**
-   * Current destinations under the DATA_EXPORT integration.
-   */
-  data: DestinationUpdateResponse.Data;
-}
-
-export namespace DestinationUpdateResponse {
   /**
    * Current destinations under the DATA_EXPORT integration.
    */
@@ -354,6 +261,99 @@ export namespace DestinationDeleteResponse {
   }
 }
 
+/**
+ * Response object
+ */
+export interface DestinationUpdateSelectionResponse {
+  /**
+   * Current destinations under the DATA_EXPORT integration.
+   */
+  data: DestinationUpdateSelectionResponse.Data;
+}
+
+export namespace DestinationUpdateSelectionResponse {
+  /**
+   * Current destinations under the DATA_EXPORT integration.
+   */
+  export interface Data {
+    /**
+     * Current destinations under the DATA_EXPORT integration
+     */
+    destinations: Array<Data.Destination>;
+  }
+
+  export namespace Data {
+    /**
+     * A single destination entry under the DATA_EXPORT integration.
+     */
+    export interface Destination {
+      /**
+       * ISO8601 timestamp of when the destination was connected
+       */
+      connectedAt: string;
+
+      /**
+       * Provider destination ID
+       */
+      destinationId: string;
+
+      /**
+       * Destination type (snowflake, bigquery, ...)
+       */
+      type: string;
+
+      /**
+       * Connection status of the destination (connected, failed)
+       */
+      connectionStatus?: string;
+
+      enabledModels?: Array<string>;
+
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      lastSyncStatus?: Destination.LastSyncStatus;
+    }
+
+    export namespace Destination {
+      /**
+       * Latest sync snapshot for the destination, refreshed by the provider webhook
+       */
+      export interface LastSyncStatus {
+        /**
+         * ISO8601 timestamp of when the latest sync finished
+         */
+        finishedAt: string;
+
+        /**
+         * Sync status (PENDING, RUNNING, INCOMPLETE, FAILED, SUCCEEDED, CANCELLED)
+         */
+        status: string;
+
+        /**
+         * Provider transfer ID of the latest sync
+         */
+        transferId: string;
+
+        /**
+         * Party responsible for a failed sync, as reported by the data-export provider
+         */
+        blamedParty?: string;
+
+        /**
+         * Customer-friendly failure message, when the latest sync failed
+         */
+        failureMessage?: string;
+
+        /**
+         * Number of rows transferred in the latest sync
+         */
+        rowsTransferred?: number;
+      }
+    }
+  }
+}
+
 export interface DestinationCreateParams {
   /**
    * Body param: The provider destination ID returned by the embedded SDK on connect
@@ -399,7 +399,7 @@ export interface DestinationDeleteParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface DestinationUpdateParams {
+export interface DestinationUpdateSelectionParams {
   /**
    * Body param
    */
@@ -427,10 +427,10 @@ export interface DestinationUpdateParams {
 export declare namespace Destinations {
   export {
     type DestinationCreateResponse as DestinationCreateResponse,
-    type DestinationUpdateResponse as DestinationUpdateResponse,
     type DestinationDeleteResponse as DestinationDeleteResponse,
+    type DestinationUpdateSelectionResponse as DestinationUpdateSelectionResponse,
     type DestinationCreateParams as DestinationCreateParams,
     type DestinationDeleteParams as DestinationDeleteParams,
-    type DestinationUpdateParams as DestinationUpdateParams,
+    type DestinationUpdateSelectionParams as DestinationUpdateSelectionParams,
   };
 }

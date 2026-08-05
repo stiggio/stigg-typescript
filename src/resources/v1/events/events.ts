@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as BetaAPI from './beta/beta';
+import { Beta } from './beta/beta';
 import * as DataExportAPI from './data-export/data-export';
 import {
   DataExport,
@@ -20,6 +22,7 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class Events extends APIResource {
   dataExport: DataExportAPI.DataExport = new DataExportAPI.DataExport(this._client);
+  beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
 
   /**
    * Reports raw usage events for event-based metering. Events are ingested
@@ -45,10 +48,7 @@ export class Events extends APIResource {
    * estimated cost per credit currency, the current balance, and the balance after
    * the estimated consumption.
    */
-  estimateCost(
-    params: EventEstimateCostParams,
-    options?: RequestOptions,
-  ): APIPromise<EventEstimateCostResponse> {
+  estimate(params: EventEstimateParams, options?: RequestOptions): APIPromise<EventEstimateResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.post('/api/v1/events/estimate', {
       body,
@@ -67,14 +67,14 @@ export class Events extends APIResource {
 /**
  * Response object
  */
-export interface EventEstimateCostResponse {
+export interface EventEstimateResponse {
   /**
    * Estimated credit cost, current balance and balance after
    */
-  data: EventEstimateCostResponse.Data;
+  data: EventEstimateResponse.Data;
 }
 
-export namespace EventEstimateCostResponse {
+export namespace EventEstimateResponse {
   /**
    * Estimated credit cost, current balance and balance after
    */
@@ -212,7 +212,7 @@ export namespace EventReportParams {
   }
 }
 
-export interface EventEstimateCostParams {
+export interface EventEstimateParams {
   /**
    * Body param: Customer id
    */
@@ -248,13 +248,14 @@ export interface EventEstimateCostParams {
 }
 
 Events.DataExport = DataExport;
+Events.Beta = Beta;
 
 export declare namespace Events {
   export {
-    type EventEstimateCostResponse as EventEstimateCostResponse,
+    type EventEstimateResponse as EventEstimateResponse,
     type EventReportResponse as EventReportResponse,
     type EventReportParams as EventReportParams,
-    type EventEstimateCostParams as EventEstimateCostParams,
+    type EventEstimateParams as EventEstimateParams,
   };
 
   export {
@@ -266,4 +267,6 @@ export declare namespace Events {
     type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportListModelsParams as DataExportListModelsParams,
   };
+
+  export { Beta as Beta };
 }

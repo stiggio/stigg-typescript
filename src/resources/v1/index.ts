@@ -20,6 +20,20 @@ export {
   type AddonListChargesResponsesMyCursorIDPage,
 } from './addons/index';
 export {
+  Contracts,
+  type ContractCreateResponse,
+  type ContractRetrieveResponse,
+  type ContractUpdateResponse,
+  type ContractListResponse,
+  type ContractDeleteResponse,
+  type ContractListParams,
+  type ContractCreateParams,
+  type ContractRetrieveParams,
+  type ContractUpdateParams,
+  type ContractDeleteParams,
+  type ContractListResponsesMyCursorIDPage,
+} from './contracts';
+export {
   Coupons,
   type Coupon,
   type CouponListResponse,
@@ -47,6 +61,8 @@ export {
   type CustomerListResponse,
   type CustomerCheckEntitlementResponse,
   type CustomerImportResponse,
+  type CustomerListContractsResponse,
+  type CustomerListInvoicesResponse,
   type CustomerListResourcesResponse,
   type CustomerRetrieveEntitlementsResponse,
   type CustomerRetrieveParams,
@@ -59,15 +75,18 @@ export {
   type CustomerListResourcesParams,
   type CustomerRetrieveEntitlementsParams,
   type CustomerCheckEntitlementParams,
+  type CustomerListContractsParams,
+  type CustomerListInvoicesParams,
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
+  type CustomerListInvoicesResponsesMyCursorIDPage,
 } from './customers/index';
 export {
   Events,
-  type EventEstimateCostResponse,
+  type EventEstimateResponse,
   type EventReportResponse,
   type EventReportParams,
-  type EventEstimateCostParams,
+  type EventEstimateParams,
 } from './events/index';
 export {
   Features,
@@ -136,11 +155,11 @@ export {
 } from './subscriptions/index';
 export {
   Usage,
-  type UsageEstimateCostResponse,
+  type UsageEstimateResponse,
   type UsageHistoryResponse,
   type UsageReportResponse,
   type UsageReportParams,
   type UsageHistoryParams,
-  type UsageEstimateCostParams,
+  type UsageEstimateParams,
 } from './usage';
 export { V1 } from './v1';

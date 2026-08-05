@@ -7,6 +7,8 @@ export {
   type CustomerListResponse,
   type CustomerCheckEntitlementResponse,
   type CustomerImportResponse,
+  type CustomerListContractsResponse,
+  type CustomerListInvoicesResponse,
   type CustomerListResourcesResponse,
   type CustomerRetrieveEntitlementsResponse,
   type CustomerRetrieveParams,
@@ -19,8 +21,11 @@ export {
   type CustomerListResourcesParams,
   type CustomerRetrieveEntitlementsParams,
   type CustomerCheckEntitlementParams,
+  type CustomerListContractsParams,
+  type CustomerListInvoicesParams,
   type CustomerListResponsesMyCursorIDPage,
   type CustomerListResourcesResponsesMyCursorIDPage,
+  type CustomerListInvoicesResponsesMyCursorIDPage,
 } from './customers';
 export {
   Integrations,
