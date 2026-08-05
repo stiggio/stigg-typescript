@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.51 (2026-08-05)
+
+Full Changelog: [v0.1.0-beta.50...v0.1.0-beta.51](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.50...v0.1.0-beta.51)
+
+### Features
+
+* **api:** add displayName to entities/governance, description to entity_types ([92015d9](https://github.com/stiggio/stigg-typescript/commit/92015d975b89ccf820fa2759f33e33000e896073))
+
 ## 0.1.0-beta.50 (2026-08-05)
 
 Full Changelog: [v0.1.0-beta.49...v0.1.0-beta.50](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.49...v0.1.0-beta.50)
