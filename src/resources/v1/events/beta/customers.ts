@@ -65,6 +65,12 @@ export namespace CustomerRetrieveGovernanceResponse {
     currentUsage: number | null;
 
     /**
+     * Human-readable name of the entity, or null when none is set (display the entity
+     * id instead).
+     */
+    displayName: string | null;
+
+    /**
      * External id of the entity at this node.
      */
     entityId: string;
@@ -75,8 +81,10 @@ export namespace CustomerRetrieveGovernanceResponse {
     entityTypeId: string;
 
     /**
-     * External id of the parent entity in the tree; `null` for a root. Use it to
-     * rebuild the tree.
+     * External id of the parent entity in the tree. `null` means the entity is either
+     * a root or not yet placed in the hierarchy — placement rides on an assignment, so
+     * an entity with no limits set has no parent yet. Both render at the top level;
+     * use it to rebuild the tree.
      */
     parentId: string | null;
 
@@ -92,14 +100,16 @@ export namespace CustomerRetrieveGovernanceResponse {
     usageLimit: number | null;
 
     /**
-     * Exclusive end of the cadence period — when usage resets; `null` once the period
-     * has rolled over.
+     * Exclusive end of the cadence period in progress now — when usage resets. `null`
+     * when the node has no usage configuration, or when a stored cadence cannot be
+     * parsed.
      */
     usagePeriodEnd: string | null;
 
     /**
-     * Start of the cadence period the usage snapshot belongs to; `null` once the
-     * period has rolled over.
+     * Start of the cadence period in progress now, derived from the cadence and the
+     * assignment anchor — it stays correct across a rollover. `null` when the node has
+     * no usage configuration, or when a stored cadence cannot be parsed.
      */
     usagePeriodStart: string | null;
 
@@ -143,8 +153,8 @@ export interface CustomerRetrieveGovernanceParams {
   currencyIds?: Array<string>;
 
   /**
-   * Query param: Case-insensitive substring match on the entity id (`%`/`_` matched
-   * literally).
+   * Query param: Case-insensitive substring match on the entity id or its display
+   * name (`%`/`_` matched literally).
    */
   entityIdSearch?: string;
 
