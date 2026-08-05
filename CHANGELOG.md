@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.50 (2026-08-05)
+
+Full Changelog: [v0.1.0-beta.49...v0.1.0-beta.50](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.49...v0.1.0-beta.50)
+
+### Features
+
+* **api:** add eventCount field to credits usage response ([307bb75](https://github.com/stiggio/stigg-typescript/commit/307bb7507b78bd66f368726a0252464f4dc0b131))
+
 ## 0.1.0-beta.49 (2026-07-31)
 
 Full Changelog: [v0.1.0-beta.48...v0.1.0-beta.49](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.48...v0.1.0-beta.49)
