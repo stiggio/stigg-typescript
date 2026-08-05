@@ -50,6 +50,8 @@ export class EntityTypes extends APIResource {
    *     {
    *       id: 'org',
    *       displayName: 'Organization',
+   *       description:
+   *         'A customer organization — the top of the hierarchy, holding the account-wide budget.',
    *       attributionKeys: ['organizationId'],
    *     },
    *     {
@@ -103,6 +105,12 @@ export interface EntityTypeListResponse {
   createdAt: string;
 
   /**
+   * What this entity type represents and what it is for governing, or null when none
+   * is set
+   */
+  description: string | null;
+
+  /**
    * The display name for the entity type
    */
   displayName: string;
@@ -143,6 +151,12 @@ export namespace EntityTypeUpsertResponse {
      * Timestamp of when the record was created
      */
     createdAt: string;
+
+    /**
+     * What this entity type represents and what it is for governing, or null when none
+     * is set
+     */
+    description: string | null;
 
     /**
      * The display name for the entity type
@@ -211,6 +225,12 @@ export namespace EntityTypeUpsertParams {
      * The display name for the entity type
      */
     displayName: string;
+
+    /**
+     * What this entity type represents and what it is for governing. Omit to preserve
+     * the stored value, or send an empty string or null to clear it.
+     */
+    description?: string | null;
   }
 }
 
