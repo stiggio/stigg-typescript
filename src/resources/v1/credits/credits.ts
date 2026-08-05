@@ -269,6 +269,13 @@ export namespace CreditGetUsageResponse {
      */
     export interface Series {
       /**
+       * Number of distinct usage events that consumed credits in this series. This count
+       * is not additive across series, because an event matched by several meters
+       * appears in more than one series.
+       */
+      eventCount: number;
+
+      /**
        * The feature ID; null when grouping by dimensions only
        */
       featureId: string | null;
@@ -299,6 +306,11 @@ export namespace CreditGetUsageResponse {
        * A single data point in the credit usage time series
        */
       export interface Point {
+        /**
+         * Number of distinct usage events that consumed credits in this time bucket
+         */
+        eventCount: number;
+
         /**
          * The timestamp of the data point
          */
