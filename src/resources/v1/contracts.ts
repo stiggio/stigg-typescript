@@ -165,6 +165,11 @@ export namespace ContractCreateResponse {
     billingId: string | null;
 
     /**
+     * The current state of the contract
+     */
+    billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING' | null;
+
+    /**
      * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
      */
     contractId: string;
@@ -498,6 +503,11 @@ export namespace ContractRetrieveResponse {
      * to the billing provider
      */
     billingId: string | null;
+
+    /**
+     * The current state of the contract
+     */
+    billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING' | null;
 
     /**
      * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
@@ -835,6 +845,11 @@ export namespace ContractUpdateResponse {
     billingId: string | null;
 
     /**
+     * The current state of the contract
+     */
+    billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING' | null;
+
+    /**
      * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
      */
     contractId: string;
@@ -1157,6 +1172,11 @@ export interface ContractListResponse {
    * to the billing provider
    */
   billingId: string | null;
+
+  /**
+   * The current state of the contract
+   */
+  billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING' | null;
 
   /**
    * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
@@ -1491,6 +1511,11 @@ export namespace ContractDeleteResponse {
      * to the billing provider
      */
     billingId: string | null;
+
+    /**
+     * The current state of the contract
+     */
+    billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING' | null;
 
     /**
      * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
