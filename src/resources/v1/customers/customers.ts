@@ -1850,6 +1850,11 @@ export namespace CustomerListContractsResponse {
     billingId: string | null;
 
     /**
+     * The current state of the contract
+     */
+    billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING' | null;
+
+    /**
      * The Stigg contract ref ID (the key used to fetch/update/delete this contract)
      */
     contractId: string;
