@@ -127,11 +127,13 @@ describe('resource entities', () => {
       entities: [
         {
           id: 'user-7f3a0c1d',
+          displayName: 'Jane Doe',
           entityTypeId: 'user',
           metadata: { email: 'jane@acme.com', role: 'admin' },
         },
         {
           id: 'user-c4d1b2e9',
+          displayName: 'John Roe',
           entityTypeId: 'user',
           metadata: { email: 'john@acme.com' },
         },

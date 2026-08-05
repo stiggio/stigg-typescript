@@ -144,11 +144,13 @@ export class Entities extends APIResource {
    *     entities: [
    *       {
    *         id: 'user-7f3a0c1d',
+   *         displayName: 'Jane Doe',
    *         entityTypeId: 'user',
    *         metadata: { email: 'jane@acme.com', role: 'admin' },
    *       },
    *       {
    *         id: 'user-c4d1b2e9',
+   *         displayName: 'John Roe',
    *         entityTypeId: 'user',
    *         metadata: { email: 'john@acme.com' },
    *       },
@@ -205,6 +207,12 @@ export namespace EntityRetrieveResponse {
     createdAt: string;
 
     /**
+     * Human-readable name for the entity, or null when none is set — in which case
+     * clients display the entity ID
+     */
+    displayName: string | null;
+
+    /**
      * The entity type identifier this entity instantiates
      */
     entityTypeId: string;
@@ -239,6 +247,12 @@ export interface EntityListResponse {
    * Timestamp of when the record was created
    */
   createdAt: string;
+
+  /**
+   * Human-readable name for the entity, or null when none is set — in which case
+   * clients display the entity ID
+   */
+  displayName: string | null;
 
   /**
    * The entity type identifier this entity instantiates
@@ -326,6 +340,12 @@ export namespace EntityUpsertResponse {
      * Timestamp of when the record was created
      */
     createdAt: string;
+
+    /**
+     * Human-readable name for the entity, or null when none is set — in which case
+     * clients display the entity ID
+     */
+    displayName: string | null;
 
     /**
      * The entity type identifier this entity instantiates
@@ -459,6 +479,12 @@ export namespace EntityUpsertParams {
      * The unique identifier for the entity
      */
     id: string;
+
+    /**
+     * Human-readable name for the entity. Omit to preserve the stored value, or send
+     * an empty string or null to clear it.
+     */
+    displayName?: string | null;
 
     /**
      * The entity type ID this entity instantiates. Required when creating a new
