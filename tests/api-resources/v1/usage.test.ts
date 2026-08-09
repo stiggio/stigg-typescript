@@ -9,15 +9,11 @@ const client = new Stigg({
 
 describe('resource usage', () => {
   // Mock server tests are disabled
-  test.skip('report: only required params', async () => {
-    const responsePromise = client.v1.usage.report({
-      usages: [
-        {
-          customerId: 'customerId',
-          featureId: 'featureId',
-          value: -9007199254740991,
-        },
-      ],
+  test.skip('estimate: only required params', async () => {
+    const responsePromise = client.v1.usage.estimate({
+      customerId: 'customerId',
+      featureId: 'featureId',
+      value: -9007199254740991,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,20 +25,14 @@ describe('resource usage', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('report: required and optional params', async () => {
-    const response = await client.v1.usage.report({
-      usages: [
-        {
-          customerId: 'customerId',
-          featureId: 'featureId',
-          value: -9007199254740991,
-          createdAt: '2019-12-27T18:11:19.117Z',
-          dimensions: { foo: 'string' },
-          idempotencyKey: 'x',
-          resourceId: 'resourceId',
-          updateBehavior: 'DELTA',
-        },
-      ],
+  test.skip('estimate: required and optional params', async () => {
+    const response = await client.v1.usage.estimate({
+      customerId: 'customerId',
+      featureId: 'featureId',
+      value: -9007199254740991,
+      dimensions: { foo: 'string' },
+      resourceId: 'resourceId',
+      updateBehavior: 'DELTA',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
@@ -77,11 +67,15 @@ describe('resource usage', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('estimate: only required params', async () => {
-    const responsePromise = client.v1.usage.estimate({
-      customerId: 'customerId',
-      featureId: 'featureId',
-      value: -9007199254740991,
+  test.skip('report: only required params', async () => {
+    const responsePromise = client.v1.usage.report({
+      usages: [
+        {
+          customerId: 'customerId',
+          featureId: 'featureId',
+          value: -9007199254740991,
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -93,14 +87,20 @@ describe('resource usage', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('estimate: required and optional params', async () => {
-    const response = await client.v1.usage.estimate({
-      customerId: 'customerId',
-      featureId: 'featureId',
-      value: -9007199254740991,
-      dimensions: { foo: 'string' },
-      resourceId: 'resourceId',
-      updateBehavior: 'DELTA',
+  test.skip('report: required and optional params', async () => {
+    const response = await client.v1.usage.report({
+      usages: [
+        {
+          customerId: 'customerId',
+          featureId: 'featureId',
+          value: -9007199254740991,
+          createdAt: '2019-12-27T18:11:19.117Z',
+          dimensions: { foo: 'string' },
+          idempotencyKey: 'x',
+          resourceId: 'resourceId',
+          updateBehavior: 'DELTA',
+        },
+      ],
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

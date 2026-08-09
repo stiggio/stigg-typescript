@@ -33,6 +33,18 @@ describe('resource subscriptions', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('update', async () => {
+    const responsePromise = client.v1.subscriptions.update('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.subscriptions.list();
     const rawResponse = await responsePromise.asResponse();
@@ -70,6 +82,178 @@ describe('resource subscriptions', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('cancel', async () => {
+    const responsePromise = client.v1.subscriptions.cancel('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('delegate: only required params', async () => {
+    const responsePromise = client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('delegate: required and optional params', async () => {
+    const response = await client.v1.subscriptions.delegate('x', {
+      targetCustomerId: 'targetCustomerId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('import: only required params', async () => {
+    const responsePromise = client.v1.subscriptions.import({
+      subscriptions: [
+        {
+          id: 'id',
+          customerId: 'customerId',
+          planId: 'planId',
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('import: required and optional params', async () => {
+    const response = await client.v1.subscriptions.import({
+      subscriptions: [
+        {
+          id: 'id',
+          customerId: 'customerId',
+          planId: 'planId',
+          addons: [{ id: 'id', quantity: 0 }],
+          billingId: 'billingId',
+          billingPeriod: 'MONTHLY',
+          charges: [
+            {
+              id: 'id',
+              quantity: 0,
+              type: 'FEATURE',
+            },
+          ],
+          endDate: '2019-12-27T18:11:19.117Z',
+          metadata: { foo: 'string' },
+          resourceId: 'resourceId',
+          startDate: '2019-12-27T18:11:19.117Z',
+        },
+      ],
+      integrationId: 'integrationId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('migrate', async () => {
+    const responsePromise = client.v1.subscriptions.migrate('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('preview: only required params', async () => {
+    const responsePromise = client.v1.subscriptions.preview({ customerId: 'customerId', planId: 'planId' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('preview: required and optional params', async () => {
+    const response = await client.v1.subscriptions.preview({
+      customerId: 'customerId',
+      planId: 'planId',
+      addons: [{ id: 'id', quantity: 0 }],
+      appliedCoupon: {
+        billingCouponId: 'billingCouponId',
+        configuration: { startDate: '2019-12-27T18:11:19.117Z' },
+        couponId: 'couponId',
+        discount: {
+          amountsOff: [{ amount: 0, currency: 'usd' }],
+          description: 'description',
+          durationInMonths: 1,
+          name: 'name',
+          percentOff: 1,
+        },
+        promotionCode: 'promotionCode',
+      },
+      billableFeatures: [{ featureId: 'featureId', quantity: 0 }],
+      billingCountryCode: 'billingCountryCode',
+      billingCycleAnchor: 'UNCHANGED',
+      billingInformation: {
+        billingAddress: {
+          city: 'city',
+          country: 'country',
+          line1: 'line1',
+          line2: 'line2',
+          postalCode: 'postalCode',
+          state: 'state',
+        },
+        chargeOnBehalfOfAccount: 'chargeOnBehalfOfAccount',
+        integrationId: 'integrationId',
+        invoiceDaysUntilDue: 0,
+        isBackdated: true,
+        isInvoicePaid: true,
+        metadata: { foo: 'string' },
+        prorationBehavior: 'INVOICE_IMMEDIATELY',
+        taxIds: [{ type: 'type', value: 'value' }],
+        taxPercentage: 0,
+        taxRateIds: ['string'],
+      },
+      billingPeriod: 'MONTHLY',
+      charges: [
+        {
+          id: 'id',
+          quantity: 0,
+          type: 'FEATURE',
+        },
+      ],
+      payingCustomerId: 'payingCustomerId',
+      resourceId: 'resourceId',
+      scheduleStrategy: 'END_OF_BILLING_PERIOD',
+      startDate: '2019-12-27T18:11:19.117Z',
+      trialOverrideConfiguration: {
+        isTrial: true,
+        trialEndBehavior: 'CONVERT_TO_PAID',
+        trialEndDate: '2019-12-27T18:11:19.117Z',
+      },
+      unitQuantity: 0,
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
   });
 
   // Mock server tests are disabled
@@ -224,189 +408,5 @@ describe('resource subscriptions', () => {
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('migrate', async () => {
-    const responsePromise = client.v1.subscriptions.migrate('x', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('delegate: only required params', async () => {
-    const responsePromise = client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('delegate: required and optional params', async () => {
-    const response = await client.v1.subscriptions.delegate('x', {
-      targetCustomerId: 'targetCustomerId',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('preview: only required params', async () => {
-    const responsePromise = client.v1.subscriptions.preview({ customerId: 'customerId', planId: 'planId' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('preview: required and optional params', async () => {
-    const response = await client.v1.subscriptions.preview({
-      customerId: 'customerId',
-      planId: 'planId',
-      addons: [{ id: 'id', quantity: 0 }],
-      appliedCoupon: {
-        billingCouponId: 'billingCouponId',
-        configuration: { startDate: '2019-12-27T18:11:19.117Z' },
-        couponId: 'couponId',
-        discount: {
-          amountsOff: [{ amount: 0, currency: 'usd' }],
-          description: 'description',
-          durationInMonths: 1,
-          name: 'name',
-          percentOff: 1,
-        },
-        promotionCode: 'promotionCode',
-      },
-      billableFeatures: [{ featureId: 'featureId', quantity: 0 }],
-      billingCountryCode: 'billingCountryCode',
-      billingCycleAnchor: 'UNCHANGED',
-      billingInformation: {
-        billingAddress: {
-          city: 'city',
-          country: 'country',
-          line1: 'line1',
-          line2: 'line2',
-          postalCode: 'postalCode',
-          state: 'state',
-        },
-        chargeOnBehalfOfAccount: 'chargeOnBehalfOfAccount',
-        integrationId: 'integrationId',
-        invoiceDaysUntilDue: 0,
-        isBackdated: true,
-        isInvoicePaid: true,
-        metadata: { foo: 'string' },
-        prorationBehavior: 'INVOICE_IMMEDIATELY',
-        taxIds: [{ type: 'type', value: 'value' }],
-        taxPercentage: 0,
-        taxRateIds: ['string'],
-      },
-      billingPeriod: 'MONTHLY',
-      charges: [
-        {
-          id: 'id',
-          quantity: 0,
-          type: 'FEATURE',
-        },
-      ],
-      payingCustomerId: 'payingCustomerId',
-      resourceId: 'resourceId',
-      scheduleStrategy: 'END_OF_BILLING_PERIOD',
-      startDate: '2019-12-27T18:11:19.117Z',
-      trialOverrideConfiguration: {
-        isTrial: true,
-        trialEndBehavior: 'CONVERT_TO_PAID',
-        trialEndDate: '2019-12-27T18:11:19.117Z',
-      },
-      unitQuantity: 0,
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.v1.subscriptions.update('x', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('import: only required params', async () => {
-    const responsePromise = client.v1.subscriptions.import({
-      subscriptions: [
-        {
-          id: 'id',
-          customerId: 'customerId',
-          planId: 'planId',
-        },
-      ],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('import: required and optional params', async () => {
-    const response = await client.v1.subscriptions.import({
-      subscriptions: [
-        {
-          id: 'id',
-          customerId: 'customerId',
-          planId: 'planId',
-          addons: [{ id: 'id', quantity: 0 }],
-          billingId: 'billingId',
-          billingPeriod: 'MONTHLY',
-          charges: [
-            {
-              id: 'id',
-              quantity: 0,
-              type: 'FEATURE',
-            },
-          ],
-          endDate: '2019-12-27T18:11:19.117Z',
-          metadata: { foo: 'string' },
-          resourceId: 'resourceId',
-          startDate: '2019-12-27T18:11:19.117Z',
-        },
-      ],
-      integrationId: 'integrationId',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('cancel', async () => {
-    const responsePromise = client.v1.subscriptions.cancel('x', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

@@ -29,46 +29,22 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers',
   },
   {
-    clientCallName: 'client.v1.customers.provision',
-    fullyQualifiedName: 'v1.customers.provision',
-    httpMethod: 'post',
-    httpPath: '/api/v1/customers',
-  },
-  {
     clientCallName: 'client.v1.customers.archive',
     fullyQualifiedName: 'v1.customers.archive',
     httpMethod: 'post',
     httpPath: '/api/v1/customers/{id}/archive',
   },
   {
-    clientCallName: 'client.v1.customers.unarchive',
-    fullyQualifiedName: 'v1.customers.unarchive',
-    httpMethod: 'post',
-    httpPath: '/api/v1/customers/{id}/unarchive',
+    clientCallName: 'client.v1.customers.checkEntitlement',
+    fullyQualifiedName: 'v1.customers.checkEntitlement',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entitlements/check',
   },
   {
     clientCallName: 'client.v1.customers.import',
     fullyQualifiedName: 'v1.customers.import',
     httpMethod: 'post',
     httpPath: '/api/v1/customers/import',
-  },
-  {
-    clientCallName: 'client.v1.customers.listResources',
-    fullyQualifiedName: 'v1.customers.listResources',
-    httpMethod: 'get',
-    httpPath: '/api/v1/customers/{id}/resources',
-  },
-  {
-    clientCallName: 'client.v1.customers.retrieveEntitlements',
-    fullyQualifiedName: 'v1.customers.retrieveEntitlements',
-    httpMethod: 'get',
-    httpPath: '/api/v1/customers/{id}/entitlements',
-  },
-  {
-    clientCallName: 'client.v1.customers.checkEntitlement',
-    fullyQualifiedName: 'v1.customers.checkEntitlement',
-    httpMethod: 'get',
-    httpPath: '/api/v1/customers/{id}/entitlements/check',
   },
   {
     clientCallName: 'client.v1.customers.listContracts',
@@ -83,6 +59,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/invoices',
   },
   {
+    clientCallName: 'client.v1.customers.listResources',
+    fullyQualifiedName: 'v1.customers.listResources',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/resources',
+  },
+  {
+    clientCallName: 'client.v1.customers.provision',
+    fullyQualifiedName: 'v1.customers.provision',
+    httpMethod: 'post',
+    httpPath: '/api/v1/customers',
+  },
+  {
+    clientCallName: 'client.v1.customers.retrieveEntitlements',
+    fullyQualifiedName: 'v1.customers.retrieveEntitlements',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entitlements',
+  },
+  {
+    clientCallName: 'client.v1.customers.unarchive',
+    fullyQualifiedName: 'v1.customers.unarchive',
+    httpMethod: 'post',
+    httpPath: '/api/v1/customers/{id}/unarchive',
+  },
+  {
     clientCallName: 'client.v1.customers.paymentMethod.attach',
     fullyQualifiedName: 'v1.customers.paymentMethod.attach',
     httpMethod: 'post',
@@ -95,15 +95,15 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/payment-method',
   },
   {
-    clientCallName: 'client.v1.customers.promotionalEntitlements.list',
-    fullyQualifiedName: 'v1.customers.promotionalEntitlements.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/customers/{id}/promotional-entitlements',
-  },
-  {
     clientCallName: 'client.v1.customers.promotionalEntitlements.create',
     fullyQualifiedName: 'v1.customers.promotionalEntitlements.create',
     httpMethod: 'post',
+    httpPath: '/api/v1/customers/{id}/promotional-entitlements',
+  },
+  {
+    clientCallName: 'client.v1.customers.promotionalEntitlements.list',
+    fullyQualifiedName: 'v1.customers.promotionalEntitlements.list',
+    httpMethod: 'get',
     httpPath: '/api/v1/customers/{id}/promotional-entitlements',
   },
   {
@@ -111,18 +111,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.customers.promotionalEntitlements.revoke',
     httpMethod: 'delete',
     httpPath: '/api/v1/customers/{id}/promotional-entitlements/{featureId}',
-  },
-  {
-    clientCallName: 'client.v1.customers.integrations.list',
-    fullyQualifiedName: 'v1.customers.integrations.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/customers/{id}/integrations',
-  },
-  {
-    clientCallName: 'client.v1.customers.integrations.link',
-    fullyQualifiedName: 'v1.customers.integrations.link',
-    httpMethod: 'post',
-    httpPath: '/api/v1/customers/{id}/integrations',
   },
   {
     clientCallName: 'client.v1.customers.integrations.retrieve',
@@ -137,6 +125,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/integrations/{integrationId}',
   },
   {
+    clientCallName: 'client.v1.customers.integrations.list',
+    fullyQualifiedName: 'v1.customers.integrations.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/integrations',
+  },
+  {
+    clientCallName: 'client.v1.customers.integrations.link',
+    fullyQualifiedName: 'v1.customers.integrations.link',
+    httpMethod: 'post',
+    httpPath: '/api/v1/customers/{id}/integrations',
+  },
+  {
     clientCallName: 'client.v1.customers.integrations.unlink',
     fullyQualifiedName: 'v1.customers.integrations.unlink',
     httpMethod: 'delete',
@@ -149,10 +149,46 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/subscriptions/{id}',
   },
   {
+    clientCallName: 'client.v1.subscriptions.update',
+    fullyQualifiedName: 'v1.subscriptions.update',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/subscriptions/{id}',
+  },
+  {
     clientCallName: 'client.v1.subscriptions.list',
     fullyQualifiedName: 'v1.subscriptions.list',
     httpMethod: 'get',
     httpPath: '/api/v1/subscriptions',
+  },
+  {
+    clientCallName: 'client.v1.subscriptions.cancel',
+    fullyQualifiedName: 'v1.subscriptions.cancel',
+    httpMethod: 'post',
+    httpPath: '/api/v1/subscriptions/{id}/cancel',
+  },
+  {
+    clientCallName: 'client.v1.subscriptions.delegate',
+    fullyQualifiedName: 'v1.subscriptions.delegate',
+    httpMethod: 'post',
+    httpPath: '/api/v1/subscriptions/{id}/delegate',
+  },
+  {
+    clientCallName: 'client.v1.subscriptions.import',
+    fullyQualifiedName: 'v1.subscriptions.import',
+    httpMethod: 'post',
+    httpPath: '/api/v1/subscriptions/import',
+  },
+  {
+    clientCallName: 'client.v1.subscriptions.migrate',
+    fullyQualifiedName: 'v1.subscriptions.migrate',
+    httpMethod: 'post',
+    httpPath: '/api/v1/subscriptions/{id}/migrate',
+  },
+  {
+    clientCallName: 'client.v1.subscriptions.preview',
+    fullyQualifiedName: 'v1.subscriptions.preview',
+    httpMethod: 'post',
+    httpPath: '/api/v1/subscriptions/preview',
   },
   {
     clientCallName: 'client.v1.subscriptions.provision',
@@ -165,42 +201,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.subscriptions.transfer',
     httpMethod: 'post',
     httpPath: '/api/v1/subscriptions/{id}/transfer',
-  },
-  {
-    clientCallName: 'client.v1.subscriptions.migrate',
-    fullyQualifiedName: 'v1.subscriptions.migrate',
-    httpMethod: 'post',
-    httpPath: '/api/v1/subscriptions/{id}/migrate',
-  },
-  {
-    clientCallName: 'client.v1.subscriptions.delegate',
-    fullyQualifiedName: 'v1.subscriptions.delegate',
-    httpMethod: 'post',
-    httpPath: '/api/v1/subscriptions/{id}/delegate',
-  },
-  {
-    clientCallName: 'client.v1.subscriptions.preview',
-    fullyQualifiedName: 'v1.subscriptions.preview',
-    httpMethod: 'post',
-    httpPath: '/api/v1/subscriptions/preview',
-  },
-  {
-    clientCallName: 'client.v1.subscriptions.update',
-    fullyQualifiedName: 'v1.subscriptions.update',
-    httpMethod: 'patch',
-    httpPath: '/api/v1/subscriptions/{id}',
-  },
-  {
-    clientCallName: 'client.v1.subscriptions.import',
-    fullyQualifiedName: 'v1.subscriptions.import',
-    httpMethod: 'post',
-    httpPath: '/api/v1/subscriptions/import',
-  },
-  {
-    clientCallName: 'client.v1.subscriptions.cancel',
-    fullyQualifiedName: 'v1.subscriptions.cancel',
-    httpMethod: 'post',
-    httpPath: '/api/v1/subscriptions/{id}/cancel',
   },
   {
     clientCallName: 'client.v1.subscriptions.futureUpdate.cancelPendingPayment',
@@ -239,22 +239,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/coupons',
   },
   {
-    clientCallName: 'client.v1.coupons.list',
-    fullyQualifiedName: 'v1.coupons.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/coupons',
-  },
-  {
     clientCallName: 'client.v1.coupons.retrieve',
     fullyQualifiedName: 'v1.coupons.retrieve',
     httpMethod: 'get',
     httpPath: '/api/v1/coupons/{id}',
   },
   {
-    clientCallName: 'client.v1.coupons.updateCoupon',
-    fullyQualifiedName: 'v1.coupons.updateCoupon',
-    httpMethod: 'patch',
-    httpPath: '/api/v1/coupons/{id}',
+    clientCallName: 'client.v1.coupons.list',
+    fullyQualifiedName: 'v1.coupons.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/coupons',
   },
   {
     clientCallName: 'client.v1.coupons.archiveCoupon',
@@ -263,10 +257,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/coupons/{id}/archive',
   },
   {
-    clientCallName: 'client.v1.events.report',
-    fullyQualifiedName: 'v1.events.report',
-    httpMethod: 'post',
-    httpPath: '/api/v1/events',
+    clientCallName: 'client.v1.coupons.updateCoupon',
+    fullyQualifiedName: 'v1.coupons.updateCoupon',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/coupons/{id}',
   },
   {
     clientCallName: 'client.v1.events.estimate',
@@ -275,10 +269,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/events/estimate',
   },
   {
-    clientCallName: 'client.v1.events.dataExport.triggerSync',
-    fullyQualifiedName: 'v1.events.dataExport.triggerSync',
+    clientCallName: 'client.v1.events.report',
+    fullyQualifiedName: 'v1.events.report',
     httpMethod: 'post',
-    httpPath: '/api/v1/data-export/sync',
+    httpPath: '/api/v1/events',
+  },
+  {
+    clientCallName: 'client.v1.events.dataExport.listModels',
+    fullyQualifiedName: 'v1.events.dataExport.listModels',
+    httpMethod: 'get',
+    httpPath: '/api/v1/data-export/models',
   },
   {
     clientCallName: 'client.v1.events.dataExport.mintScopedToken',
@@ -287,10 +287,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/data-export/scoped-token',
   },
   {
-    clientCallName: 'client.v1.events.dataExport.listModels',
-    fullyQualifiedName: 'v1.events.dataExport.listModels',
-    httpMethod: 'get',
-    httpPath: '/api/v1/data-export/models',
+    clientCallName: 'client.v1.events.dataExport.triggerSync',
+    fullyQualifiedName: 'v1.events.dataExport.triggerSync',
+    httpMethod: 'post',
+    httpPath: '/api/v1/data-export/sync',
   },
   {
     clientCallName: 'client.v1.events.dataExport.destinations.create',
@@ -317,16 +317,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1-beta/customers/{id}/governance',
   },
   {
-    clientCallName: 'client.v1.credits.getUsage',
-    fullyQualifiedName: 'v1.credits.getUsage',
-    httpMethod: 'get',
-    httpPath: '/api/v1/credits/usage',
-  },
-  {
     clientCallName: 'client.v1.credits.getAutoRecharge',
     fullyQualifiedName: 'v1.credits.getAutoRecharge',
     httpMethod: 'get',
     httpPath: '/api/v1/credits/auto-recharge',
+  },
+  {
+    clientCallName: 'client.v1.credits.getUsage',
+    fullyQualifiedName: 'v1.credits.getUsage',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/usage',
   },
   {
     clientCallName: 'client.v1.credits.listLedger',
@@ -335,15 +335,15 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/credits/ledger',
   },
   {
-    clientCallName: 'client.v1.credits.grants.list',
-    fullyQualifiedName: 'v1.credits.grants.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/credits/grants',
-  },
-  {
     clientCallName: 'client.v1.credits.grants.create',
     fullyQualifiedName: 'v1.credits.grants.create',
     httpMethod: 'post',
+    httpPath: '/api/v1/credits/grants',
+  },
+  {
+    clientCallName: 'client.v1.credits.grants.list',
+    fullyQualifiedName: 'v1.credits.grants.list',
+    httpMethod: 'get',
     httpPath: '/api/v1/credits/grants',
   },
   {
@@ -351,12 +351,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.credits.grants.void',
     httpMethod: 'post',
     httpPath: '/api/v1/credits/grants/{id}/void',
-  },
-  {
-    clientCallName: 'client.v1.credits.customCurrencies.list',
-    fullyQualifiedName: 'v1.credits.customCurrencies.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/credits/custom-currencies',
   },
   {
     clientCallName: 'client.v1.credits.customCurrencies.create',
@@ -371,22 +365,28 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/credits/custom-currencies/{currencyId}',
   },
   {
+    clientCallName: 'client.v1.credits.customCurrencies.list',
+    fullyQualifiedName: 'v1.credits.customCurrencies.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/credits/custom-currencies',
+  },
+  {
     clientCallName: 'client.v1.credits.customCurrencies.archive',
     fullyQualifiedName: 'v1.credits.customCurrencies.archive',
     httpMethod: 'post',
     httpPath: '/api/v1/credits/custom-currencies/{currencyId}/archive',
   },
   {
-    clientCallName: 'client.v1.credits.customCurrencies.unarchive',
-    fullyQualifiedName: 'v1.credits.customCurrencies.unarchive',
-    httpMethod: 'post',
-    httpPath: '/api/v1/credits/custom-currencies/{currencyId}/unarchive',
-  },
-  {
     clientCallName: 'client.v1.credits.customCurrencies.listAssociatedEntities',
     fullyQualifiedName: 'v1.credits.customCurrencies.listAssociatedEntities',
     httpMethod: 'get',
     httpPath: '/api/v1/credits/custom-currencies/{currencyId}/associated-entities',
+  },
+  {
+    clientCallName: 'client.v1.credits.customCurrencies.unarchive',
+    fullyQualifiedName: 'v1.credits.customCurrencies.unarchive',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/custom-currencies/{currencyId}/unarchive',
   },
   {
     clientCallName: 'client.v1.credits.consumption.consume',
@@ -401,16 +401,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/credits/consumption/async',
   },
   {
-    clientCallName: 'client.v1.features.retrieveFeature',
-    fullyQualifiedName: 'v1.features.retrieveFeature',
-    httpMethod: 'get',
-    httpPath: '/api/v1/features/{id}',
-  },
-  {
-    clientCallName: 'client.v1.features.updateFeature',
-    fullyQualifiedName: 'v1.features.updateFeature',
-    httpMethod: 'patch',
-    httpPath: '/api/v1/features/{id}',
+    clientCallName: 'client.v1.features.archiveFeature',
+    fullyQualifiedName: 'v1.features.archiveFeature',
+    httpMethod: 'post',
+    httpPath: '/api/v1/features/{id}/archive',
   },
   {
     clientCallName: 'client.v1.features.createFeature',
@@ -425,10 +419,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/features',
   },
   {
-    clientCallName: 'client.v1.features.archiveFeature',
-    fullyQualifiedName: 'v1.features.archiveFeature',
-    httpMethod: 'post',
-    httpPath: '/api/v1/features/{id}/archive',
+    clientCallName: 'client.v1.features.retrieveFeature',
+    fullyQualifiedName: 'v1.features.retrieveFeature',
+    httpMethod: 'get',
+    httpPath: '/api/v1/features/{id}',
   },
   {
     clientCallName: 'client.v1.features.unarchiveFeature',
@@ -437,10 +431,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/features/{id}/unarchive',
   },
   {
-    clientCallName: 'client.v1.addons.list',
-    fullyQualifiedName: 'v1.addons.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/addons',
+    clientCallName: 'client.v1.features.updateFeature',
+    fullyQualifiedName: 'v1.features.updateFeature',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/features/{id}',
   },
   {
     clientCallName: 'client.v1.addons.create',
@@ -461,27 +455,21 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/addons/{id}',
   },
   {
+    clientCallName: 'client.v1.addons.list',
+    fullyQualifiedName: 'v1.addons.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/addons',
+  },
+  {
     clientCallName: 'client.v1.addons.archive',
     fullyQualifiedName: 'v1.addons.archive',
     httpMethod: 'post',
     httpPath: '/api/v1/addons/{id}/archive',
   },
   {
-    clientCallName: 'client.v1.addons.publish',
-    fullyQualifiedName: 'v1.addons.publish',
-    httpMethod: 'post',
-    httpPath: '/api/v1/addons/{id}/publish',
-  },
-  {
     clientCallName: 'client.v1.addons.createDraft',
     fullyQualifiedName: 'v1.addons.createDraft',
     httpMethod: 'post',
-    httpPath: '/api/v1/addons/{id}/draft',
-  },
-  {
-    clientCallName: 'client.v1.addons.removeDraft',
-    fullyQualifiedName: 'v1.addons.removeDraft',
-    httpMethod: 'delete',
     httpPath: '/api/v1/addons/{id}/draft',
   },
   {
@@ -491,10 +479,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/addons/{id}/charges',
   },
   {
-    clientCallName: 'client.v1.addons.entitlements.list',
-    fullyQualifiedName: 'v1.addons.entitlements.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/addons/{addonId}/entitlements',
+    clientCallName: 'client.v1.addons.publish',
+    fullyQualifiedName: 'v1.addons.publish',
+    httpMethod: 'post',
+    httpPath: '/api/v1/addons/{id}/publish',
+  },
+  {
+    clientCallName: 'client.v1.addons.removeDraft',
+    fullyQualifiedName: 'v1.addons.removeDraft',
+    httpMethod: 'delete',
+    httpPath: '/api/v1/addons/{id}/draft',
   },
   {
     clientCallName: 'client.v1.addons.entitlements.create',
@@ -509,6 +503,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/addons/{addonId}/entitlements/{id}',
   },
   {
+    clientCallName: 'client.v1.addons.entitlements.list',
+    fullyQualifiedName: 'v1.addons.entitlements.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/addons/{addonId}/entitlements',
+  },
+  {
     clientCallName: 'client.v1.addons.entitlements.delete',
     fullyQualifiedName: 'v1.addons.entitlements.delete',
     httpMethod: 'delete',
@@ -518,12 +518,6 @@ export const sdkMethods: SdkMethod[] = [
     clientCallName: 'client.v1.plans.create',
     fullyQualifiedName: 'v1.plans.create',
     httpMethod: 'post',
-    httpPath: '/api/v1/plans',
-  },
-  {
-    clientCallName: 'client.v1.plans.list',
-    fullyQualifiedName: 'v1.plans.list',
-    httpMethod: 'get',
     httpPath: '/api/v1/plans',
   },
   {
@@ -539,27 +533,21 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/plans/{id}',
   },
   {
+    clientCallName: 'client.v1.plans.list',
+    fullyQualifiedName: 'v1.plans.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/plans',
+  },
+  {
     clientCallName: 'client.v1.plans.archive',
     fullyQualifiedName: 'v1.plans.archive',
     httpMethod: 'post',
     httpPath: '/api/v1/plans/{id}/archive',
   },
   {
-    clientCallName: 'client.v1.plans.publish',
-    fullyQualifiedName: 'v1.plans.publish',
-    httpMethod: 'post',
-    httpPath: '/api/v1/plans/{id}/publish',
-  },
-  {
     clientCallName: 'client.v1.plans.createDraft',
     fullyQualifiedName: 'v1.plans.createDraft',
     httpMethod: 'post',
-    httpPath: '/api/v1/plans/{id}/draft',
-  },
-  {
-    clientCallName: 'client.v1.plans.removeDraft',
-    fullyQualifiedName: 'v1.plans.removeDraft',
-    httpMethod: 'delete',
     httpPath: '/api/v1/plans/{id}/draft',
   },
   {
@@ -575,10 +563,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/plans/{id}/overage-charges',
   },
   {
-    clientCallName: 'client.v1.plans.entitlements.list',
-    fullyQualifiedName: 'v1.plans.entitlements.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1/plans/{planId}/entitlements',
+    clientCallName: 'client.v1.plans.publish',
+    fullyQualifiedName: 'v1.plans.publish',
+    httpMethod: 'post',
+    httpPath: '/api/v1/plans/{id}/publish',
+  },
+  {
+    clientCallName: 'client.v1.plans.removeDraft',
+    fullyQualifiedName: 'v1.plans.removeDraft',
+    httpMethod: 'delete',
+    httpPath: '/api/v1/plans/{id}/draft',
   },
   {
     clientCallName: 'client.v1.plans.entitlements.create',
@@ -593,22 +587,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/plans/{planId}/entitlements/{id}',
   },
   {
+    clientCallName: 'client.v1.plans.entitlements.list',
+    fullyQualifiedName: 'v1.plans.entitlements.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/plans/{planId}/entitlements',
+  },
+  {
     clientCallName: 'client.v1.plans.entitlements.delete',
     fullyQualifiedName: 'v1.plans.entitlements.delete',
     httpMethod: 'delete',
     httpPath: '/api/v1/plans/{planId}/entitlements/{id}',
-  },
-  {
-    clientCallName: 'client.v1.usage.report',
-    fullyQualifiedName: 'v1.usage.report',
-    httpMethod: 'post',
-    httpPath: '/api/v1/usage',
-  },
-  {
-    clientCallName: 'client.v1.usage.history',
-    fullyQualifiedName: 'v1.usage.history',
-    httpMethod: 'get',
-    httpPath: '/api/v1/usage/{customerId}/history/{featureId}',
   },
   {
     clientCallName: 'client.v1.usage.estimate',
@@ -617,22 +605,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/usage/estimate',
   },
   {
-    clientCallName: 'client.v1.products.listProducts',
-    fullyQualifiedName: 'v1.products.listProducts',
+    clientCallName: 'client.v1.usage.history',
+    fullyQualifiedName: 'v1.usage.history',
     httpMethod: 'get',
-    httpPath: '/api/v1/products',
+    httpPath: '/api/v1/usage/{customerId}/history/{featureId}',
   },
   {
-    clientCallName: 'client.v1.products.createProduct',
-    fullyQualifiedName: 'v1.products.createProduct',
+    clientCallName: 'client.v1.usage.report',
+    fullyQualifiedName: 'v1.usage.report',
     httpMethod: 'post',
-    httpPath: '/api/v1/products',
-  },
-  {
-    clientCallName: 'client.v1.products.updateProduct',
-    fullyQualifiedName: 'v1.products.updateProduct',
-    httpMethod: 'patch',
-    httpPath: '/api/v1/products/{id}',
+    httpPath: '/api/v1/usage',
   },
   {
     clientCallName: 'client.v1.products.archiveProduct',
@@ -641,10 +623,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/products/{id}/archive',
   },
   {
-    clientCallName: 'client.v1.products.unarchiveProduct',
-    fullyQualifiedName: 'v1.products.unarchiveProduct',
+    clientCallName: 'client.v1.products.createProduct',
+    fullyQualifiedName: 'v1.products.createProduct',
     httpMethod: 'post',
-    httpPath: '/api/v1/products/{id}/unarchive',
+    httpPath: '/api/v1/products',
   },
   {
     clientCallName: 'client.v1.products.duplicateProduct',
@@ -653,10 +635,22 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/products/{id}/duplicate',
   },
   {
-    clientCallName: 'client.v1.contracts.list',
-    fullyQualifiedName: 'v1.contracts.list',
+    clientCallName: 'client.v1.products.listProducts',
+    fullyQualifiedName: 'v1.products.listProducts',
     httpMethod: 'get',
-    httpPath: '/api/v1/contracts',
+    httpPath: '/api/v1/products',
+  },
+  {
+    clientCallName: 'client.v1.products.unarchiveProduct',
+    fullyQualifiedName: 'v1.products.unarchiveProduct',
+    httpMethod: 'post',
+    httpPath: '/api/v1/products/{id}/unarchive',
+  },
+  {
+    clientCallName: 'client.v1.products.updateProduct',
+    fullyQualifiedName: 'v1.products.updateProduct',
+    httpMethod: 'patch',
+    httpPath: '/api/v1/products/{id}',
   },
   {
     clientCallName: 'client.v1.contracts.create',
@@ -677,6 +671,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/contracts/{id}',
   },
   {
+    clientCallName: 'client.v1.contracts.list',
+    fullyQualifiedName: 'v1.contracts.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/contracts',
+  },
+  {
     clientCallName: 'client.v1.contracts.delete',
     fullyQualifiedName: 'v1.contracts.delete',
     httpMethod: 'post',
@@ -689,22 +689,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1-beta/customers/{id}/entitlements/check',
   },
   {
-    clientCallName: 'client.v1Beta.customers.entities.list',
-    fullyQualifiedName: 'v1Beta.customers.entities.list',
-    httpMethod: 'get',
-    httpPath: '/api/v1-beta/customers/{id}/entities',
-  },
-  {
-    clientCallName: 'client.v1Beta.customers.entities.upsert',
-    fullyQualifiedName: 'v1Beta.customers.entities.upsert',
-    httpMethod: 'put',
-    httpPath: '/api/v1-beta/customers/{id}/entities',
-  },
-  {
     clientCallName: 'client.v1Beta.customers.entities.retrieve',
     fullyQualifiedName: 'v1Beta.customers.entities.retrieve',
     httpMethod: 'get',
     httpPath: '/api/v1-beta/customers/{id}/entities/{entityId}',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entities.list',
+    fullyQualifiedName: 'v1Beta.customers.entities.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/entities',
   },
   {
     clientCallName: 'client.v1Beta.customers.entities.archive',
@@ -717,6 +711,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1Beta.customers.entities.unarchive',
     httpMethod: 'post',
     httpPath: '/api/v1-beta/customers/{id}/entities/unarchive',
+  },
+  {
+    clientCallName: 'client.v1Beta.customers.entities.upsert',
+    fullyQualifiedName: 'v1Beta.customers.entities.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1-beta/customers/{id}/entities',
   },
   {
     clientCallName: 'client.v1Beta.customers.assignments.list',

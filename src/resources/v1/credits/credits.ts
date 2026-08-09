@@ -46,12 +46,15 @@ export class Credits extends APIResource {
   consumption: ConsumptionAPI.Consumption = new ConsumptionAPI.Consumption(this._client);
 
   /**
-   * Retrieves credit usage time-series data for a customer, grouped by feature, over
-   * a specified time range.
+   * Retrieves the automatic recharge configuration for a customer and currency.
+   * Returns default settings if no configuration exists.
    */
-  getUsage(params: CreditGetUsageParams, options?: RequestOptions): APIPromise<CreditGetUsageResponse> {
+  getAutoRecharge(
+    params: CreditGetAutoRechargeParams,
+    options?: RequestOptions,
+  ): APIPromise<CreditGetAutoRechargeResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
-    return this._client.get('/api/v1/credits/usage', {
+    return this._client.get('/api/v1/credits/auto-recharge', {
       query,
       ...options,
       headers: buildHeaders([
@@ -65,15 +68,12 @@ export class Credits extends APIResource {
   }
 
   /**
-   * Retrieves the automatic recharge configuration for a customer and currency.
-   * Returns default settings if no configuration exists.
+   * Retrieves credit usage time-series data for a customer, grouped by feature, over
+   * a specified time range.
    */
-  getAutoRecharge(
-    params: CreditGetAutoRechargeParams,
-    options?: RequestOptions,
-  ): APIPromise<CreditGetAutoRechargeResponse> {
+  getUsage(params: CreditGetUsageParams, options?: RequestOptions): APIPromise<CreditGetUsageResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params;
-    return this._client.get('/api/v1/credits/auto-recharge', {
+    return this._client.get('/api/v1/credits/usage', {
       query,
       ...options,
       headers: buildHeaders([
@@ -397,6 +397,31 @@ export interface CreditListLedgerResponse {
   timestamp: string;
 }
 
+export interface CreditGetAutoRechargeParams {
+  /**
+   * Query param: Filter by currency ID (required)
+   */
+  currencyId: string;
+
+  /**
+   * Query param: Filter by customer ID (required)
+   */
+  customerId: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface CreditGetUsageParams {
   /**
    * Query param: Filter by customer ID (required)
@@ -466,31 +491,6 @@ export interface CreditGetUsageParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface CreditGetAutoRechargeParams {
-  /**
-   * Query param: Filter by currency ID (required)
-   */
-  currencyId: string;
-
-  /**
-   * Query param: Filter by customer ID (required)
-   */
-  customerId: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface CreditListLedgerParams extends MyCursorIDPageParams {
   /**
    * Query param: Filter by customer ID (required)
@@ -536,8 +536,8 @@ export declare namespace Credits {
     type CreditGetUsageResponse as CreditGetUsageResponse,
     type CreditListLedgerResponse as CreditListLedgerResponse,
     type CreditListLedgerResponsesMyCursorIDPage as CreditListLedgerResponsesMyCursorIDPage,
-    type CreditGetUsageParams as CreditGetUsageParams,
     type CreditGetAutoRechargeParams as CreditGetAutoRechargeParams,
+    type CreditGetUsageParams as CreditGetUsageParams,
     type CreditListLedgerParams as CreditListLedgerParams,
   };
 
@@ -546,8 +546,8 @@ export declare namespace Credits {
     type CreditGrantResponse as CreditGrantResponse,
     type GrantListResponse as GrantListResponse,
     type GrantListResponsesMyCursorIDPage as GrantListResponsesMyCursorIDPage,
-    type GrantListParams as GrantListParams,
     type GrantCreateParams as GrantCreateParams,
+    type GrantListParams as GrantListParams,
     type GrantVoidParams as GrantVoidParams,
   };
 
@@ -557,12 +557,12 @@ export declare namespace Credits {
     type CustomCurrencyListResponse as CustomCurrencyListResponse,
     type CustomCurrencyListAssociatedEntitiesResponse as CustomCurrencyListAssociatedEntitiesResponse,
     type CustomCurrencyListResponsesMyCursorIDPage as CustomCurrencyListResponsesMyCursorIDPage,
-    type CustomCurrencyListParams as CustomCurrencyListParams,
     type CustomCurrencyCreateParams as CustomCurrencyCreateParams,
     type CustomCurrencyUpdateParams as CustomCurrencyUpdateParams,
+    type CustomCurrencyListParams as CustomCurrencyListParams,
     type CustomCurrencyArchiveParams as CustomCurrencyArchiveParams,
-    type CustomCurrencyUnarchiveParams as CustomCurrencyUnarchiveParams,
     type CustomCurrencyListAssociatedEntitiesParams as CustomCurrencyListAssociatedEntitiesParams,
+    type CustomCurrencyUnarchiveParams as CustomCurrencyUnarchiveParams,
   };
 
   export {

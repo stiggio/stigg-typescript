@@ -9,6 +9,52 @@ const client = new Stigg({
 
 describe('resource integrations', () => {
   // Mock server tests are disabled
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.v1.customers.integrations.retrieve('integrationId', {
+      id: 'id',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.v1.customers.integrations.update('integrationId', {
+      id: 'id',
+      syncedEntityId: 'syncedEntityId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('update: required and optional params', async () => {
+    const response = await client.v1.customers.integrations.update('integrationId', {
+      id: 'id',
+      syncedEntityId: 'syncedEntityId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.customers.integrations.list('x');
     const rawResponse = await responsePromise.asResponse();
@@ -61,52 +107,6 @@ describe('resource integrations', () => {
       id: 'id',
       syncedEntityId: 'syncedEntityId',
       vendorIdentifier: 'AUTH0',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.v1.customers.integrations.retrieve('integrationId', {
-      id: 'id',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.v1.customers.integrations.update('integrationId', {
-      id: 'id',
-      syncedEntityId: 'syncedEntityId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.v1.customers.integrations.update('integrationId', {
-      id: 'id',
-      syncedEntityId: 'syncedEntityId',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

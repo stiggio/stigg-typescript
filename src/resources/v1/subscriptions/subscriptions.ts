@@ -52,6 +52,25 @@ export class Subscriptions extends APIResource {
   }
 
   /**
+   * Updates an active subscription's properties including billing period, add-ons,
+   * unit quantities, and discounts.
+   */
+  update(id: string, params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/subscriptions/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Retrieves a paginated list of subscriptions, with optional filters for customer,
    * status, and plan.
    */
@@ -62,6 +81,108 @@ export class Subscriptions extends APIResource {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
     return this._client.getAPIList('/api/v1/subscriptions', MyCursorIDPage<SubscriptionListResponse>, {
       query,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Cancels an active subscription, either immediately or at a specified time such
+   * as end of billing period.
+   */
+  cancel(id: string, params: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/cancel`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Delegates the payment responsibility of a subscription to a different customer.
+   * The delegated customer will be billed for this subscription.
+   */
+  delegate(
+    id: string,
+    params: SubscriptionDelegateParams,
+    options?: RequestOptions,
+  ): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/delegate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Imports multiple subscriptions in bulk. Used for migrating subscription data
+   * from external systems.
+   */
+  import(params: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/subscriptions/import', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Migrates a subscription to the latest published version of its plan or add-ons.
+   * Handles prorated charges or credits automatically.
+   */
+  migrate(id: string, params: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post(path`/api/v1/subscriptions/${id}/migrate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Previews the pricing impact of creating or updating a subscription without
+   * making changes. Returns estimated costs, taxes, and proration details.
+   */
+  preview(
+    params: SubscriptionPreviewParams,
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionPreviewResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.post('/api/v1/subscriptions/preview', {
+      body,
       ...options,
       headers: buildHeaders([
         {
@@ -106,127 +227,6 @@ export class Subscriptions extends APIResource {
   ): APIPromise<Subscription> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.post(path`/api/v1/subscriptions/${id}/transfer`, {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Migrates a subscription to the latest published version of its plan or add-ons.
-   * Handles prorated charges or credits automatically.
-   */
-  migrate(id: string, params: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post(path`/api/v1/subscriptions/${id}/migrate`, {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Delegates the payment responsibility of a subscription to a different customer.
-   * The delegated customer will be billed for this subscription.
-   */
-  delegate(
-    id: string,
-    params: SubscriptionDelegateParams,
-    options?: RequestOptions,
-  ): APIPromise<Subscription> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post(path`/api/v1/subscriptions/${id}/delegate`, {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Previews the pricing impact of creating or updating a subscription without
-   * making changes. Returns estimated costs, taxes, and proration details.
-   */
-  preview(
-    params: SubscriptionPreviewParams,
-    options?: RequestOptions,
-  ): APIPromise<SubscriptionPreviewResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/subscriptions/preview', {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Updates an active subscription's properties including billing period, add-ons,
-   * unit quantities, and discounts.
-   */
-  update(id: string, params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.patch(path`/api/v1/subscriptions/${id}`, {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Imports multiple subscriptions in bulk. Used for migrating subscription data
-   * from external systems.
-   */
-  import(params: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/subscriptions/import', {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Cancels an active subscription, either immediately or at a specified time such
-   * as end of billing period.
-   */
-  cancel(id: string, params: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post(path`/api/v1/subscriptions/${id}/cancel`, {
       body,
       ...options,
       headers: buildHeaders([
@@ -4043,6 +4043,784 @@ export interface SubscriptionRetrieveParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
+export interface SubscriptionUpdateParams {
+  /**
+   * Body param
+   */
+  addons?: Array<SubscriptionUpdateParams.Addon>;
+
+  /**
+   * Body param
+   */
+  appliedCoupon?: SubscriptionUpdateParams.AppliedCoupon;
+
+  /**
+   * Body param: Await payment confirmation
+   */
+  awaitPaymentConfirmation?: boolean;
+
+  /**
+   * Body param
+   */
+  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
+
+  /**
+   * Body param
+   */
+  billingInformation?: SubscriptionUpdateParams.BillingInformation;
+
+  /**
+   * Body param
+   */
+  billingPeriod?: 'MONTHLY' | 'ANNUALLY';
+
+  /**
+   * Body param
+   */
+  budget?: SubscriptionUpdateParams.Budget | null;
+
+  /**
+   * Body param: Subscription cancellation date
+   */
+  cancellationDate?: string | null;
+
+  /**
+   * Body param
+   */
+  charges?: Array<SubscriptionUpdateParams.Charge>;
+
+  /**
+   * Body param
+   */
+  entitlements?: Array<SubscriptionUpdateParams.Feature | SubscriptionUpdateParams.Credit>;
+
+  /**
+   * Body param: Additional metadata for the subscription
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * Body param: Minimum spend amount
+   */
+  minimumSpend?: SubscriptionUpdateParams.MinimumSpend | null;
+
+  /**
+   * Body param
+   */
+  priceOverrides?: Array<SubscriptionUpdateParams.PriceOverride>;
+
+  /**
+   * Body param: Promotion code
+   */
+  promotionCode?: string;
+
+  /**
+   * Body param: Salesforce ID
+   */
+  salesforceId?: string | null;
+
+  /**
+   * Body param
+   */
+  scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
+
+  /**
+   * Body param: Subscription trial end date
+   */
+  trialEndDate?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export namespace SubscriptionUpdateParams {
+  /**
+   * Addon configuration
+   */
+  export interface Addon {
+    /**
+     * Addon ID
+     */
+    id: string;
+
+    /**
+     * Number of addon instances
+     */
+    quantity: number;
+  }
+
+  export interface AppliedCoupon {
+    billingCouponId?: string;
+
+    configuration?: AppliedCoupon.Configuration;
+
+    /**
+     * Stigg coupon ID
+     */
+    couponId?: string;
+
+    discount?: AppliedCoupon.Discount;
+
+    promotionCode?: string | null;
+  }
+
+  export namespace AppliedCoupon {
+    export interface Configuration {
+      /**
+       * Coupon start date
+       */
+      startDate?: string;
+    }
+
+    export interface Discount {
+      amountsOff?: Array<Discount.AmountsOff> | null;
+
+      description?: string;
+
+      durationInMonths?: number;
+
+      name?: string;
+
+      percentOff?: number;
+    }
+
+    export namespace Discount {
+      /**
+       * Monetary amount with currency
+       */
+      export interface AmountsOff {
+        /**
+         * The price amount
+         */
+        amount: number;
+
+        /**
+         * ISO 4217 currency code
+         */
+        currency:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+    }
+  }
+
+  export interface BillingInformation {
+    /**
+     * Physical address
+     */
+    billingAddress?: BillingInformation.BillingAddress;
+
+    chargeOnBehalfOfAccount?: string;
+
+    couponId?: string;
+
+    integrationId?: string;
+
+    invoiceDaysUntilDue?: number;
+
+    isBackdated?: boolean;
+
+    isInvoicePaid?: boolean;
+
+    /**
+     * Additional metadata for the subscription
+     */
+    metadata?: { [key: string]: string };
+
+    prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE';
+
+    taxIds?: Array<BillingInformation.TaxID>;
+
+    taxPercentage?: number;
+
+    taxRateIds?: Array<string>;
+  }
+
+  export namespace BillingInformation {
+    /**
+     * Physical address
+     */
+    export interface BillingAddress {
+      /**
+       * City name
+       */
+      city?: string;
+
+      /**
+       * Country code or name
+       */
+      country?: string;
+
+      /**
+       * Street address line 1
+       */
+      line1?: string;
+
+      /**
+       * Street address line 2
+       */
+      line2?: string;
+
+      /**
+       * Postal or ZIP code
+       */
+      postalCode?: string;
+
+      /**
+       * State or province
+       */
+      state?: string;
+    }
+
+    export interface TaxID {
+      type: string;
+
+      value: string;
+    }
+  }
+
+  export interface Budget {
+    /**
+     * Whether the budget is a soft limit
+     */
+    hasSoftLimit: boolean;
+
+    /**
+     * Maximum spending limit
+     */
+    limit: number;
+  }
+
+  export interface Charge {
+    /**
+     * Charge ID
+     */
+    id: string;
+
+    quantity: number;
+
+    type: 'FEATURE' | 'CREDIT';
+  }
+
+  /**
+   * Feature entitlement configuration for a subscription
+   */
+  export interface Feature {
+    /**
+     * The feature ID to attach the entitlement to
+     */
+    id: string;
+
+    /**
+     * SubscriptionFeatureEntitlementRequest
+     */
+    type: 'FEATURE';
+
+    /**
+     * Whether the usage limit is a soft limit
+     */
+    hasSoftLimit?: boolean;
+
+    /**
+     * Whether usage is unlimited
+     */
+    hasUnlimitedUsage?: boolean;
+
+    /**
+     * Configuration for monthly reset period
+     */
+    monthlyResetPeriodConfiguration?: Feature.MonthlyResetPeriodConfiguration | null;
+
+    /**
+     * Period at which usage resets
+     */
+    resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
+
+    /**
+     * Maximum allowed usage for the feature
+     */
+    usageLimit?: number;
+
+    /**
+     * Configuration for weekly reset period
+     */
+    weeklyResetPeriodConfiguration?: Feature.WeeklyResetPeriodConfiguration | null;
+
+    /**
+     * Configuration for yearly reset period
+     */
+    yearlyResetPeriodConfiguration?: Feature.YearlyResetPeriodConfiguration | null;
+  }
+
+  export namespace Feature {
+    /**
+     * Configuration for monthly reset period
+     */
+    export interface MonthlyResetPeriodConfiguration {
+      /**
+       * Reset anchor (SubscriptionStart or StartOfTheMonth)
+       */
+      accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
+    }
+
+    /**
+     * Configuration for weekly reset period
+     */
+    export interface WeeklyResetPeriodConfiguration {
+      /**
+       * Reset anchor (SubscriptionStart or specific day)
+       */
+      accordingTo:
+        | 'SubscriptionStart'
+        | 'EverySunday'
+        | 'EveryMonday'
+        | 'EveryTuesday'
+        | 'EveryWednesday'
+        | 'EveryThursday'
+        | 'EveryFriday'
+        | 'EverySaturday';
+    }
+
+    /**
+     * Configuration for yearly reset period
+     */
+    export interface YearlyResetPeriodConfiguration {
+      /**
+       * Reset anchor (SubscriptionStart)
+       */
+      accordingTo: 'SubscriptionStart';
+    }
+  }
+
+  /**
+   * Credit entitlement configuration for a subscription
+   */
+  export interface Credit {
+    /**
+     * The custom currency ID for the credit entitlement
+     */
+    id: string;
+
+    /**
+     * Credit grant amount
+     */
+    amount: number;
+
+    /**
+     * Credit grant cadence (MONTH or YEAR)
+     */
+    cadence: 'MONTH' | 'YEAR';
+
+    /**
+     * SubscriptionCreditEntitlementRequest
+     */
+    type: 'CREDIT';
+  }
+
+  /**
+   * Minimum spend amount
+   */
+  export interface MinimumSpend {
+    /**
+     * The price amount
+     */
+    amount?: number;
+
+    /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
+  }
+
+  export interface PriceOverride {
+    /**
+     * Addon ID
+     */
+    addonId?: string;
+
+    /**
+     * The price amount
+     */
+    amount?: number;
+
+    /**
+     * Whether this is a base charge override
+     */
+    baseCharge?: boolean;
+
+    /**
+     * The price currency
+     */
+    currency?:
+      | 'usd'
+      | 'aed'
+      | 'all'
+      | 'amd'
+      | 'ang'
+      | 'aud'
+      | 'awg'
+      | 'azn'
+      | 'bam'
+      | 'bbd'
+      | 'bdt'
+      | 'bgn'
+      | 'bif'
+      | 'bmd'
+      | 'bnd'
+      | 'bsd'
+      | 'bwp'
+      | 'byn'
+      | 'bzd'
+      | 'brl'
+      | 'cad'
+      | 'cdf'
+      | 'chf'
+      | 'cny'
+      | 'czk'
+      | 'dkk'
+      | 'dop'
+      | 'dzd'
+      | 'egp'
+      | 'etb'
+      | 'eur'
+      | 'fjd'
+      | 'gbp'
+      | 'gel'
+      | 'gip'
+      | 'gmd'
+      | 'gyd'
+      | 'hkd'
+      | 'hrk'
+      | 'htg'
+      | 'idr'
+      | 'ils'
+      | 'inr'
+      | 'isk'
+      | 'jmd'
+      | 'jpy'
+      | 'kes'
+      | 'kgs'
+      | 'khr'
+      | 'kmf'
+      | 'krw'
+      | 'kyd'
+      | 'kzt'
+      | 'lbp'
+      | 'lkr'
+      | 'lrd'
+      | 'lsl'
+      | 'mad'
+      | 'mdl'
+      | 'mga'
+      | 'mkd'
+      | 'mmk'
+      | 'mnt'
+      | 'mop'
+      | 'mro'
+      | 'mvr'
+      | 'mwk'
+      | 'mxn'
+      | 'myr'
+      | 'mzn'
+      | 'nad'
+      | 'ngn'
+      | 'nok'
+      | 'npr'
+      | 'nzd'
+      | 'pgk'
+      | 'php'
+      | 'pkr'
+      | 'pln'
+      | 'qar'
+      | 'ron'
+      | 'rsd'
+      | 'rub'
+      | 'rwf'
+      | 'sar'
+      | 'sbd'
+      | 'scr'
+      | 'sek'
+      | 'sgd'
+      | 'sle'
+      | 'sll'
+      | 'sos'
+      | 'szl'
+      | 'thb'
+      | 'tjs'
+      | 'top'
+      | 'try'
+      | 'ttd'
+      | 'tzs'
+      | 'uah'
+      | 'uzs'
+      | 'vnd'
+      | 'vuv'
+      | 'wst'
+      | 'xaf'
+      | 'xcd'
+      | 'yer'
+      | 'zar'
+      | 'zmw'
+      | 'clp'
+      | 'djf'
+      | 'gnf'
+      | 'ugx'
+      | 'pyg'
+      | 'xof'
+      | 'xpf';
+
+    /**
+     * The corresponding custom currency id of the recurring credits price
+     */
+    currencyId?: string;
+
+    /**
+     * Feature ID
+     */
+    featureId?: string;
+  }
+}
+
 export interface SubscriptionListParams extends MyCursorIDPageParams {
   /**
    * Query param: Filter by creation date using range operators: gt, gte, lt, lte
@@ -4114,6 +4892,665 @@ export namespace SubscriptionListParams {
      * Less than or equal to the specified createdAt value
      */
     lte?: string;
+  }
+}
+
+export interface SubscriptionCancelParams {
+  /**
+   * Body param: Action on cancellation (downgrade or revoke)
+   */
+  cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS';
+
+  /**
+   * Body param: When to cancel (immediate, period end, or date)
+   */
+  cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE';
+
+  /**
+   * Body param: Subscription end date
+   */
+  endDate?: string;
+
+  /**
+   * Body param: If set, enables or disables prorating of credits on subscription
+   * cancellation.
+   */
+  prorate?: boolean;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface SubscriptionDelegateParams {
+  /**
+   * Body param: The unique identifier of the customer who will assume payment
+   * responsibility for this subscription. This customer must already exist in your
+   * Stigg account and have a valid payment method if the subscription requires
+   * payment.
+   */
+  targetCustomerId: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface SubscriptionImportParams {
+  /**
+   * Body param: List of subscription objects to import
+   */
+  subscriptions: Array<SubscriptionImportParams.Subscription>;
+
+  /**
+   * Body param: Integration ID to use for importing subscriptions
+   */
+  integrationId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export namespace SubscriptionImportParams {
+  export interface Subscription {
+    /**
+     * Subscription ID
+     */
+    id: string;
+
+    /**
+     * Customer ID
+     */
+    customerId: string;
+
+    /**
+     * Plan ID
+     */
+    planId: string;
+
+    addons?: Array<Subscription.Addon>;
+
+    /**
+     * Billing ID
+     */
+    billingId?: string | null;
+
+    /**
+     * Billing period (MONTHLY or ANNUALLY)
+     */
+    billingPeriod?: 'MONTHLY' | 'ANNUALLY';
+
+    charges?: Array<Subscription.Charge>;
+
+    /**
+     * Subscription end date
+     */
+    endDate?: string | null;
+
+    /**
+     * Additional metadata for the subscription
+     */
+    metadata?: { [key: string]: string };
+
+    /**
+     * Resource ID
+     */
+    resourceId?: string | null;
+
+    /**
+     * Subscription start date
+     */
+    startDate?: string;
+  }
+
+  export namespace Subscription {
+    /**
+     * Addon configuration
+     */
+    export interface Addon {
+      /**
+       * Addon ID
+       */
+      id: string;
+
+      /**
+       * Number of addon instances
+       */
+      quantity: number;
+    }
+
+    /**
+     * A charge selection for a subscription (references a catalog charge with a
+     * quantity).
+     */
+    export interface Charge {
+      /**
+       * Charge ID
+       */
+      id: string;
+
+      /**
+       * Charge quantity. Minimum is 0 (zero is allowed).
+       */
+      quantity: number;
+
+      /**
+       * Charge type
+       */
+      type: 'FEATURE' | 'CREDIT';
+    }
+  }
+}
+
+export interface SubscriptionMigrateParams {
+  /**
+   * Body param: When to migrate (immediate or period end)
+   */
+  subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE';
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export interface SubscriptionPreviewParams {
+  /**
+   * Body param: Customer ID
+   */
+  customerId: string;
+
+  /**
+   * Body param: Plan ID
+   */
+  planId: string;
+
+  /**
+   * Body param: Addons to include
+   */
+  addons?: Array<SubscriptionPreviewParams.Addon>;
+
+  /**
+   * Body param: Coupon or discount to apply
+   */
+  appliedCoupon?: SubscriptionPreviewParams.AppliedCoupon;
+
+  /**
+   * Body param: Billable features with quantities
+   */
+  billableFeatures?: Array<SubscriptionPreviewParams.BillableFeature>;
+
+  /**
+   * Body param: ISO 3166-1 country code for localization
+   */
+  billingCountryCode?: string;
+
+  /**
+   * Body param: Billing cycle anchor behavior for the subscription
+   */
+  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
+
+  /**
+   * Body param: Billing and tax configuration
+   */
+  billingInformation?: SubscriptionPreviewParams.BillingInformation;
+
+  /**
+   * Body param: Billing period (MONTHLY or ANNUALLY)
+   */
+  billingPeriod?: 'MONTHLY' | 'ANNUALLY';
+
+  /**
+   * Body param: One-time or recurring charges
+   */
+  charges?: Array<SubscriptionPreviewParams.Charge>;
+
+  /**
+   * Body param: Paying customer ID for delegated billing
+   */
+  payingCustomerId?: string;
+
+  /**
+   * Body param: Resource ID for multi-instance subscriptions
+   */
+  resourceId?: string;
+
+  /**
+   * Body param: When to apply subscription changes
+   */
+  scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
+
+  /**
+   * Body param: Subscription start date
+   */
+  startDate?: string;
+
+  /**
+   * Body param: Trial period override settings
+   */
+  trialOverrideConfiguration?: SubscriptionPreviewParams.TrialOverrideConfiguration;
+
+  /**
+   * Body param: Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
+   */
+  unitQuantity?: number;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export namespace SubscriptionPreviewParams {
+  /**
+   * Addon configuration
+   */
+  export interface Addon {
+    /**
+     * Addon ID
+     */
+    id: string;
+
+    /**
+     * Number of addon instances
+     */
+    quantity: number;
+  }
+
+  /**
+   * Coupon or discount to apply
+   */
+  export interface AppliedCoupon {
+    /**
+     * Billing provider coupon ID
+     */
+    billingCouponId?: string;
+
+    /**
+     * Coupon timing configuration
+     */
+    configuration?: AppliedCoupon.Configuration;
+
+    /**
+     * Stigg coupon ID
+     */
+    couponId?: string;
+
+    /**
+     * Ad-hoc discount configuration
+     */
+    discount?: AppliedCoupon.Discount;
+
+    /**
+     * Promotion code to apply
+     */
+    promotionCode?: string;
+  }
+
+  export namespace AppliedCoupon {
+    /**
+     * Coupon timing configuration
+     */
+    export interface Configuration {
+      /**
+       * Coupon start date
+       */
+      startDate?: string;
+    }
+
+    /**
+     * Ad-hoc discount configuration
+     */
+    export interface Discount {
+      /**
+       * Fixed amounts off by currency
+       */
+      amountsOff?: Array<Discount.AmountsOff> | null;
+
+      /**
+       * Ad-hoc discount
+       */
+      description?: string;
+
+      /**
+       * Duration in months
+       */
+      durationInMonths?: number;
+
+      /**
+       * Discount name
+       */
+      name?: string;
+
+      /**
+       * Percentage discount
+       */
+      percentOff?: number;
+    }
+
+    export namespace Discount {
+      export interface AmountsOff {
+        /**
+         * The price amount
+         */
+        amount: number;
+
+        /**
+         * ISO 4217 currency code
+         */
+        currency:
+          | 'usd'
+          | 'aed'
+          | 'all'
+          | 'amd'
+          | 'ang'
+          | 'aud'
+          | 'awg'
+          | 'azn'
+          | 'bam'
+          | 'bbd'
+          | 'bdt'
+          | 'bgn'
+          | 'bif'
+          | 'bmd'
+          | 'bnd'
+          | 'bsd'
+          | 'bwp'
+          | 'byn'
+          | 'bzd'
+          | 'brl'
+          | 'cad'
+          | 'cdf'
+          | 'chf'
+          | 'cny'
+          | 'czk'
+          | 'dkk'
+          | 'dop'
+          | 'dzd'
+          | 'egp'
+          | 'etb'
+          | 'eur'
+          | 'fjd'
+          | 'gbp'
+          | 'gel'
+          | 'gip'
+          | 'gmd'
+          | 'gyd'
+          | 'hkd'
+          | 'hrk'
+          | 'htg'
+          | 'idr'
+          | 'ils'
+          | 'inr'
+          | 'isk'
+          | 'jmd'
+          | 'jpy'
+          | 'kes'
+          | 'kgs'
+          | 'khr'
+          | 'kmf'
+          | 'krw'
+          | 'kyd'
+          | 'kzt'
+          | 'lbp'
+          | 'lkr'
+          | 'lrd'
+          | 'lsl'
+          | 'mad'
+          | 'mdl'
+          | 'mga'
+          | 'mkd'
+          | 'mmk'
+          | 'mnt'
+          | 'mop'
+          | 'mro'
+          | 'mvr'
+          | 'mwk'
+          | 'mxn'
+          | 'myr'
+          | 'mzn'
+          | 'nad'
+          | 'ngn'
+          | 'nok'
+          | 'npr'
+          | 'nzd'
+          | 'pgk'
+          | 'php'
+          | 'pkr'
+          | 'pln'
+          | 'qar'
+          | 'ron'
+          | 'rsd'
+          | 'rub'
+          | 'rwf'
+          | 'sar'
+          | 'sbd'
+          | 'scr'
+          | 'sek'
+          | 'sgd'
+          | 'sle'
+          | 'sll'
+          | 'sos'
+          | 'szl'
+          | 'thb'
+          | 'tjs'
+          | 'top'
+          | 'try'
+          | 'ttd'
+          | 'tzs'
+          | 'uah'
+          | 'uzs'
+          | 'vnd'
+          | 'vuv'
+          | 'wst'
+          | 'xaf'
+          | 'xcd'
+          | 'yer'
+          | 'zar'
+          | 'zmw'
+          | 'clp'
+          | 'djf'
+          | 'gnf'
+          | 'ugx'
+          | 'pyg'
+          | 'xof'
+          | 'xpf';
+      }
+    }
+  }
+
+  /**
+   * Feature with quantity
+   */
+  export interface BillableFeature {
+    /**
+     * Feature ID
+     */
+    featureId: string;
+
+    /**
+     * Quantity of feature units. Minimum is 0 (zero is allowed).
+     */
+    quantity: number;
+  }
+
+  /**
+   * Billing and tax configuration
+   */
+  export interface BillingInformation {
+    /**
+     * Billing address
+     */
+    billingAddress?: BillingInformation.BillingAddress;
+
+    /**
+     * Connected account ID for platform billing
+     */
+    chargeOnBehalfOfAccount?: string;
+
+    /**
+     * Billing integration ID
+     */
+    integrationId?: string;
+
+    /**
+     * Days until invoice is due
+     */
+    invoiceDaysUntilDue?: number;
+
+    /**
+     * Whether subscription is backdated
+     */
+    isBackdated?: boolean;
+
+    /**
+     * Whether invoice is already paid
+     */
+    isInvoicePaid?: boolean;
+
+    /**
+     * Additional billing metadata
+     */
+    metadata?: { [key: string]: string };
+
+    /**
+     * Proration behavior
+     */
+    prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE';
+
+    /**
+     * Customer tax IDs
+     */
+    taxIds?: Array<BillingInformation.TaxID>;
+
+    /**
+     * Tax percentage to apply
+     */
+    taxPercentage?: number;
+
+    /**
+     * Tax rate IDs from billing provider
+     */
+    taxRateIds?: Array<string>;
+  }
+
+  export namespace BillingInformation {
+    /**
+     * Billing address
+     */
+    export interface BillingAddress {
+      city?: string;
+
+      country?: string;
+
+      line1?: string;
+
+      line2?: string;
+
+      postalCode?: string;
+
+      state?: string;
+    }
+
+    /**
+     * Tax exemption identifier
+     */
+    export interface TaxID {
+      /**
+       * Tax exemption type (e.g., vat, gst)
+       */
+      type: string;
+
+      /**
+       * Tax exemption identifier value
+       */
+      value: string;
+    }
+  }
+
+  /**
+   * A charge selection for a subscription (references a catalog charge with a
+   * quantity).
+   */
+  export interface Charge {
+    /**
+     * Charge ID
+     */
+    id: string;
+
+    /**
+     * Charge quantity. Minimum is 0 (zero is allowed).
+     */
+    quantity: number;
+
+    /**
+     * Charge type
+     */
+    type: 'FEATURE' | 'CREDIT';
+  }
+
+  /**
+   * Trial period override settings
+   */
+  export interface TrialOverrideConfiguration {
+    /**
+     * Whether to start as trial
+     */
+    isTrial: boolean;
+
+    /**
+     * Behavior when trial ends
+     */
+    trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION';
+
+    /**
+     * Trial end date
+     */
+    trialEndDate?: string;
   }
 }
 
@@ -5399,1443 +6836,6 @@ export interface SubscriptionTransferParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface SubscriptionMigrateParams {
-  /**
-   * Body param: When to migrate (immediate or period end)
-   */
-  subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE';
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface SubscriptionDelegateParams {
-  /**
-   * Body param: The unique identifier of the customer who will assume payment
-   * responsibility for this subscription. This customer must already exist in your
-   * Stigg account and have a valid payment method if the subscription requires
-   * payment.
-   */
-  targetCustomerId: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface SubscriptionPreviewParams {
-  /**
-   * Body param: Customer ID
-   */
-  customerId: string;
-
-  /**
-   * Body param: Plan ID
-   */
-  planId: string;
-
-  /**
-   * Body param: Addons to include
-   */
-  addons?: Array<SubscriptionPreviewParams.Addon>;
-
-  /**
-   * Body param: Coupon or discount to apply
-   */
-  appliedCoupon?: SubscriptionPreviewParams.AppliedCoupon;
-
-  /**
-   * Body param: Billable features with quantities
-   */
-  billableFeatures?: Array<SubscriptionPreviewParams.BillableFeature>;
-
-  /**
-   * Body param: ISO 3166-1 country code for localization
-   */
-  billingCountryCode?: string;
-
-  /**
-   * Body param: Billing cycle anchor behavior for the subscription
-   */
-  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
-
-  /**
-   * Body param: Billing and tax configuration
-   */
-  billingInformation?: SubscriptionPreviewParams.BillingInformation;
-
-  /**
-   * Body param: Billing period (MONTHLY or ANNUALLY)
-   */
-  billingPeriod?: 'MONTHLY' | 'ANNUALLY';
-
-  /**
-   * Body param: One-time or recurring charges
-   */
-  charges?: Array<SubscriptionPreviewParams.Charge>;
-
-  /**
-   * Body param: Paying customer ID for delegated billing
-   */
-  payingCustomerId?: string;
-
-  /**
-   * Body param: Resource ID for multi-instance subscriptions
-   */
-  resourceId?: string;
-
-  /**
-   * Body param: When to apply subscription changes
-   */
-  scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
-
-  /**
-   * Body param: Subscription start date
-   */
-  startDate?: string;
-
-  /**
-   * Body param: Trial period override settings
-   */
-  trialOverrideConfiguration?: SubscriptionPreviewParams.TrialOverrideConfiguration;
-
-  /**
-   * Body param: Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
-   */
-  unitQuantity?: number;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export namespace SubscriptionPreviewParams {
-  /**
-   * Addon configuration
-   */
-  export interface Addon {
-    /**
-     * Addon ID
-     */
-    id: string;
-
-    /**
-     * Number of addon instances
-     */
-    quantity: number;
-  }
-
-  /**
-   * Coupon or discount to apply
-   */
-  export interface AppliedCoupon {
-    /**
-     * Billing provider coupon ID
-     */
-    billingCouponId?: string;
-
-    /**
-     * Coupon timing configuration
-     */
-    configuration?: AppliedCoupon.Configuration;
-
-    /**
-     * Stigg coupon ID
-     */
-    couponId?: string;
-
-    /**
-     * Ad-hoc discount configuration
-     */
-    discount?: AppliedCoupon.Discount;
-
-    /**
-     * Promotion code to apply
-     */
-    promotionCode?: string;
-  }
-
-  export namespace AppliedCoupon {
-    /**
-     * Coupon timing configuration
-     */
-    export interface Configuration {
-      /**
-       * Coupon start date
-       */
-      startDate?: string;
-    }
-
-    /**
-     * Ad-hoc discount configuration
-     */
-    export interface Discount {
-      /**
-       * Fixed amounts off by currency
-       */
-      amountsOff?: Array<Discount.AmountsOff> | null;
-
-      /**
-       * Ad-hoc discount
-       */
-      description?: string;
-
-      /**
-       * Duration in months
-       */
-      durationInMonths?: number;
-
-      /**
-       * Discount name
-       */
-      name?: string;
-
-      /**
-       * Percentage discount
-       */
-      percentOff?: number;
-    }
-
-    export namespace Discount {
-      export interface AmountsOff {
-        /**
-         * The price amount
-         */
-        amount: number;
-
-        /**
-         * ISO 4217 currency code
-         */
-        currency:
-          | 'usd'
-          | 'aed'
-          | 'all'
-          | 'amd'
-          | 'ang'
-          | 'aud'
-          | 'awg'
-          | 'azn'
-          | 'bam'
-          | 'bbd'
-          | 'bdt'
-          | 'bgn'
-          | 'bif'
-          | 'bmd'
-          | 'bnd'
-          | 'bsd'
-          | 'bwp'
-          | 'byn'
-          | 'bzd'
-          | 'brl'
-          | 'cad'
-          | 'cdf'
-          | 'chf'
-          | 'cny'
-          | 'czk'
-          | 'dkk'
-          | 'dop'
-          | 'dzd'
-          | 'egp'
-          | 'etb'
-          | 'eur'
-          | 'fjd'
-          | 'gbp'
-          | 'gel'
-          | 'gip'
-          | 'gmd'
-          | 'gyd'
-          | 'hkd'
-          | 'hrk'
-          | 'htg'
-          | 'idr'
-          | 'ils'
-          | 'inr'
-          | 'isk'
-          | 'jmd'
-          | 'jpy'
-          | 'kes'
-          | 'kgs'
-          | 'khr'
-          | 'kmf'
-          | 'krw'
-          | 'kyd'
-          | 'kzt'
-          | 'lbp'
-          | 'lkr'
-          | 'lrd'
-          | 'lsl'
-          | 'mad'
-          | 'mdl'
-          | 'mga'
-          | 'mkd'
-          | 'mmk'
-          | 'mnt'
-          | 'mop'
-          | 'mro'
-          | 'mvr'
-          | 'mwk'
-          | 'mxn'
-          | 'myr'
-          | 'mzn'
-          | 'nad'
-          | 'ngn'
-          | 'nok'
-          | 'npr'
-          | 'nzd'
-          | 'pgk'
-          | 'php'
-          | 'pkr'
-          | 'pln'
-          | 'qar'
-          | 'ron'
-          | 'rsd'
-          | 'rub'
-          | 'rwf'
-          | 'sar'
-          | 'sbd'
-          | 'scr'
-          | 'sek'
-          | 'sgd'
-          | 'sle'
-          | 'sll'
-          | 'sos'
-          | 'szl'
-          | 'thb'
-          | 'tjs'
-          | 'top'
-          | 'try'
-          | 'ttd'
-          | 'tzs'
-          | 'uah'
-          | 'uzs'
-          | 'vnd'
-          | 'vuv'
-          | 'wst'
-          | 'xaf'
-          | 'xcd'
-          | 'yer'
-          | 'zar'
-          | 'zmw'
-          | 'clp'
-          | 'djf'
-          | 'gnf'
-          | 'ugx'
-          | 'pyg'
-          | 'xof'
-          | 'xpf';
-      }
-    }
-  }
-
-  /**
-   * Feature with quantity
-   */
-  export interface BillableFeature {
-    /**
-     * Feature ID
-     */
-    featureId: string;
-
-    /**
-     * Quantity of feature units. Minimum is 0 (zero is allowed).
-     */
-    quantity: number;
-  }
-
-  /**
-   * Billing and tax configuration
-   */
-  export interface BillingInformation {
-    /**
-     * Billing address
-     */
-    billingAddress?: BillingInformation.BillingAddress;
-
-    /**
-     * Connected account ID for platform billing
-     */
-    chargeOnBehalfOfAccount?: string;
-
-    /**
-     * Billing integration ID
-     */
-    integrationId?: string;
-
-    /**
-     * Days until invoice is due
-     */
-    invoiceDaysUntilDue?: number;
-
-    /**
-     * Whether subscription is backdated
-     */
-    isBackdated?: boolean;
-
-    /**
-     * Whether invoice is already paid
-     */
-    isInvoicePaid?: boolean;
-
-    /**
-     * Additional billing metadata
-     */
-    metadata?: { [key: string]: string };
-
-    /**
-     * Proration behavior
-     */
-    prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE';
-
-    /**
-     * Customer tax IDs
-     */
-    taxIds?: Array<BillingInformation.TaxID>;
-
-    /**
-     * Tax percentage to apply
-     */
-    taxPercentage?: number;
-
-    /**
-     * Tax rate IDs from billing provider
-     */
-    taxRateIds?: Array<string>;
-  }
-
-  export namespace BillingInformation {
-    /**
-     * Billing address
-     */
-    export interface BillingAddress {
-      city?: string;
-
-      country?: string;
-
-      line1?: string;
-
-      line2?: string;
-
-      postalCode?: string;
-
-      state?: string;
-    }
-
-    /**
-     * Tax exemption identifier
-     */
-    export interface TaxID {
-      /**
-       * Tax exemption type (e.g., vat, gst)
-       */
-      type: string;
-
-      /**
-       * Tax exemption identifier value
-       */
-      value: string;
-    }
-  }
-
-  /**
-   * A charge selection for a subscription (references a catalog charge with a
-   * quantity).
-   */
-  export interface Charge {
-    /**
-     * Charge ID
-     */
-    id: string;
-
-    /**
-     * Charge quantity. Minimum is 0 (zero is allowed).
-     */
-    quantity: number;
-
-    /**
-     * Charge type
-     */
-    type: 'FEATURE' | 'CREDIT';
-  }
-
-  /**
-   * Trial period override settings
-   */
-  export interface TrialOverrideConfiguration {
-    /**
-     * Whether to start as trial
-     */
-    isTrial: boolean;
-
-    /**
-     * Behavior when trial ends
-     */
-    trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION';
-
-    /**
-     * Trial end date
-     */
-    trialEndDate?: string;
-  }
-}
-
-export interface SubscriptionUpdateParams {
-  /**
-   * Body param
-   */
-  addons?: Array<SubscriptionUpdateParams.Addon>;
-
-  /**
-   * Body param
-   */
-  appliedCoupon?: SubscriptionUpdateParams.AppliedCoupon;
-
-  /**
-   * Body param: Await payment confirmation
-   */
-  awaitPaymentConfirmation?: boolean;
-
-  /**
-   * Body param
-   */
-  billingCycleAnchor?: 'UNCHANGED' | 'NOW';
-
-  /**
-   * Body param
-   */
-  billingInformation?: SubscriptionUpdateParams.BillingInformation;
-
-  /**
-   * Body param
-   */
-  billingPeriod?: 'MONTHLY' | 'ANNUALLY';
-
-  /**
-   * Body param
-   */
-  budget?: SubscriptionUpdateParams.Budget | null;
-
-  /**
-   * Body param: Subscription cancellation date
-   */
-  cancellationDate?: string | null;
-
-  /**
-   * Body param
-   */
-  charges?: Array<SubscriptionUpdateParams.Charge>;
-
-  /**
-   * Body param
-   */
-  entitlements?: Array<SubscriptionUpdateParams.Feature | SubscriptionUpdateParams.Credit>;
-
-  /**
-   * Body param: Additional metadata for the subscription
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * Body param: Minimum spend amount
-   */
-  minimumSpend?: SubscriptionUpdateParams.MinimumSpend | null;
-
-  /**
-   * Body param
-   */
-  priceOverrides?: Array<SubscriptionUpdateParams.PriceOverride>;
-
-  /**
-   * Body param: Promotion code
-   */
-  promotionCode?: string;
-
-  /**
-   * Body param: Salesforce ID
-   */
-  salesforceId?: string | null;
-
-  /**
-   * Body param
-   */
-  scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE';
-
-  /**
-   * Body param: Subscription trial end date
-   */
-  trialEndDate?: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export namespace SubscriptionUpdateParams {
-  /**
-   * Addon configuration
-   */
-  export interface Addon {
-    /**
-     * Addon ID
-     */
-    id: string;
-
-    /**
-     * Number of addon instances
-     */
-    quantity: number;
-  }
-
-  export interface AppliedCoupon {
-    billingCouponId?: string;
-
-    configuration?: AppliedCoupon.Configuration;
-
-    /**
-     * Stigg coupon ID
-     */
-    couponId?: string;
-
-    discount?: AppliedCoupon.Discount;
-
-    promotionCode?: string | null;
-  }
-
-  export namespace AppliedCoupon {
-    export interface Configuration {
-      /**
-       * Coupon start date
-       */
-      startDate?: string;
-    }
-
-    export interface Discount {
-      amountsOff?: Array<Discount.AmountsOff> | null;
-
-      description?: string;
-
-      durationInMonths?: number;
-
-      name?: string;
-
-      percentOff?: number;
-    }
-
-    export namespace Discount {
-      /**
-       * Monetary amount with currency
-       */
-      export interface AmountsOff {
-        /**
-         * The price amount
-         */
-        amount: number;
-
-        /**
-         * ISO 4217 currency code
-         */
-        currency:
-          | 'usd'
-          | 'aed'
-          | 'all'
-          | 'amd'
-          | 'ang'
-          | 'aud'
-          | 'awg'
-          | 'azn'
-          | 'bam'
-          | 'bbd'
-          | 'bdt'
-          | 'bgn'
-          | 'bif'
-          | 'bmd'
-          | 'bnd'
-          | 'bsd'
-          | 'bwp'
-          | 'byn'
-          | 'bzd'
-          | 'brl'
-          | 'cad'
-          | 'cdf'
-          | 'chf'
-          | 'cny'
-          | 'czk'
-          | 'dkk'
-          | 'dop'
-          | 'dzd'
-          | 'egp'
-          | 'etb'
-          | 'eur'
-          | 'fjd'
-          | 'gbp'
-          | 'gel'
-          | 'gip'
-          | 'gmd'
-          | 'gyd'
-          | 'hkd'
-          | 'hrk'
-          | 'htg'
-          | 'idr'
-          | 'ils'
-          | 'inr'
-          | 'isk'
-          | 'jmd'
-          | 'jpy'
-          | 'kes'
-          | 'kgs'
-          | 'khr'
-          | 'kmf'
-          | 'krw'
-          | 'kyd'
-          | 'kzt'
-          | 'lbp'
-          | 'lkr'
-          | 'lrd'
-          | 'lsl'
-          | 'mad'
-          | 'mdl'
-          | 'mga'
-          | 'mkd'
-          | 'mmk'
-          | 'mnt'
-          | 'mop'
-          | 'mro'
-          | 'mvr'
-          | 'mwk'
-          | 'mxn'
-          | 'myr'
-          | 'mzn'
-          | 'nad'
-          | 'ngn'
-          | 'nok'
-          | 'npr'
-          | 'nzd'
-          | 'pgk'
-          | 'php'
-          | 'pkr'
-          | 'pln'
-          | 'qar'
-          | 'ron'
-          | 'rsd'
-          | 'rub'
-          | 'rwf'
-          | 'sar'
-          | 'sbd'
-          | 'scr'
-          | 'sek'
-          | 'sgd'
-          | 'sle'
-          | 'sll'
-          | 'sos'
-          | 'szl'
-          | 'thb'
-          | 'tjs'
-          | 'top'
-          | 'try'
-          | 'ttd'
-          | 'tzs'
-          | 'uah'
-          | 'uzs'
-          | 'vnd'
-          | 'vuv'
-          | 'wst'
-          | 'xaf'
-          | 'xcd'
-          | 'yer'
-          | 'zar'
-          | 'zmw'
-          | 'clp'
-          | 'djf'
-          | 'gnf'
-          | 'ugx'
-          | 'pyg'
-          | 'xof'
-          | 'xpf';
-      }
-    }
-  }
-
-  export interface BillingInformation {
-    /**
-     * Physical address
-     */
-    billingAddress?: BillingInformation.BillingAddress;
-
-    chargeOnBehalfOfAccount?: string;
-
-    couponId?: string;
-
-    integrationId?: string;
-
-    invoiceDaysUntilDue?: number;
-
-    isBackdated?: boolean;
-
-    isInvoicePaid?: boolean;
-
-    /**
-     * Additional metadata for the subscription
-     */
-    metadata?: { [key: string]: string };
-
-    prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE';
-
-    taxIds?: Array<BillingInformation.TaxID>;
-
-    taxPercentage?: number;
-
-    taxRateIds?: Array<string>;
-  }
-
-  export namespace BillingInformation {
-    /**
-     * Physical address
-     */
-    export interface BillingAddress {
-      /**
-       * City name
-       */
-      city?: string;
-
-      /**
-       * Country code or name
-       */
-      country?: string;
-
-      /**
-       * Street address line 1
-       */
-      line1?: string;
-
-      /**
-       * Street address line 2
-       */
-      line2?: string;
-
-      /**
-       * Postal or ZIP code
-       */
-      postalCode?: string;
-
-      /**
-       * State or province
-       */
-      state?: string;
-    }
-
-    export interface TaxID {
-      type: string;
-
-      value: string;
-    }
-  }
-
-  export interface Budget {
-    /**
-     * Whether the budget is a soft limit
-     */
-    hasSoftLimit: boolean;
-
-    /**
-     * Maximum spending limit
-     */
-    limit: number;
-  }
-
-  export interface Charge {
-    /**
-     * Charge ID
-     */
-    id: string;
-
-    quantity: number;
-
-    type: 'FEATURE' | 'CREDIT';
-  }
-
-  /**
-   * Feature entitlement configuration for a subscription
-   */
-  export interface Feature {
-    /**
-     * The feature ID to attach the entitlement to
-     */
-    id: string;
-
-    /**
-     * SubscriptionFeatureEntitlementRequest
-     */
-    type: 'FEATURE';
-
-    /**
-     * Whether the usage limit is a soft limit
-     */
-    hasSoftLimit?: boolean;
-
-    /**
-     * Whether usage is unlimited
-     */
-    hasUnlimitedUsage?: boolean;
-
-    /**
-     * Configuration for monthly reset period
-     */
-    monthlyResetPeriodConfiguration?: Feature.MonthlyResetPeriodConfiguration | null;
-
-    /**
-     * Period at which usage resets
-     */
-    resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR';
-
-    /**
-     * Maximum allowed usage for the feature
-     */
-    usageLimit?: number;
-
-    /**
-     * Configuration for weekly reset period
-     */
-    weeklyResetPeriodConfiguration?: Feature.WeeklyResetPeriodConfiguration | null;
-
-    /**
-     * Configuration for yearly reset period
-     */
-    yearlyResetPeriodConfiguration?: Feature.YearlyResetPeriodConfiguration | null;
-  }
-
-  export namespace Feature {
-    /**
-     * Configuration for monthly reset period
-     */
-    export interface MonthlyResetPeriodConfiguration {
-      /**
-       * Reset anchor (SubscriptionStart or StartOfTheMonth)
-       */
-      accordingTo: 'SubscriptionStart' | 'StartOfTheMonth';
-    }
-
-    /**
-     * Configuration for weekly reset period
-     */
-    export interface WeeklyResetPeriodConfiguration {
-      /**
-       * Reset anchor (SubscriptionStart or specific day)
-       */
-      accordingTo:
-        | 'SubscriptionStart'
-        | 'EverySunday'
-        | 'EveryMonday'
-        | 'EveryTuesday'
-        | 'EveryWednesday'
-        | 'EveryThursday'
-        | 'EveryFriday'
-        | 'EverySaturday';
-    }
-
-    /**
-     * Configuration for yearly reset period
-     */
-    export interface YearlyResetPeriodConfiguration {
-      /**
-       * Reset anchor (SubscriptionStart)
-       */
-      accordingTo: 'SubscriptionStart';
-    }
-  }
-
-  /**
-   * Credit entitlement configuration for a subscription
-   */
-  export interface Credit {
-    /**
-     * The custom currency ID for the credit entitlement
-     */
-    id: string;
-
-    /**
-     * Credit grant amount
-     */
-    amount: number;
-
-    /**
-     * Credit grant cadence (MONTH or YEAR)
-     */
-    cadence: 'MONTH' | 'YEAR';
-
-    /**
-     * SubscriptionCreditEntitlementRequest
-     */
-    type: 'CREDIT';
-  }
-
-  /**
-   * Minimum spend amount
-   */
-  export interface MinimumSpend {
-    /**
-     * The price amount
-     */
-    amount?: number;
-
-    /**
-     * The price currency
-     */
-    currency?:
-      | 'usd'
-      | 'aed'
-      | 'all'
-      | 'amd'
-      | 'ang'
-      | 'aud'
-      | 'awg'
-      | 'azn'
-      | 'bam'
-      | 'bbd'
-      | 'bdt'
-      | 'bgn'
-      | 'bif'
-      | 'bmd'
-      | 'bnd'
-      | 'bsd'
-      | 'bwp'
-      | 'byn'
-      | 'bzd'
-      | 'brl'
-      | 'cad'
-      | 'cdf'
-      | 'chf'
-      | 'cny'
-      | 'czk'
-      | 'dkk'
-      | 'dop'
-      | 'dzd'
-      | 'egp'
-      | 'etb'
-      | 'eur'
-      | 'fjd'
-      | 'gbp'
-      | 'gel'
-      | 'gip'
-      | 'gmd'
-      | 'gyd'
-      | 'hkd'
-      | 'hrk'
-      | 'htg'
-      | 'idr'
-      | 'ils'
-      | 'inr'
-      | 'isk'
-      | 'jmd'
-      | 'jpy'
-      | 'kes'
-      | 'kgs'
-      | 'khr'
-      | 'kmf'
-      | 'krw'
-      | 'kyd'
-      | 'kzt'
-      | 'lbp'
-      | 'lkr'
-      | 'lrd'
-      | 'lsl'
-      | 'mad'
-      | 'mdl'
-      | 'mga'
-      | 'mkd'
-      | 'mmk'
-      | 'mnt'
-      | 'mop'
-      | 'mro'
-      | 'mvr'
-      | 'mwk'
-      | 'mxn'
-      | 'myr'
-      | 'mzn'
-      | 'nad'
-      | 'ngn'
-      | 'nok'
-      | 'npr'
-      | 'nzd'
-      | 'pgk'
-      | 'php'
-      | 'pkr'
-      | 'pln'
-      | 'qar'
-      | 'ron'
-      | 'rsd'
-      | 'rub'
-      | 'rwf'
-      | 'sar'
-      | 'sbd'
-      | 'scr'
-      | 'sek'
-      | 'sgd'
-      | 'sle'
-      | 'sll'
-      | 'sos'
-      | 'szl'
-      | 'thb'
-      | 'tjs'
-      | 'top'
-      | 'try'
-      | 'ttd'
-      | 'tzs'
-      | 'uah'
-      | 'uzs'
-      | 'vnd'
-      | 'vuv'
-      | 'wst'
-      | 'xaf'
-      | 'xcd'
-      | 'yer'
-      | 'zar'
-      | 'zmw'
-      | 'clp'
-      | 'djf'
-      | 'gnf'
-      | 'ugx'
-      | 'pyg'
-      | 'xof'
-      | 'xpf';
-  }
-
-  export interface PriceOverride {
-    /**
-     * Addon ID
-     */
-    addonId?: string;
-
-    /**
-     * The price amount
-     */
-    amount?: number;
-
-    /**
-     * Whether this is a base charge override
-     */
-    baseCharge?: boolean;
-
-    /**
-     * The price currency
-     */
-    currency?:
-      | 'usd'
-      | 'aed'
-      | 'all'
-      | 'amd'
-      | 'ang'
-      | 'aud'
-      | 'awg'
-      | 'azn'
-      | 'bam'
-      | 'bbd'
-      | 'bdt'
-      | 'bgn'
-      | 'bif'
-      | 'bmd'
-      | 'bnd'
-      | 'bsd'
-      | 'bwp'
-      | 'byn'
-      | 'bzd'
-      | 'brl'
-      | 'cad'
-      | 'cdf'
-      | 'chf'
-      | 'cny'
-      | 'czk'
-      | 'dkk'
-      | 'dop'
-      | 'dzd'
-      | 'egp'
-      | 'etb'
-      | 'eur'
-      | 'fjd'
-      | 'gbp'
-      | 'gel'
-      | 'gip'
-      | 'gmd'
-      | 'gyd'
-      | 'hkd'
-      | 'hrk'
-      | 'htg'
-      | 'idr'
-      | 'ils'
-      | 'inr'
-      | 'isk'
-      | 'jmd'
-      | 'jpy'
-      | 'kes'
-      | 'kgs'
-      | 'khr'
-      | 'kmf'
-      | 'krw'
-      | 'kyd'
-      | 'kzt'
-      | 'lbp'
-      | 'lkr'
-      | 'lrd'
-      | 'lsl'
-      | 'mad'
-      | 'mdl'
-      | 'mga'
-      | 'mkd'
-      | 'mmk'
-      | 'mnt'
-      | 'mop'
-      | 'mro'
-      | 'mvr'
-      | 'mwk'
-      | 'mxn'
-      | 'myr'
-      | 'mzn'
-      | 'nad'
-      | 'ngn'
-      | 'nok'
-      | 'npr'
-      | 'nzd'
-      | 'pgk'
-      | 'php'
-      | 'pkr'
-      | 'pln'
-      | 'qar'
-      | 'ron'
-      | 'rsd'
-      | 'rub'
-      | 'rwf'
-      | 'sar'
-      | 'sbd'
-      | 'scr'
-      | 'sek'
-      | 'sgd'
-      | 'sle'
-      | 'sll'
-      | 'sos'
-      | 'szl'
-      | 'thb'
-      | 'tjs'
-      | 'top'
-      | 'try'
-      | 'ttd'
-      | 'tzs'
-      | 'uah'
-      | 'uzs'
-      | 'vnd'
-      | 'vuv'
-      | 'wst'
-      | 'xaf'
-      | 'xcd'
-      | 'yer'
-      | 'zar'
-      | 'zmw'
-      | 'clp'
-      | 'djf'
-      | 'gnf'
-      | 'ugx'
-      | 'pyg'
-      | 'xof'
-      | 'xpf';
-
-    /**
-     * The corresponding custom currency id of the recurring credits price
-     */
-    currencyId?: string;
-
-    /**
-     * Feature ID
-     */
-    featureId?: string;
-  }
-}
-
-export interface SubscriptionImportParams {
-  /**
-   * Body param: List of subscription objects to import
-   */
-  subscriptions: Array<SubscriptionImportParams.Subscription>;
-
-  /**
-   * Body param: Integration ID to use for importing subscriptions
-   */
-  integrationId?: string | null;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export namespace SubscriptionImportParams {
-  export interface Subscription {
-    /**
-     * Subscription ID
-     */
-    id: string;
-
-    /**
-     * Customer ID
-     */
-    customerId: string;
-
-    /**
-     * Plan ID
-     */
-    planId: string;
-
-    addons?: Array<Subscription.Addon>;
-
-    /**
-     * Billing ID
-     */
-    billingId?: string | null;
-
-    /**
-     * Billing period (MONTHLY or ANNUALLY)
-     */
-    billingPeriod?: 'MONTHLY' | 'ANNUALLY';
-
-    charges?: Array<Subscription.Charge>;
-
-    /**
-     * Subscription end date
-     */
-    endDate?: string | null;
-
-    /**
-     * Additional metadata for the subscription
-     */
-    metadata?: { [key: string]: string };
-
-    /**
-     * Resource ID
-     */
-    resourceId?: string | null;
-
-    /**
-     * Subscription start date
-     */
-    startDate?: string;
-  }
-
-  export namespace Subscription {
-    /**
-     * Addon configuration
-     */
-    export interface Addon {
-      /**
-       * Addon ID
-       */
-      id: string;
-
-      /**
-       * Number of addon instances
-       */
-      quantity: number;
-    }
-
-    /**
-     * A charge selection for a subscription (references a catalog charge with a
-     * quantity).
-     */
-    export interface Charge {
-      /**
-       * Charge ID
-       */
-      id: string;
-
-      /**
-       * Charge quantity. Minimum is 0 (zero is allowed).
-       */
-      quantity: number;
-
-      /**
-       * Charge type
-       */
-      type: 'FEATURE' | 'CREDIT';
-    }
-  }
-}
-
-export interface SubscriptionCancelParams {
-  /**
-   * Body param: Action on cancellation (downgrade or revoke)
-   */
-  cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS';
-
-  /**
-   * Body param: When to cancel (immediate, period end, or date)
-   */
-  cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE';
-
-  /**
-   * Body param: Subscription end date
-   */
-  endDate?: string;
-
-  /**
-   * Body param: If set, enables or disables prorating of credits on subscription
-   * cancellation.
-   */
-  prorate?: boolean;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 Subscriptions.FutureUpdate = FutureUpdateAPIFutureUpdate;
 Subscriptions.Usage = Usage;
 Subscriptions.Invoice = Invoice;
@@ -6849,15 +6849,15 @@ export declare namespace Subscriptions {
     type SubscriptionProvisionResponse as SubscriptionProvisionResponse,
     type SubscriptionListResponsesMyCursorIDPage as SubscriptionListResponsesMyCursorIDPage,
     type SubscriptionRetrieveParams as SubscriptionRetrieveParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionListParams as SubscriptionListParams,
+    type SubscriptionCancelParams as SubscriptionCancelParams,
+    type SubscriptionDelegateParams as SubscriptionDelegateParams,
+    type SubscriptionImportParams as SubscriptionImportParams,
+    type SubscriptionMigrateParams as SubscriptionMigrateParams,
+    type SubscriptionPreviewParams as SubscriptionPreviewParams,
     type SubscriptionProvisionParams as SubscriptionProvisionParams,
     type SubscriptionTransferParams as SubscriptionTransferParams,
-    type SubscriptionMigrateParams as SubscriptionMigrateParams,
-    type SubscriptionDelegateParams as SubscriptionDelegateParams,
-    type SubscriptionPreviewParams as SubscriptionPreviewParams,
-    type SubscriptionUpdateParams as SubscriptionUpdateParams,
-    type SubscriptionImportParams as SubscriptionImportParams,
-    type SubscriptionCancelParams as SubscriptionCancelParams,
   };
 
   export {

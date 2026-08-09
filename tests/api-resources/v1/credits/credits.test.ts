@@ -9,6 +9,31 @@ const client = new Stigg({
 
 describe('resource credits', () => {
   // Mock server tests are disabled
+  test.skip('getAutoRecharge: only required params', async () => {
+    const responsePromise = client.v1.credits.getAutoRecharge({
+      currencyId: 'currencyId',
+      customerId: 'customerId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getAutoRecharge: required and optional params', async () => {
+    const response = await client.v1.credits.getAutoRecharge({
+      currencyId: 'currencyId',
+      customerId: 'customerId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('getUsage: only required params', async () => {
     const responsePromise = client.v1.credits.getUsage({ customerId: 'customerId' });
     const rawResponse = await responsePromise.asResponse();
@@ -33,31 +58,6 @@ describe('resource credits', () => {
       resourceId: 'resourceId',
       startDate: '2019-12-27T18:11:19.117Z',
       timeRange: 'LAST_DAY',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('getAutoRecharge: only required params', async () => {
-    const responsePromise = client.v1.credits.getAutoRecharge({
-      currencyId: 'currencyId',
-      customerId: 'customerId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getAutoRecharge: required and optional params', async () => {
-    const response = await client.v1.credits.getAutoRecharge({
-      currencyId: 'currencyId',
-      customerId: 'customerId',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

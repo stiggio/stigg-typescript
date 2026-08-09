@@ -9,6 +9,27 @@ const client = new Stigg({
 
 describe('resource entities', () => {
   // Mock server tests are disabled
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.v1Beta.customers.entities.retrieve('x', { id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.v1Beta.customers.entities.retrieve('x', {
+      id: 'id',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1Beta.customers.entities.list('id');
     const rawResponse = await responsePromise.asResponse();
@@ -38,63 +59,6 @@ describe('resource entities', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('upsert: only required params', async () => {
-    const responsePromise = client.v1Beta.customers.entities.upsert('id', {
-      entities: [{ id: 'user-7f3a0c1d' }, { id: 'user-c4d1b2e9' }],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('upsert: required and optional params', async () => {
-    const response = await client.v1Beta.customers.entities.upsert('id', {
-      entities: [
-        {
-          id: 'user-7f3a0c1d',
-          displayName: 'Jane Doe',
-          entityTypeId: 'user',
-          metadata: { email: 'jane@acme.com', role: 'admin' },
-        },
-        {
-          id: 'user-c4d1b2e9',
-          displayName: 'John Roe',
-          entityTypeId: 'user',
-          metadata: { email: 'john@acme.com' },
-        },
-      ],
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.v1Beta.customers.entities.retrieve('x', { id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.v1Beta.customers.entities.retrieve('x', {
-      id: 'id',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
   });
 
   // Mock server tests are disabled
@@ -138,6 +102,42 @@ describe('resource entities', () => {
   test.skip('unarchive: required and optional params', async () => {
     const response = await client.v1Beta.customers.entities.unarchive('id', {
       ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('upsert: only required params', async () => {
+    const responsePromise = client.v1Beta.customers.entities.upsert('id', {
+      entities: [{ id: 'user-7f3a0c1d' }, { id: 'user-c4d1b2e9' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('upsert: required and optional params', async () => {
+    const response = await client.v1Beta.customers.entities.upsert('id', {
+      entities: [
+        {
+          id: 'user-7f3a0c1d',
+          displayName: 'Jane Doe',
+          entityTypeId: 'user',
+          metadata: { email: 'jane@acme.com', role: 'admin' },
+        },
+        {
+          id: 'user-c4d1b2e9',
+          displayName: 'John Roe',
+          entityTypeId: 'user',
+          metadata: { email: 'john@acme.com' },
+        },
+      ],
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

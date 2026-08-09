@@ -5,9 +5,9 @@ export {
   type DataExportListModelsResponse,
   type DataExportMintScopedTokenResponse,
   type DataExportTriggerSyncResponse,
-  type DataExportTriggerSyncParams,
-  type DataExportMintScopedTokenParams,
   type DataExportListModelsParams,
+  type DataExportMintScopedTokenParams,
+  type DataExportTriggerSyncParams,
 } from './data-export';
 export {
   Destinations,

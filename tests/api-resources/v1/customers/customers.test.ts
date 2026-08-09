@@ -82,6 +82,193 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('archive', async () => {
+    const responsePromise = client.v1.customers.archive('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('archive: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.archive(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('checkEntitlement', async () => {
+    const responsePromise = client.v1.customers.checkEntitlement('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('checkEntitlement: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.checkEntitlement(
+        'x',
+        {
+          currencyId: 'x',
+          featureId: 'x',
+          requestedUsage: 0,
+          requestedValues: ['string'],
+          resourceId: 'x',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('import: only required params', async () => {
+    const responsePromise = client.v1.customers.import({
+      customers: [
+        {
+          id: 'id',
+          email: 'dev@stainless.com',
+          name: 'name',
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('import: required and optional params', async () => {
+    const response = await client.v1.customers.import({
+      customers: [
+        {
+          id: 'id',
+          email: 'dev@stainless.com',
+          name: 'name',
+          billingId: 'billingId',
+          metadata: { foo: 'string' },
+          paymentMethodId: 'paymentMethodId',
+          salesforceId: 'salesforceId',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+        },
+      ],
+      integrationId: 'integrationId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('listContracts', async () => {
+    const responsePromise = client.v1.customers.listContracts('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listContracts: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.listContracts(
+        'id',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listInvoices', async () => {
+    const responsePromise = client.v1.customers.listInvoices('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listInvoices: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.listInvoices(
+        'id',
+        {
+          after: 'after',
+          before: 'before',
+          contractExternalId: 'contractExternalId',
+          issuedAfter: '2019-12-27T18:11:19.117Z',
+          issuedBefore: '2019-12-27T18:11:19.117Z',
+          limit: 1,
+          orderBy: 'issueDate',
+          orderDir: 'ASC',
+          stateIn: 'stateIn',
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listResources', async () => {
+    const responsePromise = client.v1.customers.listResources('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listResources: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.customers.listResources(
+        'x',
+        {
+          after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          limit: 1,
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('provision: only required params', async () => {
     const responsePromise = client.v1.customers.provision({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
@@ -163,125 +350,6 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('archive', async () => {
-    const responsePromise = client.v1.customers.archive('x');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('archive: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.customers.archive(
-        'x',
-        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('unarchive', async () => {
-    const responsePromise = client.v1.customers.unarchive('x');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('unarchive: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.customers.unarchive(
-        'x',
-        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('import: only required params', async () => {
-    const responsePromise = client.v1.customers.import({
-      customers: [
-        {
-          id: 'id',
-          email: 'dev@stainless.com',
-          name: 'name',
-        },
-      ],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('import: required and optional params', async () => {
-    const response = await client.v1.customers.import({
-      customers: [
-        {
-          id: 'id',
-          email: 'dev@stainless.com',
-          name: 'name',
-          billingId: 'billingId',
-          metadata: { foo: 'string' },
-          paymentMethodId: 'paymentMethodId',
-          salesforceId: 'salesforceId',
-          updatedAt: '2019-12-27T18:11:19.117Z',
-        },
-      ],
-      integrationId: 'integrationId',
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('listResources', async () => {
-    const responsePromise = client.v1.customers.listResources('x');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listResources: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.customers.listResources(
-        'x',
-        {
-          after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-          before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-          limit: 1,
-          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('retrieveEntitlements', async () => {
     const responsePromise = client.v1.customers.retrieveEntitlements('x');
     const rawResponse = await responsePromise.asResponse();
@@ -310,8 +378,8 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('checkEntitlement', async () => {
-    const responsePromise = client.v1.customers.checkEntitlement('x');
+  test.skip('unarchive', async () => {
+    const responsePromise = client.v1.customers.unarchive('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -322,80 +390,12 @@ describe('resource customers', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('checkEntitlement: request options and params are passed correctly', async () => {
+  test.skip('unarchive: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.customers.checkEntitlement(
+      client.v1.customers.unarchive(
         'x',
-        {
-          currencyId: 'x',
-          featureId: 'x',
-          requestedUsage: 0,
-          requestedValues: ['string'],
-          resourceId: 'x',
-          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listContracts', async () => {
-    const responsePromise = client.v1.customers.listContracts('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listContracts: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.customers.listContracts(
-        'id',
         { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listInvoices', async () => {
-    const responsePromise = client.v1.customers.listInvoices('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listInvoices: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.customers.listInvoices(
-        'id',
-        {
-          after: 'after',
-          before: 'before',
-          contractExternalId: 'contractExternalId',
-          issuedAfter: '2019-12-27T18:11:19.117Z',
-          issuedBefore: '2019-12-27T18:11:19.117Z',
-          limit: 1,
-          orderBy: 'issueDate',
-          orderDir: 'ASC',
-          stateIn: 'stateIn',
-          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);

@@ -9,31 +9,6 @@ import { path } from '../../internal/utils/path';
 
 export class Contracts extends APIResource {
   /**
-   * Retrieves a cursor-paginated list of contracts in the environment, fetched live
-   * from the connected billing provider. Each contract is enriched with a preview of
-   * its upcoming (next) invoice when one is available. Returns an empty list when no
-   * billing provider is connected. Supports filtering by customer external ID,
-   * state, and name.
-   */
-  list(
-    params: ContractListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<ContractListResponsesMyCursorIDPage, ContractListResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
-    return this._client.getAPIList('/api/v1/contracts', MyCursorIDPage<ContractListResponse>, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Creates a contract for a customer together with all of its (custom)
    * subscriptions in a single atomic operation. Every new subscription is created
    * inside one transaction — any validation or creation failure rolls the whole
@@ -91,6 +66,31 @@ export class Contracts extends APIResource {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
     return this._client.patch(path`/api/v1/contracts/${id}`, {
       body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Retrieves a cursor-paginated list of contracts in the environment, fetched live
+   * from the connected billing provider. Each contract is enriched with a preview of
+   * its upcoming (next) invoice when one is available. Returns an empty list when no
+   * billing provider is connected. Supports filtering by customer external ID,
+   * state, and name.
+   */
+  list(
+    params: ContractListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ContractListResponsesMyCursorIDPage, ContractListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.getAPIList('/api/v1/contracts', MyCursorIDPage<ContractListResponse>, {
+      query,
       ...options,
       headers: buildHeaders([
         {
@@ -1815,38 +1815,6 @@ export namespace ContractDeleteResponse {
   }
 }
 
-export interface ContractListParams extends MyCursorIDPageParams {
-  /**
-   * Query param: Filter by the exact external ID of the customer the contract
-   * belongs to
-   */
-  customerExternalId?: string;
-
-  /**
-   * Query param: Filter by exact contract name
-   */
-  name?: string;
-
-  /**
-   * Query param: Filter by contract state. Supports comma-separated values for
-   * multiple states
-   */
-  state?: string;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface ContractCreateParams {
   /**
    * Body param: The customer ref ID the contract belongs to
@@ -3221,6 +3189,38 @@ export interface ContractUpdateParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
+export interface ContractListParams extends MyCursorIDPageParams {
+  /**
+   * Query param: Filter by the exact external ID of the customer the contract
+   * belongs to
+   */
+  customerExternalId?: string;
+
+  /**
+   * Query param: Filter by exact contract name
+   */
+  name?: string;
+
+  /**
+   * Query param: Filter by contract state. Supports comma-separated values for
+   * multiple states
+   */
+  state?: string;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface ContractDeleteParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
@@ -3244,10 +3244,10 @@ export declare namespace Contracts {
     type ContractListResponse as ContractListResponse,
     type ContractDeleteResponse as ContractDeleteResponse,
     type ContractListResponsesMyCursorIDPage as ContractListResponsesMyCursorIDPage,
-    type ContractListParams as ContractListParams,
     type ContractCreateParams as ContractCreateParams,
     type ContractRetrieveParams as ContractRetrieveParams,
     type ContractUpdateParams as ContractUpdateParams,
+    type ContractListParams as ContractListParams,
     type ContractDeleteParams as ContractDeleteParams,
   };
 }

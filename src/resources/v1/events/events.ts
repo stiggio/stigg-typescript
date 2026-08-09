@@ -25,12 +25,13 @@ export class Events extends APIResource {
   beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
 
   /**
-   * Reports raw usage events for event-based metering. Events are ingested
-   * asynchronously and aggregated into usage totals.
+   * Estimates the credit cost of a usage event without ingesting it. Returns the
+   * estimated cost per credit currency, the current balance, and the balance after
+   * the estimated consumption.
    */
-  report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
+  estimate(params: EventEstimateParams, options?: RequestOptions): APIPromise<EventEstimateResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/events', {
+    return this._client.post('/api/v1/events/estimate', {
       body,
       ...options,
       headers: buildHeaders([
@@ -44,13 +45,12 @@ export class Events extends APIResource {
   }
 
   /**
-   * Estimates the credit cost of a usage event without ingesting it. Returns the
-   * estimated cost per credit currency, the current balance, and the balance after
-   * the estimated consumption.
+   * Reports raw usage events for event-based metering. Events are ingested
+   * asynchronously and aggregated into usage totals.
    */
-  estimate(params: EventEstimateParams, options?: RequestOptions): APIPromise<EventEstimateResponse> {
+  report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/events/estimate', {
+    return this._client.post('/api/v1/events', {
       body,
       ...options,
       headers: buildHeaders([
@@ -155,6 +155,41 @@ export interface EventReportResponse {
   data: unknown;
 }
 
+export interface EventEstimateParams {
+  /**
+   * Body param: Customer id
+   */
+  customerId: string;
+
+  /**
+   * Body param: The name of the usage event
+   */
+  eventName: string;
+
+  /**
+   * Body param: Dimensions associated with the usage event
+   */
+  dimensions?: { [key: string]: string | number | boolean };
+
+  /**
+   * Body param: Resource id
+   */
+  resourceId?: string | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface EventReportParams {
   /**
    * Body param: A list of usage events to report
@@ -212,41 +247,6 @@ export namespace EventReportParams {
   }
 }
 
-export interface EventEstimateParams {
-  /**
-   * Body param: Customer id
-   */
-  customerId: string;
-
-  /**
-   * Body param: The name of the usage event
-   */
-  eventName: string;
-
-  /**
-   * Body param: Dimensions associated with the usage event
-   */
-  dimensions?: { [key: string]: string | number | boolean };
-
-  /**
-   * Body param: Resource id
-   */
-  resourceId?: string | null;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 Events.DataExport = DataExport;
 Events.Beta = Beta;
 
@@ -254,8 +254,8 @@ export declare namespace Events {
   export {
     type EventEstimateResponse as EventEstimateResponse,
     type EventReportResponse as EventReportResponse,
-    type EventReportParams as EventReportParams,
     type EventEstimateParams as EventEstimateParams,
+    type EventReportParams as EventReportParams,
   };
 
   export {
@@ -263,9 +263,9 @@ export declare namespace Events {
     type DataExportListModelsResponse as DataExportListModelsResponse,
     type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
     type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
-    type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
-    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportListModelsParams as DataExportListModelsParams,
+    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
+    type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
   };
 
   export { Beta as Beta };

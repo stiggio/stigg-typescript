@@ -31,27 +31,6 @@ export class Coupons extends APIResource {
   }
 
   /**
-   * Retrieves a paginated list of coupons in the environment.
-   */
-  list(
-    params: CouponListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CouponListResponsesMyCursorIDPage, CouponListResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
-    return this._client.getAPIList('/api/v1/coupons', MyCursorIDPage<CouponListResponse>, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Retrieves a coupon by its unique identifier.
    */
   retrieve(
@@ -73,12 +52,15 @@ export class Coupons extends APIResource {
   }
 
   /**
-   * Updates an existing coupon's properties such as name, description, and metadata.
+   * Retrieves a paginated list of coupons in the environment.
    */
-  updateCoupon(id: string, params: CouponUpdateCouponParams, options?: RequestOptions): APIPromise<Coupon> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.patch(path`/api/v1/coupons/${id}`, {
-      body,
+  list(
+    params: CouponListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CouponListResponsesMyCursorIDPage, CouponListResponse> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...query } = params ?? {};
+    return this._client.getAPIList('/api/v1/coupons', MyCursorIDPage<CouponListResponse>, {
+      query,
       ...options,
       headers: buildHeaders([
         {
@@ -100,6 +82,24 @@ export class Coupons extends APIResource {
   ): APIPromise<Coupon> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
     return this._client.post(path`/api/v1/coupons/${id}/archive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Updates an existing coupon's properties such as name, description, and metadata.
+   */
+  updateCoupon(id: string, params: CouponUpdateCouponParams, options?: RequestOptions): APIPromise<Coupon> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/coupons/${id}`, {
+      body,
       ...options,
       headers: buildHeaders([
         {
@@ -725,6 +725,21 @@ export namespace CouponCreateParams {
   }
 }
 
+export interface CouponRetrieveParams {
+  /**
+   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
+   * back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Environment ID — required when authenticating with a user JWT (Bearer token) on
+   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
+   * key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
 export interface CouponListParams extends MyCursorIDPageParams {
   /**
    * Query param: Filter by entity ID
@@ -788,7 +803,7 @@ export namespace CouponListParams {
   }
 }
 
-export interface CouponRetrieveParams {
+export interface CouponArchiveCouponParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
    * back to the user's first membership. Ignored for API-key auth.
@@ -833,30 +848,15 @@ export interface CouponUpdateCouponParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface CouponArchiveCouponParams {
-  /**
-   * Account ID — optional when authenticating with a user JWT (Bearer token); falls
-   * back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Environment ID — required when authenticating with a user JWT (Bearer token) on
-   * environment-scoped endpoints. Ignored for API-key auth (env is intrinsic to the
-   * key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export declare namespace Coupons {
   export {
     type Coupon as Coupon,
     type CouponListResponse as CouponListResponse,
     type CouponListResponsesMyCursorIDPage as CouponListResponsesMyCursorIDPage,
     type CouponCreateParams as CouponCreateParams,
-    type CouponListParams as CouponListParams,
     type CouponRetrieveParams as CouponRetrieveParams,
-    type CouponUpdateCouponParams as CouponUpdateCouponParams,
+    type CouponListParams as CouponListParams,
     type CouponArchiveCouponParams as CouponArchiveCouponParams,
+    type CouponUpdateCouponParams as CouponUpdateCouponParams,
   };
 }

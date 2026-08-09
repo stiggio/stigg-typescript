@@ -9,36 +9,6 @@ const client = new Stigg({
 
 describe('resource customCurrencies', () => {
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.v1.credits.customCurrencies.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.credits.customCurrencies.list(
-        {
-          after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-          before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-          limit: 1,
-          status: ['ACTIVE'],
-          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.v1.credits.customCurrencies.create({
       id: 'id',
@@ -80,6 +50,36 @@ describe('resource customCurrencies', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.v1.credits.customCurrencies.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.credits.customCurrencies.list(
+        {
+          after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          limit: 1,
+          status: ['ACTIVE'],
+          'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+          'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('archive', async () => {
     const responsePromise = client.v1.credits.customCurrencies.archive('currencyId');
     const rawResponse = await responsePromise.asResponse();
@@ -104,30 +104,6 @@ describe('resource customCurrencies', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('unarchive', async () => {
-    const responsePromise = client.v1.credits.customCurrencies.unarchive('currencyId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('unarchive: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.credits.customCurrencies.unarchive(
-        'currencyId',
-        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('listAssociatedEntities', async () => {
     const responsePromise = client.v1.credits.customCurrencies.listAssociatedEntities('currencyId');
     const rawResponse = await responsePromise.asResponse();
@@ -144,6 +120,30 @@ describe('resource customCurrencies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.credits.customCurrencies.listAssociatedEntities(
+        'currencyId',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unarchive', async () => {
+    const responsePromise = client.v1.credits.customCurrencies.unarchive('currencyId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unarchive: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.credits.customCurrencies.unarchive(
         'currencyId',
         { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
         { path: '/_stainless_unknown_path' },

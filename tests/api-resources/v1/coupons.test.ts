@@ -44,6 +44,30 @@ describe('resource coupons', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.v1.coupons.retrieve('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.coupons.retrieve(
+        'x',
+        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.v1.coupons.list();
     const rawResponse = await responsePromise.asResponse();
@@ -82,42 +106,6 @@ describe('resource coupons', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.v1.coupons.retrieve('x');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.coupons.retrieve(
-        'x',
-        { 'X-ACCOUNT-ID': 'X-ACCOUNT-ID', 'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Stigg.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('updateCoupon', async () => {
-    const responsePromise = client.v1.coupons.updateCoupon('x', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
   test.skip('archiveCoupon', async () => {
     const responsePromise = client.v1.coupons.archiveCoupon('x');
     const rawResponse = await responsePromise.asResponse();
@@ -139,5 +127,17 @@ describe('resource coupons', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Stigg.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateCoupon', async () => {
+    const responsePromise = client.v1.coupons.updateCoupon('x', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

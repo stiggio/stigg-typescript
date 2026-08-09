@@ -6,14 +6,14 @@ export {
   type DataExportListModelsResponse,
   type DataExportMintScopedTokenResponse,
   type DataExportTriggerSyncResponse,
-  type DataExportTriggerSyncParams,
-  type DataExportMintScopedTokenParams,
   type DataExportListModelsParams,
+  type DataExportMintScopedTokenParams,
+  type DataExportTriggerSyncParams,
 } from './data-export/index';
 export {
   Events,
   type EventEstimateResponse,
   type EventReportResponse,
-  type EventReportParams,
   type EventEstimateParams,
+  type EventReportParams,
 } from './events';

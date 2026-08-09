@@ -9,6 +9,30 @@ const client = new Stigg({
 
 describe('resource events', () => {
   // Mock server tests are disabled
+  test.skip('estimate: only required params', async () => {
+    const responsePromise = client.v1.events.estimate({ customerId: 'customerId', eventName: 'x' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('estimate: required and optional params', async () => {
+    const response = await client.v1.events.estimate({
+      customerId: 'customerId',
+      eventName: 'x',
+      dimensions: { foo: 'string' },
+      resourceId: 'resourceId',
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('report: only required params', async () => {
     const responsePromise = client.v1.events.report({
       events: [
@@ -41,30 +65,6 @@ describe('resource events', () => {
           timestamp: '2019-12-27T18:11:19.117Z',
         },
       ],
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('estimate: only required params', async () => {
-    const responsePromise = client.v1.events.estimate({ customerId: 'customerId', eventName: 'x' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('estimate: required and optional params', async () => {
-    const response = await client.v1.events.estimate({
-      customerId: 'customerId',
-      eventName: 'x',
-      dimensions: { foo: 'string' },
-      resourceId: 'resourceId',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

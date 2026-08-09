@@ -12,38 +12,15 @@ import { path } from '../../internal/utils/path';
  */
 export class Features extends APIResource {
   /**
-   * Retrieves a feature by its unique identifier.
+   * Archives a feature, preventing it from being used in new entitlements.
    */
-  retrieveFeature(
+  archiveFeature(
     id: string,
-    params: FeatureRetrieveFeatureParams | null | undefined = {},
+    params: FeatureArchiveFeatureParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Feature> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.get(path`/api/v1/features/${id}`, {
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Updates an existing feature's properties such as display name, description, and
-   * configuration.
-   */
-  updateFeature(
-    id: string,
-    params: FeatureUpdateFeatureParams,
-    options?: RequestOptions,
-  ): APIPromise<Feature> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.patch(path`/api/v1/features/${id}`, {
-      body,
+    return this._client.post(path`/api/v1/features/${id}/archive`, {
       ...options,
       headers: buildHeaders([
         {
@@ -95,15 +72,15 @@ export class Features extends APIResource {
   }
 
   /**
-   * Archives a feature, preventing it from being used in new entitlements.
+   * Retrieves a feature by its unique identifier.
    */
-  archiveFeature(
+  retrieveFeature(
     id: string,
-    params: FeatureArchiveFeatureParams | null | undefined = {},
+    params: FeatureRetrieveFeatureParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Feature> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
-    return this._client.post(path`/api/v1/features/${id}/archive`, {
+    return this._client.get(path`/api/v1/features/${id}`, {
       ...options,
       headers: buildHeaders([
         {
@@ -125,6 +102,29 @@ export class Features extends APIResource {
   ): APIPromise<Feature> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params ?? {};
     return this._client.post(path`/api/v1/features/${id}/unarchive`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
+          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Updates an existing feature's properties such as display name, description, and
+   * configuration.
+   */
+  updateFeature(
+    id: string,
+    params: FeatureUpdateFeatureParams,
+    options?: RequestOptions,
+  ): APIPromise<Feature> {
+    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
+    return this._client.patch(path`/api/v1/features/${id}`, {
+      body,
       ...options,
       headers: buildHeaders([
         {
@@ -369,7 +369,7 @@ export namespace FeatureListFeaturesResponse {
   }
 }
 
-export interface FeatureRetrieveFeatureParams {
+export interface FeatureArchiveFeatureParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
    * back to the user's first membership. Ignored for API-key auth.
@@ -382,151 +382,6 @@ export interface FeatureRetrieveFeatureParams {
    * key).
    */
   'X-ENVIRONMENT-ID'?: string;
-}
-
-export interface FeatureUpdateFeatureParams {
-  /**
-   * Body param: The description for the feature
-   */
-  description?: string;
-
-  /**
-   * Body param: The display name for the feature
-   */
-  displayName?: string;
-
-  /**
-   * Body param: The configuration data for the feature
-   */
-  enumConfiguration?: Array<FeatureUpdateFeatureParams.EnumConfiguration>;
-
-  /**
-   * Body param: The units for the feature
-   */
-  featureUnits?: string;
-
-  /**
-   * Body param: The plural units for the feature
-   */
-  featureUnitsPlural?: string;
-
-  /**
-   * Body param: The additional metadata for the feature
-   */
-  metadata?: { [key: string]: string };
-
-  /**
-   * Body param
-   */
-  meter?: FeatureUpdateFeatureParams.Meter;
-
-  /**
-   * Body param: Unit transformation to be applied to the reported usage
-   */
-  unitTransformation?: FeatureUpdateFeatureParams.UnitTransformation | null;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
-export namespace FeatureUpdateFeatureParams {
-  export interface EnumConfiguration {
-    /**
-     * The display name for the enum configuration entity
-     */
-    displayName: string;
-
-    /**
-     * The unique value identifier for the enum configuration entity
-     */
-    value: string;
-  }
-
-  export interface Meter {
-    aggregation: Meter.Aggregation;
-
-    filters: Array<Meter.Filter>;
-  }
-
-  export namespace Meter {
-    export interface Aggregation {
-      function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
-
-      /**
-       * Aggregation field name
-       */
-      field?: string;
-    }
-
-    export interface Filter {
-      conditions: Array<Filter.Condition>;
-    }
-
-    export namespace Filter {
-      export interface Condition {
-        /**
-         * Condition field name
-         */
-        field: string;
-
-        operation:
-          | 'EQUALS'
-          | 'NOT_EQUALS'
-          | 'GREATER_THAN'
-          | 'GREATER_THAN_OR_EQUAL'
-          | 'LESS_THAN'
-          | 'LESS_THAN_OR_EQUAL'
-          | 'IS_NULL'
-          | 'IS_NOT_NULL'
-          | 'CONTAINS'
-          | 'STARTS_WITH'
-          | 'ENDS_WITH'
-          | 'IN';
-
-        /**
-         * Condition value
-         */
-        value?: string;
-
-        values?: Array<string>;
-      }
-    }
-  }
-
-  /**
-   * Unit transformation to be applied to the reported usage
-   */
-  export interface UnitTransformation {
-    /**
-     * Divide usage by this number
-     */
-    divide: number;
-
-    /**
-     * Singular feature units after the transformation
-     */
-    featureUnits?: string;
-
-    /**
-     * Plural feature units after the transformation
-     */
-    featureUnitsPlural?: string;
-
-    /**
-     * After division, either round the result up or down
-     */
-    round?: 'UP' | 'DOWN';
-  }
 }
 
 export interface FeatureCreateFeatureParams {
@@ -708,7 +563,7 @@ export namespace FeatureListFeaturesParams {
   }
 }
 
-export interface FeatureArchiveFeatureParams {
+export interface FeatureRetrieveFeatureParams {
   /**
    * Account ID — optional when authenticating with a user JWT (Bearer token); falls
    * back to the user's first membership. Ignored for API-key auth.
@@ -738,16 +593,161 @@ export interface FeatureUnarchiveFeatureParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
+export interface FeatureUpdateFeatureParams {
+  /**
+   * Body param: The description for the feature
+   */
+  description?: string;
+
+  /**
+   * Body param: The display name for the feature
+   */
+  displayName?: string;
+
+  /**
+   * Body param: The configuration data for the feature
+   */
+  enumConfiguration?: Array<FeatureUpdateFeatureParams.EnumConfiguration>;
+
+  /**
+   * Body param: The units for the feature
+   */
+  featureUnits?: string;
+
+  /**
+   * Body param: The plural units for the feature
+   */
+  featureUnitsPlural?: string;
+
+  /**
+   * Body param: The additional metadata for the feature
+   */
+  metadata?: { [key: string]: string };
+
+  /**
+   * Body param
+   */
+  meter?: FeatureUpdateFeatureParams.Meter;
+
+  /**
+   * Body param: Unit transformation to be applied to the reported usage
+   */
+  unitTransformation?: FeatureUpdateFeatureParams.UnitTransformation | null;
+
+  /**
+   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
+   * token); falls back to the user's first membership. Ignored for API-key auth.
+   */
+  'X-ACCOUNT-ID'?: string;
+
+  /**
+   * Header param: Environment ID — required when authenticating with a user JWT
+   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
+   * intrinsic to the key).
+   */
+  'X-ENVIRONMENT-ID'?: string;
+}
+
+export namespace FeatureUpdateFeatureParams {
+  export interface EnumConfiguration {
+    /**
+     * The display name for the enum configuration entity
+     */
+    displayName: string;
+
+    /**
+     * The unique value identifier for the enum configuration entity
+     */
+    value: string;
+  }
+
+  export interface Meter {
+    aggregation: Meter.Aggregation;
+
+    filters: Array<Meter.Filter>;
+  }
+
+  export namespace Meter {
+    export interface Aggregation {
+      function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
+
+      /**
+       * Aggregation field name
+       */
+      field?: string;
+    }
+
+    export interface Filter {
+      conditions: Array<Filter.Condition>;
+    }
+
+    export namespace Filter {
+      export interface Condition {
+        /**
+         * Condition field name
+         */
+        field: string;
+
+        operation:
+          | 'EQUALS'
+          | 'NOT_EQUALS'
+          | 'GREATER_THAN'
+          | 'GREATER_THAN_OR_EQUAL'
+          | 'LESS_THAN'
+          | 'LESS_THAN_OR_EQUAL'
+          | 'IS_NULL'
+          | 'IS_NOT_NULL'
+          | 'CONTAINS'
+          | 'STARTS_WITH'
+          | 'ENDS_WITH'
+          | 'IN';
+
+        /**
+         * Condition value
+         */
+        value?: string;
+
+        values?: Array<string>;
+      }
+    }
+  }
+
+  /**
+   * Unit transformation to be applied to the reported usage
+   */
+  export interface UnitTransformation {
+    /**
+     * Divide usage by this number
+     */
+    divide: number;
+
+    /**
+     * Singular feature units after the transformation
+     */
+    featureUnits?: string;
+
+    /**
+     * Plural feature units after the transformation
+     */
+    featureUnitsPlural?: string;
+
+    /**
+     * After division, either round the result up or down
+     */
+    round?: 'UP' | 'DOWN';
+  }
+}
+
 export declare namespace Features {
   export {
     type Feature as Feature,
     type FeatureListFeaturesResponse as FeatureListFeaturesResponse,
     type FeatureListFeaturesResponsesMyCursorIDPage as FeatureListFeaturesResponsesMyCursorIDPage,
-    type FeatureRetrieveFeatureParams as FeatureRetrieveFeatureParams,
-    type FeatureUpdateFeatureParams as FeatureUpdateFeatureParams,
+    type FeatureArchiveFeatureParams as FeatureArchiveFeatureParams,
     type FeatureCreateFeatureParams as FeatureCreateFeatureParams,
     type FeatureListFeaturesParams as FeatureListFeaturesParams,
-    type FeatureArchiveFeatureParams as FeatureArchiveFeatureParams,
+    type FeatureRetrieveFeatureParams as FeatureRetrieveFeatureParams,
     type FeatureUnarchiveFeatureParams as FeatureUnarchiveFeatureParams,
+    type FeatureUpdateFeatureParams as FeatureUpdateFeatureParams,
   };
 }
