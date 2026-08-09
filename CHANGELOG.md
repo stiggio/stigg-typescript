@@ -1,5 +1,50 @@
 # Changelog
 
+## 0.1.0-beta.51 (2026-08-05)
+
+Full Changelog: [v0.1.0-beta.50...v0.1.0-beta.51](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.50...v0.1.0-beta.51)
+
+### Features
+
+* **api:** add displayName to entities/governance, description to entity_types ([92015d9](https://github.com/stiggio/stigg-typescript/commit/92015d975b89ccf820fa2759f33e33000e896073))
+
+## 0.1.0-beta.50 (2026-08-05)
+
+Full Changelog: [v0.1.0-beta.49...v0.1.0-beta.50](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.49...v0.1.0-beta.50)
+
+### Features
+
+* **api:** add eventCount field to credits usage response ([307bb75](https://github.com/stiggio/stigg-typescript/commit/307bb7507b78bd66f368726a0252464f4dc0b131))
+
+## 0.1.0-beta.49 (2026-07-31)
+
+Full Changelog: [v0.1.0-beta.48...v0.1.0-beta.49](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.48...v0.1.0-beta.49)
+
+### Bug Fixes
+
+* **stlc:** stop hand-edited CI workflows from blocking seals and builds ([9692ed6](https://github.com/stiggio/stigg-typescript/commit/9692ed6211ef42208c819b03e06b644c60beaab9))
+
+## 0.1.0-beta.48 (2026-07-28)
+
+Full Changelog: [v0.1.0-beta.47...v0.1.0-beta.48](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.47...v0.1.0-beta.48)
+
+### Features
+
+* **api:** add contracts resource, retrieveContracts to customers, syncStates to grants ([2a432eb](https://github.com/stiggio/stigg-typescript/commit/2a432ebbb47105123de3136b370a0fa87789157f))
+
+## 0.1.0-beta.47 (2026-07-26)
+
+Full Changelog: [v0.1.0-beta.46...v0.1.0-beta.47](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.46...v0.1.0-beta.47)
+
+### Features
+
+* **api:** add creditEntitlement field to addons/plans overage pricing ([0419a0b](https://github.com/stiggio/stigg-typescript/commit/0419a0b70654d2962da8418ca759f8372ba59b58))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([0e0483e](https://github.com/stiggio/stigg-typescript/commit/0e0483e34f3b69c0ccd85aa0a4cf2fa1e52a9bbd))
+
 ## 0.1.0-beta.46 (2026-07-21)
 
 Full Changelog: [v0.1.0-beta.45...v0.1.0-beta.46](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.45...v0.1.0-beta.46)
