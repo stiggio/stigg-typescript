@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.0-beta.53 (2026-08-10)
+
+Full Changelog: [v0.1.0-beta.52...v0.1.0-beta.53](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.52...v0.1.0-beta.53)
+
+### Bug Fixes
+
+* point staging_repo at stiggio instead of stainless-sdks ([908939c](https://github.com/stiggio/stigg-typescript/commit/908939ccc6d40ba0ee2edfffd3eacb178aaeec9e))
+* regenerate from current spec ([b4edc8c](https://github.com/stiggio/stigg-typescript/commit/b4edc8cc5e8a1efc658b9c8ea82e4423ca5b6dec))
+* regenerate from current spec (STIGG-576 overage pricing types) ([90ec6d2](https://github.com/stiggio/stigg-typescript/commit/90ec6d23c5816546a4cb08a246fc4b7d33ba8adc))
+* regenerate from current spec (STIGG-576 overage pricing types) ([64d6d6f](https://github.com/stiggio/stigg-typescript/commit/64d6d6f992769ce13796ab2841749b9a73e6f418))
+* regenerate from current spec (STIGG-576 overage pricing types) ([d3819c4](https://github.com/stiggio/stigg-typescript/commit/d3819c41f5995844d43813a4cc5f69247fad47d6))
+* sync OpenAPI spec from stigg-api ([8044fc9](https://github.com/stiggio/stigg-typescript/commit/8044fc98e39bbf6567475652d8542773d10e1567))
+
+
+### Styles
+
+* satisfy prettier in the trunk-sync lock ([20731e9](https://github.com/stiggio/stigg-typescript/commit/20731e942e39fb82a89cb5ac6e9d017b21ea1939))
+
 ## 0.1.0-beta.52 (2026-08-10)
 
 Full Changelog: [v0.1.0-beta.51...v0.1.0-beta.52](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.51...v0.1.0-beta.52)
