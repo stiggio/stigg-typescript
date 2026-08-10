@@ -2021,19 +2021,9 @@ export namespace PlanUpdateParams {
      */
     export interface OveragePricingModel {
       /**
-       * The billing model for overages
-       */
-      billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED';
-
-      /**
        * Price periods for overage pricing
        */
       pricePeriods: Array<OveragePricingModel.PricePeriod>;
-
-      /**
-       * The billing cadence for overages
-       */
-      billingCadence?: 'RECURRING' | 'ONE_OFF';
 
       /**
        * Credit entitlement to grant when a credit overage targets a currency not yet
