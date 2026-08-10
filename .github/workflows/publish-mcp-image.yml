@@ -1,0 +1,131 @@
+# Builds the self-hosted MCP server image and pushes it to ECR, so stiggio/gitops
+# (apps/stigg-mcp) has something to deploy. This replaces the Stainless-hosted MCP
+# endpoint that sunsets with app.stainless.com on 2026-09-01.
+#
+# Triggered by the same `release: published` event as publish-npm.yml, which
+# publishes both `.` and `packages/mcp-server` to npm from one release. The image
+# is therefore a third artifact of that one release, built from the released tag's
+# source — so the version inside the image matches the published package rather
+# than being independently numbered.
+#
+# The repository guard mirrors release-please.yml's: this file is generated into
+# both the staging and production repos, but releases only exist in production.
+#
+# arm64 only — the MCP Karpenter pool provisions Graviton nodes
+# (gitops apps/karpenter/overlays/*/nodepool-mcp.yaml). The runner is natively
+# arm64 so the image builds without QEMU emulation, which the Dockerfile's
+# `yarn install && yarn build` stage would make painfully slow.
+
+name: Publish MCP image
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to build, e.g. v0.1.0-beta.53'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write # Required to request the OIDC token for gha-mcp-ecr-push.
+
+env:
+  AWS_REGION: us-east-2
+  ECR_REPOSITORY: stigg-mcp
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
+jobs:
+  publish:
+    if: github.repository == 'stiggio/stigg-typescript'
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Resolve the tag to build
+        id: t
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          tag="${INPUT_TAG:-$RELEASE_TAG}"
+          if [ -z "$tag" ]; then
+            echo "::error title=No tag::Neither a release tag nor a tag input was provided."
+            exit 1
+          fi
+          # Release tags are v-prefixed (include-v-in-tag); image tags are not,
+          # so they read the same as the npm version.
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "version=${tag#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Git checkout
+        uses: actions/checkout@v4
+        with:
+          # Build the released source, not whatever main points at now — promote
+          # can land new codegen between the release and this run.
+          ref: ${{ steps.t.outputs.tag }}
+          persist-credentials: false
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ECR_PUSH_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Log in to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILD_SUMMARY: false
+        with:
+          # Context is the repo root: the Dockerfile builds the SDK and the
+          # mcp-server from source (`COPY . .` then `yarn build`) rather than
+          # installing the published package, so it needs the whole tree.
+          context: .
+          file: packages/mcp-server/Dockerfile
+          platforms: linux/arm64
+          push: true
+          provenance: false
+          tags: |
+            ${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ steps.t.outputs.version }}
+            ${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+          cache-from: type=registry,ref=${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:buildcache
+          cache-to: type=registry,ref=${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:buildcache,mode=max,image-manifest=true,oci-mediatypes=true
+
+      - name: Promote to staging
+        # Pins the new tag in gitops apps/stigg-mcp/overlays/staging, the same way
+        # every other Stigg service is promoted. Without this the overlay would
+        # have to track a floating tag, and ArgoCD would see no manifest change
+        # to roll — new pods would pick the image up only when something else
+        # happened to restart them.
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.GUTHUB_SERVICE_TOKEN }}
+          repository: stiggio/gitops
+          event-type: promote-app
+          client-payload: |
+            {
+              "environment": "staging",
+              "apps": "stigg-mcp",
+              "tag": "${{ steps.t.outputs.version }}"
+            }
+
+      - name: Summary
+        env:
+          REGISTRY: ${{ steps.ecr.outputs.registry }}
+          VERSION: ${{ steps.t.outputs.version }}
+        run: |
+          {
+            echo "### MCP image published"
+            echo ""
+            echo "\`${REGISTRY}/${ECR_REPOSITORY}:${VERSION}\` (also tagged \`latest\`)"
+            echo ""
+            echo "Promoted to staging in stiggio/gitops \`apps/stigg-mcp\`."
+          } >> "$GITHUB_STEP_SUMMARY"
