@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0-beta.54](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.53...v0.1.0-beta.54) (2026-08-10)
+
+
+### Features
+
+* add the self-hosted MCP server image build ([a6829a5](https://github.com/stiggio/stigg-typescript/commit/a6829a54afb56698e3600dd099345b6c774825ba))
+
 ## 0.1.0-beta.53 (2026-08-10)
 
 Full Changelog: [v0.1.0-beta.52...v0.1.0-beta.53](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.52...v0.1.0-beta.53)
