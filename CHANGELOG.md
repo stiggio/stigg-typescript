@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.52 (2026-08-10)
+
+Full Changelog: [v0.1.0-beta.51...v0.1.0-beta.52](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.51...v0.1.0-beta.52)
+
+### Bug Fixes
+
+* **types:** remove billingModel and billingCadence from OveragePricingModel in addons/plans ([d0fe537](https://github.com/stiggio/stigg-typescript/commit/d0fe5372075fca60c468d9d48fe4c39cb4f09aa4))
+
 ## 0.1.0-beta.51 (2026-08-05)
 
 Full Changelog: [v0.1.0-beta.50...v0.1.0-beta.51](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.50...v0.1.0-beta.51)
