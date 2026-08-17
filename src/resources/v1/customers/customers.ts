@@ -1987,6 +1987,11 @@ export namespace CustomerListContractsResponse {
       dueDate: string | null;
 
       /**
+       * The billing provider ID of the draft invoice this preview describes
+       */
+      invoiceId: string | null;
+
+      /**
        * The end of the billing period the upcoming invoice covers
        */
       periodEnd: string | null;

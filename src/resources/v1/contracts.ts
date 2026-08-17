@@ -302,6 +302,11 @@ export namespace ContractCreateResponse {
       dueDate: string | null;
 
       /**
+       * The billing provider ID of the draft invoice this preview describes
+       */
+      invoiceId: string | null;
+
+      /**
        * The end of the billing period the upcoming invoice covers
        */
       periodEnd: string | null;
@@ -640,6 +645,11 @@ export namespace ContractRetrieveResponse {
        * The date the upcoming invoice is due
        */
       dueDate: string | null;
+
+      /**
+       * The billing provider ID of the draft invoice this preview describes
+       */
+      invoiceId: string | null;
 
       /**
        * The end of the billing period the upcoming invoice covers
@@ -982,6 +992,11 @@ export namespace ContractUpdateResponse {
       dueDate: string | null;
 
       /**
+       * The billing provider ID of the draft invoice this preview describes
+       */
+      invoiceId: string | null;
+
+      /**
        * The end of the billing period the upcoming invoice covers
        */
       periodEnd: string | null;
@@ -1309,6 +1324,11 @@ export namespace ContractListResponse {
      * The date the upcoming invoice is due
      */
     dueDate: string | null;
+
+    /**
+     * The billing provider ID of the draft invoice this preview describes
+     */
+    invoiceId: string | null;
 
     /**
      * The end of the billing period the upcoming invoice covers
@@ -1648,6 +1668,11 @@ export namespace ContractDeleteResponse {
        * The date the upcoming invoice is due
        */
       dueDate: string | null;
+
+      /**
+       * The billing provider ID of the draft invoice this preview describes
+       */
+      invoiceId: string | null;
 
       /**
        * The end of the billing period the upcoming invoice covers
