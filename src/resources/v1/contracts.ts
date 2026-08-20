@@ -2532,6 +2532,11 @@ export namespace ContractCreateParams {
          * SubscriptionCreditEntitlementRequest
          */
         type: 'CREDIT';
+
+        /**
+         * Whether the credit balance is a soft limit
+         */
+        hasSoftLimit?: boolean;
       }
 
       /**

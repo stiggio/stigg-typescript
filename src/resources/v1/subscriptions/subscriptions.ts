@@ -4539,6 +4539,11 @@ export namespace SubscriptionUpdateParams {
      * SubscriptionCreditEntitlementRequest
      */
     type: 'CREDIT';
+
+    /**
+     * Whether the credit balance is a soft limit
+     */
+    hasSoftLimit?: boolean;
   }
 
   /**
@@ -6200,6 +6205,11 @@ export namespace SubscriptionProvisionParams {
      * SubscriptionCreditEntitlementRequest
      */
     type: 'CREDIT';
+
+    /**
+     * Whether the credit balance is a soft limit
+     */
+    hasSoftLimit?: boolean;
   }
 
   /**
