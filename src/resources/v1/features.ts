@@ -205,6 +205,11 @@ export namespace Feature {
     metadata: { [key: string]: string };
 
     /**
+     * Event meter that turns reported events into usage for a metered feature
+     */
+    meter: Data.Meter | null;
+
+    /**
      * The meter type for the feature
      */
     meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
@@ -231,6 +236,84 @@ export namespace Feature {
        * The unique value identifier for the enum configuration entity
        */
       value: string;
+    }
+
+    /**
+     * Event meter that turns reported events into usage for a metered feature
+     */
+    export interface Meter {
+      /**
+       * How the matching events are aggregated into a usage value
+       */
+      aggregation: Meter.Aggregation;
+
+      /**
+       * Event filters. Conditions within a filter are ANDed, and filters are ORed
+       */
+      filters: Array<Meter.Filter>;
+    }
+
+    export namespace Meter {
+      /**
+       * How the matching events are aggregated into a usage value
+       */
+      export interface Aggregation {
+        /**
+         * Aggregation function applied to the matching events
+         */
+        function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
+
+        /**
+         * Aggregation field name
+         */
+        field?: string | null;
+      }
+
+      /**
+       * A set of conditions an event must all match
+       */
+      export interface Filter {
+        /**
+         * Conditions the event must match
+         */
+        conditions: Array<Filter.Condition>;
+      }
+
+      export namespace Filter {
+        /**
+         * Meter filter condition
+         */
+        export interface Condition {
+          /**
+           * Condition field name
+           */
+          field: string;
+
+          /**
+           * Comparison applied to the condition field
+           */
+          operation:
+            | 'EQUALS'
+            | 'NOT_EQUALS'
+            | 'GREATER_THAN'
+            | 'GREATER_THAN_OR_EQUAL'
+            | 'LESS_THAN'
+            | 'LESS_THAN_OR_EQUAL'
+            | 'IS_NULL'
+            | 'IS_NOT_NULL'
+            | 'CONTAINS'
+            | 'STARTS_WITH'
+            | 'ENDS_WITH'
+            | 'IN';
+
+          /**
+           * Condition value
+           */
+          value?: string | null;
+
+          values?: Array<string> | null;
+        }
+      }
     }
 
     /**
@@ -315,6 +398,11 @@ export interface FeatureListFeaturesResponse {
   metadata: { [key: string]: string };
 
   /**
+   * Event meter that turns reported events into usage for a metered feature
+   */
+  meter: FeatureListFeaturesResponse.Meter | null;
+
+  /**
    * The meter type for the feature
    */
   meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
@@ -341,6 +429,84 @@ export namespace FeatureListFeaturesResponse {
      * The unique value identifier for the enum configuration entity
      */
     value: string;
+  }
+
+  /**
+   * Event meter that turns reported events into usage for a metered feature
+   */
+  export interface Meter {
+    /**
+     * How the matching events are aggregated into a usage value
+     */
+    aggregation: Meter.Aggregation;
+
+    /**
+     * Event filters. Conditions within a filter are ANDed, and filters are ORed
+     */
+    filters: Array<Meter.Filter>;
+  }
+
+  export namespace Meter {
+    /**
+     * How the matching events are aggregated into a usage value
+     */
+    export interface Aggregation {
+      /**
+       * Aggregation function applied to the matching events
+       */
+      function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
+
+      /**
+       * Aggregation field name
+       */
+      field?: string | null;
+    }
+
+    /**
+     * A set of conditions an event must all match
+     */
+    export interface Filter {
+      /**
+       * Conditions the event must match
+       */
+      conditions: Array<Filter.Condition>;
+    }
+
+    export namespace Filter {
+      /**
+       * Meter filter condition
+       */
+      export interface Condition {
+        /**
+         * Condition field name
+         */
+        field: string;
+
+        /**
+         * Comparison applied to the condition field
+         */
+        operation:
+          | 'EQUALS'
+          | 'NOT_EQUALS'
+          | 'GREATER_THAN'
+          | 'GREATER_THAN_OR_EQUAL'
+          | 'LESS_THAN'
+          | 'LESS_THAN_OR_EQUAL'
+          | 'IS_NULL'
+          | 'IS_NOT_NULL'
+          | 'CONTAINS'
+          | 'STARTS_WITH'
+          | 'ENDS_WITH'
+          | 'IN';
+
+        /**
+         * Condition value
+         */
+        value?: string | null;
+
+        values?: Array<string> | null;
+      }
+    }
   }
 
   /**
@@ -431,6 +597,12 @@ export interface FeatureCreateFeatureParams {
   metadata?: { [key: string]: string };
 
   /**
+   * Body param: Event meter that turns reported events into usage for a metered
+   * feature
+   */
+  meter?: FeatureCreateFeatureParams.Meter;
+
+  /**
    * Body param: The meter type for the feature
    */
   meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
@@ -465,6 +637,78 @@ export namespace FeatureCreateFeatureParams {
      * The unique value identifier for the enum configuration entity
      */
     value: string;
+  }
+
+  /**
+   * Event meter that turns reported events into usage for a metered feature
+   */
+  export interface Meter {
+    /**
+     * How the matching events are aggregated into a usage value
+     */
+    aggregation: Meter.Aggregation;
+
+    /**
+     * Event filters. Conditions within a filter are ANDed, and filters are ORed
+     */
+    filters: Array<Meter.Filter>;
+  }
+
+  export namespace Meter {
+    /**
+     * How the matching events are aggregated into a usage value
+     */
+    export interface Aggregation {
+      /**
+       * Aggregation function applied to the matching events
+       */
+      function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
+
+      /**
+       * Aggregation field name
+       */
+      field?: string;
+    }
+
+    export interface Filter {
+      /**
+       * Conditions the event must match
+       */
+      conditions: Array<Filter.Condition>;
+    }
+
+    export namespace Filter {
+      export interface Condition {
+        /**
+         * Condition field name
+         */
+        field: string;
+
+        /**
+         * Comparison applied to the condition field
+         */
+        operation:
+          | 'EQUALS'
+          | 'NOT_EQUALS'
+          | 'GREATER_THAN'
+          | 'GREATER_THAN_OR_EQUAL'
+          | 'LESS_THAN'
+          | 'LESS_THAN_OR_EQUAL'
+          | 'IS_NULL'
+          | 'IS_NOT_NULL'
+          | 'CONTAINS'
+          | 'STARTS_WITH'
+          | 'ENDS_WITH'
+          | 'IN';
+
+        /**
+         * Condition value
+         */
+        value?: string;
+
+        values?: Array<string>;
+      }
+    }
   }
 
   /**
@@ -625,7 +869,8 @@ export interface FeatureUpdateFeatureParams {
   metadata?: { [key: string]: string };
 
   /**
-   * Body param
+   * Body param: Event meter that turns reported events into usage for a metered
+   * feature
    */
   meter?: FeatureUpdateFeatureParams.Meter;
 
@@ -661,14 +906,29 @@ export namespace FeatureUpdateFeatureParams {
     value: string;
   }
 
+  /**
+   * Event meter that turns reported events into usage for a metered feature
+   */
   export interface Meter {
+    /**
+     * How the matching events are aggregated into a usage value
+     */
     aggregation: Meter.Aggregation;
 
+    /**
+     * Event filters. Conditions within a filter are ANDed, and filters are ORed
+     */
     filters: Array<Meter.Filter>;
   }
 
   export namespace Meter {
+    /**
+     * How the matching events are aggregated into a usage value
+     */
     export interface Aggregation {
+      /**
+       * Aggregation function applied to the matching events
+       */
       function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE';
 
       /**
@@ -678,6 +938,9 @@ export namespace FeatureUpdateFeatureParams {
     }
 
     export interface Filter {
+      /**
+       * Conditions the event must match
+       */
       conditions: Array<Filter.Condition>;
     }
 
@@ -688,6 +951,9 @@ export namespace FeatureUpdateFeatureParams {
          */
         field: string;
 
+        /**
+         * Comparison applied to the condition field
+         */
         operation:
           | 'EQUALS'
           | 'NOT_EQUALS'

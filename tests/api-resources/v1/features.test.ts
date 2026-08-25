@@ -60,6 +60,21 @@ describe('resource features', () => {
       featureUnits: 'featureUnits',
       featureUnitsPlural: 'featureUnitsPlural',
       metadata: { foo: 'string' },
+      meter: {
+        aggregation: { function: 'SUM', field: 'x' },
+        filters: [
+          {
+            conditions: [
+              {
+                field: 'x',
+                operation: 'EQUALS',
+                value: 'value',
+                values: ['string'],
+              },
+            ],
+          },
+        ],
+      },
       meterType: 'None',
       unitTransformation: {
         divide: 0,
