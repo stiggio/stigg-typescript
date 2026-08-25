@@ -65,6 +65,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.customers.retrieve(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}`\n\nRetrieves a customer by their unique identifier, including billing information and subscription status.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.retrieve('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Retrieve',
+        example:
+          'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'customers retrieve',
         example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -78,11 +83,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Retrieve',
-        example:
-          'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.retrieve',
@@ -132,6 +132,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.customers.update(id: string, billingCurrency?: string, billingId?: string, couponId?: string | '', email?: string, integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[], language?: string, metadata?: object, name?: string, passthrough?: { stripe?: { billingAddress?: object; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: object; taxIds?: object[]; }; zuora?: { billingAddress?: object; currency?: string; metadata?: object; paymentMethodId?: string; }; }, timezone?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/customers/{id}`\n\nUpdates an existing customer's properties such as name, email, and billing information.\n\n### Parameters\n\n- `id: string`\n\n- `billingCurrency?: string`\n  The billing currency of the customer\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `couponId?: string | ''`\n  Customer level coupon\n\n- `email?: string`\n  The email of the customer\n\n- `integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]`\n  List of integrations\n\n- `language?: string`\n  Language to use for this customer\n\n- `metadata?: object`\n  Additional metadata\n\n- `name?: string`\n  The name of the customer\n\n- `passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }`\n  Vendor-specific billing passthrough fields.\n  - `stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }`\n    Stripe-specific billing fields for the customer.\n  - `zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }`\n    Zuora-specific billing fields for the customer.\n\n- `timezone?: string`\n  Timezone to use for this customer\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.update('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Update',
+        example:
+          'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'customers update',
         example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -145,11 +150,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Update',
-        example:
-          'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.update',
@@ -195,6 +195,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.customers.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, email?: string, limit?: number, name?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: object; email?: string; integrations?: object[]; language?: string; metadata?: object; name?: string; passthrough?: object; timezone?: string; }`\n\n**get** `/api/v1/customers`\n\nRetrieves a paginated list of customers in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `email?: string`\n  Filter by exact customer email address\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `name?: string`\n  Filter by exact customer name\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: object; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: object; taxIds?: object[]; }; zuora?: { billingAddress?: object; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n  A customer can be either an organization or an individual\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `updatedAt: string`\n  - `billingCurrency?: string`\n  - `billingId?: string`\n  - `couponId?: string | ''`\n  - `defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }`\n  - `email?: string`\n  - `integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]`\n  - `language?: string`\n  - `metadata?: object`\n  - `name?: string`\n  - `passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }`\n  - `timezone?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResponse of client.v1.customers.list()) {\n  console.log(customerListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.List',
+        example:
+          'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'customers list',
         example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
@@ -208,11 +213,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.List',
-        example:
-          'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.customers.list',
@@ -263,6 +263,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## provision\n\n`client.v1.customers.provision(id: string, billingCurrency?: string, billingId?: string, couponId?: string | '', defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }, email?: string, integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[], language?: string, metadata?: object, name?: string, passthrough?: { stripe?: { billingAddress?: object; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: object; taxIds?: object[]; }; zuora?: { billingAddress?: object; currency?: string; metadata?: object; paymentMethodId?: string; }; }, timezone?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/customers`\n\nCreates a new customer.\n\n### Parameters\n\n- `id: string`\n  Customer slug\n\n- `billingCurrency?: string`\n  The billing currency of the customer\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `couponId?: string | ''`\n  Customer level coupon\n\n- `defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }`\n  The default payment method details\n  - `billingId: string`\n    The default payment method id\n  - `cardExpiryMonth: number`\n    The expiration month of the default payment method\n  - `cardExpiryYear: number`\n    The expiration year of the default payment method\n  - `cardLast4Digits: string`\n    The last 4 digits of the default payment method\n  - `type: 'CARD' | 'BANK' | 'CASH_APP'`\n    The default payment method type\n\n- `email?: string`\n  The email of the customer\n\n- `integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]`\n  List of integrations\n\n- `language?: string`\n  Language to use for this customer\n\n- `metadata?: object`\n  Additional metadata\n\n- `name?: string`\n  The name of the customer\n\n- `passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }`\n  Vendor-specific billing passthrough fields.\n  - `stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }`\n    Stripe-specific billing fields for the customer.\n  - `zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }`\n    Zuora-specific billing fields for the customer.\n\n- `timezone?: string`\n  Timezone to use for this customer\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.provision({ id: 'id' });\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Provision',
+        example:
+          'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'customers provision',
         example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
@@ -276,11 +281,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Provision',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Provision(context.TODO(), stigg.V1CustomerProvisionParams{\n\t\tID: "id",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Provision',
-        example:
-          'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.provision',
@@ -318,6 +318,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.customers.archive(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/archive`\n\nArchives a customer, preventing new subscriptions. Optionally cancels existing subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.archive('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Archive',
+        example:
+          'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'customers archive',
         example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -331,11 +336,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Archive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Archive',
-        example:
-          'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.archive',
@@ -372,6 +372,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive\n\n`client.v1.customers.unarchive(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/unarchive`\n\nRestores an archived customer, allowing them to create new subscriptions again.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.unarchive('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Unarchive',
+        example:
+          'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'customers unarchive',
         example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -385,11 +390,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Unarchive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Unarchive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerUnarchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Unarchive',
-        example:
-          'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.unarchive',
@@ -431,6 +431,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## import\n\n`client.v1.customers.import(customers: { id: string; email: string; name: string; billingId?: string; metadata?: object; paymentMethodId?: string; salesforceId?: string; updatedAt?: string; }[], integrationId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/customers/import`\n\nImports multiple customers in bulk. Used for migrating customer data from external systems.\n\n### Parameters\n\n- `customers: { id: string; email: string; name: string; billingId?: string; metadata?: object; paymentMethodId?: string; salesforceId?: string; updatedAt?: string; }[]`\n  List of customer objects to import\n\n- `integrationId?: string`\n  Integration details\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { newCustomers: string[]; }; }`\n  Response object\n\n  - `data: { newCustomers: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.import({ customers: [{\n  id: 'id',\n  email: 'dev@stainless.com',\n  name: 'name',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Import',
+        example:
+          'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'customers import',
         example:
@@ -445,11 +450,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Import',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Import(context.TODO(), stigg.V1CustomerImportParams{\n\t\tCustomers: []stigg.V1CustomerImportParamsCustomer{{\n\t\t\tID:    "id",\n\t\t\tEmail: stigg.String("dev@stainless.com"),\n\t\t\tName:  stigg.String("name"),\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Import',
-        example:
-          'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.customers.import_',
@@ -492,6 +492,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_resources\n\n`client.v1.customers.listResources(id: string, after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; createdAt: string; updatedAt: string; }`\n\n**get** `/api/v1/customers/{id}/resources`\n\nRetrieves a paginated list of resources within the same customer.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; createdAt: string; updatedAt: string; }`\n  Resource object that belongs to a customer\n\n  - `id: string`\n  - `createdAt: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResourcesResponse of client.v1.customers.listResources('x')) {\n  console.log(customerListResourcesResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.ListResources',
+        example:
+          'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'customers list_resources',
         example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -505,11 +510,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.ListResources',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.ListResources(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerListResourcesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.ListResources',
-        example:
-          'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.customers.list_resources',
@@ -547,6 +547,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_entitlements\n\n`client.v1.customers.retrieveEntitlements(id: string, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}/entitlements`\n\nRetrieves the effective entitlements for a customer or resource, including feature and credit entitlements.\n\n**Warning:** This REST API endpoint lacks built-in client-side caching, fallback mechanisms, and low-latency guarantees. It is not recommended for hot-path entitlement checks. For production use, consider using the Stigg Node Server SDK with caching or the Sidecar for low-latency cached responses.\n\n### Parameters\n\n- `id: string`\n\n- `resourceId?: string`\n  Resource ID to scope entitlements to a specific resource\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { accessDeniedReason: 'CustomerNotFound' | 'NoActiveSubscription' | 'CustomerIsArchived'; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: object; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: object; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: 'CustomerNotFound' | 'NoActiveSubscription' | 'CustomerIsArchived'; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.retrieveEntitlements('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.RetrieveEntitlements',
+        example:
+          'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'customers retrieve_entitlements',
         example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -560,11 +565,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.GetEntitlements',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.GetEntitlements(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerGetEntitlementsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.RetrieveEntitlements',
-        example:
-          'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.customers.retrieve_entitlements',
@@ -611,6 +611,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## check_entitlement\n\n`client.v1.customers.checkEntitlement(id: string, currencyId?: string, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object; }`\n\n**get** `/api/v1/customers/{id}/entitlements/check`\n\nChecks a single entitlement (feature or credit) for a customer or resource. Supports `requestedUsage` and `requestedValues` to evaluate against limits or enum values.\n\n**Warning:** This REST API endpoint lacks built-in client-side caching, fallback mechanisms, and low-latency guarantees. It is not recommended for hot-path entitlement checks. For production use, consider using the Stigg Node Server SDK with caching or the Sidecar for low-latency cached responses.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.checkEntitlement('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.CheckEntitlement',
+        example:
+          'CustomerCheckEntitlementParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.CheckEntitlement(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'customers check_entitlement',
         example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -624,11 +629,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.CheckEntitlement',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.CheckEntitlement(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerCheckEntitlementParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.CheckEntitlement',
-        example:
-          'CustomerCheckEntitlementParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.CheckEntitlement(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.customers.check_entitlement',
@@ -666,6 +666,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_contracts\n\n`client.v1.customers.listContracts(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**get** `/api/v1/customers/{id}/contracts`\n\nRetrieves a customer's contracts, fetched live from the connected billing provider, each enriched with a preview of its upcoming (next) invoice when available. Returns an empty list when no billing provider is connected or the customer is not synced.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: object; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }[]; }`\n  A list of a customer's contracts\n\n  - `data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.listContracts('id');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.ListContracts',
+        example:
+          'CustomerListContractsParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Customers.ListContracts(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'customers list_contracts',
         example: "stigg v1:customers list-contracts \\\n  --api-key 'My API Key' \\\n  --id id",
@@ -679,11 +684,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.ListContracts',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.ListContracts(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1CustomerListContractsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.ListContracts',
-        example:
-          'CustomerListContractsParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Customers.ListContracts(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.customers.list_contracts',
@@ -734,6 +734,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_invoices\n\n`client.v1.customers.listInvoices(id: string, after?: string, before?: string, contractExternalId?: string, issuedAfter?: string, issuedBefore?: string, limit?: number, orderBy?: 'issueDate' | 'dueDate' | 'total', orderDir?: 'ASC' | 'DESC', stateIn?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { contractExternalId: string; currency: string; customerExternalId: string; discount: number; dueDate: string; invoiceExternalId: string; invoiceId: string; invoiceNumber: string; issueDate: string; lineItems: object[]; paidDate: string; state: 'OPEN' | 'CANCELED' | 'PAID'; subtotal: number; tax: number; total: number; }`\n\n**get** `/api/v1/customers/{id}/invoices`\n\nRetrieves a cursor-paginated list of a customer's invoices, fetched live from the connected billing provider. Ordered by issue date ascending by default; override with orderBy (issueDate | dueDate | total) and orderDir (ASC | DESC). Optionally narrowed to one contract, an issue-date range, and/or a set of invoice states. Returns an empty list when no billing provider is connected or the customer is not synced.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `contractExternalId?: string`\n  Filter to invoices for this contract only (contract external ID or Received contract ID). Omit for all contracts.\n\n- `issuedAfter?: string`\n  Filter to invoices issued on or after this date, inclusive (ISO 8601)\n\n- `issuedBefore?: string`\n  Filter to invoices issued on or before this date, inclusive (ISO 8601)\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `orderBy?: 'issueDate' | 'dueDate' | 'total'`\n  Field to sort by: issueDate (default), dueDate, or total\n\n- `orderDir?: 'ASC' | 'DESC'`\n  Sort direction: ASC (default) or DESC\n\n- `stateIn?: string`\n  Filter by invoice state. Supports comma-separated values for multiple states\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ contractExternalId: string; currency: string; customerExternalId: string; discount: number; dueDate: string; invoiceExternalId: string; invoiceId: string; invoiceNumber: string; issueDate: string; lineItems: { amount: number; description: string; productExternalId: string; quantity: number; unitPrice: number; }[]; paidDate: string; state: 'OPEN' | 'CANCELED' | 'PAID'; subtotal: number; tax: number; total: number; }`\n  A customer invoice as reported by the connected billing provider.\n\n  - `contractExternalId: string`\n  - `currency: string`\n  - `customerExternalId: string`\n  - `discount: number`\n  - `dueDate: string`\n  - `invoiceExternalId: string`\n  - `invoiceId: string`\n  - `invoiceNumber: string`\n  - `issueDate: string`\n  - `lineItems: { amount: number; description: string; productExternalId: string; quantity: number; unitPrice: number; }[]`\n  - `paidDate: string`\n  - `state: 'OPEN' | 'CANCELED' | 'PAID'`\n  - `subtotal: number`\n  - `tax: number`\n  - `total: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customerListInvoicesResponse of client.v1.customers.listInvoices('id')) {\n  console.log(customerListInvoicesResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.ListInvoices',
+        example:
+          'CustomerListInvoicesParams parameters = new() { ID = "id" };\n\nvar page = await client.V1.Customers.ListInvoices(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'customers list_invoices',
         example: "stigg v1:customers list-invoices \\\n  --api-key 'My API Key' \\\n  --id id",
@@ -747,11 +752,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.ListInvoices',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.ListInvoices(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1CustomerListInvoicesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.ListInvoices',
-        example:
-          'CustomerListInvoicesParams parameters = new() { ID = "id" };\n\nvar page = await client.V1.Customers.ListInvoices(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.customers.list_invoices',
@@ -797,6 +797,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## attach\n\n`client.v1.customers.paymentMethod.attach(id: string, integrationId: string, paymentMethodId: string, vendorIdentifier: string, billingCurrency?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/payment-method`\n\nAttaches a payment method to a customer for billing. Required for paid subscriptions when integrated with a billing provider.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n  Integration details\n\n- `paymentMethodId: string`\n  Billing provider payment method id\n\n- `vendorIdentifier: string`\n  The vendor identifier of integration\n\n- `billingCurrency?: string`\n  Customers selected currency\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.paymentMethod.attach('x', {\n  integrationId: 'integrationId',\n  paymentMethodId: 'paymentMethodId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.PaymentMethod.Attach',
+        example:
+          'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'payment_method attach',
         example:
@@ -811,11 +816,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.PaymentMethod.Attach',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Attach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodAttachParams{\n\t\t\tIntegrationID:    "integrationId",\n\t\t\tPaymentMethodID:  "paymentMethodId",\n\t\t\tVendorIdentifier: stigg.V1CustomerPaymentMethodAttachParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.PaymentMethod.Attach',
-        example:
-          'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.payment_method.attach',
@@ -853,6 +853,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## detach\n\n`client.v1.customers.paymentMethod.detach(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/payment-method`\n\nRemoves the payment method from a customer. Ensure active paid subscriptions have an alternative payment method.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: object; zuora?: object; }; timezone?: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; updatedAt: string; billingCurrency?: string; billingId?: string; couponId?: string | ''; defaultPaymentMethod?: { billingId: string; cardExpiryMonth: number; cardExpiryYear: number; cardLast4Digits: string; type: 'CARD' | 'BANK' | 'CASH_APP'; }; email?: string; integrations?: { id: string; syncedEntityId: string; vendorIdentifier: string; }[]; language?: string; metadata?: object; name?: string; passthrough?: { stripe?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; customerName?: string; invoiceCustomFields?: object; metadata?: object; paymentMethodId?: string; shippingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; taxIds?: { type: string; value: string; }[]; }; zuora?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; currency?: string; metadata?: object; paymentMethodId?: string; }; }; timezone?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerResponse = await client.v1.customers.paymentMethod.detach('x');\n\nconsole.log(customerResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.PaymentMethod.Detach',
+        example:
+          'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
+      },
       cli: {
         method: 'payment_method detach',
         example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -866,11 +871,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.PaymentMethod.Detach',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Detach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodDetachParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.PaymentMethod.Detach',
-        example:
-          'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
       python: {
         method: 'v1.customers.payment_method.detach',
@@ -916,6 +916,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.customers.promotionalEntitlements.list(id: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: 'Active' | 'Expired' | 'Paused'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: object | object | object; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n\n**get** `/api/v1/customers/{id}/promotional-entitlements`\n\nRetrieves a paginated list of a customer's promotional entitlements.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'Active' | 'Expired' | 'Paused'[]`\n  Filter by promotional entitlement status. Supports comma-separated values for multiple statuses\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n  Granted feature entitlement\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `endDate: string`\n  - `enumValues: string[]`\n  - `environmentId: string`\n  - `featureGroupIds: string[]`\n  - `featureId: string`\n  - `hasSoftLimit: boolean`\n  - `hasUnlimitedUsage: boolean`\n  - `isVisible: boolean`\n  - `period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'`\n  - `resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'`\n  - `resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }`\n  - `startDate: string`\n  - `status: 'Active' | 'Expired' | 'Paused'`\n  - `updatedAt: string`\n  - `usageLimit: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const promotionalEntitlementListResponse of client.v1.customers.promotionalEntitlements.list('x')) {\n  console.log(promotionalEntitlementListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.PromotionalEntitlements.List',
+        example:
+          'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'promotional_entitlements list',
         example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -929,11 +934,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.PromotionalEntitlements.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.PromotionalEntitlements.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.PromotionalEntitlements.List',
-        example:
-          'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.customers.promotional_entitlements.list',
@@ -976,6 +976,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.customers.promotionalEntitlements.create(id: string, promotionalEntitlements: { customEndDate: string; enumValues: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit: number; weeklyResetPeriodConfiguration: { accordingTo: string; }; yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; }; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**post** `/api/v1/customers/{id}/promotional-entitlements`\n\nGrants promotional entitlements to a customer, providing feature access outside their subscription. Entitlements can be time-limited or permanent.\n\n### Parameters\n\n- `id: string`\n\n- `promotionalEntitlements: { customEndDate: string; enumValues: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit: number; weeklyResetPeriodConfiguration: { accordingTo: string; }; yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; }; }[]`\n  Promotional entitlements to grant\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }[]; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst promotionalEntitlement = await client.v1.customers.promotionalEntitlements.create('x', { promotionalEntitlements: [{\n  customEndDate: '2019-12-27T18:11:19.117Z',\n  enumValues: ['string'],\n  featureId: 'featureId',\n  hasSoftLimit: true,\n  hasUnlimitedUsage: true,\n  isVisible: true,\n  monthlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n  period: '1 week',\n  resetPeriod: 'YEAR',\n  usageLimit: -9007199254740991,\n  weeklyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n  yearlyResetPeriodConfiguration: { accordingTo: 'SubscriptionStart' },\n}] });\n\nconsole.log(promotionalEntitlement);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.PromotionalEntitlements.Create',
+        example:
+          'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
+      },
       cli: {
         method: 'promotional_entitlements create',
         example:
@@ -990,11 +995,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.PromotionalEntitlements.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpromotionalEntitlement, err := client.V1.Customers.PromotionalEntitlements.New(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementNewParams{\n\t\t\tPromotionalEntitlements: []stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlement{{\n\t\t\t\tCustomEndDate:     stigg.Time(time.Now()),\n\t\t\t\tEnumValues:        []string{"string"},\n\t\t\t\tFeatureID:         "featureId",\n\t\t\t\tHasSoftLimit:      stigg.Bool(true),\n\t\t\t\tHasUnlimitedUsage: stigg.Bool(true),\n\t\t\t\tIsVisible:         stigg.Bool(true),\n\t\t\t\tMonthlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementMonthlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tPeriod:      "1 week",\n\t\t\t\tResetPeriod: "YEAR",\n\t\t\t\tUsageLimit:  stigg.Int(-9007199254740991),\n\t\t\t\tWeeklyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementWeeklyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tYearlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementYearlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", promotionalEntitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.PromotionalEntitlements.Create',
-        example:
-          'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
       },
       python: {
         method: 'v1.customers.promotional_entitlements.create',
@@ -1032,6 +1032,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## revoke\n\n`client.v1.customers.promotionalEntitlements.revoke(id: string, featureId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/promotional-entitlements/{featureId}`\n\nRevokes a previously granted promotional entitlement from a customer for a specific feature.\n\n### Parameters\n\n- `id: string`\n\n- `featureId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; endDate: string; enumValues: string[]; environmentId: string; featureGroupIds: string[]; featureId: string; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; isVisible: boolean; period: '1 week' | '1 month' | '6 month' | '1 year' | 'lifetime' | 'custom'; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; startDate: string; status: 'Active' | 'Expired' | 'Paused'; updatedAt: string; usageLimit: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.customers.promotionalEntitlements.revoke('featureId', { id: 'id' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.PromotionalEntitlements.Revoke',
+        example:
+          'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'promotional_entitlements revoke',
         example:
@@ -1046,11 +1051,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.PromotionalEntitlements.Revoke(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1CustomerPromotionalEntitlementRevokeParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.PromotionalEntitlements.Revoke',
-        example:
-          'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.customers.promotional_entitlements.revoke',
@@ -1095,6 +1095,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.customers.integrations.list(id: string, after?: string, before?: string, limit?: number, vendorIdentifier?: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: object | object | object; }`\n\n**get** `/api/v1/customers/{id}/integrations`\n\nRetrieves a paginated list of a customer's external integrations (billing, CRM, etc.).\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `vendorIdentifier?: string[]`\n  Filter by vendor identifier. Supports comma-separated values for multiple vendors (e.g., STRIPE,HUBSPOT)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n  External billing or CRM integration link\n\n  - `id: string`\n  - `syncedEntityId: string`\n  - `vendorIdentifier: string`\n  - `syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const integrationListResponse of client.v1.customers.integrations.list('x')) {\n  console.log(integrationListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Integrations.List',
+        example:
+          'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'integrations list',
         example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1108,11 +1113,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Integrations.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.Integrations.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Integrations.List',
-        example:
-          'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.customers.integrations.list',
@@ -1157,6 +1157,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## link\n\n`client.v1.customers.integrations.link(id: string, id: string, syncedEntityId: string, vendorIdentifier: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/customers/{id}/integrations`\n\nLinks a customer to an external integration by specifying the vendor and external entity ID.\n\n### Parameters\n\n- `id: string`\n\n- `id: string`\n  Integration details\n\n- `syncedEntityId: string`\n  Synced entity id\n\n- `vendorIdentifier: string`\n  The vendor identifier of integration\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.link('x', {\n  id: 'id',\n  syncedEntityId: 'syncedEntityId',\n  vendorIdentifier: 'AUTH0',\n});\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Integrations.Link',
+        example:
+          'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
+      },
       cli: {
         method: 'integrations link',
         example:
@@ -1171,11 +1176,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Integrations.Link',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Link(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationLinkParams{\n\t\t\tID:               "id",\n\t\t\tSyncedEntityID:   "syncedEntityId",\n\t\t\tVendorIdentifier: stigg.V1CustomerIntegrationLinkParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Integrations.Link',
-        example:
-          'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
       python: {
         method: 'v1.customers.integrations.link',
@@ -1212,6 +1212,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.customers.integrations.retrieve(id: string, integrationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nRetrieves a specific integration for a customer by integration ID.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.retrieve('integrationId', { id: 'id' });\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Integrations.Retrieve',
+        example:
+          'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
+      },
       cli: {
         method: 'integrations retrieve',
         example:
@@ -1226,11 +1231,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Integrations.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Get(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Integrations.Retrieve',
-        example:
-          'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
       python: {
         method: 'v1.customers.integrations.retrieve',
@@ -1273,6 +1273,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.customers.integrations.update(id: string, integrationId: string, syncedEntityId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nUpdates a customer's integration link, such as changing the synced external entity ID.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n- `syncedEntityId: string`\n  Synced entity id\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.update('integrationId', { id: 'id', syncedEntityId: 'syncedEntityId' });\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Integrations.Update',
+        example:
+          'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
+      },
       cli: {
         method: 'integrations update',
         example:
@@ -1287,11 +1292,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Integrations.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Update(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUpdateParams{\n\t\t\tID:             "id",\n\t\t\tSyncedEntityID: stigg.String("syncedEntityId"),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Integrations.Update',
-        example:
-          'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
       python: {
         method: 'v1.customers.integrations.update',
@@ -1328,6 +1328,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unlink\n\n`client.v1.customers.integrations.unlink(id: string, integrationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/customers/{id}/integrations/{integrationId}`\n\nRemoves the link between a customer and an external integration.\n\n### Parameters\n\n- `id: string`\n\n- `integrationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }; }`\n  Response object\n\n  - `data: { id: string; syncedEntityId: string; vendorIdentifier: string; syncData?: { billingId: string; billingLinkUrl: string; priceGroupPackageBillingId: string; } | { billingId: string; billingLinkUrl: string; } | { dimensions: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customerIntegrationResponse = await client.v1.customers.integrations.unlink('integrationId', { id: 'id' });\n\nconsole.log(customerIntegrationResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Customers.Integrations.Unlink',
+        example:
+          'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
+      },
       cli: {
         method: 'integrations unlink',
         example:
@@ -1342,11 +1347,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Customers.Integrations.Unlink',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Unlink(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUnlinkParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Customers.Integrations.Unlink',
-        example:
-          'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
       python: {
         method: 'v1.customers.integrations.unlink',
@@ -1384,6 +1384,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.subscriptions.retrieve(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/subscriptions/{id}`\n\nRetrieves a subscription by its unique identifier, including plan details, billing period, status, and add-ons.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.retrieve('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Retrieve',
+        example:
+          'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       cli: {
         method: 'subscriptions retrieve',
         example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1397,11 +1402,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Retrieve',
-        example:
-          'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
       },
       python: {
         method: 'v1.subscriptions.retrieve',
@@ -1450,6 +1450,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.subscriptions.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, customerId?: string, limit?: number, planId?: string, pricingType?: 'FREE' | 'PAID' | 'CUSTOM'[], resourceId?: string, status?: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }`\n\n**get** `/api/v1/subscriptions`\n\nRetrieves a paginated list of subscriptions, with optional filters for customer, status, and plan.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `customerId?: string`\n  Filter by customer ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `planId?: string`\n  Filter by plan ID\n\n- `pricingType?: 'FREE' | 'PAID' | 'CUSTOM'[]`\n  Filter by pricing type. Supports comma-separated values for multiple types\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `status?: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'[]`\n  Filter by subscription status. Supports comma-separated values for multiple statuses\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n  Customer subscription to a plan\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `customerId: string`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `planId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `startDate: string`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'`\n  - `addons?: { id: string; quantity: number; }[]`\n  - `billingCycleAnchor?: string`\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `cancellationDate?: string`\n  - `cancelReason?: string`\n  - `contractId?: string`\n  - `coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]`\n  - `currentBillingPeriodEnd?: string`\n  - `currentBillingPeriodStart?: string`\n  - `effectiveEndDate?: string`\n  - `endDate?: string`\n  - `futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]`\n  - `latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }`\n  - `metadata?: object`\n  - `minimumSpend?: { amount?: number; currency?: string; }`\n  - `payingCustomerId?: string`\n  - `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  - `prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]`\n  - `resourceId?: string`\n  - `subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `trialEndDate?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.List',
+        example:
+          'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'subscriptions list',
         example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
@@ -1463,11 +1468,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Subscriptions.List(context.TODO(), stigg.V1SubscriptionListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.List',
-        example:
-          'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.subscriptions.list',
@@ -1534,6 +1534,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## provision\n\n`client.v1.subscriptions.provision(customerId: string, planId: string, id?: string, addons?: { id: string; quantity: number; }[], appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }, awaitPaymentConfirmation?: boolean, billingCountryCode?: string, billingCycleAnchor?: 'UNCHANGED' | 'NOW', billingId?: string, billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }, billingPeriod?: 'MONTHLY' | 'ANNUALLY', budget?: { hasSoftLimit: boolean; limit: number; }, cancellationDate?: string, charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[], checkoutOptions?: { cancelUrl: string; successUrl: string; allowPromoCodes?: boolean; allowTaxIdCollection?: boolean; collectBillingAddress?: boolean; collectPhoneNumber?: boolean; referenceId?: string; }, entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; hasSoftLimit?: boolean; }[], metadata?: object, minimumSpend?: { amount?: number; currency?: string; }, payingCustomerId?: string, paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE', priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[], resourceId?: string, salesforceId?: string, scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE', startDate?: string, trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }, unitQuantity?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions`\n\nCreates a new subscription for an existing customer. When payment is required and no payment method exists, returns a checkout URL.\n\n### Parameters\n\n- `customerId: string`\n  Customer ID to provision the subscription for\n\n- `planId: string`\n  Plan ID to provision\n\n- `id?: string`\n  Unique identifier for the subscription\n\n- `addons?: { id: string; quantity: number; }[]`\n\n- `appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }`\n  Coupon configuration\n  - `billingCouponId?: string`\n    Billing provider coupon ID\n  - `configuration?: { startDate?: string; }`\n    Coupon timing configuration\n  - `couponId?: string`\n    Stigg coupon ID\n  - `discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }`\n    Ad-hoc discount configuration\n  - `promotionCode?: string`\n    Promotion code to apply\n\n- `awaitPaymentConfirmation?: boolean`\n  Whether to wait for payment confirmation before returning the subscription\n\n- `billingCountryCode?: string`\n  The ISO 3166-1 alpha-2 country code for billing\n\n- `billingCycleAnchor?: 'UNCHANGED' | 'NOW'`\n  Billing cycle anchor behavior for the subscription\n\n- `billingId?: string`\n  External billing system identifier\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }`\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    Billing address for the subscription\n  - `chargeOnBehalfOfAccount?: string`\n    Stripe Connect account to charge on behalf of\n  - `integrationId?: string`\n    Billing integration identifier\n  - `invoiceDaysUntilDue?: number`\n    Number of days until invoice is due\n  - `isBackdated?: boolean`\n    Whether the subscription is backdated\n  - `isInvoicePaid?: boolean`\n    Whether the invoice is marked as paid\n  - `metadata?: object`\n    Additional metadata for the subscription\n  - `prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'`\n    How to handle proration for billing changes\n  - `taxIds?: { type: string; value: string; }[]`\n    Customer tax identification numbers\n  - `taxPercentage?: number`\n    Tax percentage (0-100)\n  - `taxRateIds?: string[]`\n    Tax rate identifiers to apply\n\n- `billingPeriod?: 'MONTHLY' | 'ANNUALLY'`\n  Billing period (MONTHLY or ANNUALLY)\n\n- `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `hasSoftLimit: boolean`\n    Whether the budget is a soft limit\n  - `limit: number`\n    Maximum spending limit\n\n- `cancellationDate?: string`\n  Subscription cancellation date\n\n- `charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]`\n\n- `checkoutOptions?: { cancelUrl: string; successUrl: string; allowPromoCodes?: boolean; allowTaxIdCollection?: boolean; collectBillingAddress?: boolean; collectPhoneNumber?: boolean; referenceId?: string; }`\n  Checkout page configuration for payment collection\n  - `cancelUrl: string`\n    URL to redirect to if checkout is canceled\n  - `successUrl: string`\n    URL to redirect to after successful checkout\n  - `allowPromoCodes?: boolean`\n    Allow promotional codes during checkout\n  - `allowTaxIdCollection?: boolean`\n    Allow tax ID collection during checkout\n  - `collectBillingAddress?: boolean`\n    Collect billing address during checkout\n  - `collectPhoneNumber?: boolean`\n    Collect phone number during checkout\n  - `referenceId?: string`\n    Optional reference ID for the checkout session\n\n- `entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; hasSoftLimit?: boolean; }[]`\n\n- `metadata?: object`\n  Additional metadata for the subscription\n\n- `minimumSpend?: { amount?: number; currency?: string; }`\n  Minimum spend amount\n  - `amount?: number`\n    The price amount\n  - `currency?: string`\n    The price currency\n\n- `payingCustomerId?: string`\n  Optional paying customer ID for split billing scenarios\n\n- `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  How payments should be collected for this subscription\n\n- `priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]`\n\n- `resourceId?: string`\n  Optional resource ID for multi-instance subscriptions\n\n- `salesforceId?: string`\n  Salesforce ID\n\n- `scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'`\n  Strategy for scheduling subscription changes\n\n- `startDate?: string`\n  Subscription start date\n\n- `trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }`\n  Trial period override settings\n  - `isTrial: boolean`\n    Whether the subscription should start with a trial period\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when trial ends: CONVERT_TO_PAID or CANCEL_SUBSCRIPTION\n  - `trialEndDate?: string`\n    Custom trial end date\n\n- `unitQuantity?: number`\n  Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: object; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: object; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; status: 'SUCCESS' | 'PAYMENT_REQUIRED'; subscription: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: object[]; billingCycleAnchor?: string; budget?: object; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: object[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: object[]; latestInvoice?: object; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: object[]; resourceId?: string; subscriptionEntitlements?: object[]; trial?: object; trialEndDate?: string; }; checkoutBillingId?: string; checkoutUrl?: string; isScheduled?: boolean; }; }`\n  Response object\n\n  - `data: { id: string; entitlements: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }[]; status: 'SUCCESS' | 'PAYMENT_REQUIRED'; subscription: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; checkoutBillingId?: string; checkoutUrl?: string; isScheduled?: boolean; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.provision({ customerId: 'customerId', planId: 'planId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Provision',
+        example:
+          'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'subscriptions provision',
         example:
@@ -1548,11 +1553,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Provision',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Provision(context.TODO(), stigg.V1SubscriptionProvisionParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Provision',
-        example:
-          'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.subscriptions.provision',
@@ -1595,6 +1595,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## transfer\n\n`client.v1.subscriptions.transfer(id: string, destinationResourceId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/transfer`\n\nTransfers a subscription to a different resource ID. Used for multi-resource products where subscriptions apply to specific entities like websites or apps.\n\n### Parameters\n\n- `id: string`\n\n- `destinationResourceId: string`\n  Resource ID to transfer the subscription to\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.transfer('x', { destinationResourceId: 'destinationResourceId' });\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Transfer',
+        example:
+          'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       cli: {
         method: 'subscriptions transfer',
         example:
@@ -1609,11 +1614,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Transfer',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Transfer(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionTransferParams{\n\t\t\tDestinationResourceID: "destinationResourceId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Transfer',
-        example:
-          'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
       },
       python: {
         method: 'v1.subscriptions.transfer',
@@ -1656,6 +1656,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## migrate\n\n`client.v1.subscriptions.migrate(id: string, subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/migrate`\n\nMigrates a subscription to the latest published version of its plan or add-ons. Handles prorated charges or credits automatically.\n\n### Parameters\n\n- `id: string`\n\n- `subscriptionMigrationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE'`\n  When to migrate (immediate or period end)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.migrate('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Migrate',
+        example:
+          'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       cli: {
         method: 'subscriptions migrate',
         example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1669,11 +1674,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Migrate',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Migrate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionMigrateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Migrate',
-        example:
-          'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
       },
       python: {
         method: 'v1.subscriptions.migrate',
@@ -1716,6 +1716,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delegate\n\n`client.v1.subscriptions.delegate(id: string, targetCustomerId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/delegate`\n\nDelegates the payment responsibility of a subscription to a different customer. The delegated customer will be billed for this subscription.\n\n### Parameters\n\n- `id: string`\n\n- `targetCustomerId: string`\n  The unique identifier of the customer who will assume payment responsibility for this subscription. This customer must already exist in your Stigg account and have a valid payment method if the subscription requires payment.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.delegate('x', { targetCustomerId: 'targetCustomerId' });\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Delegate',
+        example:
+          'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       cli: {
         method: 'subscriptions delegate',
         example:
@@ -1730,11 +1735,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Delegate',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Delegate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionDelegateParams{\n\t\t\tTargetCustomerID: "targetCustomerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Delegate',
-        example:
-          'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
       },
       python: {
         method: 'v1.subscriptions.delegate',
@@ -1791,6 +1791,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## preview\n\n`client.v1.subscriptions.preview(customerId: string, planId: string, addons?: { id: string; quantity: number; }[], appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }, billableFeatures?: { featureId: string; quantity: number; }[], billingCountryCode?: string, billingCycleAnchor?: 'UNCHANGED' | 'NOW', billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }, billingPeriod?: 'MONTHLY' | 'ANNUALLY', charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[], payingCustomerId?: string, resourceId?: string, scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE', startDate?: string, trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }, unitQuantity?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/preview`\n\nPreviews the pricing impact of creating or updating a subscription without making changes. Returns estimated costs, taxes, and proration details.\n\n### Parameters\n\n- `customerId: string`\n  Customer ID\n\n- `planId: string`\n  Plan ID\n\n- `addons?: { id: string; quantity: number; }[]`\n  Addons to include\n\n- `appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }`\n  Coupon or discount to apply\n  - `billingCouponId?: string`\n    Billing provider coupon ID\n  - `configuration?: { startDate?: string; }`\n    Coupon timing configuration\n  - `couponId?: string`\n    Stigg coupon ID\n  - `discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }`\n    Ad-hoc discount configuration\n  - `promotionCode?: string`\n    Promotion code to apply\n\n- `billableFeatures?: { featureId: string; quantity: number; }[]`\n  Billable features with quantities\n\n- `billingCountryCode?: string`\n  ISO 3166-1 country code for localization\n\n- `billingCycleAnchor?: 'UNCHANGED' | 'NOW'`\n  Billing cycle anchor behavior for the subscription\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }`\n  Billing and tax configuration\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    Billing address\n  - `chargeOnBehalfOfAccount?: string`\n    Connected account ID for platform billing\n  - `integrationId?: string`\n    Billing integration ID\n  - `invoiceDaysUntilDue?: number`\n    Days until invoice is due\n  - `isBackdated?: boolean`\n    Whether subscription is backdated\n  - `isInvoicePaid?: boolean`\n    Whether invoice is already paid\n  - `metadata?: object`\n    Additional billing metadata\n  - `prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'`\n    Proration behavior\n  - `taxIds?: { type: string; value: string; }[]`\n    Customer tax IDs\n  - `taxPercentage?: number`\n    Tax percentage to apply\n  - `taxRateIds?: string[]`\n    Tax rate IDs from billing provider\n\n- `billingPeriod?: 'MONTHLY' | 'ANNUALLY'`\n  Billing period (MONTHLY or ANNUALLY)\n\n- `charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]`\n  One-time or recurring charges\n\n- `payingCustomerId?: string`\n  Paying customer ID for delegated billing\n\n- `resourceId?: string`\n  Resource ID for multi-instance subscriptions\n\n- `scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'`\n  When to apply subscription changes\n\n- `startDate?: string`\n  Subscription start date\n\n- `trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }`\n  Trial period override settings\n  - `isTrial: boolean`\n    Whether to start as trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when trial ends\n  - `trialEndDate?: string`\n    Trial end date\n\n- `unitQuantity?: number`\n  Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { immediateInvoice: { subTotal: number; total: number; billingPeriodRange?: object; currency?: string; discount?: number; discountDetails?: object; discounts?: object[]; lines?: object[]; tax?: number; }; billingPeriodRange?: { end?: string; start?: string; }; freeItems?: { id: string; quantity: number; }[]; hasScheduledUpdates?: boolean; isPlanDowngrade?: boolean; recurringInvoice?: { subTotal: number; total: number; billingPeriodRange?: object; currency?: string; discount?: number; discountDetails?: object; discounts?: object[]; lines?: object[]; tax?: number; }; }; }`\n  Response object\n\n  - `data: { immediateInvoice: { subTotal: number; total: number; billingPeriodRange?: { end: string; start: string; }; currency?: string; discount?: number; discountDetails?: { code?: string; fixedAmount?: number; percentage?: number; }; discounts?: { amount: number; currency: string; description: string; }[]; lines?: { currency: string; description: string; subTotal: number; unitPrice: number; quantity?: number; }[]; tax?: number; }; billingPeriodRange?: { end?: string; start?: string; }; freeItems?: { id: string; quantity: number; }[]; hasScheduledUpdates?: boolean; isPlanDowngrade?: boolean; recurringInvoice?: { subTotal: number; total: number; billingPeriodRange?: { end: string; start: string; }; currency?: string; discount?: number; discountDetails?: { code?: string; fixedAmount?: number; percentage?: number; }; discounts?: { amount: number; currency: string; description: string; }[]; lines?: { currency: string; description: string; subTotal: number; unitPrice: number; quantity?: number; }[]; tax?: number; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.preview({ customerId: 'customerId', planId: 'planId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Preview',
+        example:
+          'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'subscriptions preview',
         example:
@@ -1805,11 +1810,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Preview',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Preview(context.TODO(), stigg.V1SubscriptionPreviewParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Preview',
-        example:
-          'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.subscriptions.preview',
@@ -1868,6 +1868,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.subscriptions.update(id: string, addons?: { id: string; quantity: number; }[], appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }, awaitPaymentConfirmation?: boolean, billingCycleAnchor?: 'UNCHANGED' | 'NOW', billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; couponId?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }, billingPeriod?: 'MONTHLY' | 'ANNUALLY', budget?: { hasSoftLimit: boolean; limit: number; }, cancellationDate?: string, charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[], entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; hasSoftLimit?: boolean; }[], metadata?: object, minimumSpend?: { amount?: number; currency?: string; }, priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; currency?: string; currencyId?: string; featureId?: string; }[], promotionCode?: string, salesforceId?: string, scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE', trialEndDate?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/subscriptions/{id}`\n\nUpdates an active subscription's properties including billing period, add-ons, unit quantities, and discounts.\n\n### Parameters\n\n- `id: string`\n\n- `addons?: { id: string; quantity: number; }[]`\n\n- `appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }`\n  - `billingCouponId?: string`\n  - `configuration?: { startDate?: string; }`\n  - `couponId?: string`\n    Stigg coupon ID\n  - `discount?: { amountsOff?: { amount: number; currency: string; }[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }`\n  - `promotionCode?: string`\n\n- `awaitPaymentConfirmation?: boolean`\n  Await payment confirmation\n\n- `billingCycleAnchor?: 'UNCHANGED' | 'NOW'`\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; couponId?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }`\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    Physical address\n  - `chargeOnBehalfOfAccount?: string`\n  - `couponId?: string`\n  - `integrationId?: string`\n  - `invoiceDaysUntilDue?: number`\n  - `isBackdated?: boolean`\n  - `isInvoicePaid?: boolean`\n  - `metadata?: object`\n    Additional metadata for the subscription\n  - `prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'`\n  - `taxIds?: { type: string; value: string; }[]`\n  - `taxPercentage?: number`\n  - `taxRateIds?: string[]`\n\n- `billingPeriod?: 'MONTHLY' | 'ANNUALLY'`\n\n- `budget?: { hasSoftLimit: boolean; limit: number; }`\n  - `hasSoftLimit: boolean`\n    Whether the budget is a soft limit\n  - `limit: number`\n    Maximum spending limit\n\n- `cancellationDate?: string`\n  Subscription cancellation date\n\n- `charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]`\n\n- `entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; hasSoftLimit?: boolean; }[]`\n\n- `metadata?: object`\n  Additional metadata for the subscription\n\n- `minimumSpend?: { amount?: number; currency?: string; }`\n  Minimum spend amount\n  - `amount?: number`\n    The price amount\n  - `currency?: string`\n    The price currency\n\n- `priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; currency?: string; currencyId?: string; featureId?: string; }[]`\n\n- `promotionCode?: string`\n  Promotion code\n\n- `salesforceId?: string`\n  Salesforce ID\n\n- `scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'`\n\n- `trialEndDate?: string`\n  Subscription trial end date\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.update('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Update',
+        example:
+          'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       cli: {
         method: 'subscriptions update',
         example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -1881,11 +1886,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Update',
-        example:
-          'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
       },
       python: {
         method: 'v1.subscriptions.update',
@@ -1927,6 +1927,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## import\n\n`client.v1.subscriptions.import(subscriptions: { id: string; customerId: string; planId: string; addons?: { id: string; quantity: number; }[]; billingId?: string; billingPeriod?: 'MONTHLY' | 'ANNUALLY'; charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]; endDate?: string; metadata?: object; resourceId?: string; startDate?: string; }[], integrationId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/import`\n\nImports multiple subscriptions in bulk. Used for migrating subscription data from external systems.\n\n### Parameters\n\n- `subscriptions: { id: string; customerId: string; planId: string; addons?: { id: string; quantity: number; }[]; billingId?: string; billingPeriod?: 'MONTHLY' | 'ANNUALLY'; charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]; endDate?: string; metadata?: object; resourceId?: string; startDate?: string; }[]`\n  List of subscription objects to import\n\n- `integrationId?: string`\n  Integration ID to use for importing subscriptions\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { taskId: string; }; }`\n  Response object\n\n  - `data: { taskId: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.import({ subscriptions: [{\n  id: 'id',\n  customerId: 'customerId',\n  planId: 'planId',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Import',
+        example:
+          'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'subscriptions import',
         example:
@@ -1941,11 +1946,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Import',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Import(context.TODO(), stigg.V1SubscriptionImportParams{\n\t\tSubscriptions: []stigg.V1SubscriptionImportParamsSubscription{{\n\t\t\tID:         "id",\n\t\t\tCustomerID: "customerId",\n\t\t\tPlanID:     "planId",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Import',
-        example:
-          'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.subscriptions.import_',
@@ -1991,6 +1991,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel\n\n`client.v1.subscriptions.cancel(id: string, cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS', cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE', endDate?: string, prorate?: boolean, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/cancel`\n\nCancels an active subscription, either immediately or at a specified time such as end of billing period.\n\n### Parameters\n\n- `id: string`\n\n- `cancellationAction?: 'DEFAULT' | 'REVOKE_ENTITLEMENTS'`\n  Action on cancellation (downgrade or revoke)\n\n- `cancellationTime?: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'`\n  When to cancel (immediate, period end, or date)\n\n- `endDate?: string`\n  Subscription end date\n\n- `prorate?: boolean`\n  If set, enables or disables prorating of credits on subscription cancellation.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: object[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: object; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: object[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; customerId: string; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; planId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; startDate: string; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'IN_TRIAL' | 'CANCELED' | 'NOT_STARTED'; addons?: { id: string; quantity: number; }[]; billingCycleAnchor?: string; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; cancelReason?: string; contractId?: string; coupons?: { id: string; name: string; status: 'ACTIVE' | 'EXPIRED' | 'REMOVED'; amountsOff?: { amount?: number; currency?: string; }[]; percentOff?: number; }[]; currentBillingPeriodEnd?: string; currentBillingPeriodStart?: string; effectiveEndDate?: string; endDate?: string; futureUpdates?: { scheduledExecutionTime: string; scheduleStatus: 'PENDING_PAYMENT' | 'SCHEDULED' | 'CANCELED' | 'DONE' | 'FAILED'; subscriptionScheduleType: string; targetPackage?: { id: string; }; }[]; latestInvoice?: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; prices?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; currency?: string; featureId?: string; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; }[]; resourceId?: string; subscriptionEntitlements?: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; trial?: { trialEndBehavior: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; trialEndDate?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst subscription = await client.v1.subscriptions.cancel('x');\n\nconsole.log(subscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Cancel',
+        example:
+          'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
+      },
       cli: {
         method: 'subscriptions cancel',
         example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2004,11 +2009,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Cancel',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Cancel(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionCancelParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Cancel',
-        example:
-          'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
       },
       python: {
         method: 'v1.subscriptions.cancel',
@@ -2044,6 +2044,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel_pending_payment\n\n`client.v1.subscriptions.futureUpdate.cancelPendingPayment(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/subscriptions/{id}/future-update/pending-payment`\n\nCancels a subscription update that is pending payment completion.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response object\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelPendingPayment('x');\n\nconsole.log(cancelSubscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.FutureUpdate.CancelPendingPayment',
+        example:
+          'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
+      },
       cli: {
         method: 'future_update cancel_pending_payment',
         example:
@@ -2058,11 +2063,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionFutureUpdateCancelPendingPaymentParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.FutureUpdate.CancelPendingPayment',
-        example:
-          'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
       python: {
         method: 'v1.subscriptions.future_update.cancel_pending_payment',
@@ -2098,6 +2098,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## cancel_schedule\n\n`client.v1.subscriptions.futureUpdate.cancelSchedule(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/subscriptions/{id}/future-update/schedule`\n\nCancels a scheduled subscription update, such as a future downgrade or plan change.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response object\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst cancelSubscription = await client.v1.subscriptions.futureUpdate.cancelSchedule('x');\n\nconsole.log(cancelSubscription);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.FutureUpdate.CancelSchedule',
+        example:
+          'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
+      },
       cli: {
         method: 'future_update cancel_schedule',
         example:
@@ -2112,11 +2117,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelSchedule(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionFutureUpdateCancelScheduleParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.FutureUpdate.CancelSchedule',
-        example:
-          'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
       python: {
         method: 'v1.subscriptions.future_update.cancel_schedule',
@@ -2154,6 +2154,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## charge_usage\n\n`client.v1.subscriptions.usage.chargeUsage(id: string, untilDate?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/usage/charge`\n\nImmediately charges usage for a subscription via the billing integration. Calculates usage since the last charge and creates an invoice.\n\n### Parameters\n\n- `id: string`\n\n- `untilDate?: string`\n  Cutoff date for usage calculation. If not provided, the current time is used.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { invoiceBillingId: string; periodEnd: string; periodStart: string; subscriptionId: string; usageCharged: { featureId: string; usageAmount: number; }[]; }; }`\n  Response object\n\n  - `data: { invoiceBillingId: string; periodEnd: string; periodStart: string; subscriptionId: string; usageCharged: { featureId: string; usageAmount: number; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.usage.chargeUsage('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Usage.ChargeUsage',
+        example:
+          'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'usage charge_usage',
         example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2167,11 +2172,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Usage.ChargeUsage',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.ChargeUsage(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUsageChargeUsageParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Usage.ChargeUsage',
-        example:
-          'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.subscriptions.usage.charge_usage',
@@ -2207,6 +2207,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## sync\n\n`client.v1.subscriptions.usage.sync(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/usage/sync`\n\nTriggers a usage sync for a subscription, reporting current usage to the billing provider.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { triggered: boolean; }; }`\n  Response object\n\n  - `data: { triggered: boolean; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.usage.sync('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Usage.Sync',
+        example:
+          'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'usage sync',
         example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2220,11 +2225,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Usage.Sync',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.Sync(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUsageSyncParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Usage.Sync',
-        example:
-          'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.subscriptions.usage.sync',
@@ -2261,6 +2261,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## mark_as_paid\n\n`client.v1.subscriptions.invoice.markAsPaid(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/subscriptions/{id}/invoice/paid`\n\nMarks the latest invoice of a subscription as paid in the billing provider. The invoice must exist and have an OPEN status.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response object\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.subscriptions.invoice.markAsPaid('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Subscriptions.Invoice.MarkAsPaid',
+        example:
+          'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'invoice mark_as_paid',
         example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2274,11 +2279,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Invoice.MarkAsPaid(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionInvoiceMarkAsPaidParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Subscriptions.Invoice.MarkAsPaid',
-        example:
-          'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.subscriptions.invoice.mark_as_paid',
@@ -2326,6 +2326,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.coupons.create(id: string, amountsOff: { amount: number; currency: string; }[], description: string, durationInMonths: number, metadata: object, name: string, percentOff: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/coupons`\n\nCreates a new discount coupon with percentage or fixed amount off, applicable to customer subscriptions.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `amountsOff: { amount: number; currency: string; }[]`\n  Fixed amount discounts in different currencies\n\n- `description: string`\n  Description of the coupon\n\n- `durationInMonths: number`\n  Duration of the coupon validity in months\n\n- `metadata: object`\n  Metadata associated with the entity\n\n- `name: string`\n  Name of the coupon\n\n- `percentOff: number`\n  Percentage discount off the original price\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.create({\n  id: 'id',\n  amountsOff: [{ amount: 0, currency: 'usd' }],\n  description: 'description',\n  durationInMonths: 1,\n  metadata: { foo: 'string' },\n  name: 'name',\n  percentOff: 1,\n});\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Coupons.Create',
+        example:
+          'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
+      },
       cli: {
         method: 'coupons create',
         example:
@@ -2340,11 +2345,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Coupons.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.New(context.TODO(), stigg.V1CouponNewParams{\n\t\tID: "id",\n\t\tAmountsOff: []stigg.V1CouponNewParamsAmountsOff{{\n\t\t\tAmount:   0,\n\t\t\tCurrency: "usd",\n\t\t}},\n\t\tDescription:      stigg.String("description"),\n\t\tDurationInMonths: stigg.Int(1),\n\t\tMetadata: map[string]string{\n\t\t\t"foo": "string",\n\t\t},\n\t\tName:       "name",\n\t\tPercentOff: stigg.Float(1),\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Coupons.Create',
-        example:
-          'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
       },
       python: {
         method: 'v1.coupons.create',
@@ -2391,6 +2391,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.coupons.list(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: 'ACTIVE' | 'ARCHIVED'[], type?: 'FIXED' | 'PERCENTAGE', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; amountsOff: object[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n**get** `/api/v1/coupons`\n\nRetrieves a paginated list of coupons in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'ACTIVE' | 'ARCHIVED'[]`\n  Filter by coupon status. Supports comma-separated values for multiple statuses\n\n- `type?: 'FIXED' | 'PERCENTAGE'`\n  Filter by coupon type (FIXED or PERCENTAGE)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n  Discount instrument with percentage or fixed amount\n\n  - `id: string`\n  - `amountsOff: { amount: number; currency: string; }[]`\n  - `billingId: string`\n  - `billingLinkUrl: string`\n  - `createdAt: string`\n  - `description: string`\n  - `durationInMonths: number`\n  - `metadata: object`\n  - `name: string`\n  - `percentOff: number`\n  - `source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'`\n  - `status: 'ACTIVE' | 'ARCHIVED'`\n  - `type: 'FIXED' | 'PERCENTAGE'`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Coupons.List',
+        example:
+          'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'coupons list',
         example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
@@ -2404,11 +2409,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Coupons.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Coupons.List(context.TODO(), stigg.V1CouponListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Coupons.List',
-        example:
-          'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.coupons.list',
@@ -2444,6 +2444,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.coupons.retrieve(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/coupons/{id}`\n\nRetrieves a coupon by its unique identifier.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.retrieve('x');\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Coupons.Retrieve',
+        example:
+          'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
+      },
       cli: {
         method: 'coupons retrieve',
         example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2457,11 +2462,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Coupons.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Coupons.Retrieve',
-        example:
-          'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
       },
       python: {
         method: 'v1.coupons.retrieve',
@@ -2504,6 +2504,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_coupon\n\n`client.v1.coupons.updateCoupon(id: string, description?: string, metadata?: object, name?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/coupons/{id}`\n\nUpdates an existing coupon's properties such as name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `description?: string`\n  Description of the coupon\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `name?: string`\n  Name of the coupon\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.updateCoupon('x');\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Coupons.UpdateCoupon',
+        example:
+          'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
+      },
       cli: {
         method: 'coupons update_coupon',
         example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2517,11 +2522,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Coupons.UpdateCoupon',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.UpdateCoupon(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponUpdateCouponParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Coupons.UpdateCoupon',
-        example:
-          'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
       python: {
         method: 'v1.coupons.update_coupon',
@@ -2558,6 +2558,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive_coupon\n\n`client.v1.coupons.archiveCoupon(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/coupons/{id}/archive`\n\nArchives a coupon, preventing it from being applied to new subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amountsOff: { amount: number; currency: string; }[]; billingId: string; billingLinkUrl: string; createdAt: string; description: string; durationInMonths: number; metadata: object; name: string; percentOff: number; source: 'STIGG' | 'STIGG_ADHOC' | 'STRIPE'; status: 'ACTIVE' | 'ARCHIVED'; type: 'FIXED' | 'PERCENTAGE'; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst coupon = await client.v1.coupons.archiveCoupon('x');\n\nconsole.log(coupon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Coupons.ArchiveCoupon',
+        example:
+          'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
+      },
       cli: {
         method: 'coupons archive_coupon',
         example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -2571,11 +2576,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Coupons.ArchiveCoupon',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.ArchiveCoupon(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponArchiveCouponParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Coupons.ArchiveCoupon',
-        example:
-          'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
       python: {
         method: 'v1.coupons.archive_coupon',
@@ -2616,6 +2616,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## report\n\n`client.v1.events.report(events: { customerId: string; eventName: string; idempotencyKey: string; dimensions?: object; resourceId?: string; timestamp?: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/events`\n\nReports raw usage events for event-based metering. Events are ingested asynchronously and aggregated into usage totals.\n\n### Parameters\n\n- `events: { customerId: string; eventName: string; idempotencyKey: string; dimensions?: object; resourceId?: string; timestamp?: string; }[]`\n  A list of usage events to report\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: object; }`\n  Response object\n\n  - `data: object`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.report({ events: [{\n  customerId: 'customerId',\n  eventName: 'x',\n  idempotencyKey: 'x',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.Report',
+        example:
+          'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'events report',
         example:
@@ -2630,11 +2635,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.Report',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Report(context.TODO(), stigg.V1EventReportParams{\n\t\tEvents: []stigg.V1EventReportParamsEvent{{\n\t\t\tCustomerID:     "customerId",\n\t\t\tEventName:      "x",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.Report',
-        example:
-          'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.report',
@@ -2679,6 +2679,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## estimate\n\n`client.v1.events.estimate(customerId: string, eventName: string, dimensions?: object, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/events/estimate`\n\nEstimates the credit cost of a usage event without ingesting it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `eventName: string`\n  The name of the usage event\n\n- `dimensions?: object`\n  Dimensions associated with the usage event\n\n- `resourceId?: string`\n  Resource id\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.estimate({ customerId: 'customerId', eventName: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.Estimate',
+        example:
+          'EventEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.Estimate(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'events estimate',
         example:
@@ -2693,11 +2698,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.Estimate',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Estimate(context.TODO(), stigg.V1EventEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tEventName:  "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.Estimate',
-        example:
-          'EventEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.estimate',
@@ -2734,6 +2734,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## trigger_sync\n\n`client.v1.events.dataExport.triggerSync(destinationId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/sync`\n\nTrigger a sync for one destination or all destinations under the provider entity.\n\n### Parameters\n\n- `destinationId?: string`\n  Provider destination ID to sync. Omit to sync all destinations.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }; }`\n  Response object\n\n  - `data: { results: { destinationId: string; triggered: boolean; errorMessage?: string; transferId?: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.triggerSync();\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.DataExport.TriggerSync',
+        example:
+          'DataExportTriggerSyncParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.TriggerSync(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'data_export trigger_sync',
         example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
@@ -2747,11 +2752,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.DataExport.TriggerSync',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.TriggerSync(context.TODO(), stigg.V1EventDataExportTriggerSyncParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.DataExport.TriggerSync',
-        example:
-          'DataExportTriggerSyncParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.TriggerSync(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.data_export.trigger_sync',
@@ -2794,6 +2794,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## mint_scoped_token\n\n`client.v1.events.dataExport.mintScopedToken(applicationOrigin: string, destinationType?: string, enabledModels?: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/scoped-token`\n\nMint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT integration if needed.\n\n### Parameters\n\n- `applicationOrigin: string`\n  FE origin the resulting JWT is bound to (provider-side anti-fraud)\n\n- `destinationType?: string`\n  Pin the token to a specific warehouse connect flow\n\n- `enabledModels?: string[]`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { token: string; expiresAt: string; providerMetadata: object; }; }`\n  Response object\n\n  - `data: { token: string; expiresAt: string; providerMetadata: object; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.DataExport.MintScopedToken',
+        example:
+          'DataExportMintScopedTokenParams parameters = new() { ApplicationOrigin = "x" };\n\nvar response = await client.V1.Events.DataExport.MintScopedToken(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'data_export mint_scoped_token',
         example:
@@ -2808,11 +2813,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.DataExport.MintScopedToken',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.MintScopedToken(context.TODO(), stigg.V1EventDataExportMintScopedTokenParams{\n\t\tApplicationOrigin: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.DataExport.MintScopedToken',
-        example:
-          'DataExportMintScopedTokenParams parameters = new() { ApplicationOrigin = "x" };\n\nvar response = await client.V1.Events.DataExport.MintScopedToken(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.data_export.mint_scoped_token',
@@ -2849,6 +2849,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_models\n\n`client.v1.events.dataExport.listModels(X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/data-export/models`\n\nList the catalog of data-export models the customer can opt into when connecting a destination.\n\n### Parameters\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { groups: { id: string; displayName: string; models: object[]; }[]; }; }`\n  Response object\n\n  - `data: { groups: { id: string; displayName: string; models: { id: string; displayName: string; }[]; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.listModels();\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.DataExport.ListModels',
+        example:
+          'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'data_export list_models',
         example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
@@ -2862,11 +2867,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.DataExport.ListModels',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.ListModels(context.TODO(), stigg.V1EventDataExportListModelsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.DataExport.ListModels',
-        example:
-          'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.data_export.list_models',
@@ -2909,6 +2909,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.events.dataExport.destinations.create(destinationId: string, destinationType: string, enabledModels?: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/data-export/destinations`\n\nRegister a destination on the environment's DATA_EXPORT integration. Lazy-creates the integration row + provider recipient on first call. Idempotent on destinationId.\n\n### Parameters\n\n- `destinationId: string`\n  The provider destination ID returned by the embedded SDK on connect\n\n- `destinationType: string`\n  The destination type (e.g. snowflake, bigquery)\n\n- `enabledModels?: string[]`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.create({ destinationId: 'x', destinationType: 'x' });\n\nconsole.log(destination);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.DataExport.Destinations.Create',
+        example:
+          'DestinationCreateParams parameters = new()\n{\n    DestinationID = "x",\n    DestinationType = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Create(parameters);\n\nConsole.WriteLine(destination);',
+      },
       cli: {
         method: 'destinations create',
         example:
@@ -2923,11 +2928,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.DataExport.Destinations.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.New(context.TODO(), stigg.V1EventDataExportDestinationNewParams{\n\t\tDestinationID:   "x",\n\t\tDestinationType: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.DataExport.Destinations.Create',
-        example:
-          'DestinationCreateParams parameters = new()\n{\n    DestinationID = "x",\n    DestinationType = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Create(parameters);\n\nConsole.WriteLine(destination);',
       },
       python: {
         method: 'v1.events.data_export.destinations.create',
@@ -2965,6 +2965,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.v1.events.dataExport.destinations.delete(destinationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/data-export/destinations/{destinationId}`\n\nDisconnect a destination: stops the provider sync (deletes the provider destination) and removes it from the DATA_EXPORT integration. Non-destructive — the warehouse table is left intact. Idempotent.\n\n### Parameters\n\n- `destinationId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst destination = await client.v1.events.dataExport.destinations.delete('x');\n\nconsole.log(destination);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.DataExport.Destinations.Delete',
+        example:
+          'DestinationDeleteParams parameters = new() { DestinationID = "x" };\n\nvar destination = await client.V1.Events.DataExport.Destinations.Delete(parameters);\n\nConsole.WriteLine(destination);',
+      },
       cli: {
         method: 'destinations delete',
         example:
@@ -2979,11 +2984,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.DataExport.Destinations.Delete',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Delete(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationDeleteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.DataExport.Destinations.Delete',
-        example:
-          'DestinationDeleteParams parameters = new() { DestinationID = "x" };\n\nvar destination = await client.V1.Events.DataExport.Destinations.Delete(parameters);\n\nConsole.WriteLine(destination);',
       },
       python: {
         method: 'v1.events.data_export.destinations.delete',
@@ -3027,6 +3027,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_selection\n\n`client.v1.events.dataExport.destinations.updateSelection(destinationId: string, enabledModels: string[], integrationId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/data-export/destinations/{destinationId}`\n\nUpdate a destination's entity selection. Pushes the new enabled_models to the provider first, then persists the selection. Applies on the next scheduled transfer.\n\n### Parameters\n\n- `destinationId: string`\n\n- `enabledModels: string[]`\n\n- `integrationId: string`\n  Target integration row hosting the destination\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: object; }[]; }; }`\n  Response object\n\n  - `data: { destinations: { connectedAt: string; destinationId: string; type: string; connectionStatus?: string; enabledModels?: string[]; lastSyncStatus?: { finishedAt: string; status: string; transferId: string; blamedParty?: string; failureMessage?: string; rowsTransferred?: number; }; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.dataExport.destinations.updateSelection('x', { enabledModels: ['x'], integrationId: 'x' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.DataExport.Destinations.UpdateSelection',
+        example:
+          'DestinationUpdateSelectionParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar response = await client.V1.Events.DataExport.Destinations.UpdateSelection(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'destinations update_selection',
         example:
@@ -3041,11 +3046,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.DataExport.Destinations.UpdateSelection',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.Destinations.UpdateSelection(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationUpdateSelectionParams{\n\t\t\tEnabledModels: []string{"x"},\n\t\t\tIntegrationID: "x",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.DataExport.Destinations.UpdateSelection',
-        example:
-          'DestinationUpdateSelectionParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar response = await client.V1.Events.DataExport.Destinations.UpdateSelection(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.data_export.destinations.update_selection',
@@ -3097,6 +3097,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_governance\n\n`client.v1.events.beta.customers.retrieveGovernance(id: string, after?: string, currencyIds?: string[], entityIdSearch?: string, entityTypeIds?: string[], featureIds?: string[], limit?: number, minUtilization?: number, order?: 'asc' | 'desc', scope?: 'all' | 'nodeWide' | 'scoped', sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; pagination: object; }`\n\n**get** `/api/v1-beta/customers/{id}/governance`\n\nQueries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `currencyIds?: string[]`\n  Currency ids to include, repeated per value (e.g. `?currencyIds=credits`). Omit both featureIds and currencyIds for tree mode.\n\n- `entityIdSearch?: string`\n  Case-insensitive substring match on the entity id or its display name (`%`/`_` matched literally).\n\n- `entityTypeIds?: string[]`\n  Filter to one or more entity types, repeated per value (e.g. `?entityTypeIds=team&entityTypeIds=user`).\n\n- `featureIds?: string[]`\n  Feature ids to include, repeated per value (e.g. `?featureIds=ai-tokens&featureIds=seats`). Omit both featureIds and currencyIds for tree mode — every node in the hierarchy with no usage configuration attached.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `minUtilization?: number`\n  Only nodes with utilization ≥ this value (e.g. 0.8 for ≥80%, 1 for at/over limit).\n\n- `order?: 'asc' | 'desc'`\n  Sort direction: `asc` or `desc` (default `desc`).\n\n- `scope?: 'all' | 'nodeWide' | 'scoped'`\n  Filter by configuration scope: `all` (default), `nodeWide` (`[]` only), or `scoped` (non-empty only).\n\n- `sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt'`\n  Sort key: `utilization` (default, cross-capability-safe), `currentUsage`, `usageLimit`, `scopeSize`, `id`, or `createdAt`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { cadence: string; currentUsage: number; displayName: string; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]; pagination: { next: string; }; }`\n  Paginated list of governance tree nodes, each with its usage configuration and current usage.\n\n  - `data: { cadence: string; currentUsage: number; displayName: string; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }[]`\n  - `pagination: { next: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.events.beta.customers.retrieveGovernance('id');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Events.Beta.Customers.RetrieveGovernance',
+        example:
+          'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Events.Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'customers retrieve_governance',
         example:
@@ -3111,11 +3116,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Events.Beta.Customers.GetGovernance',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Events.Beta.Customers.RetrieveGovernance',
-        example:
-          'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Events.Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.events.beta.customers.retrieve_governance',
@@ -3166,6 +3166,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_usage\n\n`client.v1.credits.getUsage(customerId: string, after?: string, before?: string, currencyId?: string, endDate?: string, groupBy?: string, limit?: number, resourceId?: string, startDate?: string, timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/credits/usage`\n\nRetrieves credit usage time-series data for a customer, grouped by feature, over a specified time range.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `endDate?: string`\n  End date for the credit usage time range (ISO 8601). Defaults to now when startDate is provided\n\n- `groupBy?: string`\n  Comma-separated list of feature dimension keys to group usage series by (up to 3). Each key matches /^[a-zA-Z0-9_$-]+$/\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `startDate?: string`\n  Start date for the credit usage time range (ISO 8601). Takes precedence over timeRange when provided\n\n- `timeRange?: 'LAST_DAY' | 'LAST_WEEK' | 'LAST_MONTH' | 'LAST_YEAR'`\n  Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults to LAST_MONTH\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; pagination: { next: string; prev: string; }; series: { eventCount: number; featureId: string; featureName: string; points: object[]; totalCredits: number; tags?: object[]; }[]; }; }`\n  Response object\n\n  - `data: { currency: { currencyId: string; displayName: string; plural: string; singular: string; symbol: string; }; pagination: { next: string; prev: string; }; series: { eventCount: number; featureId: string; featureName: string; points: { eventCount: number; timestamp: string; value: number; }[]; totalCredits: number; tags?: { key: string; value: string; }[]; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.GetUsage',
+        example:
+          'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'credits get_usage',
         example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
@@ -3179,11 +3184,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.GetUsage',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetUsage(context.TODO(), stigg.V1CreditGetUsageParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.GetUsage',
-        example:
-          'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.credits.get_usage',
@@ -3225,6 +3225,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## get_auto_recharge\n\n`client.v1.credits.getAutoRecharge(currencyId: string, customerId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/credits/auto-recharge`\n\nRetrieves the automatic recharge configuration for a customer and currency. Returns default settings if no configuration exists.\n\n### Parameters\n\n- `currencyId: string`\n  Filter by currency ID (required)\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; currencyId: string; customerId: string; grantExpirationPeriod: '1_MONTH' | '1_YEAR'; isEnabled: boolean; maxSpendLimit: number; targetBalance: number; thresholdType: 'CREDIT_AMOUNT' | 'DOLLAR_AMOUNT'; thresholdValue: number; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.getAutoRecharge({ currencyId: 'currencyId', customerId: 'customerId' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.GetAutoRecharge',
+        example:
+          'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'credits get_auto_recharge',
         example:
@@ -3239,11 +3244,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.GetAutoRecharge',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetAutoRecharge(context.TODO(), stigg.V1CreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.GetAutoRecharge',
-        example:
-          'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.credits.get_auto_recharge',
@@ -3290,6 +3290,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_ledger\n\n`client.v1.credits.listLedger(customerId: string, after?: string, before?: string, currencyId?: string, eventType?: string, limit?: number, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n\n**get** `/api/v1/credits/ledger`\n\nRetrieves a paginated list of credit ledger events for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `eventType?: string`\n  Filter by event type(s), comma-separated\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ amount: number; creditCurrencyId: string; creditGrantId: string; customerId: string; eventId: string; eventType: string; featureId: string; resourceId: string; timestamp: string; }`\n  A credit ledger event representing a change to credit balance\n\n  - `amount: number`\n  - `creditCurrencyId: string`\n  - `creditGrantId: string`\n  - `customerId: string`\n  - `eventId: string`\n  - `eventType: string`\n  - `featureId: string`\n  - `resourceId: string`\n  - `timestamp: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.credits.listLedger({ customerId: 'customerId' })) {\n  console.log(creditListLedgerResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.ListLedger',
+        example:
+          'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'credits list_ledger',
         example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
@@ -3303,11 +3308,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.ListLedger',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.ListLedger(context.TODO(), stigg.V1CreditListLedgerParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.ListLedger',
-        example:
-          'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.credits.list_ledger',
@@ -3353,6 +3353,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.credits.grants.list(customerId: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, currencyId?: string, limit?: number, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; amount: number; comment: string; consumedAmount: number; cost: object; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: object; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; syncStates: object[]; updatedAt: string; voidedAt: string; }`\n\n**get** `/api/v1/credits/grants`\n\nRetrieves a paginated list of credit grants for a customer.\n\n### Parameters\n\n- `customerId: string`\n  Filter by customer ID (required)\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `currencyId?: string`\n  Filter by currency ID\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `resourceId?: string`\n  Filter by resource ID. When omitted, only grants without a resource are returned\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; syncStates: { status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED'; syncedEntityId: string; vendorIdentifier: string; }[]; updatedAt: string; voidedAt: string; }`\n  Credit grant object representing allocated credits for a customer\n\n  - `id: string`\n  - `amount: number`\n  - `comment: string`\n  - `consumedAmount: number`\n  - `cost: { amount: number; currency: string; }`\n  - `createdAt: string`\n  - `currencyId: string`\n  - `customerId: string`\n  - `displayName: string`\n  - `effectiveAt: string`\n  - `expireAt: string`\n  - `grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'`\n  - `invoiceId: string`\n  - `latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }`\n  - `metadata: object`\n  - `paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'`\n  - `priority: number`\n  - `resourceId: string`\n  - `sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'`\n  - `status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'`\n  - `syncStates: { status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED'; syncedEntityId: string; vendorIdentifier: string; }[]`\n  - `updatedAt: string`\n  - `voidedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.credits.grants.list({ customerId: 'customerId' })) {\n  console.log(grantListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.Grants.List',
+        example:
+          'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'grants list',
         example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
@@ -3366,11 +3371,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.Grants.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.Grants.List(context.TODO(), stigg.V1CreditGrantListParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.Grants.List',
-        example:
-          'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.credits.grants.list',
@@ -3425,6 +3425,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.credits.grants.create(amount: number, currencyId: string, customerId: string, displayName: string, grantType: 'PAID' | 'PROMOTIONAL', awaitPaymentConfirmation?: boolean, billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }, comment?: string, cost?: { amount: number; currency: string; }, effectiveAt?: string, expireAt?: string, metadata?: object, paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE', priority?: number, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/grants`\n\nCreates a new credit grant for a customer with specified amount, type, and optional billing configuration.\n\n### Parameters\n\n- `amount: number`\n  The credit amount to grant\n\n- `currencyId: string`\n  The credit currency ID (required)\n\n- `customerId: string`\n  The customer ID to grant credits to (required)\n\n- `displayName: string`\n  The display name for the credit grant\n\n- `grantType: 'PAID' | 'PROMOTIONAL'`\n  The type of credit grant (PAID, PROMOTIONAL)\n\n- `awaitPaymentConfirmation?: boolean`\n  Whether to wait for payment confirmation before returning (default: true)\n\n- `billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; invoiceDaysUntilDue?: number; isInvoicePaid?: boolean; }`\n  Billing information for the credit grant\n  - `billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }`\n    The billing address\n  - `invoiceDaysUntilDue?: number`\n    Days until the invoice is due\n  - `isInvoicePaid?: boolean`\n    Whether the invoice is already paid\n\n- `comment?: string`\n  An optional comment on the credit grant\n\n- `cost?: { amount: number; currency: string; }`\n  The monetary cost of the credit grant\n  - `amount: number`\n    The price amount\n  - `currency: string`\n    ISO 4217 currency code\n\n- `effectiveAt?: string`\n  The date when the credit grant becomes effective\n\n- `expireAt?: string`\n  The date when the credit grant expires\n\n- `metadata?: object`\n  Additional metadata for the credit grant\n\n- `paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'`\n  The payment collection method (CHARGE, INVOICE, NONE)\n\n- `priority?: number`\n  The priority of the credit grant (lower number = higher priority)\n\n- `resourceId?: string`\n  The resource ID to scope the grant to\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; syncStates: { status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED'; syncedEntityId: string; vendorIdentifier: string; }[]; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; syncStates: { status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED'; syncedEntityId: string; vendorIdentifier: string; }[]; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.credits.grants.create({\n  amount: 0,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  displayName: 'displayName',\n  grantType: 'PAID',\n});\n\nconsole.log(creditGrantResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.Grants.Create',
+        example:
+          'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
+      },
       cli: {
         method: 'grants create',
         example:
@@ -3439,11 +3444,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.Grants.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.New(context.TODO(), stigg.V1CreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1CreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.Grants.Create',
-        example:
-          'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
       python: {
         method: 'v1.credits.grants.create',
@@ -3480,6 +3480,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## void\n\n`client.v1.credits.grants.void(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/grants/{id}/void`\n\nVoids an existing credit grant, preventing further consumption of the remaining credits.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; syncStates: { status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED'; syncedEntityId: string; vendorIdentifier: string; }[]; updatedAt: string; voidedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; amount: number; comment: string; consumedAmount: number; cost: { amount: number; currency: string; }; createdAt: string; currencyId: string; customerId: string; displayName: string; effectiveAt: string; expireAt: string; grantType: 'PAID' | 'PROMOTIONAL' | 'RECURRING' | 'OVERDRAFT'; invoiceId: string; latestInvoice: { billingId: string; billingReason: 'MANUAL' | 'OTHER'; createdAt: string; currency: string; dueDate: string; errorMessage: string; paymentUrl: string; pdfUrl: string; requiresAction: boolean; status: 'OPEN' | 'PAID' | 'CANCELED'; subTotal: number; tax: number; total: number; updatedAt: string; }; metadata: object; paymentCollection: 'NOT_REQUIRED' | 'PROCESSING' | 'FAILED' | 'ACTION_REQUIRED'; priority: number; resourceId: string; sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT'; status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED'; syncStates: { status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED'; syncedEntityId: string; vendorIdentifier: string; }[]; updatedAt: string; voidedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst creditGrantResponse = await client.v1.credits.grants.void('x');\n\nconsole.log(creditGrantResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.Grants.Void',
+        example:
+          'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
+      },
       cli: {
         method: 'grants void',
         example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -3493,11 +3498,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.Grants.Void',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.Void(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CreditGrantVoidParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.Grants.Void',
-        example:
-          'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
       python: {
         method: 'v1.credits.grants.void',
@@ -3542,6 +3542,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.credits.customCurrencies.list(after?: string, before?: string, limit?: number, status?: 'ACTIVE' | 'ARCHIVED'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: object; updatedAt: string; }`\n\n**get** `/api/v1/credits/custom-currencies`\n\nRetrieves a paginated list of custom currencies in the environment. Archived currencies are excluded by default; pass `status=ARCHIVED` (or `status=ACTIVE,ARCHIVED`) to include them.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'ACTIVE' | 'ARCHIVED'[]`\n  Filter by custom currency status. Supports comma-separated values (e.g., `ACTIVE,ARCHIVED`). Defaults to `ACTIVE`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n  A custom currency used to denominate credit-based entitlements and pricing\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `symbol: string`\n  - `units: { plural: string; singular: string; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const customCurrencyListResponse of client.v1.credits.customCurrencies.list()) {\n  console.log(customCurrencyListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.CustomCurrencies.List',
+        example:
+          'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'custom_currencies list',
         example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
@@ -3555,11 +3560,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.CustomCurrencies.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.CustomCurrencies.List(context.TODO(), stigg.V1CreditCustomCurrencyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.CustomCurrencies.List',
-        example:
-          'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.credits.custom_currencies.list',
@@ -3605,6 +3605,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.credits.customCurrencies.create(id: string, displayName: string, description?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies`\n\nCreates a new custom currency in the environment.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the new custom currency\n\n- `displayName: string`\n  The display name of the custom currency\n\n- `description?: string`\n  Description of the currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.create({ id: 'id', displayName: 'displayName' });\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.CustomCurrencies.Create',
+        example:
+          'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
+      },
       cli: {
         method: 'custom_currencies create',
         example:
@@ -3619,11 +3624,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.CustomCurrencies.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.New(context.TODO(), stigg.V1CreditCustomCurrencyNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.CustomCurrencies.Create',
-        example:
-          'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       python: {
         method: 'v1.credits.custom_currencies.create',
@@ -3669,6 +3669,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.credits.customCurrencies.update(currencyId: string, description?: string, displayName?: string, metadata?: object, symbol?: string, units?: { plural: string; singular: string; }, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/credits/custom-currencies/{currencyId}`\n\nUpdates an existing custom currency. Only the supplied fields are modified.\n\n### Parameters\n\n- `currencyId: string`\n\n- `description?: string`\n  A human-readable description of the custom currency. Send an empty string to clear.\n\n- `displayName?: string`\n  The display name of the custom currency\n\n- `metadata?: object`\n  Additional metadata to attach to the custom currency\n\n- `symbol?: string`\n  The symbol used to represent the custom currency. Send an empty string to clear.\n\n- `units?: { plural: string; singular: string; }`\n  Singular and plural unit labels for a custom currency. Both fields are required when supplied.\n  - `plural: string`\n    Plural form of the unit label\n  - `singular: string`\n    Singular form of the unit label\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.update('currencyId');\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.CustomCurrencies.Update',
+        example:
+          'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
+      },
       cli: {
         method: 'custom_currencies update',
         example:
@@ -3683,11 +3688,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.CustomCurrencies.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Update(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.CustomCurrencies.Update',
-        example:
-          'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       python: {
         method: 'v1.credits.custom_currencies.update',
@@ -3725,6 +3725,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.credits.customCurrencies.archive(currencyId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/archive`\n\nArchives a custom currency. Fails if the currency is still associated with any active plan or addon — use the associated-entities endpoint first to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.archive('currencyId');\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.CustomCurrencies.Archive',
+        example:
+          'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
+      },
       cli: {
         method: 'custom_currencies archive',
         example:
@@ -3739,11 +3744,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.CustomCurrencies.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Archive(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.CustomCurrencies.Archive',
-        example:
-          'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       python: {
         method: 'v1.credits.custom_currencies.archive',
@@ -3781,6 +3781,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive\n\n`client.v1.credits.customCurrencies.unarchive(currencyId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/custom-currencies/{currencyId}/unarchive`\n\nRestores a previously archived custom currency. Fails if another active currency with the same ID already exists.\n\n### Parameters\n\n- `currencyId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; description: string; displayName: string; metadata: object; symbol: string; units: { plural: string; singular: string; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst customCurrencyResponse = await client.v1.credits.customCurrencies.unarchive('currencyId');\n\nconsole.log(customCurrencyResponse);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.CustomCurrencies.Unarchive',
+        example:
+          'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
+      },
       cli: {
         method: 'custom_currencies unarchive',
         example:
@@ -3795,11 +3800,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.CustomCurrencies.Unarchive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Unarchive(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUnarchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.CustomCurrencies.Unarchive',
-        example:
-          'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
       python: {
         method: 'v1.credits.custom_currencies.unarchive',
@@ -3836,6 +3836,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_associated_entities\n\n`client.v1.credits.customCurrencies.listAssociatedEntities(currencyId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**get** `/api/v1/credits/custom-currencies/{currencyId}/associated-entities`\n\nLists the active plans and addons that reference a custom currency. Useful before archiving to inspect dependencies.\n\n### Parameters\n\n- `currencyId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; displayName: string; type: string; }[]; }`\n  List of entities (plans or addons) that reference a custom currency\n\n  - `data: { id: string; displayName: string; type: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.customCurrencies.listAssociatedEntities('currencyId');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.CustomCurrencies.ListAssociatedEntities',
+        example:
+          'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'custom_currencies list_associated_entities',
         example:
@@ -3850,11 +3855,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.CustomCurrencies.ListAssociatedEntities',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.CustomCurrencies.ListAssociatedEntities(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyListAssociatedEntitiesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.CustomCurrencies.ListAssociatedEntities',
-        example:
-          'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.credits.custom_currencies.list_associated_entities',
@@ -3902,6 +3902,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## consume\n\n`client.v1.credits.consumption.consume(amount: number, currencyId: string, customerId: string, idempotencyKey: string, createdAt?: string, dimensions?: object, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/consumption`\n\nConsumes a specified amount of credits directly from a customer wallet, with no feature mapping. Returns the optimistic balance.\n\n### Parameters\n\n- `amount: number`\n  The amount of credits to consume\n\n- `currencyId: string`\n  The credit currency to consume from (required)\n\n- `customerId: string`\n  The customer to consume credits from (required)\n\n- `idempotencyKey: string`\n  A unique key used to deduplicate the consumption (required)\n\n- `createdAt?: string`\n  Optional timestamp the consumption is attributed to\n\n- `dimensions?: object`\n  Optional dimensions describing the consumption\n\n- `resourceId?: string`\n  Optional resource the consumption is attributed to\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { amount: number; currencyId: string; customerId: string; timestamp: string; credit?: { currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; resourceId?: string; }; }`\n  Response object\n\n  - `data: { amount: number; currencyId: string; customerId: string; timestamp: string; credit?: { currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; resourceId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.consumption.consume({\n  amount: 1,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  idempotencyKey: 'x',\n});\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.Consumption.Consume',
+        example:
+          'ConsumptionConsumeParams parameters = new()\n{\n    Amount = 1,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    IdempotencyKey = "x",\n};\n\nvar response = await client.V1.Credits.Consumption.Consume(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'consumption consume',
         example:
@@ -3916,11 +3921,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.Consumption.Consume',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.Consume(context.TODO(), stigg.V1CreditConsumptionConsumeParams{\n\t\tAmount:         1,\n\t\tCurrencyID:     "currencyId",\n\t\tCustomerID:     "customerId",\n\t\tIdempotencyKey: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.Consumption.Consume',
-        example:
-          'ConsumptionConsumeParams parameters = new()\n{\n    Amount = 1,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    IdempotencyKey = "x",\n};\n\nvar response = await client.V1.Credits.Consumption.Consume(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.credits.consumption.consume',
@@ -3961,6 +3961,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## consume_async\n\n`client.v1.credits.consumption.consumeAsync(consumptions: { amount: number; currencyId: string; customerId: string; idempotencyKey: string; createdAt?: string; dimensions?: object; resourceId?: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/credits/consumption/async`\n\nConsumes credits directly from customer wallets asynchronously. Consumptions are reconciled asynchronously into the credit balances.\n\n### Parameters\n\n- `consumptions: { amount: number; currencyId: string; customerId: string; idempotencyKey: string; createdAt?: string; dimensions?: object; resourceId?: string; }[]`\n  The credit consumptions to report (up to 1000)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: object; }`\n  Response object\n\n  - `data: object`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.credits.consumption.consumeAsync({ consumptions: [{\n  amount: 1,\n  currencyId: 'currencyId',\n  customerId: 'customerId',\n  idempotencyKey: 'x',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Credits.Consumption.ConsumeAsync',
+        example:
+          'ConsumptionConsumeAsyncParams parameters = new()\n{\n    Consumptions =\n    [\n        new()\n        {\n            Amount = 1,\n            CurrencyID = "currencyId",\n            CustomerID = "customerId",\n            IdempotencyKey = "x",\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n        },\n    ],\n};\n\nvar response = await client.V1.Credits.Consumption.ConsumeAsync(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'consumption consume_async',
         example:
@@ -3975,11 +3980,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Credits.Consumption.ConsumeAsync',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.ConsumeAsync(context.TODO(), stigg.V1CreditConsumptionConsumeAsyncParams{\n\t\tConsumptions: []stigg.V1CreditConsumptionConsumeAsyncParamsConsumption{{\n\t\t\tAmount:         1,\n\t\t\tCurrencyID:     "currencyId",\n\t\t\tCustomerID:     "customerId",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Credits.Consumption.ConsumeAsync',
-        example:
-          'ConsumptionConsumeAsyncParams parameters = new()\n{\n    Consumptions =\n    [\n        new()\n        {\n            Amount = 1,\n            CurrencyID = "currencyId",\n            CustomerID = "customerId",\n            IdempotencyKey = "x",\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n        },\n    ],\n};\n\nvar response = await client.V1.Credits.Consumption.ConsumeAsync(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.credits.consumption.consume_async',
@@ -4016,6 +4016,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_feature\n\n`client.v1.features.retrieveFeature(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/features/{id}`\n\nRetrieves a feature by its unique identifier.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.retrieveFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Features.RetrieveFeature',
+        example:
+          'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
+      },
       cli: {
         method: 'features retrieve_feature',
         example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4029,11 +4034,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Features.GetFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.GetFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureGetFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Features.RetrieveFeature',
-        example:
-          'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       python: {
         method: 'v1.features.retrieve_feature',
@@ -4082,6 +4082,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_feature\n\n`client.v1.features.updateFeature(id: string, description?: string, displayName?: string, enumConfiguration?: { displayName: string; value: string; }[], featureUnits?: string, featureUnitsPlural?: string, metadata?: object, meter?: { aggregation: { function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE'; field?: string; }; filters: { conditions: object[]; }[]; }, unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/features/{id}`\n\nUpdates an existing feature's properties such as display name, description, and configuration.\n\n### Parameters\n\n- `id: string`\n\n- `description?: string`\n  The description for the feature\n\n- `displayName?: string`\n  The display name for the feature\n\n- `enumConfiguration?: { displayName: string; value: string; }[]`\n  The configuration data for the feature\n\n- `featureUnits?: string`\n  The units for the feature\n\n- `featureUnitsPlural?: string`\n  The plural units for the feature\n\n- `metadata?: object`\n  The additional metadata for the feature\n\n- `meter?: { aggregation: { function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE'; field?: string; }; filters: { conditions: { field: string; operation: string; value?: string; values?: string[]; }[]; }[]; }`\n  - `aggregation: { function: 'SUM' | 'MAX' | 'MIN' | 'AVG' | 'COUNT' | 'UNIQUE'; field?: string; }`\n  - `filters: { conditions: { field: string; operation: string; value?: string; values?: string[]; }[]; }[]`\n\n- `unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }`\n  Unit transformation to be applied to the reported usage\n  - `divide: number`\n    Divide usage by this number\n  - `featureUnits?: string`\n    Singular feature units after the transformation\n  - `featureUnitsPlural?: string`\n    Plural feature units after the transformation\n  - `round?: 'UP' | 'DOWN'`\n    After division, either round the result up or down\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.updateFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Features.UpdateFeature',
+        example:
+          'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
+      },
       cli: {
         method: 'features update_feature',
         example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4095,11 +4100,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Features.UpdateFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UpdateFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureUpdateFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Features.UpdateFeature',
-        example:
-          'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       python: {
         method: 'v1.features.update_feature',
@@ -4150,6 +4150,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_feature\n\n`client.v1.features.createFeature(id: string, displayName: string, featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM', description?: string, enumConfiguration?: { displayName: string; value: string; }[], featureStatus?: 'NEW' | 'SUSPENDED' | 'ACTIVE', featureUnits?: string, featureUnitsPlural?: string, metadata?: object, meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL', unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/features`\n\nCreates a new feature with the specified type, metering, and configuration.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the feature\n\n- `displayName: string`\n  The display name for the feature\n\n- `featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'`\n  The type of the feature\n\n- `description?: string`\n  The description for the feature\n\n- `enumConfiguration?: { displayName: string; value: string; }[]`\n  The configuration data for the feature\n\n- `featureStatus?: 'NEW' | 'SUSPENDED' | 'ACTIVE'`\n  The status of the feature\n\n- `featureUnits?: string`\n  The units for the feature\n\n- `featureUnitsPlural?: string`\n  The plural units for the feature\n\n- `metadata?: object`\n  The additional metadata for the feature\n\n- `meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'`\n  The meter type for the feature\n\n- `unitTransformation?: { divide: number; featureUnits?: string; featureUnitsPlural?: string; round?: 'UP' | 'DOWN'; }`\n  Unit transformation to be applied to the reported usage\n  - `divide: number`\n    Divide usage by this number\n  - `featureUnits?: string`\n    Singular feature units after the transformation\n  - `featureUnitsPlural?: string`\n    Plural feature units after the transformation\n  - `round?: 'UP' | 'DOWN'`\n    After division, either round the result up or down\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.createFeature({\n  id: 'id',\n  displayName: 'displayName',\n  featureType: 'BOOLEAN',\n});\n\nconsole.log(feature);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Features.CreateFeature',
+        example:
+          'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
+      },
       cli: {
         method: 'features create_feature',
         example:
@@ -4164,11 +4169,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Features.NewFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.NewFeature(context.TODO(), stigg.V1FeatureNewFeatureParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tFeatureType: stigg.V1FeatureNewFeatureParamsFeatureTypeBoolean,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Features.CreateFeature',
-        example:
-          'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       python: {
         method: 'v1.features.create_feature',
@@ -4216,6 +4216,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_features\n\n`client.v1.features.listFeatures(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, featureType?: 'BOOLEAN' | 'NUMBER' | 'ENUM'[], limit?: number, meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'[], status?: 'NEW' | 'SUSPENDED' | 'ACTIVE'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: object[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: object; updatedAt: string; }`\n\n**get** `/api/v1/features`\n\nRetrieves a paginated list of features in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `featureType?: 'BOOLEAN' | 'NUMBER' | 'ENUM'[]`\n  Filter by feature type. Supports comma-separated values for multiple types\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL'[]`\n  Filter by meter type. Supports comma-separated values for multiple types\n\n- `status?: 'NEW' | 'SUSPENDED' | 'ACTIVE'[]`\n  Filter by feature status. Supports comma-separated values for multiple statuses\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n  Feature configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `enumConfiguration: { displayName: string; value: string; }[]`\n  - `featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'`\n  - `featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'`\n  - `featureUnits: string`\n  - `featureUnitsPlural: string`\n  - `metadata: object`\n  - `meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'`\n  - `unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Features.ListFeatures',
+        example:
+          'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'features list_features',
         example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
@@ -4229,11 +4234,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Features.ListFeatures',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Features.ListFeatures(context.TODO(), stigg.V1FeatureListFeaturesParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Features.ListFeatures',
-        example:
-          'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.features.list_features',
@@ -4269,6 +4269,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive_feature\n\n`client.v1.features.archiveFeature(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/features/{id}/archive`\n\nArchives a feature, preventing it from being used in new entitlements.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.archiveFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Features.ArchiveFeature',
+        example:
+          'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
+      },
       cli: {
         method: 'features archive_feature',
         example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4282,11 +4287,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Features.ArchiveFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.ArchiveFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureArchiveFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Features.ArchiveFeature',
-        example:
-          'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       python: {
         method: 'v1.features.archive_feature',
@@ -4323,6 +4323,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive_feature\n\n`client.v1.features.unarchiveFeature(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/features/{id}/unarchive`\n\nRestores an archived feature, allowing it to be used in entitlements again.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; enumConfiguration: { displayName: string; value: string; }[]; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; featureUnits: string; featureUnitsPlural: string; metadata: object; meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL'; unitTransformation: { divide: number; featureUnits: string; featureUnitsPlural: string; round: 'UP' | 'DOWN'; }; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst feature = await client.v1.features.unarchiveFeature('x');\n\nconsole.log(feature);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Features.UnarchiveFeature',
+        example:
+          'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
+      },
       cli: {
         method: 'features unarchive_feature',
         example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4336,11 +4341,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Features.UnarchiveFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UnarchiveFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureUnarchiveFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Features.UnarchiveFeature',
-        example:
-          'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
       python: {
         method: 'v1.features.unarchive_feature',
@@ -4386,6 +4386,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.addons.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: object[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/addons`\n\nRetrieves a paginated list of addons in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[]`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Addon configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `createdAt: string`\n  - `dependencies: string[]`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `maxQuantity: number`\n  - `metadata: object`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.List',
+        example:
+          'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'addons list',
         example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
@@ -4399,11 +4404,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.List(context.TODO(), stigg.V1AddonListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.List',
-        example:
-          'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.addons.list',
@@ -4451,6 +4451,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.addons.create(id: string, displayName: string, productId: string, billingId?: string, description?: string, maxQuantity?: number, metadata?: object, pricingType?: 'FREE' | 'PAID' | 'CUSTOM', status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/addons`\n\nCreates a new addon in draft status, associated with a specific product.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `displayName: string`\n  The display name of the package\n\n- `productId: string`\n  The product id of the package\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `description?: string`\n  The description of the package\n\n- `maxQuantity?: number`\n  The maximum quantity of this addon that can be added to a subscription\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `pricingType?: 'FREE' | 'PAID' | 'CUSTOM'`\n  The pricing type of the package\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(addon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Create',
+        example:
+          'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
+      },
       cli: {
         method: 'addons create',
         example:
@@ -4465,11 +4470,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.New(context.TODO(), stigg.V1AddonNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Create',
-        example:
-          'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
       },
       python: {
         method: 'v1.addons.create',
@@ -4506,6 +4506,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.addons.retrieve(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/addons/{id}`\n\nRetrieves an addon by its unique identifier, including entitlements and pricing details.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.retrieve('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Retrieve',
+        example:
+          'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
+      },
       cli: {
         method: 'addons retrieve',
         example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4519,11 +4524,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Retrieve',
-        example:
-          'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
       },
       python: {
         method: 'v1.addons.retrieve',
@@ -4571,6 +4571,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.addons.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { pricePeriods: object[]; creditEntitlement?: object; currencyId?: string; entitlement?: object; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, dependencies?: string[], description?: string, displayName?: string, maxQuantity?: number, metadata?: object, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/addons/{id}`\n\nUpdates an existing addon's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; creditEntitlement?: { amount: number; cadence: 'MONTH' | 'YEAR'; customCurrencyId: string; }; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the addon draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; creditEntitlement?: { amount: number; cadence: 'MONTH' | 'YEAR'; customCurrencyId: string; }; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `dependencies?: string[]`\n  List of addons the addon is dependant on\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `maxQuantity?: number`\n  The maximum quantity of this addon that can be added to a subscription\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.update('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Update',
+        example:
+          'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
+      },
       cli: {
         method: 'addons update',
         example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4584,11 +4589,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Update',
-        example:
-          'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
       },
       python: {
         method: 'v1.addons.update',
@@ -4625,6 +4625,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.addons.archive(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/addons/{id}/archive`\n\nArchives an addon, preventing it from being used in new subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.archive('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Archive',
+        example:
+          'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
+      },
       cli: {
         method: 'addons archive',
         example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4638,11 +4643,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Archive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Archive',
-        example:
-          'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
       },
       python: {
         method: 'v1.addons.archive',
@@ -4683,6 +4683,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## publish\n\n`client.v1.addons.publish(id: string, migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/addons/{id}/publish`\n\nPublishes a draft addon, making it available for use in subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS'`\n  The migration type of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { taskId: string; }; }`\n  Response containing task ID for publish operation\n\n  - `data: { taskId: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.addons.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Publish',
+        example:
+          'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'addons publish',
         example:
@@ -4697,11 +4702,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Publish',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonPublishParams{\n\t\t\tMigrationType: stigg.V1AddonPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Publish',
-        example:
-          'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.addons.publish',
@@ -4738,6 +4738,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_draft\n\n`client.v1.addons.createDraft(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/addons/{id}/draft`\n\nCreates a draft version of an existing addon for modification before publishing.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; createdAt: string; dependencies: string[]; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; maxQuantity: number; metadata: object; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addon = await client.v1.addons.createDraft('x');\n\nconsole.log(addon);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.CreateDraft',
+        example:
+          'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
+      },
       cli: {
         method: 'addons create_draft',
         example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4751,11 +4756,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.NewDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.NewDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonNewDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.CreateDraft',
-        example:
-          'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
       },
       python: {
         method: 'v1.addons.create_draft',
@@ -4791,6 +4791,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## remove_draft\n\n`client.v1.addons.removeDraft(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/addons/{id}/draft`\n\nRemoves a draft version of an addon.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response confirming the addon draft was removed.\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.addons.removeDraft('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.RemoveDraft',
+        example:
+          'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'addons remove_draft',
         example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4804,11 +4809,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.RemoveDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.RemoveDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonRemoveDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.RemoveDraft',
-        example:
-          'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.addons.remove_draft',
@@ -4852,6 +4852,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_charges\n\n`client.v1.addons.listCharges(id: string, after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: object; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: object; tiers?: object[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n\n**get** `/api/v1/addons/{id}/charges`\n\nRetrieves the list of charges configured on an addon.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n  A single pricing row on a plan or addon. Each charge encodes one (billingPeriod, billingModel, billingCadence, billingCountryCode) combination. Plans and addons own many of these — one per currency / billing period / feature.\n\n  - `id: string`\n  - `billingCadence: 'RECURRING' | 'ONE_OFF'`\n  - `billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'`\n  - `billingPeriod: 'MONTHLY' | 'ANNUALLY'`\n  - `createdAt: string`\n  - `billingCountryCode?: string`\n  - `billingId?: string`\n  - `blockSize?: number`\n  - `creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'`\n  - `creditRate?: { amount: number; currencyId: string; costFormula?: string; }`\n  - `crmId?: string`\n  - `crmLinkUrl?: string`\n  - `featureId?: string`\n  - `maxUnitQuantity?: number`\n  - `minUnitQuantity?: number`\n  - `price?: { amount: number; currency: string; }`\n  - `tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]`\n  - `tiersMode?: 'VOLUME' | 'GRADUATED'`\n  - `topUpCustomCurrencyId?: string`\n  - `usedInSubscriptions?: boolean`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const addonListChargesResponse of client.v1.addons.listCharges('x')) {\n  console.log(addonListChargesResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.ListCharges',
+        example:
+          'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'addons list_charges',
         example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -4865,11 +4870,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.ListCharges',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.ListCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonListChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.ListCharges',
-        example:
-          'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.addons.list_charges',
@@ -4905,6 +4905,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.addons.entitlements.list(addonId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object[]; pagination: object; }`\n\n**get** `/api/v1/addons/{addonId}/entitlements`\n\nRetrieves a list of entitlements for an addon.\n\n### Parameters\n\n- `addonId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; pagination: { next: string; prev: string; }; }`\n  Response list object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n  - `pagination: { next: string; prev: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlements = await client.v1.addons.entitlements.list('addonId');\n\nconsole.log(entitlements);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Entitlements.List',
+        example:
+          'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
+      },
       cli: {
         method: 'entitlements list',
         example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
@@ -4918,11 +4923,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Entitlements.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Addons.Entitlements.List(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Entitlements.List',
-        example:
-          'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
       python: {
         method: 'v1.addons.entitlements.list',
@@ -4964,6 +4964,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.addons.entitlements.create(addonId: string, entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hasSoftLimit?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object[]; }`\n\n**post** `/api/v1/addons/{addonId}/entitlements`\n\nCreates one or more entitlements (feature or credit) on a draft addon.\n\n### Parameters\n\n- `addonId: string`\n\n- `entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hasSoftLimit?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[]`\n  Entitlements to create\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlement = await client.v1.addons.entitlements.create('addonId', { entitlements: [{ id: 'id', type: 'FEATURE' }] });\n\nconsole.log(entitlement);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Entitlements.Create',
+        example:
+          'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
+      },
       cli: {
         method: 'entitlements create',
         example:
@@ -4978,11 +4983,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Entitlements.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Addons.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1AddonEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1AddonEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Entitlements.Create',
-        example:
-          'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
       python: {
         method: 'v1.addons.entitlements.create',
@@ -5023,6 +5023,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Entitlements.Update',
+        example:
+          'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
+      },
       cli: {
         method: 'entitlements update',
         example:
@@ -5037,11 +5042,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Entitlements.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementUpdateParams{\n\t\t\tAddonID:   "addonId",\n\t\t\tOfFeature: &stigg.V1AddonEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Entitlements.Update',
-        example:
-          'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
       python: {
         method: 'v1.addons.entitlements.update',
@@ -5078,6 +5078,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.v1.addons.entitlements.delete(addonId: string, id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object; }`\n\n**delete** `/api/v1/addons/{addonId}/entitlements/{id}`\n\nDeletes an entitlement from a draft addon.\n\n### Parameters\n\n- `addonId: string`\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst addonPackageEntitlement = await client.v1.addons.entitlements.delete('id', { addonId: 'addonId' });\n\nconsole.log(addonPackageEntitlement);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Addons.Entitlements.Delete',
+        example:
+          'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
+      },
       cli: {
         method: 'entitlements delete',
         example:
@@ -5092,11 +5097,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Addons.Entitlements.Delete',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementDeleteParams{\n\t\t\tAddonID: "addonId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Addons.Entitlements.Delete',
-        example:
-          'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
       python: {
         method: 'v1.addons.entitlements.delete',
@@ -5146,6 +5146,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.plans.create(id: string, displayName: string, productId: string, billingId?: string, defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }, description?: string, metadata?: object, parentPlanId?: string, pricingType?: 'FREE' | 'PAID' | 'CUSTOM', status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/plans`\n\nCreates a new plan in draft status.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `displayName: string`\n  The display name of the package\n\n- `productId: string`\n  The product ID to associate the plan with\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  Default trial configuration for the plan\n  - `duration: number`\n    The duration of the trial in the specified units\n  - `units: 'DAY' | 'MONTH'`\n    The time unit for the trial duration (DAY or MONTH)\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n    Budget configuration for the trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)\n\n- `description?: string`\n  The description of the package\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `parentPlanId?: string`\n  The ID of the parent plan, if applicable\n\n- `pricingType?: 'FREE' | 'PAID' | 'CUSTOM'`\n  The pricing type of the package\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  The status of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.create({\n  id: 'id',\n  displayName: 'displayName',\n  productId: 'productId',\n});\n\nconsole.log(plan);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Create',
+        example:
+          'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
+      },
       cli: {
         method: 'plans create',
         example:
@@ -5160,11 +5165,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.New(context.TODO(), stigg.V1PlanNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Create',
-        example:
-          'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
       },
       python: {
         method: 'v1.plans.create',
@@ -5210,6 +5210,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.plans.list(after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, productId?: string, status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: object; description: string; displayName: string; entitlements: object[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n**get** `/api/v1/plans`\n\nRetrieves a paginated list of plans in the environment.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `productId?: string`\n  Filter by product ID\n\n- `status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'[]`\n  Filter by status. Supports comma-separated values for multiple statuses\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n  Plan configuration object\n\n  - `id: string`\n  - `billingId: string`\n  - `compatibleAddonIds: string[]`\n  - `createdAt: string`\n  - `defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  - `description: string`\n  - `displayName: string`\n  - `entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]`\n  - `isLatest: boolean`\n  - `metadata: object`\n  - `parentPlanId: string`\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n  - `productId: string`\n  - `status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `versionNumber: number`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.List',
+        example:
+          'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'plans list',
         example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
@@ -5223,11 +5228,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.List(context.TODO(), stigg.V1PlanListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.List',
-        example:
-          'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.plans.list',
@@ -5263,6 +5263,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.plans.retrieve(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/plans/{id}`\n\nRetrieves a plan by its unique identifier, including entitlements and pricing details.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.retrieve('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Retrieve',
+        example:
+          'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
+      },
       cli: {
         method: 'plans retrieve',
         example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5276,11 +5281,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Retrieve',
-        example:
-          'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
       },
       python: {
         method: 'v1.plans.retrieve',
@@ -5328,6 +5328,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.plans.update(id: string, billingId?: string, charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: object; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { pricePeriods: object[]; creditEntitlement?: object; currencyId?: string; entitlement?: object; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: object[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: object; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: object; yearlyResetPeriodConfiguration?: object; }[]; }, compatibleAddonIds?: string[], defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }, description?: string, displayName?: string, metadata?: object, parentPlanId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/plans/{id}`\n\nUpdates an existing plan's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `billingId?: string`\n  The unique identifier for the entity in the billing provider\n\n- `charges?: { pricingType: 'FREE' | 'PAID' | 'CUSTOM'; billingId?: string; minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]; overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'; overagePricingModels?: { pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; creditEntitlement?: { amount: number; cadence: 'MONTH' | 'YEAR'; customCurrencyId: string; }; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]; pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]; }`\n  Pricing configuration to set on the plan draft\n  - `pricingType: 'FREE' | 'PAID' | 'CUSTOM'`\n    The pricing type (FREE, PAID, or CUSTOM)\n  - `billingId?: string`\n    Deprecated: billing integration ID\n  - `minimumSpend?: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; minimum: { amount: number; currency?: string; }; }[]`\n    Minimum spend configuration per billing period\n  - `overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY'`\n    When overage charges are billed\n  - `overagePricingModels?: { pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; creditEntitlement?: { amount: number; cadence: 'MONTH' | 'YEAR'; customCurrencyId: string; }; currencyId?: string; entitlement?: { featureId: string; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }; featureId?: string; }[]`\n    Array of overage pricing model configurations\n  - `pricingModels?: { billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; pricePeriods: { billingPeriod: 'MONTHLY' | 'ANNUALLY'; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; price?: { amount: number; currency?: string; }; tiers?: { flatPrice?: { amount: number; currency?: string; }; unitPrice?: { amount: number; currency?: string; }; upTo?: number; }[]; }[]; billingCadence?: 'RECURRING' | 'ONE_OFF'; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; }[]`\n    Array of pricing model configurations\n\n- `compatibleAddonIds?: string[]`\n\n- `defaultTrialConfig?: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }`\n  Default trial configuration for the plan\n  - `duration: number`\n    The duration of the trial in the specified units\n  - `units: 'DAY' | 'MONTH'`\n    The time unit for the trial duration (DAY or MONTH)\n  - `budget?: { hasSoftLimit: boolean; limit: number; }`\n    Budget configuration for the trial\n  - `trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'`\n    Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)\n\n- `description?: string`\n  The description of the package\n\n- `displayName?: string`\n  The display name of the package\n\n- `metadata?: object`\n  Metadata associated with the entity\n\n- `parentPlanId?: string`\n  The ID of the parent plan, if applicable\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.update('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Update',
+        example:
+          'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
+      },
       cli: {
         method: 'plans update',
         example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5341,11 +5346,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Update',
-        example:
-          'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
       },
       python: {
         method: 'v1.plans.update',
@@ -5382,6 +5382,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1.plans.archive(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/plans/{id}/archive`\n\nArchives a plan, preventing it from being used in new subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.archive('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Archive',
+        example:
+          'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
+      },
       cli: {
         method: 'plans archive',
         example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5395,11 +5400,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Archive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Archive',
-        example:
-          'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
       },
       python: {
         method: 'v1.plans.archive',
@@ -5440,6 +5440,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## publish\n\n`client.v1.plans.publish(id: string, migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/plans/{id}/publish`\n\nPublishes a draft plan, making it available for use in subscriptions.\n\n### Parameters\n\n- `id: string`\n\n- `migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS'`\n  The migration type of the package\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { taskId: string; }; }`\n  Response containing task ID for publish operation\n\n  - `data: { taskId: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.plans.publish('x', { migrationType: 'NEW_CUSTOMERS' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Publish',
+        example:
+          'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'plans publish',
         example:
@@ -5454,11 +5459,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Publish',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanPublishParams{\n\t\t\tMigrationType: stigg.V1PlanPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Publish',
-        example:
-          'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.plans.publish',
@@ -5495,6 +5495,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_draft\n\n`client.v1.plans.createDraft(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/plans/{id}/draft`\n\nCreates a draft version of an existing plan for modification before publishing.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: object; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }; }`\n  Response object\n\n  - `data: { id: string; billingId: string; compatibleAddonIds: string[]; createdAt: string; defaultTrialConfig: { duration: number; units: 'DAY' | 'MONTH'; budget?: { hasSoftLimit: boolean; limit: number; }; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; }; description: string; displayName: string; entitlements: { id: string; type: 'FEATURE' | 'CREDIT'; }[]; isLatest: boolean; metadata: object; parentPlanId: string; pricingType: 'FREE' | 'PAID' | 'CUSTOM'; productId: string; status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; versionNumber: number; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst plan = await client.v1.plans.createDraft('x');\n\nconsole.log(plan);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.CreateDraft',
+        example:
+          'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
+      },
       cli: {
         method: 'plans create_draft',
         example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5508,11 +5513,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.NewDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.NewDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanNewDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.CreateDraft',
-        example:
-          'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
       },
       python: {
         method: 'v1.plans.create_draft',
@@ -5548,6 +5548,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## remove_draft\n\n`client.v1.plans.removeDraft(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**delete** `/api/v1/plans/{id}/draft`\n\nRemoves a draft version of a plan.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; }; }`\n  Response confirming the plan draft was removed.\n\n  - `data: { id: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.plans.removeDraft('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.RemoveDraft',
+        example:
+          'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'plans remove_draft',
         example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5561,11 +5566,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.RemoveDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.RemoveDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanRemoveDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.RemoveDraft',
-        example:
-          'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.plans.remove_draft',
@@ -5609,6 +5609,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_charges\n\n`client.v1.plans.listCharges(id: string, after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: object; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: object; tiers?: object[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n\n**get** `/api/v1/plans/{id}/charges`\n\nRetrieves the list of charges configured on a plan.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n  A single pricing row on a plan or addon. Each charge encodes one (billingPeriod, billingModel, billingCadence, billingCountryCode) combination. Plans and addons own many of these — one per currency / billing period / feature.\n\n  - `id: string`\n  - `billingCadence: 'RECURRING' | 'ONE_OFF'`\n  - `billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'`\n  - `billingPeriod: 'MONTHLY' | 'ANNUALLY'`\n  - `createdAt: string`\n  - `billingCountryCode?: string`\n  - `billingId?: string`\n  - `blockSize?: number`\n  - `creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'`\n  - `creditRate?: { amount: number; currencyId: string; costFormula?: string; }`\n  - `crmId?: string`\n  - `crmLinkUrl?: string`\n  - `featureId?: string`\n  - `maxUnitQuantity?: number`\n  - `minUnitQuantity?: number`\n  - `price?: { amount: number; currency: string; }`\n  - `tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]`\n  - `tiersMode?: 'VOLUME' | 'GRADUATED'`\n  - `topUpCustomCurrencyId?: string`\n  - `usedInSubscriptions?: boolean`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListChargesResponse of client.v1.plans.listCharges('x')) {\n  console.log(planListChargesResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.ListCharges',
+        example:
+          'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'plans list_charges',
         example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5622,11 +5627,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.ListCharges',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.ListCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanListChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.ListCharges',
-        example:
-          'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.plans.list_charges',
@@ -5669,6 +5669,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_overage_charges\n\n`client.v1.plans.listOverageCharges(id: string, after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: object; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: object; tiers?: object[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n\n**get** `/api/v1/plans/{id}/overage-charges`\n\nRetrieves the list of overage charges configured on a plan.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; billingCadence: 'RECURRING' | 'ONE_OFF'; billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'; billingPeriod: 'MONTHLY' | 'ANNUALLY'; createdAt: string; billingCountryCode?: string; billingId?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; crmId?: string; crmLinkUrl?: string; featureId?: string; maxUnitQuantity?: number; minUnitQuantity?: number; price?: { amount: number; currency: string; }; tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]; tiersMode?: 'VOLUME' | 'GRADUATED'; topUpCustomCurrencyId?: string; usedInSubscriptions?: boolean; }`\n  A single pricing row on a plan or addon. Each charge encodes one (billingPeriod, billingModel, billingCadence, billingCountryCode) combination. Plans and addons own many of these — one per currency / billing period / feature.\n\n  - `id: string`\n  - `billingCadence: 'RECURRING' | 'ONE_OFF'`\n  - `billingModel: 'FLAT_FEE' | 'MINIMUM_SPEND' | 'PER_UNIT' | 'USAGE_BASED' | 'CREDIT_BASED'`\n  - `billingPeriod: 'MONTHLY' | 'ANNUALLY'`\n  - `createdAt: string`\n  - `billingCountryCode?: string`\n  - `billingId?: string`\n  - `blockSize?: number`\n  - `creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'`\n  - `creditRate?: { amount: number; currencyId: string; costFormula?: string; }`\n  - `crmId?: string`\n  - `crmLinkUrl?: string`\n  - `featureId?: string`\n  - `maxUnitQuantity?: number`\n  - `minUnitQuantity?: number`\n  - `price?: { amount: number; currency: string; }`\n  - `tiers?: { flatPrice?: { amount: number; currency: string; }; unitPrice?: { amount: number; currency: string; }; upTo?: number; }[]`\n  - `tiersMode?: 'VOLUME' | 'GRADUATED'`\n  - `topUpCustomCurrencyId?: string`\n  - `usedInSubscriptions?: boolean`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const planListOverageChargesResponse of client.v1.plans.listOverageCharges('x')) {\n  console.log(planListOverageChargesResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.ListOverageCharges',
+        example:
+          'PlanListOverageChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListOverageCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'plans list_overage_charges',
         example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -5682,11 +5687,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.ListOverageCharges',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.ListOverageCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanListOverageChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.ListOverageCharges',
-        example:
-          'PlanListOverageChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListOverageCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.plans.list_overage_charges',
@@ -5723,6 +5723,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.plans.entitlements.list(planId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object[]; pagination: object; }`\n\n**get** `/api/v1/plans/{planId}/entitlements`\n\nRetrieves a list of entitlements for a plan.\n\n### Parameters\n\n- `planId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; pagination: { next: string; prev: string; }; }`\n  Response list object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n  - `pagination: { next: string; prev: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlements = await client.v1.plans.entitlements.list('planId');\n\nconsole.log(entitlements);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Entitlements.List',
+        example:
+          'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
+      },
       cli: {
         method: 'entitlements list',
         example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
@@ -5736,11 +5741,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Entitlements.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Plans.Entitlements.List(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Entitlements.List',
-        example:
-          'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
       python: {
         method: 'v1.plans.entitlements.list',
@@ -5782,6 +5782,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.plans.entitlements.create(planId: string, entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hasSoftLimit?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object[]; }`\n\n**post** `/api/v1/plans/{planId}/entitlements`\n\nCreates one or more entitlements (feature or credit) on a draft plan.\n\n### Parameters\n\n- `planId: string`\n\n- `entitlements: { id: string; type: 'FEATURE'; behavior?: 'Increment' | 'Override'; description?: string; displayNameOverride?: string; enumValues?: string[]; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; order?: number; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; behavior?: 'Increment' | 'Override'; dependencyFeatureId?: string; description?: string; displayNameOverride?: string; hasSoftLimit?: boolean; hiddenFromWidgets?: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom?: boolean; isGranted?: boolean; order?: number; }[]`\n  Entitlements to create\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entitlement = await client.v1.plans.entitlements.create('planId', { entitlements: [{ id: 'id', type: 'FEATURE' }] });\n\nconsole.log(entitlement);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Entitlements.Create',
+        example:
+          'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
+      },
       cli: {
         method: 'entitlements create',
         example:
@@ -5796,11 +5801,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Entitlements.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Plans.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1PlanEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1PlanEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Entitlements.Create',
-        example:
-          'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
       python: {
         method: 'v1.plans.entitlements.create',
@@ -5841,6 +5841,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Entitlements.Update',
+        example:
+          'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
+      },
       cli: {
         method: 'entitlements update',
         example:
@@ -5855,11 +5860,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Entitlements.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementUpdateParams{\n\t\t\tPlanID:    "planId",\n\t\t\tOfFeature: &stigg.V1PlanEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Entitlements.Update',
-        example:
-          'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
       python: {
         method: 'v1.plans.entitlements.update',
@@ -5896,6 +5896,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.v1.plans.entitlements.delete(planId: string, id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object; }`\n\n**delete** `/api/v1/plans/{planId}/entitlements/{id}`\n\nDeletes an entitlement from a draft plan.\n\n### Parameters\n\n- `planId: string`\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }; }`\n  Response object\n\n  - `data: { id: string; behavior: 'Increment' | 'Override'; createdAt: string; description: string; displayNameOverride: string; enumValues: string[]; hasSoftLimit: boolean; hasUnlimitedUsage: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; resetPeriod: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; resetPeriodConfiguration: { accordingTo: 'SubscriptionStart'; } | { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; } | { accordingTo: string; }; type: 'FEATURE'; updatedAt: string; usageLimit: number; } | { id: string; amount: number; behavior: 'Increment' | 'Override'; cadence: 'MONTH' | 'YEAR'; createdAt: string; description: string; displayNameOverride: string; hasSoftLimit: boolean; hiddenFromWidgets: 'PAYWALL' | 'CUSTOMER_PORTAL' | 'CHECKOUT'[]; isCustom: boolean; isGranted: boolean; order: number; type: 'CREDIT'; updatedAt: string; dependencyFeatureId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst planEntitlement = await client.v1.plans.entitlements.delete('id', { planId: 'planId' });\n\nconsole.log(planEntitlement);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Plans.Entitlements.Delete',
+        example:
+          'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
+      },
       cli: {
         method: 'entitlements delete',
         example:
@@ -5910,11 +5915,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Plans.Entitlements.Delete',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementDeleteParams{\n\t\t\tPlanID: "planId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Plans.Entitlements.Delete',
-        example:
-          'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
       python: {
         method: 'v1.plans.entitlements.delete',
@@ -5956,6 +5956,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## report\n\n`client.v1.usage.report(usages: { customerId: string; featureId: string; value: number; createdAt?: string; dimensions?: object; idempotencyKey?: string; resourceId?: string; updateBehavior?: 'DELTA' | 'SET'; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**post** `/api/v1/usage`\n\nReports usage measurements for metered features. The reported usage is used to track, limit, and bill customer consumption.\n\n### Parameters\n\n- `usages: { customerId: string; featureId: string; value: number; createdAt?: string; dimensions?: object; idempotencyKey?: string; resourceId?: string; updateBehavior?: 'DELTA' | 'SET'; }[]`\n  A list of usage reports to be submitted in bulk\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; customerId: string; featureId: string; timestamp: string; value: number; credit?: { consumed: number; currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; currentUsage?: number; nextResetDate?: string; resourceId?: string; usagePeriodEnd?: string; usagePeriodStart?: string; }[]; }`\n  Response containing reported usage measurements with current usage values, period information, and reset dates for each measurement.\n\n  - `data: { id: string; createdAt: string; customerId: string; featureId: string; timestamp: string; value: number; credit?: { consumed: number; currencyId: string; currentUsage: number; timestamp: string; usageLimit: number; usagePeriodEnd?: string; }; currentUsage?: number; nextResetDate?: string; resourceId?: string; usagePeriodEnd?: string; usagePeriodStart?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.report({ usages: [{\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Usage.Report',
+        example:
+          'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'usage report',
         example:
@@ -5970,11 +5975,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Usage.Report',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Report(context.TODO(), stigg.V1UsageReportParams{\n\t\tUsages: []stigg.V1UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Usage.Report',
-        example:
-          'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.usage.report',
@@ -6020,6 +6020,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## history\n\n`client.v1.usage.history(customerId: string, featureId: string, startDate: string, endDate?: string, groupBy?: string, resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/usage/{customerId}/history/{featureId}`\n\nRetrieves historical usage data for a customer's metered feature over time.\n\n### Parameters\n\n- `customerId: string`\n\n- `featureId: string`\n\n- `startDate: string`\n  The start date of the range\n\n- `endDate?: string`\n  The end date of the range\n\n- `groupBy?: string`\n  Criteria by which to group the usage history\n\n- `resourceId?: string`\n  Resource id\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { markers: { timestamp: string; type: 'PERIODIC_RESET' | 'SUBSCRIPTION_CHANGE_RESET'; }[]; series: { points: object[]; tags: object[]; }[]; }; }`\n  Response object\n\n  - `data: { markers: { timestamp: string; type: 'PERIODIC_RESET' | 'SUBSCRIPTION_CHANGE_RESET'; }[]; series: { points: { isResetPoint: boolean; timestamp: string; value: number; }[]; tags: { key: string; value: string; }[]; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.history('featureId', { customerId: 'customerId', startDate: '2019-12-27T18:11:19.117Z' });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Usage.History',
+        example:
+          'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'usage history',
         example:
@@ -6034,11 +6039,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Usage.History',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.History(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1UsageHistoryParams{\n\t\t\tCustomerID: "customerId",\n\t\t\tStartDate:  time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Usage.History',
-        example:
-          'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.usage.history',
@@ -6085,6 +6085,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## estimate\n\n`client.v1.usage.estimate(customerId: string, featureId: string, value: number, dimensions?: object, resourceId?: string, updateBehavior?: 'DELTA' | 'SET', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/usage/estimate`\n\nEstimates the credit cost of a usage report without recording it. Returns the estimated cost per credit currency, the current balance, and the balance after the estimated consumption.\n\n### Parameters\n\n- `customerId: string`\n  Customer id\n\n- `featureId: string`\n  Feature id\n\n- `value: number`\n  The value to report for usage\n\n- `dimensions?: object`\n  Additional dimensions for the usage report\n\n- `resourceId?: string`\n  Resource id\n\n- `updateBehavior?: 'DELTA' | 'SET'`\n  The method by which the usage value should be updated\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { estimates: { balanceAfterEstimate: number; breakdown: object[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }; }`\n  Response object\n\n  - `data: { estimates: { balanceAfterEstimate: number; breakdown: { cost: number; featureId: string; warningCode: 'UNSUPPORTED_AGGREGATION'; }[]; currencyId: string; currentBalance: number; estimatedCost: number; wouldOverdraft: boolean; }[]; warnings: 'RESOURCE_SCOPED_SUBSCRIPTION_EXISTS' | 'FEATURE_NOT_FOUND' | 'FEATURE_NOT_CREDIT_BASED'[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1.usage.estimate({\n  customerId: 'customerId',\n  featureId: 'featureId',\n  value: -9007199254740991,\n});\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Usage.Estimate',
+        example:
+          'UsageEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.Estimate(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'usage estimate',
         example:
@@ -6099,11 +6104,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Usage.Estimate',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Estimate(context.TODO(), stigg.V1UsageEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tFeatureID:  "featureId",\n\t\tValue:      -9007199254740991,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Usage.Estimate',
-        example:
-          'UsageEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1.usage.estimate',
@@ -6149,6 +6149,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list_products\n\n`client.v1.products.listProducts(id?: string, after?: string, before?: string, createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }, limit?: number, status?: 'PUBLISHED' | 'ARCHIVED'[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: object; }`\n\n**get** `/api/v1/products`\n\nRetrieves a paginated list of products in the environment.\n\n### Parameters\n\n- `id?: string`\n  Filter by entity ID\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `createdAt?: { gt?: string; gte?: string; lt?: string; lte?: string; }`\n  Filter by creation date using range operators: gt, gte, lt, lte\n  - `gt?: string`\n    Greater than the specified createdAt value\n  - `gte?: string`\n    Greater than or equal to the specified createdAt value\n  - `lt?: string`\n    Less than the specified createdAt value\n  - `lte?: string`\n    Less than or equal to the specified createdAt value\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `status?: 'PUBLISHED' | 'ARCHIVED'[]`\n  Filter by product status. Supports comma-separated values for multiple statuses\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n  Product configuration object\n\n  - `id: string`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `metadata: object`\n  - `multipleSubscriptions: boolean`\n  - `status: 'PUBLISHED' | 'ARCHIVED'`\n  - `updatedAt: string`\n  - `productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Products.ListProducts',
+        example:
+          'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'products list_products',
         example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
@@ -6162,11 +6167,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Products.ListProducts',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Products.ListProducts(context.TODO(), stigg.V1ProductListProductsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Products.ListProducts',
-        example:
-          'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.products.list_products',
@@ -6210,6 +6210,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create_product\n\n`client.v1.products.createProduct(id: string, displayName: string, description?: string, metadata?: object, multipleSubscriptions?: boolean, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/products`\n\nCreates a new product.\n\n### Parameters\n\n- `id: string`\n  The unique identifier for the entity\n\n- `displayName: string`\n  Display name of the product\n\n- `description?: string`\n  Description of the product\n\n- `metadata?: object`\n  Additional metadata for the product\n\n- `multipleSubscriptions?: boolean`\n  Indicates if multiple subscriptions to this product are allowed\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.createProduct({ id: 'id', displayName: 'displayName' });\n\nconsole.log(product);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Products.CreateProduct',
+        example:
+          'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       cli: {
         method: 'products create_product',
         example:
@@ -6224,11 +6229,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Products.NewProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.NewProduct(context.TODO(), stigg.V1ProductNewProductParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Products.CreateProduct',
-        example:
-          'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       python: {
         method: 'v1.products.create_product',
@@ -6275,6 +6275,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update_product\n\n`client.v1.products.updateProduct(id: string, description?: string, displayName?: string, metadata?: object, multipleSubscriptions?: boolean, productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }, usageResetCutoffRule?: { behavior: 'NEVER_RESET' | 'ALWAYS_RESET' | 'BILLING_PERIOD_CHANGE'; }, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/products/{id}`\n\nUpdates an existing product's properties such as display name, description, and metadata.\n\n### Parameters\n\n- `id: string`\n\n- `description?: string`\n  Description of the product\n\n- `displayName?: string`\n  Display name of the product\n\n- `metadata?: object`\n  Additional metadata for the product\n\n- `multipleSubscriptions?: boolean`\n  Indicates if multiple subscriptions to this product are allowed\n\n- `productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }`\n  - `subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'`\n    Time when the subscription will be cancelled\n  - `subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'`\n    Setup for the end of the subscription\n  - `subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'`\n    Setup for the start of the subscription\n  - `downgradePlanId?: string`\n    ID of the plan to downgrade to at the end of the billing period\n  - `prorateAtEndOfBillingPeriod?: boolean`\n    Indicates if the subscription should be prorated at the end of the billing period\n  - `subscriptionStartPlanId?: string`\n    ID of the plan to start the subscription with\n\n- `usageResetCutoffRule?: { behavior: 'NEVER_RESET' | 'ALWAYS_RESET' | 'BILLING_PERIOD_CHANGE'; }`\n  Rule defining when usage resets upon subscription update.\n  - `behavior: 'NEVER_RESET' | 'ALWAYS_RESET' | 'BILLING_PERIOD_CHANGE'`\n    Behavior of the usage reset cutoff rule\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.updateProduct('x');\n\nconsole.log(product);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Products.UpdateProduct',
+        example:
+          'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       cli: {
         method: 'products update_product',
         example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6288,11 +6293,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Products.UpdateProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UpdateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductUpdateProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Products.UpdateProduct',
-        example:
-          'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       python: {
         method: 'v1.products.update_product',
@@ -6329,6 +6329,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive_product\n\n`client.v1.products.archiveProduct(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/products/{id}/archive`\n\nArchives a product, preventing new subscriptions. All plans and addons are archived.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.archiveProduct('x');\n\nconsole.log(product);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Products.ArchiveProduct',
+        example:
+          'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       cli: {
         method: 'products archive_product',
         example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6342,11 +6347,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Products.ArchiveProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.ArchiveProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductArchiveProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Products.ArchiveProduct',
-        example:
-          'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       python: {
         method: 'v1.products.archive_product',
@@ -6383,6 +6383,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive_product\n\n`client.v1.products.unarchiveProduct(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/products/{id}/unarchive`\n\nRestores an archived product, allowing new subscriptions to be created.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.unarchiveProduct('x');\n\nconsole.log(product);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Products.UnarchiveProduct',
+        example:
+          'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       cli: {
         method: 'products unarchive_product',
         example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6396,11 +6401,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Products.UnarchiveProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UnarchiveProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductUnarchiveProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Products.UnarchiveProduct',
-        example:
-          'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       python: {
         method: 'v1.products.unarchive_product',
@@ -6444,6 +6444,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## duplicate_product\n\n`client.v1.products.duplicateProduct(id: string, targetId: string, description?: string, displayName?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/products/{id}/duplicate`\n\nDuplicates an existing product, including its plans, addons, and configuration.\n\n### Parameters\n\n- `id: string`\n\n- `targetId: string`\n  The unique identifier for the entity\n\n- `description?: string`\n  Description of the product\n\n- `displayName?: string`\n  Display name of the product\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }; }`\n  Response object\n\n  - `data: { id: string; createdAt: string; description: string; displayName: string; metadata: object; multipleSubscriptions: boolean; status: 'PUBLISHED' | 'ARCHIVED'; updatedAt: string; productSettings?: { subscriptionCancellationTime: 'END_OF_BILLING_PERIOD' | 'IMMEDIATE' | 'SPECIFIC_DATE'; subscriptionEndSetup: 'DOWNGRADE_TO_FREE' | 'CANCEL_SUBSCRIPTION'; subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN'; downgradePlanId?: string; prorateAtEndOfBillingPeriod?: boolean; subscriptionStartPlanId?: string; }; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst product = await client.v1.products.duplicateProduct('x', { targetId: 'targetId' });\n\nconsole.log(product);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Products.DuplicateProduct',
+        example:
+          'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
+      },
       cli: {
         method: 'products duplicate_product',
         example:
@@ -6458,11 +6463,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Products.DuplicateProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.DuplicateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductDuplicateProductParams{\n\t\t\tTargetID: "targetId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Products.DuplicateProduct',
-        example:
-          'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
       python: {
         method: 'v1.products.duplicate_product',
@@ -6509,6 +6509,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1.contracts.list(after?: string, before?: string, customerExternalId?: string, limit?: number, name?: string, state?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: object; name: string; nextInvoice: object; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: object[]; }`\n\n**get** `/api/v1/contracts`\n\nRetrieves a cursor-paginated list of contracts in the environment, fetched live from the connected billing provider. Each contract is enriched with a preview of its upcoming (next) invoice when one is available. Returns an empty list when no billing provider is connected. Supports filtering by customer external ID, state, and name.\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `customerExternalId?: string`\n  Filter by the exact external ID of the customer the contract belongs to\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `name?: string`\n  Filter by exact contract name\n\n- `state?: string`\n  Filter by contract state. Supports comma-separated values for multiple states\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }`\n  A billing contract as reported by the connected billing provider.\n\n  - `id: string`\n  - `activationEndDate: string`\n  - `activationStartDate: string`\n  - `billingId: string`\n  - `billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'`\n  - `contractId: string`\n  - `createdAt: string`\n  - `customerExternalId: string`\n  - `externalId: string`\n  - `latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }`\n  - `name: string`\n  - `nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }`\n  - `poNumber: string`\n  - `refId: string`\n  - `state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'`\n  - `subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const contractListResponse of client.v1.contracts.list()) {\n  console.log(contractListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Contracts.List',
+        example:
+          'ContractListParams parameters = new();\n\nvar page = await client.V1.Contracts.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'contracts list',
         example: "stigg v1:contracts list \\\n  --api-key 'My API Key'",
@@ -6522,11 +6527,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Contracts.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Contracts.List(context.TODO(), stigg.V1ContractListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Contracts.List',
-        example:
-          'ContractListParams parameters = new();\n\nvar page = await client.V1.Contracts.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1.contracts.list',
@@ -6573,6 +6573,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.v1.contracts.create(customerId: string, subscriptions: { existingSubscriptionId?: string; newSubscription?: { customerId: string; planId: string; id?: string; addons?: object[]; appliedCoupon?: object; awaitPaymentConfirmation?: boolean; billingCountryCode?: string; billingCycleAnchor?: 'UNCHANGED' | 'NOW'; billingId?: string; billingInformation?: object; billingPeriod?: 'MONTHLY' | 'ANNUALLY'; budget?: object; cancellationDate?: string; charges?: object[]; checkoutOptions?: object; entitlements?: object | object[]; metadata?: object; minimumSpend?: object; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; priceOverrides?: object[]; resourceId?: string; salesforceId?: string; scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'; startDate?: string; trialOverrideConfiguration?: object; unitQuantity?: number; }; }[], activationEndDate?: string, activationStartDate?: string, name?: string, poNumber?: string, setupBilling?: boolean, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/contracts`\n\nCreates a contract for a customer together with all of its (custom) subscriptions in a single atomic operation. Every new subscription is created inside one transaction — any validation or creation failure rolls the whole contract back. Each subscription entry is either a new subscription to create or a reference to an existing custom subscription. Returns the created contract.\n\n### Parameters\n\n- `customerId: string`\n  The customer ref ID the contract belongs to\n\n- `subscriptions: { existingSubscriptionId?: string; newSubscription?: { customerId: string; planId: string; id?: string; addons?: { id: string; quantity: number; }[]; appliedCoupon?: { billingCouponId?: string; configuration?: { startDate?: string; }; couponId?: string; discount?: { amountsOff?: object[]; description?: string; durationInMonths?: number; name?: string; percentOff?: number; }; promotionCode?: string; }; awaitPaymentConfirmation?: boolean; billingCountryCode?: string; billingCycleAnchor?: 'UNCHANGED' | 'NOW'; billingId?: string; billingInformation?: { billingAddress?: { city?: string; country?: string; line1?: string; line2?: string; postalCode?: string; state?: string; }; chargeOnBehalfOfAccount?: string; integrationId?: string; invoiceDaysUntilDue?: number; isBackdated?: boolean; isInvoicePaid?: boolean; metadata?: object; prorationBehavior?: 'INVOICE_IMMEDIATELY' | 'CREATE_PRORATIONS' | 'NONE'; taxIds?: { type: string; value: string; }[]; taxPercentage?: number; taxRateIds?: string[]; }; billingPeriod?: 'MONTHLY' | 'ANNUALLY'; budget?: { hasSoftLimit: boolean; limit: number; }; cancellationDate?: string; charges?: { id: string; quantity: number; type: 'FEATURE' | 'CREDIT'; }[]; checkoutOptions?: { cancelUrl: string; successUrl: string; allowPromoCodes?: boolean; allowTaxIdCollection?: boolean; collectBillingAddress?: boolean; collectPhoneNumber?: boolean; referenceId?: string; }; entitlements?: { id: string; type: 'FEATURE'; hasSoftLimit?: boolean; hasUnlimitedUsage?: boolean; monthlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart' | 'StartOfTheMonth'; }; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; weeklyResetPeriodConfiguration?: { accordingTo: string; }; yearlyResetPeriodConfiguration?: { accordingTo: 'SubscriptionStart'; }; } | { id: string; amount: number; cadence: 'MONTH' | 'YEAR'; type: 'CREDIT'; hasSoftLimit?: boolean; }[]; metadata?: object; minimumSpend?: { amount?: number; currency?: string; }; payingCustomerId?: string; paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE'; priceOverrides?: { addonId?: string; amount?: number; baseCharge?: boolean; billingCountryCode?: string; blockSize?: number; creditGrantCadence?: 'BEGINNING_OF_BILLING_PERIOD' | 'MONTHLY'; creditRate?: { amount: number; currencyId: string; costFormula?: string; }; currency?: string; featureId?: string; tiers?: { flatPrice?: object; unitPrice?: object; upTo?: number; }[]; }[]; resourceId?: string; salesforceId?: string; scheduleStrategy?: 'END_OF_BILLING_PERIOD' | 'END_OF_BILLING_MONTH' | 'IMMEDIATE'; startDate?: string; trialOverrideConfiguration?: { isTrial: boolean; trialEndBehavior?: 'CONVERT_TO_PAID' | 'CANCEL_SUBSCRIPTION'; trialEndDate?: string; }; unitQuantity?: number; }; }[]`\n  The subscriptions to attach to the contract (must be non-empty). Each entry is either a new subscription to create or a reference to an existing custom subscription.\n\n- `activationEndDate?: string`\n  Optional contract activation end date\n\n- `activationStartDate?: string`\n  Optional contract activation start date\n\n- `name?: string`\n  Optional contract name\n\n- `poNumber?: string`\n  Optional purchase-order number\n\n- `setupBilling?: boolean`\n  Whether to set up billing for the contract by creating a billing contract in the connected billing provider. When false, the contract only provisions access (grants entitlements) and no billing contract is created. Defaults to true.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: object; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }; }`\n  Response object\n\n  - `data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst contract = await client.v1.contracts.create({ customerId: 'customerId', subscriptions: [{}] });\n\nconsole.log(contract);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Contracts.Create',
+        example:
+          'ContractCreateParams parameters = new()\n{\n    CustomerID = "customerId",\n    Subscriptions =\n    [\n        new()\n        {\n            ExistingSubscriptionID = "existingSubscriptionId",\n            NewSubscription = new()\n            {\n                CustomerID = "customerId",\n                PlanID = "planId",\n                ID = "id",\n                Addons =\n                [\n                    new()\n                    {\n                        ID = "id",\n                        Quantity = 0,\n                    },\n                ],\n                AppliedCoupon = new()\n                {\n                    BillingCouponID = "billingCouponId",\n                    Configuration = new()\n                    {\n                        StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                    },\n                    CouponID = "couponId",\n                    Discount = new()\n                    {\n                        AmountsOff =\n                        [\n                            new()\n                            {\n                                Amount = 0,\n                                Currency = Currency.Usd,\n                            },\n                        ],\n                        Description = "description",\n                        DurationInMonths = 1,\n                        Name = "name",\n                        PercentOff = 1,\n                    },\n                    PromotionCode = "promotionCode",\n                },\n                AwaitPaymentConfirmation = true,\n                BillingCountryCode = "billingCountryCode",\n                BillingCycleAnchor = BillingCycleAnchor.Unchanged,\n                BillingID = "billingId",\n                BillingInformation = new()\n                {\n                    BillingAddress = new()\n                    {\n                        City = "city",\n                        Country = "country",\n                        Line1 = "line1",\n                        Line2 = "line2",\n                        PostalCode = "postalCode",\n                        State = "state",\n                    },\n                    ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",\n                    IntegrationID = "integrationId",\n                    InvoiceDaysUntilDue = 0,\n                    IsBackdated = true,\n                    IsInvoicePaid = true,\n                    Metadata = new Dictionary<string, string>()\n                    {\n                        { "foo", "string" }\n                    },\n                    ProrationBehavior = ProrationBehavior.InvoiceImmediately,\n                    TaxIds =\n                    [\n                        new()\n                        {\n                            Type = "type",\n                            Value = "value",\n                        },\n                    ],\n                    TaxPercentage = 0,\n                    TaxRateIds =\n                    [\n                        "string"\n                    ],\n                },\n                BillingPeriod = BillingPeriod.Monthly,\n                Budget = new()\n                {\n                    HasSoftLimit = true,\n                    Limit = 0,\n                },\n                CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                Charges =\n                [\n                    new()\n                    {\n                        ID = "id",\n                        Quantity = 0,\n                        Type = Type.Feature,\n                    },\n                ],\n                CheckoutOptions = new()\n                {\n                    CancelUrl = "https://example.com",\n                    SuccessUrl = "https://example.com",\n                    AllowPromoCodes = true,\n                    AllowTaxIDCollection = true,\n                    CollectBillingAddress = true,\n                    CollectPhoneNumber = true,\n                    ReferenceID = "referenceId",\n                },\n                Entitlements =\n                [\n                    new Feature()\n                    {\n                        ID = "id",\n                        HasSoftLimit = true,\n                        HasUnlimitedUsage = true,\n                        MonthlyResetPeriodConfiguration = new(\n                            AccordingTo.SubscriptionStart\n                        ),\n                        ResetPeriod = ResetPeriod.Year,\n                        UsageLimit = 0,\n                        WeeklyResetPeriodConfiguration = new(\n                            AccordingTo.SubscriptionStart\n                        ),\n                        YearlyResetPeriodConfiguration = new(\n                            AccordingTo.SubscriptionStart\n                        ),\n                    },\n                ],\n                Metadata = new Dictionary<string, string>()\n                {\n                    { "foo", "string" }\n                },\n                MinimumSpend = new()\n                {\n                    Amount = 0,\n                    Currency = Currency.Usd,\n                },\n                PayingCustomerID = "payingCustomerId",\n                PaymentCollectionMethod = PaymentCollectionMethod.Charge,\n                PriceOverrides =\n                [\n                    new()\n                    {\n                        AddonID = "addonId",\n                        Amount = 0,\n                        BaseCharge = true,\n                        BillingCountryCode = "billingCountryCode",\n                        BlockSize = 0,\n                        CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,\n                        CreditRate = new()\n                        {\n                            Amount = 1,\n                            CurrencyID = "currencyId",\n                            CostFormula = "costFormula",\n                        },\n                        Currency = Currency.Usd,\n                        FeatureID = "featureId",\n                        Tiers =\n                        [\n                            new()\n                            {\n                                FlatPrice = new()\n                                {\n                                    Amount = 0,\n                                    Currency = Currency.Usd,\n                                },\n                                UnitPrice = new()\n                                {\n                                    Amount = 0,\n                                    Currency = Currency.Usd,\n                                },\n                                UpTo = 0,\n                            },\n                        ],\n                    },\n                ],\n                ResourceID = "resourceId",\n                SalesforceID = "salesforceId",\n                ScheduleStrategy = ScheduleStrategy.EndOfBillingPeriod,\n                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                TrialOverrideConfiguration = new()\n                {\n                    IsTrial = true,\n                    TrialEndBehavior = TrialEndBehavior.ConvertToPaid,\n                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                },\n                UnitQuantity = 0,\n            },\n        },\n    ],\n};\n\nvar contract = await client.V1.Contracts.Create(parameters);\n\nConsole.WriteLine(contract);',
+      },
       cli: {
         method: 'contracts create',
         example:
@@ -6587,11 +6592,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Contracts.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.New(context.TODO(), stigg.V1ContractNewParams{\n\t\tCustomerID:    "customerId",\n\t\tSubscriptions: []stigg.V1ContractNewParamsSubscription{{}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Contracts.Create',
-        example:
-          'ContractCreateParams parameters = new()\n{\n    CustomerID = "customerId",\n    Subscriptions =\n    [\n        new()\n        {\n            ExistingSubscriptionID = "existingSubscriptionId",\n            NewSubscription = new()\n            {\n                CustomerID = "customerId",\n                PlanID = "planId",\n                ID = "id",\n                Addons =\n                [\n                    new()\n                    {\n                        ID = "id",\n                        Quantity = 0,\n                    },\n                ],\n                AppliedCoupon = new()\n                {\n                    BillingCouponID = "billingCouponId",\n                    Configuration = new()\n                    {\n                        StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                    },\n                    CouponID = "couponId",\n                    Discount = new()\n                    {\n                        AmountsOff =\n                        [\n                            new()\n                            {\n                                Amount = 0,\n                                Currency = Currency.Usd,\n                            },\n                        ],\n                        Description = "description",\n                        DurationInMonths = 1,\n                        Name = "name",\n                        PercentOff = 1,\n                    },\n                    PromotionCode = "promotionCode",\n                },\n                AwaitPaymentConfirmation = true,\n                BillingCountryCode = "billingCountryCode",\n                BillingCycleAnchor = BillingCycleAnchor.Unchanged,\n                BillingID = "billingId",\n                BillingInformation = new()\n                {\n                    BillingAddress = new()\n                    {\n                        City = "city",\n                        Country = "country",\n                        Line1 = "line1",\n                        Line2 = "line2",\n                        PostalCode = "postalCode",\n                        State = "state",\n                    },\n                    ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",\n                    IntegrationID = "integrationId",\n                    InvoiceDaysUntilDue = 0,\n                    IsBackdated = true,\n                    IsInvoicePaid = true,\n                    Metadata = new Dictionary<string, string>()\n                    {\n                        { "foo", "string" }\n                    },\n                    ProrationBehavior = ProrationBehavior.InvoiceImmediately,\n                    TaxIds =\n                    [\n                        new()\n                        {\n                            Type = "type",\n                            Value = "value",\n                        },\n                    ],\n                    TaxPercentage = 0,\n                    TaxRateIds =\n                    [\n                        "string"\n                    ],\n                },\n                BillingPeriod = BillingPeriod.Monthly,\n                Budget = new()\n                {\n                    HasSoftLimit = true,\n                    Limit = 0,\n                },\n                CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                Charges =\n                [\n                    new()\n                    {\n                        ID = "id",\n                        Quantity = 0,\n                        Type = Type.Feature,\n                    },\n                ],\n                CheckoutOptions = new()\n                {\n                    CancelUrl = "https://example.com",\n                    SuccessUrl = "https://example.com",\n                    AllowPromoCodes = true,\n                    AllowTaxIDCollection = true,\n                    CollectBillingAddress = true,\n                    CollectPhoneNumber = true,\n                    ReferenceID = "referenceId",\n                },\n                Entitlements =\n                [\n                    new Feature()\n                    {\n                        ID = "id",\n                        HasSoftLimit = true,\n                        HasUnlimitedUsage = true,\n                        MonthlyResetPeriodConfiguration = new(\n                            AccordingTo.SubscriptionStart\n                        ),\n                        ResetPeriod = ResetPeriod.Year,\n                        UsageLimit = 0,\n                        WeeklyResetPeriodConfiguration = new(\n                            AccordingTo.SubscriptionStart\n                        ),\n                        YearlyResetPeriodConfiguration = new(\n                            AccordingTo.SubscriptionStart\n                        ),\n                    },\n                ],\n                Metadata = new Dictionary<string, string>()\n                {\n                    { "foo", "string" }\n                },\n                MinimumSpend = new()\n                {\n                    Amount = 0,\n                    Currency = Currency.Usd,\n                },\n                PayingCustomerID = "payingCustomerId",\n                PaymentCollectionMethod = PaymentCollectionMethod.Charge,\n                PriceOverrides =\n                [\n                    new()\n                    {\n                        AddonID = "addonId",\n                        Amount = 0,\n                        BaseCharge = true,\n                        BillingCountryCode = "billingCountryCode",\n                        BlockSize = 0,\n                        CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,\n                        CreditRate = new()\n                        {\n                            Amount = 1,\n                            CurrencyID = "currencyId",\n                            CostFormula = "costFormula",\n                        },\n                        Currency = Currency.Usd,\n                        FeatureID = "featureId",\n                        Tiers =\n                        [\n                            new()\n                            {\n                                FlatPrice = new()\n                                {\n                                    Amount = 0,\n                                    Currency = Currency.Usd,\n                                },\n                                UnitPrice = new()\n                                {\n                                    Amount = 0,\n                                    Currency = Currency.Usd,\n                                },\n                                UpTo = 0,\n                            },\n                        ],\n                    },\n                ],\n                ResourceID = "resourceId",\n                SalesforceID = "salesforceId",\n                ScheduleStrategy = ScheduleStrategy.EndOfBillingPeriod,\n                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                TrialOverrideConfiguration = new()\n                {\n                    IsTrial = true,\n                    TrialEndBehavior = TrialEndBehavior.ConvertToPaid,\n                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n                },\n                UnitQuantity = 0,\n            },\n        },\n    ],\n};\n\nvar contract = await client.V1.Contracts.Create(parameters);\n\nConsole.WriteLine(contract);',
       },
       python: {
         method: 'v1.contracts.create',
@@ -6629,6 +6629,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1.contracts.retrieve(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1/contracts/{id}`\n\nRetrieves a single contract by its ID, enriched with a preview of its upcoming (next) invoice when one is available. Returns 404 when no contract with that ID exists in the environment.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: object; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }; }`\n  Response object\n\n  - `data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst contract = await client.v1.contracts.retrieve('x');\n\nconsole.log(contract);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Contracts.Retrieve',
+        example:
+          'ContractRetrieveParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Retrieve(parameters);\n\nConsole.WriteLine(contract);',
+      },
       cli: {
         method: 'contracts retrieve',
         example: "stigg v1:contracts retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6642,11 +6647,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Contracts.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ContractGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Contracts.Retrieve',
-        example:
-          'ContractRetrieveParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Retrieve(parameters);\n\nConsole.WriteLine(contract);',
       },
       python: {
         method: 'v1.contracts.retrieve',
@@ -6693,6 +6693,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.v1.contracts.update(id: string, activationEndDate?: string, activationStartDate?: string, name?: string, poNumber?: string, setupBilling?: boolean, subscriptionIds?: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**patch** `/api/v1/contracts/{id}`\n\nUpdates a contract's metadata (name, PO number, activation dates) and optionally re-links its subscriptions. Best-effort re-syncs the change to the connected billing provider.\n\n### Parameters\n\n- `id: string`\n\n- `activationEndDate?: string`\n  New activation end date\n\n- `activationStartDate?: string`\n  New activation start date\n\n- `name?: string`\n  New contract name\n\n- `poNumber?: string`\n  New purchase-order number\n\n- `setupBilling?: boolean`\n  Enable billing on a provision-access-only contract by creating a billing contract in the connected billing provider. Only takes effect when true and the contract has no billing yet; omitting it leaves billing unchanged. Billing is never removed by an update.\n\n- `subscriptionIds?: string[]`\n  When provided, replaces the set of subscriptions linked to the contract (subscription ref IDs)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: object; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }; }`\n  Response object\n\n  - `data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst contract = await client.v1.contracts.update('x');\n\nconsole.log(contract);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Contracts.Update',
+        example:
+          'ContractUpdateParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Update(parameters);\n\nConsole.WriteLine(contract);',
+      },
       cli: {
         method: 'contracts update',
         example: "stigg v1:contracts update \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6706,11 +6711,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Contracts.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ContractUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Contracts.Update',
-        example:
-          'ContractUpdateParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Update(parameters);\n\nConsole.WriteLine(contract);',
       },
       python: {
         method: 'v1.contracts.update',
@@ -6748,6 +6748,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.v1.contracts.delete(id: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1/contracts/{id}/archive`\n\nDeletes a contract: cancels the contract in the connected billing provider and cancels every subscription linked to it.\n\n### Parameters\n\n- `id: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: object; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }; }`\n  Response object\n\n  - `data: { id: string; activationEndDate: string; activationStartDate: string; billingId: string; billingState: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; contractId: string; createdAt: string; customerExternalId: string; externalId: string; latestInvoice: { billingId: string; createdAt: string; requiresAction: boolean; status: 'OPEN' | 'CANCELED' | 'PAID'; amountDue?: number; billingReason?: string; currency?: string; pdfUrl?: string; total?: number; }; name: string; nextInvoice: { amount: { amount: number; currency: string; }; dueDate: string; invoiceId: string; periodEnd: string; periodStart: string; }; poNumber: string; refId: string; state: 'DRAFT' | 'ACTIVE' | 'CANCELED' | 'END_BILLING'; subscriptions: { planDisplayName: string; productDisplayName: string; subscriptionId: string; }[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst contract = await client.v1.contracts.delete('x');\n\nconsole.log(contract);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1.Contracts.Delete',
+        example:
+          'ContractDeleteParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Delete(parameters);\n\nConsole.WriteLine(contract);',
+      },
       cli: {
         method: 'contracts delete',
         example: "stigg v1:contracts delete \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6761,11 +6766,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1.Contracts.Delete',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.Delete(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ContractDeleteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1.Contracts.Delete',
-        example:
-          'ContractDeleteParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Delete(parameters);\n\nConsole.WriteLine(contract);',
       },
       python: {
         method: 'v1.contracts.delete',
@@ -6813,6 +6813,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## check\n\n`client.v1Beta.customers.entitlements.check(id: string, currencyId?: string, dimensions?: object, featureId?: string, requestedUsage?: number, requestedValues?: string[], resourceId?: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object | object; }`\n\n**get** `/api/v1-beta/customers/{id}/entitlements/check`\n\nExperimental — request and response shapes may change without notice. Same semantics as `Check entitlement`, plus an optional `dimensions` query param that resolves to per-entity governance limits surfaced as `chains` on the response.\n\n### Parameters\n\n- `id: string`\n\n- `currencyId?: string`\n  Currency ID (refId) to check for credit entitlements. Mutually exclusive with `featureId`.\n\n- `dimensions?: object`\n  Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the response includes a `chains` array with per-entity governance limits.\n\n- `featureId?: string`\n  Feature ID (refId) to check. Mutually exclusive with `currencyId`.\n\n- `requestedUsage?: number`\n  Requested usage amount to evaluate against the entitlement limit (numeric features only)\n\n- `requestedValues?: string[]`\n  Requested values to evaluate against allowed values (enum features only)\n\n- `resourceId?: string`\n  Resource ID to scope the entitlement check to a specific resource\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; scopeEntityIds: string[]; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; scopeEntityIds: string[]; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }; }`\n  Response object\n\n  - `data: { accessDeniedReason: string; isGranted: boolean; type: 'FEATURE'; chains?: { currentUsage: number; entityId: string; isGranted: boolean; scopeEntityIds: string[]; usageLimit: number; }[][]; currentUsage?: number; entitlementUpdatedAt?: string; feature?: { id: string; displayName: string; featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE'; featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM'; }; hasUnlimitedUsage?: boolean; resetPeriod?: 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR'; usageLimit?: number; usagePeriodAnchor?: string; usagePeriodEnd?: string; usagePeriodStart?: string; validUntil?: string; } | { accessDeniedReason: string; currency: { currencyId: string; displayName: string; description?: string; metadata?: object; unitPlural?: string; unitSingular?: string; }; currentUsage: number; isGranted: boolean; type: 'CREDIT'; usageLimit: number; usageUpdatedAt: string; chains?: { currentUsage: number; entityId: string; isGranted: boolean; scopeEntityIds: string[]; usageLimit: number; }[][]; entitlementUpdatedAt?: string; usagePeriodEnd?: string; validUntil?: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entitlements.check('x');\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Entitlements.Check',
+        example:
+          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'entitlements check',
         example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
@@ -6826,11 +6831,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Entitlements.Check',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Entitlements.Check',
-        example:
-          'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1_beta.customers.entitlements.check',
@@ -6876,6 +6876,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1Beta.customers.entities.list(id: string, after?: string, before?: string, entityTypeId?: string, includeArchived?: 'true' | 'false', limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; archivedAt: string; createdAt: string; displayName: string; entityTypeId: string; metadata: object; updatedAt: string; }`\n\n**get** `/api/v1-beta/customers/{id}/entities`\n\nRetrieves a paginated list of entities for the given customer.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `entityTypeId?: string`\n  Filter results to entities of a specific entity type, by the type's ID\n\n- `includeArchived?: 'true' | 'false'`\n  Whether to include archived entities. One of: true, false\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; archivedAt: string; createdAt: string; displayName: string; entityTypeId: string; metadata: object; updatedAt: string; }`\n  A stored entity instance tracked by the governance service for a given customer\n\n  - `id: string`\n  - `archivedAt: string`\n  - `createdAt: string`\n  - `displayName: string`\n  - `entityTypeId: string`\n  - `metadata: object`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityListResponse of client.v1Beta.customers.entities.list('id')) {\n  console.log(entityListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Entities.List',
+        example:
+          'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'entities list',
         example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
@@ -6889,11 +6894,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Entities.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Entities.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Entities.List',
-        example:
-          'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1_beta.customers.entities.list',
@@ -6936,6 +6936,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## upsert\n\n`client.v1Beta.customers.entities.upsert(id: string, entities: { id: string; displayName?: string; entityTypeId?: string; metadata?: object; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/customers/{id}/entities`\n\nCreates or updates entities in bulk for the given customer. Existing entities matched by id are updated; new ids are created.\n\n### Parameters\n\n- `id: string`\n\n- `entities: { id: string; displayName?: string; entityTypeId?: string; metadata?: object; }[]`\n  List of entities to create or update (1-100 entries)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; displayName: string; entityTypeId: string; metadata: object; updatedAt: string; }[]; }`\n  List of entities created or updated by an upsert request\n\n  - `data: { id: string; archivedAt: string; createdAt: string; displayName: string; entityTypeId: string; metadata: object; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entities.upsert('id', { entities: [{ id: 'user-7f3a0c1d' }, { id: 'user-c4d1b2e9' }] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Upsert',
+        example:
+          'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            DisplayName = "Jane Doe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            DisplayName = "John Roe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'entities upsert',
         example:
@@ -6950,11 +6955,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Entities.Upsert',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUpsertParams{\n\t\t\tEntities: []stigg.V1BetaCustomerEntityUpsertParamsEntity{{\n\t\t\t\tID:           "user-7f3a0c1d",\n\t\t\t\tDisplayName:  stigg.String("Jane Doe"),\n\t\t\t\tEntityTypeID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "jane@acme.com",\n\t\t\t\t\t"role":  "admin",\n\t\t\t\t},\n\t\t\t}, {\n\t\t\t\tID:           "user-c4d1b2e9",\n\t\t\t\tDisplayName:  stigg.String("John Roe"),\n\t\t\t\tEntityTypeID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "john@acme.com",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Entities.Upsert',
-        example:
-          'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            DisplayName = "Jane Doe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            DisplayName = "John Roe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1_beta.customers.entities.upsert',
@@ -6991,6 +6991,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.v1Beta.customers.entities.retrieve(id: string, entityId: string, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**get** `/api/v1-beta/customers/{id}/entities/{entityId}`\n\nRetrieves a single entity for the given customer by its identifier.\n\n### Parameters\n\n- `id: string`\n\n- `entityId: string`\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; archivedAt: string; createdAt: string; displayName: string; entityTypeId: string; metadata: object; updatedAt: string; }; }`\n  Response object\n\n  - `data: { id: string; archivedAt: string; createdAt: string; displayName: string; entityTypeId: string; metadata: object; updatedAt: string; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst entity = await client.v1Beta.customers.entities.retrieve('x', { id: 'id' });\n\nconsole.log(entity);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Retrieve',
+        example:
+          'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
+      },
       cli: {
         method: 'entities retrieve',
         example:
@@ -7005,11 +7010,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Entities.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentity, err := client.V1Beta.Customers.Entities.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntityGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Entities.Retrieve',
-        example:
-          'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
       },
       python: {
         method: 'v1_beta.customers.entities.retrieve',
@@ -7045,6 +7045,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## archive\n\n`client.v1Beta.customers.entities.archive(id: string, ids: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1-beta/customers/{id}/entities/archive`\n\nArchives entities in bulk for the given customer by id.\n\n### Parameters\n\n- `id: string`\n\n- `ids: string[]`\n  Entity identifiers to act on\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { ids: string[]; }; }`\n  Wrapped response echoing the ids that were acted on by an archive/unarchive call\n\n  - `data: { ids: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entities.archive('id', { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Archive',
+        example:
+          'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'entities archive',
         example:
@@ -7059,11 +7064,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Entities.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Archive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityArchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Entities.Archive',
-        example:
-          'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1_beta.customers.entities.archive',
@@ -7099,6 +7099,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## unarchive\n\n`client.v1Beta.customers.entities.unarchive(id: string, ids: string[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object; }`\n\n**post** `/api/v1-beta/customers/{id}/entities/unarchive`\n\nRestores previously archived entities in bulk for the given customer by id.\n\n### Parameters\n\n- `id: string`\n\n- `ids: string[]`\n  Entity identifiers to act on\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { ids: string[]; }; }`\n  Wrapped response echoing the ids that were acted on by an archive/unarchive call\n\n  - `data: { ids: string[]; }`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.entities.unarchive('id', { ids: ['user-7f3a0c1d', 'user-c4d1b2e9'] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Entities.Unarchive',
+        example:
+          'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'entities unarchive',
         example:
@@ -7113,11 +7118,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Entities.Unarchive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Unarchive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUnarchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Entities.Unarchive',
-        example:
-          'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1_beta.customers.entities.unarchive',
@@ -7165,6 +7165,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1Beta.customers.assignments.list(id: string, after?: string, before?: string, currencyId?: string, entityId?: string, featureId?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; cadence: string; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }`\n\n**get** `/api/v1-beta/customers/{id}/assignments`\n\nReturns a cursor-paginated list of capability assignments for the given customer. An assignment ties an entity to a capability with a usage limit and reset cadence.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `currencyId?: string`\n  Filter assignments to a specific currency, by its ID. Mutually exclusive with `featureId`.\n\n- `entityId?: string`\n  Filter assignments to a specific entity ID\n\n- `featureId?: string`\n  Filter assignments to a specific feature, by its ID. Mutually exclusive with `currencyId`.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; cadence: string; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }`\n  A capability assignment for an entity belonging to a customer. Defines how much of the capability the entity may consume (`usageLimit`) and how often the counter resets (`cadence`).\n\n  - `id: string`\n  - `cadence: string`\n  - `createdAt: string`\n  - `entityId: string`\n  - `parentId: string`\n  - `scopeEntityIds: string[]`\n  - `updatedAt: string`\n  - `usageLimit: number`\n  - `currencyId?: string`\n  - `featureId?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const assignmentListResponse of client.v1Beta.customers.assignments.list('id')) {\n  console.log(assignmentListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Assignments.List',
+        example:
+          'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'assignments list',
         example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
@@ -7178,11 +7183,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Assignments.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Assignments.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Assignments.List',
-        example:
-          'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1_beta.customers.assignments.list',
@@ -7225,6 +7225,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## upsert\n\n`client.v1Beta.customers.assignments.upsert(id: string, assignments: { entityId: string; cadence?: string; currencyId?: string; featureId?: string; parentId?: string; scopeEntityIds?: string[]; usageLimit?: number; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/customers/{id}/assignments`\n\nBatched create-or-update of capability assignments. Existing assignments matched by (entityId, capabilityId) are updated; new pairs are created. On update, omitted fields (usageLimit, cadence) are preserved; on create both are required by the governance service.\n\n### Parameters\n\n- `id: string`\n\n- `assignments: { entityId: string; cadence?: string; currencyId?: string; featureId?: string; parentId?: string; scopeEntityIds?: string[]; usageLimit?: number; }[]`\n  Assignments to upsert (1–100 per request)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; cadence: string; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }[]; }`\n  Assignments after upsert.\n\n  - `data: { id: string; cadence: string; createdAt: string; entityId: string; parentId: string; scopeEntityIds: string[]; updatedAt: string; usageLimit: number; currencyId?: string; featureId?: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.customers.assignments.upsert('id', { assignments: [{ entityId: 'workspace-001' }, { entityId: 'workspace-002' }] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Assignments.Upsert',
+        example:
+          'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            EntityID = "workspace-001",\n            Cadence = "P1M",\n            CurrencyID = "currencyId",\n            FeatureID = "compute-minutes",\n            ParentID = "parentId",\n            ScopeEntityIds =\n            [\n                "NxI"\n            ],\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            EntityID = "workspace-002",\n            Cadence = "P1M",\n            CurrencyID = "cred-type-tokens",\n            FeatureID = "featureId",\n            ParentID = "workspace-001",\n            ScopeEntityIds =\n            [\n                "user-1"\n            ],\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'assignments upsert',
         example:
@@ -7239,11 +7244,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.Customers.Assignments.Upsert',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Assignments.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentUpsertParams{\n\t\t\tAssignments: []stigg.V1BetaCustomerAssignmentUpsertParamsAssignment{{\n\t\t\t\tEntityID:   "workspace-001",\n\t\t\t\tFeatureID:  stigg.String("compute-minutes"),\n\t\t\t\tUsageLimit: stigg.Float(1000),\n\t\t\t\tCadence:    stigg.String("P1M"),\n\t\t\t}, {\n\t\t\t\tEntityID:       "workspace-002",\n\t\t\t\tCurrencyID:     stigg.String("cred-type-tokens"),\n\t\t\t\tUsageLimit:     stigg.Float(2000),\n\t\t\t\tCadence:        stigg.String("P1M"),\n\t\t\t\tParentID:       stigg.String("workspace-001"),\n\t\t\t\tScopeEntityIDs: []string{"user-1"},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.Customers.Assignments.Upsert',
-        example:
-          'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            EntityID = "workspace-001",\n            Cadence = "P1M",\n            CurrencyID = "currencyId",\n            FeatureID = "compute-minutes",\n            ParentID = "parentId",\n            ScopeEntityIds =\n            [\n                "NxI"\n            ],\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            EntityID = "workspace-002",\n            Cadence = "P1M",\n            CurrencyID = "cred-type-tokens",\n            FeatureID = "featureId",\n            ParentID = "workspace-001",\n            ScopeEntityIds =\n            [\n                "user-1"\n            ],\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1_beta.customers.assignments.upsert',
@@ -7287,6 +7287,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.v1Beta.entityTypes.list(after?: string, before?: string, limit?: number, X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { id: string; attributionKeys: string[]; createdAt: string; description: string; displayName: string; updatedAt: string; }`\n\n**get** `/api/v1-beta/entity-types`\n\nReturns a cursor-paginated list of entity types defined in the environment. Entity types are vendor-defined categories of resource that can be governed (e.g. Org, Team, User).\n\n### Parameters\n\n- `after?: string`\n  Return items that come after this cursor\n\n- `before?: string`\n  Return items that come before this cursor\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ id: string; attributionKeys: string[]; createdAt: string; description: string; displayName: string; updatedAt: string; }`\n  A vendor-defined category of resource that can be governed (e.g. Org, Team, User). Vendors define entity types once per environment; their customers create instances (entities) of these types and the governance engine tracks usage and enforces limits per instance.\n\n  - `id: string`\n  - `attributionKeys: string[]`\n  - `createdAt: string`\n  - `description: string`\n  - `displayName: string`\n  - `updatedAt: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {\n  console.log(entityTypeListResponse);\n}\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.EntityTypes.List',
+        example:
+          'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
       cli: {
         method: 'entity_types list',
         example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
@@ -7300,11 +7305,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.EntityTypes.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.EntityTypes.List(context.TODO(), stigg.V1BetaEntityTypeListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.EntityTypes.List',
-        example:
-          'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
       python: {
         method: 'v1_beta.entity_types.list',
@@ -7345,6 +7345,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## upsert\n\n`client.v1Beta.entityTypes.upsert(types: { id: string; attributionKeys: string[]; displayName: string; description?: string; }[], X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { data: object[]; }`\n\n**put** `/api/v1-beta/entity-types`\n\nBatched create-or-update of entity types. Existing types matched by id are updated; new ids are created. Idempotent — re-submitting the same payload converges to the same state.\n\n### Parameters\n\n- `types: { id: string; attributionKeys: string[]; displayName: string; description?: string; }[]`\n  Entity types to upsert (1–100 per request)\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ data: { id: string; attributionKeys: string[]; createdAt: string; description: string; displayName: string; updatedAt: string; }[]; }`\n  Entity types after upsert.\n\n  - `data: { id: string; attributionKeys: string[]; createdAt: string; description: string; displayName: string; updatedAt: string; }[]`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\nconst response = await client.v1Beta.entityTypes.upsert({ types: [{\n  id: 'org',\n  attributionKeys: ['organizationId'],\n  displayName: 'Organization',\n}, {\n  id: 'team',\n  attributionKeys: ['teamId'],\n  displayName: 'Team',\n}] });\n\nconsole.log(response);\n```",
     perLanguage: {
+      csharp: {
+        method: 'V1Beta.EntityTypes.Upsert',
+        example:
+          'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n            Description = "A customer organization — the top of the hierarchy, holding the account-wide budget.",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n            Description = "description",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
+      },
       cli: {
         method: 'entity_types upsert',
         example:
@@ -7359,11 +7364,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.V1Beta.EntityTypes.Upsert',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.EntityTypes.Upsert(context.TODO(), stigg.V1BetaEntityTypeUpsertParams{\n\t\tTypes: []stigg.V1BetaEntityTypeUpsertParamsType{{\n\t\t\tID:              "org",\n\t\t\tDisplayName:     "Organization",\n\t\t\tDescription:     stigg.String("A customer organization — the top of the hierarchy, holding the account-wide budget."),\n\t\t\tAttributionKeys: []string{"organizationId"},\n\t\t}, {\n\t\t\tID:              "team",\n\t\t\tDisplayName:     "Team",\n\t\t\tAttributionKeys: []string{"teamId"},\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      csharp: {
-        method: 'V1Beta.EntityTypes.Upsert',
-        example:
-          'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n            Description = "A customer organization — the top of the hierarchy, holding the account-wide budget.",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n            Description = "description",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
       python: {
         method: 'v1_beta.entity_types.upsert',
@@ -7390,6 +7390,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
 
 const EMBEDDED_READMES: { language: string; content: string }[] = [
   {
+    language: 'csharp',
+    content:
+      '# Stigg C# API Library\n\nThe Stigg C# SDK provides convenient access to the Stigg REST API from applications written in   C#.\n\n## Installation\n\nInstall the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):\n\n```bash\ndotnet add package Stigg.Client\n```\n\n## Requirements\n\nThis library requires .NET Standard 2.0 or later.\n\n## Usage\n\nSee the [`examples`](examples) directory for complete and runnable examples.\n\n```csharp\nStiggClient client = new();\n\nCustomerRetrieveParams parameters = new() { ID = "REPLACE_ME" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);\n```',
+  },
+  {
     language: 'cli',
     content:
       "# Stigg CLI\n\nThe official CLI for the Stigg REST API.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n<!-- x-release-please-start-version -->\n\n## Installation\n\n### Installing with Homebrew\n\n~~~sh\nbrew install stiggio/tools/stigg\n~~~\n\n### Installing with Go\n\nTo test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.\n\n~~~sh\ngo install 'github.com/stiggio/stigg-cli/cmd/stigg@latest'\n~~~\n\nOnce you have run `go install`, the binary is placed in your Go bin directory:\n\n- **Default location**: `$HOME/go/bin` (or `$GOPATH/bin` if GOPATH is set)\n- **Check your path**: Run `go env GOPATH` to see the base directory\n\nIf commands aren't found after installation, add the Go bin directory to your PATH:\n\n~~~sh\n# Add to your shell profile (.zshrc, .bashrc, etc.)\nexport PATH=\"$PATH:$(go env GOPATH)/bin\"\n~~~\n\n<!-- x-release-please-end -->\n\n### Running Locally\n\nAfter cloning the git repository for this project, you can use the\n`scripts/run` script to run the tool locally:\n\n~~~sh\n./scripts/run args...\n~~~\n\n## Usage\n\nThe CLI follows a resource-based command structure:\n\n~~~sh\nstigg [resource] <command> [flags...]\n~~~\n\n~~~sh\nstigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id REPLACE_ME\n~~~\n\nFor details about specific commands, use the `--help` flag.\n\n### Environment variables\n\n| Environment variable | Required |\n| -------------------- | -------- |\n| `STIGG_API_KEY`      | yes      |\n\n### Global flags\n\n- `--api-key` (can also be set with `STIGG_API_KEY` env var)\n- `--help` - Show command line usage\n- `--debug` - Enable debug logging (includes HTTP request/response details)\n- `--version`, `-v` - Show the CLI version\n- `--base-url` - Use a custom API backend URL\n- `--format` - Change the output format (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--format-error` - Change the output format for errors (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--transform` - Transform the data output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n- `--transform-error` - Transform the error output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n\n### Passing files as arguments\n\nTo pass files to your API, you can use the `@myfile.ext` syntax:\n\n~~~bash\nstigg <command> --arg @abe.jpg\n~~~\n\nFiles can also be passed inside JSON or YAML blobs:\n\n~~~bash\nstigg <command> --arg '{image: \"@abe.jpg\"}'\n# Equivalent:\nstigg <command> <<YAML\narg:\n  image: \"@abe.jpg\"\nYAML\n~~~\n\nIf you need to pass a string literal that begins with an `@` sign, you can\nescape the `@` sign to avoid accidentally passing a file.\n\n~~~bash\nstigg <command> --username '\\@abe'\n~~~\n\n#### Explicit encoding\n\nFor JSON endpoints, the CLI tool does filetype sniffing to determine whether the\nfile contents should be sent as a string literal (for plain text files) or as a\nbase64-encoded string literal (for binary files). If you need to explicitly send\nthe file as either plain text or base64-encoded data, you can use\n`@file://myfile.txt` (for string encoding) or `@data://myfile.dat` (for\nbase64-encoding). Note that absolute paths will begin with `@file://` or\n`@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).\n\n~~~bash\nstigg <command> --arg @data://file.txt\n~~~\n\n## Linking different Go SDK versions\n\nYou can link the CLI against a different version of the Stigg Go SDK\nfor development purposes using the `./scripts/link` script.\n\nTo link to a specific version from a repository (version can be a branch,\ngit tag, or commit hash):\n\n~~~bash\n./scripts/link github.com/org/repo@version\n~~~\n\nTo link to a local copy of the SDK:\n\n~~~bash\n./scripts/link ../path/to/stigg-go\n~~~\n\nIf you run the link script without any arguments, it will default to `../stigg-go`.\n",
@@ -7403,11 +7408,6 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'go',
     content:
       '# Stigg Go API Library\n\n<a href="https://pkg.go.dev/github.com/stiggio/stigg-go"><img src="https://pkg.go.dev/badge/github.com/stiggio/stigg-go.svg" alt="Go Reference"></a>\n\nThe Stigg Go library provides convenient access to the Stigg REST API\nfrom applications written in Go.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n```go\nimport (\n\t"github.com/stiggio/stigg-go" // imported as SDK_PackageName\n)\n```\n\n<!-- x-release-please-end -->\n\nOr to pin the version:\n\n<!-- x-release-please-start-version -->\n\n```sh\ngo get -u \'github.com/stiggio/stigg-go@v0.1.0-beta.49\'\n```\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Go 1.22+.\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n```go\npackage main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"), // defaults to os.LookupEnv("STIGG_API_KEY")\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(\n\t\tcontext.TODO(),\n\t\t"REPLACE_ME",\n\t\tstigg.V1CustomerGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n\n```\n\n### Request fields\n\nAll request parameters are wrapped in a generic `Field` type,\nwhich we use to distinguish zero values from null or omitted fields.\n\nThis prevents accidentally sending a zero value if you forget a required parameter,\nand enables explicitly sending `null`, `false`, `\'\'`, or `0` on optional parameters.\nAny field not specified is not sent.\n\nTo construct fields with values, use the helpers `String()`, `Int()`, `Float()`, or most commonly, the generic `F[T]()`.\nTo send a null, use `Null[T]()`, and to send a nonconforming value, use `Raw[T](any)`. For example:\n\n```go\nparams := FooParams{\n\tName: SDK_PackageName.F("hello"),\n\n\t// Explicitly send `"description": null`\n\tDescription: SDK_PackageName.Null[string](),\n\n\tPoint: SDK_PackageName.F(SDK_PackageName.Point{\n\t\tX: SDK_PackageName.Int(0),\n\t\tY: SDK_PackageName.Int(1),\n\n\t\t// In cases where the API specifies a given type,\n\t\t// but you want to send something else, use `Raw`:\n\t\tZ: SDK_PackageName.Raw[int64](0.01), // sends a float\n\t}),\n}\n```\n\n### Response objects\n\nAll fields in response structs are value types (not pointers or wrappers).\n\nIf a given field is `null`, not present, or invalid, the corresponding field\nwill simply be its zero value.\n\nAll response structs also include a special `JSON` field, containing more detailed\ninformation about each property, which you can use like so:\n\n```go\nif res.Name == "" {\n\t// true if `"name"` is either not present or explicitly null\n\tres.JSON.Name.IsNull()\n\n\t// true if the `"name"` key was not present in the response JSON at all\n\tres.JSON.Name.IsMissing()\n\n\t// When the API returns data that cannot be coerced to the expected type:\n\tif res.JSON.Name.IsInvalid() {\n\t\traw := res.JSON.Name.Raw()\n\n\t\tlegacyName := struct{\n\t\t\tFirst string `json:"first"`\n\t\t\tLast  string `json:"last"`\n\t\t}{}\n\t\tjson.Unmarshal([]byte(raw), &legacyName)\n\t\tname = legacyName.First + " " + legacyName.Last\n\t}\n}\n```\n\nThese `.JSON` structs also include an `Extras` map containing\nany properties in the json response that were not specified\nin the struct. This can be useful for API features not yet\npresent in the SDK.\n\n```go\nbody := res.JSON.ExtraFields["my_unexpected_field"].Raw()\n```\n\n### RequestOptions\n\nThis library uses the functional options pattern. Functions defined in the\n`SDK_PackageOptionName` package return a `RequestOption`, which is a closure that mutates a\n`RequestConfig`. These options can be supplied to the client or at individual\nrequests. For example:\n\n```go\nclient := SDK_PackageName.SDK_ClientInitializerName(\n\t// Adds a header to every request made by the client\n\tSDK_PackageOptionName.WithHeader("X-Some-Header", "custom_header_info"),\n)\n\nclient.V1.Customers.Get(context.TODO(), ...,\n\t// Override the header\n\tSDK_PackageOptionName.WithHeader("X-Some-Header", "some_other_custom_header_info"),\n\t// Add an undocumented field to the request body, using sjson syntax\n\tSDK_PackageOptionName.WithJSONSet("some.json.path", map[string]string{"my": "object"}),\n)\n```\n\nSee the [full list of request options](https://pkg.go.dev/github.com/stiggio/stigg-go/SDK_PackageOptionName).\n\n### Pagination\n\nThis library provides some conveniences for working with paginated list endpoints.\n\nYou can use `.ListAutoPaging()` methods to iterate through items across all pages:\n\n```go\niter := client.V1.Customers.ListAutoPaging(context.TODO(), stigg.V1CustomerListParams{\n\tLimit: stigg.Int(30),\n})\n// Automatically fetches more pages as needed.\nfor iter.Next() {\n\tv1CustomerListResponse := iter.Current()\n\tfmt.Printf("%+v\\n", v1CustomerListResponse)\n}\nif err := iter.Err(); err != nil {\n\tpanic(err.Error())\n}\n```\n\nOr you can use simple `.List()` methods to fetch a single page and receive a standard response object\nwith additional helper methods like `.GetNextPage()`, e.g.:\n\n```go\npage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{\n\tLimit: stigg.Int(30),\n})\nfor page != nil {\n\tfor _, customer := range page.Data {\n\t\tfmt.Printf("%+v\\n", customer)\n\t}\n\tpage, err = page.GetNextPage()\n}\nif err != nil {\n\tpanic(err.Error())\n}\n```\n\n### Errors\n\nWhen the API returns a non-success status code, we return an error with type\n`*SDK_PackageName.Error`. This contains the `StatusCode`, `*http.Request`, and\n`*http.Response` values of the request, as well as the JSON of the error body\n(much like other response objects in the SDK).\n\nTo handle errors, we recommend that you use the `errors.As` pattern:\n\n```go\n_, err := client.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n)\nif err != nil {\n\tvar apierr *stigg.Error\n\tif errors.As(err, &apierr) {\n\t\tprintln(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request\n\t\tprintln(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response\n\t}\n\tpanic(err.Error()) // GET "/api/v1/customers/{id}": 400 Bad Request { ... }\n}\n```\n\nWhen other errors occur, they are returned unwrapped; for example,\nif HTTP transport fails, you might receive `*url.Error` wrapping `*net.OpError`.\n\n### Timeouts\n\nRequests do not time out by default; use context to configure a timeout for a request lifecycle.\n\nNote that if a request is [retried](#retries), the context timeout does not start over.\nTo set a per-retry timeout, use `SDK_PackageOptionName.WithRequestTimeout()`.\n\n```go\n// This sets the timeout for the request, including all the retries.\nctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)\ndefer cancel()\nclient.V1.Customers.Get(\n\tctx,\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\t// This sets the per-retry timeout\n\toption.WithRequestTimeout(20*time.Second),\n)\n```\n\n### File uploads\n\nRequest parameters that correspond to file uploads in multipart requests are typed as\n`param.Field[io.Reader]`. The contents of the `io.Reader` will by default be sent as a multipart form\npart with the file name of "anonymous_file" and content-type of "application/octet-stream".\n\nThe file name and content-type can be customized by implementing `Name() string` or `ContentType()\nstring` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a\nfile returned by `os.Open` will be sent with the file name on disk.\n\nWe also provide a helper `SDK_PackageName.FileParam(reader io.Reader, filename string, contentType string)`\nwhich can be used to wrap any `io.Reader` with the appropriate file name and content type.\n\n\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\nWe retry by default all connection errors, 408 Request Timeout, 409 Conflict, 429 Rate Limit,\nand >=500 Internal errors.\n\nYou can use the `WithMaxRetries` option to configure or disable this:\n\n```go\n// Configure the default for all requests:\nclient := stigg.NewClient(\n\toption.WithMaxRetries(0), // default is 2\n)\n\n// Override per-request:\nclient.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\toption.WithMaxRetries(5),\n)\n```\n\n\n### Accessing raw response data (e.g. response headers)\n\nYou can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when\nyou need to examine response headers, status codes, or other details.\n\n```go\n// Create a variable to store the HTTP response\nvar response *http.Response\ncustomerResponse, err := client.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\toption.WithResponseInto(&response),\n)\nif err != nil {\n\t// handle error\n}\nfmt.Printf("%+v\\n", customerResponse)\n\nfmt.Printf("Status Code: %d\\n", response.StatusCode)\nfmt.Printf("Headers: %+#v\\n", response.Header)\n```\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API. If you need to access undocumented\nendpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs.\n`RequestOptions` on the client, such as retries, will be respected when making these requests.\n\n```go\nvar (\n    // params can be an io.Reader, a []byte, an encoding/json serializable object,\n    // or a "…Params" struct defined in this library.\n    params map[string]interface{}\n\n    // result can be an []byte, *http.Response, a encoding/json deserializable object,\n    // or a model defined in this library.\n    result *http.Response\n)\nerr := client.Post(context.Background(), "/unspecified", params, &result)\nif err != nil {\n    …\n}\n```\n\n#### Undocumented request params\n\nTo make requests using undocumented parameters, you may use either the `SDK_PackageOptionName.WithQuerySet()`\nor the `SDK_PackageOptionName.WithJSONSet()` methods.\n\n```go\nparams := FooNewParams{\n    ID:   SDK_PackageName.F("id_xxxx"),\n    Data: SDK_PackageName.F(FooNewParamsData{\n        FirstName: SDK_PackageName.F("John"),\n    }),\n}\nclient.Foo.New(context.Background(), params, SDK_PackageOptionName.WithJSONSet("data.last_name", "Doe"))\n```\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you may either access the raw JSON of the response as a string\nwith `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the result with\n`result.JSON.Foo.Raw()`.\n\nAny fields that are not present on the response struct will be saved and can be accessed by `result.JSON.ExtraFields()` which returns the extra fields as a `map[string]Field`.\n\n### Middleware\n\nWe provide `SDK_PackageOptionName.WithMiddleware` which applies the given\nmiddleware to requests.\n\n```go\nfunc Logger(req *http.Request, next SDK_PackageOptionName.MiddlewareNext) (res *http.Response, err error) {\n\t// Before the request\n\tstart := time.Now()\n\tLogReq(req)\n\n\t// Forward the request to the next handler\n\tres, err = next(req)\n\n\t// Handle stuff after the request\n\tend := time.Now()\n\tLogRes(res, err, start - end)\n\n    return res, err\n}\n\nclient := SDK_PackageName.SDK_ClientInitializerName(\n\tSDK_PackageOptionName.WithMiddleware(Logger),\n)\n```\n\nWhen multiple middlewares are provided as variadic arguments, the middlewares\nare applied left to right. If `SDK_PackageOptionName.WithMiddleware` is given\nmultiple times, for example first in the client then the method, the\nmiddleware in the client will run first and the middleware given in the method\nwill run next.\n\nYou may also replace the default `http.Client` with\n`SDK_PackageOptionName.WithHTTPClient(client)`. Only one http client is\naccepted (this overwrites any previous client) and receives requests after any\nmiddleware has been applied.\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-go/issues) with questions, bugs, or suggestions.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n',
-  },
-  {
-    language: 'csharp',
-    content:
-      '# Stigg C# API Library\n\nThe Stigg C# SDK provides convenient access to the Stigg REST API from applications written in   C#.\n\n## Installation\n\nInstall the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):\n\n```bash\ndotnet add package Stigg.Client\n```\n\n## Requirements\n\nThis library requires .NET Standard 2.0 or later.\n\n## Usage\n\nSee the [`examples`](examples) directory for complete and runnable examples.\n\n```csharp\nStiggClient client = new();\n\nCustomerRetrieveParams parameters = new() { ID = "REPLACE_ME" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);\n```',
   },
   {
     language: 'python',
