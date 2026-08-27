@@ -124,12 +124,12 @@ export class Customers extends APIResource {
   /**
    * Checks a single entitlement (feature or credit) for a customer or resource.
    * Supports `requestedUsage` and `requestedValues` to evaluate against limits or
-   * enum values.
-   *
-   * **Warning:** This REST API endpoint lacks built-in client-side caching, fallback
-   * mechanisms, and low-latency guarantees. It is not recommended for hot-path
-   * entitlement checks. For production use, consider using the Stigg Node Server SDK
-   * with caching or the Sidecar for low-latency cached responses.
+   * enum values. Each call reaches the Stigg API directly, so latency reflects a
+   * network round trip. For entitlement checks on a hot path (e.g. gating a request
+   * in real time), the Stigg Node Server SDK (with its built-in cache) or the
+   * Sidecar will typically respond faster and keep working through brief Stigg
+   * outages; reach for this endpoint when a live HTTP call is the natural fit, such
+   * as from a non-Node backend or a server-side job.
    */
   checkEntitlement(
     id: string,
@@ -270,12 +270,12 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves the effective entitlements for a customer or resource, including
-   * feature and credit entitlements.
-   *
-   * **Warning:** This REST API endpoint lacks built-in client-side caching, fallback
-   * mechanisms, and low-latency guarantees. It is not recommended for hot-path
-   * entitlement checks. For production use, consider using the Stigg Node Server SDK
-   * with caching or the Sidecar for low-latency cached responses.
+   * feature and credit entitlements. Each call reaches the Stigg API directly, so
+   * latency reflects a network round trip. For entitlement checks on a hot path
+   * (e.g. gating a request in real time), the Stigg Node Server SDK (with its
+   * built-in cache) or the Sidecar will typically respond faster and keep working
+   * through brief Stigg outages; reach for this endpoint when a live HTTP call is
+   * the natural fit, such as from a non-Node backend or a server-side job.
    */
   retrieveEntitlements(
     id: string,
@@ -329,28 +329,34 @@ export type CustomerListResourcesResponsesMyCursorIDPage = MyCursorIDPage<Custom
  */
 export interface CustomerIntegrationResponse {
   /**
-   * External billing or CRM integration link
+   * Links this customer to their record in a specific configured integration (e.g.
+   * their Stripe customer ID under your Stripe integration). A customer has at most
+   * one link per integration.
    */
   data: CustomerIntegrationResponse.Data;
 }
 
 export namespace CustomerIntegrationResponse {
   /**
-   * External billing or CRM integration link
+   * Links this customer to their record in a specific configured integration (e.g.
+   * their Stripe customer ID under your Stripe integration). A customer has at most
+   * one link per integration.
    */
   export interface Data {
     /**
-     * Integration details
+     * The internal ID of the integration this record is linked to
      */
     id: string;
 
     /**
-     * Synced entity id
+     * The external entity ID this record is linked to in the vendor system (e.g. the
+     * Stripe customer ID). Null until the link has synced; required when creating the
+     * link.
      */
     syncedEntityId: string | null;
 
     /**
-     * The vendor identifier of integration
+     * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
      */
     vendorIdentifier:
       | 'AUTH0'
@@ -616,7 +622,11 @@ export namespace CustomerResponse {
     language?: string | null;
 
     /**
-     * Additional metadata
+     * Custom key-value metadata to attach to the customer. When creating a customer,
+     * this sets the initial metadata. When updating a customer, this replaces the
+     * customer's existing metadata object entirely — it is not merged key by key. Omit
+     * this field on update to leave the customer's existing metadata untouched; pass
+     * an empty object to clear it.
      */
     metadata?: { [key: string]: string };
 
@@ -668,21 +678,25 @@ export namespace CustomerResponse {
     }
 
     /**
-     * External billing or CRM integration link
+     * Links this customer to their record in a specific configured integration (e.g.
+     * their Stripe customer ID under your Stripe integration). A customer has at most
+     * one link per integration.
      */
     export interface Integration {
       /**
-       * Integration details
+       * The internal ID of the integration this record is linked to
        */
       id: string;
 
       /**
-       * Synced entity id
+       * The external entity ID this record is linked to in the vendor system (e.g. the
+       * Stripe customer ID). Null until the link has synced; required when creating the
+       * link.
        */
       syncedEntityId: string | null;
 
       /**
-       * The vendor identifier of integration
+       * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
        */
       vendorIdentifier:
         | 'AUTH0'
@@ -737,7 +751,9 @@ export namespace CustomerResponse {
         invoiceCustomFields?: { [key: string]: string };
 
         /**
-         * Additional metadata
+         * Additional metadata to pass through to the billing provider on the customer's
+         * record there. This is separate from the customer's own metadata field — it's
+         * stored only on the billing-provider side, not on the Stigg customer object.
          */
         metadata?: { [key: string]: string };
 
@@ -975,7 +991,9 @@ export namespace CustomerResponse {
           | 'xpf';
 
         /**
-         * Additional metadata
+         * Additional metadata to pass through to the billing provider on the customer's
+         * record there. This is separate from the customer's own metadata field — it's
+         * stored only on the billing-provider side, not on the Stigg customer object.
          */
         metadata?: { [key: string]: string };
 
@@ -1202,7 +1220,11 @@ export interface CustomerListResponse {
   language?: string | null;
 
   /**
-   * Additional metadata
+   * Custom key-value metadata to attach to the customer. When creating a customer,
+   * this sets the initial metadata. When updating a customer, this replaces the
+   * customer's existing metadata object entirely — it is not merged key by key. Omit
+   * this field on update to leave the customer's existing metadata untouched; pass
+   * an empty object to clear it.
    */
   metadata?: { [key: string]: string };
 
@@ -1254,21 +1276,25 @@ export namespace CustomerListResponse {
   }
 
   /**
-   * External billing or CRM integration link
+   * Links this customer to their record in a specific configured integration (e.g.
+   * their Stripe customer ID under your Stripe integration). A customer has at most
+   * one link per integration.
    */
   export interface Integration {
     /**
-     * Integration details
+     * The internal ID of the integration this record is linked to
      */
     id: string;
 
     /**
-     * Synced entity id
+     * The external entity ID this record is linked to in the vendor system (e.g. the
+     * Stripe customer ID). Null until the link has synced; required when creating the
+     * link.
      */
     syncedEntityId: string | null;
 
     /**
-     * The vendor identifier of integration
+     * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
      */
     vendorIdentifier:
       | 'AUTH0'
@@ -1323,7 +1349,9 @@ export namespace CustomerListResponse {
       invoiceCustomFields?: { [key: string]: string };
 
       /**
-       * Additional metadata
+       * Additional metadata to pass through to the billing provider on the customer's
+       * record there. This is separate from the customer's own metadata field — it's
+       * stored only on the billing-provider side, not on the Stigg customer object.
        */
       metadata?: { [key: string]: string };
 
@@ -1561,7 +1589,9 @@ export namespace CustomerListResponse {
         | 'xpf';
 
       /**
-       * Additional metadata
+       * Additional metadata to pass through to the billing provider on the customer's
+       * record there. This is separate from the customer's own metadata field — it's
+       * stored only on the billing-provider side, not on the Stigg customer object.
        */
       metadata?: { [key: string]: string };
 
@@ -2273,7 +2303,12 @@ export namespace CustomerListInvoicesResponse {
 }
 
 /**
- * Resource object that belongs to a customer
+ * Resource object that belongs to a customer, used to scope subscriptions and
+ * entitlements to a specific instance within the customer's account (e.g. a
+ * website, project, or workspace) for multi-resource pricing. A resource is
+ * identified only by its resourceId — there's no separate display name or metadata
+ * field on the resource itself; if you need to attach descriptive data, keep it in
+ * your own system keyed by resourceId.
  */
 export interface CustomerListResourcesResponse {
   /**
@@ -2659,7 +2694,11 @@ export interface CustomerUpdateParams {
   language?: string | null;
 
   /**
-   * Body param: Additional metadata
+   * Body param: Custom key-value metadata to attach to the customer. When creating a
+   * customer, this sets the initial metadata. When updating a customer, this
+   * replaces the customer's existing metadata object entirely — it is not merged key
+   * by key. Omit this field on update to leave the customer's existing metadata
+   * untouched; pass an empty object to clear it.
    */
   metadata?: { [key: string]: string };
 
@@ -2694,21 +2733,25 @@ export interface CustomerUpdateParams {
 
 export namespace CustomerUpdateParams {
   /**
-   * External billing or CRM integration link
+   * Links this customer to their record in a specific configured integration (e.g.
+   * their Stripe customer ID under your Stripe integration). A customer has at most
+   * one link per integration.
    */
   export interface Integration {
     /**
-     * Integration details
+     * The internal ID of the integration this record is linked to
      */
     id: string;
 
     /**
-     * Synced entity id
+     * The external entity ID this record is linked to in the vendor system (e.g. the
+     * Stripe customer ID). Null until the link has synced; required when creating the
+     * link.
      */
     syncedEntityId: string | null;
 
     /**
-     * The vendor identifier of integration
+     * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
      */
     vendorIdentifier:
       | 'AUTH0'
@@ -2763,7 +2806,9 @@ export namespace CustomerUpdateParams {
       invoiceCustomFields?: { [key: string]: string };
 
       /**
-       * Additional metadata
+       * Additional metadata to pass through to the billing provider on the customer's
+       * record there. This is separate from the customer's own metadata field — it's
+       * stored only on the billing-provider side, not on the Stigg customer object.
        */
       metadata?: { [key: string]: string };
 
@@ -3001,7 +3046,9 @@ export namespace CustomerUpdateParams {
         | 'xpf';
 
       /**
-       * Additional metadata
+       * Additional metadata to pass through to the billing provider on the customer's
+       * record there. This is separate from the customer's own metadata field — it's
+       * stored only on the billing-provider side, not on the Stigg customer object.
        */
       metadata?: { [key: string]: string };
 
@@ -3172,7 +3219,7 @@ export interface CustomerImportParams {
   customers: Array<CustomerImportParams.Customer>;
 
   /**
-   * Body param: Integration details
+   * Body param: The internal ID of the integration this record is linked to
    */
   integrationId?: string;
 
@@ -3213,12 +3260,19 @@ export namespace CustomerImportParams {
     billingId?: string;
 
     /**
-     * Additional metadata
+     * Custom key-value metadata to attach to the customer. When creating a customer,
+     * this sets the initial metadata. When updating a customer, this replaces the
+     * customer's existing metadata object entirely — it is not merged key by key. Omit
+     * this field on update to leave the customer's existing metadata untouched; pass
+     * an empty object to clear it.
      */
     metadata?: { [key: string]: string };
 
     /**
-     * Billing provider payment method id
+     * Billing provider payment method id. Attaching it makes it the customer's new
+     * default payment method for future charges; any previously attached payment
+     * method is no longer used as the default, though it is not removed from the
+     * billing provider.
      */
     paymentMethodId?: string;
 
@@ -3472,7 +3526,11 @@ export interface CustomerProvisionParams {
   language?: string | null;
 
   /**
-   * Body param: Additional metadata
+   * Body param: Custom key-value metadata to attach to the customer. When creating a
+   * customer, this sets the initial metadata. When updating a customer, this
+   * replaces the customer's existing metadata object entirely — it is not merged key
+   * by key. Omit this field on update to leave the customer's existing metadata
+   * untouched; pass an empty object to clear it.
    */
   metadata?: { [key: string]: string };
 
@@ -3537,21 +3595,25 @@ export namespace CustomerProvisionParams {
   }
 
   /**
-   * External billing or CRM integration link
+   * Links this customer to their record in a specific configured integration (e.g.
+   * their Stripe customer ID under your Stripe integration). A customer has at most
+   * one link per integration.
    */
   export interface Integration {
     /**
-     * Integration details
+     * The internal ID of the integration this record is linked to
      */
     id: string;
 
     /**
-     * Synced entity id
+     * The external entity ID this record is linked to in the vendor system (e.g. the
+     * Stripe customer ID). Null until the link has synced; required when creating the
+     * link.
      */
     syncedEntityId: string | null;
 
     /**
-     * The vendor identifier of integration
+     * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
      */
     vendorIdentifier:
       | 'AUTH0'
@@ -3606,7 +3668,9 @@ export namespace CustomerProvisionParams {
       invoiceCustomFields?: { [key: string]: string };
 
       /**
-       * Additional metadata
+       * Additional metadata to pass through to the billing provider on the customer's
+       * record there. This is separate from the customer's own metadata field — it's
+       * stored only on the billing-provider side, not on the Stigg customer object.
        */
       metadata?: { [key: string]: string };
 
@@ -3844,7 +3908,9 @@ export namespace CustomerProvisionParams {
         | 'xpf';
 
       /**
-       * Additional metadata
+       * Additional metadata to pass through to the billing provider on the customer's
+       * record there. This is separate from the customer's own metadata field — it's
+       * stored only on the billing-provider side, not on the Stigg customer object.
        */
       metadata?: { [key: string]: string };
 

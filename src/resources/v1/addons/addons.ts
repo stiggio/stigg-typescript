@@ -173,7 +173,11 @@ export class Addons extends APIResource {
   }
 
   /**
-   * Publishes a draft addon, making it available for use in subscriptions.
+   * Publishes a draft addon, making it available for use in subscriptions. The
+   * required `migrationType` field controls whether subscriptions already using this
+   * addon are moved onto the new version immediately (`ALL_CUSTOMERS`) or stay on
+   * the version they were using — grandfathered — until you explicitly migrate them
+   * (`NEW_CUSTOMERS`).
    */
   publish(
     id: string,
@@ -276,7 +280,8 @@ export namespace Addon {
     isLatest: boolean | null;
 
     /**
-     * The maximum quantity of this addon that can be added to a subscription
+     * The maximum quantity of this addon that can be added to a subscription. Leave
+     * unset for no upper bound.
      */
     maxQuantity: number | null;
 
@@ -371,7 +376,8 @@ export interface AddonListResponse {
   isLatest: boolean | null;
 
   /**
-   * The maximum quantity of this addon that can be added to a subscription
+   * The maximum quantity of this addon that can be added to a subscription. Leave
+   * unset for no upper bound.
    */
   maxQuantity: number | null;
 
@@ -1024,7 +1030,7 @@ export interface AddonCreateParams {
 
   /**
    * Body param: The maximum quantity of this addon that can be added to a
-   * subscription
+   * subscription. Leave unset for no upper bound.
    */
   maxQuantity?: number | null;
 
@@ -1079,7 +1085,9 @@ export interface AddonUpdateParams {
   billingId?: string | null;
 
   /**
-   * Body param: Pricing configuration to set on the addon draft
+   * Body param: Pricing configuration to set on the addon draft. Unlike the rest of
+   * this request, this is a full replace of the pricing configuration, not a merge —
+   * see SetPackagePricingRequest.
    */
   charges?: AddonUpdateParams.Charges;
 
@@ -1100,7 +1108,7 @@ export interface AddonUpdateParams {
 
   /**
    * Body param: The maximum quantity of this addon that can be added to a
-   * subscription
+   * subscription. Leave unset for no upper bound.
    */
   maxQuantity?: number | null;
 
@@ -1130,7 +1138,9 @@ export interface AddonUpdateParams {
 
 export namespace AddonUpdateParams {
   /**
-   * Pricing configuration to set on the addon draft
+   * Pricing configuration to set on the addon draft. Unlike the rest of this
+   * request, this is a full replace of the pricing configuration, not a merge — see
+   * SetPackagePricingRequest.
    */
   export interface Charges {
     /**
@@ -1154,12 +1164,14 @@ export namespace AddonUpdateParams {
     overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY';
 
     /**
-     * Array of overage pricing model configurations
+     * Array of overage pricing model configurations. Replaces all existing overage
+     * pricing models on the draft — omit this to end up with no overage pricing.
      */
     overagePricingModels?: Array<Charges.OveragePricingModel>;
 
     /**
-     * Array of pricing model configurations
+     * Array of pricing model configurations. Replaces all existing base pricing models
+     * on the draft — omit this to end up with no base pricing.
      */
     pricingModels?: Array<Charges.PricingModel>;
   }
@@ -2618,7 +2630,9 @@ export interface AddonListChargesParams extends MyCursorIDPageParams {
 
 export interface AddonPublishParams {
   /**
-   * Body param: The migration type of the package
+   * Body param: Who the published version applies to: NEW_CUSTOMERS (default) leaves
+   * existing subscribers on their current version, ALL_CUSTOMERS moves them onto the
+   * new version immediately.
    */
   migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS';
 

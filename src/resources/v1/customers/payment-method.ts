@@ -59,17 +59,21 @@ export class PaymentMethod extends APIResource {
 
 export interface PaymentMethodAttachParams {
   /**
-   * Body param: Integration details
+   * Body param: The internal ID of the integration this record is linked to
    */
   integrationId: string;
 
   /**
-   * Body param: Billing provider payment method id
+   * Body param: Billing provider payment method id. Attaching it makes it the
+   * customer's new default payment method for future charges; any previously
+   * attached payment method is no longer used as the default, though it is not
+   * removed from the billing provider.
    */
   paymentMethodId: string;
 
   /**
-   * Body param: The vendor identifier of integration
+   * Body param: The vendor identifier of the integration (e.g. STRIPE, SALESFORCE,
+   * SNOWFLAKE)
    */
   vendorIdentifier:
     | 'AUTH0'

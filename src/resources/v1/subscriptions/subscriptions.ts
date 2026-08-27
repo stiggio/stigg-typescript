@@ -53,7 +53,13 @@ export class Subscriptions extends APIResource {
 
   /**
    * Updates an active subscription's properties including billing period, add-ons,
-   * unit quantities, and discounts.
+   * unit quantities, and discounts. This is a partial update — only the fields
+   * present in the request body change. Object fields such as `metadata` are
+   * replaced wholesale rather than merged, and list fields such as `addons` and
+   * `priceOverrides` must be sent in full: any existing item that isn't included in
+   * the array is removed from the subscription. Changes classified as a downgrade
+   * may be scheduled for the end of the current billing period instead of applying
+   * immediately, depending on your update scheduling configuration.
    */
   update(id: string, params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -112,8 +118,10 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Delegates the payment responsibility of a subscription to a different customer.
-   * The delegated customer will be billed for this subscription.
+   * Delegates a subscription to a different customer, who becomes responsible for
+   * managing it. The original customer remains the paying customer for this
+   * subscription, unless payment was already delegated to the target customer, in
+   * which case the target customer becomes the paying customer as well.
    */
   delegate(
     id: string,
@@ -377,7 +385,8 @@ export namespace Subscription {
     latestInvoice?: Data.LatestInvoice | null;
 
     /**
-     * Additional metadata for the subscription
+     * Additional metadata for the subscription, stored as an arbitrary flat key-value
+     * object.
      */
     metadata?: { [key: string]: string };
 
@@ -863,7 +872,9 @@ export namespace Subscription {
       baseCharge?: boolean;
 
       /**
-       * The billing country code of the price
+       * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
+       * price shown to all countries; set one or more country-specific price periods on
+       * the same currency to localize the amount by billing country.
        */
       billingCountryCode?: string;
 
@@ -1438,7 +1449,8 @@ export interface SubscriptionListResponse {
   latestInvoice?: SubscriptionListResponse.LatestInvoice | null;
 
   /**
-   * Additional metadata for the subscription
+   * Additional metadata for the subscription, stored as an arbitrary flat key-value
+   * object.
    */
   metadata?: { [key: string]: string };
 
@@ -1924,7 +1936,9 @@ export namespace SubscriptionListResponse {
     baseCharge?: boolean;
 
     /**
-     * The billing country code of the price
+     * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
+     * price shown to all countries; set one or more country-specific price periods on
+     * the same currency to localize the amount by billing country.
      */
     billingCountryCode?: string;
 
@@ -2426,7 +2440,12 @@ export namespace SubscriptionPreviewResponse {
     hasScheduledUpdates?: boolean;
 
     /**
-     * Whether this is a downgrade
+     * Whether this change is classified as a downgrade. Stigg determines this by
+     * ranking the target plan against the customer's current plan — primarily by
+     * calculated price (or by plan parent/child inheritance, when your catalog uses
+     * it) — rather than by a manually assigned plan order. Downgrades can be scheduled
+     * to take effect at the end of the current billing period instead of immediately,
+     * depending on your update scheduling configuration.
      */
     isPlanDowngrade?: boolean;
 
@@ -3090,7 +3109,8 @@ export namespace SubscriptionProvisionResponse {
       latestInvoice?: Subscription.LatestInvoice | null;
 
       /**
-       * Additional metadata for the subscription
+       * Additional metadata for the subscription, stored as an arbitrary flat key-value
+       * object.
        */
       metadata?: { [key: string]: string };
 
@@ -3576,7 +3596,9 @@ export namespace SubscriptionProvisionResponse {
         baseCharge?: boolean;
 
         /**
-         * The billing country code of the price
+         * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
+         * price shown to all countries; set one or more country-specific price periods on
+         * the same currency to localize the amount by billing country.
          */
         billingCountryCode?: string;
 
@@ -4095,7 +4117,8 @@ export interface SubscriptionUpdateParams {
   entitlements?: Array<SubscriptionUpdateParams.Feature | SubscriptionUpdateParams.Credit>;
 
   /**
-   * Body param: Additional metadata for the subscription
+   * Body param: Additional metadata for the subscription, stored as an arbitrary
+   * flat key-value object.
    */
   metadata?: { [key: string]: string };
 
@@ -4347,7 +4370,8 @@ export namespace SubscriptionUpdateParams {
     isInvoicePaid?: boolean;
 
     /**
-     * Additional metadata for the subscription
+     * Additional metadata for the subscription, stored as an arbitrary flat key-value
+     * object.
      */
     metadata?: { [key: string]: string };
 
@@ -4938,10 +4962,10 @@ export interface SubscriptionCancelParams {
 
 export interface SubscriptionDelegateParams {
   /**
-   * Body param: The unique identifier of the customer who will assume payment
-   * responsibility for this subscription. This customer must already exist in your
-   * Stigg account and have a valid payment method if the subscription requires
-   * payment.
+   * Body param: The unique identifier of the customer who will manage this
+   * subscription going forward. This customer must already exist in your Stigg
+   * account. The paying customer for the subscription does not change as a result of
+   * this request.
    */
   targetCustomerId: string;
 
@@ -5021,7 +5045,8 @@ export namespace SubscriptionImportParams {
     endDate?: string | null;
 
     /**
-     * Additional metadata for the subscription
+     * Additional metadata for the subscription, stored as an arbitrary flat key-value
+     * object.
      */
     metadata?: { [key: string]: string };
 
@@ -5642,7 +5667,8 @@ export interface SubscriptionProvisionParams {
   entitlements?: Array<SubscriptionProvisionParams.Feature | SubscriptionProvisionParams.Credit>;
 
   /**
-   * Body param: Additional metadata for the subscription
+   * Body param: Additional metadata for the subscription, stored as an arbitrary
+   * flat key-value object.
    */
   metadata?: { [key: string]: string };
 
@@ -5960,7 +5986,8 @@ export namespace SubscriptionProvisionParams {
     isInvoicePaid?: boolean;
 
     /**
-     * Additional metadata for the subscription
+     * Additional metadata for the subscription, stored as an arbitrary flat key-value
+     * object.
      */
     metadata?: { [key: string]: string };
 
@@ -6360,7 +6387,9 @@ export namespace SubscriptionProvisionParams {
     baseCharge?: boolean;
 
     /**
-     * The billing country code of the price
+     * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
+     * price shown to all countries; set one or more country-specific price periods on
+     * the same currency to localize the amount by billing country.
      */
     billingCountryCode?: string;
 

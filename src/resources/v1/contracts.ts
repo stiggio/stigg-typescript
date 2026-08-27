@@ -1985,7 +1985,8 @@ export namespace ContractCreateParams {
       entitlements?: Array<NewSubscription.Feature | NewSubscription.Credit>;
 
       /**
-       * Additional metadata for the subscription
+       * Additional metadata for the subscription, stored as an arbitrary flat key-value
+       * object.
        */
       metadata?: { [key: string]: string };
 
@@ -2287,7 +2288,8 @@ export namespace ContractCreateParams {
         isInvoicePaid?: boolean;
 
         /**
-         * Additional metadata for the subscription
+         * Additional metadata for the subscription, stored as an arbitrary flat key-value
+         * object.
          */
         metadata?: { [key: string]: string };
 
@@ -2687,7 +2689,9 @@ export namespace ContractCreateParams {
         baseCharge?: boolean;
 
         /**
-         * The billing country code of the price
+         * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
+         * price shown to all countries; set one or more country-specific price periods on
+         * the same currency to localize the amount by billing country.
          */
         billingCountryCode?: string;
 

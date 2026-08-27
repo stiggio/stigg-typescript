@@ -128,21 +128,25 @@ export class Integrations extends APIResource {
 export type IntegrationListResponsesMyCursorIDPage = MyCursorIDPage<IntegrationListResponse>;
 
 /**
- * External billing or CRM integration link
+ * Links this customer to their record in a specific configured integration (e.g.
+ * their Stripe customer ID under your Stripe integration). A customer has at most
+ * one link per integration.
  */
 export interface IntegrationListResponse {
   /**
-   * Integration details
+   * The internal ID of the integration this record is linked to
    */
   id: string;
 
   /**
-   * Synced entity id
+   * The external entity ID this record is linked to in the vendor system (e.g. the
+   * Stripe customer ID). Null until the link has synced; required when creating the
+   * link.
    */
   syncedEntityId: string | null;
 
   /**
-   * The vendor identifier of integration
+   * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
    */
   vendorIdentifier:
     | 'AUTH0'
@@ -246,7 +250,9 @@ export interface IntegrationUpdateParams {
   id: string;
 
   /**
-   * Body param: Synced entity id
+   * Body param: The external entity ID this record is linked to in the vendor system
+   * (e.g. the Stripe customer ID). Null until the link has synced; required when
+   * creating the link.
    */
   syncedEntityId: string | null;
 
@@ -302,17 +308,20 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
 
 export interface IntegrationLinkParams {
   /**
-   * Body param: Integration details
+   * Body param: The internal ID of the integration this record is linked to
    */
   id: string;
 
   /**
-   * Body param: Synced entity id
+   * Body param: The external entity ID this record is linked to in the vendor system
+   * (e.g. the Stripe customer ID). Null until the link has synced; required when
+   * creating the link.
    */
   syncedEntityId: string;
 
   /**
-   * Body param: The vendor identifier of integration
+   * Body param: The vendor identifier of the integration (e.g. STRIPE, SALESFORCE,
+   * SNOWFLAKE)
    */
   vendorIdentifier:
     | 'AUTH0'

@@ -45,8 +45,8 @@ export class Events extends APIResource {
   }
 
   /**
-   * Reports raw usage events for event-based metering. Events are ingested
-   * asynchronously and aggregated into usage totals.
+   * Reports raw usage events for event-based metering. Events are validated and
+   * stored synchronously, then aggregated into usage totals asynchronously.
    */
   report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -172,7 +172,10 @@ export interface EventEstimateParams {
   dimensions?: { [key: string]: string | number | boolean };
 
   /**
-   * Body param: Resource id
+   * Body param: The customer resource this usage applies to. Optional — only
+   * required if the customer has multiple resources (for example, one subscription
+   * per workspace or site) and usage needs to be tracked separately per resource;
+   * omit it to report usage at the customer level.
    */
   resourceId?: string | null;
 
@@ -226,7 +229,9 @@ export namespace EventReportParams {
     eventName: string;
 
     /**
-     * Idempotency key
+     * A key you provide to safely retry the same usage report without double-counting
+     * it. Reports with a previously-seen idempotency key are deduplicated for 7 days;
+     * after that window a retry is treated as new usage.
      */
     idempotencyKey: string;
 
@@ -236,7 +241,10 @@ export namespace EventReportParams {
     dimensions?: { [key: string]: string | number | boolean };
 
     /**
-     * Resource id
+     * The customer resource this usage applies to. Optional — only required if the
+     * customer has multiple resources (for example, one subscription per workspace or
+     * site) and usage needs to be tracked separately per resource; omit it to report
+     * usage at the customer level.
      */
     resourceId?: string | null;
 

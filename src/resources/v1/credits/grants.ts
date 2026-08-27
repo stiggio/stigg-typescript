@@ -81,14 +81,20 @@ export type GrantListResponsesMyCursorIDPage = MyCursorIDPage<GrantListResponse>
  */
 export interface CreditGrantResponse {
   /**
-   * Credit grant object representing allocated credits for a customer
+   * Credit grant object representing allocated credits for a customer. Credit grants
+   * cannot be edited after creation via this API — void the grant to stop further
+   * consumption from it, then create a new grant with the corrected amount,
+   * priority, or expiration.
    */
   data: CreditGrantResponse.Data;
 }
 
 export namespace CreditGrantResponse {
   /**
-   * Credit grant object representing allocated credits for a customer
+   * Credit grant object representing allocated credits for a customer. Credit grants
+   * cannot be edited after creation via this API — void the grant to stop further
+   * consumption from it, then create a new grant with the corrected amount,
+   * priority, or expiration.
    */
   export interface Data {
     /**
@@ -187,7 +193,11 @@ export namespace CreditGrantResponse {
     sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT' | null;
 
     /**
-     * The effective status of the credit grant
+     * The effective status of the credit grant. A grant with paymentCollectionMethod
+     * NONE or CHARGE becomes ACTIVE (and its credits become usable) as soon as it's
+     * created (or as soon as the charge succeeds). A grant with
+     * paymentCollectionMethod INVOICE stays PAYMENT_PENDING — its credits are not
+     * usable — until the invoice is paid.
      */
     status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED';
 
@@ -305,12 +315,14 @@ export namespace CreditGrantResponse {
       status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED';
 
       /**
-       * Synced entity id
+       * The external entity ID this record is linked to in the vendor system (e.g. the
+       * Stripe customer ID). Null until the link has synced; required when creating the
+       * link.
        */
       syncedEntityId: string | null;
 
       /**
-       * The vendor identifier of integration
+       * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
        */
       vendorIdentifier:
         | 'AUTH0'
@@ -332,7 +344,10 @@ export namespace CreditGrantResponse {
 }
 
 /**
- * Credit grant object representing allocated credits for a customer
+ * Credit grant object representing allocated credits for a customer. Credit grants
+ * cannot be edited after creation via this API — void the grant to stop further
+ * consumption from it, then create a new grant with the corrected amount,
+ * priority, or expiration.
  */
 export interface GrantListResponse {
   /**
@@ -431,7 +446,11 @@ export interface GrantListResponse {
   sourceType: 'PRICE' | 'PLAN_ENTITLEMENT' | 'ADDON_ENTITLEMENT' | null;
 
   /**
-   * The effective status of the credit grant
+   * The effective status of the credit grant. A grant with paymentCollectionMethod
+   * NONE or CHARGE becomes ACTIVE (and its credits become usable) as soon as it's
+   * created (or as soon as the charge succeeds). A grant with
+   * paymentCollectionMethod INVOICE stays PAYMENT_PENDING — its credits are not
+   * usable — until the invoice is paid.
    */
   status: 'PAYMENT_PENDING' | 'ACTIVE' | 'EXPIRED' | 'VOIDED' | 'SCHEDULED';
 
@@ -549,12 +568,14 @@ export namespace GrantListResponse {
     status: 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_SYNC_REQUIRED';
 
     /**
-     * Synced entity id
+     * The external entity ID this record is linked to in the vendor system (e.g. the
+     * Stripe customer ID). Null until the link has synced; required when creating the
+     * link.
      */
     syncedEntityId: string | null;
 
     /**
-     * The vendor identifier of integration
+     * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
      */
     vendorIdentifier:
       | 'AUTH0'
@@ -602,12 +623,16 @@ export interface GrantCreateParams {
 
   /**
    * Body param: Whether to wait for payment confirmation before returning (default:
-   * true)
+   * true). When false, the request returns immediately while payment (if any) is
+   * collected asynchronously; check the returned status to see whether the credits
+   * are already usable.
    */
   awaitPaymentConfirmation?: boolean;
 
   /**
-   * Body param: Billing information for the credit grant
+   * Body param: Billing information for the credit grant, used when the grant has a
+   * payment collection method that requires collecting payment (e.g. invoice due
+   * date, billing address).
    */
   billingInformation?: GrantCreateParams.BillingInformation;
 
@@ -637,12 +662,22 @@ export interface GrantCreateParams {
   metadata?: { [key: string]: string };
 
   /**
-   * Body param: The payment collection method (CHARGE, INVOICE, NONE)
+   * Body param: The payment collection method (CHARGE, INVOICE, NONE). Optional if
+   * the grant has no `cost`, since there is nothing to collect payment for. With
+   * NONE or CHARGE, the grant is active and its credits are usable right away (or as
+   * soon as the charge succeeds). With INVOICE, the grant stays pending — its
+   * credits are not usable — until the generated invoice is paid.
    */
   paymentCollectionMethod?: 'CHARGE' | 'INVOICE' | 'NONE';
 
   /**
-   * Body param: The priority of the credit grant (lower number = higher priority)
+   * Body param: Determines which grant is drawn down first when the customer has
+   * multiple active grants in the same currency (0-100). Lower numbers are consumed
+   * first. Defaults to 50 — the same default used for recurring credits granted by a
+   * plan or price — so without setting this explicitly, draw order against
+   * plan-included credits falls back to expiration date and grant type. To have this
+   * grant consumed before or after plan-included credits, set a lower or higher
+   * priority than the plan/price credit configuration.
    */
   priority?: number;
 
@@ -667,7 +702,9 @@ export interface GrantCreateParams {
 
 export namespace GrantCreateParams {
   /**
-   * Billing information for the credit grant
+   * Billing information for the credit grant, used when the grant has a payment
+   * collection method that requires collecting payment (e.g. invoice due date,
+   * billing address).
    */
   export interface BillingInformation {
     /**

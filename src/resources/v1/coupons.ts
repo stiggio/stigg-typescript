@@ -135,7 +135,8 @@ export namespace Coupon {
     id: string;
 
     /**
-     * Fixed amount discounts in different currencies
+     * Fixed amount discounts in different currencies. Provide exactly one of
+     * percentOff or amountsOff — not both, not neither.
      */
     amountsOff: Array<Data.AmountsOff> | null;
 
@@ -160,7 +161,8 @@ export namespace Coupon {
     description: string | null;
 
     /**
-     * Duration of the coupon validity in months
+     * How many billing cycles the discount applies for once redeemed. Leave unset for
+     * a discount that lasts for the lifetime of the subscription.
      */
     durationInMonths: number | null;
 
@@ -175,7 +177,8 @@ export namespace Coupon {
     name: string;
 
     /**
-     * Percentage discount off the original price
+     * Percentage discount off the original price. Provide exactly one of percentOff or
+     * amountsOff — not both, not neither.
      */
     percentOff: number | null;
 
@@ -344,7 +347,8 @@ export interface CouponListResponse {
   id: string;
 
   /**
-   * Fixed amount discounts in different currencies
+   * Fixed amount discounts in different currencies. Provide exactly one of
+   * percentOff or amountsOff — not both, not neither.
    */
   amountsOff: Array<CouponListResponse.AmountsOff> | null;
 
@@ -369,7 +373,8 @@ export interface CouponListResponse {
   description: string | null;
 
   /**
-   * Duration of the coupon validity in months
+   * How many billing cycles the discount applies for once redeemed. Leave unset for
+   * a discount that lasts for the lifetime of the subscription.
    */
   durationInMonths: number | null;
 
@@ -384,7 +389,8 @@ export interface CouponListResponse {
   name: string;
 
   /**
-   * Percentage discount off the original price
+   * Percentage discount off the original price. Provide exactly one of percentOff or
+   * amountsOff — not both, not neither.
    */
   percentOff: number | null;
 
@@ -549,7 +555,8 @@ export interface CouponCreateParams {
   id: string;
 
   /**
-   * Body param: Fixed amount discounts in different currencies
+   * Body param: Fixed amount discounts in different currencies. Provide exactly one
+   * of percentOff or amountsOff — not both, not neither.
    */
   amountsOff: Array<CouponCreateParams.AmountsOff> | null;
 
@@ -559,7 +566,8 @@ export interface CouponCreateParams {
   description: string | null;
 
   /**
-   * Body param: Duration of the coupon validity in months
+   * Body param: How many billing cycles the discount applies for once redeemed.
+   * Leave unset for a discount that lasts for the lifetime of the subscription.
    */
   durationInMonths: number | null;
 
@@ -574,7 +582,8 @@ export interface CouponCreateParams {
   name: string;
 
   /**
-   * Body param: Percentage discount off the original price
+   * Body param: Percentage discount off the original price. Provide exactly one of
+   * percentOff or amountsOff — not both, not neither.
    */
   percentOff: number | null;
 

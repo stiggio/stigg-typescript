@@ -95,7 +95,11 @@ export interface PromotionalEntitlementCreateResponse {
 
 export namespace PromotionalEntitlementCreateResponse {
   /**
-   * Granted feature entitlement
+   * A feature entitlement granted to a customer outside of their subscription plan.
+   * Promotional entitlements are applied on top of whatever the subscription already
+   * grants and are not removed when a plan or subscription changes; once past their
+   * end date they keep appearing in the customer's entitlement list with an Expired
+   * status rather than disappearing.
    */
   export interface Data {
     /**
@@ -235,7 +239,11 @@ export namespace PromotionalEntitlementCreateResponse {
 }
 
 /**
- * Granted feature entitlement
+ * A feature entitlement granted to a customer outside of their subscription plan.
+ * Promotional entitlements are applied on top of whatever the subscription already
+ * grants and are not removed when a plan or subscription changes; once past their
+ * end date they keep appearing in the customer's entitlement list with an Expired
+ * status rather than disappearing.
  */
 export interface PromotionalEntitlementListResponse {
   /**
@@ -378,14 +386,22 @@ export namespace PromotionalEntitlementListResponse {
  */
 export interface PromotionalEntitlementRevokeResponse {
   /**
-   * Granted feature entitlement
+   * A feature entitlement granted to a customer outside of their subscription plan.
+   * Promotional entitlements are applied on top of whatever the subscription already
+   * grants and are not removed when a plan or subscription changes; once past their
+   * end date they keep appearing in the customer's entitlement list with an Expired
+   * status rather than disappearing.
    */
   data: PromotionalEntitlementRevokeResponse.Data;
 }
 
 export namespace PromotionalEntitlementRevokeResponse {
   /**
-   * Granted feature entitlement
+   * A feature entitlement granted to a customer outside of their subscription plan.
+   * Promotional entitlements are applied on top of whatever the subscription already
+   * grants and are not removed when a plan or subscription changes; once past their
+   * end date they keep appearing in the customer's entitlement list with an Expired
+   * status rather than disappearing.
    */
   export interface Data {
     /**
@@ -546,7 +562,9 @@ export interface PromotionalEntitlementCreateParams {
 
 export namespace PromotionalEntitlementCreateParams {
   /**
-   * Single entitlement grant config
+   * Single entitlement grant config. Granting again for the same customer and
+   * feature replaces the existing promotional entitlement for that feature rather
+   * than stacking a second one.
    */
   export interface PromotionalEntitlement {
     /**

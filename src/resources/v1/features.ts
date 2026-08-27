@@ -185,7 +185,8 @@ export namespace Feature {
     featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE';
 
     /**
-     * The type of the feature
+     * The type of the feature: BOOLEAN (on/off access), NUMBER (a numeric limit or
+     * quantity), or ENUM (one of a fixed set of values).
      */
     featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
 
@@ -210,7 +211,11 @@ export namespace Feature {
     meter: Data.Meter | null;
 
     /**
-     * The meter type for the feature
+     * How usage accumulates for this feature. `Incremental` and `Fluctuating` features
+     * track usage from reported events; `None` means the feature's value isn't
+     * usage-tracked — it's just a numeric or enum value carried by the plan (for
+     * example, a seat count or a tier setting) rather than something customers
+     * consume.
      */
     meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
 
@@ -378,7 +383,8 @@ export interface FeatureListFeaturesResponse {
   featureStatus: 'NEW' | 'SUSPENDED' | 'ACTIVE';
 
   /**
-   * The type of the feature
+   * The type of the feature: BOOLEAN (on/off access), NUMBER (a numeric limit or
+   * quantity), or ENUM (one of a fixed set of values).
    */
   featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
 
@@ -403,7 +409,11 @@ export interface FeatureListFeaturesResponse {
   meter: FeatureListFeaturesResponse.Meter | null;
 
   /**
-   * The meter type for the feature
+   * How usage accumulates for this feature. `Incremental` and `Fluctuating` features
+   * track usage from reported events; `None` means the feature's value isn't
+   * usage-tracked — it's just a numeric or enum value carried by the plan (for
+   * example, a seat count or a tier setting) rather than something customers
+   * consume.
    */
   meterType: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
 
@@ -562,7 +572,8 @@ export interface FeatureCreateFeatureParams {
   displayName: string;
 
   /**
-   * Body param: The type of the feature
+   * Body param: The type of the feature: BOOLEAN (on/off access), NUMBER (a numeric
+   * limit or quantity), or ENUM (one of a fixed set of values).
    */
   featureType: 'BOOLEAN' | 'NUMBER' | 'ENUM';
 
@@ -603,7 +614,11 @@ export interface FeatureCreateFeatureParams {
   meter?: FeatureCreateFeatureParams.Meter;
 
   /**
-   * Body param: The meter type for the feature
+   * Body param: How usage accumulates for this feature. `Incremental` and
+   * `Fluctuating` features track usage from reported events; `None` means the
+   * feature's value isn't usage-tracked — it's just a numeric or enum value carried
+   * by the plan (for example, a seat count or a tier setting) rather than something
+   * customers consume.
    */
   meterType?: 'None' | 'FLUCTUATING' | 'INCREMENTAL';
 

@@ -310,7 +310,10 @@ export namespace UsageReportResponse {
     nextResetDate?: string | null;
 
     /**
-     * Resource id
+     * The customer resource this usage applies to. Optional — only required if the
+     * customer has multiple resources (for example, one subscription per workspace or
+     * site) and usage needs to be tracked separately per resource; omit it to report
+     * usage at the customer level.
      */
     resourceId?: string | null;
 
@@ -385,7 +388,10 @@ export interface UsageEstimateParams {
   featureId: string;
 
   /**
-   * Body param: The value to report for usage
+   * Body param: The value to report for usage. Must be a whole number — the REST API
+   * does not accept fractional (float) usage values; scale up (e.g. report cents
+   * instead of dollars, or milliseconds instead of seconds) if you need sub-unit
+   * precision.
    */
   value: number;
 
@@ -395,12 +401,17 @@ export interface UsageEstimateParams {
   dimensions?: { [key: string]: string | number | boolean };
 
   /**
-   * Body param: Resource id
+   * Body param: The customer resource this usage applies to. Optional — only
+   * required if the customer has multiple resources (for example, one subscription
+   * per workspace or site) and usage needs to be tracked separately per resource;
+   * omit it to report usage at the customer level.
    */
   resourceId?: string | null;
 
   /**
-   * Body param: The method by which the usage value should be updated
+   * Body param: How the reported value is applied: DELTA (default) adds it to the
+   * feature's current usage; SET treats it as the new absolute usage total, and
+   * Stigg computes the delta internally.
    */
   updateBehavior?: 'DELTA' | 'SET';
 
@@ -440,7 +451,10 @@ export interface UsageHistoryParams {
   groupBy?: string;
 
   /**
-   * Query param: Resource id
+   * Query param: The customer resource this usage applies to. Optional — only
+   * required if the customer has multiple resources (for example, one subscription
+   * per workspace or site) and usage needs to be tracked separately per resource;
+   * omit it to report usage at the customer level.
    */
   resourceId?: string | null;
 
@@ -494,7 +508,9 @@ export namespace UsageReportParams {
     featureId: string;
 
     /**
-     * The value to report for usage
+     * The value to report for usage. Must be a whole number — the REST API does not
+     * accept fractional (float) usage values; scale up (e.g. report cents instead of
+     * dollars, or milliseconds instead of seconds) if you need sub-unit precision.
      */
     value: number;
 
@@ -509,17 +525,24 @@ export namespace UsageReportParams {
     dimensions?: { [key: string]: string | number | boolean };
 
     /**
-     * Idempotency key
+     * A key you provide to safely retry the same usage report without double-counting
+     * it. Reports with a previously-seen idempotency key are deduplicated for 7 days;
+     * after that window a retry is treated as new usage.
      */
     idempotencyKey?: string;
 
     /**
-     * Resource id
+     * The customer resource this usage applies to. Optional — only required if the
+     * customer has multiple resources (for example, one subscription per workspace or
+     * site) and usage needs to be tracked separately per resource; omit it to report
+     * usage at the customer level.
      */
     resourceId?: string | null;
 
     /**
-     * The method by which the usage value should be updated
+     * How the reported value is applied: DELTA (default) adds it to the feature's
+     * current usage; SET treats it as the new absolute usage total, and Stigg computes
+     * the delta internally.
      */
     updateBehavior?: 'DELTA' | 'SET';
   }

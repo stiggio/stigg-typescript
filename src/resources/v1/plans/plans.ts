@@ -199,7 +199,11 @@ export class Plans extends APIResource {
   }
 
   /**
-   * Publishes a draft plan, making it available for use in subscriptions.
+   * Publishes a draft plan, making it available for use in subscriptions. The
+   * required `migrationType` field controls whether existing subscribers are moved
+   * onto the new version immediately (`ALL_CUSTOMERS`) or stay on the version they
+   * subscribed to — grandfathered — until you explicitly migrate them, e.g. via the
+   * migrate subscription endpoint (`NEW_CUSTOMERS`).
    */
   publish(id: string, params: PlanPublishParams, options?: RequestOptions): APIPromise<PlanPublishResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -277,7 +281,9 @@ export namespace Plan {
     createdAt: string;
 
     /**
-     * Default trial configuration for the plan
+     * Default trial configuration for the plan. When set, subscriptions provisioned on
+     * this plan without explicit trial settings automatically start in trial for the
+     * configured duration; leave unset for no automatic trial.
      */
     defaultTrialConfig: Data.DefaultTrialConfig | null;
 
@@ -307,7 +313,9 @@ export namespace Plan {
     metadata: { [key: string]: string };
 
     /**
-     * The ID of the parent plan, if applicable
+     * The ID of the parent plan, if this plan should inherit entitlements from another
+     * plan. Optional — omit to create a standalone plan with no inherited
+     * entitlements.
      */
     parentPlanId: string | null;
 
@@ -339,7 +347,9 @@ export namespace Plan {
 
   export namespace Data {
     /**
-     * Default trial configuration for the plan
+     * Default trial configuration for the plan. When set, subscriptions provisioned on
+     * this plan without explicit trial settings automatically start in trial for the
+     * configured duration; leave unset for no automatic trial.
      */
     export interface DefaultTrialConfig {
       /**
@@ -416,7 +426,9 @@ export interface PlanListResponse {
   createdAt: string;
 
   /**
-   * Default trial configuration for the plan
+   * Default trial configuration for the plan. When set, subscriptions provisioned on
+   * this plan without explicit trial settings automatically start in trial for the
+   * configured duration; leave unset for no automatic trial.
    */
   defaultTrialConfig: PlanListResponse.DefaultTrialConfig | null;
 
@@ -446,7 +458,9 @@ export interface PlanListResponse {
   metadata: { [key: string]: string };
 
   /**
-   * The ID of the parent plan, if applicable
+   * The ID of the parent plan, if this plan should inherit entitlements from another
+   * plan. Optional — omit to create a standalone plan with no inherited
+   * entitlements.
    */
   parentPlanId: string | null;
 
@@ -478,7 +492,9 @@ export interface PlanListResponse {
 
 export namespace PlanListResponse {
   /**
-   * Default trial configuration for the plan
+   * Default trial configuration for the plan. When set, subscriptions provisioned on
+   * this plan without explicit trial settings automatically start in trial for the
+   * configured duration; leave unset for no automatic trial.
    */
   export interface DefaultTrialConfig {
     /**
@@ -1674,7 +1690,9 @@ export interface PlanCreateParams {
   billingId?: string | null;
 
   /**
-   * Body param: Default trial configuration for the plan
+   * Body param: Default trial configuration for the plan. When set, subscriptions
+   * provisioned on this plan without explicit trial settings automatically start in
+   * trial for the configured duration; leave unset for no automatic trial.
    */
   defaultTrialConfig?: PlanCreateParams.DefaultTrialConfig | null;
 
@@ -1689,7 +1707,9 @@ export interface PlanCreateParams {
   metadata?: { [key: string]: string };
 
   /**
-   * Body param: The ID of the parent plan, if applicable
+   * Body param: The ID of the parent plan, if this plan should inherit entitlements
+   * from another plan. Optional — omit to create a standalone plan with no inherited
+   * entitlements.
    */
   parentPlanId?: string | null;
 
@@ -1719,7 +1739,9 @@ export interface PlanCreateParams {
 
 export namespace PlanCreateParams {
   /**
-   * Default trial configuration for the plan
+   * Default trial configuration for the plan. When set, subscriptions provisioned on
+   * this plan without explicit trial settings automatically start in trial for the
+   * configured duration; leave unset for no automatic trial.
    */
   export interface DefaultTrialConfig {
     /**
@@ -1783,7 +1805,9 @@ export interface PlanUpdateParams {
   billingId?: string | null;
 
   /**
-   * Body param: Pricing configuration to set on the plan draft
+   * Body param: Pricing configuration to set on the plan draft. Unlike the rest of
+   * this request, this is a full replace of the pricing configuration, not a merge —
+   * see SetPackagePricingRequest.
    */
   charges?: PlanUpdateParams.Charges;
 
@@ -1793,7 +1817,9 @@ export interface PlanUpdateParams {
   compatibleAddonIds?: Array<string> | null;
 
   /**
-   * Body param: Default trial configuration for the plan
+   * Body param: Default trial configuration for the plan. When set, subscriptions
+   * provisioned on this plan without explicit trial settings automatically start in
+   * trial for the configured duration; leave unset for no automatic trial.
    */
   defaultTrialConfig?: PlanUpdateParams.DefaultTrialConfig | null;
 
@@ -1813,7 +1839,9 @@ export interface PlanUpdateParams {
   metadata?: { [key: string]: string };
 
   /**
-   * Body param: The ID of the parent plan, if applicable
+   * Body param: The ID of the parent plan, if this plan should inherit entitlements
+   * from another plan. Optional — omit to create a standalone plan with no inherited
+   * entitlements.
    */
   parentPlanId?: string | null;
 
@@ -1833,7 +1861,9 @@ export interface PlanUpdateParams {
 
 export namespace PlanUpdateParams {
   /**
-   * Pricing configuration to set on the plan draft
+   * Pricing configuration to set on the plan draft. Unlike the rest of this request,
+   * this is a full replace of the pricing configuration, not a merge — see
+   * SetPackagePricingRequest.
    */
   export interface Charges {
     /**
@@ -1857,12 +1887,14 @@ export namespace PlanUpdateParams {
     overageBillingPeriod?: 'ON_SUBSCRIPTION_RENEWAL' | 'MONTHLY';
 
     /**
-     * Array of overage pricing model configurations
+     * Array of overage pricing model configurations. Replaces all existing overage
+     * pricing models on the draft — omit this to end up with no overage pricing.
      */
     overagePricingModels?: Array<Charges.OveragePricingModel>;
 
     /**
-     * Array of pricing model configurations
+     * Array of pricing model configurations. Replaces all existing base pricing models
+     * on the draft — omit this to end up with no base pricing.
      */
     pricingModels?: Array<Charges.PricingModel>;
   }
@@ -3216,7 +3248,9 @@ export namespace PlanUpdateParams {
   }
 
   /**
-   * Default trial configuration for the plan
+   * Default trial configuration for the plan. When set, subscriptions provisioned on
+   * this plan without explicit trial settings automatically start in trial for the
+   * configured duration; leave unset for no automatic trial.
    */
   export interface DefaultTrialConfig {
     /**
@@ -3378,7 +3412,9 @@ export interface PlanListOverageChargesParams extends MyCursorIDPageParams {
 
 export interface PlanPublishParams {
   /**
-   * Body param: The migration type of the package
+   * Body param: Who the published version applies to: NEW_CUSTOMERS (default) leaves
+   * existing subscribers on their current version, ALL_CUSTOMERS moves them onto the
+   * new version immediately.
    */
   migrationType: 'NEW_CUSTOMERS' | 'ALL_CUSTOMERS';
 

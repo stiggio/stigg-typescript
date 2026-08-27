@@ -223,7 +223,8 @@ export namespace Product {
       subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN';
 
       /**
-       * ID of the plan to downgrade to at the end of the billing period
+       * ID of the plan to downgrade to at the end of the billing period. Only relevant
+       * when subscriptionEndSetup is DOWNGRADE_TO_FREE — ignored otherwise.
        */
       downgradePlanId?: string | null;
 
@@ -234,7 +235,8 @@ export namespace Product {
       prorateAtEndOfBillingPeriod?: boolean | null;
 
       /**
-       * ID of the plan to start the subscription with
+       * ID of the plan to start the subscription with. Only relevant when
+       * subscriptionStartSetup is PLAN_SELECTION — ignored otherwise.
        */
       subscriptionStartPlanId?: string | null;
     }
@@ -312,7 +314,8 @@ export namespace ProductListProductsResponse {
     subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN';
 
     /**
-     * ID of the plan to downgrade to at the end of the billing period
+     * ID of the plan to downgrade to at the end of the billing period. Only relevant
+     * when subscriptionEndSetup is DOWNGRADE_TO_FREE — ignored otherwise.
      */
     downgradePlanId?: string | null;
 
@@ -323,7 +326,8 @@ export namespace ProductListProductsResponse {
     prorateAtEndOfBillingPeriod?: boolean | null;
 
     /**
-     * ID of the plan to start the subscription with
+     * ID of the plan to start the subscription with. Only relevant when
+     * subscriptionStartSetup is PLAN_SELECTION — ignored otherwise.
      */
     subscriptionStartPlanId?: string | null;
   }
@@ -499,7 +503,9 @@ export interface ProductUpdateProductParams {
   displayName?: string;
 
   /**
-   * Body param: Additional metadata for the product
+   * Body param: Additional metadata for the product. When included, this replaces
+   * the product's entire metadata object rather than merging with the existing keys
+   * — omit the field to leave existing metadata untouched.
    */
   metadata?: { [key: string]: string } | null;
 
@@ -550,7 +556,8 @@ export namespace ProductUpdateProductParams {
     subscriptionStartSetup: 'PLAN_SELECTION' | 'TRIAL_PERIOD' | 'FREE_PLAN';
 
     /**
-     * ID of the plan to downgrade to at the end of the billing period
+     * ID of the plan to downgrade to at the end of the billing period. Only relevant
+     * when subscriptionEndSetup is DOWNGRADE_TO_FREE — ignored otherwise.
      */
     downgradePlanId?: string | null;
 
@@ -561,7 +568,8 @@ export namespace ProductUpdateProductParams {
     prorateAtEndOfBillingPeriod?: boolean | null;
 
     /**
-     * ID of the plan to start the subscription with
+     * ID of the plan to start the subscription with. Only relevant when
+     * subscriptionStartSetup is PLAN_SELECTION — ignored otherwise.
      */
     subscriptionStartPlanId?: string | null;
   }
