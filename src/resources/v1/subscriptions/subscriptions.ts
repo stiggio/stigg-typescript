@@ -872,9 +872,10 @@ export namespace Subscription {
       baseCharge?: boolean;
 
       /**
-       * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
-       * price shown to all countries; set one or more country-specific price periods on
-       * the same currency to localize the amount by billing country.
+       * ISO 3166-1 alpha-2 country code this price applies to, or "eu" for the Eurozone
+       * region. Omit for the default price shown to all countries; set one or more
+       * country-specific price periods on the same currency to localize the amount by
+       * billing country.
        */
       billingCountryCode?: string;
 
@@ -1936,9 +1937,10 @@ export namespace SubscriptionListResponse {
     baseCharge?: boolean;
 
     /**
-     * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
-     * price shown to all countries; set one or more country-specific price periods on
-     * the same currency to localize the amount by billing country.
+     * ISO 3166-1 alpha-2 country code this price applies to, or "eu" for the Eurozone
+     * region. Omit for the default price shown to all countries; set one or more
+     * country-specific price periods on the same currency to localize the amount by
+     * billing country.
      */
     billingCountryCode?: string;
 
@@ -3596,9 +3598,10 @@ export namespace SubscriptionProvisionResponse {
         baseCharge?: boolean;
 
         /**
-         * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
-         * price shown to all countries; set one or more country-specific price periods on
-         * the same currency to localize the amount by billing country.
+         * ISO 3166-1 alpha-2 country code this price applies to, or "eu" for the Eurozone
+         * region. Omit for the default price shown to all countries; set one or more
+         * country-specific price periods on the same currency to localize the amount by
+         * billing country.
          */
         billingCountryCode?: string;
 
@@ -5147,7 +5150,8 @@ export interface SubscriptionPreviewParams {
   billableFeatures?: Array<SubscriptionPreviewParams.BillableFeature>;
 
   /**
-   * Body param: ISO 3166-1 country code for localization
+   * Body param: Country code selecting a localized price ("eu" for Eurozone); the
+   * default price applies when none matches
    */
   billingCountryCode?: string;
 
@@ -5617,7 +5621,8 @@ export interface SubscriptionProvisionParams {
   awaitPaymentConfirmation?: boolean;
 
   /**
-   * Body param: The ISO 3166-1 alpha-2 country code for billing
+   * Body param: The country code used to select a localized price (or "eu" for
+   * Eurozone), falling back to the default price when none matches
    */
   billingCountryCode?: string | null;
 
@@ -6387,9 +6392,10 @@ export namespace SubscriptionProvisionParams {
     baseCharge?: boolean;
 
     /**
-     * ISO 3166-1 alpha-2 country code this price applies to. Omit for the default
-     * price shown to all countries; set one or more country-specific price periods on
-     * the same currency to localize the amount by billing country.
+     * ISO 3166-1 alpha-2 country code this price applies to, or "eu" for the Eurozone
+     * region. Omit for the default price shown to all countries; set one or more
+     * country-specific price periods on the same currency to localize the amount by
+     * billing country.
      */
     billingCountryCode?: string;
 

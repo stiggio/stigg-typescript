@@ -458,7 +458,7 @@ export interface AddonListChargesResponse {
   createdAt: string;
 
   /**
-   * ISO country code for localized pricing, if any
+   * ISO country code (or "eu" for Eurozone) for localized pricing, if any
    */
   billingCountryCode?: string | null;
 
@@ -1367,7 +1367,7 @@ export namespace AddonUpdateParams {
         billingPeriod: 'MONTHLY' | 'ANNUALLY';
 
         /**
-         * ISO country code for localized pricing
+         * ISO country code (or "eu" for Eurozone) for localized pricing
          */
         billingCountryCode?: string;
 
@@ -2017,7 +2017,7 @@ export namespace AddonUpdateParams {
         billingPeriod: 'MONTHLY' | 'ANNUALLY';
 
         /**
-         * ISO country code for localized pricing
+         * ISO country code (or "eu" for Eurozone) for localized pricing
          */
         billingCountryCode?: string;
 
