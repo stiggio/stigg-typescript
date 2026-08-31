@@ -580,7 +580,8 @@ export interface PlanListChargesResponse {
   createdAt: string;
 
   /**
-   * ISO country code (or "eu" for Eurozone) for localized pricing, if any
+   * ISO country code for localized pricing, or "eu" for the European Union group you
+   * map countries into, if any
    */
   billingCountryCode?: string | null;
 
@@ -1124,7 +1125,8 @@ export interface PlanListOverageChargesResponse {
   createdAt: string;
 
   /**
-   * ISO country code (or "eu" for Eurozone) for localized pricing, if any
+   * ISO country code for localized pricing, or "eu" for the European Union group you
+   * map countries into, if any
    */
   billingCountryCode?: string | null;
 
@@ -2090,7 +2092,8 @@ export namespace PlanUpdateParams {
         billingPeriod: 'MONTHLY' | 'ANNUALLY';
 
         /**
-         * ISO country code (or "eu" for Eurozone) for localized pricing
+         * ISO country code for localized pricing, or "eu" for the European Union group you
+         * map countries into
          */
         billingCountryCode?: string;
 
@@ -2740,7 +2743,8 @@ export namespace PlanUpdateParams {
         billingPeriod: 'MONTHLY' | 'ANNUALLY';
 
         /**
-         * ISO country code (or "eu" for Eurozone) for localized pricing
+         * ISO country code for localized pricing, or "eu" for the European Union group you
+         * map countries into
          */
         billingCountryCode?: string;
 
