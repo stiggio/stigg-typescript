@@ -10,7 +10,7 @@ const client = new Stigg({
 describe('resource contracts', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.v1.contracts.create({ customerId: 'customerId', subscriptions: [{}] });
+    const responsePromise = client.v1.contracts.create({ customerId: 'customerId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,6 +24,12 @@ describe('resource contracts', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.contracts.create({
       customerId: 'customerId',
+      activationEndDate: '2019-12-27T18:11:19.117Z',
+      activationStartDate: '2019-12-27T18:11:19.117Z',
+      contractId: 'contractId',
+      name: 'name',
+      poNumber: 'poNumber',
+      setupBilling: true,
       subscriptions: [
         {
           existingSubscriptionId: 'existingSubscriptionId',
@@ -142,11 +148,6 @@ describe('resource contracts', () => {
           },
         },
       ],
-      activationEndDate: '2019-12-27T18:11:19.117Z',
-      activationStartDate: '2019-12-27T18:11:19.117Z',
-      name: 'name',
-      poNumber: 'poNumber',
-      setupBilling: true,
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

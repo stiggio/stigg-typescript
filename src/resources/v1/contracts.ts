@@ -78,10 +78,9 @@ export class Contracts extends APIResource {
   }
 
   /**
-   * Retrieves a cursor-paginated list of contracts in the environment, fetched live
-   * from the connected billing provider. Each contract is enriched with a preview of
-   * its upcoming (next) invoice when one is available. Returns an empty list when no
-   * billing provider is connected. Supports filtering by customer external ID,
+   * Retrieves a cursor-paginated list of contracts in the environment. Each contract
+   * that has a billing contract is enriched with a preview of its upcoming (next)
+   * invoice when one is available. Supports filtering by customer external ID,
    * state, and name.
    */
   list(
@@ -1847,13 +1846,6 @@ export interface ContractCreateParams {
   customerId: string;
 
   /**
-   * Body param: The subscriptions to attach to the contract (must be non-empty).
-   * Each entry is either a new subscription to create or a reference to an existing
-   * custom subscription.
-   */
-  subscriptions: Array<ContractCreateParams.Subscription>;
-
-  /**
    * Body param: Optional contract activation end date
    */
   activationEndDate?: string;
@@ -1862,6 +1854,15 @@ export interface ContractCreateParams {
    * Body param: Optional contract activation start date
    */
   activationStartDate?: string;
+
+  /**
+   * Body param: Your own ID for the contract, which makes this call idempotent:
+   * sending the same one again returns the existing contract instead of creating a
+   * second. Omit it and one is generated for you, but then a retry cannot be told
+   * apart from a new contract — and contracts cannot be deleted. Recommended
+   * whenever a retry is possible, e.g. building a contract from an order form.
+   */
+  contractId?: string;
 
   /**
    * Body param: Optional contract name
@@ -1880,6 +1881,14 @@ export interface ContractCreateParams {
    * Defaults to true.
    */
   setupBilling?: boolean;
+
+  /**
+   * Body param: The subscriptions to attach to the contract. Each entry is either a
+   * new subscription to create or a reference to an existing custom subscription.
+   * Optional — omit it (or pass an empty list) to create a contract with no
+   * subscriptions and attach them later.
+   */
+  subscriptions?: Array<ContractCreateParams.Subscription>;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
