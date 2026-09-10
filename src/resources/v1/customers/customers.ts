@@ -673,7 +673,7 @@ export namespace CustomerResponse {
       /**
        * The default payment method type
        */
-      type: 'CARD' | 'BANK' | 'CASH_APP';
+      type: 'CARD' | 'BANK' | 'CASH_APP' | 'PAYPAL' | null;
     }
 
     /**
@@ -1271,7 +1271,7 @@ export namespace CustomerListResponse {
     /**
      * The default payment method type
      */
-    type: 'CARD' | 'BANK' | 'CASH_APP';
+    type: 'CARD' | 'BANK' | 'CASH_APP' | 'PAYPAL' | null;
   }
 
   /**
@@ -3590,7 +3590,7 @@ export namespace CustomerProvisionParams {
     /**
      * The default payment method type
      */
-    type: 'CARD' | 'BANK' | 'CASH_APP';
+    type: 'CARD' | 'BANK' | 'CASH_APP' | 'PAYPAL' | null;
   }
 
   /**
