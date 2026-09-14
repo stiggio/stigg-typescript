@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.0-beta.56](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.55...v0.1.0-beta.56) (2026-09-03)
+
+
+### Bug Fixes
+
+* regenerate after clearing the java version-stamp conflict ([51877df](https://github.com/stiggio/stigg-typescript/commit/51877df023f2d4547455c448fadc0383b1a64b9a))
+* **STIGG-9456:** normalize the java README version references for codegen ([18900c9](https://github.com/stiggio/stigg-typescript/commit/18900c9bcc06836ae5e01ae10b1ad872417da4ab))
+
 ## [0.1.0-beta.55](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.54...v0.1.0-beta.55) (2026-08-12)
 
 
