@@ -22,18 +22,18 @@ on:
   workflow_run:
     workflows:
       # Cuts the release commit and the tag that the publish workflow acts on.
-      - "Release Please"
+      - 'Release Please'
       # Publishes the SDK to npm. A failure here leaves the registry
       # behind the release tag, which nothing on GitHub makes visible.
-      - "Publish NPM"
+      - 'Publish NPM'
       # Publishes the MCP server image.
-      - "Publish MCP image"
+      - 'Publish MCP image'
       # Fast-forwards production up to staging. While this fails no release is cut
       # at all, because Release Please only opens its version PR on production.
-      - "Promote SDKs"
+      - 'Promote SDKs'
       # Back-syncs production onto staging and asks the config repo to re-seal.
       # While this fails, custom-code tracking drifts and later builds refuse on it.
-      - "Sync SDK repos"
+      - 'Sync SDK repos'
     types:
       - completed
 
@@ -80,7 +80,7 @@ jobs:
           extraAttributes: deploy_kind=sdk-pipeline,sdk=typescript,repo=${{ github.repository }}
           # These runs come from a release, a promote or a schedule, not from a pull
           # request, so there is no PR to comment on.
-          commentOnPr: "false"
+          commentOnPr: 'false'
 
       - name: Write the trace link to the run summary
         if: steps.otel-export.outputs.traceId != ''
