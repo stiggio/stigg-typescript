@@ -3,10 +3,8 @@
 export {
   DataExport,
   type DataExportListModelsResponse,
-  type DataExportMintScopedTokenResponse,
   type DataExportTriggerSyncResponse,
   type DataExportListModelsParams,
-  type DataExportMintScopedTokenParams,
   type DataExportTriggerSyncParams,
 } from './data-export';
 export {

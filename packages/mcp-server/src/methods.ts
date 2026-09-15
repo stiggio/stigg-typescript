@@ -281,12 +281,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/data-export/models',
   },
   {
-    clientCallName: 'client.v1.events.dataExport.mintScopedToken',
-    fullyQualifiedName: 'v1.events.dataExport.mintScopedToken',
-    httpMethod: 'post',
-    httpPath: '/api/v1/data-export/scoped-token',
-  },
-  {
     clientCallName: 'client.v1.events.dataExport.triggerSync',
     fullyQualifiedName: 'v1.events.dataExport.triggerSync',
     httpMethod: 'post',

@@ -32,29 +32,6 @@ describe('resource dataExport', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('mintScopedToken: only required params', async () => {
-    const responsePromise = client.v1.events.dataExport.mintScopedToken({ applicationOrigin: 'x' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('mintScopedToken: required and optional params', async () => {
-    const response = await client.v1.events.dataExport.mintScopedToken({
-      applicationOrigin: 'x',
-      destinationType: 'destinationType',
-      enabledModels: ['x'],
-      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
-      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('triggerSync', async () => {
     const responsePromise = client.v1.events.dataExport.triggerSync({});
     const rawResponse = await responsePromise.asResponse();

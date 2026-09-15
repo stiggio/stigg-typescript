@@ -153,7 +153,6 @@ const fuse = new Fuse(
     'client.v1.events.estimate',
     'client.v1.events.report',
     'client.v1.events.dataExport.listModels',
-    'client.v1.events.dataExport.mintScopedToken',
     'client.v1.events.dataExport.triggerSync',
     'client.v1.events.dataExport.destinations.create',
     'client.v1.events.dataExport.destinations.delete',

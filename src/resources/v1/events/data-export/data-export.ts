@@ -40,28 +40,6 @@ export class DataExport extends APIResource {
   }
 
   /**
-   * Mint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT
-   * integration if needed.
-   */
-  mintScopedToken(
-    params: DataExportMintScopedTokenParams,
-    options?: RequestOptions,
-  ): APIPromise<DataExportMintScopedTokenResponse> {
-    const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
-    return this._client.post('/api/v1/data-export/scoped-token', {
-      body,
-      ...options,
-      headers: buildHeaders([
-        {
-          ...(xAccountID != null ? { 'X-ACCOUNT-ID': xAccountID } : undefined),
-          ...(xEnvironmentID != null ? { 'X-ENVIRONMENT-ID': xEnvironmentID } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
    * Trigger a sync for one destination or all destinations under the provider
    * entity.
    */
@@ -149,38 +127,6 @@ export namespace DataExportListModelsResponse {
 /**
  * Response object
  */
-export interface DataExportMintScopedTokenResponse {
-  /**
-   * Scoped token + expiry + provider-specific metadata for the FE SDK.
-   */
-  data: DataExportMintScopedTokenResponse.Data;
-}
-
-export namespace DataExportMintScopedTokenResponse {
-  /**
-   * Scoped token + expiry + provider-specific metadata for the FE SDK.
-   */
-  export interface Data {
-    /**
-     * Provider scoped JWT
-     */
-    token: string;
-
-    /**
-     * ISO8601 token expiry
-     */
-    expiresAt: string;
-
-    /**
-     * Provider-specific extras the FE embedded SDK needs
-     */
-    providerMetadata: { [key: string]: unknown };
-  }
-}
-
-/**
- * Response object
- */
 export interface DataExportTriggerSyncResponse {
   /**
    * Per-destination trigger results across the batch.
@@ -242,36 +188,6 @@ export interface DataExportListModelsParams {
   'X-ENVIRONMENT-ID'?: string;
 }
 
-export interface DataExportMintScopedTokenParams {
-  /**
-   * Body param: FE origin the resulting JWT is bound to (provider-side anti-fraud)
-   */
-  applicationOrigin: string;
-
-  /**
-   * Body param: Pin the token to a specific warehouse connect flow
-   */
-  destinationType?: string;
-
-  /**
-   * Body param
-   */
-  enabledModels?: Array<string>;
-
-  /**
-   * Header param: Account ID — optional when authenticating with a user JWT (Bearer
-   * token); falls back to the user's first membership. Ignored for API-key auth.
-   */
-  'X-ACCOUNT-ID'?: string;
-
-  /**
-   * Header param: Environment ID — required when authenticating with a user JWT
-   * (Bearer token) on environment-scoped endpoints. Ignored for API-key auth (env is
-   * intrinsic to the key).
-   */
-  'X-ENVIRONMENT-ID'?: string;
-}
-
 export interface DataExportTriggerSyncParams {
   /**
    * Body param: Provider destination ID to sync. Omit to sync all destinations.
@@ -297,10 +213,8 @@ DataExport.Destinations = Destinations;
 export declare namespace DataExport {
   export {
     type DataExportListModelsResponse as DataExportListModelsResponse,
-    type DataExportMintScopedTokenResponse as DataExportMintScopedTokenResponse,
     type DataExportTriggerSyncResponse as DataExportTriggerSyncResponse,
     type DataExportListModelsParams as DataExportListModelsParams,
-    type DataExportMintScopedTokenParams as DataExportMintScopedTokenParams,
     type DataExportTriggerSyncParams as DataExportTriggerSyncParams,
   };
 
