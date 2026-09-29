@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.1.0-beta.57](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.56...v0.1.0-beta.57) (2026-09-29)
+
+
+### Bug Fixes
+
+* **STIGG-9675:** merge production main back into staging ([180017a](https://github.com/stiggio/stigg-typescript/commit/180017ab966fcc5e0686d93db4155d7871529229))
+* **STIGG-9675:** merge production main back into staging ([4b471d1](https://github.com/stiggio/stigg-typescript/commit/4b471d1b1ba21afac1afdd6d9ce59be6cc000a1c))
+* **STIGG-9676:** format the OTEL export workflow with Prettier ([48036a9](https://github.com/stiggio/stigg-typescript/commit/48036a924bfacf7d307dc89a592f26596dc57c68))
+* **STIGG-9676:** format the OTEL export workflow with Prettier ([3719fba](https://github.com/stiggio/stigg-typescript/commit/3719fba874463bba883c7d46479a9847aa9824f6))
+* **STIGG-9768:** stop exporting skipped workflow runs as failures ([d1b98b0](https://github.com/stiggio/stigg-typescript/commit/d1b98b02a2a6c30e11a926b1b886aca7dbc1ee22))
+* **STIGG-9768:** stop exporting skipped workflow runs as failures ([801a0ce](https://github.com/stiggio/stigg-typescript/commit/801a0ce1b592f79d23e6b2243658b2caed0218d4))
+* sync OpenAPI spec from stigg-api ([ae1249f](https://github.com/stiggio/stigg-typescript/commit/ae1249f33a7176cea5f918b537278e26940b95d7))
+* sync OpenAPI spec from stigg-api ([965577b](https://github.com/stiggio/stigg-typescript/commit/965577b018793b15fc91d99d019a3b0e5aeebb41))
+* sync OpenAPI spec from stigg-api ([bd4f416](https://github.com/stiggio/stigg-typescript/commit/bd4f41677e5dfa07488d0e7813c4737ef2d92bdd))
+* sync OpenAPI spec from stigg-api ([83b930f](https://github.com/stiggio/stigg-typescript/commit/83b930fbd3d4b99e0ad4e02fa09a54882b4d4a60))
+* sync OpenAPI spec from stigg-api ([a84b459](https://github.com/stiggio/stigg-typescript/commit/a84b4594772b36dc70d8c8be58ca210cf1e5f499))
+* sync OpenAPI spec from stigg-api ([d440e45](https://github.com/stiggio/stigg-typescript/commit/d440e45eca85d62eb8f80b174fbc866fe30753cb))
+* sync OpenAPI spec from stigg-api ([3463d6f](https://github.com/stiggio/stigg-typescript/commit/3463d6f838ded2a9991a91e13ecd4f6386d1badc))
+* sync OpenAPI spec from stigg-api ([581902e](https://github.com/stiggio/stigg-typescript/commit/581902e87f04d08d5c96caa01775d25ccd1523b1))
+* sync OpenAPI spec from stigg-api ([0284fd7](https://github.com/stiggio/stigg-typescript/commit/0284fd734738fc03f7a40ad771af7ea33219c193))
+* sync OpenAPI spec from stigg-api ([37ef682](https://github.com/stiggio/stigg-typescript/commit/37ef6829d9fcc982d5876655dbb82c0ee9be5e93))
+* sync OpenAPI spec from stigg-api ([59cc674](https://github.com/stiggio/stigg-typescript/commit/59cc674277b78988448489de82de034f4e93bc3e))
+* sync OpenAPI spec from stigg-api ([5c56d7a](https://github.com/stiggio/stigg-typescript/commit/5c56d7a645009243ef30154eec10b678d0f50962))
+* sync OpenAPI spec from stigg-api ([9a15f34](https://github.com/stiggio/stigg-typescript/commit/9a15f3426fc9273e1d2a07196f0e29d565e1e386))
+
 ## [0.1.0-beta.56](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.55...v0.1.0-beta.56) (2026-09-03)
 
 
