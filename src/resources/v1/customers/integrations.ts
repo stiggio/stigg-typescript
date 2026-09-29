@@ -146,23 +146,9 @@ export interface IntegrationListResponse {
   syncedEntityId: string | null;
 
   /**
-   * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+   * The vendor whose system holds the customer record
    */
-  vendorIdentifier:
-    | 'AUTH0'
-    | 'ZUORA'
-    | 'STRIPE'
-    | 'HUBSPOT'
-    | 'AWS_MARKETPLACE'
-    | 'SNOWFLAKE'
-    | 'SALESFORCE'
-    | 'BIG_QUERY'
-    | 'OPEN_FGA'
-    | 'APP_STORE'
-    | 'RECEIVED'
-    | 'PREQUEL'
-    | 'AIRWALLEX'
-    | 'STRIPE_INVOICING';
+  vendorIdentifier: 'STRIPE' | 'ZUORA' | 'HUBSPOT' | 'AWS_MARKETPLACE';
 
   /**
    * Price billing sync revision data containing billing ID, link URL, and price
@@ -275,22 +261,7 @@ export interface IntegrationListParams extends MyCursorIDPageParams {
    * Query param: Filter by vendor identifier. Supports comma-separated values for
    * multiple vendors (e.g., STRIPE,HUBSPOT)
    */
-  vendorIdentifier?: Array<
-    | 'AUTH0'
-    | 'ZUORA'
-    | 'STRIPE'
-    | 'HUBSPOT'
-    | 'AWS_MARKETPLACE'
-    | 'SNOWFLAKE'
-    | 'SALESFORCE'
-    | 'BIG_QUERY'
-    | 'OPEN_FGA'
-    | 'APP_STORE'
-    | 'RECEIVED'
-    | 'PREQUEL'
-    | 'AIRWALLEX'
-    | 'STRIPE_INVOICING'
-  >;
+  vendorIdentifier?: Array<'STRIPE' | 'ZUORA' | 'HUBSPOT' | 'AWS_MARKETPLACE'>;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
@@ -320,24 +291,9 @@ export interface IntegrationLinkParams {
   syncedEntityId: string;
 
   /**
-   * Body param: The vendor identifier of the integration (e.g. STRIPE, SALESFORCE,
-   * SNOWFLAKE)
+   * Body param: The vendor whose system holds the customer record
    */
-  vendorIdentifier:
-    | 'AUTH0'
-    | 'ZUORA'
-    | 'STRIPE'
-    | 'HUBSPOT'
-    | 'AWS_MARKETPLACE'
-    | 'SNOWFLAKE'
-    | 'SALESFORCE'
-    | 'BIG_QUERY'
-    | 'OPEN_FGA'
-    | 'APP_STORE'
-    | 'RECEIVED'
-    | 'PREQUEL'
-    | 'AIRWALLEX'
-    | 'STRIPE_INVOICING';
+  vendorIdentifier: 'STRIPE' | 'ZUORA' | 'HUBSPOT' | 'AWS_MARKETPLACE';
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer

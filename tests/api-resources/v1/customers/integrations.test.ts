@@ -76,7 +76,7 @@ describe('resource integrations', () => {
           after: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           before: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit: 1,
-          vendorIdentifier: ['AUTH0'],
+          vendorIdentifier: ['STRIPE'],
           'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
           'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
         },
@@ -90,7 +90,7 @@ describe('resource integrations', () => {
     const responsePromise = client.v1.customers.integrations.link('x', {
       id: 'id',
       syncedEntityId: 'syncedEntityId',
-      vendorIdentifier: 'AUTH0',
+      vendorIdentifier: 'STRIPE',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,7 +106,7 @@ describe('resource integrations', () => {
     const response = await client.v1.customers.integrations.link('x', {
       id: 'id',
       syncedEntityId: 'syncedEntityId',
-      vendorIdentifier: 'AUTH0',
+      vendorIdentifier: 'STRIPE',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });

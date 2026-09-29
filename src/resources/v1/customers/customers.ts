@@ -355,23 +355,9 @@ export namespace CustomerIntegrationResponse {
     syncedEntityId: string | null;
 
     /**
-     * The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+     * The vendor whose system holds the customer record
      */
-    vendorIdentifier:
-      | 'AUTH0'
-      | 'ZUORA'
-      | 'STRIPE'
-      | 'HUBSPOT'
-      | 'AWS_MARKETPLACE'
-      | 'SNOWFLAKE'
-      | 'SALESFORCE'
-      | 'BIG_QUERY'
-      | 'OPEN_FGA'
-      | 'APP_STORE'
-      | 'RECEIVED'
-      | 'PREQUEL'
-      | 'AIRWALLEX'
-      | 'STRIPE_INVOICING';
+    vendorIdentifier: 'STRIPE' | 'ZUORA' | 'HUBSPOT' | 'AWS_MARKETPLACE';
 
     /**
      * Price billing sync revision data containing billing ID, link URL, and price
