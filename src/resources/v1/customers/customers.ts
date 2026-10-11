@@ -642,6 +642,12 @@ export namespace CustomerResponse {
       billingId: string | null;
 
       /**
+       * The card brand of the default payment method, as reported by the billing
+       * provider (e.g. visa, mastercard, amex)
+       */
+      cardBrand: string | null;
+
+      /**
        * The expiration month of the default payment method
        */
       cardExpiryMonth: number | null;
@@ -660,6 +666,12 @@ export namespace CustomerResponse {
        * The default payment method type
        */
       type: 'CARD' | 'BANK' | 'CASH_APP' | 'PAYPAL' | null;
+
+      /**
+       * The digital wallet used to add the default card payment method, as reported by
+       * the billing provider (e.g. apple_pay, google_pay)
+       */
+      walletType: string | null;
     }
 
     /**
@@ -1240,6 +1252,12 @@ export namespace CustomerListResponse {
     billingId: string | null;
 
     /**
+     * The card brand of the default payment method, as reported by the billing
+     * provider (e.g. visa, mastercard, amex)
+     */
+    cardBrand: string | null;
+
+    /**
      * The expiration month of the default payment method
      */
     cardExpiryMonth: number | null;
@@ -1258,6 +1276,12 @@ export namespace CustomerListResponse {
      * The default payment method type
      */
     type: 'CARD' | 'BANK' | 'CASH_APP' | 'PAYPAL' | null;
+
+    /**
+     * The digital wallet used to add the default card payment method, as reported by
+     * the billing provider (e.g. apple_pay, google_pay)
+     */
+    walletType: string | null;
   }
 
   /**
