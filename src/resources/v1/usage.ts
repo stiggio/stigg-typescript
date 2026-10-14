@@ -54,7 +54,10 @@ export class Usage extends APIResource {
 
   /**
    * Reports usage measurements for metered features. The reported usage is used to
-   * track, limit, and bill customer consumption.
+   * track, limit, and bill customer consumption. Deprecated: use
+   * `POST /api/v2/usage`.
+   *
+   * @deprecated
    */
   report(params: UsageReportParams, options?: RequestOptions): APIPromise<UsageReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

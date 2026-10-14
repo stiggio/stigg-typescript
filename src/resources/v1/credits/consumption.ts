@@ -93,6 +93,14 @@ export namespace ConsumptionConsumeResponse {
     credit?: Data.Credit | null;
 
     /**
+     * The current usage of each governance entitlement this request counted towards.
+     * Absent when governance is not enabled or the usage is unknown. Entitlements
+     * whose usage could not be read, and those of repeated idempotent requests, are
+     * left out
+     */
+    entities?: Array<Data.Entity>;
+
+    /**
      * The resource the consumption was attributed to
      */
     resourceId?: string | null;
@@ -133,6 +141,58 @@ export namespace ConsumptionConsumeResponse {
        * applicable
        */
       usagePeriodEnd?: string | null;
+    }
+
+    /**
+     * The usage counted against one governance entitlement
+     */
+    export interface Entity {
+      /**
+       * The absolute usage counted against the entitlement
+       */
+      currentUsage: number;
+
+      /**
+       * The customer whose usage counted towards the entitlement
+       */
+      customerId: string;
+
+      /**
+       * The governance entitlement the usage counts towards
+       */
+      entitlementId: string;
+
+      /**
+       * The governance entity the entitlement belongs to
+       */
+      entityId: string;
+
+      /**
+       * The customer resource the usage counted from; `null` for customer-level usage
+       */
+      resourceId: string | null;
+
+      /**
+       * The entities the entitlement is scoped to (empty when it is not scoped)
+       */
+      scopeEntityIds: Array<string>;
+
+      /**
+       * When the entitlement usage was last updated
+       */
+      usageUpdatedAt: string;
+
+      /**
+       * The credit currency the entitlement governs (exactly one of featureId and
+       * currencyId is set)
+       */
+      currencyId?: string;
+
+      /**
+       * The feature the entitlement governs (exactly one of featureId and currencyId is
+       * set)
+       */
+      featureId?: string;
     }
   }
 }
