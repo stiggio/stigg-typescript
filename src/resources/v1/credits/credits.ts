@@ -276,12 +276,13 @@ export namespace CreditGetUsageResponse {
       eventCount: number;
 
       /**
-       * The feature ID; null when grouping by dimensions only
+       * The feature ID; null when grouping by dimensions without `featureId`
        */
       featureId: string | null;
 
       /**
-       * The display name of the feature; null when grouping by dimensions only
+       * The display name of the feature; null when grouping by dimensions without
+       * `featureId`
        */
       featureName: string | null;
 
@@ -296,7 +297,8 @@ export namespace CreditGetUsageResponse {
       totalCredits: number;
 
       /**
-       * Dimension key/value pairs identifying this series when groupBy is applied
+       * Dimension key/value pairs identifying this series when groupBy includes
+       * dimension keys (`featureId` is returned in its own field, not as a tag)
        */
       tags?: Array<Series.Tag>;
     }
@@ -450,8 +452,10 @@ export interface CreditGetUsageParams {
   endDate?: string;
 
   /**
-   * Query param: Comma-separated list of feature dimension keys to group usage
-   * series by (up to 3). Each key matches /^[a-zA-Z0-9_$-]+$/
+   * Query param: Comma-separated list of keys to group usage series by: up to 3
+   * custom dimension keys, optionally combined with the reserved key `featureId` to
+   * also split each series by feature (e.g. `featureId,userId`). Each key matches
+   * /^[a-zA-Z0-9_$-]+$/
    */
   groupBy?: string;
 
