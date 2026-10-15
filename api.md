@@ -436,3 +436,15 @@ Methods:
 
 - <code title="get /api/v1-beta/entity-types">client.v1Beta.entityTypes.<a href="./src/resources/v1-beta/entity-types.ts">list</a>({ ...params }) -> EntityTypeListResponsesMyCursorIDPage</code>
 - <code title="put /api/v1-beta/entity-types">client.v1Beta.entityTypes.<a href="./src/resources/v1-beta/entity-types.ts">upsert</a>({ ...params }) -> EntityTypeUpsertResponse</code>
+
+# V2
+
+## Usage
+
+Types:
+
+- <code><a href="./src/resources/v2/usage.ts">UsageReportResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v2/usage">client.v2.usage.<a href="./src/resources/v2/usage.ts">report</a>({ ...params }) -> UsageReportResponse</code>

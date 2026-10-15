@@ -736,6 +736,12 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'put',
     httpPath: '/api/v1-beta/entity-types',
   },
+  {
+    clientCallName: 'client.v2.usage.report',
+    fullyQualifiedName: 'v2.usage.report',
+    httpMethod: 'post',
+    httpPath: '/api/v2/usage',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {

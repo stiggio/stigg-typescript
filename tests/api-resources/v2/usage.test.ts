@@ -1,0 +1,50 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import Stigg from '@stigg/typescript';
+
+const client = new Stigg({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
+
+describe('resource usage', () => {
+  // Mock server tests are disabled
+  test.skip('report: only required params', async () => {
+    const responsePromise = client.v2.usage.report({
+      usages: [
+        {
+          customerId: 'customerId',
+          featureId: 'featureId',
+          value: -9007199254740991,
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('report: required and optional params', async () => {
+    const response = await client.v2.usage.report({
+      usages: [
+        {
+          customerId: 'customerId',
+          featureId: 'featureId',
+          value: -9007199254740991,
+          createdAt: '2019-12-27T18:11:19.117Z',
+          dimensions: { foo: 'string' },
+          idempotencyKey: 'x',
+          resourceId: 'resourceId',
+          updateBehavior: 'DELTA',
+        },
+      ],
+      'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
+      'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
+    });
+  });
+});
