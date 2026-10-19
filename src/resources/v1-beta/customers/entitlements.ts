@@ -227,6 +227,25 @@ export namespace EntitlementCheckResponse {
     entitlementUpdatedAt?: string;
 
     /**
+     * The reservation created by this request, when it asked to reserve credits and
+     * was granted.
+     */
+    reservation?: Credit.Reservation | null;
+
+    /**
+     * Credits held by open reservations on active grants. Already included in
+     * currentUsage, so usageLimit - currentUsage is the available balance.
+     */
+    reserved?: number;
+
+    /**
+     * Credits still held by open reservations on grants that expired during the hold.
+     * They can still be released, but are not part of currentUsage or the balance and
+     * must not be subtracted from it.
+     */
+    reservedOnExpiredGrants?: number;
+
+    /**
      * The end date of the current billing period for recurring credit grants.
      */
     usagePeriodEnd?: string;
@@ -304,6 +323,33 @@ export namespace EntitlementCheckResponse {
        * Hard usage limit for this node; null when no assignment is configured.
        */
       usageLimit: number | null;
+    }
+
+    /**
+     * The reservation created by this request, when it asked to reserve credits and
+     * was granted.
+     */
+    export interface Reservation {
+      /**
+       * The client-provided reservation ID.
+       */
+      id: string;
+
+      /**
+       * The amount of credits held.
+       */
+      amount: number;
+
+      /**
+       * When the reservation expires. Unreleased credits return to the balance at this
+       * time.
+       */
+      expiresAt: string;
+
+      /**
+       * The status of the reservation.
+       */
+      status: 'ACTIVE' | 'RELEASED';
     }
   }
 }
