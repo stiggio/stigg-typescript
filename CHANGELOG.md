@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.0-beta.61](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.60...v0.1.0-beta.61) (2026-10-20)
+
+
+### Bug Fixes
+
+* **STIGG-10261:** keep SDK codegen green when a target fails, the CLI waits for Go, or staging moves ([59e211c](https://github.com/stiggio/stigg-typescript/commit/59e211c9c0086241b8862b247a4a5245303c2c68))
+* sync OpenAPI spec from stigg-api ([2768ee9](https://github.com/stiggio/stigg-typescript/commit/2768ee9b9fcd5b26c7ba42293367b80f16b723ad))
+* sync OpenAPI spec from stigg-api ([830b95e](https://github.com/stiggio/stigg-typescript/commit/830b95efe04cf1419afba63ce1c497542cc60d16))
+* sync OpenAPI spec from stigg-api ([28646c2](https://github.com/stiggio/stigg-typescript/commit/28646c27a0fbfa13b49d88aba46203e569297606))
+* sync OpenAPI spec from stigg-api ([baaba22](https://github.com/stiggio/stigg-typescript/commit/baaba229c1d068d5013297d04d95afcf7a36b4df))
+* sync OpenAPI spec from stigg-api ([879f336](https://github.com/stiggio/stigg-typescript/commit/879f33680523725845290c0dd3163615724cea0b))
+* sync OpenAPI spec from stigg-api ([7b634c6](https://github.com/stiggio/stigg-typescript/commit/7b634c61ad7fa1e06e292d534aeca64f81572ff7))
+* sync OpenAPI spec from stigg-api ([08c2962](https://github.com/stiggio/stigg-typescript/commit/08c296253a4e56e2953c403926f05acd8845a447))
+* sync OpenAPI spec from stigg-api ([11b0977](https://github.com/stiggio/stigg-typescript/commit/11b097727b5295865f22dc2f9b1e5f99e21f9bd2))
+* sync OpenAPI spec from stigg-api ([70b904f](https://github.com/stiggio/stigg-typescript/commit/70b904f48b2f9e1cce323a6a16e00992f36fd318))
+* sync OpenAPI spec from stigg-api ([4c54fd8](https://github.com/stiggio/stigg-typescript/commit/4c54fd8c5366a5dde7e1285a157b7fffc778d6f5))
+* sync OpenAPI spec from stigg-api ([0e18e12](https://github.com/stiggio/stigg-typescript/commit/0e18e124547049c86709591dd298cd890c2bbd37))
+* sync OpenAPI spec from stigg-api ([77e241a](https://github.com/stiggio/stigg-typescript/commit/77e241ae045f796660c79c79928911eeb0b4fa60))
+
 ## [0.1.0-beta.60](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.59...v0.1.0-beta.60) (2026-10-15)
 
 
