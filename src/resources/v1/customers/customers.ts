@@ -3295,6 +3295,36 @@ export interface CustomerCheckEntitlementParams {
   requestedValues?: Array<string>;
 
   /**
+   * Query param: When the reservation expires (ISO 8601, at most 24 hours ahead).
+   * Mutually exclusive with `reservationTtlSeconds`.
+   */
+  reservationExpiresAt?: string;
+
+  /**
+   * Query param: Client-provided reservation ID, required with `reserveAmount`.
+   * Retry with the same ID to get the same result; reuse with different parameters
+   * is a conflict.
+   */
+  reservationId?: string;
+
+  /**
+   * Query param: JSON-encoded object of string values to attach to the reservation.
+   */
+  reservationMetadata?: string;
+
+  /**
+   * Query param: How long the reservation holds the credits, in seconds (1–86400,
+   * default 3600). Mutually exclusive with `reservationExpiresAt`.
+   */
+  reservationTtlSeconds?: number;
+
+  /**
+   * Query param: Credits to reserve (credit entitlements only). The check is decided
+   * and the credits held atomically; `requestedUsage` is ignored.
+   */
+  reserveAmount?: number;
+
+  /**
    * Query param: Resource ID to scope the entitlement check to a specific resource
    */
   resourceId?: string;
