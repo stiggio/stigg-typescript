@@ -84,6 +84,7 @@ describe('resource credits', () => {
       currencyId: 'currencyId',
       eventType: 'eventType',
       limit: 1,
+      reservationId: 'x',
       resourceId: 'resourceId',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',

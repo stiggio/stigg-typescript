@@ -347,9 +347,16 @@ export namespace CreditGetUsageResponse {
  */
 export interface CreditListLedgerResponse {
   /**
-   * The credit amount for this event
+   * The amount of the ledger event. Reservation events carry their net effect on the
+   * balance: a reserve is negative, and so is a release that consumed more than was
+   * held
    */
   amount: number;
+
+  /**
+   * On a released reservation, the credits consumed from each grant
+   */
+  breakdown: Array<CreditListLedgerResponse.Breakdown> | null;
 
   /**
    * The credit currency ID
@@ -381,12 +388,31 @@ export interface CreditListLedgerResponse {
     | 'CREDITS_VOIDED'
     | 'CREDITS_UPDATED'
     | 'CREDITS_CONSUMPTION_TRANSFER_SOURCE'
-    | 'CREDITS_CONSUMPTION_TRANSFER_TARGET';
+    | 'CREDITS_CONSUMPTION_TRANSFER_TARGET'
+    | 'CREDITS_RESERVED'
+    | 'CREDITS_RESERVATION_RELEASED'
+    | 'CREDITS_RESERVATION_EXPIRED';
 
   /**
    * The feature ID associated with this event
    */
   featureId: string | null;
+
+  /**
+   * On a released reservation, the held amount returned to the balance before
+   * consumed credits are deducted
+   */
+  holdReturnedAmount: number | null;
+
+  /**
+   * The metadata sent with the credit reservation
+   */
+  metadata: { [key: string]: string } | null;
+
+  /**
+   * The credit reservation this event belongs to
+   */
+  reservationId: string | null;
 
   /**
    * The resource ID this event is scoped to
@@ -397,6 +423,72 @@ export interface CreditListLedgerResponse {
    * The timestamp when the event occurred
    */
   timestamp: string;
+}
+
+export namespace CreditListLedgerResponse {
+  export interface Breakdown {
+    /**
+     * The amount of the ledger event. Reservation events carry their net effect on the
+     * balance: a reserve is negative, and so is a release that consumed more than was
+     * held
+     */
+    amount: number;
+
+    /**
+     * The credit currency ID
+     */
+    creditCurrencyId: string;
+
+    /**
+     * The credit grant ID associated with this event
+     */
+    creditGrantId: string;
+
+    /**
+     * The customer ID this event belongs to
+     */
+    customerId: string;
+
+    /**
+     * The unique event identifier
+     */
+    eventId: string | null;
+
+    /**
+     * The type of credit event
+     */
+    eventType:
+      | 'CREDITS_GRANTED'
+      | 'CREDITS_EXPIRED'
+      | 'CREDITS_CONSUMED'
+      | 'CREDITS_VOIDED'
+      | 'CREDITS_UPDATED'
+      | 'CREDITS_CONSUMPTION_TRANSFER_SOURCE'
+      | 'CREDITS_CONSUMPTION_TRANSFER_TARGET'
+      | 'CREDITS_RESERVED'
+      | 'CREDITS_RESERVATION_RELEASED'
+      | 'CREDITS_RESERVATION_EXPIRED';
+
+    /**
+     * The feature ID associated with this event
+     */
+    featureId: string | null;
+
+    /**
+     * The credit reservation this event belongs to
+     */
+    reservationId: string | null;
+
+    /**
+     * The resource ID this event is scoped to
+     */
+    resourceId: string | null;
+
+    /**
+     * The timestamp when the event occurred
+     */
+    timestamp: string;
+  }
 }
 
 export interface CreditGetAutoRechargeParams {
@@ -510,6 +602,11 @@ export interface CreditListLedgerParams extends MyCursorIDPageParams {
    * Query param: Filter by event type(s), comma-separated
    */
   eventType?: string;
+
+  /**
+   * Query param: Filter by credit reservation ID
+   */
+  reservationId?: string;
 
   /**
    * Query param: Filter by resource ID
