@@ -241,6 +241,16 @@ Methods:
 - <code title="post /api/v1/credits/consumption">client.v1.credits.consumption.<a href="./src/resources/v1/credits/consumption.ts">consume</a>({ ...params }) -> ConsumptionConsumeResponse</code>
 - <code title="post /api/v1/credits/consumption/async">client.v1.credits.consumption.<a href="./src/resources/v1/credits/consumption.ts">consumeAsync</a>({ ...params }) -> ConsumptionConsumeAsyncResponse</code>
 
+### Reservations
+
+Types:
+
+- <code><a href="./src/resources/v1/credits/reservations.ts">ReservationReleaseResponse</a></code>
+
+Methods:
+
+- <code title="post /api/v1/credits/reservations/{reservationId}/release">client.v1.credits.reservations.<a href="./src/resources/v1/credits/reservations.ts">release</a>(reservationID, { ...params }) -> ReservationReleaseResponse</code>
+
 ## Features
 
 Types:

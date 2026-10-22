@@ -39,3 +39,4 @@ export {
   type GrantVoidParams,
   type GrantListResponsesMyCursorIDPage,
 } from './grants';
+export { Reservations, type ReservationReleaseResponse, type ReservationReleaseParams } from './reservations';

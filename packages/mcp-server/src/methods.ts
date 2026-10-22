@@ -395,6 +395,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/credits/consumption/async',
   },
   {
+    clientCallName: 'client.v1.credits.reservations.release',
+    fullyQualifiedName: 'v1.credits.reservations.release',
+    httpMethod: 'post',
+    httpPath: '/api/v1/credits/reservations/{reservationId}/release',
+  },
+  {
     clientCallName: 'client.v1.features.archiveFeature',
     fullyQualifiedName: 'v1.features.archiveFeature',
     httpMethod: 'post',

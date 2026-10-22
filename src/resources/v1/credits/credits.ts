@@ -33,6 +33,8 @@ import {
   GrantVoidParams,
   Grants,
 } from './grants';
+import * as ReservationsAPI from './reservations';
+import { ReservationReleaseParams, ReservationReleaseResponse, Reservations } from './reservations';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -44,6 +46,7 @@ export class Credits extends APIResource {
     this._client,
   );
   consumption: ConsumptionAPI.Consumption = new ConsumptionAPI.Consumption(this._client);
+  reservations: ReservationsAPI.Reservations = new ReservationsAPI.Reservations(this._client);
 
   /**
    * Retrieves the automatic recharge configuration for a customer and currency.
@@ -630,6 +633,7 @@ export interface CreditListLedgerParams extends MyCursorIDPageParams {
 Credits.Grants = Grants;
 Credits.CustomCurrencies = CustomCurrencies;
 Credits.Consumption = Consumption;
+Credits.Reservations = Reservations;
 
 export declare namespace Credits {
   export {
@@ -672,5 +676,11 @@ export declare namespace Credits {
     type ConsumptionConsumeAsyncResponse as ConsumptionConsumeAsyncResponse,
     type ConsumptionConsumeParams as ConsumptionConsumeParams,
     type ConsumptionConsumeAsyncParams as ConsumptionConsumeAsyncParams,
+  };
+
+  export {
+    Reservations as Reservations,
+    type ReservationReleaseResponse as ReservationReleaseResponse,
+    type ReservationReleaseParams as ReservationReleaseParams,
   };
 }
