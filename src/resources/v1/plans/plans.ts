@@ -2692,7 +2692,7 @@ export namespace PlanUpdateParams {
       featureId?: string;
 
       /**
-       * Maximum number of units (max 999999)
+       * Maximum number of units
        */
       maxUnitQuantity?: number;
 
