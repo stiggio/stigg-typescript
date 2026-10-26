@@ -3029,7 +3029,7 @@ export namespace SubscriptionProvisionResponse {
         /**
          * The status of the reservation.
          */
-        status: 'ACTIVE' | 'RELEASED';
+        status: 'ACTIVE' | 'RELEASED' | 'EXPIRED';
       }
     }
 

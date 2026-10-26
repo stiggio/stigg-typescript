@@ -122,7 +122,7 @@ export namespace ReservationReleaseResponse {
       /**
        * The status of the reservation.
        */
-      status: 'ACTIVE' | 'RELEASED';
+      status: 'ACTIVE' | 'RELEASED' | 'EXPIRED';
     }
   }
 }

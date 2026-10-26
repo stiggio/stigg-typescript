@@ -1873,7 +1873,7 @@ export namespace CustomerCheckEntitlementResponse {
       /**
        * The status of the reservation.
        */
-      status: 'ACTIVE' | 'RELEASED';
+      status: 'ACTIVE' | 'RELEASED' | 'EXPIRED';
     }
   }
 }
@@ -2625,7 +2625,7 @@ export namespace CustomerRetrieveEntitlementsResponse {
         /**
          * The status of the reservation.
          */
-        status: 'ACTIVE' | 'RELEASED';
+        status: 'ACTIVE' | 'RELEASED' | 'EXPIRED';
       }
     }
   }

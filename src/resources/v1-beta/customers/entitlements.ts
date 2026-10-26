@@ -349,7 +349,7 @@ export namespace EntitlementCheckResponse {
       /**
        * The status of the reservation.
        */
-      status: 'ACTIVE' | 'RELEASED';
+      status: 'ACTIVE' | 'RELEASED' | 'EXPIRED';
     }
   }
 }
