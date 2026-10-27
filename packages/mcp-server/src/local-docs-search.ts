@@ -70,14 +70,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers retrieve',
+        example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers retrieve',
-        example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().retrieve',
@@ -137,14 +137,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers update',
+        example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers update',
-        example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().update',
@@ -200,14 +200,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'customers list',
+        example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Customers.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'customers list',
-        example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().customers().list',
@@ -268,14 +268,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers provision',
+        example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       go: {
         method: 'client.V1.Customers.Provision',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Provision(context.TODO(), stigg.V1CustomerProvisionParams{\n\t\tID: "id",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers provision',
-        example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       java: {
         method: 'v1().customers().provision',
@@ -323,14 +323,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers archive',
+        example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Archive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers archive',
-        example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().archive',
@@ -377,14 +377,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers unarchive',
+        example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.Unarchive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.Unarchive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerUnarchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers unarchive',
-        example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().unarchive',
@@ -436,15 +436,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Customers.Import',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Import(context.TODO(), stigg.V1CustomerImportParams{\n\t\tCustomers: []stigg.V1CustomerImportParamsCustomer{{\n\t\t\tID:    "id",\n\t\t\tEmail: stigg.String("dev@stainless.com"),\n\t\t\tName:  stigg.String("name"),\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'customers import',
         example:
           "stigg v1:customers import \\\n  --api-key 'My API Key' \\\n  --customer '{id: id, email: dev@stainless.com, name: name}'",
+      },
+      go: {
+        method: 'client.V1.Customers.Import',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.Import(context.TODO(), stigg.V1CustomerImportParams{\n\t\tCustomers: []stigg.V1CustomerImportParamsCustomer{{\n\t\t\tID:    "id",\n\t\t\tEmail: stigg.String("dev@stainless.com"),\n\t\t\tName:  stigg.String("name"),\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().import_',
@@ -497,14 +497,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'customers list_resources',
+        example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.ListResources',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.ListResources(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerListResourcesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'customers list_resources',
-        example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().listResources',
@@ -552,14 +552,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'customers retrieve_entitlements',
+        example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.GetEntitlements',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.GetEntitlements(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerGetEntitlementsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers retrieve_entitlements',
-        example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().retrieveEntitlements',
@@ -621,14 +621,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerCheckEntitlementParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.CheckEntitlement(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'customers check_entitlement',
+        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.CheckEntitlement',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.CheckEntitlement(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerCheckEntitlementParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers check_entitlement',
-        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().checkEntitlement',
@@ -676,14 +676,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListContractsParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Customers.ListContracts(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'customers list_contracts',
+        example: "stigg v1:customers list-contracts \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       go: {
         method: 'client.V1.Customers.ListContracts',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.ListContracts(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1CustomerListContractsParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'customers list_contracts',
-        example: "stigg v1:customers list-contracts \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       java: {
         method: 'v1().customers().listContracts',
@@ -744,14 +744,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListInvoicesParams parameters = new() { ID = "id" };\n\nvar page = await client.V1.Customers.ListInvoices(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'customers list_invoices',
+        example: "stigg v1:customers list-invoices \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       go: {
         method: 'client.V1.Customers.ListInvoices',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.ListInvoices(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1CustomerListInvoicesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'customers list_invoices',
-        example: "stigg v1:customers list-invoices \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       java: {
         method: 'v1().customers().listInvoices',
@@ -807,15 +807,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.PaymentMethod.Attach',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Attach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodAttachParams{\n\t\t\tIntegrationID:    "integrationId",\n\t\t\tPaymentMethodID:  "paymentMethodId",\n\t\t\tVendorIdentifier: stigg.V1CustomerPaymentMethodAttachParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
       cli: {
         method: 'payment_method attach',
         example:
           "stigg v1:customers:payment-method attach \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --integration-id integrationId \\\n  --payment-method-id paymentMethodId \\\n  --vendor-identifier AUTH0",
+      },
+      go: {
+        method: 'client.V1.Customers.PaymentMethod.Attach',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Attach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodAttachParams{\n\t\t\tIntegrationID:    "integrationId",\n\t\t\tPaymentMethodID:  "paymentMethodId",\n\t\t\tVendorIdentifier: stigg.V1CustomerPaymentMethodAttachParamsVendorIdentifierAuth0,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().paymentMethod().attach',
@@ -863,14 +863,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'payment_method detach',
+        example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Detach',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerResponse, err := client.V1.Customers.PaymentMethod.Detach(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPaymentMethodDetachParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'payment_method detach',
-        example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().paymentMethod().detach',
@@ -926,14 +926,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'promotional_entitlements list',
+        example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.PromotionalEntitlements.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'promotional_entitlements list',
-        example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().promotionalEntitlements().list',
@@ -986,15 +986,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
       },
-      go: {
-        method: 'client.V1.Customers.PromotionalEntitlements.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpromotionalEntitlement, err := client.V1.Customers.PromotionalEntitlements.New(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementNewParams{\n\t\t\tPromotionalEntitlements: []stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlement{{\n\t\t\t\tCustomEndDate:     stigg.Time(time.Now()),\n\t\t\t\tEnumValues:        []string{"string"},\n\t\t\t\tFeatureID:         "featureId",\n\t\t\t\tHasSoftLimit:      stigg.Bool(true),\n\t\t\t\tHasUnlimitedUsage: stigg.Bool(true),\n\t\t\t\tIsVisible:         stigg.Bool(true),\n\t\t\t\tMonthlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementMonthlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tPeriod:      "1 week",\n\t\t\t\tResetPeriod: "YEAR",\n\t\t\t\tUsageLimit:  stigg.Int(-9007199254740991),\n\t\t\t\tWeeklyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementWeeklyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tYearlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementYearlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", promotionalEntitlement.Data)\n}\n',
-      },
       cli: {
         method: 'promotional_entitlements create',
         example:
           "stigg v1:customers:promotional-entitlements create \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --promotional-entitlement \"{customEndDate: '2019-12-27T18:11:19.117Z', enumValues: [string], featureId: featureId, hasSoftLimit: true, hasUnlimitedUsage: true, isVisible: true, monthlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, period: 1 week, resetPeriod: YEAR, usageLimit: -9007199254740991, weeklyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, yearlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}}\"",
+      },
+      go: {
+        method: 'client.V1.Customers.PromotionalEntitlements.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpromotionalEntitlement, err := client.V1.Customers.PromotionalEntitlements.New(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerPromotionalEntitlementNewParams{\n\t\t\tPromotionalEntitlements: []stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlement{{\n\t\t\t\tCustomEndDate:     stigg.Time(time.Now()),\n\t\t\t\tEnumValues:        []string{"string"},\n\t\t\t\tFeatureID:         "featureId",\n\t\t\t\tHasSoftLimit:      stigg.Bool(true),\n\t\t\t\tHasUnlimitedUsage: stigg.Bool(true),\n\t\t\t\tIsVisible:         stigg.Bool(true),\n\t\t\t\tMonthlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementMonthlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tPeriod:      "1 week",\n\t\t\t\tResetPeriod: "YEAR",\n\t\t\t\tUsageLimit:  stigg.Int(-9007199254740991),\n\t\t\t\tWeeklyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementWeeklyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t\tYearlyResetPeriodConfiguration: stigg.V1CustomerPromotionalEntitlementNewParamsPromotionalEntitlementYearlyResetPeriodConfiguration{\n\t\t\t\t\tAccordingTo: "SubscriptionStart",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", promotionalEntitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().promotionalEntitlements().create',
@@ -1042,15 +1042,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.PromotionalEntitlements.Revoke(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1CustomerPromotionalEntitlementRevokeParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'promotional_entitlements revoke',
         example:
           "stigg v1:customers:promotional-entitlements revoke \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --feature-id featureId",
+      },
+      go: {
+        method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Customers.PromotionalEntitlements.Revoke(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1CustomerPromotionalEntitlementRevokeParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().promotionalEntitlements().revoke',
@@ -1105,14 +1105,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'integrations list',
+        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Customers.Integrations.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Customers.Integrations.List(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'integrations list',
-        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().customers().integrations().list',
@@ -1167,15 +1167,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Stripe,\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Link',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Link(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationLinkParams{\n\t\t\tID:               "id",\n\t\t\tSyncedEntityID:   "syncedEntityId",\n\t\t\tVendorIdentifier: stigg.V1CustomerIntegrationLinkParamsVendorIdentifierStripe,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       cli: {
         method: 'integrations link',
         example:
           "stigg v1:customers:integrations link \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --id id \\\n  --synced-entity-id syncedEntityId \\\n  --vendor-identifier STRIPE",
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Link',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Link(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CustomerIntegrationLinkParams{\n\t\t\tID:               "id",\n\t\t\tSyncedEntityID:   "syncedEntityId",\n\t\t\tVendorIdentifier: stigg.V1CustomerIntegrationLinkParamsVendorIdentifierStripe,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().integrations().link',
@@ -1222,15 +1222,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Get(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       cli: {
         method: 'integrations retrieve',
         example:
           "stigg v1:customers:integrations retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Get(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().integrations().retrieve',
@@ -1283,15 +1283,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Update(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUpdateParams{\n\t\t\tID:             "id",\n\t\t\tSyncedEntityID: stigg.String("syncedEntityId"),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       cli: {
         method: 'integrations update',
         example:
           "stigg v1:customers:integrations update \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId \\\n  --synced-entity-id syncedEntityId",
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Update(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUpdateParams{\n\t\t\tID:             "id",\n\t\t\tSyncedEntityID: stigg.String("syncedEntityId"),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().integrations().update',
@@ -1338,15 +1338,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      go: {
-        method: 'client.V1.Customers.Integrations.Unlink',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Unlink(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUnlinkParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
-      },
       cli: {
         method: 'integrations unlink',
         example:
           "stigg v1:customers:integrations unlink \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
+      go: {
+        method: 'client.V1.Customers.Integrations.Unlink',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomerIntegrationResponse, err := client.V1.Customers.Integrations.Unlink(\n\t\tcontext.TODO(),\n\t\t"integrationId",\n\t\tstigg.V1CustomerIntegrationUnlinkParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerIntegrationResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().customers().integrations().unlink',
@@ -1394,14 +1394,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions retrieve',
+        example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      cli: {
-        method: 'subscriptions retrieve',
-        example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().retrieve',
@@ -1460,14 +1460,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'subscriptions list',
+        example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Subscriptions.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Subscriptions.List(context.TODO(), stigg.V1SubscriptionListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'subscriptions list',
-        example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().subscriptions().list',
@@ -1544,15 +1544,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Provision',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Provision(context.TODO(), stigg.V1SubscriptionProvisionParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'subscriptions provision',
         example:
           "stigg v1:subscriptions provision \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Provision',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Provision(context.TODO(), stigg.V1SubscriptionProvisionParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().provision',
@@ -1605,15 +1605,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Transfer',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Transfer(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionTransferParams{\n\t\t\tDestinationResourceID: "destinationResourceId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       cli: {
         method: 'subscriptions transfer',
         example:
           "stigg v1:subscriptions transfer \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --destination-resource-id destinationResourceId",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Transfer',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Transfer(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionTransferParams{\n\t\t\tDestinationResourceID: "destinationResourceId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().transfer',
@@ -1666,14 +1666,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions migrate',
+        example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Migrate',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Migrate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionMigrateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      cli: {
-        method: 'subscriptions migrate',
-        example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().migrate',
@@ -1726,15 +1726,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Delegate',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Delegate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionDelegateParams{\n\t\t\tTargetCustomerID: "targetCustomerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
       cli: {
         method: 'subscriptions delegate',
         example:
           "stigg v1:subscriptions delegate \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-customer-id targetCustomerId",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Delegate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Delegate(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionDelegateParams{\n\t\t\tTargetCustomerID: "targetCustomerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().delegate',
@@ -1801,15 +1801,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Preview',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Preview(context.TODO(), stigg.V1SubscriptionPreviewParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'subscriptions preview',
         example:
           "stigg v1:subscriptions preview \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Preview',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Preview(context.TODO(), stigg.V1SubscriptionPreviewParams{\n\t\tCustomerID: "customerId",\n\t\tPlanID:     "planId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().preview',
@@ -1878,14 +1878,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions update',
+        example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      cli: {
-        method: 'subscriptions update',
-        example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().update',
@@ -1937,15 +1937,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.Import',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Import(context.TODO(), stigg.V1SubscriptionImportParams{\n\t\tSubscriptions: []stigg.V1SubscriptionImportParamsSubscription{{\n\t\t\tID:         "id",\n\t\t\tCustomerID: "customerId",\n\t\t\tPlanID:     "planId",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'subscriptions import',
         example:
           "stigg v1:subscriptions import \\\n  --api-key 'My API Key' \\\n  --subscription '{id: id, customerId: customerId, planId: planId}'",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.Import',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Import(context.TODO(), stigg.V1SubscriptionImportParams{\n\t\tSubscriptions: []stigg.V1SubscriptionImportParamsSubscription{{\n\t\t\tID:         "id",\n\t\t\tCustomerID: "customerId",\n\t\t\tPlanID:     "planId",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().import_',
@@ -2001,14 +2001,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions cancel',
+        example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Cancel',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tsubscription, err := client.V1.Subscriptions.Cancel(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionCancelParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", subscription.Data)\n}\n',
-      },
-      cli: {
-        method: 'subscriptions cancel',
-        example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().cancel',
@@ -2054,15 +2054,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionFutureUpdateCancelPendingPaymentParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
-      },
       cli: {
         method: 'future_update cancel_pending_payment',
         example:
           "stigg v1:subscriptions:future-update cancel-pending-payment \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionFutureUpdateCancelPendingPaymentParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().futureUpdate().cancelPendingPayment',
@@ -2108,15 +2108,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
-      go: {
-        method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelSchedule(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionFutureUpdateCancelScheduleParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
-      },
       cli: {
         method: 'future_update cancel_schedule',
         example:
           "stigg v1:subscriptions:future-update cancel-schedule \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      go: {
+        method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcancelSubscription, err := client.V1.Subscriptions.FutureUpdate.CancelSchedule(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionFutureUpdateCancelScheduleParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", cancelSubscription.Data)\n}\n',
       },
       java: {
         method: 'v1().subscriptions().futureUpdate().cancelSchedule',
@@ -2164,14 +2164,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'usage charge_usage',
+        example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Usage.ChargeUsage',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.ChargeUsage(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUsageChargeUsageParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'usage charge_usage',
-        example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().usage().chargeUsage',
@@ -2217,14 +2217,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'usage sync',
+        example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Usage.Sync',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Usage.Sync(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionUsageSyncParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'usage sync',
-        example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().usage().sync',
@@ -2271,14 +2271,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'invoice mark_as_paid',
+        example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Subscriptions.Invoice.MarkAsPaid(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1SubscriptionInvoiceMarkAsPaidParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'invoice mark_as_paid',
-        example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().subscriptions().invoice().markAsPaid',
@@ -2336,15 +2336,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      go: {
-        method: 'client.V1.Coupons.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.New(context.TODO(), stigg.V1CouponNewParams{\n\t\tID: "id",\n\t\tAmountsOff: []stigg.V1CouponNewParamsAmountsOff{{\n\t\t\tAmount:   0,\n\t\t\tCurrency: "usd",\n\t\t}},\n\t\tDescription:      stigg.String("description"),\n\t\tDurationInMonths: stigg.Int(1),\n\t\tMetadata: map[string]string{\n\t\t\t"foo": "string",\n\t\t},\n\t\tName:       "name",\n\t\tPercentOff: stigg.Float(1),\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
       cli: {
         method: 'coupons create',
         example:
           "stigg v1:coupons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --amounts-off '{amount: 0, currency: usd}' \\\n  --description description \\\n  --duration-in-months 1 \\\n  --metadata '{foo: string}' \\\n  --name name \\\n  --percent-off 1",
+      },
+      go: {
+        method: 'client.V1.Coupons.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.New(context.TODO(), stigg.V1CouponNewParams{\n\t\tID: "id",\n\t\tAmountsOff: []stigg.V1CouponNewParamsAmountsOff{{\n\t\t\tAmount:   0,\n\t\t\tCurrency: "usd",\n\t\t}},\n\t\tDescription:      stigg.String("description"),\n\t\tDurationInMonths: stigg.Int(1),\n\t\tMetadata: map[string]string{\n\t\t\t"foo": "string",\n\t\t},\n\t\tName:       "name",\n\t\tPercentOff: stigg.Float(1),\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
       },
       java: {
         method: 'v1().coupons().create',
@@ -2401,14 +2401,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'coupons list',
+        example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Coupons.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Coupons.List(context.TODO(), stigg.V1CouponListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'coupons list',
-        example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().coupons().list',
@@ -2454,14 +2454,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
       },
+      cli: {
+        method: 'coupons retrieve',
+        example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Coupons.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      cli: {
-        method: 'coupons retrieve',
-        example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().coupons().retrieve',
@@ -2514,14 +2514,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
+      cli: {
+        method: 'coupons update_coupon',
+        example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Coupons.UpdateCoupon',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.UpdateCoupon(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponUpdateCouponParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      cli: {
-        method: 'coupons update_coupon',
-        example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().coupons().updateCoupon',
@@ -2568,14 +2568,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
+      cli: {
+        method: 'coupons archive_coupon',
+        example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Coupons.ArchiveCoupon',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcoupon, err := client.V1.Coupons.ArchiveCoupon(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CouponArchiveCouponParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", coupon.Data)\n}\n',
-      },
-      cli: {
-        method: 'coupons archive_coupon',
-        example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().coupons().archiveCoupon',
@@ -2626,15 +2626,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.Report',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Report(context.TODO(), stigg.V1EventReportParams{\n\t\tEvents: []stigg.V1EventReportParamsEvent{{\n\t\t\tCustomerID:     "customerId",\n\t\t\tEventName:      "x",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'events report',
         example:
           "stigg v1:events report \\\n  --api-key 'My API Key' \\\n  --event '{customerId: customerId, eventName: x, idempotencyKey: x}'",
+      },
+      go: {
+        method: 'client.V1.Events.Report',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Report(context.TODO(), stigg.V1EventReportParams{\n\t\tEvents: []stigg.V1EventReportParamsEvent{{\n\t\t\tCustomerID:     "customerId",\n\t\t\tEventName:      "x",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().events().report',
@@ -2689,15 +2689,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.Estimate',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Estimate(context.TODO(), stigg.V1EventEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tEventName:  "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'events estimate',
         example:
           "stigg v1:events estimate \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
+      },
+      go: {
+        method: 'client.V1.Events.Estimate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Estimate(context.TODO(), stigg.V1EventEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tEventName:  "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().events().estimate',
@@ -2744,14 +2744,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DataExportTriggerSyncParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.TriggerSync(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'data_export trigger_sync',
+        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Events.DataExport.TriggerSync',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.TriggerSync(context.TODO(), stigg.V1EventDataExportTriggerSyncParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'data_export trigger_sync',
-        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().events().dataExport().triggerSync',
@@ -2798,14 +2798,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'data_export list_models',
+        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Events.DataExport.ListModels',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.ListModels(context.TODO(), stigg.V1EventDataExportListModelsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'data_export list_models',
-        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().events().dataExport().listModels',
@@ -2858,15 +2858,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DestinationCreateParams parameters = new()\n{\n    DestinationID = "x",\n    DestinationType = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Create(parameters);\n\nConsole.WriteLine(destination);',
       },
-      go: {
-        method: 'client.V1.Events.DataExport.Destinations.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.New(context.TODO(), stigg.V1EventDataExportDestinationNewParams{\n\t\tDestinationID:   "x",\n\t\tDestinationType: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
-      },
       cli: {
         method: 'destinations create',
         example:
           "stigg v1:events:data-export:destinations create \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --destination-type x",
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.Destinations.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.New(context.TODO(), stigg.V1EventDataExportDestinationNewParams{\n\t\tDestinationID:   "x",\n\t\tDestinationType: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
       },
       java: {
         method: 'v1().events().dataExport().destinations().create',
@@ -2914,15 +2914,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DestinationDeleteParams parameters = new() { DestinationID = "x" };\n\nvar destination = await client.V1.Events.DataExport.Destinations.Delete(parameters);\n\nConsole.WriteLine(destination);',
       },
-      go: {
-        method: 'client.V1.Events.DataExport.Destinations.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Delete(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationDeleteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
-      },
       cli: {
         method: 'destinations delete',
         example:
           "stigg v1:events:data-export:destinations delete \\\n  --api-key 'My API Key' \\\n  --destination-id x",
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.Destinations.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tdestination, err := client.V1.Events.DataExport.Destinations.Delete(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationDeleteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", destination.Data)\n}\n',
       },
       java: {
         method: 'v1().events().dataExport().destinations().delete',
@@ -2976,15 +2976,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DestinationUpdateSelectionParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar response = await client.V1.Events.DataExport.Destinations.UpdateSelection(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.DataExport.Destinations.UpdateSelection',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.Destinations.UpdateSelection(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationUpdateSelectionParams{\n\t\t\tEnabledModels: []string{"x"},\n\t\t\tIntegrationID: "x",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'destinations update_selection',
         example:
           "stigg v1:events:data-export:destinations update-selection \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
+      },
+      go: {
+        method: 'client.V1.Events.DataExport.Destinations.UpdateSelection',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.DataExport.Destinations.UpdateSelection(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1EventDataExportDestinationUpdateSelectionParams{\n\t\t\tEnabledModels: []string{"x"},\n\t\t\tIntegrationID: "x",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().events().dataExport().destinations().updateSelection',
@@ -3046,15 +3046,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Events.Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Events.Beta.Customers.GetGovernance',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'customers retrieve_governance',
         example:
           "stigg v1:events:beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      go: {
+        method: 'client.V1.Events.Beta.Customers.GetGovernance',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Events.Beta.Customers.GetGovernance(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1EventBetaCustomerGetGovernanceParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().events().beta().customers().retrieveGovernance',
@@ -3115,14 +3115,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'credits get_usage',
+        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       go: {
         method: 'client.V1.Credits.GetUsage',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetUsage(context.TODO(), stigg.V1CreditGetUsageParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'credits get_usage',
-        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       java: {
         method: 'v1().credits().getUsage',
@@ -3174,15 +3174,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Credits.GetAutoRecharge',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetAutoRecharge(context.TODO(), stigg.V1CreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'credits get_auto_recharge',
         example:
           "stigg v1:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
+      },
+      go: {
+        method: 'client.V1.Credits.GetAutoRecharge',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.GetAutoRecharge(context.TODO(), stigg.V1CreditGetAutoRechargeParams{\n\t\tCurrencyID: "currencyId",\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().getAutoRecharge',
@@ -3240,14 +3240,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'credits list_ledger',
+        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       go: {
         method: 'client.V1.Credits.ListLedger',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.ListLedger(context.TODO(), stigg.V1CreditListLedgerParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'credits list_ledger',
-        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       java: {
         method: 'v1().credits().listLedger',
@@ -3303,14 +3303,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'grants list',
+        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       go: {
         method: 'client.V1.Credits.Grants.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.Grants.List(context.TODO(), stigg.V1CreditGrantListParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'grants list',
-        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       java: {
         method: 'v1().credits().grants().list',
@@ -3375,15 +3375,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
-      go: {
-        method: 'client.V1.Credits.Grants.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.New(context.TODO(), stigg.V1CreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1CreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
-      },
       cli: {
         method: 'grants create',
         example:
           "stigg v1:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
+      },
+      go: {
+        method: 'client.V1.Credits.Grants.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.New(context.TODO(), stigg.V1CreditGrantNewParams{\n\t\tAmount:      0,\n\t\tCurrencyID:  "currencyId",\n\t\tCustomerID:  "customerId",\n\t\tDisplayName: "displayName",\n\t\tGrantType:   stigg.V1CreditGrantNewParamsGrantTypePaid,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().grants().create',
@@ -3430,14 +3430,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
+      cli: {
+        method: 'grants void',
+        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Credits.Grants.Void',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcreditGrantResponse, err := client.V1.Credits.Grants.Void(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CreditGrantVoidParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", creditGrantResponse.Data)\n}\n',
-      },
-      cli: {
-        method: 'grants void',
-        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().credits().grants().void_',
@@ -3492,14 +3492,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'custom_currencies list',
+        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Credits.CustomCurrencies.List(context.TODO(), stigg.V1CreditCustomCurrencyListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'custom_currencies list',
-        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().credits().customCurrencies().list',
@@ -3555,15 +3555,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      go: {
-        method: 'client.V1.Credits.CustomCurrencies.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.New(context.TODO(), stigg.V1CreditCustomCurrencyNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
       cli: {
         method: 'custom_currencies create',
         example:
           "stigg v1:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+      },
+      go: {
+        method: 'client.V1.Credits.CustomCurrencies.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.New(context.TODO(), stigg.V1CreditCustomCurrencyNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().customCurrencies().create',
@@ -3619,15 +3619,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      go: {
-        method: 'client.V1.Credits.CustomCurrencies.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Update(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
       cli: {
         method: 'custom_currencies update',
         example:
           "stigg v1:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      go: {
+        method: 'client.V1.Credits.CustomCurrencies.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Update(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().customCurrencies().update',
@@ -3675,15 +3675,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      go: {
-        method: 'client.V1.Credits.CustomCurrencies.Archive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Archive(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
       cli: {
         method: 'custom_currencies archive',
         example:
           "stigg v1:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      go: {
+        method: 'client.V1.Credits.CustomCurrencies.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Archive(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().customCurrencies().archive',
@@ -3731,15 +3731,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      go: {
-        method: 'client.V1.Credits.CustomCurrencies.Unarchive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Unarchive(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUnarchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
-      },
       cli: {
         method: 'custom_currencies unarchive',
         example:
           "stigg v1:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      go: {
+        method: 'client.V1.Credits.CustomCurrencies.Unarchive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcustomCurrencyResponse, err := client.V1.Credits.CustomCurrencies.Unarchive(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyUnarchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customCurrencyResponse.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().customCurrencies().unarchive',
@@ -3786,15 +3786,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Credits.CustomCurrencies.ListAssociatedEntities',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.CustomCurrencies.ListAssociatedEntities(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyListAssociatedEntitiesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'custom_currencies list_associated_entities',
         example:
           "stigg v1:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      go: {
+        method: 'client.V1.Credits.CustomCurrencies.ListAssociatedEntities',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.CustomCurrencies.ListAssociatedEntities(\n\t\tcontext.TODO(),\n\t\t"currencyId",\n\t\tstigg.V1CreditCustomCurrencyListAssociatedEntitiesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().customCurrencies().listAssociatedEntities',
@@ -3852,15 +3852,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ConsumptionConsumeParams parameters = new()\n{\n    Amount = 1,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    IdempotencyKey = "x",\n};\n\nvar response = await client.V1.Credits.Consumption.Consume(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Credits.Consumption.Consume',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.Consume(context.TODO(), stigg.V1CreditConsumptionConsumeParams{\n\t\tAmount:         1,\n\t\tCurrencyID:     "currencyId",\n\t\tCustomerID:     "customerId",\n\t\tIdempotencyKey: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'consumption consume',
         example:
           "stigg v1:credits:consumption consume \\\n  --api-key 'My API Key' \\\n  --amount 1 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --idempotency-key x",
+      },
+      go: {
+        method: 'client.V1.Credits.Consumption.Consume',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.Consume(context.TODO(), stigg.V1CreditConsumptionConsumeParams{\n\t\tAmount:         1,\n\t\tCurrencyID:     "currencyId",\n\t\tCustomerID:     "customerId",\n\t\tIdempotencyKey: "x",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().consumption().consume',
@@ -3911,15 +3911,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ConsumptionConsumeAsyncParams parameters = new()\n{\n    Consumptions =\n    [\n        new()\n        {\n            Amount = 1,\n            CurrencyID = "currencyId",\n            CustomerID = "customerId",\n            IdempotencyKey = "x",\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n        },\n    ],\n};\n\nvar response = await client.V1.Credits.Consumption.ConsumeAsync(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Credits.Consumption.ConsumeAsync',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.ConsumeAsync(context.TODO(), stigg.V1CreditConsumptionConsumeAsyncParams{\n\t\tConsumptions: []stigg.V1CreditConsumptionConsumeAsyncParamsConsumption{{\n\t\t\tAmount:         1,\n\t\t\tCurrencyID:     "currencyId",\n\t\t\tCustomerID:     "customerId",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'consumption consume_async',
         example:
           "stigg v1:credits:consumption consume-async \\\n  --api-key 'My API Key' \\\n  --consumption '{amount: 1, currencyId: currencyId, customerId: customerId, idempotencyKey: x}'",
+      },
+      go: {
+        method: 'client.V1.Credits.Consumption.ConsumeAsync',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Consumption.ConsumeAsync(context.TODO(), stigg.V1CreditConsumptionConsumeAsyncParams{\n\t\tConsumptions: []stigg.V1CreditConsumptionConsumeAsyncParamsConsumption{{\n\t\t\tAmount:         1,\n\t\t\tCurrencyID:     "currencyId",\n\t\t\tCustomerID:     "customerId",\n\t\t\tIdempotencyKey: "x",\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().consumption().consumeAsync',
@@ -3975,15 +3975,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ReservationReleaseParams parameters = new()\n{\n    ReservationID = "x",\n    ConsumedAmount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.Reservations.Release(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Credits.Reservations.Release',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Reservations.Release(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CreditReservationReleaseParams{\n\t\t\tConsumedAmount: 0,\n\t\t\tCurrencyID:     "currencyId",\n\t\t\tCustomerID:     "customerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'reservations release',
         example:
           "stigg v1:credits:reservations release \\\n  --api-key 'My API Key' \\\n  --reservation-id x \\\n  --consumed-amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId",
+      },
+      go: {
+        method: 'client.V1.Credits.Reservations.Release',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Credits.Reservations.Release(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1CreditReservationReleaseParams{\n\t\t\tConsumedAmount: 0,\n\t\t\tCurrencyID:     "currencyId",\n\t\t\tCustomerID:     "customerId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().credits().reservations().release',
@@ -4030,14 +4030,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features retrieve_feature',
+        example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Features.GetFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.GetFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureGetFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      cli: {
-        method: 'features retrieve_feature',
-        example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().features().retrieveFeature',
@@ -4096,14 +4096,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features update_feature',
+        example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Features.UpdateFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UpdateFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureUpdateFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      cli: {
-        method: 'features update_feature',
-        example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().features().updateFeature',
@@ -4165,15 +4165,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      go: {
-        method: 'client.V1.Features.NewFeature',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.NewFeature(context.TODO(), stigg.V1FeatureNewFeatureParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tFeatureType: stigg.V1FeatureNewFeatureParamsFeatureTypeBoolean,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
       cli: {
         method: 'features create_feature',
         example:
           "stigg v1:features create-feature \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --feature-type BOOLEAN",
+      },
+      go: {
+        method: 'client.V1.Features.NewFeature',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.NewFeature(context.TODO(), stigg.V1FeatureNewFeatureParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tFeatureType: stigg.V1FeatureNewFeatureParamsFeatureTypeBoolean,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
       },
       java: {
         method: 'v1().features().createFeature',
@@ -4231,14 +4231,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'features list_features',
+        example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Features.ListFeatures',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Features.ListFeatures(context.TODO(), stigg.V1FeatureListFeaturesParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'features list_features',
-        example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().features().listFeatures',
@@ -4284,14 +4284,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features archive_feature',
+        example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Features.ArchiveFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.ArchiveFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureArchiveFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      cli: {
-        method: 'features archive_feature',
-        example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().features().archiveFeature',
@@ -4338,14 +4338,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features unarchive_feature',
+        example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Features.UnarchiveFeature',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tfeature, err := client.V1.Features.UnarchiveFeature(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1FeatureUnarchiveFeatureParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", feature.Data)\n}\n',
-      },
-      cli: {
-        method: 'features unarchive_feature',
-        example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().features().unarchiveFeature',
@@ -4401,14 +4401,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'addons list',
+        example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Addons.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.List(context.TODO(), stigg.V1AddonListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'addons list',
-        example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().addons().list',
@@ -4466,15 +4466,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
       },
-      go: {
-        method: 'client.V1.Addons.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.New(context.TODO(), stigg.V1AddonNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
       cli: {
         method: 'addons create',
         example:
           "stigg v1:addons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
+      },
+      go: {
+        method: 'client.V1.Addons.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.New(context.TODO(), stigg.V1AddonNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
       },
       java: {
         method: 'v1().addons().create',
@@ -4521,14 +4521,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons retrieve',
+        example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Addons.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      cli: {
-        method: 'addons retrieve',
-        example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().addons().retrieve',
@@ -4586,14 +4586,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons update',
+        example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Addons.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      cli: {
-        method: 'addons update',
-        example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().addons().update',
@@ -4640,14 +4640,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons archive',
+        example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Addons.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.Archive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      cli: {
-        method: 'addons archive',
-        example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().addons().archive',
@@ -4699,15 +4699,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Addons.Publish',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonPublishParams{\n\t\t\tMigrationType: stigg.V1AddonPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'addons publish',
         example:
           "stigg v1:addons publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
+      },
+      go: {
+        method: 'client.V1.Addons.Publish',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonPublishParams{\n\t\t\tMigrationType: stigg.V1AddonPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().addons().publish',
@@ -4754,14 +4754,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons create_draft',
+        example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Addons.NewDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddon, err := client.V1.Addons.NewDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonNewDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addon.Data)\n}\n',
-      },
-      cli: {
-        method: 'addons create_draft',
-        example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().addons().createDraft',
@@ -4807,14 +4807,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'addons remove_draft',
+        example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Addons.RemoveDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Addons.RemoveDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonRemoveDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'addons remove_draft',
-        example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().addons().removeDraft',
@@ -4868,14 +4868,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'addons list_charges',
+        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Addons.ListCharges',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Addons.ListCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1AddonListChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'addons list_charges',
-        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().addons().listCharges',
@@ -4921,14 +4921,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
+      cli: {
+        method: 'entitlements list',
+        example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
+      },
       go: {
         method: 'client.V1.Addons.Entitlements.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Addons.Entitlements.List(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
-      },
-      cli: {
-        method: 'entitlements list',
-        example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
       },
       java: {
         method: 'v1().addons().entitlements().list',
@@ -4980,15 +4980,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Addons.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1AddonEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1AddonEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
-      },
       cli: {
         method: 'entitlements create',
         example:
           "stigg v1:addons:entitlements create \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --entitlement '{id: id, type: FEATURE}'",
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Addons.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"addonId",\n\t\tstigg.V1AddonEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1AddonEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1AddonEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().addons().entitlements().create',
@@ -5039,15 +5039,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementUpdateParams{\n\t\t\tAddonID:   "addonId",\n\t\t\tOfFeature: &stigg.V1AddonEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
-      },
       cli: {
         method: 'entitlements update',
         example:
           "stigg v1:addons:entitlements update \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id \\\n  --type FEATURE",
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementUpdateParams{\n\t\t\tAddonID:   "addonId",\n\t\t\tOfFeature: &stigg.V1AddonEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().addons().entitlements().update',
@@ -5094,15 +5094,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
-      go: {
-        method: 'client.V1.Addons.Entitlements.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementDeleteParams{\n\t\t\tAddonID: "addonId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
-      },
       cli: {
         method: 'entitlements delete',
         example:
           "stigg v1:addons:entitlements delete \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id",
+      },
+      go: {
+        method: 'client.V1.Addons.Entitlements.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\taddonPackageEntitlement, err := client.V1.Addons.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1AddonEntitlementDeleteParams{\n\t\t\tAddonID: "addonId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", addonPackageEntitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().addons().entitlements().delete',
@@ -5162,15 +5162,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
       },
-      go: {
-        method: 'client.V1.Plans.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.New(context.TODO(), stigg.V1PlanNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
       cli: {
         method: 'plans create',
         example:
           "stigg v1:plans create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
+      },
+      go: {
+        method: 'client.V1.Plans.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.New(context.TODO(), stigg.V1PlanNewParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t\tProductID:   "productId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
       },
       java: {
         method: 'v1().plans().create',
@@ -5226,14 +5226,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'plans list',
+        example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Plans.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.List(context.TODO(), stigg.V1PlanListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'plans list',
-        example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().plans().list',
@@ -5279,14 +5279,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans retrieve',
+        example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      cli: {
-        method: 'plans retrieve',
-        example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().retrieve',
@@ -5344,14 +5344,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans update',
+        example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      cli: {
-        method: 'plans update',
-        example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().update',
@@ -5398,14 +5398,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans archive',
+        example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.Archive',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.Archive(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanArchiveParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      cli: {
-        method: 'plans archive',
-        example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().archive',
@@ -5457,15 +5457,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Plans.Publish',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanPublishParams{\n\t\t\tMigrationType: stigg.V1PlanPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'plans publish',
         example:
           "stigg v1:plans publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
+      },
+      go: {
+        method: 'client.V1.Plans.Publish',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.Publish(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanPublishParams{\n\t\t\tMigrationType: stigg.V1PlanPublishParamsMigrationTypeNewCustomers,\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().plans().publish',
@@ -5512,14 +5512,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans create_draft',
+        example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.NewDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.V1.Plans.NewDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanNewDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      cli: {
-        method: 'plans create_draft',
-        example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().createDraft',
@@ -5565,14 +5565,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'plans remove_draft',
+        example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.RemoveDraft',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Plans.RemoveDraft(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanRemoveDraftParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'plans remove_draft',
-        example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().removeDraft',
@@ -5626,14 +5626,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'plans list_charges',
+        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.ListCharges',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.ListCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanListChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'plans list_charges',
-        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().listCharges',
@@ -5686,14 +5686,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListOverageChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListOverageCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'plans list_overage_charges',
+        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Plans.ListOverageCharges',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Plans.ListOverageCharges(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1PlanListOverageChargesParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'plans list_overage_charges',
-        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().plans().listOverageCharges',
@@ -5740,14 +5740,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
+      cli: {
+        method: 'entitlements list',
+        example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
+      },
       go: {
         method: 'client.V1.Plans.Entitlements.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlements, err := client.V1.Plans.Entitlements.List(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlements.Data)\n}\n',
-      },
-      cli: {
-        method: 'entitlements list',
-        example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
       },
       java: {
         method: 'v1().plans().entitlements().list',
@@ -5799,15 +5799,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Plans.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1PlanEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1PlanEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
-      },
       cli: {
         method: 'entitlements create',
         example:
           "stigg v1:plans:entitlements create \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --entitlement '{id: id, type: FEATURE}'",
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentitlement, err := client.V1.Plans.Entitlements.New(\n\t\tcontext.TODO(),\n\t\t"planId",\n\t\tstigg.V1PlanEntitlementNewParams{\n\t\t\tEntitlements: []stigg.V1PlanEntitlementNewParamsEntitlementUnion{{\n\t\t\t\tOfFeature: &stigg.V1PlanEntitlementNewParamsEntitlementFeature{\n\t\t\t\t\tID: "id",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().plans().entitlements().create',
@@ -5858,15 +5858,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementUpdateParams{\n\t\t\tPlanID:    "planId",\n\t\t\tOfFeature: &stigg.V1PlanEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
-      },
       cli: {
         method: 'entitlements update',
         example:
           "stigg v1:plans:entitlements update \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id \\\n  --type FEATURE",
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Update(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementUpdateParams{\n\t\t\tPlanID:    "planId",\n\t\t\tOfFeature: &stigg.V1PlanEntitlementUpdateParamsBodyFeature{},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().plans().entitlements().update',
@@ -5913,15 +5913,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
-      go: {
-        method: 'client.V1.Plans.Entitlements.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementDeleteParams{\n\t\t\tPlanID: "planId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
-      },
       cli: {
         method: 'entitlements delete',
         example:
           "stigg v1:plans:entitlements delete \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id",
+      },
+      go: {
+        method: 'client.V1.Plans.Entitlements.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplanEntitlement, err := client.V1.Plans.Entitlements.Delete(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1PlanEntitlementDeleteParams{\n\t\t\tPlanID: "planId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", planEntitlement.Data)\n}\n',
       },
       java: {
         method: 'v1().plans().entitlements().delete',
@@ -5973,15 +5973,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Usage.Report',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Report(context.TODO(), stigg.V1UsageReportParams{\n\t\tUsages: []stigg.V1UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'usage report',
         example:
           "stigg v1:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
+      },
+      go: {
+        method: 'client.V1.Usage.Report',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Report(context.TODO(), stigg.V1UsageReportParams{\n\t\tUsages: []stigg.V1UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().usage().report',
@@ -6037,15 +6037,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Usage.History',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.History(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1UsageHistoryParams{\n\t\t\tCustomerID: "customerId",\n\t\t\tStartDate:  time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'usage history',
         example:
           "stigg v1:usage history \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --start-date \"'2019-12-27T18:11:19.117Z'\"",
+      },
+      go: {
+        method: 'client.V1.Usage.History',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\t"time"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.History(\n\t\tcontext.TODO(),\n\t\t"featureId",\n\t\tstigg.V1UsageHistoryParams{\n\t\t\tCustomerID: "customerId",\n\t\t\tStartDate:  time.Now(),\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().usage().history',
@@ -6102,15 +6102,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1.Usage.Estimate',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Estimate(context.TODO(), stigg.V1UsageEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tFeatureID:  "featureId",\n\t\tValue:      -9007199254740991,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'usage estimate',
         example:
           "stigg v1:usage estimate \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
+      },
+      go: {
+        method: 'client.V1.Usage.Estimate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1.Usage.Estimate(context.TODO(), stigg.V1UsageEstimateParams{\n\t\tCustomerID: "customerId",\n\t\tFeatureID:  "featureId",\n\t\tValue:      -9007199254740991,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1().usage().estimate',
@@ -6166,14 +6166,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'products list_products',
+        example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Products.ListProducts',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Products.ListProducts(context.TODO(), stigg.V1ProductListProductsParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'products list_products',
-        example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().products().listProducts',
@@ -6227,15 +6227,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.NewProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.NewProduct(context.TODO(), stigg.V1ProductNewProductParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       cli: {
         method: 'products create_product',
         example:
           "stigg v1:products create-product \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+      },
+      go: {
+        method: 'client.V1.Products.NewProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.NewProduct(context.TODO(), stigg.V1ProductNewProductParams{\n\t\tID:          "id",\n\t\tDisplayName: "displayName",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
       },
       java: {
         method: 'v1().products().createProduct',
@@ -6292,14 +6292,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
+      cli: {
+        method: 'products update_product',
+        example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Products.UpdateProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UpdateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductUpdateProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      cli: {
-        method: 'products update_product',
-        example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().products().updateProduct',
@@ -6346,14 +6346,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
+      cli: {
+        method: 'products archive_product',
+        example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Products.ArchiveProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.ArchiveProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductArchiveProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      cli: {
-        method: 'products archive_product',
-        example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().products().archiveProduct',
@@ -6400,14 +6400,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
+      cli: {
+        method: 'products unarchive_product',
+        example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Products.UnarchiveProduct',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.UnarchiveProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductUnarchiveProductParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
-      cli: {
-        method: 'products unarchive_product',
-        example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().products().unarchiveProduct',
@@ -6461,15 +6461,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      go: {
-        method: 'client.V1.Products.DuplicateProduct',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.DuplicateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductDuplicateProductParams{\n\t\t\tTargetID: "targetId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
-      },
       cli: {
         method: 'products duplicate_product',
         example:
           "stigg v1:products duplicate-product \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-id targetId",
+      },
+      go: {
+        method: 'client.V1.Products.DuplicateProduct',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tproduct, err := client.V1.Products.DuplicateProduct(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ProductDuplicateProductParams{\n\t\t\tTargetID: "targetId",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", product.Data)\n}\n',
       },
       java: {
         method: 'v1().products().duplicateProduct',
@@ -6526,14 +6526,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractListParams parameters = new();\n\nvar page = await client.V1.Contracts.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'contracts list',
+        example: "stigg v1:contracts list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1.Contracts.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1.Contracts.List(context.TODO(), stigg.V1ContractListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'contracts list',
-        example: "stigg v1:contracts list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1().contracts().list',
@@ -6591,14 +6591,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractCreateParams parameters = new() { CustomerID = "customerId" };\n\nvar contract = await client.V1.Contracts.Create(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts create',
+        example: "stigg v1:contracts create \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       go: {
         method: 'client.V1.Contracts.New',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.New(context.TODO(), stigg.V1ContractNewParams{\n\t\tCustomerID: "customerId",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      cli: {
-        method: 'contracts create',
-        example: "stigg v1:contracts create \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       java: {
         method: 'v1().contracts().create',
@@ -6646,14 +6646,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractRetrieveParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Retrieve(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts retrieve',
+        example: "stigg v1:contracts retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Contracts.Get',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ContractGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      cli: {
-        method: 'contracts retrieve',
-        example: "stigg v1:contracts retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().contracts().retrieve',
@@ -6710,14 +6710,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractUpdateParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Update(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts update',
+        example: "stigg v1:contracts update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Contracts.Update',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.Update(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ContractUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      cli: {
-        method: 'contracts update',
-        example: "stigg v1:contracts update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().contracts().update',
@@ -6765,14 +6765,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractDeleteParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Delete(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts delete',
+        example: "stigg v1:contracts delete \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1.Contracts.Delete',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tcontract, err := client.V1.Contracts.Delete(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1ContractDeleteParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", contract.Data)\n}\n',
-      },
-      cli: {
-        method: 'contracts delete',
-        example: "stigg v1:contracts delete \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1().contracts().delete',
@@ -6830,14 +6830,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'entitlements check',
+        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       go: {
         method: 'client.V1Beta.Customers.Entitlements.Check',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entitlements.Check(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntitlementCheckParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
-      cli: {
-        method: 'entitlements check',
-        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       java: {
         method: 'v1Beta().customers().entitlements().check',
@@ -6893,14 +6893,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'entities list',
+        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       go: {
         method: 'client.V1Beta.Customers.Entities.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Entities.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'entities list',
-        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       java: {
         method: 'v1Beta().customers().entities().list',
@@ -6953,15 +6953,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            DisplayName = "Jane Doe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            DisplayName = "John Roe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1Beta.Customers.Entities.Upsert',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUpsertParams{\n\t\t\tEntities: []stigg.V1BetaCustomerEntityUpsertParamsEntity{{\n\t\t\t\tID:           "user-7f3a0c1d",\n\t\t\t\tDisplayName:  stigg.String("Jane Doe"),\n\t\t\t\tEntityTypeID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "jane@acme.com",\n\t\t\t\t\t"role":  "admin",\n\t\t\t\t},\n\t\t\t}, {\n\t\t\t\tID:           "user-c4d1b2e9",\n\t\t\t\tDisplayName:  stigg.String("John Roe"),\n\t\t\t\tEntityTypeID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "john@acme.com",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'entities upsert',
         example:
           "stigg v1-beta:customers:entities upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity '{id: user-7f3a0c1d}' \\\n  --entity '{id: user-c4d1b2e9}'",
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUpsertParams{\n\t\t\tEntities: []stigg.V1BetaCustomerEntityUpsertParamsEntity{{\n\t\t\t\tID:           "user-7f3a0c1d",\n\t\t\t\tDisplayName:  stigg.String("Jane Doe"),\n\t\t\t\tEntityTypeID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "jane@acme.com",\n\t\t\t\t\t"role":  "admin",\n\t\t\t\t},\n\t\t\t}, {\n\t\t\t\tID:           "user-c4d1b2e9",\n\t\t\t\tDisplayName:  stigg.String("John Roe"),\n\t\t\t\tEntityTypeID: stigg.String("user"),\n\t\t\t\tMetadata: map[string]string{\n\t\t\t\t\t"email": "john@acme.com",\n\t\t\t\t},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1Beta().customers().entities().upsert',
@@ -7008,15 +7008,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
       },
-      go: {
-        method: 'client.V1Beta.Customers.Entities.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentity, err := client.V1Beta.Customers.Entities.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntityGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.Data)\n}\n',
-      },
       cli: {
         method: 'entities retrieve',
         example:
           "stigg v1-beta:customers:entities retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity-id x",
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tentity, err := client.V1Beta.Customers.Entities.Get(\n\t\tcontext.TODO(),\n\t\t"x",\n\t\tstigg.V1BetaCustomerEntityGetParams{\n\t\t\tID: "id",\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", entity.Data)\n}\n',
       },
       java: {
         method: 'v1Beta().customers().entities().retrieve',
@@ -7062,15 +7062,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1Beta.Customers.Entities.Archive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Archive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityArchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'entities archive',
         example:
           "stigg v1-beta:customers:entities archive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Archive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Archive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityArchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1Beta().customers().entities().archive',
@@ -7116,15 +7116,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1Beta.Customers.Entities.Unarchive',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Unarchive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUnarchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'entities unarchive',
         example:
           "stigg v1-beta:customers:entities unarchive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Entities.Unarchive',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Entities.Unarchive(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerEntityUnarchiveParams{\n\t\t\tIDs: []string{"user-7f3a0c1d", "user-c4d1b2e9"},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1Beta().customers().entities().unarchive',
@@ -7182,14 +7182,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'assignments list',
+        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       go: {
         method: 'client.V1Beta.Customers.Assignments.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Assignments.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'assignments list',
-        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       java: {
         method: 'v1Beta().customers().assignments().list',
@@ -7242,15 +7242,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            EntityID = "workspace-001",\n            Cadence = "P1M",\n            CurrencyID = "currencyId",\n            FeatureID = "compute-minutes",\n            ParentID = "parentId",\n            ScopeEntityIds =\n            [\n                "NxI"\n            ],\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            EntityID = "workspace-002",\n            Cadence = "P1M",\n            CurrencyID = "cred-type-tokens",\n            FeatureID = "featureId",\n            ParentID = "workspace-001",\n            ScopeEntityIds =\n            [\n                "user-1"\n            ],\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1Beta.Customers.Assignments.Upsert',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Assignments.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentUpsertParams{\n\t\t\tAssignments: []stigg.V1BetaCustomerAssignmentUpsertParamsAssignment{{\n\t\t\t\tEntityID:   "workspace-001",\n\t\t\t\tFeatureID:  stigg.String("compute-minutes"),\n\t\t\t\tUsageLimit: stigg.Float(1000),\n\t\t\t\tCadence:    stigg.String("P1M"),\n\t\t\t}, {\n\t\t\t\tEntityID:       "workspace-002",\n\t\t\t\tCurrencyID:     stigg.String("cred-type-tokens"),\n\t\t\t\tUsageLimit:     stigg.Float(2000),\n\t\t\t\tCadence:        stigg.String("P1M"),\n\t\t\t\tParentID:       stigg.String("workspace-001"),\n\t\t\t\tScopeEntityIDs: []string{"user-1"},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'assignments upsert',
         example:
           "stigg v1-beta:customers:assignments upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --assignment '{entityId: workspace-001}' \\\n  --assignment '{entityId: workspace-002}'",
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Assignments.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.Customers.Assignments.Upsert(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerAssignmentUpsertParams{\n\t\t\tAssignments: []stigg.V1BetaCustomerAssignmentUpsertParamsAssignment{{\n\t\t\t\tEntityID:   "workspace-001",\n\t\t\t\tFeatureID:  stigg.String("compute-minutes"),\n\t\t\t\tUsageLimit: stigg.Float(1000),\n\t\t\t\tCadence:    stigg.String("P1M"),\n\t\t\t}, {\n\t\t\t\tEntityID:       "workspace-002",\n\t\t\t\tCurrencyID:     stigg.String("cred-type-tokens"),\n\t\t\t\tUsageLimit:     stigg.Float(2000),\n\t\t\t\tCadence:        stigg.String("P1M"),\n\t\t\t\tParentID:       stigg.String("workspace-001"),\n\t\t\t\tScopeEntityIDs: []string{"user-1"},\n\t\t\t}},\n\t\t},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1Beta().customers().assignments().upsert',
@@ -7304,14 +7304,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'entity_types list',
+        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
+      },
       go: {
         method: 'client.V1Beta.EntityTypes.List',
         example:
           'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.EntityTypes.List(context.TODO(), stigg.V1BetaEntityTypeListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
-      },
-      cli: {
-        method: 'entity_types list',
-        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
       },
       java: {
         method: 'v1Beta().entityTypes().list',
@@ -7362,15 +7362,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n            Description = "A customer organization — the top of the hierarchy, holding the account-wide budget.",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n            Description = "description",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V1Beta.EntityTypes.Upsert',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.EntityTypes.Upsert(context.TODO(), stigg.V1BetaEntityTypeUpsertParams{\n\t\tTypes: []stigg.V1BetaEntityTypeUpsertParamsType{{\n\t\t\tID:              "org",\n\t\t\tDisplayName:     "Organization",\n\t\t\tDescription:     stigg.String("A customer organization — the top of the hierarchy, holding the account-wide budget."),\n\t\t\tAttributionKeys: []string{"organizationId"},\n\t\t}, {\n\t\t\tID:              "team",\n\t\t\tDisplayName:     "Team",\n\t\t\tAttributionKeys: []string{"teamId"},\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'entity_types upsert',
         example:
           "stigg v1-beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
+      },
+      go: {
+        method: 'client.V1Beta.EntityTypes.Upsert',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V1Beta.EntityTypes.Upsert(context.TODO(), stigg.V1BetaEntityTypeUpsertParams{\n\t\tTypes: []stigg.V1BetaEntityTypeUpsertParamsType{{\n\t\t\tID:              "org",\n\t\t\tDisplayName:     "Organization",\n\t\t\tDescription:     stigg.String("A customer organization — the top of the hierarchy, holding the account-wide budget."),\n\t\t\tAttributionKeys: []string{"organizationId"},\n\t\t}, {\n\t\t\tID:              "team",\n\t\t\tDisplayName:     "Team",\n\t\t\tAttributionKeys: []string{"teamId"},\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v1Beta().entityTypes().upsert',
@@ -7422,15 +7422,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V2.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      go: {
-        method: 'client.V2.Usage.Report',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V2.Usage.Report(context.TODO(), stigg.V2UsageReportParams{\n\t\tUsages: []stigg.V2UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
-      },
       cli: {
         method: 'usage report',
         example:
           "stigg v2:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
+      },
+      go: {
+        method: 'client.V2.Usage.Report',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.V2.Usage.Report(context.TODO(), stigg.V2UsageReportParams{\n\t\tUsages: []stigg.V2UsageReportParamsUsage{{\n\t\t\tCustomerID: "customerId",\n\t\t\tFeatureID:  "featureId",\n\t\t\tValue:      -9007199254740991,\n\t\t}},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Data)\n}\n',
       },
       java: {
         method: 'v2().usage().report',
@@ -7467,14 +7467,14 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
       '# Stigg C# API Library\n\nThe Stigg C# SDK provides convenient access to the Stigg REST API from applications written in   C#.\n\n## Installation\n\nInstall the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):\n\n```bash\ndotnet add package Stigg.Client\n```\n\n## Requirements\n\nThis library requires .NET Standard 2.0 or later.\n\n## Usage\n\nSee the [`examples`](examples) directory for complete and runnable examples.\n\n```csharp\nStiggClient client = new();\n\nCustomerRetrieveParams parameters = new() { ID = "REPLACE_ME" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);\n```',
   },
   {
-    language: 'go',
-    content:
-      '# Stigg Go API Library\n\n<a href="https://pkg.go.dev/github.com/stiggio/stigg-go"><img src="https://pkg.go.dev/badge/github.com/stiggio/stigg-go.svg" alt="Go Reference"></a>\n\nThe Stigg Go library provides convenient access to the Stigg REST API\nfrom applications written in Go.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n```go\nimport (\n\t"github.com/stiggio/stigg-go" // imported as SDK_PackageName\n)\n```\n\n<!-- x-release-please-end -->\n\nOr to pin the version:\n\n<!-- x-release-please-start-version -->\n\n```sh\ngo get -u \'github.com/stiggio/stigg-go@v0.1.0-beta.54\'\n```\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Go 1.22+.\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n```go\npackage main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"), // defaults to os.LookupEnv("STIGG_API_KEY")\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(\n\t\tcontext.TODO(),\n\t\t"REPLACE_ME",\n\t\tstigg.V1CustomerGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n\n```\n\n### Request fields\n\nAll request parameters are wrapped in a generic `Field` type,\nwhich we use to distinguish zero values from null or omitted fields.\n\nThis prevents accidentally sending a zero value if you forget a required parameter,\nand enables explicitly sending `null`, `false`, `\'\'`, or `0` on optional parameters.\nAny field not specified is not sent.\n\nTo construct fields with values, use the helpers `String()`, `Int()`, `Float()`, or most commonly, the generic `F[T]()`.\nTo send a null, use `Null[T]()`, and to send a nonconforming value, use `Raw[T](any)`. For example:\n\n```go\nparams := FooParams{\n\tName: SDK_PackageName.F("hello"),\n\n\t// Explicitly send `"description": null`\n\tDescription: SDK_PackageName.Null[string](),\n\n\tPoint: SDK_PackageName.F(SDK_PackageName.Point{\n\t\tX: SDK_PackageName.Int(0),\n\t\tY: SDK_PackageName.Int(1),\n\n\t\t// In cases where the API specifies a given type,\n\t\t// but you want to send something else, use `Raw`:\n\t\tZ: SDK_PackageName.Raw[int64](0.01), // sends a float\n\t}),\n}\n```\n\n### Response objects\n\nAll fields in response structs are value types (not pointers or wrappers).\n\nIf a given field is `null`, not present, or invalid, the corresponding field\nwill simply be its zero value.\n\nAll response structs also include a special `JSON` field, containing more detailed\ninformation about each property, which you can use like so:\n\n```go\nif res.Name == "" {\n\t// true if `"name"` is either not present or explicitly null\n\tres.JSON.Name.IsNull()\n\n\t// true if the `"name"` key was not present in the response JSON at all\n\tres.JSON.Name.IsMissing()\n\n\t// When the API returns data that cannot be coerced to the expected type:\n\tif res.JSON.Name.IsInvalid() {\n\t\traw := res.JSON.Name.Raw()\n\n\t\tlegacyName := struct{\n\t\t\tFirst string `json:"first"`\n\t\t\tLast  string `json:"last"`\n\t\t}{}\n\t\tjson.Unmarshal([]byte(raw), &legacyName)\n\t\tname = legacyName.First + " " + legacyName.Last\n\t}\n}\n```\n\nThese `.JSON` structs also include an `Extras` map containing\nany properties in the json response that were not specified\nin the struct. This can be useful for API features not yet\npresent in the SDK.\n\n```go\nbody := res.JSON.ExtraFields["my_unexpected_field"].Raw()\n```\n\n### RequestOptions\n\nThis library uses the functional options pattern. Functions defined in the\n`SDK_PackageOptionName` package return a `RequestOption`, which is a closure that mutates a\n`RequestConfig`. These options can be supplied to the client or at individual\nrequests. For example:\n\n```go\nclient := SDK_PackageName.SDK_ClientInitializerName(\n\t// Adds a header to every request made by the client\n\tSDK_PackageOptionName.WithHeader("X-Some-Header", "custom_header_info"),\n)\n\nclient.V1.Customers.Get(context.TODO(), ...,\n\t// Override the header\n\tSDK_PackageOptionName.WithHeader("X-Some-Header", "some_other_custom_header_info"),\n\t// Add an undocumented field to the request body, using sjson syntax\n\tSDK_PackageOptionName.WithJSONSet("some.json.path", map[string]string{"my": "object"}),\n)\n```\n\nSee the [full list of request options](https://pkg.go.dev/github.com/stiggio/stigg-go/SDK_PackageOptionName).\n\n### Pagination\n\nThis library provides some conveniences for working with paginated list endpoints.\n\nYou can use `.ListAutoPaging()` methods to iterate through items across all pages:\n\n```go\niter := client.V1.Customers.ListAutoPaging(context.TODO(), stigg.V1CustomerListParams{\n\tLimit: stigg.Int(30),\n})\n// Automatically fetches more pages as needed.\nfor iter.Next() {\n\tv1CustomerListResponse := iter.Current()\n\tfmt.Printf("%+v\\n", v1CustomerListResponse)\n}\nif err := iter.Err(); err != nil {\n\tpanic(err.Error())\n}\n```\n\nOr you can use simple `.List()` methods to fetch a single page and receive a standard response object\nwith additional helper methods like `.GetNextPage()`, e.g.:\n\n```go\npage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{\n\tLimit: stigg.Int(30),\n})\nfor page != nil {\n\tfor _, customer := range page.Data {\n\t\tfmt.Printf("%+v\\n", customer)\n\t}\n\tpage, err = page.GetNextPage()\n}\nif err != nil {\n\tpanic(err.Error())\n}\n```\n\n### Errors\n\nWhen the API returns a non-success status code, we return an error with type\n`*SDK_PackageName.Error`. This contains the `StatusCode`, `*http.Request`, and\n`*http.Response` values of the request, as well as the JSON of the error body\n(much like other response objects in the SDK).\n\nTo handle errors, we recommend that you use the `errors.As` pattern:\n\n```go\n_, err := client.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n)\nif err != nil {\n\tvar apierr *stigg.Error\n\tif errors.As(err, &apierr) {\n\t\tprintln(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request\n\t\tprintln(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response\n\t}\n\tpanic(err.Error()) // GET "/api/v1/customers/{id}": 400 Bad Request { ... }\n}\n```\n\nWhen other errors occur, they are returned unwrapped; for example,\nif HTTP transport fails, you might receive `*url.Error` wrapping `*net.OpError`.\n\n### Timeouts\n\nRequests do not time out by default; use context to configure a timeout for a request lifecycle.\n\nNote that if a request is [retried](#retries), the context timeout does not start over.\nTo set a per-retry timeout, use `SDK_PackageOptionName.WithRequestTimeout()`.\n\n```go\n// This sets the timeout for the request, including all the retries.\nctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)\ndefer cancel()\nclient.V1.Customers.Get(\n\tctx,\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\t// This sets the per-retry timeout\n\toption.WithRequestTimeout(20*time.Second),\n)\n```\n\n### File uploads\n\nRequest parameters that correspond to file uploads in multipart requests are typed as\n`param.Field[io.Reader]`. The contents of the `io.Reader` will by default be sent as a multipart form\npart with the file name of "anonymous_file" and content-type of "application/octet-stream".\n\nThe file name and content-type can be customized by implementing `Name() string` or `ContentType()\nstring` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a\nfile returned by `os.Open` will be sent with the file name on disk.\n\nWe also provide a helper `SDK_PackageName.FileParam(reader io.Reader, filename string, contentType string)`\nwhich can be used to wrap any `io.Reader` with the appropriate file name and content type.\n\n\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\nWe retry by default all connection errors, 408 Request Timeout, 409 Conflict, 429 Rate Limit,\nand >=500 Internal errors.\n\nYou can use the `WithMaxRetries` option to configure or disable this:\n\n```go\n// Configure the default for all requests:\nclient := stigg.NewClient(\n\toption.WithMaxRetries(0), // default is 2\n)\n\n// Override per-request:\nclient.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\toption.WithMaxRetries(5),\n)\n```\n\n\n### Accessing raw response data (e.g. response headers)\n\nYou can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when\nyou need to examine response headers, status codes, or other details.\n\n```go\n// Create a variable to store the HTTP response\nvar response *http.Response\ncustomerResponse, err := client.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\toption.WithResponseInto(&response),\n)\nif err != nil {\n\t// handle error\n}\nfmt.Printf("%+v\\n", customerResponse)\n\nfmt.Printf("Status Code: %d\\n", response.StatusCode)\nfmt.Printf("Headers: %+#v\\n", response.Header)\n```\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API. If you need to access undocumented\nendpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs.\n`RequestOptions` on the client, such as retries, will be respected when making these requests.\n\n```go\nvar (\n    // params can be an io.Reader, a []byte, an encoding/json serializable object,\n    // or a "…Params" struct defined in this library.\n    params map[string]interface{}\n\n    // result can be an []byte, *http.Response, a encoding/json deserializable object,\n    // or a model defined in this library.\n    result *http.Response\n)\nerr := client.Post(context.Background(), "/unspecified", params, &result)\nif err != nil {\n    …\n}\n```\n\n#### Undocumented request params\n\nTo make requests using undocumented parameters, you may use either the `SDK_PackageOptionName.WithQuerySet()`\nor the `SDK_PackageOptionName.WithJSONSet()` methods.\n\n```go\nparams := FooNewParams{\n    ID:   SDK_PackageName.F("id_xxxx"),\n    Data: SDK_PackageName.F(FooNewParamsData{\n        FirstName: SDK_PackageName.F("John"),\n    }),\n}\nclient.Foo.New(context.Background(), params, SDK_PackageOptionName.WithJSONSet("data.last_name", "Doe"))\n```\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you may either access the raw JSON of the response as a string\nwith `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the result with\n`result.JSON.Foo.Raw()`.\n\nAny fields that are not present on the response struct will be saved and can be accessed by `result.JSON.ExtraFields()` which returns the extra fields as a `map[string]Field`.\n\n### Middleware\n\nWe provide `SDK_PackageOptionName.WithMiddleware` which applies the given\nmiddleware to requests.\n\n```go\nfunc Logger(req *http.Request, next SDK_PackageOptionName.MiddlewareNext) (res *http.Response, err error) {\n\t// Before the request\n\tstart := time.Now()\n\tLogReq(req)\n\n\t// Forward the request to the next handler\n\tres, err = next(req)\n\n\t// Handle stuff after the request\n\tend := time.Now()\n\tLogRes(res, err, start - end)\n\n    return res, err\n}\n\nclient := SDK_PackageName.SDK_ClientInitializerName(\n\tSDK_PackageOptionName.WithMiddleware(Logger),\n)\n```\n\nWhen multiple middlewares are provided as variadic arguments, the middlewares\nare applied left to right. If `SDK_PackageOptionName.WithMiddleware` is given\nmultiple times, for example first in the client then the method, the\nmiddleware in the client will run first and the middleware given in the method\nwill run next.\n\nYou may also replace the default `http.Client` with\n`SDK_PackageOptionName.WithHTTPClient(client)`. Only one http client is\naccepted (this overwrites any previous client) and receives requests after any\nmiddleware has been applied.\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-go/issues) with questions, bugs, or suggestions.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n',
-  },
-  {
     language: 'cli',
     content:
       "# Stigg CLI\n\nThe official CLI for the Stigg REST API.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n<!-- x-release-please-start-version -->\n\n## Installation\n\n### Installing with Homebrew\n\n~~~sh\nbrew install stiggio/tools/stigg\n~~~\n\n### Installing with Go\n\nTo test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.\n\n~~~sh\ngo install 'github.com/stiggio/stigg-cli/cmd/stigg@latest'\n~~~\n\nOnce you have run `go install`, the binary is placed in your Go bin directory:\n\n- **Default location**: `$HOME/go/bin` (or `$GOPATH/bin` if GOPATH is set)\n- **Check your path**: Run `go env GOPATH` to see the base directory\n\nIf commands aren't found after installation, add the Go bin directory to your PATH:\n\n~~~sh\n# Add to your shell profile (.zshrc, .bashrc, etc.)\nexport PATH=\"$PATH:$(go env GOPATH)/bin\"\n~~~\n\n<!-- x-release-please-end -->\n\n### Running Locally\n\nAfter cloning the git repository for this project, you can use the\n`scripts/run` script to run the tool locally:\n\n~~~sh\n./scripts/run args...\n~~~\n\n## Usage\n\nThe CLI follows a resource-based command structure:\n\n~~~sh\nstigg [resource] <command> [flags...]\n~~~\n\n~~~sh\nstigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id REPLACE_ME\n~~~\n\nFor details about specific commands, use the `--help` flag.\n\n### Environment variables\n\n| Environment variable | Required |\n| -------------------- | -------- |\n| `STIGG_API_KEY`      | yes      |\n\n### Global flags\n\n- `--api-key` (can also be set with `STIGG_API_KEY` env var)\n- `--help` - Show command line usage\n- `--debug` - Enable debug logging (includes HTTP request/response details)\n- `--version`, `-v` - Show the CLI version\n- `--base-url` - Use a custom API backend URL\n- `--format` - Change the output format (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--format-error` - Change the output format for errors (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--transform` - Transform the data output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n- `--transform-error` - Transform the error output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n\n### Passing files as arguments\n\nTo pass files to your API, you can use the `@myfile.ext` syntax:\n\n~~~bash\nstigg <command> --arg @abe.jpg\n~~~\n\nFiles can also be passed inside JSON or YAML blobs:\n\n~~~bash\nstigg <command> --arg '{image: \"@abe.jpg\"}'\n# Equivalent:\nstigg <command> <<YAML\narg:\n  image: \"@abe.jpg\"\nYAML\n~~~\n\nIf you need to pass a string literal that begins with an `@` sign, you can\nescape the `@` sign to avoid accidentally passing a file.\n\n~~~bash\nstigg <command> --username '\\@abe'\n~~~\n\n#### Explicit encoding\n\nFor JSON endpoints, the CLI tool does filetype sniffing to determine whether the\nfile contents should be sent as a string literal (for plain text files) or as a\nbase64-encoded string literal (for binary files). If you need to explicitly send\nthe file as either plain text or base64-encoded data, you can use\n`@file://myfile.txt` (for string encoding) or `@data://myfile.dat` (for\nbase64-encoding). Note that absolute paths will begin with `@file://` or\n`@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).\n\n~~~bash\nstigg <command> --arg @data://file.txt\n~~~\n\n## Linking different Go SDK versions\n\nYou can link the CLI against a different version of the Stigg Go SDK\nfor development purposes using the `./scripts/link` script.\n\nTo link to a specific version from a repository (version can be a branch,\ngit tag, or commit hash):\n\n~~~bash\n./scripts/link github.com/org/repo@version\n~~~\n\nTo link to a local copy of the SDK:\n\n~~~bash\n./scripts/link ../path/to/stigg-go\n~~~\n\nIf you run the link script without any arguments, it will default to `../stigg-go`.\n",
+  },
+  {
+    language: 'go',
+    content:
+      '# Stigg Go API Library\n\n<a href="https://pkg.go.dev/github.com/stiggio/stigg-go"><img src="https://pkg.go.dev/badge/github.com/stiggio/stigg-go.svg" alt="Go Reference"></a>\n\nThe Stigg Go library provides convenient access to the Stigg REST API\nfrom applications written in Go.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n```go\nimport (\n\t"github.com/stiggio/stigg-go" // imported as SDK_PackageName\n)\n```\n\n<!-- x-release-please-end -->\n\nOr to pin the version:\n\n<!-- x-release-please-start-version -->\n\n```sh\ngo get -u \'github.com/stiggio/stigg-go@v0.1.0-beta.54\'\n```\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Go 1.22+.\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n```go\npackage main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"), // defaults to os.LookupEnv("STIGG_API_KEY")\n\t)\n\tcustomerResponse, err := client.V1.Customers.Get(\n\t\tcontext.TODO(),\n\t\t"REPLACE_ME",\n\t\tstigg.V1CustomerGetParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", customerResponse.Data)\n}\n\n```\n\n### Request fields\n\nAll request parameters are wrapped in a generic `Field` type,\nwhich we use to distinguish zero values from null or omitted fields.\n\nThis prevents accidentally sending a zero value if you forget a required parameter,\nand enables explicitly sending `null`, `false`, `\'\'`, or `0` on optional parameters.\nAny field not specified is not sent.\n\nTo construct fields with values, use the helpers `String()`, `Int()`, `Float()`, or most commonly, the generic `F[T]()`.\nTo send a null, use `Null[T]()`, and to send a nonconforming value, use `Raw[T](any)`. For example:\n\n```go\nparams := FooParams{\n\tName: SDK_PackageName.F("hello"),\n\n\t// Explicitly send `"description": null`\n\tDescription: SDK_PackageName.Null[string](),\n\n\tPoint: SDK_PackageName.F(SDK_PackageName.Point{\n\t\tX: SDK_PackageName.Int(0),\n\t\tY: SDK_PackageName.Int(1),\n\n\t\t// In cases where the API specifies a given type,\n\t\t// but you want to send something else, use `Raw`:\n\t\tZ: SDK_PackageName.Raw[int64](0.01), // sends a float\n\t}),\n}\n```\n\n### Response objects\n\nAll fields in response structs are value types (not pointers or wrappers).\n\nIf a given field is `null`, not present, or invalid, the corresponding field\nwill simply be its zero value.\n\nAll response structs also include a special `JSON` field, containing more detailed\ninformation about each property, which you can use like so:\n\n```go\nif res.Name == "" {\n\t// true if `"name"` is either not present or explicitly null\n\tres.JSON.Name.IsNull()\n\n\t// true if the `"name"` key was not present in the response JSON at all\n\tres.JSON.Name.IsMissing()\n\n\t// When the API returns data that cannot be coerced to the expected type:\n\tif res.JSON.Name.IsInvalid() {\n\t\traw := res.JSON.Name.Raw()\n\n\t\tlegacyName := struct{\n\t\t\tFirst string `json:"first"`\n\t\t\tLast  string `json:"last"`\n\t\t}{}\n\t\tjson.Unmarshal([]byte(raw), &legacyName)\n\t\tname = legacyName.First + " " + legacyName.Last\n\t}\n}\n```\n\nThese `.JSON` structs also include an `Extras` map containing\nany properties in the json response that were not specified\nin the struct. This can be useful for API features not yet\npresent in the SDK.\n\n```go\nbody := res.JSON.ExtraFields["my_unexpected_field"].Raw()\n```\n\n### RequestOptions\n\nThis library uses the functional options pattern. Functions defined in the\n`SDK_PackageOptionName` package return a `RequestOption`, which is a closure that mutates a\n`RequestConfig`. These options can be supplied to the client or at individual\nrequests. For example:\n\n```go\nclient := SDK_PackageName.SDK_ClientInitializerName(\n\t// Adds a header to every request made by the client\n\tSDK_PackageOptionName.WithHeader("X-Some-Header", "custom_header_info"),\n)\n\nclient.V1.Customers.Get(context.TODO(), ...,\n\t// Override the header\n\tSDK_PackageOptionName.WithHeader("X-Some-Header", "some_other_custom_header_info"),\n\t// Add an undocumented field to the request body, using sjson syntax\n\tSDK_PackageOptionName.WithJSONSet("some.json.path", map[string]string{"my": "object"}),\n)\n```\n\nSee the [full list of request options](https://pkg.go.dev/github.com/stiggio/stigg-go/SDK_PackageOptionName).\n\n### Pagination\n\nThis library provides some conveniences for working with paginated list endpoints.\n\nYou can use `.ListAutoPaging()` methods to iterate through items across all pages:\n\n```go\niter := client.V1.Customers.ListAutoPaging(context.TODO(), stigg.V1CustomerListParams{\n\tLimit: stigg.Int(30),\n})\n// Automatically fetches more pages as needed.\nfor iter.Next() {\n\tv1CustomerListResponse := iter.Current()\n\tfmt.Printf("%+v\\n", v1CustomerListResponse)\n}\nif err := iter.Err(); err != nil {\n\tpanic(err.Error())\n}\n```\n\nOr you can use simple `.List()` methods to fetch a single page and receive a standard response object\nwith additional helper methods like `.GetNextPage()`, e.g.:\n\n```go\npage, err := client.V1.Customers.List(context.TODO(), stigg.V1CustomerListParams{\n\tLimit: stigg.Int(30),\n})\nfor page != nil {\n\tfor _, customer := range page.Data {\n\t\tfmt.Printf("%+v\\n", customer)\n\t}\n\tpage, err = page.GetNextPage()\n}\nif err != nil {\n\tpanic(err.Error())\n}\n```\n\n### Errors\n\nWhen the API returns a non-success status code, we return an error with type\n`*SDK_PackageName.Error`. This contains the `StatusCode`, `*http.Request`, and\n`*http.Response` values of the request, as well as the JSON of the error body\n(much like other response objects in the SDK).\n\nTo handle errors, we recommend that you use the `errors.As` pattern:\n\n```go\n_, err := client.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n)\nif err != nil {\n\tvar apierr *stigg.Error\n\tif errors.As(err, &apierr) {\n\t\tprintln(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request\n\t\tprintln(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response\n\t}\n\tpanic(err.Error()) // GET "/api/v1/customers/{id}": 400 Bad Request { ... }\n}\n```\n\nWhen other errors occur, they are returned unwrapped; for example,\nif HTTP transport fails, you might receive `*url.Error` wrapping `*net.OpError`.\n\n### Timeouts\n\nRequests do not time out by default; use context to configure a timeout for a request lifecycle.\n\nNote that if a request is [retried](#retries), the context timeout does not start over.\nTo set a per-retry timeout, use `SDK_PackageOptionName.WithRequestTimeout()`.\n\n```go\n// This sets the timeout for the request, including all the retries.\nctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)\ndefer cancel()\nclient.V1.Customers.Get(\n\tctx,\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\t// This sets the per-retry timeout\n\toption.WithRequestTimeout(20*time.Second),\n)\n```\n\n### File uploads\n\nRequest parameters that correspond to file uploads in multipart requests are typed as\n`param.Field[io.Reader]`. The contents of the `io.Reader` will by default be sent as a multipart form\npart with the file name of "anonymous_file" and content-type of "application/octet-stream".\n\nThe file name and content-type can be customized by implementing `Name() string` or `ContentType()\nstring` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a\nfile returned by `os.Open` will be sent with the file name on disk.\n\nWe also provide a helper `SDK_PackageName.FileParam(reader io.Reader, filename string, contentType string)`\nwhich can be used to wrap any `io.Reader` with the appropriate file name and content type.\n\n\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\nWe retry by default all connection errors, 408 Request Timeout, 409 Conflict, 429 Rate Limit,\nand >=500 Internal errors.\n\nYou can use the `WithMaxRetries` option to configure or disable this:\n\n```go\n// Configure the default for all requests:\nclient := stigg.NewClient(\n\toption.WithMaxRetries(0), // default is 2\n)\n\n// Override per-request:\nclient.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\toption.WithMaxRetries(5),\n)\n```\n\n\n### Accessing raw response data (e.g. response headers)\n\nYou can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when\nyou need to examine response headers, status codes, or other details.\n\n```go\n// Create a variable to store the HTTP response\nvar response *http.Response\ncustomerResponse, err := client.V1.Customers.Get(\n\tcontext.TODO(),\n\t"REPLACE_ME",\n\tstigg.V1CustomerGetParams{},\n\toption.WithResponseInto(&response),\n)\nif err != nil {\n\t// handle error\n}\nfmt.Printf("%+v\\n", customerResponse)\n\nfmt.Printf("Status Code: %d\\n", response.StatusCode)\nfmt.Printf("Headers: %+#v\\n", response.Header)\n```\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API. If you need to access undocumented\nendpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs.\n`RequestOptions` on the client, such as retries, will be respected when making these requests.\n\n```go\nvar (\n    // params can be an io.Reader, a []byte, an encoding/json serializable object,\n    // or a "…Params" struct defined in this library.\n    params map[string]interface{}\n\n    // result can be an []byte, *http.Response, a encoding/json deserializable object,\n    // or a model defined in this library.\n    result *http.Response\n)\nerr := client.Post(context.Background(), "/unspecified", params, &result)\nif err != nil {\n    …\n}\n```\n\n#### Undocumented request params\n\nTo make requests using undocumented parameters, you may use either the `SDK_PackageOptionName.WithQuerySet()`\nor the `SDK_PackageOptionName.WithJSONSet()` methods.\n\n```go\nparams := FooNewParams{\n    ID:   SDK_PackageName.F("id_xxxx"),\n    Data: SDK_PackageName.F(FooNewParamsData{\n        FirstName: SDK_PackageName.F("John"),\n    }),\n}\nclient.Foo.New(context.Background(), params, SDK_PackageOptionName.WithJSONSet("data.last_name", "Doe"))\n```\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you may either access the raw JSON of the response as a string\nwith `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the result with\n`result.JSON.Foo.Raw()`.\n\nAny fields that are not present on the response struct will be saved and can be accessed by `result.JSON.ExtraFields()` which returns the extra fields as a `map[string]Field`.\n\n### Middleware\n\nWe provide `SDK_PackageOptionName.WithMiddleware` which applies the given\nmiddleware to requests.\n\n```go\nfunc Logger(req *http.Request, next SDK_PackageOptionName.MiddlewareNext) (res *http.Response, err error) {\n\t// Before the request\n\tstart := time.Now()\n\tLogReq(req)\n\n\t// Forward the request to the next handler\n\tres, err = next(req)\n\n\t// Handle stuff after the request\n\tend := time.Now()\n\tLogRes(res, err, start - end)\n\n    return res, err\n}\n\nclient := SDK_PackageName.SDK_ClientInitializerName(\n\tSDK_PackageOptionName.WithMiddleware(Logger),\n)\n```\n\nWhen multiple middlewares are provided as variadic arguments, the middlewares\nare applied left to right. If `SDK_PackageOptionName.WithMiddleware` is given\nmultiple times, for example first in the client then the method, the\nmiddleware in the client will run first and the middleware given in the method\nwill run next.\n\nYou may also replace the default `http.Client` with\n`SDK_PackageOptionName.WithHTTPClient(client)`. Only one http client is\naccepted (this overwrites any previous client) and receives requests after any\nmiddleware has been applied.\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-go/issues) with questions, bugs, or suggestions.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n',
   },
   {
     language: 'java',
