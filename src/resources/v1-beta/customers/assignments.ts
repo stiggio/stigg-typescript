@@ -312,7 +312,8 @@ export namespace AssignmentUpsertParams {
     /**
      * Parent entity ID in the hierarchy. Omit to leave the current parent untouched (a
      * new node defaults to a root); `null` detaches to a root; an ID sets or changes
-     * the parent. Reparenting an existing node is leaf-only.
+     * the parent. Reparenting or detaching an existing node is leaf-only; place a
+     * parent before its children, or in the same batch.
      */
     parentId?: string | null;
 
