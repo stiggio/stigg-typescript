@@ -731,6 +731,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1-beta/customers/{id}/assignments',
   },
   {
+    clientCallName: 'client.v1Beta.customers.governance.list',
+    fullyQualifiedName: 'v1Beta.customers.governance.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1-beta/customers/{id}/governance',
+  },
+  {
     clientCallName: 'client.v1Beta.entityTypes.list',
     fullyQualifiedName: 'v1Beta.entityTypes.list',
     httpMethod: 'get',

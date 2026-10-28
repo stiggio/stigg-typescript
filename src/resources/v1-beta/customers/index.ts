@@ -24,3 +24,9 @@ export {
   type EntityListResponsesMyCursorIDPage,
 } from './entities';
 export { Entitlements, type EntitlementCheckResponse, type EntitlementCheckParams } from './entitlements';
+export {
+  Governance,
+  type GovernanceListResponse,
+  type GovernanceListParams,
+  type GovernanceListResponsesMyCursorIDPage,
+} from './governance';

@@ -7281,6 +7281,76 @@ const EMBEDDED_METHODS: MethodEntry[] = [
   },
   {
     name: 'list',
+    endpoint: '/api/v1-beta/customers/{id}/governance',
+    httpMethod: 'get',
+    summary: 'Get a list of governance nodes',
+    description:
+      "Queries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.",
+    stainlessPath: '(resource) v1-beta.customers.governance > (method) list',
+    qualified: 'client.v1Beta.customers.governance.list',
+    params: [
+      'id: string;',
+      'after?: string;',
+      'before?: string;',
+      'currencyIds?: string[];',
+      'entityIdSearch?: string;',
+      'entityTypeIds?: string[];',
+      'featureIds?: string[];',
+      'limit?: number;',
+      'minUtilization?: number;',
+      "order?: 'asc' | 'desc';",
+      "scope?: 'all' | 'nodeWide' | 'scoped';",
+      "sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt';",
+      'X-ACCOUNT-ID?: string;',
+      'X-ENVIRONMENT-ID?: string;',
+    ],
+    response:
+      '{ cadence: string; currentUsage: number; displayName: string; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }',
+    markdown:
+      "## list\n\n`client.v1Beta.customers.governance.list(id: string, after?: string, before?: string, currencyIds?: string[], entityIdSearch?: string, entityTypeIds?: string[], featureIds?: string[], limit?: number, minUtilization?: number, order?: 'asc' | 'desc', scope?: 'all' | 'nodeWide' | 'scoped', sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt', X-ACCOUNT-ID?: string, X-ENVIRONMENT-ID?: string): { cadence: string; currentUsage: number; displayName: string; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }`\n\n**get** `/api/v1-beta/customers/{id}/governance`\n\nQueries the customer's governance hierarchy tree, returning a cursor-paginated list of nodes with their usage configuration (limit, cadence, scope) and current usage, sortable and filterable by usage. Each node carries `parentId` so the tree can be rebuilt client-side. Usage is read from a periodically-refreshed read model and never gates access.\n\n### Parameters\n\n- `id: string`\n\n- `after?: string`\n  Opaque cursor from a page’s `next`; returns the page after it. Mutually exclusive with `before`.\n\n- `before?: string`\n  Opaque cursor from a page’s `prev`; returns the page before it. Mutually exclusive with `after`.\n\n- `currencyIds?: string[]`\n  Currency ids to include, comma-separated (e.g. `?currencyIds=credits`), up to 100. Omit both featureIds and currencyIds for tree mode.\n\n- `entityIdSearch?: string`\n  Case-insensitive substring match on the entity id or its display name (`%`/`_` matched literally).\n\n- `entityTypeIds?: string[]`\n  Filter to one or more entity types, comma-separated (e.g. `?entityTypeIds=team,user`), up to 100.\n\n- `featureIds?: string[]`\n  Feature ids to include, comma-separated (e.g. `?featureIds=ai-tokens,seats`), up to 100. Omit both featureIds and currencyIds for tree mode — every node in the hierarchy with no usage configuration attached.\n\n- `limit?: number`\n  Maximum number of items to return\n\n- `minUtilization?: number`\n  Only nodes with utilization ≥ this value (e.g. 0.8 for ≥80%, 1 for at/over limit).\n\n- `order?: 'asc' | 'desc'`\n  Sort direction: `asc` or `desc` (default `desc`).\n\n- `scope?: 'all' | 'nodeWide' | 'scoped'`\n  Filter by configuration scope: `all` (default), `nodeWide` (`[]` only), or `scoped` (non-empty only).\n\n- `sortBy?: 'utilization' | 'currentUsage' | 'usageLimit' | 'scopeSize' | 'id' | 'createdAt'`\n  Sort key: `utilization` (default, cross-capability-safe), `currentUsage`, `usageLimit`, `scopeSize`, `id`, or `createdAt`.\n\n- `X-ACCOUNT-ID?: string`\n\n- `X-ENVIRONMENT-ID?: string`\n\n### Returns\n\n- `{ cadence: string; currentUsage: number; displayName: string; entityId: string; entityTypeId: string; parentId: string; scopeEntityIds: string[]; usageLimit: number; usagePeriodEnd: string; usagePeriodStart: string; utilization: number; currencyId?: string; featureId?: string; }`\n  A node of the governance hierarchy tree with its usage configuration (limit, cadence, scope) and current usage. Usage is read from a periodically-refreshed read model and may lag the live counter by a short interval; it never gates access.\n\n  - `cadence: string`\n  - `currentUsage: number`\n  - `displayName: string`\n  - `entityId: string`\n  - `entityTypeId: string`\n  - `parentId: string`\n  - `scopeEntityIds: string[]`\n  - `usageLimit: number`\n  - `usagePeriodEnd: string`\n  - `usagePeriodStart: string`\n  - `utilization: number`\n  - `currencyId?: string`\n  - `featureId?: string`\n\n### Example\n\n```typescript\nimport Stigg from '@stigg/typescript';\n\nconst client = new Stigg();\n\n// Automatically fetches more pages as needed.\nfor await (const governanceListResponse of client.v1Beta.customers.governance.list('id')) {\n  console.log(governanceListResponse);\n}\n```",
+    perLanguage: {
+      csharp: {
+        method: 'V1Beta.Customers.Governance.List',
+        example:
+          'GovernanceListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Governance.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
+      },
+      cli: {
+        method: 'governance list',
+        example: "stigg v1-beta:customers:governance list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      java: {
+        method: 'v1Beta().customers().governance().list',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.governance.GovernanceListPage;\nimport io.stigg.models.v1beta.customers.governance.GovernanceListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GovernanceListPage page = client.v1Beta().customers().governance().list("id");\n    }\n}',
+      },
+      go: {
+        method: 'client.V1Beta.Customers.Governance.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stiggio/stigg-go"\n\t"github.com/stiggio/stigg-go/option"\n)\n\nfunc main() {\n\tclient := stigg.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpage, err := client.V1Beta.Customers.Governance.List(\n\t\tcontext.TODO(),\n\t\t"id",\n\t\tstigg.V1BetaCustomerGovernanceListParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", page)\n}\n',
+      },
+      python: {
+        method: 'v1_beta.customers.governance.list',
+        example:
+          'import os\nfrom stigg import Stigg\n\nclient = Stigg(\n    api_key=os.environ.get("STIGG_API_KEY"),  # This is the default and can be omitted\n)\npage = client.v1_beta.customers.governance.list(\n    id="id",\n)\npage = page.data[0]\nprint(page.cadence)',
+      },
+      ruby: {
+        method: 'v1_beta.customers.governance.list',
+        example:
+          'require "stigg"\n\nstigg = Stigg::Client.new(api_key: "My API Key")\n\npage = stigg.v1_beta.customers.governance.list("id")\n\nputs(page)',
+      },
+      typescript: {
+        method: 'client.v1Beta.customers.governance.list',
+        example:
+          "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const governanceListResponse of client.v1Beta.customers.governance.list('id')) {\n  console.log(governanceListResponse.cadence);\n}",
+      },
+      http: {
+        example:
+          'curl https://api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list',
     endpoint: '/api/v1-beta/entity-types',
     httpMethod: 'get',
     summary: 'Get a list of entity types',

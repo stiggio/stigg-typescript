@@ -27,16 +27,25 @@ import {
 } from './entities';
 import * as EntitlementsAPI from './entitlements';
 import { EntitlementCheckParams, EntitlementCheckResponse, Entitlements } from './entitlements';
+import * as GovernanceAPI from './governance';
+import {
+  Governance,
+  GovernanceListParams,
+  GovernanceListResponse,
+  GovernanceListResponsesMyCursorIDPage,
+} from './governance';
 
 export class Customers extends APIResource {
   entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
   entities: EntitiesAPI.Entities = new EntitiesAPI.Entities(this._client);
   assignments: AssignmentsAPI.Assignments = new AssignmentsAPI.Assignments(this._client);
+  governance: GovernanceAPI.Governance = new GovernanceAPI.Governance(this._client);
 }
 
 Customers.Entitlements = Entitlements;
 Customers.Entities = Entities;
 Customers.Assignments = Assignments;
+Customers.Governance = Governance;
 
 export declare namespace Customers {
   export {
@@ -67,5 +76,12 @@ export declare namespace Customers {
     type AssignmentListResponsesMyCursorIDPage as AssignmentListResponsesMyCursorIDPage,
     type AssignmentListParams as AssignmentListParams,
     type AssignmentUpsertParams as AssignmentUpsertParams,
+  };
+
+  export {
+    Governance as Governance,
+    type GovernanceListResponse as GovernanceListResponse,
+    type GovernanceListResponsesMyCursorIDPage as GovernanceListResponsesMyCursorIDPage,
+    type GovernanceListParams as GovernanceListParams,
   };
 }

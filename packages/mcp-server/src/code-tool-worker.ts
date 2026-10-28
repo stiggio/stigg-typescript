@@ -228,6 +228,7 @@ const fuse = new Fuse(
     'client.v1Beta.customers.entities.upsert',
     'client.v1Beta.customers.assignments.list',
     'client.v1Beta.customers.assignments.upsert',
+    'client.v1Beta.customers.governance.list',
     'client.v1Beta.entityTypes.list',
     'client.v1Beta.entityTypes.upsert',
     'client.v2.usage.report',

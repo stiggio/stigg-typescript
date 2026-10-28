@@ -435,6 +435,16 @@ Methods:
 - <code title="get /api/v1-beta/customers/{id}/assignments">client.v1Beta.customers.assignments.<a href="./src/resources/v1-beta/customers/assignments.ts">list</a>(id, { ...params }) -> AssignmentListResponsesMyCursorIDPage</code>
 - <code title="put /api/v1-beta/customers/{id}/assignments">client.v1Beta.customers.assignments.<a href="./src/resources/v1-beta/customers/assignments.ts">upsert</a>(id, { ...params }) -> AssignmentUpsertResponse</code>
 
+### Governance
+
+Types:
+
+- <code><a href="./src/resources/v1-beta/customers/governance.ts">GovernanceListResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1-beta/customers/{id}/governance">client.v1Beta.customers.governance.<a href="./src/resources/v1-beta/customers/governance.ts">list</a>(id, { ...params }) -> GovernanceListResponsesMyCursorIDPage</code>
+
 ## EntityTypes
 
 Types:
