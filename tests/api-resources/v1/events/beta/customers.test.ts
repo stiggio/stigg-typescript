@@ -28,6 +28,7 @@ describe('resource customers', () => {
         'id',
         {
           after: 'after',
+          before: 'before',
           currencyIds: ['string'],
           entityIdSearch: 'x',
           entityTypeIds: ['string'],

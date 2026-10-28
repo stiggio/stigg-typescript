@@ -137,18 +137,31 @@ export namespace CustomerRetrieveGovernanceResponse {
      * exist
      */
     next: string | null;
+
+    /**
+     * Cursor for fetching the previous page of results, or null if at the beginning
+     */
+    prev: string | null;
   }
 }
 
 export interface CustomerRetrieveGovernanceParams {
   /**
-   * Query param: Return items that come after this cursor
+   * Query param: Opaque cursor from a page’s `next`; returns the page after it.
+   * Mutually exclusive with `before`.
    */
   after?: string;
 
   /**
-   * Query param: Currency ids to include, repeated per value (e.g.
-   * `?currencyIds=credits`). Omit both featureIds and currencyIds for tree mode.
+   * Query param: Opaque cursor from a page’s `prev`; returns the page before it.
+   * Mutually exclusive with `after`.
+   */
+  before?: string;
+
+  /**
+   * Query param: Currency ids to include, comma-separated (e.g.
+   * `?currencyIds=credits`), up to 100. Omit both featureIds and currencyIds for
+   * tree mode.
    */
   currencyIds?: Array<string>;
 
@@ -159,14 +172,14 @@ export interface CustomerRetrieveGovernanceParams {
   entityIdSearch?: string;
 
   /**
-   * Query param: Filter to one or more entity types, repeated per value (e.g.
-   * `?entityTypeIds=team&entityTypeIds=user`).
+   * Query param: Filter to one or more entity types, comma-separated (e.g.
+   * `?entityTypeIds=team,user`), up to 100.
    */
   entityTypeIds?: Array<string>;
 
   /**
-   * Query param: Feature ids to include, repeated per value (e.g.
-   * `?featureIds=ai-tokens&featureIds=seats`). Omit both featureIds and currencyIds
+   * Query param: Feature ids to include, comma-separated (e.g.
+   * `?featureIds=ai-tokens,seats`), up to 100. Omit both featureIds and currencyIds
    * for tree mode — every node in the hierarchy with no usage configuration
    * attached.
    */
