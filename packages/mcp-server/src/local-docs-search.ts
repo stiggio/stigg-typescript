@@ -70,14 +70,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers retrieve',
+        example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().retrieve',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().retrieve("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers retrieve',
-        example: "stigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Get',
@@ -100,7 +100,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst customerResponse = await client.v1.customers.retrieve('x');\n\nconsole.log(customerResponse.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/customers/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/customers/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -137,14 +137,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUpdateParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Update(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers update',
+        example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().update',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().update("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers update',
-        example: "stigg v1:customers update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Update',
@@ -168,7 +168,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/customers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/customers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -200,14 +200,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListParams parameters = new();\n\nvar page = await client.V1.Customers.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'customers list',
+        example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().customers().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListPage page = client.v1().customers().list();\n    }\n}',
-      },
-      cli: {
-        method: 'customers list',
-        example: "stigg v1:customers list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Customers.List',
@@ -230,7 +230,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const customerListResponse of client.v1.customers.list()) {\n  console.log(customerListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/customers \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/customers \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -268,14 +268,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerProvisionParams parameters = new() { ID = "id" };\n\nvar customerResponse = await client.V1.Customers.Provision(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers provision',
+        example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       java: {
         method: 'v1().customers().provision',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerProvisionParams;\nimport io.stigg.models.v1.customers.CustomerResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerProvisionParams params = CustomerProvisionParams.builder()\n            .id("id")\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().provision(params);\n    }\n}',
-      },
-      cli: {
-        method: 'customers provision',
-        example: "stigg v1:customers provision \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       go: {
         method: 'client.V1.Customers.Provision',
@@ -299,7 +299,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/customers \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id"\n        }\'',
       },
     },
   },
@@ -323,14 +323,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerArchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Archive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers archive',
+        example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().archive',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerArchiveParams;\nimport io.stigg.models.v1.customers.CustomerResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().archive("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers archive',
-        example: "stigg v1:customers archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Archive',
@@ -354,7 +354,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -377,14 +377,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerUnarchiveParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.Unarchive(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'customers unarchive',
+        example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().unarchive',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerUnarchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().unarchive("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers unarchive',
-        example: "stigg v1:customers unarchive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Unarchive',
@@ -408,7 +408,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -436,15 +436,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerImportParams parameters = new()\n{\n    Customers =\n    [\n        new()\n        {\n            ID = "id",\n            Email = "dev@stainless.com",\n            Name = "name",\n            BillingID = "billingId",\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            PaymentMethodID = "paymentMethodId",\n            SalesforceID = "salesforceId",\n            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Customers.Import(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().customers().import_',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerImportParams;\nimport io.stigg.models.v1.customers.CustomerImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerImportParams params = CustomerImportParams.builder()\n            .addCustomer(CustomerImportParams.Customer.builder()\n                .id("id")\n                .email("dev@stainless.com")\n                .name("name")\n                .build())\n            .build();\n        CustomerImportResponse response = client.v1().customers().import_(params);\n    }\n}',
-      },
       cli: {
         method: 'customers import',
         example:
           "stigg v1:customers import \\\n  --api-key 'My API Key' \\\n  --customer '{id: id, email: dev@stainless.com, name: name}'",
+      },
+      java: {
+        method: 'v1().customers().import_',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerImportParams;\nimport io.stigg.models.v1.customers.CustomerImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerImportParams params = CustomerImportParams.builder()\n            .addCustomer(CustomerImportParams.Customer.builder()\n                .id("id")\n                .email("dev@stainless.com")\n                .name("name")\n                .build())\n            .build();\n        CustomerImportResponse response = client.v1().customers().import_(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.Import',
@@ -468,7 +468,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customers": [\n            {\n              "id": "id",\n              "email": "dev@stainless.com",\n              "name": "name"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/customers/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customers": [\n            {\n              "id": "id",\n              "email": "dev@stainless.com",\n              "name": "name"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -497,14 +497,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListResourcesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.ListResources(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'customers list_resources',
+        example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().listResources',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListResourcesPage;\nimport io.stigg.models.v1.customers.CustomerListResourcesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListResourcesPage page = client.v1().customers().listResources("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers list_resources',
-        example: "stigg v1:customers list-resources \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.ListResources',
@@ -528,7 +528,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/resources \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/resources \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -552,14 +552,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveEntitlementsParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.RetrieveEntitlements(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'customers retrieve_entitlements',
+        example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().retrieveEntitlements',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerRetrieveEntitlementsParams;\nimport io.stigg.models.v1.customers.CustomerRetrieveEntitlementsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveEntitlementsResponse response = client.v1().customers().retrieveEntitlements("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers retrieve_entitlements',
-        example: "stigg v1:customers retrieve-entitlements \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.GetEntitlements',
@@ -583,7 +583,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -621,14 +621,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerCheckEntitlementParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Customers.CheckEntitlement(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'customers check_entitlement',
+        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().checkEntitlement',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerCheckEntitlementParams;\nimport io.stigg.models.v1.customers.CustomerCheckEntitlementResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerCheckEntitlementResponse response = client.v1().customers().checkEntitlement("x");\n    }\n}',
-      },
-      cli: {
-        method: 'customers check_entitlement',
-        example: "stigg v1:customers check-entitlement \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.CheckEntitlement',
@@ -652,7 +652,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -676,14 +676,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListContractsParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Customers.ListContracts(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'customers list_contracts',
+        example: "stigg v1:customers list-contracts \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       java: {
         method: 'v1().customers().listContracts',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListContractsParams;\nimport io.stigg.models.v1.customers.CustomerListContractsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListContractsResponse response = client.v1().customers().listContracts("id");\n    }\n}',
-      },
-      cli: {
-        method: 'customers list_contracts',
-        example: "stigg v1:customers list-contracts \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       go: {
         method: 'client.V1.Customers.ListContracts',
@@ -707,7 +707,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/contracts \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/contracts \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -744,14 +744,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerListInvoicesParams parameters = new() { ID = "id" };\n\nvar page = await client.V1.Customers.ListInvoices(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'customers list_invoices',
+        example: "stigg v1:customers list-invoices \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       java: {
         method: 'v1().customers().listInvoices',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerListInvoicesPage;\nimport io.stigg.models.v1.customers.CustomerListInvoicesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerListInvoicesPage page = client.v1().customers().listInvoices("id");\n    }\n}',
-      },
-      cli: {
-        method: 'customers list_invoices',
-        example: "stigg v1:customers list-invoices \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       go: {
         method: 'client.V1.Customers.ListInvoices',
@@ -775,7 +775,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/invoices \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/invoices \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -807,15 +807,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodAttachParams parameters = new()\n{\n    ID = "x",\n    IntegrationID = "integrationId",\n    PaymentMethodID = "paymentMethodId",\n    VendorIdentifier = VendorIdentifier.Auth0,\n};\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Attach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
-      java: {
-        method: 'v1().customers().paymentMethod().attach',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodAttachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PaymentMethodAttachParams params = PaymentMethodAttachParams.builder()\n            .id("x")\n            .integrationId("integrationId")\n            .paymentMethodId("paymentMethodId")\n            .vendorIdentifier(PaymentMethodAttachParams.VendorIdentifier.AUTH0)\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().attach(params);\n    }\n}',
-      },
       cli: {
         method: 'payment_method attach',
         example:
           "stigg v1:customers:payment-method attach \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --integration-id integrationId \\\n  --payment-method-id paymentMethodId \\\n  --vendor-identifier AUTH0",
+      },
+      java: {
+        method: 'v1().customers().paymentMethod().attach',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodAttachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PaymentMethodAttachParams params = PaymentMethodAttachParams.builder()\n            .id("x")\n            .integrationId("integrationId")\n            .paymentMethodId("paymentMethodId")\n            .vendorIdentifier(PaymentMethodAttachParams.VendorIdentifier.AUTH0)\n            .build();\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().attach(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Attach',
@@ -839,7 +839,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "integrationId": "integrationId",\n          "paymentMethodId": "paymentMethodId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "integrationId": "integrationId",\n          "paymentMethodId": "paymentMethodId",\n          "vendorIdentifier": "AUTH0"\n        }\'',
       },
     },
   },
@@ -863,14 +863,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PaymentMethodDetachParams parameters = new() { ID = "x" };\n\nvar customerResponse = await client.V1.Customers.PaymentMethod.Detach(parameters);\n\nConsole.WriteLine(customerResponse);',
       },
+      cli: {
+        method: 'payment_method detach',
+        example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().paymentMethod().detach',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.paymentmethod.PaymentMethodDetachParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerResponse customerResponse = client.v1().customers().paymentMethod().detach("x");\n    }\n}',
-      },
-      cli: {
-        method: 'payment_method detach',
-        example: "stigg v1:customers:payment-method detach \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.PaymentMethod.Detach',
@@ -894,7 +894,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/payment-method \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -926,14 +926,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.PromotionalEntitlements.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'promotional_entitlements list',
+        example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().promotionalEntitlements().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementListPage;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementListPage page = client.v1().customers().promotionalEntitlements().list("x");\n    }\n}',
-      },
-      cli: {
-        method: 'promotional_entitlements list',
-        example: "stigg v1:customers:promotional-entitlements list \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.List',
@@ -957,7 +957,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -986,15 +986,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementCreateParams parameters = new()\n{\n    ID = "x",\n    PromotionalEntitlements =\n    [\n        new()\n        {\n            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            EnumValues =\n            [\n                "string"\n            ],\n            FeatureID = "featureId",\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            IsVisible = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Period = Period.1Week,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = -9007199254740991,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar promotionalEntitlement = await client.V1.Customers.PromotionalEntitlements.Create(parameters);\n\nConsole.WriteLine(promotionalEntitlement);',
       },
-      java: {
-        method: 'v1().customers().promotionalEntitlements().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementCreateParams params = PromotionalEntitlementCreateParams.builder()\n            .id("x")\n            .addPromotionalEntitlement(PromotionalEntitlementCreateParams.PromotionalEntitlement.builder()\n                .customEndDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n                .addEnumValue("string")\n                .featureId("featureId")\n                .hasSoftLimit(true)\n                .hasUnlimitedUsage(true)\n                .isVisible(true)\n                .monthlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .period(PromotionalEntitlementCreateParams.PromotionalEntitlement.Period._1_WEEK)\n                .resetPeriod(PromotionalEntitlementCreateParams.PromotionalEntitlement.ResetPeriod.YEAR)\n                .usageLimit(-9007199254740991L)\n                .weeklyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .yearlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .build())\n            .build();\n        PromotionalEntitlementCreateResponse promotionalEntitlement = client.v1().customers().promotionalEntitlements().create(params);\n    }\n}',
-      },
       cli: {
         method: 'promotional_entitlements create',
         example:
           "stigg v1:customers:promotional-entitlements create \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --promotional-entitlement \"{customEndDate: '2019-12-27T18:11:19.117Z', enumValues: [string], featureId: featureId, hasSoftLimit: true, hasUnlimitedUsage: true, isVisible: true, monthlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, period: 1 week, resetPeriod: YEAR, usageLimit: -9007199254740991, weeklyResetPeriodConfiguration: {accordingTo: SubscriptionStart}, yearlyResetPeriodConfiguration: {accordingTo: SubscriptionStart}}\"",
+      },
+      java: {
+        method: 'v1().customers().promotionalEntitlements().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementCreateResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementCreateParams params = PromotionalEntitlementCreateParams.builder()\n            .id("x")\n            .addPromotionalEntitlement(PromotionalEntitlementCreateParams.PromotionalEntitlement.builder()\n                .customEndDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n                .addEnumValue("string")\n                .featureId("featureId")\n                .hasSoftLimit(true)\n                .hasUnlimitedUsage(true)\n                .isVisible(true)\n                .monthlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.MonthlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .period(PromotionalEntitlementCreateParams.PromotionalEntitlement.Period._1_WEEK)\n                .resetPeriod(PromotionalEntitlementCreateParams.PromotionalEntitlement.ResetPeriod.YEAR)\n                .usageLimit(-9007199254740991L)\n                .weeklyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.WeeklyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .yearlyResetPeriodConfiguration(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.builder()\n                    .accordingTo(PromotionalEntitlementCreateParams.PromotionalEntitlement.YearlyResetPeriodConfiguration.AccordingTo.SUBSCRIPTION_START)\n                    .build())\n                .build())\n            .build();\n        PromotionalEntitlementCreateResponse promotionalEntitlement = client.v1().customers().promotionalEntitlements().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.New',
@@ -1018,7 +1018,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "promotionalEntitlements": [\n            {\n              "customEndDate": "2019-12-27T18:11:19.117Z",\n              "enumValues": [\n                "string"\n              ],\n              "featureId": "featureId",\n              "hasSoftLimit": true,\n              "hasUnlimitedUsage": true,\n              "isVisible": true,\n              "monthlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "period": "1 week",\n              "resetPeriod": "YEAR",\n              "usageLimit": -9007199254740991,\n              "weeklyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "yearlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              }\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "promotionalEntitlements": [\n            {\n              "customEndDate": "2019-12-27T18:11:19.117Z",\n              "enumValues": [\n                "string"\n              ],\n              "featureId": "featureId",\n              "hasSoftLimit": true,\n              "hasUnlimitedUsage": true,\n              "isVisible": true,\n              "monthlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "period": "1 week",\n              "resetPeriod": "YEAR",\n              "usageLimit": -9007199254740991,\n              "weeklyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              },\n              "yearlyResetPeriodConfiguration": {\n                "accordingTo": "SubscriptionStart"\n              }\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -1042,15 +1042,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PromotionalEntitlementRevokeParams parameters = new()\n{\n    ID = "id",\n    FeatureID = "featureId",\n};\n\nvar response = await client.V1.Customers.PromotionalEntitlements.Revoke(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().customers().promotionalEntitlements().revoke',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementRevokeParams params = PromotionalEntitlementRevokeParams.builder()\n            .id("id")\n            .featureId("featureId")\n            .build();\n        PromotionalEntitlementRevokeResponse response = client.v1().customers().promotionalEntitlements().revoke(params);\n    }\n}',
-      },
       cli: {
         method: 'promotional_entitlements revoke',
         example:
           "stigg v1:customers:promotional-entitlements revoke \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --feature-id featureId",
+      },
+      java: {
+        method: 'v1().customers().promotionalEntitlements().revoke',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeParams;\nimport io.stigg.models.v1.customers.promotionalentitlements.PromotionalEntitlementRevokeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PromotionalEntitlementRevokeParams params = PromotionalEntitlementRevokeParams.builder()\n            .id("id")\n            .featureId("featureId")\n            .build();\n        PromotionalEntitlementRevokeResponse response = client.v1().customers().promotionalEntitlements().revoke(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.PromotionalEntitlements.Revoke',
@@ -1074,7 +1074,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/promotional-entitlements/$FEATURE_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/promotional-entitlements/$FEATURE_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1105,14 +1105,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationListParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Customers.Integrations.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'integrations list',
+        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().customers().integrations().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.integrations.IntegrationListPage;\nimport io.stigg.models.v1.customers.integrations.IntegrationListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationListPage page = client.v1().customers().integrations().list("x");\n    }\n}',
-      },
-      cli: {
-        method: 'integrations list',
-        example: "stigg v1:customers:integrations list \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Customers.Integrations.List',
@@ -1136,7 +1136,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1167,15 +1167,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationLinkParams parameters = new()\n{\n    ID = "x",\n    ID = "id",\n    SyncedEntityID = "syncedEntityId",\n    VendorIdentifier = VendorIdentifier.Stripe,\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Link(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      java: {
-        method: 'v1().customers().integrations().link',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationLinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationLinkParams params = IntegrationLinkParams.builder()\n            .pathId("x")\n            .bodyId("id")\n            .syncedEntityId("syncedEntityId")\n            .vendorIdentifier(IntegrationLinkParams.VendorIdentifier.STRIPE)\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().link(params);\n    }\n}',
-      },
       cli: {
         method: 'integrations link',
         example:
           "stigg v1:customers:integrations link \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --id id \\\n  --synced-entity-id syncedEntityId \\\n  --vendor-identifier STRIPE",
+      },
+      java: {
+        method: 'v1().customers().integrations().link',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationLinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationLinkParams params = IntegrationLinkParams.builder()\n            .pathId("x")\n            .bodyId("id")\n            .syncedEntityId("syncedEntityId")\n            .vendorIdentifier(IntegrationLinkParams.VendorIdentifier.STRIPE)\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().link(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.Integrations.Link',
@@ -1199,7 +1199,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "STRIPE"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "syncedEntityId": "syncedEntityId",\n          "vendorIdentifier": "STRIPE"\n        }\'',
       },
     },
   },
@@ -1222,15 +1222,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationRetrieveParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Retrieve(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      java: {
-        method: 'v1().customers().integrations().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationRetrieveParams params = IntegrationRetrieveParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().retrieve(params);\n    }\n}',
-      },
       cli: {
         method: 'integrations retrieve',
         example:
           "stigg v1:customers:integrations retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
+      java: {
+        method: 'v1().customers().integrations().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationRetrieveParams params = IntegrationRetrieveParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().retrieve(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.Integrations.Get',
@@ -1254,7 +1254,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1283,15 +1283,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationUpdateParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n    SyncedEntityID = "syncedEntityId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Update(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      java: {
-        method: 'v1().customers().integrations().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUpdateParams params = IntegrationUpdateParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .syncedEntityId("syncedEntityId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().update(params);\n    }\n}',
-      },
       cli: {
         method: 'integrations update',
         example:
           "stigg v1:customers:integrations update \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId \\\n  --synced-entity-id syncedEntityId",
+      },
+      java: {
+        method: 'v1().customers().integrations().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUpdateParams params = IntegrationUpdateParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .syncedEntityId("syncedEntityId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().update(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.Integrations.Update',
@@ -1315,7 +1315,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "syncedEntityId": "syncedEntityId"\n        }\'',
       },
     },
   },
@@ -1338,15 +1338,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'IntegrationUnlinkParams parameters = new()\n{\n    ID = "id",\n    IntegrationID = "integrationId",\n};\n\nvar customerIntegrationResponse = await client.V1.Customers.Integrations.Unlink(parameters);\n\nConsole.WriteLine(customerIntegrationResponse);',
       },
-      java: {
-        method: 'v1().customers().integrations().unlink',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUnlinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUnlinkParams params = IntegrationUnlinkParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().unlink(params);\n    }\n}',
-      },
       cli: {
         method: 'integrations unlink',
         example:
           "stigg v1:customers:integrations unlink \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --integration-id integrationId",
+      },
+      java: {
+        method: 'v1().customers().integrations().unlink',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerIntegrationResponse;\nimport io.stigg.models.v1.customers.integrations.IntegrationUnlinkParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        IntegrationUnlinkParams params = IntegrationUnlinkParams.builder()\n            .id("id")\n            .integrationId("integrationId")\n            .build();\n        CustomerIntegrationResponse customerIntegrationResponse = client.v1().customers().integrations().unlink(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Customers.Integrations.Unlink',
@@ -1370,7 +1370,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/customers/$ID/integrations/$INTEGRATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1394,14 +1394,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionRetrieveParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Retrieve(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions retrieve',
+        example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().retrieve',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().retrieve("x");\n    }\n}',
-      },
-      cli: {
-        method: 'subscriptions retrieve',
-        example: "stigg v1:subscriptions retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Get',
@@ -1424,7 +1424,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst subscription = await client.v1.subscriptions.retrieve('x');\n\nconsole.log(subscription.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/subscriptions/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1460,14 +1461,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionListParams parameters = new();\n\nvar page = await client.V1.Subscriptions.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'subscriptions list',
+        example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().subscriptions().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionListPage;\nimport io.stigg.models.v1.subscriptions.SubscriptionListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionListPage page = client.v1().subscriptions().list();\n    }\n}',
-      },
-      cli: {
-        method: 'subscriptions list',
-        example: "stigg v1:subscriptions list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Subscriptions.List',
@@ -1490,7 +1491,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const subscriptionListResponse of client.v1.subscriptions.list()) {\n  console.log(subscriptionListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/subscriptions \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/subscriptions \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -1544,15 +1545,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionProvisionParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Provision(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().subscriptions().provision',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionProvisionParams params = SubscriptionProvisionParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionProvisionResponse response = client.v1().subscriptions().provision(params);\n    }\n}',
-      },
       cli: {
         method: 'subscriptions provision',
         example:
           "stigg v1:subscriptions provision \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
+      },
+      java: {
+        method: 'v1().subscriptions().provision',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionProvisionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionProvisionParams params = SubscriptionProvisionParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionProvisionResponse response = client.v1().subscriptions().provision(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.Provision',
@@ -1576,7 +1577,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
       },
     },
   },
@@ -1605,15 +1606,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionTransferParams parameters = new()\n{\n    ID = "x",\n    DestinationResourceID = "destinationResourceId",\n};\n\nvar subscription = await client.V1.Subscriptions.Transfer(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      java: {
-        method: 'v1().subscriptions().transfer',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionTransferParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionTransferParams params = SubscriptionTransferParams.builder()\n            .id("x")\n            .destinationResourceId("destinationResourceId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().transfer(params);\n    }\n}',
-      },
       cli: {
         method: 'subscriptions transfer',
         example:
           "stigg v1:subscriptions transfer \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --destination-resource-id destinationResourceId",
+      },
+      java: {
+        method: 'v1().subscriptions().transfer',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionTransferParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionTransferParams params = SubscriptionTransferParams.builder()\n            .id("x")\n            .destinationResourceId("destinationResourceId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().transfer(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.Transfer',
@@ -1637,7 +1638,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/$ID/transfer \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationResourceId": "destinationResourceId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/transfer \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationResourceId": "destinationResourceId"\n        }\'',
       },
     },
   },
@@ -1666,14 +1667,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionMigrateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Migrate(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions migrate',
+        example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().migrate',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionMigrateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().migrate("x");\n    }\n}',
-      },
-      cli: {
-        method: 'subscriptions migrate',
-        example: "stigg v1:subscriptions migrate \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Migrate',
@@ -1697,7 +1698,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/subscriptions/$ID/migrate \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/migrate \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -1726,15 +1727,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionDelegateParams parameters = new()\n{\n    ID = "x",\n    TargetCustomerID = "targetCustomerId",\n};\n\nvar subscription = await client.V1.Subscriptions.Delegate(parameters);\n\nConsole.WriteLine(subscription);',
       },
-      java: {
-        method: 'v1().subscriptions().delegate',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionDelegateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionDelegateParams params = SubscriptionDelegateParams.builder()\n            .id("x")\n            .targetCustomerId("targetCustomerId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().delegate(params);\n    }\n}',
-      },
       cli: {
         method: 'subscriptions delegate',
         example:
           "stigg v1:subscriptions delegate \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-customer-id targetCustomerId",
+      },
+      java: {
+        method: 'v1().subscriptions().delegate',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionDelegateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionDelegateParams params = SubscriptionDelegateParams.builder()\n            .id("x")\n            .targetCustomerId("targetCustomerId")\n            .build();\n        Subscription subscription = client.v1().subscriptions().delegate(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.Delegate',
@@ -1758,7 +1759,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/$ID/delegate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetCustomerId": "targetCustomerId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/delegate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetCustomerId": "targetCustomerId"\n        }\'',
       },
     },
   },
@@ -1801,15 +1802,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionPreviewParams parameters = new()\n{\n    CustomerID = "customerId",\n    PlanID = "planId",\n};\n\nvar response = await client.V1.Subscriptions.Preview(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().subscriptions().preview',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionPreviewParams params = SubscriptionPreviewParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionPreviewResponse response = client.v1().subscriptions().preview(params);\n    }\n}',
-      },
       cli: {
         method: 'subscriptions preview',
         example:
           "stigg v1:subscriptions preview \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --plan-id planId",
+      },
+      java: {
+        method: 'v1().subscriptions().preview',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionPreviewResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionPreviewParams params = SubscriptionPreviewParams.builder()\n            .customerId("customerId")\n            .planId("planId")\n            .build();\n        SubscriptionPreviewResponse response = client.v1().subscriptions().preview(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.Preview',
@@ -1833,7 +1834,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/preview \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/preview \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "planId": "planId"\n        }\'',
       },
     },
   },
@@ -1878,14 +1879,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionUpdateParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Update(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions update',
+        example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().update',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().update("x");\n    }\n}',
-      },
-      cli: {
-        method: 'subscriptions update',
-        example: "stigg v1:subscriptions update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Update',
@@ -1909,7 +1910,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/subscriptions/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -1937,15 +1938,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionImportParams parameters = new()\n{\n    Subscriptions =\n    [\n        new()\n        {\n            ID = "id",\n            CustomerID = "customerId",\n            PlanID = "planId",\n            Addons =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                },\n            ],\n            BillingID = "billingId",\n            BillingPeriod = BillingPeriod.Monthly,\n            Charges =\n            [\n                new()\n                {\n                    ID = "id",\n                    Quantity = 0,\n                    Type = Type.Feature,\n                },\n            ],\n            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n            ResourceID = "resourceId",\n            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Subscriptions.Import(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().subscriptions().import_',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionImportParams params = SubscriptionImportParams.builder()\n            .addSubscription(SubscriptionImportParams.Subscription.builder()\n                .id("id")\n                .customerId("customerId")\n                .planId("planId")\n                .build())\n            .build();\n        SubscriptionImportResponse response = client.v1().subscriptions().import_(params);\n    }\n}',
-      },
       cli: {
         method: 'subscriptions import',
         example:
           "stigg v1:subscriptions import \\\n  --api-key 'My API Key' \\\n  --subscription '{id: id, customerId: customerId, planId: planId}'",
+      },
+      java: {
+        method: 'v1().subscriptions().import_',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportParams;\nimport io.stigg.models.v1.subscriptions.SubscriptionImportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        SubscriptionImportParams params = SubscriptionImportParams.builder()\n            .addSubscription(SubscriptionImportParams.Subscription.builder()\n                .id("id")\n                .customerId("customerId")\n                .planId("planId")\n                .build())\n            .build();\n        SubscriptionImportResponse response = client.v1().subscriptions().import_(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.Import',
@@ -1969,7 +1970,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "subscriptions": [\n            {\n              "id": "id",\n              "customerId": "customerId",\n              "planId": "planId"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/import \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "subscriptions": [\n            {\n              "id": "id",\n              "customerId": "customerId",\n              "planId": "planId"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -2001,14 +2002,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'SubscriptionCancelParams parameters = new() { ID = "x" };\n\nvar subscription = await client.V1.Subscriptions.Cancel(parameters);\n\nConsole.WriteLine(subscription);',
       },
+      cli: {
+        method: 'subscriptions cancel',
+        example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().cancel',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.Subscription;\nimport io.stigg.models.v1.subscriptions.SubscriptionCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Subscription subscription = client.v1().subscriptions().cancel("x");\n    }\n}',
-      },
-      cli: {
-        method: 'subscriptions cancel',
-        example: "stigg v1:subscriptions cancel \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Cancel',
@@ -2032,7 +2033,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/subscriptions/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/cancel \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2054,15 +2055,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FutureUpdateCancelPendingPaymentParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
-      java: {
-        method: 'v1().subscriptions().futureUpdate().cancelPendingPayment',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelPendingPaymentParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelPendingPayment("x");\n    }\n}',
-      },
       cli: {
         method: 'future_update cancel_pending_payment',
         example:
           "stigg v1:subscriptions:future-update cancel-pending-payment \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      java: {
+        method: 'v1().subscriptions().futureUpdate().cancelPendingPayment',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelPendingPaymentParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelPendingPayment("x");\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.FutureUpdate.CancelPendingPayment',
@@ -2086,7 +2087,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/$ID/future-update/pending-payment \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/future-update/pending-payment \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2108,15 +2109,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FutureUpdateCancelScheduleParams parameters = new() { ID = "x" };\n\nvar cancelSubscription = await client.V1.Subscriptions.FutureUpdate.CancelSchedule(parameters);\n\nConsole.WriteLine(cancelSubscription);',
       },
-      java: {
-        method: 'v1().subscriptions().futureUpdate().cancelSchedule',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelScheduleParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelSchedule("x");\n    }\n}',
-      },
       cli: {
         method: 'future_update cancel_schedule',
         example:
           "stigg v1:subscriptions:future-update cancel-schedule \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
+      java: {
+        method: 'v1().subscriptions().futureUpdate().cancelSchedule',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.futureupdate.CancelSubscription;\nimport io.stigg.models.v1.subscriptions.futureupdate.FutureUpdateCancelScheduleParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CancelSubscription cancelSubscription = client.v1().subscriptions().futureUpdate().cancelSchedule("x");\n    }\n}',
       },
       go: {
         method: 'client.V1.Subscriptions.FutureUpdate.CancelSchedule',
@@ -2140,7 +2141,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/$ID/future-update/schedule \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/future-update/schedule \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2164,14 +2165,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageChargeUsageParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.ChargeUsage(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'usage charge_usage',
+        example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().usage().chargeUsage',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.usage.UsageChargeUsageParams;\nimport io.stigg.models.v1.subscriptions.usage.UsageChargeUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageChargeUsageResponse response = client.v1().subscriptions().usage().chargeUsage("x");\n    }\n}',
-      },
-      cli: {
-        method: 'usage charge_usage',
-        example: "stigg v1:subscriptions:usage charge-usage \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Usage.ChargeUsage',
@@ -2195,7 +2196,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/subscriptions/$ID/usage/charge \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/usage/charge \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2217,14 +2218,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageSyncParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Usage.Sync(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'usage sync',
+        example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().usage().sync',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.usage.UsageSyncParams;\nimport io.stigg.models.v1.subscriptions.usage.UsageSyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageSyncResponse response = client.v1().subscriptions().usage().sync("x");\n    }\n}',
-      },
-      cli: {
-        method: 'usage sync',
-        example: "stigg v1:subscriptions:usage sync \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Usage.Sync',
@@ -2248,7 +2249,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/$ID/usage/sync \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/usage/sync \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2271,14 +2272,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'InvoiceMarkAsPaidParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Subscriptions.Invoice.MarkAsPaid(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'invoice mark_as_paid',
+        example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().subscriptions().invoice().markAsPaid',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.subscriptions.invoice.InvoiceMarkAsPaidParams;\nimport io.stigg.models.v1.subscriptions.invoice.InvoiceMarkAsPaidResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        InvoiceMarkAsPaidResponse response = client.v1().subscriptions().invoice().markAsPaid("x");\n    }\n}',
-      },
-      cli: {
-        method: 'invoice mark_as_paid',
-        example: "stigg v1:subscriptions:invoice mark-as-paid \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Subscriptions.Invoice.MarkAsPaid',
@@ -2302,7 +2303,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/subscriptions/$ID/invoice/paid \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/subscriptions/$ID/invoice/paid \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2336,15 +2337,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponCreateParams parameters = new()\n{\n    ID = "id",\n    AmountsOff =\n    [\n        new()\n        {\n            Amount = 0,\n            Currency = Currency.Usd,\n        },\n    ],\n    Description = "description",\n    DurationInMonths = 1,\n    Metadata = new Dictionary<string, string>() { { "foo", "string" } },\n    Name = "name",\n    PercentOff = 1,\n};\n\nvar coupon = await client.V1.Coupons.Create(parameters);\n\nConsole.WriteLine(coupon);',
       },
-      java: {
-        method: 'v1().coupons().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponCreateParams params = CouponCreateParams.builder()\n            .id("id")\n            .addAmountsOff(CouponCreateParams.AmountsOff.builder()\n                .amount(0.0)\n                .currency(CouponCreateParams.AmountsOff.Currency.USD)\n                .build())\n            .description("description")\n            .durationInMonths(1L)\n            .metadata(CouponCreateParams.Metadata.builder()\n                .putAdditionalProperty("foo", JsonValue.from("string"))\n                .build())\n            .name("name")\n            .percentOff(1.0)\n            .build();\n        Coupon coupon = client.v1().coupons().create(params);\n    }\n}',
-      },
       cli: {
         method: 'coupons create',
         example:
           "stigg v1:coupons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --amounts-off '{amount: 0, currency: usd}' \\\n  --description description \\\n  --duration-in-months 1 \\\n  --metadata '{foo: string}' \\\n  --name name \\\n  --percent-off 1",
+      },
+      java: {
+        method: 'v1().coupons().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponCreateParams params = CouponCreateParams.builder()\n            .id("id")\n            .addAmountsOff(CouponCreateParams.AmountsOff.builder()\n                .amount(0.0)\n                .currency(CouponCreateParams.AmountsOff.Currency.USD)\n                .build())\n            .description("description")\n            .durationInMonths(1L)\n            .metadata(CouponCreateParams.Metadata.builder()\n                .putAdditionalProperty("foo", JsonValue.from("string"))\n                .build())\n            .name("name")\n            .percentOff(1.0)\n            .build();\n        Coupon coupon = client.v1().coupons().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Coupons.New',
@@ -2368,7 +2369,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/coupons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "amountsOff": [\n            {\n              "amount": 0,\n              "currency": "usd"\n            }\n          ],\n          "description": "description",\n          "durationInMonths": 1,\n          "metadata": {\n            "foo": "string"\n          },\n          "name": "name",\n          "percentOff": 1\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/coupons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "amountsOff": [\n            {\n              "amount": 0,\n              "currency": "usd"\n            }\n          ],\n          "description": "description",\n          "durationInMonths": 1,\n          "metadata": {\n            "foo": "string"\n          },\n          "name": "name",\n          "percentOff": 1\n        }\'',
       },
     },
   },
@@ -2401,14 +2402,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponListParams parameters = new();\n\nvar page = await client.V1.Coupons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'coupons list',
+        example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().coupons().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.CouponListPage;\nimport io.stigg.models.v1.coupons.CouponListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CouponListPage page = client.v1().coupons().list();\n    }\n}',
-      },
-      cli: {
-        method: 'coupons list',
-        example: "stigg v1:coupons list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Coupons.List',
@@ -2431,7 +2432,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const couponListResponse of client.v1.coupons.list()) {\n  console.log(couponListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/coupons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/coupons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2454,14 +2455,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponRetrieveParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.Retrieve(parameters);\n\nConsole.WriteLine(coupon);',
       },
+      cli: {
+        method: 'coupons retrieve',
+        example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().coupons().retrieve',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().retrieve("x");\n    }\n}',
-      },
-      cli: {
-        method: 'coupons retrieve',
-        example: "stigg v1:coupons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Coupons.Get',
@@ -2484,7 +2485,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst coupon = await client.v1.coupons.retrieve('x');\n\nconsole.log(coupon.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/coupons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/coupons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2514,14 +2515,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponUpdateCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.UpdateCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
+      cli: {
+        method: 'coupons update_coupon',
+        example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().coupons().updateCoupon',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponUpdateCouponParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().updateCoupon("x");\n    }\n}',
-      },
-      cli: {
-        method: 'coupons update_coupon',
-        example: "stigg v1:coupons update-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Coupons.UpdateCoupon',
@@ -2545,7 +2546,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/coupons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/coupons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2568,14 +2569,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CouponArchiveCouponParams parameters = new() { ID = "x" };\n\nvar coupon = await client.V1.Coupons.ArchiveCoupon(parameters);\n\nConsole.WriteLine(coupon);',
       },
+      cli: {
+        method: 'coupons archive_coupon',
+        example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().coupons().archiveCoupon',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.coupons.Coupon;\nimport io.stigg.models.v1.coupons.CouponArchiveCouponParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Coupon coupon = client.v1().coupons().archiveCoupon("x");\n    }\n}',
-      },
-      cli: {
-        method: 'coupons archive_coupon',
-        example: "stigg v1:coupons archive-coupon \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Coupons.ArchiveCoupon',
@@ -2599,7 +2600,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/coupons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/coupons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2626,15 +2627,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventReportParams parameters = new()\n{\n    Events =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            EventName = "x",\n            IdempotencyKey = "x",\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n        },\n    ],\n};\n\nvar response = await client.V1.Events.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().events().report',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventReportParams;\nimport io.stigg.models.v1.events.EventReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventReportParams params = EventReportParams.builder()\n            .addEvent(EventReportParams.Event.builder()\n                .customerId("customerId")\n                .eventName("x")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        EventReportResponse response = client.v1().events().report(params);\n    }\n}',
-      },
       cli: {
         method: 'events report',
         example:
           "stigg v1:events report \\\n  --api-key 'My API Key' \\\n  --event '{customerId: customerId, eventName: x, idempotencyKey: x}'",
+      },
+      java: {
+        method: 'v1().events().report',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventReportParams;\nimport io.stigg.models.v1.events.EventReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventReportParams params = EventReportParams.builder()\n            .addEvent(EventReportParams.Event.builder()\n                .customerId("customerId")\n                .eventName("x")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        EventReportResponse response = client.v1().events().report(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Events.Report',
@@ -2658,7 +2659,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/events \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "events": [\n            {\n              "customerId": "customerId",\n              "eventName": "x",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/events \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "events": [\n            {\n              "customerId": "customerId",\n              "eventName": "x",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -2689,15 +2690,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EventEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    EventName = "x",\n};\n\nvar response = await client.V1.Events.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().events().estimate',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventEstimateParams;\nimport io.stigg.models.v1.events.EventEstimateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventEstimateParams params = EventEstimateParams.builder()\n            .customerId("customerId")\n            .eventName("x")\n            .build();\n        EventEstimateResponse response = client.v1().events().estimate(params);\n    }\n}',
-      },
       cli: {
         method: 'events estimate',
         example:
           "stigg v1:events estimate \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --event-name x",
+      },
+      java: {
+        method: 'v1().events().estimate',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.EventEstimateParams;\nimport io.stigg.models.v1.events.EventEstimateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EventEstimateParams params = EventEstimateParams.builder()\n            .customerId("customerId")\n            .eventName("x")\n            .build();\n        EventEstimateResponse response = client.v1().events().estimate(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Events.Estimate',
@@ -2721,7 +2722,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/events/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "eventName": "x"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/events/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "eventName": "x"\n        }\'',
       },
     },
   },
@@ -2744,14 +2745,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DataExportTriggerSyncParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.TriggerSync(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'data_export trigger_sync',
+        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().events().dataExport().triggerSync',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.DataExportTriggerSyncParams;\nimport io.stigg.models.v1.events.dataexport.DataExportTriggerSyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DataExportTriggerSyncResponse response = client.v1().events().dataExport().triggerSync();\n    }\n}',
-      },
-      cli: {
-        method: 'data_export trigger_sync',
-        example: "stigg v1:events:data-export trigger-sync \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Events.DataExport.TriggerSync',
@@ -2775,7 +2776,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/data-export/sync \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/data-export/sync \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -2798,14 +2799,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DataExportListModelsParams parameters = new();\n\nvar response = await client.V1.Events.DataExport.ListModels(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'data_export list_models',
+        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().events().dataExport().listModels',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.DataExportListModelsParams;\nimport io.stigg.models.v1.events.dataexport.DataExportListModelsResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DataExportListModelsResponse response = client.v1().events().dataExport().listModels();\n    }\n}',
-      },
-      cli: {
-        method: 'data_export list_models',
-        example: "stigg v1:events:data-export list-models \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Events.DataExport.ListModels',
@@ -2828,7 +2829,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.events.dataExport.listModels();\n\nconsole.log(response.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/data-export/models \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1/data-export/models \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2858,15 +2860,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DestinationCreateParams parameters = new()\n{\n    DestinationID = "x",\n    DestinationType = "x",\n};\n\nvar destination = await client.V1.Events.DataExport.Destinations.Create(parameters);\n\nConsole.WriteLine(destination);',
       },
-      java: {
-        method: 'v1().events().dataExport().destinations().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationCreateParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationCreateParams params = DestinationCreateParams.builder()\n            .destinationId("x")\n            .destinationType("x")\n            .build();\n        DestinationCreateResponse destination = client.v1().events().dataExport().destinations().create(params);\n    }\n}',
-      },
       cli: {
         method: 'destinations create',
         example:
           "stigg v1:events:data-export:destinations create \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --destination-type x",
+      },
+      java: {
+        method: 'v1().events().dataExport().destinations().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationCreateParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationCreateParams params = DestinationCreateParams.builder()\n            .destinationId("x")\n            .destinationType("x")\n            .build();\n        DestinationCreateResponse destination = client.v1().events().dataExport().destinations().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Events.DataExport.Destinations.New',
@@ -2890,7 +2892,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/data-export/destinations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationId": "x",\n          "destinationType": "x"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/data-export/destinations \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "destinationId": "x",\n          "destinationType": "x"\n        }\'',
       },
     },
   },
@@ -2914,15 +2916,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DestinationDeleteParams parameters = new() { DestinationID = "x" };\n\nvar destination = await client.V1.Events.DataExport.Destinations.Delete(parameters);\n\nConsole.WriteLine(destination);',
       },
-      java: {
-        method: 'v1().events().dataExport().destinations().delete',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationDeleteParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationDeleteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationDeleteResponse destination = client.v1().events().dataExport().destinations().delete("x");\n    }\n}',
-      },
       cli: {
         method: 'destinations delete',
         example:
           "stigg v1:events:data-export:destinations delete \\\n  --api-key 'My API Key' \\\n  --destination-id x",
+      },
+      java: {
+        method: 'v1().events().dataExport().destinations().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationDeleteParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationDeleteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationDeleteResponse destination = client.v1().events().dataExport().destinations().delete("x");\n    }\n}',
       },
       go: {
         method: 'client.V1.Events.DataExport.Destinations.Delete',
@@ -2946,7 +2948,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -2976,15 +2978,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'DestinationUpdateSelectionParams parameters = new()\n{\n    DestinationID = "x",\n    EnabledModels =\n    [\n        "x"\n    ],\n    IntegrationID = "x",\n};\n\nvar response = await client.V1.Events.DataExport.Destinations.UpdateSelection(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().events().dataExport().destinations().updateSelection',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateSelectionParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateSelectionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationUpdateSelectionParams params = DestinationUpdateSelectionParams.builder()\n            .destinationId("x")\n            .addEnabledModel("x")\n            .integrationId("x")\n            .build();\n        DestinationUpdateSelectionResponse response = client.v1().events().dataExport().destinations().updateSelection(params);\n    }\n}',
-      },
       cli: {
         method: 'destinations update_selection',
         example:
           "stigg v1:events:data-export:destinations update-selection \\\n  --api-key 'My API Key' \\\n  --destination-id x \\\n  --enabled-model x \\\n  --integration-id x",
+      },
+      java: {
+        method: 'v1().events().dataExport().destinations().updateSelection',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateSelectionParams;\nimport io.stigg.models.v1.events.dataexport.destinations.DestinationUpdateSelectionResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        DestinationUpdateSelectionParams params = DestinationUpdateSelectionParams.builder()\n            .destinationId("x")\n            .addEnabledModel("x")\n            .integrationId("x")\n            .build();\n        DestinationUpdateSelectionResponse response = client.v1().events().dataExport().destinations().updateSelection(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Events.DataExport.Destinations.UpdateSelection',
@@ -3008,7 +3010,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "enabledModels": [\n            "x"\n          ],\n          "integrationId": "x"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/data-export/destinations/$DESTINATION_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "enabledModels": [\n            "x"\n          ],\n          "integrationId": "x"\n        }\'',
       },
     },
   },
@@ -3047,15 +3049,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomerRetrieveGovernanceParams parameters = new() { ID = "id" };\n\nvar response = await client.V1.Events.Beta.Customers.RetrieveGovernance(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().events().beta().customers().retrieveGovernance',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceParams;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveGovernanceResponse response = client.v1().events().beta().customers().retrieveGovernance("id");\n    }\n}',
-      },
       cli: {
         method: 'customers retrieve_governance',
         example:
           "stigg v1:events:beta:customers retrieve-governance \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
+      java: {
+        method: 'v1().events().beta().customers().retrieveGovernance',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceParams;\nimport io.stigg.models.v1.events.beta.customers.CustomerRetrieveGovernanceResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomerRetrieveGovernanceResponse response = client.v1().events().beta().customers().retrieveGovernance("id");\n    }\n}',
       },
       go: {
         method: 'client.V1.Events.Beta.Customers.GetGovernance',
@@ -3079,7 +3081,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3116,14 +3118,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetUsageParams parameters = new() { CustomerID = "customerId" };\n\nvar response = await client.V1.Credits.GetUsage(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'credits get_usage',
+        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       java: {
         method: 'v1().credits().getUsage',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditGetUsageParams;\nimport io.stigg.models.v1.credits.CreditGetUsageResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetUsageParams params = CreditGetUsageParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditGetUsageResponse response = client.v1().credits().getUsage(params);\n    }\n}',
-      },
-      cli: {
-        method: 'credits get_usage',
-        example: "stigg v1:credits get-usage \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       go: {
         method: 'client.V1.Credits.GetUsage',
@@ -3146,7 +3148,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.v1.credits.getUsage({ customerId: 'customerId' });\n\nconsole.log(response.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/credits/usage \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3175,15 +3177,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditGetAutoRechargeParams parameters = new()\n{\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.GetAutoRecharge(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().credits().getAutoRecharge',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditGetAutoRechargeParams;\nimport io.stigg.models.v1.credits.CreditGetAutoRechargeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetAutoRechargeParams params = CreditGetAutoRechargeParams.builder()\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        CreditGetAutoRechargeResponse response = client.v1().credits().getAutoRecharge(params);\n    }\n}',
-      },
       cli: {
         method: 'credits get_auto_recharge',
         example:
           "stigg v1:credits get-auto-recharge \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId \\\n  --customer-id customerId",
+      },
+      java: {
+        method: 'v1().credits().getAutoRecharge',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditGetAutoRechargeParams;\nimport io.stigg.models.v1.credits.CreditGetAutoRechargeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGetAutoRechargeParams params = CreditGetAutoRechargeParams.builder()\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        CreditGetAutoRechargeResponse response = client.v1().credits().getAutoRecharge(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.GetAutoRecharge',
@@ -3207,7 +3209,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/auto-recharge \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/credits/auto-recharge \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3241,14 +3243,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CreditListLedgerParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.ListLedger(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'credits list_ledger',
+        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       java: {
         method: 'v1().credits().listLedger',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.CreditListLedgerPage;\nimport io.stigg.models.v1.credits.CreditListLedgerParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditListLedgerParams params = CreditListLedgerParams.builder()\n            .customerId("customerId")\n            .build();\n        CreditListLedgerPage page = client.v1().credits().listLedger(params);\n    }\n}',
-      },
-      cli: {
-        method: 'credits list_ledger',
-        example: "stigg v1:credits list-ledger \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       go: {
         method: 'client.V1.Credits.ListLedger',
@@ -3271,7 +3273,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const creditListLedgerResponse of client.v1.credits.listLedger({\n  customerId: 'customerId',\n})) {\n  console.log(creditListLedgerResponse.amount);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1/credits/ledger \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3304,14 +3307,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantListParams parameters = new() { CustomerID = "customerId" };\n\nvar page = await client.V1.Credits.Grants.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'grants list',
+        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       java: {
         method: 'v1().credits().grants().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.GrantListPage;\nimport io.stigg.models.v1.credits.grants.GrantListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantListParams params = GrantListParams.builder()\n            .customerId("customerId")\n            .build();\n        GrantListPage page = client.v1().credits().grants().list(params);\n    }\n}',
-      },
-      cli: {
-        method: 'grants list',
-        example: "stigg v1:credits:grants list \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       go: {
         method: 'client.V1.Credits.Grants.List',
@@ -3334,7 +3337,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const grantListResponse of client.v1.credits.grants.list({ customerId: 'customerId' })) {\n  console.log(grantListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1/credits/grants \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3376,15 +3380,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantCreateParams parameters = new()\n{\n    Amount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    DisplayName = "displayName",\n    GrantType = GrantType.Paid,\n};\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Create(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
-      java: {
-        method: 'v1().credits().grants().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.credits.grants.GrantCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantCreateParams params = GrantCreateParams.builder()\n            .amount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .displayName("displayName")\n            .grantType(GrantCreateParams.GrantType.PAID)\n            .build();\n        CreditGrantResponse creditGrantResponse = client.v1().credits().grants().create(params);\n    }\n}',
-      },
       cli: {
         method: 'grants create',
         example:
           "stigg v1:credits:grants create \\\n  --api-key 'My API Key' \\\n  --amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --display-name displayName \\\n  --grant-type PAID",
+      },
+      java: {
+        method: 'v1().credits().grants().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.credits.grants.GrantCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GrantCreateParams params = GrantCreateParams.builder()\n            .amount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .displayName("displayName")\n            .grantType(GrantCreateParams.GrantType.PAID)\n            .build();\n        CreditGrantResponse creditGrantResponse = client.v1().credits().grants().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.Grants.New',
@@ -3408,7 +3412,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/grants \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "displayName": "displayName",\n          "grantType": "PAID"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/credits/grants \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "displayName": "displayName",\n          "grantType": "PAID"\n        }\'',
       },
     },
   },
@@ -3431,14 +3435,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GrantVoidParams parameters = new() { ID = "x" };\n\nvar creditGrantResponse = await client.V1.Credits.Grants.Void(parameters);\n\nConsole.WriteLine(creditGrantResponse);',
       },
+      cli: {
+        method: 'grants void',
+        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().credits().grants().void_',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.grants.CreditGrantResponse;\nimport io.stigg.models.v1.credits.grants.GrantVoidParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CreditGrantResponse creditGrantResponse = client.v1().credits().grants().void_("x");\n    }\n}',
-      },
-      cli: {
-        method: 'grants void',
-        example: "stigg v1:credits:grants void \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Credits.Grants.Void',
@@ -3462,7 +3466,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/grants/$ID/void \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/credits/grants/$ID/void \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3493,14 +3497,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyListParams parameters = new();\n\nvar page = await client.V1.Credits.CustomCurrencies.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'custom_currencies list',
+        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().credits().customCurrencies().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListPage;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListPage page = client.v1().credits().customCurrencies().list();\n    }\n}',
-      },
-      cli: {
-        method: 'custom_currencies list',
-        example: "stigg v1:credits:custom-currencies list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.List',
@@ -3524,7 +3528,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/custom-currencies \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3556,15 +3560,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Create(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      java: {
-        method: 'v1().credits().customCurrencies().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyCreateParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyCreateParams params = CustomCurrencyCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().create(params);\n    }\n}',
-      },
       cli: {
         method: 'custom_currencies create',
         example:
           "stigg v1:credits:custom-currencies create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+      },
+      java: {
+        method: 'v1().credits().customCurrencies().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyCreateParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyCreateParams params = CustomCurrencyCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.New',
@@ -3588,7 +3592,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/custom-currencies \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
       },
     },
   },
@@ -3620,15 +3624,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyUpdateParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Update(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      java: {
-        method: 'v1().credits().customCurrencies().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().update("currencyId");\n    }\n}',
-      },
       cli: {
         method: 'custom_currencies update',
         example:
           "stigg v1:credits:custom-currencies update \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      java: {
+        method: 'v1().credits().customCurrencies().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().update("currencyId");\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.Update',
@@ -3652,7 +3656,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -3676,15 +3680,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyArchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Archive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      java: {
-        method: 'v1().credits().customCurrencies().archive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyArchiveParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().archive("currencyId");\n    }\n}',
-      },
       cli: {
         method: 'custom_currencies archive',
         example:
           "stigg v1:credits:custom-currencies archive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      java: {
+        method: 'v1().credits().customCurrencies().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyArchiveParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().archive("currencyId");\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.Archive',
@@ -3708,7 +3712,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3732,15 +3736,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyUnarchiveParams parameters = new() { CurrencyID = "currencyId" };\n\nvar customCurrencyResponse = await client.V1.Credits.CustomCurrencies.Unarchive(parameters);\n\nConsole.WriteLine(customCurrencyResponse);',
       },
-      java: {
-        method: 'v1().credits().customCurrencies().unarchive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyUnarchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().unarchive("currencyId");\n    }\n}',
-      },
       cli: {
         method: 'custom_currencies unarchive',
         example:
           "stigg v1:credits:custom-currencies unarchive \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      java: {
+        method: 'v1().credits().customCurrencies().unarchive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyResponse;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyUnarchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyResponse customCurrencyResponse = client.v1().credits().customCurrencies().unarchive("currencyId");\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.Unarchive',
@@ -3764,7 +3768,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3787,15 +3791,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'CustomCurrencyListAssociatedEntitiesParams parameters = new()\n{\n    CurrencyID = "currencyId"\n};\n\nvar response = await client.V1.Credits.CustomCurrencies.ListAssociatedEntities(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().credits().customCurrencies().listAssociatedEntities',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListAssociatedEntitiesResponse response = client.v1().credits().customCurrencies().listAssociatedEntities("currencyId");\n    }\n}',
-      },
       cli: {
         method: 'custom_currencies list_associated_entities',
         example:
           "stigg v1:credits:custom-currencies list-associated-entities \\\n  --api-key 'My API Key' \\\n  --currency-id currencyId",
+      },
+      java: {
+        method: 'v1().credits().customCurrencies().listAssociatedEntities',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesParams;\nimport io.stigg.models.v1.credits.customcurrencies.CustomCurrencyListAssociatedEntitiesResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        CustomCurrencyListAssociatedEntitiesResponse response = client.v1().credits().customCurrencies().listAssociatedEntities("currencyId");\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.CustomCurrencies.ListAssociatedEntities',
@@ -3819,7 +3823,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/associated-entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/credits/custom-currencies/$CURRENCY_ID/associated-entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -3853,15 +3857,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ConsumptionConsumeParams parameters = new()\n{\n    Amount = 1,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n    IdempotencyKey = "x",\n};\n\nvar response = await client.V1.Credits.Consumption.Consume(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().credits().consumption().consume',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeParams;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ConsumptionConsumeParams params = ConsumptionConsumeParams.builder()\n            .amount(1.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .idempotencyKey("x")\n            .build();\n        ConsumptionConsumeResponse response = client.v1().credits().consumption().consume(params);\n    }\n}',
-      },
       cli: {
         method: 'consumption consume',
         example:
           "stigg v1:credits:consumption consume \\\n  --api-key 'My API Key' \\\n  --amount 1 \\\n  --currency-id currencyId \\\n  --customer-id customerId \\\n  --idempotency-key x",
+      },
+      java: {
+        method: 'v1().credits().consumption().consume',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeParams;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ConsumptionConsumeParams params = ConsumptionConsumeParams.builder()\n            .amount(1.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .idempotencyKey("x")\n            .build();\n        ConsumptionConsumeResponse response = client.v1().credits().consumption().consume(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.Consumption.Consume',
@@ -3885,7 +3889,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/consumption \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 1,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "idempotencyKey": "x"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/credits/consumption \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "amount": 1,\n          "currencyId": "currencyId",\n          "customerId": "customerId",\n          "idempotencyKey": "x"\n        }\'',
       },
     },
   },
@@ -3912,15 +3916,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ConsumptionConsumeAsyncParams parameters = new()\n{\n    Consumptions =\n    [\n        new()\n        {\n            Amount = 1,\n            CurrencyID = "currencyId",\n            CustomerID = "customerId",\n            IdempotencyKey = "x",\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            ResourceID = "resourceId",\n        },\n    ],\n};\n\nvar response = await client.V1.Credits.Consumption.ConsumeAsync(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().credits().consumption().consumeAsync',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeAsyncParams;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeAsyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ConsumptionConsumeAsyncParams params = ConsumptionConsumeAsyncParams.builder()\n            .addConsumption(ConsumptionConsumeAsyncParams.Consumption.builder()\n                .amount(1.0)\n                .currencyId("currencyId")\n                .customerId("customerId")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        ConsumptionConsumeAsyncResponse response = client.v1().credits().consumption().consumeAsync(params);\n    }\n}',
-      },
       cli: {
         method: 'consumption consume_async',
         example:
           "stigg v1:credits:consumption consume-async \\\n  --api-key 'My API Key' \\\n  --consumption '{amount: 1, currencyId: currencyId, customerId: customerId, idempotencyKey: x}'",
+      },
+      java: {
+        method: 'v1().credits().consumption().consumeAsync',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeAsyncParams;\nimport io.stigg.models.v1.credits.consumption.ConsumptionConsumeAsyncResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ConsumptionConsumeAsyncParams params = ConsumptionConsumeAsyncParams.builder()\n            .addConsumption(ConsumptionConsumeAsyncParams.Consumption.builder()\n                .amount(1.0)\n                .currencyId("currencyId")\n                .customerId("customerId")\n                .idempotencyKey("x")\n                .build())\n            .build();\n        ConsumptionConsumeAsyncResponse response = client.v1().credits().consumption().consumeAsync(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.Consumption.ConsumeAsync',
@@ -3944,7 +3948,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/consumption/async \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumptions": [\n            {\n              "amount": 1,\n              "currencyId": "currencyId",\n              "customerId": "customerId",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/credits/consumption/async \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumptions": [\n            {\n              "amount": 1,\n              "currencyId": "currencyId",\n              "customerId": "customerId",\n              "idempotencyKey": "x"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -3976,15 +3980,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ReservationReleaseParams parameters = new()\n{\n    ReservationID = "x",\n    ConsumedAmount = 0,\n    CurrencyID = "currencyId",\n    CustomerID = "customerId",\n};\n\nvar response = await client.V1.Credits.Reservations.Release(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().credits().reservations().release',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.reservations.ReservationReleaseParams;\nimport io.stigg.models.v1.credits.reservations.ReservationReleaseResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ReservationReleaseParams params = ReservationReleaseParams.builder()\n            .reservationId("x")\n            .consumedAmount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        ReservationReleaseResponse response = client.v1().credits().reservations().release(params);\n    }\n}',
-      },
       cli: {
         method: 'reservations release',
         example:
           "stigg v1:credits:reservations release \\\n  --api-key 'My API Key' \\\n  --reservation-id x \\\n  --consumed-amount 0 \\\n  --currency-id currencyId \\\n  --customer-id customerId",
+      },
+      java: {
+        method: 'v1().credits().reservations().release',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.credits.reservations.ReservationReleaseParams;\nimport io.stigg.models.v1.credits.reservations.ReservationReleaseResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ReservationReleaseParams params = ReservationReleaseParams.builder()\n            .reservationId("x")\n            .consumedAmount(0.0)\n            .currencyId("currencyId")\n            .customerId("customerId")\n            .build();\n        ReservationReleaseResponse response = client.v1().credits().reservations().release(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Credits.Reservations.Release',
@@ -4008,7 +4012,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/credits/reservations/$RESERVATION_ID/release \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumedAmount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/credits/reservations/$RESERVATION_ID/release \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "consumedAmount": 0,\n          "currencyId": "currencyId",\n          "customerId": "customerId"\n        }\'',
       },
     },
   },
@@ -4031,14 +4035,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureRetrieveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.RetrieveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features retrieve_feature',
+        example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().features().retrieveFeature',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureRetrieveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().retrieveFeature("x");\n    }\n}',
-      },
-      cli: {
-        method: 'features retrieve_feature',
-        example: "stigg v1:features retrieve-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.GetFeature',
@@ -4061,7 +4065,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst feature = await client.v1.features.retrieveFeature('x');\n\nconsole.log(feature.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/features/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/features/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4097,14 +4101,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUpdateFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UpdateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features update_feature',
+        example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().features().updateFeature',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureUpdateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().updateFeature("x");\n    }\n}',
-      },
-      cli: {
-        method: 'features update_feature',
-        example: "stigg v1:features update-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.UpdateFeature',
@@ -4128,7 +4132,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/features/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/features/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -4166,15 +4170,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureCreateFeatureParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    FeatureType = FeatureType.Boolean,\n};\n\nvar feature = await client.V1.Features.CreateFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
-      java: {
-        method: 'v1().features().createFeature',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureCreateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureCreateFeatureParams params = FeatureCreateFeatureParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .featureType(FeatureCreateFeatureParams.FeatureType.BOOLEAN)\n            .build();\n        Feature feature = client.v1().features().createFeature(params);\n    }\n}',
-      },
       cli: {
         method: 'features create_feature',
         example:
           "stigg v1:features create-feature \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --feature-type BOOLEAN",
+      },
+      java: {
+        method: 'v1().features().createFeature',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureCreateFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureCreateFeatureParams params = FeatureCreateFeatureParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .featureType(FeatureCreateFeatureParams.FeatureType.BOOLEAN)\n            .build();\n        Feature feature = client.v1().features().createFeature(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Features.NewFeature',
@@ -4198,7 +4202,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/features \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "featureType": "BOOLEAN"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/features \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "featureType": "BOOLEAN"\n        }\'',
       },
     },
   },
@@ -4232,14 +4236,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureListFeaturesParams parameters = new();\n\nvar page = await client.V1.Features.ListFeatures(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'features list_features',
+        example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().features().listFeatures',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.FeatureListFeaturesPage;\nimport io.stigg.models.v1.features.FeatureListFeaturesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        FeatureListFeaturesPage page = client.v1().features().listFeatures();\n    }\n}',
-      },
-      cli: {
-        method: 'features list_features',
-        example: "stigg v1:features list-features \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Features.ListFeatures',
@@ -4262,7 +4266,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const featureListFeaturesResponse of client.v1.features.listFeatures()) {\n  console.log(featureListFeaturesResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/features \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/features \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4285,14 +4289,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureArchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.ArchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features archive_feature',
+        example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().features().archiveFeature',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureArchiveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().archiveFeature("x");\n    }\n}',
-      },
-      cli: {
-        method: 'features archive_feature',
-        example: "stigg v1:features archive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.ArchiveFeature',
@@ -4316,7 +4320,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/features/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/features/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4339,14 +4343,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'FeatureUnarchiveFeatureParams parameters = new() { ID = "x" };\n\nvar feature = await client.V1.Features.UnarchiveFeature(parameters);\n\nConsole.WriteLine(feature);',
       },
+      cli: {
+        method: 'features unarchive_feature',
+        example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().features().unarchiveFeature',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.features.Feature;\nimport io.stigg.models.v1.features.FeatureUnarchiveFeatureParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Feature feature = client.v1().features().unarchiveFeature("x");\n    }\n}',
-      },
-      cli: {
-        method: 'features unarchive_feature',
-        example: "stigg v1:features unarchive-feature \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Features.UnarchiveFeature',
@@ -4370,7 +4374,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/features/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/features/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4402,14 +4406,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonListParams parameters = new();\n\nvar page = await client.V1.Addons.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'addons list',
+        example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().addons().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonListPage;\nimport io.stigg.models.v1.addons.AddonListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonListPage page = client.v1().addons().list();\n    }\n}',
-      },
-      cli: {
-        method: 'addons list',
-        example: "stigg v1:addons list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Addons.List',
@@ -4432,7 +4436,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const addonListResponse of client.v1.addons.list()) {\n  console.log(addonListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/addons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/addons \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4467,15 +4471,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar addon = await client.V1.Addons.Create(parameters);\n\nConsole.WriteLine(addon);',
       },
-      java: {
-        method: 'v1().addons().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonCreateParams params = AddonCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Addon addon = client.v1().addons().create(params);\n    }\n}',
-      },
       cli: {
         method: 'addons create',
         example:
           "stigg v1:addons create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
+      },
+      java: {
+        method: 'v1().addons().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonCreateParams params = AddonCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Addon addon = client.v1().addons().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Addons.New',
@@ -4499,7 +4503,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/addons \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
       },
     },
   },
@@ -4522,14 +4526,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonRetrieveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Retrieve(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons retrieve',
+        example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().addons().retrieve',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().retrieve("x");\n    }\n}',
-      },
-      cli: {
-        method: 'addons retrieve',
-        example: "stigg v1:addons retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.Get',
@@ -4552,7 +4556,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst addon = await client.v1.addons.retrieve('x');\n\nconsole.log(addon.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/addons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/addons/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4587,14 +4591,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonUpdateParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Update(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons update',
+        example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().addons().update',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().update("x");\n    }\n}',
-      },
-      cli: {
-        method: 'addons update',
-        example: "stigg v1:addons update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.Update',
@@ -4618,7 +4622,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/addons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/addons/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -4641,14 +4645,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonArchiveParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.Archive(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons archive',
+        example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().addons().archive',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonArchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().archive("x");\n    }\n}',
-      },
-      cli: {
-        method: 'addons archive',
-        example: "stigg v1:addons archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.Archive',
@@ -4672,7 +4676,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4700,15 +4704,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Addons.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().addons().publish',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonPublishParams;\nimport io.stigg.models.v1.addons.AddonPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonPublishParams params = AddonPublishParams.builder()\n            .id("x")\n            .migrationType(AddonPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        AddonPublishResponse response = client.v1().addons().publish(params);\n    }\n}',
-      },
       cli: {
         method: 'addons publish',
         example:
           "stigg v1:addons publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
+      },
+      java: {
+        method: 'v1().addons().publish',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonPublishParams;\nimport io.stigg.models.v1.addons.AddonPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonPublishParams params = AddonPublishParams.builder()\n            .id("x")\n            .migrationType(AddonPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        AddonPublishResponse response = client.v1().addons().publish(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Addons.Publish',
@@ -4732,7 +4736,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
       },
     },
   },
@@ -4755,14 +4759,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonCreateDraftParams parameters = new() { ID = "x" };\n\nvar addon = await client.V1.Addons.CreateDraft(parameters);\n\nConsole.WriteLine(addon);',
       },
+      cli: {
+        method: 'addons create_draft',
+        example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().addons().createDraft',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.Addon;\nimport io.stigg.models.v1.addons.AddonCreateDraftParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Addon addon = client.v1().addons().createDraft("x");\n    }\n}',
-      },
-      cli: {
-        method: 'addons create_draft',
-        example: "stigg v1:addons create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.NewDraft',
@@ -4786,7 +4790,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4808,14 +4812,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Addons.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'addons remove_draft',
+        example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().addons().removeDraft',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonRemoveDraftParams;\nimport io.stigg.models.v1.addons.AddonRemoveDraftResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonRemoveDraftResponse response = client.v1().addons().removeDraft("x");\n    }\n}',
-      },
-      cli: {
-        method: 'addons remove_draft',
-        example: "stigg v1:addons remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.RemoveDraft',
@@ -4839,7 +4843,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4869,14 +4873,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AddonListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Addons.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'addons list_charges',
+        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().addons().listCharges',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.AddonListChargesPage;\nimport io.stigg.models.v1.addons.AddonListChargesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AddonListChargesPage page = client.v1().addons().listCharges("x");\n    }\n}',
-      },
-      cli: {
-        method: 'addons list_charges',
-        example: "stigg v1:addons list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Addons.ListCharges',
@@ -4899,7 +4903,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const addonListChargesResponse of client.v1.addons.listCharges('x')) {\n  console.log(addonListChargesResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/addons/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1/addons/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4922,14 +4927,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementListParams parameters = new() { AddonID = "addonId" };\n\nvar entitlements = await client.V1.Addons.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
+      cli: {
+        method: 'entitlements list',
+        example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
+      },
       java: {
         method: 'v1().addons().entitlements().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementListParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementListResponse entitlements = client.v1().addons().entitlements().list("addonId");\n    }\n}',
-      },
-      cli: {
-        method: 'entitlements list',
-        example: "stigg v1:addons:entitlements list \\\n  --api-key 'My API Key' \\\n  --addon-id addonId",
       },
       go: {
         method: 'client.V1.Addons.Entitlements.List',
@@ -4953,7 +4958,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -4981,15 +4986,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCreateParams parameters = new()\n{\n    AddonID = "addonId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Addons.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
-      java: {
-        method: 'v1().addons().entitlements().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .addonId("addonId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().addons().entitlements().create(params);\n    }\n}',
-      },
       cli: {
         method: 'entitlements create',
         example:
           "stigg v1:addons:entitlements create \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --entitlement '{id: id, type: FEATURE}'",
+      },
+      java: {
+        method: 'v1().addons().entitlements().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.addons.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .addonId("addonId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().addons().entitlements().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Addons.Entitlements.New',
@@ -5013,7 +5018,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -5040,15 +5045,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Update(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
-      java: {
-        method: 'v1().addons().entitlements().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().update(params);\n    }\n}',
-      },
       cli: {
         method: 'entitlements update',
         example:
           "stigg v1:addons:entitlements update \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id \\\n  --type FEATURE",
+      },
+      java: {
+        method: 'v1().addons().entitlements().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().update(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Addons.Entitlements.Update',
@@ -5072,7 +5077,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
       },
     },
   },
@@ -5095,15 +5100,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    AddonID = "addonId",\n    ID = "id",\n};\n\nvar addonPackageEntitlement = await client.V1.Addons.Entitlements.Delete(parameters);\n\nConsole.WriteLine(addonPackageEntitlement);',
       },
-      java: {
-        method: 'v1().addons().entitlements().delete',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().delete(params);\n    }\n}',
-      },
       cli: {
         method: 'entitlements delete',
         example:
           "stigg v1:addons:entitlements delete \\\n  --api-key 'My API Key' \\\n  --addon-id addonId \\\n  --id id",
+      },
+      java: {
+        method: 'v1().addons().entitlements().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.addons.entitlements.AddonPackageEntitlement;\nimport io.stigg.models.v1.addons.entitlements.EntitlementDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .addonId("addonId")\n            .id("id")\n            .build();\n        AddonPackageEntitlement addonPackageEntitlement = client.v1().addons().entitlements().delete(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Addons.Entitlements.Delete',
@@ -5127,7 +5132,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/addons/$ADDON_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5163,15 +5168,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n    ProductID = "productId",\n};\n\nvar plan = await client.V1.Plans.Create(parameters);\n\nConsole.WriteLine(plan);',
       },
-      java: {
-        method: 'v1().plans().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanCreateParams params = PlanCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Plan plan = client.v1().plans().create(params);\n    }\n}',
-      },
       cli: {
         method: 'plans create',
         example:
           "stigg v1:plans create \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName \\\n  --product-id productId",
+      },
+      java: {
+        method: 'v1().plans().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanCreateParams params = PlanCreateParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .productId("productId")\n            .build();\n        Plan plan = client.v1().plans().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Plans.New',
@@ -5195,7 +5200,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName",\n          "productId": "productId"\n        }\'',
       },
     },
   },
@@ -5227,14 +5232,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListParams parameters = new();\n\nvar page = await client.V1.Plans.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'plans list',
+        example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().plans().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListPage;\nimport io.stigg.models.v1.plans.PlanListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListPage page = client.v1().plans().list();\n    }\n}',
-      },
-      cli: {
-        method: 'plans list',
-        example: "stigg v1:plans list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Plans.List',
@@ -5257,7 +5262,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const planListResponse of client.v1.plans.list()) {\n  console.log(planListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/plans \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/plans \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5280,14 +5285,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanRetrieveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans retrieve',
+        example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().retrieve',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().retrieve("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans retrieve',
-        example: "stigg v1:plans retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.Get',
@@ -5310,7 +5315,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.v1.plans.retrieve('x');\n\nconsole.log(plan.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/plans/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/plans/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5345,14 +5350,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanUpdateParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Update(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans update',
+        example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().update',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().update("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans update',
-        example: "stigg v1:plans update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.Update',
@@ -5376,7 +5381,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -5399,14 +5404,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanArchiveParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.Archive(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans archive',
+        example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().archive',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanArchiveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().archive("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans archive',
-        example: "stigg v1:plans archive \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.Archive',
@@ -5430,7 +5435,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/plans/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5458,15 +5463,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanPublishParams parameters = new()\n{\n    ID = "x",\n    MigrationType = MigrationType.NewCustomers,\n};\n\nvar response = await client.V1.Plans.Publish(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().plans().publish',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanPublishParams;\nimport io.stigg.models.v1.plans.PlanPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanPublishParams params = PlanPublishParams.builder()\n            .id("x")\n            .migrationType(PlanPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        PlanPublishResponse response = client.v1().plans().publish(params);\n    }\n}',
-      },
       cli: {
         method: 'plans publish',
         example:
           "stigg v1:plans publish \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --migration-type NEW_CUSTOMERS",
+      },
+      java: {
+        method: 'v1().plans().publish',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanPublishParams;\nimport io.stigg.models.v1.plans.PlanPublishResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanPublishParams params = PlanPublishParams.builder()\n            .id("x")\n            .migrationType(PlanPublishParams.MigrationType.NEW_CUSTOMERS)\n            .build();\n        PlanPublishResponse response = client.v1().plans().publish(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Plans.Publish',
@@ -5490,7 +5495,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/plans/$ID/publish \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "migrationType": "NEW_CUSTOMERS"\n        }\'',
       },
     },
   },
@@ -5513,14 +5518,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanCreateDraftParams parameters = new() { ID = "x" };\n\nvar plan = await client.V1.Plans.CreateDraft(parameters);\n\nConsole.WriteLine(plan);',
       },
+      cli: {
+        method: 'plans create_draft',
+        example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().createDraft',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.Plan;\nimport io.stigg.models.v1.plans.PlanCreateDraftParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Plan plan = client.v1().plans().createDraft("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans create_draft',
-        example: "stigg v1:plans create-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.NewDraft',
@@ -5544,7 +5549,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/plans/$ID/draft \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5566,14 +5571,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanRemoveDraftParams parameters = new() { ID = "x" };\n\nvar response = await client.V1.Plans.RemoveDraft(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'plans remove_draft',
+        example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().removeDraft',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanRemoveDraftParams;\nimport io.stigg.models.v1.plans.PlanRemoveDraftResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanRemoveDraftResponse response = client.v1().plans().removeDraft("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans remove_draft',
-        example: "stigg v1:plans remove-draft \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.RemoveDraft',
@@ -5597,7 +5602,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/plans/$ID/draft \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5627,14 +5632,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'plans list_charges',
+        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().listCharges',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListChargesPage;\nimport io.stigg.models.v1.plans.PlanListChargesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListChargesPage page = client.v1().plans().listCharges("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans list_charges',
-        example: "stigg v1:plans list-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.ListCharges',
@@ -5657,7 +5662,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const planListChargesResponse of client.v1.plans.listCharges('x')) {\n  console.log(planListChargesResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/plans/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1/plans/$ID/charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5687,14 +5693,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'PlanListOverageChargesParams parameters = new() { ID = "x" };\n\nvar page = await client.V1.Plans.ListOverageCharges(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'plans list_overage_charges',
+        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().plans().listOverageCharges',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.PlanListOverageChargesPage;\nimport io.stigg.models.v1.plans.PlanListOverageChargesParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        PlanListOverageChargesPage page = client.v1().plans().listOverageCharges("x");\n    }\n}',
-      },
-      cli: {
-        method: 'plans list_overage_charges',
-        example: "stigg v1:plans list-overage-charges \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Plans.ListOverageCharges',
@@ -5718,7 +5724,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$ID/overage-charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/plans/$ID/overage-charges \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5741,14 +5747,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementListParams parameters = new() { PlanID = "planId" };\n\nvar entitlements = await client.V1.Plans.Entitlements.List(parameters);\n\nConsole.WriteLine(entitlements);',
       },
+      cli: {
+        method: 'entitlements list',
+        example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
+      },
       java: {
         method: 'v1().plans().entitlements().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementListParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementListResponse entitlements = client.v1().plans().entitlements().list("planId");\n    }\n}',
-      },
-      cli: {
-        method: 'entitlements list',
-        example: "stigg v1:plans:entitlements list \\\n  --api-key 'My API Key' \\\n  --plan-id planId",
       },
       go: {
         method: 'client.V1.Plans.Entitlements.List',
@@ -5772,7 +5778,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5800,15 +5806,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCreateParams parameters = new()\n{\n    PlanID = "planId",\n    Entitlements =\n    [\n        new Feature()\n        {\n            ID = "id",\n            Behavior = Behavior.Increment,\n            Description = "description",\n            DisplayNameOverride = "displayNameOverride",\n            EnumValues =\n            [\n                "string"\n            ],\n            HasSoftLimit = true,\n            HasUnlimitedUsage = true,\n            HiddenFromWidgets =\n            [\n                HiddenFromWidget.Paywall\n            ],\n            IsCustom = true,\n            IsGranted = true,\n            MonthlyResetPeriodConfiguration = new(\n                AccordingTo.SubscriptionStart\n            ),\n            Order = 0,\n            ResetPeriod = ResetPeriod.Year,\n            UsageLimit = 0,\n            WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n            YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        },\n    ],\n};\n\nvar entitlement = await client.V1.Plans.Entitlements.Create(parameters);\n\nConsole.WriteLine(entitlement);',
       },
-      java: {
-        method: 'v1().plans().entitlements().create',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .planId("planId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().plans().entitlements().create(params);\n    }\n}',
-      },
       cli: {
         method: 'entitlements create',
         example:
           "stigg v1:plans:entitlements create \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --entitlement '{id: id, type: FEATURE}'",
+      },
+      java: {
+        method: 'v1().plans().entitlements().create',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateParams;\nimport io.stigg.models.v1.plans.entitlements.EntitlementCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCreateParams params = EntitlementCreateParams.builder()\n            .planId("planId")\n            .addFeatureEntitlement("id")\n            .build();\n        EntitlementCreateResponse entitlement = client.v1().plans().entitlements().create(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Plans.Entitlements.New',
@@ -5832,7 +5838,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entitlements": [\n            {\n              "id": "id",\n              "type": "FEATURE"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -5859,15 +5865,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementUpdateParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n    Body = new Feature()\n    {\n        Behavior = Behavior.Increment,\n        Description = "description",\n        DisplayNameOverride = "displayNameOverride",\n        EnumValues =\n        [\n            "string"\n        ],\n        HasSoftLimit = true,\n        HasUnlimitedUsage = true,\n        HiddenFromWidgets =\n        [\n            HiddenFromWidget.Paywall\n        ],\n        IsCustom = true,\n        IsGranted = true,\n        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        Order = 0,\n        ResetPeriod = ResetPeriod.Year,\n        UsageLimit = 0,\n        WeeklyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n        YearlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),\n    },\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Update(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
-      java: {
-        method: 'v1().plans().entitlements().update',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementUpdateParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .planId("planId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().update(params);\n    }\n}',
-      },
       cli: {
         method: 'entitlements update',
         example:
           "stigg v1:plans:entitlements update \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id \\\n  --type FEATURE",
+      },
+      java: {
+        method: 'v1().plans().entitlements().update',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementUpdateParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementUpdateParams params = EntitlementUpdateParams.builder()\n            .planId("planId")\n            .id("id")\n            .body(EntitlementUpdateParams.Body.Feature.builder().build())\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().update(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Plans.Entitlements.Update',
@@ -5891,7 +5897,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "type": "FEATURE"\n        }\'',
       },
     },
   },
@@ -5914,15 +5920,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementDeleteParams parameters = new()\n{\n    PlanID = "planId",\n    ID = "id",\n};\n\nvar planEntitlement = await client.V1.Plans.Entitlements.Delete(parameters);\n\nConsole.WriteLine(planEntitlement);',
       },
-      java: {
-        method: 'v1().plans().entitlements().delete',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementDeleteParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .planId("planId")\n            .id("id")\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().delete(params);\n    }\n}',
-      },
       cli: {
         method: 'entitlements delete',
         example:
           "stigg v1:plans:entitlements delete \\\n  --api-key 'My API Key' \\\n  --plan-id planId \\\n  --id id",
+      },
+      java: {
+        method: 'v1().plans().entitlements().delete',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.plans.entitlements.EntitlementDeleteParams;\nimport io.stigg.models.v1.plans.entitlements.PlanEntitlement;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementDeleteParams params = EntitlementDeleteParams.builder()\n            .planId("planId")\n            .id("id")\n            .build();\n        PlanEntitlement planEntitlement = client.v1().plans().entitlements().delete(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Plans.Entitlements.Delete',
@@ -5946,7 +5952,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/plans/$PLAN_ID/entitlements/$ID \\\n    -X DELETE \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -5974,15 +5980,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V1.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().usage().report',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageReportParams;\nimport io.stigg.models.v1.usage.UsageReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageReportParams params = UsageReportParams.builder()\n            .addUsage(UsageReportParams.Usage.builder()\n                .customerId("customerId")\n                .featureId("featureId")\n                .value(-9007199254740991.0)\n                .build())\n            .build();\n        UsageReportResponse response = client.v1().usage().report(params);\n    }\n}',
-      },
       cli: {
         method: 'usage report',
         example:
           "stigg v1:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
+      },
+      java: {
+        method: 'v1().usage().report',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageReportParams;\nimport io.stigg.models.v1.usage.UsageReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageReportParams params = UsageReportParams.builder()\n            .addUsage(UsageReportParams.Usage.builder()\n                .customerId("customerId")\n                .featureId("featureId")\n                .value(-9007199254740991.0)\n                .build())\n            .build();\n        UsageReportResponse response = client.v1().usage().report(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Usage.Report',
@@ -6006,7 +6012,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -6038,15 +6044,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageHistoryParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n};\n\nvar response = await client.V1.Usage.History(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().usage().history',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageHistoryParams;\nimport io.stigg.models.v1.usage.UsageHistoryResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageHistoryParams params = UsageHistoryParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .startDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n            .build();\n        UsageHistoryResponse response = client.v1().usage().history(params);\n    }\n}',
-      },
       cli: {
         method: 'usage history',
         example:
           "stigg v1:usage history \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --start-date \"'2019-12-27T18:11:19.117Z'\"",
+      },
+      java: {
+        method: 'v1().usage().history',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageHistoryParams;\nimport io.stigg.models.v1.usage.UsageHistoryResponse;\nimport java.time.OffsetDateTime;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageHistoryParams params = UsageHistoryParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .startDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))\n            .build();\n        UsageHistoryResponse response = client.v1().usage().history(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Usage.History',
@@ -6070,7 +6076,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/usage/$CUSTOMER_ID/history/$FEATURE_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6103,15 +6109,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageEstimateParams parameters = new()\n{\n    CustomerID = "customerId",\n    FeatureID = "featureId",\n    Value = -9007199254740991,\n};\n\nvar response = await client.V1.Usage.Estimate(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1().usage().estimate',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageEstimateParams;\nimport io.stigg.models.v1.usage.UsageEstimateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageEstimateParams params = UsageEstimateParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .value(-9007199254740991.0)\n            .build();\n        UsageEstimateResponse response = client.v1().usage().estimate(params);\n    }\n}',
-      },
       cli: {
         method: 'usage estimate',
         example:
           "stigg v1:usage estimate \\\n  --api-key 'My API Key' \\\n  --customer-id customerId \\\n  --feature-id featureId \\\n  --value -9007199254740991",
+      },
+      java: {
+        method: 'v1().usage().estimate',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.usage.UsageEstimateParams;\nimport io.stigg.models.v1.usage.UsageEstimateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageEstimateParams params = UsageEstimateParams.builder()\n            .customerId("customerId")\n            .featureId("featureId")\n            .value(-9007199254740991.0)\n            .build();\n        UsageEstimateResponse response = client.v1().usage().estimate(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Usage.Estimate',
@@ -6135,7 +6141,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/usage/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "featureId": "featureId",\n          "value": -9007199254740991\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/usage/estimate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId",\n          "featureId": "featureId",\n          "value": -9007199254740991\n        }\'',
       },
     },
   },
@@ -6167,14 +6173,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductListProductsParams parameters = new();\n\nvar page = await client.V1.Products.ListProducts(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'products list_products',
+        example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().products().listProducts',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.ProductListProductsPage;\nimport io.stigg.models.v1.products.ProductListProductsParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductListProductsPage page = client.v1().products().listProducts();\n    }\n}',
-      },
-      cli: {
-        method: 'products list_products',
-        example: "stigg v1:products list-products \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Products.ListProducts',
@@ -6197,7 +6203,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const productListProductsResponse of client.v1.products.listProducts()) {\n  console.log(productListProductsResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/products \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/products \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6228,15 +6234,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductCreateProductParams parameters = new()\n{\n    ID = "id",\n    DisplayName = "displayName",\n};\n\nvar product = await client.V1.Products.CreateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      java: {
-        method: 'v1().products().createProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductCreateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductCreateProductParams params = ProductCreateProductParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        Product product = client.v1().products().createProduct(params);\n    }\n}',
-      },
       cli: {
         method: 'products create_product',
         example:
           "stigg v1:products create-product \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --display-name displayName",
+      },
+      java: {
+        method: 'v1().products().createProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductCreateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductCreateProductParams params = ProductCreateProductParams.builder()\n            .id("id")\n            .displayName("displayName")\n            .build();\n        Product product = client.v1().products().createProduct(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Products.NewProduct',
@@ -6260,7 +6266,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "displayName": "displayName"\n        }\'',
       },
     },
   },
@@ -6293,14 +6299,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUpdateProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UpdateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
+      cli: {
+        method: 'products update_product',
+        example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().products().updateProduct',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductUpdateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().updateProduct("x");\n    }\n}',
-      },
-      cli: {
-        method: 'products update_product',
-        example: "stigg v1:products update-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Products.UpdateProduct',
@@ -6324,7 +6330,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/products/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/products/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -6347,14 +6353,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductArchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.ArchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
+      cli: {
+        method: 'products archive_product',
+        example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().products().archiveProduct',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductArchiveProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().archiveProduct("x");\n    }\n}',
-      },
-      cli: {
-        method: 'products archive_product',
-        example: "stigg v1:products archive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Products.ArchiveProduct',
@@ -6378,7 +6384,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/products/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/products/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6401,14 +6407,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductUnarchiveProductParams parameters = new() { ID = "x" };\n\nvar product = await client.V1.Products.UnarchiveProduct(parameters);\n\nConsole.WriteLine(product);',
       },
+      cli: {
+        method: 'products unarchive_product',
+        example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().products().unarchiveProduct',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductUnarchiveProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        Product product = client.v1().products().unarchiveProduct("x");\n    }\n}',
-      },
-      cli: {
-        method: 'products unarchive_product',
-        example: "stigg v1:products unarchive-product \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Products.UnarchiveProduct',
@@ -6432,7 +6438,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/products/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/products/$ID/unarchive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6462,15 +6468,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ProductDuplicateProductParams parameters = new()\n{\n    ID = "x",\n    TargetID = "targetId",\n};\n\nvar product = await client.V1.Products.DuplicateProduct(parameters);\n\nConsole.WriteLine(product);',
       },
-      java: {
-        method: 'v1().products().duplicateProduct',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductDuplicateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductDuplicateProductParams params = ProductDuplicateProductParams.builder()\n            .id("x")\n            .targetId("targetId")\n            .build();\n        Product product = client.v1().products().duplicateProduct(params);\n    }\n}',
-      },
       cli: {
         method: 'products duplicate_product',
         example:
           "stigg v1:products duplicate-product \\\n  --api-key 'My API Key' \\\n  --id x \\\n  --target-id targetId",
+      },
+      java: {
+        method: 'v1().products().duplicateProduct',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.products.Product;\nimport io.stigg.models.v1.products.ProductDuplicateProductParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ProductDuplicateProductParams params = ProductDuplicateProductParams.builder()\n            .id("x")\n            .targetId("targetId")\n            .build();\n        Product product = client.v1().products().duplicateProduct(params);\n    }\n}',
       },
       go: {
         method: 'client.V1.Products.DuplicateProduct',
@@ -6494,7 +6500,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/products/$ID/duplicate \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "targetId": "targetId"\n        }\'',
       },
     },
   },
@@ -6527,14 +6533,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractListParams parameters = new();\n\nvar page = await client.V1.Contracts.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'contracts list',
+        example: "stigg v1:contracts list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1().contracts().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.contracts.ContractListPage;\nimport io.stigg.models.v1.contracts.ContractListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ContractListPage page = client.v1().contracts().list();\n    }\n}',
-      },
-      cli: {
-        method: 'contracts list',
-        example: "stigg v1:contracts list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1.Contracts.List',
@@ -6557,7 +6563,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const contractListResponse of client.v1.contracts.list()) {\n  console.log(contractListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/contracts \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/contracts \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6592,14 +6598,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractCreateParams parameters = new() { CustomerID = "customerId" };\n\nvar contract = await client.V1.Contracts.Create(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts create',
+        example: "stigg v1:contracts create \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
+      },
       java: {
         method: 'v1().contracts().create',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.contracts.ContractCreateParams;\nimport io.stigg.models.v1.contracts.ContractCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ContractCreateParams params = ContractCreateParams.builder()\n            .customerId("customerId")\n            .build();\n        ContractCreateResponse contract = client.v1().contracts().create(params);\n    }\n}',
-      },
-      cli: {
-        method: 'contracts create',
-        example: "stigg v1:contracts create \\\n  --api-key 'My API Key' \\\n  --customer-id customerId",
       },
       go: {
         method: 'client.V1.Contracts.New',
@@ -6623,7 +6629,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/contracts \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId"\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1/contracts \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "customerId": "customerId"\n        }\'',
       },
     },
   },
@@ -6647,14 +6653,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractRetrieveParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Retrieve(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts retrieve',
+        example: "stigg v1:contracts retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().contracts().retrieve',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.contracts.ContractRetrieveParams;\nimport io.stigg.models.v1.contracts.ContractRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ContractRetrieveResponse contract = client.v1().contracts().retrieve("x");\n    }\n}',
-      },
-      cli: {
-        method: 'contracts retrieve',
-        example: "stigg v1:contracts retrieve \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Contracts.Get',
@@ -6677,7 +6683,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\nconst contract = await client.v1.contracts.retrieve('x');\n\nconsole.log(contract.data);",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1/contracts/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example: 'curl https://edge.api.stigg.io/api/v1/contracts/$ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6711,14 +6717,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractUpdateParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Update(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts update',
+        example: "stigg v1:contracts update \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().contracts().update',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.contracts.ContractUpdateParams;\nimport io.stigg.models.v1.contracts.ContractUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ContractUpdateResponse contract = client.v1().contracts().update("x");\n    }\n}',
-      },
-      cli: {
-        method: 'contracts update',
-        example: "stigg v1:contracts update \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Contracts.Update',
@@ -6742,7 +6748,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          "curl https://api.stigg.io/api/v1/contracts/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
+          "curl https://edge.api.stigg.io/api/v1/contracts/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-API-KEY: $STIGG_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -6766,14 +6772,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'ContractDeleteParams parameters = new() { ID = "x" };\n\nvar contract = await client.V1.Contracts.Delete(parameters);\n\nConsole.WriteLine(contract);',
       },
+      cli: {
+        method: 'contracts delete',
+        example: "stigg v1:contracts delete \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1().contracts().delete',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.contracts.ContractDeleteParams;\nimport io.stigg.models.v1.contracts.ContractDeleteResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        ContractDeleteResponse contract = client.v1().contracts().delete("x");\n    }\n}',
-      },
-      cli: {
-        method: 'contracts delete',
-        example: "stigg v1:contracts delete \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1.Contracts.Delete',
@@ -6797,7 +6803,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1/contracts/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1/contracts/$ID/archive \\\n    -X POST \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6831,14 +6837,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntitlementCheckParams parameters = new() { ID = "x" };\n\nvar response = await client.V1Beta.Customers.Entitlements.Check(parameters);\n\nConsole.WriteLine(response);',
       },
+      cli: {
+        method: 'entitlements check',
+        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
+      },
       java: {
         method: 'v1Beta().customers().entitlements().check',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entitlements.EntitlementCheckParams;\nimport io.stigg.models.v1beta.customers.entitlements.EntitlementCheckResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntitlementCheckResponse response = client.v1Beta().customers().entitlements().check("x");\n    }\n}',
-      },
-      cli: {
-        method: 'entitlements check',
-        example: "stigg v1-beta:customers:entitlements check \\\n  --api-key 'My API Key' \\\n  --id x",
       },
       go: {
         method: 'client.V1Beta.Customers.Entitlements.Check',
@@ -6862,7 +6868,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entitlements/check \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6894,14 +6900,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Entities.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'entities list',
+        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       java: {
         method: 'v1Beta().customers().entities().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityListPage;\nimport io.stigg.models.v1beta.customers.entities.EntityListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityListPage page = client.v1Beta().customers().entities().list("id");\n    }\n}',
-      },
-      cli: {
-        method: 'entities list',
-        example: "stigg v1-beta:customers:entities list \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.List',
@@ -6925,7 +6931,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -6954,15 +6960,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityUpsertParams parameters = new()\n{\n    ID = "id",\n    Entities =\n    [\n        new()\n        {\n            ID = "user-7f3a0c1d",\n            DisplayName = "Jane Doe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "jane@acme.com" }, { "role", "admin" }\n            },\n        },\n        new()\n        {\n            ID = "user-c4d1b2e9",\n            DisplayName = "John Roe",\n            EntityTypeID = "user",\n            Metadata = new Dictionary<string, string>()\n            {\n                { "email", "john@acme.com" }\n            },\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1Beta().customers().entities().upsert',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityUpsertParams;\nimport io.stigg.models.v1beta.customers.entities.EntityUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUpsertParams params = EntityUpsertParams.builder()\n            .id("id")\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-7f3a0c1d")\n                .build())\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-c4d1b2e9")\n                .build())\n            .build();\n        EntityUpsertResponse response = client.v1Beta().customers().entities().upsert(params);\n    }\n}',
-      },
       cli: {
         method: 'entities upsert',
         example:
           "stigg v1-beta:customers:entities upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity '{id: user-7f3a0c1d}' \\\n  --entity '{id: user-c4d1b2e9}'",
+      },
+      java: {
+        method: 'v1Beta().customers().entities().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityUpsertParams;\nimport io.stigg.models.v1beta.customers.entities.EntityUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUpsertParams params = EntityUpsertParams.builder()\n            .id("id")\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-7f3a0c1d")\n                .build())\n            .addEntity(EntityUpsertParams.Entity.builder()\n                .id("user-c4d1b2e9")\n                .build())\n            .build();\n        EntityUpsertResponse response = client.v1Beta().customers().entities().upsert(params);\n    }\n}',
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Upsert',
@@ -6986,7 +6992,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "displayName": "Jane Doe",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              }\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "displayName": "John Roe",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "john@acme.com"\n              }\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "entities": [\n            {\n              "id": "user-7f3a0c1d",\n              "displayName": "Jane Doe",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "jane@acme.com",\n                "role": "admin"\n              }\n            },\n            {\n              "id": "user-c4d1b2e9",\n              "displayName": "John Roe",\n              "entityTypeId": "user",\n              "metadata": {\n                "email": "john@acme.com"\n              }\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -7009,15 +7015,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityRetrieveParams parameters = new()\n{\n    ID = "id",\n    EntityID = "x",\n};\n\nvar entity = await client.V1Beta.Customers.Entities.Retrieve(parameters);\n\nConsole.WriteLine(entity);',
       },
-      java: {
-        method: 'v1Beta().customers().entities().retrieve',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityRetrieveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityRetrieveParams params = EntityRetrieveParams.builder()\n            .id("id")\n            .entityId("x")\n            .build();\n        EntityRetrieveResponse entity = client.v1Beta().customers().entities().retrieve(params);\n    }\n}',
-      },
       cli: {
         method: 'entities retrieve',
         example:
           "stigg v1-beta:customers:entities retrieve \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --entity-id x",
+      },
+      java: {
+        method: 'v1Beta().customers().entities().retrieve',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityRetrieveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityRetrieveParams params = EntityRetrieveParams.builder()\n            .id("id")\n            .entityId("x")\n            .build();\n        EntityRetrieveResponse entity = client.v1Beta().customers().entities().retrieve(params);\n    }\n}',
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Get',
@@ -7041,7 +7047,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/$ENTITY_ID \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -7063,15 +7069,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityArchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Archive(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1Beta().customers().entities().archive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityArchiveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityArchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityArchiveParams params = EntityArchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityArchiveResponse response = client.v1Beta().customers().entities().archive(params);\n    }\n}',
-      },
       cli: {
         method: 'entities archive',
         example:
           "stigg v1-beta:customers:entities archive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
+      java: {
+        method: 'v1Beta().customers().entities().archive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityArchiveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityArchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityArchiveParams params = EntityArchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityArchiveResponse response = client.v1Beta().customers().entities().archive(params);\n    }\n}',
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Archive',
@@ -7095,7 +7101,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/archive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
       },
     },
   },
@@ -7117,15 +7123,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityUnarchiveParams parameters = new()\n{\n    ID = "id",\n    Ids =\n    [\n        "user-7f3a0c1d", "user-c4d1b2e9"\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Entities.Unarchive(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1Beta().customers().entities().unarchive',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityUnarchiveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityUnarchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUnarchiveParams params = EntityUnarchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityUnarchiveResponse response = client.v1Beta().customers().entities().unarchive(params);\n    }\n}',
-      },
       cli: {
         method: 'entities unarchive',
         example:
           "stigg v1-beta:customers:entities unarchive \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --id user-7f3a0c1d \\\n  --id user-c4d1b2e9",
+      },
+      java: {
+        method: 'v1Beta().customers().entities().unarchive',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.entities.EntityUnarchiveParams;\nimport io.stigg.models.v1beta.customers.entities.EntityUnarchiveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityUnarchiveParams params = EntityUnarchiveParams.builder()\n            .id("id")\n            .addId("user-7f3a0c1d")\n            .addId("user-c4d1b2e9")\n            .build();\n        EntityUnarchiveResponse response = client.v1Beta().customers().entities().unarchive(params);\n    }\n}',
       },
       go: {
         method: 'client.V1Beta.Customers.Entities.Unarchive',
@@ -7149,7 +7155,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/entities/unarchive \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "ids": [\n            "user-7f3a0c1d",\n            "user-c4d1b2e9"\n          ]\n        }\'',
       },
     },
   },
@@ -7183,14 +7189,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AssignmentListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Assignments.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'assignments list',
+        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       java: {
         method: 'v1Beta().customers().assignments().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentListPage;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentListPage page = client.v1Beta().customers().assignments().list("id");\n    }\n}',
-      },
-      cli: {
-        method: 'assignments list',
-        example: "stigg v1-beta:customers:assignments list \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       go: {
         method: 'client.V1Beta.Customers.Assignments.List',
@@ -7214,7 +7220,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -7243,15 +7249,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'AssignmentUpsertParams parameters = new()\n{\n    ID = "id",\n    Assignments =\n    [\n        new()\n        {\n            EntityID = "workspace-001",\n            Cadence = "P1M",\n            CurrencyID = "currencyId",\n            FeatureID = "compute-minutes",\n            ParentID = "parentId",\n            ScopeEntityIds =\n            [\n                "NxI"\n            ],\n            UsageLimit = 1000,\n        },\n        new()\n        {\n            EntityID = "workspace-002",\n            Cadence = "P1M",\n            CurrencyID = "cred-type-tokens",\n            FeatureID = "featureId",\n            ParentID = "workspace-001",\n            ScopeEntityIds =\n            [\n                "user-1"\n            ],\n            UsageLimit = 2000,\n        },\n    ],\n};\n\nvar response = await client.V1Beta.Customers.Assignments.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1Beta().customers().assignments().upsert',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentUpsertParams;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentUpsertParams params = AssignmentUpsertParams.builder()\n            .id("id")\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .entityId("workspace-001")\n                .build())\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .entityId("workspace-002")\n                .build())\n            .build();\n        AssignmentUpsertResponse response = client.v1Beta().customers().assignments().upsert(params);\n    }\n}',
-      },
       cli: {
         method: 'assignments upsert',
         example:
           "stigg v1-beta:customers:assignments upsert \\\n  --api-key 'My API Key' \\\n  --id id \\\n  --assignment '{entityId: workspace-001}' \\\n  --assignment '{entityId: workspace-002}'",
+      },
+      java: {
+        method: 'v1Beta().customers().assignments().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentUpsertParams;\nimport io.stigg.models.v1beta.customers.assignments.AssignmentUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        AssignmentUpsertParams params = AssignmentUpsertParams.builder()\n            .id("id")\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .entityId("workspace-001")\n                .build())\n            .addAssignment(AssignmentUpsertParams.Assignment.builder()\n                .entityId("workspace-002")\n                .build())\n            .build();\n        AssignmentUpsertResponse response = client.v1Beta().customers().assignments().upsert(params);\n    }\n}',
       },
       go: {
         method: 'client.V1Beta.Customers.Assignments.Upsert',
@@ -7275,7 +7281,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "entityId": "workspace-001",\n              "cadence": "P1M",\n              "featureId": "compute-minutes",\n              "usageLimit": 1000\n            },\n            {\n              "entityId": "workspace-002",\n              "cadence": "P1M",\n              "currencyId": "cred-type-tokens",\n              "parentId": "workspace-001",\n              "scopeEntityIds": [\n                "user-1"\n              ],\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/assignments \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "assignments": [\n            {\n              "entityId": "workspace-001",\n              "cadence": "P1M",\n              "featureId": "compute-minutes",\n              "usageLimit": 1000\n            },\n            {\n              "entityId": "workspace-002",\n              "cadence": "P1M",\n              "currencyId": "cred-type-tokens",\n              "parentId": "workspace-001",\n              "scopeEntityIds": [\n                "user-1"\n              ],\n              "usageLimit": 2000\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -7314,14 +7320,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'GovernanceListParams parameters = new() { ID = "id" };\n\nvar page = await client.V1Beta.Customers.Governance.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'governance list',
+        example: "stigg v1-beta:customers:governance list \\\n  --api-key 'My API Key' \\\n  --id id",
+      },
       java: {
         method: 'v1Beta().customers().governance().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.customers.governance.GovernanceListPage;\nimport io.stigg.models.v1beta.customers.governance.GovernanceListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        GovernanceListPage page = client.v1Beta().customers().governance().list("id");\n    }\n}',
-      },
-      cli: {
-        method: 'governance list',
-        example: "stigg v1-beta:customers:governance list \\\n  --api-key 'My API Key' \\\n  --id id",
       },
       go: {
         method: 'client.V1Beta.Customers.Governance.List',
@@ -7345,7 +7351,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+          'curl https://edge.api.stigg.io/api/v1-beta/customers/$ID/governance \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -7375,14 +7381,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityTypeListParams parameters = new();\n\nvar page = await client.V1Beta.EntityTypes.List(parameters);\nawait foreach (var item in page.Paginate())\n{\n    Console.WriteLine(item);\n}',
       },
+      cli: {
+        method: 'entity_types list',
+        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
+      },
       java: {
         method: 'v1Beta().entityTypes().list',
         example:
           'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeListPage;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeListPage page = client.v1Beta().entityTypes().list();\n    }\n}',
-      },
-      cli: {
-        method: 'entity_types list',
-        example: "stigg v1-beta:entity-types list \\\n  --api-key 'My API Key'",
       },
       go: {
         method: 'client.V1Beta.EntityTypes.List',
@@ -7405,7 +7411,8 @@ const EMBEDDED_METHODS: MethodEntry[] = [
           "import Stigg from '@stigg/typescript';\n\nconst client = new Stigg({\n  apiKey: process.env['STIGG_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {\n  console.log(entityTypeListResponse.id);\n}",
       },
       http: {
-        example: 'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
+        example:
+          'curl https://edge.api.stigg.io/api/v1-beta/entity-types \\\n    -H "X-API-KEY: $STIGG_API_KEY"',
       },
     },
   },
@@ -7433,15 +7440,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'EntityTypeUpsertParams parameters = new()\n{\n    Types =\n    [\n        new()\n        {\n            ID = "org",\n            AttributionKeys =\n            [\n                "organizationId"\n            ],\n            DisplayName = "Organization",\n            Description = "A customer organization — the top of the hierarchy, holding the account-wide budget.",\n        },\n        new()\n        {\n            ID = "team",\n            AttributionKeys =\n            [\n                "teamId"\n            ],\n            DisplayName = "Team",\n            Description = "description",\n        },\n    ],\n};\n\nvar response = await client.V1Beta.EntityTypes.Upsert(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v1Beta().entityTypes().upsert',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertParams;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeUpsertParams params = EntityTypeUpsertParams.builder()\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("org")\n                .addAttributionKey("organizationId")\n                .displayName("Organization")\n                .build())\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("team")\n                .addAttributionKey("teamId")\n                .displayName("Team")\n                .build())\n            .build();\n        EntityTypeUpsertResponse response = client.v1Beta().entityTypes().upsert(params);\n    }\n}',
-      },
       cli: {
         method: 'entity_types upsert',
         example:
           "stigg v1-beta:entity-types upsert \\\n  --api-key 'My API Key' \\\n  --type '{id: org, attributionKeys: [organizationId], displayName: Organization}' \\\n  --type '{id: team, attributionKeys: [teamId], displayName: Team}'",
+      },
+      java: {
+        method: 'v1Beta().entityTypes().upsert',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertParams;\nimport io.stigg.models.v1beta.entitytypes.EntityTypeUpsertResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        EntityTypeUpsertParams params = EntityTypeUpsertParams.builder()\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("org")\n                .addAttributionKey("organizationId")\n                .displayName("Organization")\n                .build())\n            .addType(EntityTypeUpsertParams.Type.builder()\n                .id("team")\n                .addAttributionKey("teamId")\n                .displayName("Team")\n                .build())\n            .build();\n        EntityTypeUpsertResponse response = client.v1Beta().entityTypes().upsert(params);\n    }\n}',
       },
       go: {
         method: 'client.V1Beta.EntityTypes.Upsert',
@@ -7465,7 +7472,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization",\n              "description": "A customer organization — the top of the hierarchy, holding the account-wide budget."\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v1-beta/entity-types \\\n    -X PUT \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "types": [\n            {\n              "id": "org",\n              "attributionKeys": [\n                "organizationId"\n              ],\n              "displayName": "Organization",\n              "description": "A customer organization — the top of the hierarchy, holding the account-wide budget."\n            },\n            {\n              "id": "team",\n              "attributionKeys": [\n                "teamId"\n              ],\n              "displayName": "Team"\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -7493,15 +7500,15 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'UsageReportParams parameters = new()\n{\n    Usages =\n    [\n        new()\n        {\n            CustomerID = "customerId",\n            FeatureID = "featureId",\n            Value = -9007199254740991,\n            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),\n            Dimensions = new Dictionary<string, Dimension>()\n            {\n                { "foo", "string" }\n            },\n            IdempotencyKey = "x",\n            ResourceID = "resourceId",\n            UpdateBehavior = UpdateBehavior.Delta,\n        },\n    ],\n};\n\nvar response = await client.V2.Usage.Report(parameters);\n\nConsole.WriteLine(response);',
       },
-      java: {
-        method: 'v2().usage().report',
-        example:
-          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v2.usage.UsageReportParams;\nimport io.stigg.models.v2.usage.UsageReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageReportParams params = UsageReportParams.builder()\n            .addUsage(UsageReportParams.Usage.builder()\n                .customerId("customerId")\n                .featureId("featureId")\n                .value(-9007199254740991.0)\n                .build())\n            .build();\n        UsageReportResponse response = client.v2().usage().report(params);\n    }\n}',
-      },
       cli: {
         method: 'usage report',
         example:
           "stigg v2:usage report \\\n  --api-key 'My API Key' \\\n  --usage '{customerId: customerId, featureId: featureId, value: -9007199254740991}'",
+      },
+      java: {
+        method: 'v2().usage().report',
+        example:
+          'package io.stigg.example;\n\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v2.usage.UsageReportParams;\nimport io.stigg.models.v2.usage.UsageReportResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        StiggClient client = StiggOkHttpClient.fromEnv();\n\n        UsageReportParams params = UsageReportParams.builder()\n            .addUsage(UsageReportParams.Usage.builder()\n                .customerId("customerId")\n                .featureId("featureId")\n                .value(-9007199254740991.0)\n                .build())\n            .build();\n        UsageReportResponse response = client.v2().usage().report(params);\n    }\n}',
       },
       go: {
         method: 'client.V2.Usage.Report',
@@ -7525,7 +7532,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.stigg.io/api/v2/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
+          'curl https://edge.api.stigg.io/api/v2/usage \\\n    -H \'Content-Type: application/json\' \\\n    -H "X-API-KEY: $STIGG_API_KEY" \\\n    -d \'{\n          "usages": [\n            {\n              "customerId": "customerId",\n              "featureId": "featureId",\n              "value": -9007199254740991\n            }\n          ]\n        }\'',
       },
     },
   },
@@ -7538,14 +7545,14 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
       '# Stigg C# API Library\n\nThe Stigg C# SDK provides convenient access to the Stigg REST API from applications written in   C#.\n\n## Installation\n\nInstall the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):\n\n```bash\ndotnet add package Stigg.Client\n```\n\n## Requirements\n\nThis library requires .NET Standard 2.0 or later.\n\n## Usage\n\nSee the [`examples`](examples) directory for complete and runnable examples.\n\n```csharp\nStiggClient client = new();\n\nCustomerRetrieveParams parameters = new() { ID = "REPLACE_ME" };\n\nvar customerResponse = await client.V1.Customers.Retrieve(parameters);\n\nConsole.WriteLine(customerResponse);\n```',
   },
   {
-    language: 'java',
-    content:
-      '# Stigg Java API Library\n\n<!-- x-release-please-start-version -->\n[![Maven Central](https://img.shields.io/maven-central/v/io.stigg/stigg-java)](https://central.sonatype.com/artifact/io.stigg/stigg-java/0.1.0-beta.55)\n[![javadoc](https://javadoc.io/badge2/io.stigg/stigg-java/0.1.0-beta.55/javadoc.svg)](https://javadoc.io/doc/io.stigg/stigg-java/0.1.0-beta.55)\n<!-- x-release-please-end -->\n\nThe Stigg Java SDK provides convenient access to the Stigg REST API   from applications written in Java.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n<!-- x-release-please-start-version -->\n\nJavadocs are available on [javadoc.io](https://javadoc.io/doc/io.stigg/stigg-java/0.1.0-beta.55).\n\n<!-- x-release-please-end -->\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n### Gradle\n\n~~~kotlin\nimplementation("io.stigg:stigg-java:0.1.0-beta.55")\n~~~\n\n### Maven\n\n~~~xml\n<dependency>\n  <groupId>io.stigg</groupId>\n  <artifactId>stigg-java</artifactId>\n  <version>0.1.0-beta.55</version>\n</dependency>\n~~~\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Java 8 or later.\n\n## Usage\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCustomerResponse customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\n## Client configuration\n\nConfigure the client using system properties or environment variables:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n```\n\nOr manually:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .apiKey("My API Key")\n    .build();\n```\n\nOr using a combination of the two approaches:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    // Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n    // Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\n    .fromEnv()\n    .apiKey("My API Key")\n    .build();\n```\n\nSee this table for the available options:\n\n| Setter    | System property | Environment variable | Required | Default value            |\n| --------- | --------------- | -------------------- | -------- | ------------------------ |\n| `apiKey`  | `stigg.apiKey`  | `STIGG_API_KEY`      | true     | -                        |\n| `baseUrl` | `stigg.baseUrl` | `STIGG_BASE_URL`     | true     | `"https://api.stigg.io"` |\n\nSystem properties take precedence over environment variables.\n\n> [!TIP]\n> Don\'t create more than one client in the same application. Each client has a connection pool and\n> thread pools, which are more efficient to share between requests.\n\n### Modifying configuration\n\nTo temporarily use a modified client configuration, while reusing the same connection and thread       pools, call `withOptions()` on any client or service:\n\n```java\nimport io.stigg.client.StiggClient;\n\nStiggClient clientWithOptions = client.withOptions(optionsBuilder -> {\n    optionsBuilder.baseUrl("https://example.com");\n    optionsBuilder.maxRetries(42);\n});\n```\n\nThe `withOptions()` method does not affect the original client or service.\n\n## Requests and responses\n\nTo send a request to the Stigg API, build an instance of some `Params` class and pass it to the     corresponding client method. When the response is received, it will be deserialized into an instance of     a Java class.\n\nFor example, `client.v1().customers().retrieve(...)` should be called with an instance of `CustomerRetrieveParams`, and it     will return an instance of `CustomerResponse`.\n\n## Immutability\n\nEach class in the SDK has an associated   [builder](https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java)   or factory method for constructing it.\n\nEach class is [immutable](https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html)   once constructed. If the class has an associated builder, then it has a `toBuilder()` method, which can   be used to convert it back to a builder for making a modified copy.\n\nBecause each class is immutable, builder modification will _never_ affect already built class instances.\n\n## Asynchronous execution\n\nThe default client is synchronous. To switch to asynchronous execution, call the `async()` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.async().v1().customers().retrieve("REPLACE_ME");\n```\n\nOr create an asynchronous client from the beginning:\n\n```java\nimport io.stigg.client.StiggClientAsync;\nimport io.stigg.client.okhttp.StiggOkHttpClientAsync;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClientAsync client = StiggOkHttpClientAsync.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\nThe asynchronous client supports the same options as the synchronous one, except most methods return `CompletableFuture`s.\n\n\n\n\n\n\n\n## Raw responses\n\nThe SDK defines methods that deserialize responses into instances of Java classes.       However, these methods don\'t provide access to the response headers, status code, or the raw response       body.\n\nTo access this data, prefix any HTTP method call on a client or service with `withRawResponse()`:\n\n```java\nimport io.stigg.core.http.Headers;\nimport io.stigg.core.http.HttpResponseFor;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nHttpResponseFor<CustomerResponse> customerResponse = client.v1().customers().withRawResponse().retrieve("REPLACE_ME");\n\nint statusCode = customerResponse.statusCode();\nHeaders headers = customerResponse.headers();\n```\n\nYou can still deserialize the response into an instance of a Java class if needed:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse parsedCustomerResponse = customerResponse.parse();\n```\n\n## Error handling\n\nThe SDK throws custom unchecked exception types:\n\n- [`StiggServiceException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggServiceException.kt): Base class for HTTP errors. See this table for which exception       subclass is thrown for each HTTP status code:\n\n  | Status | Exception                                          |\n  | ------ | -------------------------------------------------- |\n  | 400    | [`BadRequestException`](stigg-java-core/src/main/kotlin/io/stigg/errors/BadRequestException.kt)           |\n  | 401    | [`UnauthorizedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnauthorizedException.kt)         |\n  | 403    | [`PermissionDeniedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/PermissionDeniedException.kt)     |\n  | 404    | [`NotFoundException`](stigg-java-core/src/main/kotlin/io/stigg/errors/NotFoundException.kt)             |\n  | 422    | [`UnprocessableEntityException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnprocessableEntityException.kt)  |\n  | 429    | [`RateLimitException`](stigg-java-core/src/main/kotlin/io/stigg/errors/RateLimitException.kt)            |\n  | 5xx    | [`InternalServerException`](stigg-java-core/src/main/kotlin/io/stigg/errors/InternalServerException.kt)       |\n  | others | [`UnexpectedStatusCodeException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnexpectedStatusCodeException.kt) |\n\n- [`StiggIoException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggIoException.kt): I/O networking errors.\n\n- [`StiggRetryableException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggRetryableException.kt): Generic error indicating a failure that could be retried by the client.\n\n- [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt): Failure to interpret successfully parsed data. For example,       when accessing a property that\'s supposed to be required, but the API unexpectedly omitted it from the       response.\n\n- [`StiggException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggException.kt): Base class for all exceptions. Most errors will result in one of the       previously mentioned ones, but completely generic errors may be thrown using the base class.\n\n## Pagination\n\nThe SDK defines methods that return a paginated lists of results. It provides convenient ways to access     the results either one page at a time or item-by-item across all pages.\n\n### Auto-pagination\n\nTo iterate through all results across all pages, use the `autoPager()` method, which automatically     fetches more pages as needed.\n\nWhen using the synchronous client, the method returns an [`Iterable`](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\n\n// Process as an Iterable\nfor (CustomerListResponse customer : page.autoPager()) {\n    System.out.println(customer);\n}\n\n// Process as a Stream\npage.autoPager()\n    .stream()\n    .limit(50)\n    .forEach(customer -> System.out.println(customer));\n```\n\nWhen using the asynchronous client, the method returns an [`AsyncStreamResponse`](stigg-java-core/src/main/kotlin/io/stigg/core/http/AsyncStreamResponse.kt):\n\n```java\nimport io.stigg.core.http.AsyncStreamResponse;\nimport io.stigg.models.v1.customers.CustomerListPageAsync;\nimport io.stigg.models.v1.customers.CustomerListResponse;\nimport java.util.Optional;\nimport java.util.concurrent.CompletableFuture;\n\nCompletableFuture<CustomerListPageAsync> pageFuture = client.async().v1().customers().list();\n\npageFuture.thenRun(page -> page.autoPager().subscribe(customer -> {\n    System.out.println(customer);\n}));\n\n// If you need to handle errors or completion of the stream\npageFuture.thenRun(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {\n    @Override\n    public void onNext(CustomerListResponse customer) {\n        System.out.println(customer);\n    }\n\n    @Override\n    public void onComplete(Optional<Throwable> error) {\n        if (error.isPresent()) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error.get());\n        } else {\n            System.out.println("No more!");\n        }\n    }\n}));\n\n// Or use futures\npageFuture.thenRun(page -> page.autoPager()\n    .subscribe(customer -> {\n        System.out.println(customer);\n    })\n    .onCompleteFuture()\n    .whenComplete((unused, error) -> {\n        if (error != null) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error);\n        } else {\n            System.out.println("No more!");\n        }\n    }));\n```\n\n### Manual pagination\n\nTo access individual page items and manually request the next page, use the `items()`,\n`hasNextPage()`, and `nextPage()` methods:\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\nwhile (true) {\n    for (CustomerListResponse customer : page.items()) {\n        System.out.println(customer);\n    }\n\n    if (!page.hasNextPage()) {\n        break;\n    }\n\n    page = page.nextPage();\n}\n```\n\n## Logging\n\nEnable logging by setting the `STIGG_LOG` environment variable to   `info`:\n\n```sh\nexport STIGG_LOG=info\n```\n\nOr to `debug` for more verbose logging:\n\n```sh\nexport STIGG_LOG=debug\n```\n\nOr configure the client manually using the `logLevel` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.LogLevel;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .logLevel(LogLevel.INFO)\n    .build();\n```\n\n## ProGuard and R8\n\nAlthough the SDK uses reflection, it is still usable with     [ProGuard](https://github.com/Guardsquare/proguard) and     [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because     `stigg-java-core` is published with a     [configuration file](stigg-java-core/src/main/resources/META-INF/proguard/stigg-java-core.pro) containing     [keep rules](https://www.guardsquare.com/manual/configuration/usage).\n\nProGuard and R8 should automatically detect and use the published rules, but you can also manually copy     the keep rules if necessary.\n\n\n\n\n\n## Jackson\n\nThe SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON     serialization/deserialization. It is compatible with version 2.13.4 or higher,     but depends on version 2.18.2 by default.\n\nThe SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the     default version was overridden in your Maven or Gradle config).\n\nIf the SDK threw an exception, but you\'re _certain_ the version is compatible, then disable the version     check using the `checkJacksonVersionCompatibility` on [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or     [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt).\n\n> [!CAUTION]\n> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.\n\nAlso note that there are bugs in older Jackson versions that can affect the SDK. We don\'t work around all     Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to     upgrade Jackson for those instead.\n\n## Network options\n\n### Retries\n\nThe SDK automatically retries 2 times by default, with a short exponential backoff between requests.\n\nOnly the following error types are retried:\n- Connection errors (for example, due to a network connectivity problem)\n- 408 Request Timeout\n- 409 Conflict\n- 429 Rate Limit\n- 5xx Internal\n\nThe API may also explicitly instruct the SDK to retry or not retry a request.\n\nTo set a custom number of retries, configure the client using the `maxRetries` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .maxRetries(4)\n    .build();\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default.\n\nTo set a custom timeout, configure the method call using the `timeout` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .timeout(Duration.ofSeconds(30))\n    .build();\n```\n\n### Proxies\n\nTo route requests through a proxy, configure the client using the `proxy` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.net.InetSocketAddress;\nimport java.net.Proxy;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(new Proxy(\n      Proxy.Type.HTTP, new InetSocketAddress(\n        "https://example.com", 8080\n      )\n    ))\n    .build();\n```\n\nIf the proxy responds with `407 Proxy Authentication Required`, supply credentials by also   configuring `proxyAuthenticator`:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.http.ProxyAuthenticator;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(...)\n    // Or a custom implementation of `ProxyAuthenticator`.\n    .proxyAuthenticator(ProxyAuthenticator.basic("username", "password"))\n    .build();\n```\n\n### Connection pooling\n\nTo customize the underlying OkHttp connection pool, configure the client using the   `maxIdleConnections` and `keepAliveDuration` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.\n    .maxIdleConnections(10)\n    .keepAliveDuration(Duration.ofMinutes(2))\n    .build();\n```\n\nIf both options are unset, OkHttp\'s default connection pool settings are used.\n\n### HTTPS\n\n> [!NOTE]\n> Most applications should not call these methods, and instead use the system defaults. The defaults include\n> special optimizations that can be lost if the implementations are modified.\n\nTo configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`,   `trustManager`, and `hostnameVerifier` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.\n    .sslSocketFactory(yourSSLSocketFactory)\n    .trustManager(yourTrustManager)\n    .hostnameVerifier(yourHostnameVerifier)\n    .build();\n```\n\n\n\n### Custom HTTP client\n\nThe SDK consists of three artifacts:\n- `stigg-java-core`\n  - Contains core SDK logic\n  - Does not depend on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggClient`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClient.kt), [`StiggClientAsync`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsync.kt),             [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt), and [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), all of which can             work with any HTTP client\n- `stigg-java-client-okhttp`\n  - Depends on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) and [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), which             provide a way to construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) and             [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), respectively, using OkHttp\n- `stigg-java`\n  - Depends on and exposes the APIs of both `stigg-java-core` and `stigg-java-client-okhttp`\n  - Does not have its own logic\n\nThis structure allows replacing the SDK\'s default HTTP client without pulling in unnecessary dependencies.\n\n#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)\n\n> [!TIP]\n> Try the available [network options](#network-options) before replacing the default client.\n\nTo use a customized `OkHttpClient`:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Copy `stigg-java-client-okhttp`\'s [`OkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/OkHttpClient.kt) class into your code and        customize it\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your        customized client\n\n### Completely custom HTTP client\n\nTo use a completely custom HTTP client:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Write a class that implements the [`HttpClient`](stigg-java-core/src/main/kotlin/io/stigg/core/http/HttpClient.kt) interface\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your new        client class\n\n## Undocumented API functionality\n\nThe SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.\n\n### Parameters\n\nTo set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQueryParam`, or       `putAdditionalBodyProperty` methods on any `Params` class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .putAdditionalHeader("Secret-Header", "42")\n    .putAdditionalQueryParam("secret_query_param", "42")\n    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))\n    .build();\n```\n\nThese can be accessed on the built object later using the `_additionalHeaders()`,       `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.\n\nTo set undocumented parameters on _nested_ headers, query params, or body classes, call the         `putAdditionalProperty` method on the nested class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\nCustomerUpdateParams params = CustomerUpdateParams.builder()\n    .passthrough(CustomerUpdateParams.Passthrough.builder()\n        .putAdditionalProperty("secretProperty", JsonValue.from("42"))\n        .build())\n    .build();\n```\n\nThese properties can be accessed on the nested built object later using the         `_additionalProperties()` method.\n\nTo set a documented parameter or property to an undocumented or not yet supported _value_, pass a       [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) object to its setter:\n\n```java\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder().build();\n```\n\nThe most straightforward way to create a [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) is using its       `from(...)` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.List;\nimport java.util.Map;\n\n// Create primitive JSON values\nJsonValue nullValue = JsonValue.from(null);\nJsonValue booleanValue = JsonValue.from(true);\nJsonValue numberValue = JsonValue.from(42);\nJsonValue stringValue = JsonValue.from("Hello World!");\n\n// Create a JSON array value equivalent to `["Hello", "World"]`\nJsonValue arrayValue = JsonValue.from(List.of(\n  "Hello", "World"\n));\n\n// Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`\nJsonValue objectValue = JsonValue.from(Map.of(\n  "a", 1,\n  "b", 2\n));\n\n// Create an arbitrarily nested JSON equivalent to:\n// {\n//   "a": [1, 2],\n//   "b": [3, 4]\n// }\nJsonValue complexValue = JsonValue.from(Map.of(\n  "a", List.of(\n    1, 2\n  ),\n  "b", List.of(\n    3, 4\n  )\n));\n```\n\nNormally a `Builder` class\'s `build` method will throw         [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html)         if any required parameter or property is unset.\n\nTo forcibly omit a required parameter or property, pass [`JsonMissing`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt):\n\n```java\nimport io.stigg.core.JsonMissing;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .id(JsonMissing.of())\n    .build();\n```\n\n### Response properties\n\nTo access undocumented response properties, call the `_additionalProperties()` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.Map;\n\nMap<String, JsonValue> additionalProperties = client.v1().customers().retrieve(params)._additionalProperties();\nJsonValue secretPropertyValue = additionalProperties.get("secretProperty");\n\nString result = secretPropertyValue.accept(new JsonValue.Visitor<>() {\n    @Override\n    public String visitNull() {\n        return "It\'s null!";\n    }\n\n    @Override\n    public String visitBoolean(boolean value) {\n        return "It\'s a boolean!";\n    }\n\n    @Override\n    public String visitNumber(Number value) {\n        return "It\'s a number!";\n    }\n\n    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`\n    // The default implementation of each unimplemented method delegates to `visitDefault`, which throws by default, but can also be overridden\n});\n```\n\nTo access a property\'s raw JSON value, which may be undocumented, call its `_` prefixed method:\n\n```java\nimport io.stigg.core.JsonField;\nimport java.util.Optional;\n\nJsonField<Object> field = client.v1().customers().retrieve(params)._field();\n\nif (field.isMissing()) {\n  // The property is absent from the JSON response\n} else if (field.isNull()) {\n  // The property was set to literal null\n} else {\n  // Check if value was provided as a string\n  // Other methods include `asNumber()`, `asBoolean()`, etc.\n  Optional<String> jsonString = field.asString();\n\n  // Try to deserialize into a custom type\n  MyClass myObject = field.asUnknown().orElseThrow().convert(MyClass.class);\n}\n```\n\n### Response validation\n\nIn rare cases, the API may return a response that doesn\'t match the expected type. For example, the SDK     may expect a property to contain a `String`, but the API could return something else.\n\nBy default, the SDK will not throw an exception in this case. It will throw     [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt) only if you directly access the property.\n\nValidating the response is _not_ forwards compatible with new types from the API for existing fields.\n\nIf you would still prefer to check that the response is completely well-typed upfront, then either call     `validate()`:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(params).validate();\n```\n\nOr configure the method call to validate the response using the `responseValidation` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().responseValidation(true).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .responseValidation(true)\n    .build();\n```\n\n## FAQ\n\n### Why don\'t you use plain `enum` classes?\n\nJava `enum` classes are not trivially   [forwards compatible](https://www.stainless.com/blog/making-java-enums-forwards-compatible). Using them in   the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.\n\n### Why do you represent fields using `JsonField<T>` instead of just plain `T`?\n\nUsing `JsonField<T>` enables a few features:\n\n- Allowing usage of [undocumented API functionality](#undocumented-api-functionality)\n- Lazily [validating the API response against the expected shape](#response-validation)\n- Representing absent vs explicitly null values\n\n### Why don\'t you use [`data` classes](https://kotlinlang.org/docs/data-classes.html)?\n\nIt is not [backwards compatible to add new fields to a data class](https://kotlinlang.org/docs/api-guidelines-backward-compatibility.html#avoid-using-data-classes-in-your-api)   and we don\'t want to introduce a breaking change every time we add a field to a class.\n\n### Why don\'t you use checked exceptions?\n\nChecked exceptions are widely considered a mistake in the Java programming language. In fact, they were   omitted from Kotlin for this reason.\n\nChecked exceptions:\n\n- Are verbose to handle\n- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error\n- Are tedious to propagate due to the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function)\n- Don\'t play well with lambdas (also due to the function coloring problem)\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-java/issues) with questions, bugs, or suggestions.\n',
-  },
-  {
     language: 'cli',
     content:
       "# Stigg CLI\n\nThe official CLI for the Stigg REST API.\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n<!-- x-release-please-start-version -->\n\n## Installation\n\n### Installing with Homebrew\n\n~~~sh\nbrew install stiggio/tools/stigg\n~~~\n\n### Installing with Go\n\nTo test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.\n\n~~~sh\ngo install 'github.com/stiggio/stigg-cli/cmd/stigg@latest'\n~~~\n\nOnce you have run `go install`, the binary is placed in your Go bin directory:\n\n- **Default location**: `$HOME/go/bin` (or `$GOPATH/bin` if GOPATH is set)\n- **Check your path**: Run `go env GOPATH` to see the base directory\n\nIf commands aren't found after installation, add the Go bin directory to your PATH:\n\n~~~sh\n# Add to your shell profile (.zshrc, .bashrc, etc.)\nexport PATH=\"$PATH:$(go env GOPATH)/bin\"\n~~~\n\n<!-- x-release-please-end -->\n\n### Running Locally\n\nAfter cloning the git repository for this project, you can use the\n`scripts/run` script to run the tool locally:\n\n~~~sh\n./scripts/run args...\n~~~\n\n## Usage\n\nThe CLI follows a resource-based command structure:\n\n~~~sh\nstigg [resource] <command> [flags...]\n~~~\n\n~~~sh\nstigg v1:customers retrieve \\\n  --api-key 'My API Key' \\\n  --id REPLACE_ME\n~~~\n\nFor details about specific commands, use the `--help` flag.\n\n### Environment variables\n\n| Environment variable | Required |\n| -------------------- | -------- |\n| `STIGG_API_KEY`      | yes      |\n\n### Global flags\n\n- `--api-key` (can also be set with `STIGG_API_KEY` env var)\n- `--help` - Show command line usage\n- `--debug` - Enable debug logging (includes HTTP request/response details)\n- `--version`, `-v` - Show the CLI version\n- `--base-url` - Use a custom API backend URL\n- `--format` - Change the output format (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--format-error` - Change the output format for errors (`auto`, `explore`, `json`, `jsonl`, `pretty`, `raw`, `yaml`)\n- `--transform` - Transform the data output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n- `--transform-error` - Transform the error output using [GJSON syntax](https://github.com/tidwall/gjson/blob/master/SYNTAX.md)\n\n### Passing files as arguments\n\nTo pass files to your API, you can use the `@myfile.ext` syntax:\n\n~~~bash\nstigg <command> --arg @abe.jpg\n~~~\n\nFiles can also be passed inside JSON or YAML blobs:\n\n~~~bash\nstigg <command> --arg '{image: \"@abe.jpg\"}'\n# Equivalent:\nstigg <command> <<YAML\narg:\n  image: \"@abe.jpg\"\nYAML\n~~~\n\nIf you need to pass a string literal that begins with an `@` sign, you can\nescape the `@` sign to avoid accidentally passing a file.\n\n~~~bash\nstigg <command> --username '\\@abe'\n~~~\n\n#### Explicit encoding\n\nFor JSON endpoints, the CLI tool does filetype sniffing to determine whether the\nfile contents should be sent as a string literal (for plain text files) or as a\nbase64-encoded string literal (for binary files). If you need to explicitly send\nthe file as either plain text or base64-encoded data, you can use\n`@file://myfile.txt` (for string encoding) or `@data://myfile.dat` (for\nbase64-encoding). Note that absolute paths will begin with `@file://` or\n`@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).\n\n~~~bash\nstigg <command> --arg @data://file.txt\n~~~\n\n## Linking different Go SDK versions\n\nYou can link the CLI against a different version of the Stigg Go SDK\nfor development purposes using the `./scripts/link` script.\n\nTo link to a specific version from a repository (version can be a branch,\ngit tag, or commit hash):\n\n~~~bash\n./scripts/link github.com/org/repo@version\n~~~\n\nTo link to a local copy of the SDK:\n\n~~~bash\n./scripts/link ../path/to/stigg-go\n~~~\n\nIf you run the link script without any arguments, it will default to `../stigg-go`.\n",
+  },
+  {
+    language: 'java',
+    content:
+      '# Stigg Java API Library\n\n<!-- x-release-please-start-version -->\n[![Maven Central](https://img.shields.io/maven-central/v/io.stigg/stigg-java)](https://central.sonatype.com/artifact/io.stigg/stigg-java/0.1.0-beta.55)\n[![javadoc](https://javadoc.io/badge2/io.stigg/stigg-java/0.1.0-beta.55/javadoc.svg)](https://javadoc.io/doc/io.stigg/stigg-java/0.1.0-beta.55)\n<!-- x-release-please-end -->\n\nThe Stigg Java SDK provides convenient access to the Stigg REST API   from applications written in Java.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Stigg MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40stigg%2Ftypescript-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBzdGlnZy90eXBlc2NyaXB0LW1jcCJdLCJlbnYiOnsiU1RJR0dfQVBJX0tFWSI6Ik15IEFQSSBLZXkifX0)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40stigg%2Ftypescript-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40stigg%2Ftypescript-mcp%22%5D%2C%22env%22%3A%7B%22STIGG_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n<!-- x-release-please-start-version -->\n\nJavadocs are available on [javadoc.io](https://javadoc.io/doc/io.stigg/stigg-java/0.1.0-beta.55).\n\n<!-- x-release-please-end -->\n\n## Installation\n\n<!-- x-release-please-start-version -->\n\n### Gradle\n\n~~~kotlin\nimplementation("io.stigg:stigg-java:0.1.0-beta.55")\n~~~\n\n### Maven\n\n~~~xml\n<dependency>\n  <groupId>io.stigg</groupId>\n  <artifactId>stigg-java</artifactId>\n  <version>0.1.0-beta.55</version>\n</dependency>\n~~~\n\n<!-- x-release-please-end -->\n\n## Requirements\n\nThis library requires Java 8 or later.\n\n## Usage\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCustomerResponse customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\n## Client configuration\n\nConfigure the client using system properties or environment variables:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n```\n\nOr manually:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .apiKey("My API Key")\n    .build();\n```\n\nOr using a combination of the two approaches:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    // Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n    // Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\n    .fromEnv()\n    .apiKey("My API Key")\n    .build();\n```\n\nSee this table for the available options:\n\n| Setter    | System property | Environment variable | Required | Default value                 |\n| --------- | --------------- | -------------------- | -------- | ----------------------------- |\n| `apiKey`  | `stigg.apiKey`  | `STIGG_API_KEY`      | true     | -                             |\n| `baseUrl` | `stigg.baseUrl` | `STIGG_BASE_URL`     | true     | `"https://edge.api.stigg.io"` |\n\nSystem properties take precedence over environment variables.\n\n> [!TIP]\n> Don\'t create more than one client in the same application. Each client has a connection pool and\n> thread pools, which are more efficient to share between requests.\n\n### Modifying configuration\n\nTo temporarily use a modified client configuration, while reusing the same connection and thread       pools, call `withOptions()` on any client or service:\n\n```java\nimport io.stigg.client.StiggClient;\n\nStiggClient clientWithOptions = client.withOptions(optionsBuilder -> {\n    optionsBuilder.baseUrl("https://example.com");\n    optionsBuilder.maxRetries(42);\n});\n```\n\nThe `withOptions()` method does not affect the original client or service.\n\n## Requests and responses\n\nTo send a request to the Stigg API, build an instance of some `Params` class and pass it to the     corresponding client method. When the response is received, it will be deserialized into an instance of     a Java class.\n\nFor example, `client.v1().customers().retrieve(...)` should be called with an instance of `CustomerRetrieveParams`, and it     will return an instance of `CustomerResponse`.\n\n## Immutability\n\nEach class in the SDK has an associated   [builder](https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java)   or factory method for constructing it.\n\nEach class is [immutable](https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html)   once constructed. If the class has an associated builder, then it has a `toBuilder()` method, which can   be used to convert it back to a builder for making a modified copy.\n\nBecause each class is immutable, builder modification will _never_ affect already built class instances.\n\n## Asynchronous execution\n\nThe default client is synchronous. To switch to asynchronous execution, call the `async()` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClient client = StiggOkHttpClient.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.async().v1().customers().retrieve("REPLACE_ME");\n```\n\nOr create an asynchronous client from the beginning:\n\n```java\nimport io.stigg.client.StiggClientAsync;\nimport io.stigg.client.okhttp.StiggOkHttpClientAsync;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\nimport java.util.concurrent.CompletableFuture;\n\n// Configures using the `stigg.apiKey` and `stigg.baseUrl` system properties\n// Or configures using the `STIGG_API_KEY` and `STIGG_BASE_URL` environment variables\nStiggClientAsync client = StiggOkHttpClientAsync.fromEnv();\n\nCompletableFuture<CustomerResponse> customerResponse = client.v1().customers().retrieve("REPLACE_ME");\n```\n\nThe asynchronous client supports the same options as the synchronous one, except most methods return `CompletableFuture`s.\n\n\n\n\n\n\n\n## Raw responses\n\nThe SDK defines methods that deserialize responses into instances of Java classes.       However, these methods don\'t provide access to the response headers, status code, or the raw response       body.\n\nTo access this data, prefix any HTTP method call on a client or service with `withRawResponse()`:\n\n```java\nimport io.stigg.core.http.Headers;\nimport io.stigg.core.http.HttpResponseFor;\nimport io.stigg.models.v1.customers.CustomerResponse;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nHttpResponseFor<CustomerResponse> customerResponse = client.v1().customers().withRawResponse().retrieve("REPLACE_ME");\n\nint statusCode = customerResponse.statusCode();\nHeaders headers = customerResponse.headers();\n```\n\nYou can still deserialize the response into an instance of a Java class if needed:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse parsedCustomerResponse = customerResponse.parse();\n```\n\n## Error handling\n\nThe SDK throws custom unchecked exception types:\n\n- [`StiggServiceException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggServiceException.kt): Base class for HTTP errors. See this table for which exception       subclass is thrown for each HTTP status code:\n\n  | Status | Exception                                          |\n  | ------ | -------------------------------------------------- |\n  | 400    | [`BadRequestException`](stigg-java-core/src/main/kotlin/io/stigg/errors/BadRequestException.kt)           |\n  | 401    | [`UnauthorizedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnauthorizedException.kt)         |\n  | 403    | [`PermissionDeniedException`](stigg-java-core/src/main/kotlin/io/stigg/errors/PermissionDeniedException.kt)     |\n  | 404    | [`NotFoundException`](stigg-java-core/src/main/kotlin/io/stigg/errors/NotFoundException.kt)             |\n  | 422    | [`UnprocessableEntityException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnprocessableEntityException.kt)  |\n  | 429    | [`RateLimitException`](stigg-java-core/src/main/kotlin/io/stigg/errors/RateLimitException.kt)            |\n  | 5xx    | [`InternalServerException`](stigg-java-core/src/main/kotlin/io/stigg/errors/InternalServerException.kt)       |\n  | others | [`UnexpectedStatusCodeException`](stigg-java-core/src/main/kotlin/io/stigg/errors/UnexpectedStatusCodeException.kt) |\n\n- [`StiggIoException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggIoException.kt): I/O networking errors.\n\n- [`StiggRetryableException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggRetryableException.kt): Generic error indicating a failure that could be retried by the client.\n\n- [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt): Failure to interpret successfully parsed data. For example,       when accessing a property that\'s supposed to be required, but the API unexpectedly omitted it from the       response.\n\n- [`StiggException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggException.kt): Base class for all exceptions. Most errors will result in one of the       previously mentioned ones, but completely generic errors may be thrown using the base class.\n\n## Pagination\n\nThe SDK defines methods that return a paginated lists of results. It provides convenient ways to access     the results either one page at a time or item-by-item across all pages.\n\n### Auto-pagination\n\nTo iterate through all results across all pages, use the `autoPager()` method, which automatically     fetches more pages as needed.\n\nWhen using the synchronous client, the method returns an [`Iterable`](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html)\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\n\n// Process as an Iterable\nfor (CustomerListResponse customer : page.autoPager()) {\n    System.out.println(customer);\n}\n\n// Process as a Stream\npage.autoPager()\n    .stream()\n    .limit(50)\n    .forEach(customer -> System.out.println(customer));\n```\n\nWhen using the asynchronous client, the method returns an [`AsyncStreamResponse`](stigg-java-core/src/main/kotlin/io/stigg/core/http/AsyncStreamResponse.kt):\n\n```java\nimport io.stigg.core.http.AsyncStreamResponse;\nimport io.stigg.models.v1.customers.CustomerListPageAsync;\nimport io.stigg.models.v1.customers.CustomerListResponse;\nimport java.util.Optional;\nimport java.util.concurrent.CompletableFuture;\n\nCompletableFuture<CustomerListPageAsync> pageFuture = client.async().v1().customers().list();\n\npageFuture.thenRun(page -> page.autoPager().subscribe(customer -> {\n    System.out.println(customer);\n}));\n\n// If you need to handle errors or completion of the stream\npageFuture.thenRun(page -> page.autoPager().subscribe(new AsyncStreamResponse.Handler<>() {\n    @Override\n    public void onNext(CustomerListResponse customer) {\n        System.out.println(customer);\n    }\n\n    @Override\n    public void onComplete(Optional<Throwable> error) {\n        if (error.isPresent()) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error.get());\n        } else {\n            System.out.println("No more!");\n        }\n    }\n}));\n\n// Or use futures\npageFuture.thenRun(page -> page.autoPager()\n    .subscribe(customer -> {\n        System.out.println(customer);\n    })\n    .onCompleteFuture()\n    .whenComplete((unused, error) -> {\n        if (error != null) {\n            System.out.println("Something went wrong!");\n            throw new RuntimeException(error);\n        } else {\n            System.out.println("No more!");\n        }\n    }));\n```\n\n### Manual pagination\n\nTo access individual page items and manually request the next page, use the `items()`,\n`hasNextPage()`, and `nextPage()` methods:\n\n```java\nimport io.stigg.models.v1.customers.CustomerListPage;\nimport io.stigg.models.v1.customers.CustomerListResponse;\n\nCustomerListPage page = client.v1().customers().list();\nwhile (true) {\n    for (CustomerListResponse customer : page.items()) {\n        System.out.println(customer);\n    }\n\n    if (!page.hasNextPage()) {\n        break;\n    }\n\n    page = page.nextPage();\n}\n```\n\n## Logging\n\nEnable logging by setting the `STIGG_LOG` environment variable to   `info`:\n\n```sh\nexport STIGG_LOG=info\n```\n\nOr to `debug` for more verbose logging:\n\n```sh\nexport STIGG_LOG=debug\n```\n\nOr configure the client manually using the `logLevel` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.LogLevel;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .logLevel(LogLevel.INFO)\n    .build();\n```\n\n## ProGuard and R8\n\nAlthough the SDK uses reflection, it is still usable with     [ProGuard](https://github.com/Guardsquare/proguard) and     [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because     `stigg-java-core` is published with a     [configuration file](stigg-java-core/src/main/resources/META-INF/proguard/stigg-java-core.pro) containing     [keep rules](https://www.guardsquare.com/manual/configuration/usage).\n\nProGuard and R8 should automatically detect and use the published rules, but you can also manually copy     the keep rules if necessary.\n\n\n\n\n\n## Jackson\n\nThe SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON     serialization/deserialization. It is compatible with version 2.13.4 or higher,     but depends on version 2.18.2 by default.\n\nThe SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the     default version was overridden in your Maven or Gradle config).\n\nIf the SDK threw an exception, but you\'re _certain_ the version is compatible, then disable the version     check using the `checkJacksonVersionCompatibility` on [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or     [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt).\n\n> [!CAUTION]\n> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.\n\nAlso note that there are bugs in older Jackson versions that can affect the SDK. We don\'t work around all     Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to     upgrade Jackson for those instead.\n\n## Network options\n\n### Retries\n\nThe SDK automatically retries 2 times by default, with a short exponential backoff between requests.\n\nOnly the following error types are retried:\n- Connection errors (for example, due to a network connectivity problem)\n- 408 Request Timeout\n- 409 Conflict\n- 429 Rate Limit\n- 5xx Internal\n\nThe API may also explicitly instruct the SDK to retry or not retry a request.\n\nTo set a custom number of retries, configure the client using the `maxRetries` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .maxRetries(4)\n    .build();\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default.\n\nTo set a custom timeout, configure the method call using the `timeout` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .timeout(Duration.ofSeconds(30))\n    .build();\n```\n\n### Proxies\n\nTo route requests through a proxy, configure the client using the `proxy` method:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.net.InetSocketAddress;\nimport java.net.Proxy;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(new Proxy(\n      Proxy.Type.HTTP, new InetSocketAddress(\n        "https://example.com", 8080\n      )\n    ))\n    .build();\n```\n\nIf the proxy responds with `407 Proxy Authentication Required`, supply credentials by also   configuring `proxyAuthenticator`:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport io.stigg.core.http.ProxyAuthenticator;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .proxy(...)\n    // Or a custom implementation of `ProxyAuthenticator`.\n    .proxyAuthenticator(ProxyAuthenticator.basic("username", "password"))\n    .build();\n```\n\n### Connection pooling\n\nTo customize the underlying OkHttp connection pool, configure the client using the   `maxIdleConnections` and `keepAliveDuration` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\nimport java.time.Duration;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.\n    .maxIdleConnections(10)\n    .keepAliveDuration(Duration.ofMinutes(2))\n    .build();\n```\n\nIf both options are unset, OkHttp\'s default connection pool settings are used.\n\n### HTTPS\n\n> [!NOTE]\n> Most applications should not call these methods, and instead use the system defaults. The defaults include\n> special optimizations that can be lost if the implementations are modified.\n\nTo configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`,   `trustManager`, and `hostnameVerifier` methods:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.\n    .sslSocketFactory(yourSSLSocketFactory)\n    .trustManager(yourTrustManager)\n    .hostnameVerifier(yourHostnameVerifier)\n    .build();\n```\n\n\n\n### Custom HTTP client\n\nThe SDK consists of three artifacts:\n- `stigg-java-core`\n  - Contains core SDK logic\n  - Does not depend on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggClient`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClient.kt), [`StiggClientAsync`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsync.kt),             [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt), and [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), all of which can             work with any HTTP client\n- `stigg-java-client-okhttp`\n  - Depends on [OkHttp](https://square.github.io/okhttp)\n  - Exposes [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) and [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), which             provide a way to construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) and             [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), respectively, using OkHttp\n- `stigg-java`\n  - Depends on and exposes the APIs of both `stigg-java-core` and `stigg-java-client-okhttp`\n  - Does not have its own logic\n\nThis structure allows replacing the SDK\'s default HTTP client without pulling in unnecessary dependencies.\n\n#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)\n\n> [!TIP]\n> Try the available [network options](#network-options) before replacing the default client.\n\nTo use a customized `OkHttpClient`:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Copy `stigg-java-client-okhttp`\'s [`OkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/OkHttpClient.kt) class into your code and        customize it\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your        customized client\n\n### Completely custom HTTP client\n\nTo use a completely custom HTTP client:\n\n1. Replace your [`stigg-java` dependency](#installation) with `stigg-java-core`\n2. Write a class that implements the [`HttpClient`](stigg-java-core/src/main/kotlin/io/stigg/core/http/HttpClient.kt) interface\n3. Construct [`StiggClientImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientImpl.kt) or [`StiggClientAsyncImpl`](stigg-java-core/src/main/kotlin/io/stigg/client/StiggClientAsyncImpl.kt), similarly to        [`StiggOkHttpClient`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClient.kt) or [`StiggOkHttpClientAsync`](stigg-java-client-okhttp/src/main/kotlin/io/stigg/client/okhttp/StiggOkHttpClientAsync.kt), using your new        client class\n\n## Undocumented API functionality\n\nThe SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.\n\n### Parameters\n\nTo set undocumented parameters, call the `putAdditionalHeader`, `putAdditionalQueryParam`, or       `putAdditionalBodyProperty` methods on any `Params` class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .putAdditionalHeader("Secret-Header", "42")\n    .putAdditionalQueryParam("secret_query_param", "42")\n    .putAdditionalBodyProperty("secretProperty", JsonValue.from("42"))\n    .build();\n```\n\nThese can be accessed on the built object later using the `_additionalHeaders()`,       `_additionalQueryParams()`, and `_additionalBodyProperties()` methods.\n\nTo set undocumented parameters on _nested_ headers, query params, or body classes, call the         `putAdditionalProperty` method on the nested class:\n\n```java\nimport io.stigg.core.JsonValue;\nimport io.stigg.models.v1.customers.CustomerUpdateParams;\n\nCustomerUpdateParams params = CustomerUpdateParams.builder()\n    .passthrough(CustomerUpdateParams.Passthrough.builder()\n        .putAdditionalProperty("secretProperty", JsonValue.from("42"))\n        .build())\n    .build();\n```\n\nThese properties can be accessed on the nested built object later using the         `_additionalProperties()` method.\n\nTo set a documented parameter or property to an undocumented or not yet supported _value_, pass a       [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) object to its setter:\n\n```java\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder().build();\n```\n\nThe most straightforward way to create a [`JsonValue`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt) is using its       `from(...)` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.List;\nimport java.util.Map;\n\n// Create primitive JSON values\nJsonValue nullValue = JsonValue.from(null);\nJsonValue booleanValue = JsonValue.from(true);\nJsonValue numberValue = JsonValue.from(42);\nJsonValue stringValue = JsonValue.from("Hello World!");\n\n// Create a JSON array value equivalent to `["Hello", "World"]`\nJsonValue arrayValue = JsonValue.from(List.of(\n  "Hello", "World"\n));\n\n// Create a JSON object value equivalent to `{ "a": 1, "b": 2 }`\nJsonValue objectValue = JsonValue.from(Map.of(\n  "a", 1,\n  "b", 2\n));\n\n// Create an arbitrarily nested JSON equivalent to:\n// {\n//   "a": [1, 2],\n//   "b": [3, 4]\n// }\nJsonValue complexValue = JsonValue.from(Map.of(\n  "a", List.of(\n    1, 2\n  ),\n  "b", List.of(\n    3, 4\n  )\n));\n```\n\nNormally a `Builder` class\'s `build` method will throw         [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html)         if any required parameter or property is unset.\n\nTo forcibly omit a required parameter or property, pass [`JsonMissing`](stigg-java-core/src/main/kotlin/io/stigg/core/Values.kt):\n\n```java\nimport io.stigg.core.JsonMissing;\nimport io.stigg.models.v1.customers.CustomerRetrieveParams;\n\nCustomerRetrieveParams params = CustomerRetrieveParams.builder()\n    .id(JsonMissing.of())\n    .build();\n```\n\n### Response properties\n\nTo access undocumented response properties, call the `_additionalProperties()` method:\n\n```java\nimport io.stigg.core.JsonValue;\nimport java.util.Map;\n\nMap<String, JsonValue> additionalProperties = client.v1().customers().retrieve(params)._additionalProperties();\nJsonValue secretPropertyValue = additionalProperties.get("secretProperty");\n\nString result = secretPropertyValue.accept(new JsonValue.Visitor<>() {\n    @Override\n    public String visitNull() {\n        return "It\'s null!";\n    }\n\n    @Override\n    public String visitBoolean(boolean value) {\n        return "It\'s a boolean!";\n    }\n\n    @Override\n    public String visitNumber(Number value) {\n        return "It\'s a number!";\n    }\n\n    // Other methods include `visitMissing`, `visitString`, `visitArray`, and `visitObject`\n    // The default implementation of each unimplemented method delegates to `visitDefault`, which throws by default, but can also be overridden\n});\n```\n\nTo access a property\'s raw JSON value, which may be undocumented, call its `_` prefixed method:\n\n```java\nimport io.stigg.core.JsonField;\nimport java.util.Optional;\n\nJsonField<Object> field = client.v1().customers().retrieve(params)._field();\n\nif (field.isMissing()) {\n  // The property is absent from the JSON response\n} else if (field.isNull()) {\n  // The property was set to literal null\n} else {\n  // Check if value was provided as a string\n  // Other methods include `asNumber()`, `asBoolean()`, etc.\n  Optional<String> jsonString = field.asString();\n\n  // Try to deserialize into a custom type\n  MyClass myObject = field.asUnknown().orElseThrow().convert(MyClass.class);\n}\n```\n\n### Response validation\n\nIn rare cases, the API may return a response that doesn\'t match the expected type. For example, the SDK     may expect a property to contain a `String`, but the API could return something else.\n\nBy default, the SDK will not throw an exception in this case. It will throw     [`StiggInvalidDataException`](stigg-java-core/src/main/kotlin/io/stigg/errors/StiggInvalidDataException.kt) only if you directly access the property.\n\nValidating the response is _not_ forwards compatible with new types from the API for existing fields.\n\nIf you would still prefer to check that the response is completely well-typed upfront, then either call     `validate()`:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(params).validate();\n```\n\nOr configure the method call to validate the response using the `responseValidation` method:\n\n```java\nimport io.stigg.models.v1.customers.CustomerResponse;\n\nCustomerResponse customerResponse = client.v1().customers().retrieve(RequestOptions.builder().responseValidation(true).build());\n```\n\nOr configure the default for all method calls at the client level:\n\n```java\nimport io.stigg.client.StiggClient;\nimport io.stigg.client.okhttp.StiggOkHttpClient;\n\nStiggClient client = StiggOkHttpClient.builder()\n    .fromEnv()\n    .responseValidation(true)\n    .build();\n```\n\n## FAQ\n\n### Why don\'t you use plain `enum` classes?\n\nJava `enum` classes are not trivially   [forwards compatible](https://www.stainless.com/blog/making-java-enums-forwards-compatible). Using them in   the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.\n\n### Why do you represent fields using `JsonField<T>` instead of just plain `T`?\n\nUsing `JsonField<T>` enables a few features:\n\n- Allowing usage of [undocumented API functionality](#undocumented-api-functionality)\n- Lazily [validating the API response against the expected shape](#response-validation)\n- Representing absent vs explicitly null values\n\n### Why don\'t you use [`data` classes](https://kotlinlang.org/docs/data-classes.html)?\n\nIt is not [backwards compatible to add new fields to a data class](https://kotlinlang.org/docs/api-guidelines-backward-compatibility.html#avoid-using-data-classes-in-your-api)   and we don\'t want to introduce a breaking change every time we add a field to a class.\n\n### Why don\'t you use checked exceptions?\n\nChecked exceptions are widely considered a mistake in the Java programming language. In fact, they were   omitted from Kotlin for this reason.\n\nChecked exceptions:\n\n- Are verbose to handle\n- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error\n- Are tedious to propagate due to the [function coloring problem](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function)\n- Don\'t play well with lambdas (also due to the function coloring problem)\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n2. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stiggio/stigg-java/issues) with questions, bugs, or suggestions.\n',
   },
   {
     language: 'go',
