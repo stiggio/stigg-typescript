@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.0-beta.64](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.63...v0.1.0-beta.64) (2026-10-28)
+
+
+### Bug Fixes
+
+* **stainless:** restore edge.api.stigg.io as the production server ([5765bce](https://github.com/stiggio/stigg-typescript/commit/5765bce6bb2a9e2e4eac05a12257b56c07ab4b22))
+* sync OpenAPI spec from stigg-api ([c701e99](https://github.com/stiggio/stigg-typescript/commit/c701e995a470e4cade473334bb06dd90c98de522))
+* sync OpenAPI spec from stigg-api ([9bc531c](https://github.com/stiggio/stigg-typescript/commit/9bc531cd51ae6c4ed04f793cba4c22f17f6e40ee))
+
 ## [0.1.0-beta.63](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.62...v0.1.0-beta.63) (2026-10-28)
 
 
