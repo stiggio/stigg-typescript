@@ -626,6 +626,11 @@ export namespace CustomerResponse {
     passthrough?: Data.Passthrough;
 
     /**
+     * The unique identifier for the customer in Salesforce integration
+     */
+    salesforceId?: string | null;
+
+    /**
      * Timezone to use for this customer
      */
     timezone?: string | null;
@@ -1234,6 +1239,11 @@ export interface CustomerListResponse {
    * Vendor-specific billing passthrough fields.
    */
   passthrough?: CustomerListResponse.Passthrough;
+
+  /**
+   * The unique identifier for the customer in Salesforce integration
+   */
+  salesforceId?: string | null;
 
   /**
    * Timezone to use for this customer
@@ -2814,6 +2824,11 @@ export interface CustomerUpdateParams {
   passthrough?: CustomerUpdateParams.Passthrough;
 
   /**
+   * Body param: The unique identifier for the customer in Salesforce integration
+   */
+  salesforceId?: string | null;
+
+  /**
    * Body param: Timezone to use for this customer
    */
   timezone?: string | null;
@@ -3674,6 +3689,11 @@ export interface CustomerProvisionParams {
    * Body param: Vendor-specific billing passthrough fields.
    */
   passthrough?: CustomerProvisionParams.Passthrough;
+
+  /**
+   * Body param: The unique identifier for the customer in Salesforce integration
+   */
+  salesforceId?: string | null;
 
   /**
    * Body param: Timezone to use for this customer

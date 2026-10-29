@@ -348,6 +348,7 @@ describe('resource customers', () => {
           paymentMethodId: 'paymentMethodId',
         },
       },
+      salesforceId: 'salesforceId',
       timezone: 'timezone',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
