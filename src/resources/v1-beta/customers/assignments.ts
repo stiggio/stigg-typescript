@@ -11,17 +11,10 @@ export class Assignments extends APIResource {
   /**
    * Returns a cursor-paginated list of capability assignments for the given
    * customer. An assignment ties an entity to a capability with a usage limit and
-   * reset cadence.
+   * reset cadence. Deprecated: use
+   * `GET /api/v1/customers/{id}/entities/entitlements`.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const assignmentListResponse of client.v1Beta.customers.assignments.list(
-   *   'id',
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     id: string,
@@ -50,30 +43,11 @@ export class Assignments extends APIResource {
    * Batched create-or-update of capability assignments. Existing assignments matched
    * by (entityId, capabilityId) are updated; new pairs are created. On update,
    * omitted fields (usageLimit, cadence) are preserved; on create both are required
-   * by the governance service.
+   * by the governance service. Deprecated: use
+   * `PUT /api/v1/customers/{id}/entities/entitlements` with the body key
+   * `entityEntitlements`.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1Beta.customers.assignments.upsert('id', {
-   *     assignments: [
-   *       {
-   *         entityId: 'workspace-001',
-   *         featureId: 'compute-minutes',
-   *         usageLimit: 1000,
-   *         cadence: 'P1M',
-   *       },
-   *       {
-   *         entityId: 'workspace-002',
-   *         currencyId: 'cred-type-tokens',
-   *         usageLimit: 2000,
-   *         cadence: 'P1M',
-   *         parentId: 'workspace-001',
-   *         scopeEntityIds: ['user-1'],
-   *       },
-   *     ],
-   *   });
-   * ```
+   * @deprecated
    */
   upsert(
     id: string,

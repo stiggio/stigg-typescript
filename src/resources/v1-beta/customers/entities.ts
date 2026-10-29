@@ -9,15 +9,10 @@ import { path } from '../../../internal/utils/path';
 
 export class Entities extends APIResource {
   /**
-   * Retrieves a single entity for the given customer by its identifier.
+   * Retrieves a single entity for the given customer by its identifier. Deprecated:
+   * use `GET /api/v1/customers/{id}/entities/{entityId}`.
    *
-   * @example
-   * ```ts
-   * const entity =
-   *   await client.v1Beta.customers.entities.retrieve('x', {
-   *     id: 'id',
-   *   });
-   * ```
+   * @deprecated
    */
   retrieve(
     entityID: string,
@@ -38,17 +33,10 @@ export class Entities extends APIResource {
   }
 
   /**
-   * Retrieves a paginated list of entities for the given customer.
+   * Retrieves a paginated list of entities for the given customer. Deprecated: use
+   * `GET /api/v1/customers/{id}/entities`.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const entityListResponse of client.v1Beta.customers.entities.list(
-   *   'id',
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     id: string,
@@ -74,15 +62,11 @@ export class Entities extends APIResource {
   }
 
   /**
-   * Archives entities in bulk for the given customer by id.
+   * Archives entities in bulk for the given customer by id. Upsert an archived
+   * entity to restore it. Deprecated: use
+   * `POST /api/v1/customers/{id}/entities/archive`.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1Beta.customers.entities.archive('id', {
-   *     ids: ['user-7f3a0c1d', 'user-c4d1b2e9'],
-   *   });
-   * ```
+   * @deprecated
    */
   archive(
     id: string,
@@ -104,8 +88,9 @@ export class Entities extends APIResource {
   }
 
   /**
-   * Deprecated: upsert an entity to restore it. Restores previously archived
-   * entities in bulk for the given customer by id.
+   * Deprecated: use `PUT /api/v1/customers/{id}/entities` with the entity id to
+   * restore it. Restores previously archived entities in bulk for the given customer
+   * by id.
    *
    * @deprecated
    */
@@ -131,28 +116,10 @@ export class Entities extends APIResource {
   /**
    * Creates or updates entities in bulk for the given customer. Existing entities
    * matched by id are updated; new ids are created. An upsert of an archived entity
-   * restores it. An entity on an archived entity type fails with 400.
+   * restores it. An entity on an archived entity type fails with 400. Deprecated:
+   * use `PUT /api/v1/customers/{id}/entities`.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1Beta.customers.entities.upsert('id', {
-   *     entities: [
-   *       {
-   *         id: 'user-7f3a0c1d',
-   *         displayName: 'Jane Doe',
-   *         entityTypeId: 'user',
-   *         metadata: { email: 'jane@acme.com', role: 'admin' },
-   *       },
-   *       {
-   *         id: 'user-c4d1b2e9',
-   *         displayName: 'John Roe',
-   *         entityTypeId: 'user',
-   *         metadata: { email: 'john@acme.com' },
-   *       },
-   *     ],
-   *   });
-   * ```
+   * @deprecated
    */
   upsert(id: string, params: EntityUpsertParams, options?: RequestOptions): APIPromise<EntityUpsertResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

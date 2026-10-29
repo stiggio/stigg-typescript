@@ -11,15 +11,9 @@ export class EntityTypes extends APIResource {
    * Returns a cursor-paginated list of entity types defined in the environment.
    * Entity types are vendor-defined categories of resource that can be governed
    * (e.g. Org, Team, User). Archived entity types are excluded unless
-   * includeArchived=true.
+   * includeArchived=true. Deprecated: use `GET /api/v1/entity-types`.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const entityTypeListResponse of client.v1Beta.entityTypes.list()) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     params: EntityTypeListParams | null | undefined = {},
@@ -43,26 +37,9 @@ export class EntityTypes extends APIResource {
    * Batched create-or-update of entity types. Existing types matched by id are
    * updated; new ids are created. Idempotent — re-submitting the same payload
    * converges to the same state. An upsert of an archived entity type restores it.
+   * Deprecated: use `PUT /api/v1/entity-types`.
    *
-   * @example
-   * ```ts
-   * const response = await client.v1Beta.entityTypes.upsert({
-   *   types: [
-   *     {
-   *       id: 'org',
-   *       displayName: 'Organization',
-   *       description:
-   *         'A customer organization — the top of the hierarchy, holding the account-wide budget.',
-   *       attributionKeys: ['organizationId'],
-   *     },
-   *     {
-   *       id: 'team',
-   *       displayName: 'Team',
-   *       attributionKeys: ['teamId'],
-   *     },
-   *   ],
-   * });
-   * ```
+   * @deprecated
    */
   upsert(params: EntityTypeUpsertParams, options?: RequestOptions): APIPromise<EntityTypeUpsertResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
