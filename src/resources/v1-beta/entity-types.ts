@@ -10,7 +10,8 @@ export class EntityTypes extends APIResource {
   /**
    * Returns a cursor-paginated list of entity types defined in the environment.
    * Entity types are vendor-defined categories of resource that can be governed
-   * (e.g. Org, Team, User).
+   * (e.g. Org, Team, User). Archived entity types are excluded unless
+   * includeArchived=true.
    *
    * @example
    * ```ts
@@ -41,7 +42,7 @@ export class EntityTypes extends APIResource {
   /**
    * Batched create-or-update of entity types. Existing types matched by id are
    * updated; new ids are created. Idempotent — re-submitting the same payload
-   * converges to the same state.
+   * converges to the same state. An upsert of an archived entity type restores it.
    *
    * @example
    * ```ts
@@ -94,6 +95,11 @@ export interface EntityTypeListResponse {
   id: string;
 
   /**
+   * Timestamp of when the record was deleted
+   */
+  archivedAt: string | null;
+
+  /**
    * Dimension keys used to attribute usage events to instances of this type (e.g.
    * ["orgId"]). Empty array means no attribution.
    */
@@ -142,6 +148,11 @@ export namespace EntityTypeUpsertResponse {
     id: string;
 
     /**
+     * Timestamp of when the record was deleted
+     */
+    archivedAt: string | null;
+
+    /**
      * Dimension keys used to attribute usage events to instances of this type (e.g.
      * ["orgId"]). Empty array means no attribution.
      */
@@ -171,6 +182,11 @@ export namespace EntityTypeUpsertResponse {
 }
 
 export interface EntityTypeListParams extends MyCursorIDPageParams {
+  /**
+   * Query param: Whether to include archived entity types. One of: true, false
+   */
+  includeArchived?: 'true' | 'false';
+
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer
    * token); falls back to the user's first membership. Ignored for API-key auth.
