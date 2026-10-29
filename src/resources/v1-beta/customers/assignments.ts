@@ -291,6 +291,11 @@ export namespace AssignmentUpsertParams {
      */
     parentId?: string | null;
 
+    /**
+     * Dimension-scoped sub-budget: the set of entity IDs this budget applies to
+     * (order-insensitive, unique, at most 5). Omit or leave empty for the node-wide
+     * budget.
+     */
     scopeEntityIds?: Array<string>;
 
     /**
