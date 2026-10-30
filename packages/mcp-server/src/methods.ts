@@ -143,6 +143,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/api/v1/customers/{id}/integrations/{integrationId}',
   },
   {
+    clientCallName: 'client.v1.customers.entities.retrieve',
+    fullyQualifiedName: 'v1.customers.entities.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entities/{entityId}',
+  },
+  {
+    clientCallName: 'client.v1.customers.entities.list',
+    fullyQualifiedName: 'v1.customers.entities.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entities',
+  },
+  {
+    clientCallName: 'client.v1.customers.entities.archive',
+    fullyQualifiedName: 'v1.customers.entities.archive',
+    httpMethod: 'post',
+    httpPath: '/api/v1/customers/{id}/entities/archive',
+  },
+  {
+    clientCallName: 'client.v1.customers.entities.upsert',
+    fullyQualifiedName: 'v1.customers.entities.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1/customers/{id}/entities',
+  },
+  {
+    clientCallName: 'client.v1.customers.entities.entitlements.list',
+    fullyQualifiedName: 'v1.customers.entities.entitlements.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/customers/{id}/entities/entitlements',
+  },
+  {
+    clientCallName: 'client.v1.customers.entities.entitlements.upsert',
+    fullyQualifiedName: 'v1.customers.entities.entitlements.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1/customers/{id}/entities/entitlements',
+  },
+  {
     clientCallName: 'client.v1.subscriptions.retrieve',
     fullyQualifiedName: 'v1.subscriptions.retrieve',
     httpMethod: 'get',
@@ -681,6 +717,30 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'v1.contracts.delete',
     httpMethod: 'post',
     httpPath: '/api/v1/contracts/{id}/archive',
+  },
+  {
+    clientCallName: 'client.v1.entityTypes.list',
+    fullyQualifiedName: 'v1.entityTypes.list',
+    httpMethod: 'get',
+    httpPath: '/api/v1/entity-types',
+  },
+  {
+    clientCallName: 'client.v1.entityTypes.archive',
+    fullyQualifiedName: 'v1.entityTypes.archive',
+    httpMethod: 'post',
+    httpPath: '/api/v1/entity-types/archive',
+  },
+  {
+    clientCallName: 'client.v1.entityTypes.checkActiveEntities',
+    fullyQualifiedName: 'v1.entityTypes.checkActiveEntities',
+    httpMethod: 'get',
+    httpPath: '/api/v1/entity-types/{id}/has-active-entities',
+  },
+  {
+    clientCallName: 'client.v1.entityTypes.upsert',
+    fullyQualifiedName: 'v1.entityTypes.upsert',
+    httpMethod: 'put',
+    httpPath: '/api/v1/entity-types',
   },
   {
     clientCallName: 'client.v1Beta.customers.entitlements.check',

@@ -64,6 +64,34 @@ Methods:
 - <code title="post /api/v1/customers/{id}/integrations">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">link</a>(id, { ...params }) -> CustomerIntegrationResponse</code>
 - <code title="delete /api/v1/customers/{id}/integrations/{integrationId}">client.v1.customers.integrations.<a href="./src/resources/v1/customers/integrations.ts">unlink</a>(integrationID, { ...params }) -> CustomerIntegrationResponse</code>
 
+### Entities
+
+Types:
+
+- <code><a href="./src/resources/v1/customers/entities/entities.ts">EntityRetrieveResponse</a></code>
+- <code><a href="./src/resources/v1/customers/entities/entities.ts">EntityListResponse</a></code>
+- <code><a href="./src/resources/v1/customers/entities/entities.ts">EntityArchiveResponse</a></code>
+- <code><a href="./src/resources/v1/customers/entities/entities.ts">EntityUpsertResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/customers/{id}/entities/{entityId}">client.v1.customers.entities.<a href="./src/resources/v1/customers/entities/entities.ts">retrieve</a>(entityID, { ...params }) -> EntityRetrieveResponse</code>
+- <code title="get /api/v1/customers/{id}/entities">client.v1.customers.entities.<a href="./src/resources/v1/customers/entities/entities.ts">list</a>(id, { ...params }) -> EntityListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/customers/{id}/entities/archive">client.v1.customers.entities.<a href="./src/resources/v1/customers/entities/entities.ts">archive</a>(id, { ...params }) -> EntityArchiveResponse</code>
+- <code title="put /api/v1/customers/{id}/entities">client.v1.customers.entities.<a href="./src/resources/v1/customers/entities/entities.ts">upsert</a>(id, { ...params }) -> EntityUpsertResponse</code>
+
+#### Entitlements
+
+Types:
+
+- <code><a href="./src/resources/v1/customers/entities/entitlements.ts">EntitlementListResponse</a></code>
+- <code><a href="./src/resources/v1/customers/entities/entitlements.ts">EntitlementUpsertResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/customers/{id}/entities/entitlements">client.v1.customers.entities.entitlements.<a href="./src/resources/v1/customers/entities/entitlements.ts">list</a>(id, { ...params }) -> EntitlementListResponsesMyCursorIDPage</code>
+- <code title="put /api/v1/customers/{id}/entities/entitlements">client.v1.customers.entities.entitlements.<a href="./src/resources/v1/customers/entities/entitlements.ts">upsert</a>(id, { ...params }) -> EntitlementUpsertResponse</code>
+
 ## Subscriptions
 
 Types:
@@ -390,6 +418,22 @@ Methods:
 - <code title="patch /api/v1/contracts/{id}">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">update</a>(id, { ...params }) -> ContractUpdateResponse</code>
 - <code title="get /api/v1/contracts">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">list</a>({ ...params }) -> ContractListResponsesMyCursorIDPage</code>
 - <code title="post /api/v1/contracts/{id}/archive">client.v1.contracts.<a href="./src/resources/v1/contracts.ts">delete</a>(id, { ...params }) -> ContractDeleteResponse</code>
+
+## EntityTypes
+
+Types:
+
+- <code><a href="./src/resources/v1/entity-types.ts">EntityTypeListResponse</a></code>
+- <code><a href="./src/resources/v1/entity-types.ts">EntityTypeArchiveResponse</a></code>
+- <code><a href="./src/resources/v1/entity-types.ts">EntityTypeCheckActiveEntitiesResponse</a></code>
+- <code><a href="./src/resources/v1/entity-types.ts">EntityTypeUpsertResponse</a></code>
+
+Methods:
+
+- <code title="get /api/v1/entity-types">client.v1.entityTypes.<a href="./src/resources/v1/entity-types.ts">list</a>({ ...params }) -> EntityTypeListResponsesMyCursorIDPage</code>
+- <code title="post /api/v1/entity-types/archive">client.v1.entityTypes.<a href="./src/resources/v1/entity-types.ts">archive</a>({ ...params }) -> EntityTypeArchiveResponse</code>
+- <code title="get /api/v1/entity-types/{id}/has-active-entities">client.v1.entityTypes.<a href="./src/resources/v1/entity-types.ts">checkActiveEntities</a>(id, { ...params }) -> EntityTypeCheckActiveEntitiesResponse</code>
+- <code title="put /api/v1/entity-types">client.v1.entityTypes.<a href="./src/resources/v1/entity-types.ts">upsert</a>({ ...params }) -> EntityTypeUpsertResponse</code>
 
 # V1Beta
 

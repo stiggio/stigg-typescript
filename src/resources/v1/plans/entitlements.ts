@@ -9,6 +9,14 @@ import { path } from '../../../internal/utils/path';
 export class Entitlements extends APIResource {
   /**
    * Creates one or more entitlements (feature or credit) on a draft plan.
+   *
+   * @example
+   * ```ts
+   * const entitlement =
+   *   await client.v1.plans.entitlements.create('planId', {
+   *     entitlements: [{ id: 'id', type: 'FEATURE' }],
+   *   });
+   * ```
    */
   create(
     planID: string,
@@ -31,6 +39,15 @@ export class Entitlements extends APIResource {
 
   /**
    * Updates an existing entitlement on a draft plan.
+   *
+   * @example
+   * ```ts
+   * const planEntitlement =
+   *   await client.v1.plans.entitlements.update('id', {
+   *     planId: 'planId',
+   *     type: 'FEATURE',
+   *   });
+   * ```
    */
   update(id: string, params: EntitlementUpdateParams, options?: RequestOptions): APIPromise<PlanEntitlement> {
     const { planId, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -49,6 +66,12 @@ export class Entitlements extends APIResource {
 
   /**
    * Retrieves a list of entitlements for a plan.
+   *
+   * @example
+   * ```ts
+   * const entitlements =
+   *   await client.v1.plans.entitlements.list('planId');
+   * ```
    */
   list(
     planID: string,
@@ -70,6 +93,14 @@ export class Entitlements extends APIResource {
 
   /**
    * Deletes an entitlement from a draft plan.
+   *
+   * @example
+   * ```ts
+   * const planEntitlement =
+   *   await client.v1.plans.entitlements.delete('id', {
+   *     planId: 'planId',
+   *   });
+   * ```
    */
   delete(id: string, params: EntitlementDeleteParams, options?: RequestOptions): APIPromise<PlanEntitlement> {
     const { planId, 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID } = params;

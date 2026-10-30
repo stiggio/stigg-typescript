@@ -14,6 +14,13 @@ export class Contracts extends APIResource {
    * inside one transaction — any validation or creation failure rolls the whole
    * contract back. Each subscription entry is either a new subscription to create or
    * a reference to an existing custom subscription. Returns the created contract.
+   *
+   * @example
+   * ```ts
+   * const contract = await client.v1.contracts.create({
+   *   customerId: 'customerId',
+   * });
+   * ```
    */
   create(params: ContractCreateParams, options?: RequestOptions): APIPromise<ContractCreateResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -34,6 +41,11 @@ export class Contracts extends APIResource {
    * Retrieves a single contract by its ID, enriched with a preview of its upcoming
    * (next) invoice when one is available. Returns 404 when no contract with that ID
    * exists in the environment.
+   *
+   * @example
+   * ```ts
+   * const contract = await client.v1.contracts.retrieve('x');
+   * ```
    */
   retrieve(
     id: string,
@@ -57,6 +69,11 @@ export class Contracts extends APIResource {
    * Updates a contract's metadata (name, PO number, activation dates) and optionally
    * re-links its subscriptions. Best-effort re-syncs the change to the connected
    * billing provider.
+   *
+   * @example
+   * ```ts
+   * const contract = await client.v1.contracts.update('x');
+   * ```
    */
   update(
     id: string,
@@ -82,6 +99,14 @@ export class Contracts extends APIResource {
    * that has a billing contract is enriched with a preview of its upcoming (next)
    * invoice when one is available. Supports filtering by customer external ID,
    * state, and name.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const contractListResponse of client.v1.contracts.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: ContractListParams | null | undefined = {},
@@ -104,6 +129,11 @@ export class Contracts extends APIResource {
   /**
    * Deletes a contract: cancels the contract in the connected billing provider and
    * cancels every subscription linked to it.
+   *
+   * @example
+   * ```ts
+   * const contract = await client.v1.contracts.delete('x');
+   * ```
    */
   delete(
     id: string,

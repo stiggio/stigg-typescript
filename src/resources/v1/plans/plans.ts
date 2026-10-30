@@ -26,6 +26,15 @@ export class Plans extends APIResource {
 
   /**
    * Creates a new plan in draft status.
+   *
+   * @example
+   * ```ts
+   * const plan = await client.v1.plans.create({
+   *   id: 'id',
+   *   displayName: 'displayName',
+   *   productId: 'productId',
+   * });
+   * ```
    */
   create(params: PlanCreateParams, options?: RequestOptions): APIPromise<Plan> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -45,6 +54,11 @@ export class Plans extends APIResource {
   /**
    * Retrieves a plan by its unique identifier, including entitlements and pricing
    * details.
+   *
+   * @example
+   * ```ts
+   * const plan = await client.v1.plans.retrieve('x');
+   * ```
    */
   retrieve(
     id: string,
@@ -67,6 +81,11 @@ export class Plans extends APIResource {
   /**
    * Updates an existing plan's properties such as display name, description, and
    * metadata.
+   *
+   * @example
+   * ```ts
+   * const plan = await client.v1.plans.update('x');
+   * ```
    */
   update(id: string, params: PlanUpdateParams, options?: RequestOptions): APIPromise<Plan> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -85,6 +104,14 @@ export class Plans extends APIResource {
 
   /**
    * Retrieves a paginated list of plans in the environment.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const planListResponse of client.v1.plans.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PlanListParams | null | undefined = {},
@@ -106,6 +133,11 @@ export class Plans extends APIResource {
 
   /**
    * Archives a plan, preventing it from being used in new subscriptions.
+   *
+   * @example
+   * ```ts
+   * const plan = await client.v1.plans.archive('x');
+   * ```
    */
   archive(
     id: string,
@@ -127,6 +159,11 @@ export class Plans extends APIResource {
 
   /**
    * Creates a draft version of an existing plan for modification before publishing.
+   *
+   * @example
+   * ```ts
+   * const plan = await client.v1.plans.createDraft('x');
+   * ```
    */
   createDraft(
     id: string,
@@ -148,6 +185,16 @@ export class Plans extends APIResource {
 
   /**
    * Retrieves the list of charges configured on a plan.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const planListChargesResponse of client.v1.plans.listCharges(
+   *   'x',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   listCharges(
     id: string,
@@ -174,6 +221,16 @@ export class Plans extends APIResource {
 
   /**
    * Retrieves the list of overage charges configured on a plan.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const planListOverageChargesResponse of client.v1.plans.listOverageCharges(
+   *   'x',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   listOverageCharges(
     id: string,
@@ -204,6 +261,13 @@ export class Plans extends APIResource {
    * onto the new version immediately (`ALL_CUSTOMERS`) or stay on the version they
    * subscribed to — grandfathered — until you explicitly migrate them, e.g. via the
    * migrate subscription endpoint (`NEW_CUSTOMERS`).
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.plans.publish('x', {
+   *   migrationType: 'NEW_CUSTOMERS',
+   * });
+   * ```
    */
   publish(id: string, params: PlanPublishParams, options?: RequestOptions): APIPromise<PlanPublishResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -222,6 +286,11 @@ export class Plans extends APIResource {
 
   /**
    * Removes a draft version of a plan.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.plans.removeDraft('x');
+   * ```
    */
   removeDraft(
     id: string,

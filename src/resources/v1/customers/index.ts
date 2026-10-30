@@ -28,6 +28,18 @@ export {
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers';
 export {
+  Entities,
+  type EntityRetrieveResponse,
+  type EntityListResponse,
+  type EntityArchiveResponse,
+  type EntityUpsertResponse,
+  type EntityRetrieveParams,
+  type EntityListParams,
+  type EntityArchiveParams,
+  type EntityUpsertParams,
+  type EntityListResponsesMyCursorIDPage,
+} from './entities/index';
+export {
   Integrations,
   type IntegrationListResponse,
   type IntegrationRetrieveParams,

@@ -25,6 +25,19 @@ import {
   PromotionalEntitlementRevokeResponse,
   PromotionalEntitlements,
 } from './promotional-entitlements';
+import * as EntitiesAPI from './entities/entities';
+import {
+  Entities,
+  EntityArchiveParams,
+  EntityArchiveResponse,
+  EntityListParams,
+  EntityListResponse,
+  EntityListResponsesMyCursorIDPage,
+  EntityRetrieveParams,
+  EntityRetrieveResponse,
+  EntityUpsertParams,
+  EntityUpsertResponse,
+} from './entities/entities';
 import { APIPromise } from '../../../core/api-promise';
 import { MyCursorIDPage, type MyCursorIDPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -36,10 +49,18 @@ export class Customers extends APIResource {
   promotionalEntitlements: PromotionalEntitlementsAPI.PromotionalEntitlements =
     new PromotionalEntitlementsAPI.PromotionalEntitlements(this._client);
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
+  entities: EntitiesAPI.Entities = new EntitiesAPI.Entities(this._client);
 
   /**
    * Retrieves a customer by their unique identifier, including billing information
    * and subscription status.
+   *
+   * @example
+   * ```ts
+   * const customerResponse = await client.v1.customers.retrieve(
+   *   'x',
+   * );
+   * ```
    */
   retrieve(
     id: string,
@@ -62,6 +83,13 @@ export class Customers extends APIResource {
   /**
    * Updates an existing customer's properties such as name, email, and billing
    * information.
+   *
+   * @example
+   * ```ts
+   * const customerResponse = await client.v1.customers.update(
+   *   'x',
+   * );
+   * ```
    */
   update(id: string, params: CustomerUpdateParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -80,6 +108,14 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves a paginated list of customers in the environment.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customerListResponse of client.v1.customers.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: CustomerListParams | null | undefined = {},
@@ -102,6 +138,13 @@ export class Customers extends APIResource {
   /**
    * Archives a customer, preventing new subscriptions. Optionally cancels existing
    * subscriptions.
+   *
+   * @example
+   * ```ts
+   * const customerResponse = await client.v1.customers.archive(
+   *   'x',
+   * );
+   * ```
    */
   archive(
     id: string,
@@ -132,6 +175,13 @@ export class Customers extends APIResource {
    * respond faster and keep working through brief Stigg outages; reach for this
    * endpoint when a live HTTP call is the natural fit, such as from a non-Node
    * backend or a server-side job.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.customers.checkEntitlement(
+   *   'x',
+   * );
+   * ```
    */
   checkEntitlement(
     id: string,
@@ -155,6 +205,19 @@ export class Customers extends APIResource {
   /**
    * Imports multiple customers in bulk. Used for migrating customer data from
    * external systems.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.customers.import({
+   *   customers: [
+   *     {
+   *       id: 'id',
+   *       email: 'dev@stainless.com',
+   *       name: 'name',
+   *     },
+   *   ],
+   * });
+   * ```
    */
   import(params: CustomerImportParams, options?: RequestOptions): APIPromise<CustomerImportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -175,6 +238,13 @@ export class Customers extends APIResource {
    * Retrieves a customer's contracts. Each contract that has a billing contract is
    * enriched with a preview of its upcoming (next) invoice when available. Returns
    * an empty list when the customer has no contracts.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.customers.listContracts(
+   *   'id',
+   * );
+   * ```
    */
   listContracts(
     id: string,
@@ -201,6 +271,16 @@ export class Customers extends APIResource {
    * Optionally narrowed to one contract, an issue-date range, and/or a set of
    * invoice states. Returns an empty list when no billing provider is connected or
    * the customer is not synced.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customerListInvoicesResponse of client.v1.customers.listInvoices(
+   *   'id',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   listInvoices(
     id: string,
@@ -227,6 +307,16 @@ export class Customers extends APIResource {
 
   /**
    * Retrieves a paginated list of resources within the same customer.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const customerListResourcesResponse of client.v1.customers.listResources(
+   *   'x',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   listResources(
     id: string,
@@ -253,6 +343,12 @@ export class Customers extends APIResource {
 
   /**
    * Creates a new customer.
+   *
+   * @example
+   * ```ts
+   * const customerResponse =
+   *   await client.v1.customers.provision({ id: 'id' });
+   * ```
    */
   provision(params: CustomerProvisionParams, options?: RequestOptions): APIPromise<CustomerResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -277,6 +373,12 @@ export class Customers extends APIResource {
    * built-in cache) or the Sidecar will typically respond faster and keep working
    * through brief Stigg outages; reach for this endpoint when a live HTTP call is
    * the natural fit, such as from a non-Node backend or a server-side job.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.customers.retrieveEntitlements('x');
+   * ```
    */
   retrieveEntitlements(
     id: string,
@@ -299,6 +401,12 @@ export class Customers extends APIResource {
 
   /**
    * Restores an archived customer, allowing them to create new subscriptions again.
+   *
+   * @example
+   * ```ts
+   * const customerResponse =
+   *   await client.v1.customers.unarchive('x');
+   * ```
    */
   unarchive(
     id: string,
@@ -4236,6 +4344,7 @@ export interface CustomerUnarchiveParams {
 Customers.PaymentMethod = PaymentMethod;
 Customers.PromotionalEntitlements = PromotionalEntitlements;
 Customers.Integrations = Integrations;
+Customers.Entities = Entities;
 
 export declare namespace Customers {
   export {
@@ -4291,5 +4400,18 @@ export declare namespace Customers {
     type IntegrationListParams as IntegrationListParams,
     type IntegrationLinkParams as IntegrationLinkParams,
     type IntegrationUnlinkParams as IntegrationUnlinkParams,
+  };
+
+  export {
+    Entities as Entities,
+    type EntityRetrieveResponse as EntityRetrieveResponse,
+    type EntityListResponse as EntityListResponse,
+    type EntityArchiveResponse as EntityArchiveResponse,
+    type EntityUpsertResponse as EntityUpsertResponse,
+    type EntityListResponsesMyCursorIDPage as EntityListResponsesMyCursorIDPage,
+    type EntityRetrieveParams as EntityRetrieveParams,
+    type EntityListParams as EntityListParams,
+    type EntityArchiveParams as EntityArchiveParams,
+    type EntityUpsertParams as EntityUpsertParams,
   };
 }

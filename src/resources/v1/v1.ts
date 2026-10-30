@@ -28,6 +28,19 @@ import {
   CouponUpdateCouponParams,
   Coupons,
 } from './coupons';
+import * as EntityTypesAPI from './entity-types';
+import {
+  EntityTypeArchiveParams,
+  EntityTypeArchiveResponse,
+  EntityTypeCheckActiveEntitiesParams,
+  EntityTypeCheckActiveEntitiesResponse,
+  EntityTypeListParams,
+  EntityTypeListResponse,
+  EntityTypeListResponsesMyCursorIDPage,
+  EntityTypeUpsertParams,
+  EntityTypeUpsertResponse,
+  EntityTypes,
+} from './entity-types';
 import * as FeaturesAPI from './features';
 import {
   Feature,
@@ -187,6 +200,7 @@ export class V1 extends APIResource {
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
   contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
+  entityTypes: EntityTypesAPI.EntityTypes = new EntityTypesAPI.EntityTypes(this._client);
 }
 
 V1.Customers = Customers;
@@ -200,6 +214,7 @@ V1.Plans = Plans;
 V1.Usage = Usage;
 V1.Products = Products;
 V1.Contracts = Contracts;
+V1.EntityTypes = EntityTypes;
 
 export declare namespace V1 {
   export {
@@ -373,5 +388,18 @@ export declare namespace V1 {
     type ContractUpdateParams as ContractUpdateParams,
     type ContractListParams as ContractListParams,
     type ContractDeleteParams as ContractDeleteParams,
+  };
+
+  export {
+    EntityTypes as EntityTypes,
+    type EntityTypeListResponse as EntityTypeListResponse,
+    type EntityTypeArchiveResponse as EntityTypeArchiveResponse,
+    type EntityTypeCheckActiveEntitiesResponse as EntityTypeCheckActiveEntitiesResponse,
+    type EntityTypeUpsertResponse as EntityTypeUpsertResponse,
+    type EntityTypeListResponsesMyCursorIDPage as EntityTypeListResponsesMyCursorIDPage,
+    type EntityTypeListParams as EntityTypeListParams,
+    type EntityTypeArchiveParams as EntityTypeArchiveParams,
+    type EntityTypeCheckActiveEntitiesParams as EntityTypeCheckActiveEntitiesParams,
+    type EntityTypeUpsertParams as EntityTypeUpsertParams,
   };
 }

@@ -12,7 +12,7 @@ export class Entities extends APIResource {
    * Retrieves a single entity for the given customer by its identifier. Deprecated:
    * use `GET /api/v1/customers/{id}/entities/{entityId}`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.retrieve` instead.
    */
   retrieve(
     entityID: string,
@@ -36,7 +36,7 @@ export class Entities extends APIResource {
    * Retrieves a paginated list of entities for the given customer. Deprecated: use
    * `GET /api/v1/customers/{id}/entities`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.list` instead.
    */
   list(
     id: string,
@@ -66,7 +66,7 @@ export class Entities extends APIResource {
    * entity to restore it. Deprecated: use
    * `POST /api/v1/customers/{id}/entities/archive`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.archive` instead.
    */
   archive(
     id: string,
@@ -92,7 +92,7 @@ export class Entities extends APIResource {
    * restore it. Restores previously archived entities in bulk for the given customer
    * by id.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.upsert` with the entity id to restore an archived entity.
    */
   unarchive(
     id: string,
@@ -119,7 +119,7 @@ export class Entities extends APIResource {
    * restores it. An entity on an archived entity type fails with 400. Deprecated:
    * use `PUT /api/v1/customers/{id}/entities`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.upsert` instead.
    */
   upsert(id: string, params: EntityUpsertParams, options?: RequestOptions): APIPromise<EntityUpsertResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

@@ -32,6 +32,13 @@ export class Subscriptions extends APIResource {
   /**
    * Retrieves a subscription by its unique identifier, including plan details,
    * billing period, status, and add-ons.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.v1.subscriptions.retrieve(
+   *   'x',
+   * );
+   * ```
    */
   retrieve(
     id: string,
@@ -60,6 +67,13 @@ export class Subscriptions extends APIResource {
    * the array is removed from the subscription. Changes classified as a downgrade
    * may be scheduled for the end of the current billing period instead of applying
    * immediately, depending on your update scheduling configuration.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.v1.subscriptions.update(
+   *   'x',
+   * );
+   * ```
    */
   update(id: string, params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Subscription> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -79,6 +93,14 @@ export class Subscriptions extends APIResource {
   /**
    * Retrieves a paginated list of subscriptions, with optional filters for customer,
    * status, and plan.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const subscriptionListResponse of client.v1.subscriptions.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: SubscriptionListParams | null | undefined = {},
@@ -101,6 +123,13 @@ export class Subscriptions extends APIResource {
   /**
    * Cancels an active subscription, either immediately or at a specified time such
    * as end of billing period.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.v1.subscriptions.cancel(
+   *   'x',
+   * );
+   * ```
    */
   cancel(id: string, params: SubscriptionCancelParams, options?: RequestOptions): APIPromise<Subscription> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -122,6 +151,14 @@ export class Subscriptions extends APIResource {
    * managing it. The original customer remains the paying customer for this
    * subscription, unless payment was already delegated to the target customer, in
    * which case the target customer becomes the paying customer as well.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.v1.subscriptions.delegate(
+   *   'x',
+   *   { targetCustomerId: 'targetCustomerId' },
+   * );
+   * ```
    */
   delegate(
     id: string,
@@ -145,6 +182,19 @@ export class Subscriptions extends APIResource {
   /**
    * Imports multiple subscriptions in bulk. Used for migrating subscription data
    * from external systems.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.subscriptions.import({
+   *   subscriptions: [
+   *     {
+   *       id: 'id',
+   *       customerId: 'customerId',
+   *       planId: 'planId',
+   *     },
+   *   ],
+   * });
+   * ```
    */
   import(params: SubscriptionImportParams, options?: RequestOptions): APIPromise<SubscriptionImportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -164,6 +214,13 @@ export class Subscriptions extends APIResource {
   /**
    * Migrates a subscription to the latest published version of its plan or add-ons.
    * Handles prorated charges or credits automatically.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.v1.subscriptions.migrate(
+   *   'x',
+   * );
+   * ```
    */
   migrate(id: string, params: SubscriptionMigrateParams, options?: RequestOptions): APIPromise<Subscription> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -183,6 +240,14 @@ export class Subscriptions extends APIResource {
   /**
    * Previews the pricing impact of creating or updating a subscription without
    * making changes. Returns estimated costs, taxes, and proration details.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.subscriptions.preview({
+   *   customerId: 'customerId',
+   *   planId: 'planId',
+   * });
+   * ```
    */
   preview(
     params: SubscriptionPreviewParams,
@@ -205,6 +270,14 @@ export class Subscriptions extends APIResource {
   /**
    * Creates a new subscription for an existing customer. When payment is required
    * and no payment method exists, returns a checkout URL.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.subscriptions.provision({
+   *   customerId: 'customerId',
+   *   planId: 'planId',
+   * });
+   * ```
    */
   provision(
     params: SubscriptionProvisionParams,
@@ -227,6 +300,14 @@ export class Subscriptions extends APIResource {
   /**
    * Transfers a subscription to a different resource ID. Used for multi-resource
    * products where subscriptions apply to specific entities like websites or apps.
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.v1.subscriptions.transfer(
+   *   'x',
+   *   { destinationResourceId: 'destinationResourceId' },
+   * );
+   * ```
    */
   transfer(
     id: string,

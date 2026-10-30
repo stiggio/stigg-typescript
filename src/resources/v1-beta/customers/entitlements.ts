@@ -13,7 +13,7 @@ export class Entitlements extends APIResource {
    * resolves to per-entity governance limits surfaced as `chains` on the response.
    * Deprecated: use `GET /api/v1/customers/{id}/entitlements/check`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.check_entitlement` instead.
    */
   check(
     id: string,

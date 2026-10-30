@@ -13,7 +13,7 @@ export class EntityTypes extends APIResource {
    * (e.g. Org, Team, User). Archived entity types are excluded unless
    * includeArchived=true. Deprecated: use `GET /api/v1/entity-types`.
    *
-   * @deprecated
+   * @deprecated Use `v1.entity_types.list` instead.
    */
   list(
     params: EntityTypeListParams | null | undefined = {},
@@ -39,7 +39,7 @@ export class EntityTypes extends APIResource {
    * converges to the same state. An upsert of an archived entity type restores it.
    * Deprecated: use `PUT /api/v1/entity-types`.
    *
-   * @deprecated
+   * @deprecated Use `v1.entity_types.upsert` instead.
    */
   upsert(params: EntityTypeUpsertParams, options?: RequestOptions): APIPromise<EntityTypeUpsertResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

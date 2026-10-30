@@ -14,7 +14,7 @@ export class Assignments extends APIResource {
    * reset cadence. Deprecated: use
    * `GET /api/v1/customers/{id}/entities/entitlements`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.entitlements.list` instead.
    */
   list(
     id: string,
@@ -47,7 +47,7 @@ export class Assignments extends APIResource {
    * `PUT /api/v1/customers/{id}/entities/entitlements` with the body key
    * `entityEntitlements`.
    *
-   * @deprecated
+   * @deprecated Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`.
    */
   upsert(
     id: string,

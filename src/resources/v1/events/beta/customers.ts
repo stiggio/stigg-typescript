@@ -13,6 +13,14 @@ export class Customers extends APIResource {
    * usage, sortable and filterable by usage. Each node carries `parentId` so the
    * tree can be rebuilt client-side. Usage is read from a periodically-refreshed
    * read model and never gates access.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.events.beta.customers.retrieveGovernance(
+   *     'id',
+   *   );
+   * ```
    */
   retrieveGovernance(
     id: string,

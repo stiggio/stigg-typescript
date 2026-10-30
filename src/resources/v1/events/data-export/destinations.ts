@@ -11,6 +11,15 @@ export class Destinations extends APIResource {
    * Register a destination on the environment's DATA_EXPORT integration.
    * Lazy-creates the integration row + provider recipient on first call. Idempotent
    * on destinationId.
+   *
+   * @example
+   * ```ts
+   * const destination =
+   *   await client.v1.events.dataExport.destinations.create({
+   *     destinationId: 'x',
+   *     destinationType: 'x',
+   *   });
+   * ```
    */
   create(params: DestinationCreateParams, options?: RequestOptions): APIPromise<DestinationCreateResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -31,6 +40,14 @@ export class Destinations extends APIResource {
    * Disconnect a destination: stops the provider sync (deletes the provider
    * destination) and removes it from the DATA_EXPORT integration. Non-destructive —
    * the warehouse table is left intact. Idempotent.
+   *
+   * @example
+   * ```ts
+   * const destination =
+   *   await client.v1.events.dataExport.destinations.delete(
+   *     'x',
+   *   );
+   * ```
    */
   delete(
     destinationID: string,
@@ -54,6 +71,15 @@ export class Destinations extends APIResource {
    * Update a destination's entity selection. Pushes the new enabled_models to the
    * provider first, then persists the selection. Applies on the next scheduled
    * transfer.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.events.dataExport.destinations.updateSelection(
+   *     'x',
+   *     { enabledModels: ['x'], integrationId: 'x' },
+   *   );
+   * ```
    */
   updateSelection(
     destinationID: string,

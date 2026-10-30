@@ -26,6 +26,14 @@ export class Events extends APIResource {
    * Estimates the credit cost of a usage event without ingesting it. Returns the
    * estimated cost per credit currency, the current balance, and the balance after
    * the estimated consumption.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.events.estimate({
+   *   customerId: 'customerId',
+   *   eventName: 'x',
+   * });
+   * ```
    */
   estimate(params: EventEstimateParams, options?: RequestOptions): APIPromise<EventEstimateResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;
@@ -45,6 +53,19 @@ export class Events extends APIResource {
   /**
    * Reports raw usage events for event-based metering. Events are validated and
    * stored synchronously, then aggregated into usage totals asynchronously.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.events.report({
+   *   events: [
+   *     {
+   *       customerId: 'customerId',
+   *       eventName: 'x',
+   *       idempotencyKey: 'x',
+   *     },
+   *   ],
+   * });
+   * ```
    */
   report(params: EventReportParams, options?: RequestOptions): APIPromise<EventReportResponse> {
     const { 'X-ACCOUNT-ID': xAccountID, 'X-ENVIRONMENT-ID': xEnvironmentID, ...body } = params;

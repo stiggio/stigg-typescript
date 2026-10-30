@@ -21,6 +21,12 @@ export class DataExport extends APIResource {
   /**
    * List the catalog of data-export models the customer can opt into when connecting
    * a destination.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.events.dataExport.listModels();
+   * ```
    */
   listModels(
     params: DataExportListModelsParams | null | undefined = {},
@@ -42,6 +48,12 @@ export class DataExport extends APIResource {
   /**
    * Trigger a sync for one destination or all destinations under the provider
    * entity.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.events.dataExport.triggerSync();
+   * ```
    */
   triggerSync(
     params: DataExportTriggerSyncParams,

@@ -9,6 +9,17 @@ export class Consumption extends APIResource {
   /**
    * Consumes a specified amount of credits directly from a customer wallet, with no
    * feature mapping. Returns the optimistic balance.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.credits.consumption.consume({
+   *     amount: 1,
+   *     currencyId: 'currencyId',
+   *     customerId: 'customerId',
+   *     idempotencyKey: 'x',
+   *   });
+   * ```
    */
   consume(
     params: ConsumptionConsumeParams,
@@ -31,6 +42,21 @@ export class Consumption extends APIResource {
   /**
    * Consumes credits directly from customer wallets asynchronously. Consumptions are
    * reconciled asynchronously into the credit balances.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.credits.consumption.consumeAsync({
+   *     consumptions: [
+   *       {
+   *         amount: 1,
+   *         currencyId: 'currencyId',
+   *         customerId: 'customerId',
+   *         idempotencyKey: 'x',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   consumeAsync(
     params: ConsumptionConsumeAsyncParams,

@@ -82,6 +82,18 @@ export {
   type CustomerListResourcesResponsesMyCursorIDPage,
 } from './customers/index';
 export {
+  EntityTypes,
+  type EntityTypeListResponse,
+  type EntityTypeArchiveResponse,
+  type EntityTypeCheckActiveEntitiesResponse,
+  type EntityTypeUpsertResponse,
+  type EntityTypeListParams,
+  type EntityTypeArchiveParams,
+  type EntityTypeCheckActiveEntitiesParams,
+  type EntityTypeUpsertParams,
+  type EntityTypeListResponsesMyCursorIDPage,
+} from './entity-types';
+export {
   Events,
   type EventEstimateResponse,
   type EventReportResponse,

@@ -11,6 +11,16 @@ export class Reservations extends APIResource {
    * Releases a credit reservation, consuming the given amount and returning the rest
    * of the held credits to the balance. Retry a failed release with the same
    * reservation ID; it is applied once.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.credits.reservations.release('x', {
+   *     consumedAmount: 0,
+   *     currencyId: 'currencyId',
+   *     customerId: 'customerId',
+   *   });
+   * ```
    */
   release(
     reservationID: string,
