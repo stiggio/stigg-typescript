@@ -125,6 +125,7 @@ describe('resource customers', () => {
         'x',
         {
           currencyId: 'x',
+          dimensions: { foo: 'string' },
           featureId: 'x',
           requestedUsage: 0,
           requestedValues: ['string'],

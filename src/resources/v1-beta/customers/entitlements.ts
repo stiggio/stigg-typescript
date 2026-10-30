@@ -11,12 +11,9 @@ export class Entitlements extends APIResource {
    * Experimental — request and response shapes may change without notice. Same
    * semantics as `Check entitlement`, plus an optional `dimensions` query param that
    * resolves to per-entity governance limits surfaced as `chains` on the response.
+   * Deprecated: use `GET /api/v1/customers/{id}/entitlements/check`.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1Beta.customers.entitlements.check('x');
-   * ```
+   * @deprecated
    */
   check(
     id: string,
@@ -148,7 +145,7 @@ export namespace EntitlementCheckResponse {
       scopeEntityIds: Array<string>;
 
       /**
-       * Hard usage limit for this node; null when no assignment is configured.
+       * Hard usage limit for this node; null when the entity has no entity entitlement.
        */
       usageLimit: number | null;
     }
@@ -320,7 +317,7 @@ export namespace EntitlementCheckResponse {
       scopeEntityIds: Array<string>;
 
       /**
-       * Hard usage limit for this node; null when no assignment is configured.
+       * Hard usage limit for this node; null when the entity has no entity entitlement.
        */
       usageLimit: number | null;
     }
@@ -362,9 +359,9 @@ export interface EntitlementCheckParams {
   currencyId?: string;
 
   /**
-   * Query param: Optional attribution map (e.g. `dimensions[userId]=u1`). When
-   * provided, the response includes a `chains` array with per-entity governance
-   * limits.
+   * Query param: Attribution map of the entities the usage is attributed to (e.g.
+   * `dimensions[userId]=u1`). When provided, their governance budgets are checked
+   * too and the response includes `chains`.
    */
   dimensions?: { [key: string]: string };
 

@@ -124,12 +124,14 @@ export class Customers extends APIResource {
   /**
    * Checks a single entitlement (feature or credit) for a customer or resource.
    * Supports `requestedUsage` and `requestedValues` to evaluate against limits or
-   * enum values. Each call reaches the Stigg API directly, so latency reflects a
-   * network round trip. For entitlement checks on a hot path (e.g. gating a request
-   * in real time), the Stigg Node Server SDK (with its built-in cache) or the
-   * Sidecar will typically respond faster and keep working through brief Stigg
-   * outages; reach for this endpoint when a live HTTP call is the natural fit, such
-   * as from a non-Node backend or a server-side job.
+   * enum values. Pass `dimensions` to also check the governance budgets of the
+   * entities the usage is attributed to; the response then includes `chains`. Each
+   * call reaches the Stigg API directly, so latency reflects a network round trip.
+   * For entitlement checks on a hot path (e.g. gating a request in real time), the
+   * Stigg Node Server SDK (with its built-in cache) or the Sidecar will typically
+   * respond faster and keep working through brief Stigg outages; reach for this
+   * endpoint when a live HTTP call is the natural fit, such as from a non-Node
+   * backend or a server-side job.
    */
   checkEntitlement(
     id: string,
@@ -1689,6 +1691,12 @@ export namespace CustomerCheckEntitlementResponse {
 
     type: 'FEATURE';
 
+    /**
+     * Per-entity rollups, one chain per resolved dimension. Omitted when dimensions
+     * was not provided.
+     */
+    chains?: Array<Array<Feature.Chain>>;
+
     currentUsage?: number;
 
     /**
@@ -1729,6 +1737,39 @@ export namespace CustomerCheckEntitlementResponse {
   }
 
   export namespace Feature {
+    /**
+     * Per-entity governance node — limit and current usage for a single resolved
+     * entity.
+     */
+    export interface Chain {
+      /**
+       * Amount consumed by this entity in the current cadence period.
+       */
+      currentUsage: number;
+
+      /**
+       * External id of the entity within the customer.
+       */
+      entityId: string;
+
+      /**
+       * Whether this node alone permits the requested usage.
+       */
+      isGranted: boolean;
+
+      /**
+       * External ids of the entities this budget is scoped to. Empty (`[]`) is the
+       * node-wide budget; a non-empty set is the dimension-scoped budget that matched
+       * this request — use it to tell apart multiple budgets on the same entity.
+       */
+      scopeEntityIds: Array<string>;
+
+      /**
+       * Hard usage limit for this node; null when the entity has no entity entitlement.
+       */
+      usageLimit: number | null;
+    }
+
     export interface Feature {
       /**
        * The unique reference ID of the entitlement.
@@ -1787,6 +1828,12 @@ export namespace CustomerCheckEntitlementResponse {
      * Timestamp of the last update to the credit usage.
      */
     usageUpdatedAt: string;
+
+    /**
+     * Per-entity rollups, one chain per resolved dimension. Omitted when dimensions
+     * was not provided.
+     */
+    chains?: Array<Array<Credit.Chain>>;
 
     /**
      * Timestamp of the last update to the entitlement grant or configuration.
@@ -1857,6 +1904,39 @@ export namespace CustomerCheckEntitlementResponse {
        * The singular form of the currency unit.
        */
       unitSingular?: string | null;
+    }
+
+    /**
+     * Per-entity governance node — limit and current usage for a single resolved
+     * entity.
+     */
+    export interface Chain {
+      /**
+       * Amount consumed by this entity in the current cadence period.
+       */
+      currentUsage: number;
+
+      /**
+       * External id of the entity within the customer.
+       */
+      entityId: string;
+
+      /**
+       * Whether this node alone permits the requested usage.
+       */
+      isGranted: boolean;
+
+      /**
+       * External ids of the entities this budget is scoped to. Empty (`[]`) is the
+       * node-wide budget; a non-empty set is the dimension-scoped budget that matched
+       * this request — use it to tell apart multiple budgets on the same entity.
+       */
+      scopeEntityIds: Array<string>;
+
+      /**
+       * Hard usage limit for this node; null when the entity has no entity entitlement.
+       */
+      usageLimit: number | null;
     }
 
     /**
@@ -3293,6 +3373,13 @@ export interface CustomerCheckEntitlementParams {
   currencyId?: string;
 
   /**
+   * Query param: Attribution map of the entities the usage is attributed to (e.g.
+   * `dimensions[userId]=u1`). When provided, their governance budgets are checked
+   * too and the response includes `chains`.
+   */
+  dimensions?: { [key: string]: string };
+
+  /**
    * Query param: Feature ID (refId) to check. Mutually exclusive with `currencyId`.
    */
   featureId?: string;
@@ -3335,7 +3422,8 @@ export interface CustomerCheckEntitlementParams {
 
   /**
    * Query param: Credits to reserve (credit entitlements only). The check is decided
-   * and the credits held atomically; `requestedUsage` is ignored.
+   * and the credits held atomically; `requestedUsage` is ignored. Not supported with
+   * `dimensions`.
    */
   reserveAmount?: number;
 
