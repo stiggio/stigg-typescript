@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.0-beta.66](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.65...v0.1.0-beta.66) (2026-10-30)
+
+
+### Features
+
+* **STIGG-9594:** add the v1 governance resources and v1-beta deprecation messages ([6795ab5](https://github.com/stiggio/stigg-typescript/commit/6795ab50826dcef45435dd7559390ff22664e2bf))
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([71e2853](https://github.com/stiggio/stigg-typescript/commit/71e28533fed8299fe9b615cb3c6b49412e5cdd74))
+* sync OpenAPI spec from stigg-api ([4e72b28](https://github.com/stiggio/stigg-typescript/commit/4e72b28883a350e6d8654f3cf96a902623646cdd))
+* sync OpenAPI spec from stigg-api ([a59d9f8](https://github.com/stiggio/stigg-typescript/commit/a59d9f81f29acf1501d04e6c12360fc925501ab5))
+* sync OpenAPI spec from stigg-api ([84321e2](https://github.com/stiggio/stigg-typescript/commit/84321e2277f083bf75fae602461357b436031c12))
+* sync OpenAPI spec from stigg-api ([0eea31b](https://github.com/stiggio/stigg-typescript/commit/0eea31bb721f1ddc7db648280e69344a9d96d492))
+
 ## [0.1.0-beta.65](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.64...v0.1.0-beta.65) (2026-10-29)
 
 
