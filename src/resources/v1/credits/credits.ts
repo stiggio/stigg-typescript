@@ -627,6 +627,12 @@ export interface CreditListLedgerParams extends MyCursorIDPageParams {
   currencyId?: string;
 
   /**
+   * Query param: Filter to events with a timestamp on or before this date, inclusive
+   * (ISO 8601)
+   */
+  endDate?: string;
+
+  /**
    * Query param: Filter by event type(s), comma-separated
    */
   eventType?: string;
@@ -640,6 +646,12 @@ export interface CreditListLedgerParams extends MyCursorIDPageParams {
    * Query param: Filter by resource ID
    */
   resourceId?: string;
+
+  /**
+   * Query param: Filter to events with a timestamp on or after this date, inclusive
+   * (ISO 8601)
+   */
+  startDate?: string;
 
   /**
    * Header param: Account ID — optional when authenticating with a user JWT (Bearer

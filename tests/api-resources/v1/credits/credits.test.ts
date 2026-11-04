@@ -82,10 +82,12 @@ describe('resource credits', () => {
       after: 'after',
       before: 'before',
       currencyId: 'currencyId',
+      endDate: '2019-12-27T18:11:19.117Z',
       eventType: 'eventType',
       limit: 1,
       reservationId: 'x',
       resourceId: 'resourceId',
+      startDate: '2019-12-27T18:11:19.117Z',
       'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
       'X-ENVIRONMENT-ID': 'X-ENVIRONMENT-ID',
     });
