@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.0-beta.67](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.66...v0.1.0-beta.67) (2026-11-04)
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([107b2ab](https://github.com/stiggio/stigg-typescript/commit/107b2ab2212f574e361654d5579679084e063327))
+* sync OpenAPI spec from stigg-api ([997b826](https://github.com/stiggio/stigg-typescript/commit/997b826cffff260dfec8455af66add98bcff3eb3))
+* sync OpenAPI spec from stigg-api ([bbc0fde](https://github.com/stiggio/stigg-typescript/commit/bbc0fde1b3322c9362a287ef5d3ba035a57cbfc5))
+* sync OpenAPI spec from stigg-api ([580c01b](https://github.com/stiggio/stigg-typescript/commit/580c01b7677628a4de54526ee5311a5ee70eba1d))
+* sync OpenAPI spec from stigg-api ([01709f3](https://github.com/stiggio/stigg-typescript/commit/01709f3cb7f5b559d83bc3c971d3638cec97aa16))
+* sync OpenAPI spec from stigg-api ([b6935dd](https://github.com/stiggio/stigg-typescript/commit/b6935ddc332768a5c3577712c539a96004881816))
+* sync OpenAPI spec from stigg-api ([ae5d679](https://github.com/stiggio/stigg-typescript/commit/ae5d679be51edb2171bc071dd8a0b926c0a00aa1))
+* sync OpenAPI spec from stigg-api ([7971baa](https://github.com/stiggio/stigg-typescript/commit/7971baa2ce5a191ee72448824dfcaa0c2382d8f2))
+* sync OpenAPI spec from stigg-api ([645c28f](https://github.com/stiggio/stigg-typescript/commit/645c28f371f0bf0a4915189ea5833708ae448b8a))
+* sync OpenAPI spec from stigg-api ([2627d36](https://github.com/stiggio/stigg-typescript/commit/2627d3605ef7ce9e08a7f97c9cb089b8e938aefa))
+* sync OpenAPI spec from stigg-api ([da2c534](https://github.com/stiggio/stigg-typescript/commit/da2c534029464fe5207990587ef042edddcf2ad9))
+* sync OpenAPI spec from stigg-api ([7ba0718](https://github.com/stiggio/stigg-typescript/commit/7ba07182bf342ab781c51cff1350f18eb2cfd89f))
+* sync OpenAPI spec from stigg-api ([cb920a9](https://github.com/stiggio/stigg-typescript/commit/cb920a9ac5a9e3a13d41856ba5fc3256c90affbe))
+
 ## [0.1.0-beta.66](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.65...v0.1.0-beta.66) (2026-10-30)
 
 
