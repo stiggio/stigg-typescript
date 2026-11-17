@@ -11,7 +11,7 @@ describe('resource grants', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.v1.credits.grants.create({
-      amount: 0,
+      amount: 9007199254,
       currencyId: 'currencyId',
       customerId: 'customerId',
       displayName: 'displayName',
@@ -29,7 +29,7 @@ describe('resource grants', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.v1.credits.grants.create({
-      amount: 0,
+      amount: 9007199254,
       currencyId: 'currencyId',
       customerId: 'customerId',
       displayName: 'displayName',
