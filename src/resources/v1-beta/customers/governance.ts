@@ -86,6 +86,12 @@ export interface GovernanceListResponse {
   entityTypeId: string;
 
   /**
+   * Whether usage past `usageLimit` is allowed and still counted. `null` when the
+   * node has no usage configuration.
+   */
+  hasSoftLimit: boolean | null;
+
+  /**
    * External id of the parent entity in the tree. `null` means the entity is either
    * a root or not yet placed in the hierarchy — placement rides on an assignment, so
    * an entity with no limits set has no parent yet. Both render at the top level;
@@ -100,7 +106,7 @@ export interface GovernanceListResponse {
   scopeEntityIds: Array<string>;
 
   /**
-   * Hard usage limit for this node per cadence period.
+   * Usage limit for this node per cadence period.
    */
   usageLimit: number | null;
 

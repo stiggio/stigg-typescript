@@ -69,6 +69,7 @@ export class Entitlements extends APIResource {
    *           entityId: 'workspace-002',
    *           currencyId: 'cred-type-tokens',
    *           usageLimit: 2000,
+   *           hasSoftLimit: true,
    *           cadence: 'P1M',
    *           parentId: 'workspace-001',
    *           scopeEntityIds: ['user-1'],
@@ -126,6 +127,12 @@ export interface EntitlementListResponse {
    * The entity ID this entity entitlement is attached to
    */
   entityId: string;
+
+  /**
+   * Whether usage past `usageLimit` is allowed and still counted, instead of
+   * blocked.
+   */
+  hasSoftLimit: boolean;
 
   /**
    * Parent entity ID in the hierarchy, or `null` for a root.
@@ -195,6 +202,12 @@ export namespace EntitlementUpsertResponse {
      * The entity ID this entity entitlement is attached to
      */
     entityId: string;
+
+    /**
+     * Whether usage past `usageLimit` is allowed and still counted, instead of
+     * blocked.
+     */
+    hasSoftLimit: boolean;
 
     /**
      * Parent entity ID in the hierarchy, or `null` for a root.
@@ -313,6 +326,12 @@ export namespace EntitlementUpsertParams {
      * Feature ID this entity entitlement grants. Mutually exclusive with `currencyId`.
      */
     featureId?: string;
+
+    /**
+     * Allow usage past `usageLimit` and keep counting it, instead of blocking.
+     * Defaults to `false` on create; omit on update to keep the current value.
+     */
+    hasSoftLimit?: boolean;
 
     /**
      * Parent entity ID in the hierarchy. Omit to leave the current parent untouched (a

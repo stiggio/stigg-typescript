@@ -1861,6 +1861,12 @@ export namespace CustomerCheckEntitlementResponse {
       entityId: string;
 
       /**
+       * Whether this node allows usage past `usageLimit` and keeps counting it. When
+       * `true`, the node does not deny on its own limit.
+       */
+      hasSoftLimit: boolean;
+
+      /**
        * Whether this node alone permits the requested usage.
        */
       isGranted: boolean;
@@ -1873,7 +1879,7 @@ export namespace CustomerCheckEntitlementResponse {
       scopeEntityIds: Array<string>;
 
       /**
-       * Hard usage limit for this node; null when the entity has no entity entitlement.
+       * Usage limit for this node; null when the entity has no entity entitlement.
        */
       usageLimit: number | null;
     }
@@ -2030,6 +2036,12 @@ export namespace CustomerCheckEntitlementResponse {
       entityId: string;
 
       /**
+       * Whether this node allows usage past `usageLimit` and keeps counting it. When
+       * `true`, the node does not deny on its own limit.
+       */
+      hasSoftLimit: boolean;
+
+      /**
        * Whether this node alone permits the requested usage.
        */
       isGranted: boolean;
@@ -2042,7 +2054,7 @@ export namespace CustomerCheckEntitlementResponse {
       scopeEntityIds: Array<string>;
 
       /**
-       * Hard usage limit for this node; null when the entity has no entity entitlement.
+       * Usage limit for this node; null when the entity has no entity entitlement.
        */
       usageLimit: number | null;
     }
