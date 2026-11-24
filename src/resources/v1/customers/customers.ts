@@ -2604,6 +2604,12 @@ export namespace CustomerRetrieveEntitlementsResponse {
      * List of effective feature and credit entitlements
      */
     entitlements: Array<Data.Feature | Data.Credit>;
+
+    /**
+     * When these entitlements last changed, on the same clock as the
+     * entitlementsUpdated event; always set, also when the list is empty.
+     */
+    entitlementsUpdatedAt: string;
   }
 
   export namespace Data {
