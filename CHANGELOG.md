@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.0-beta.69](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.68...v0.1.0-beta.69) (2026-11-25)
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([2f79fa5](https://github.com/stiggio/stigg-typescript/commit/2f79fa5941e93ff0dfa5dba3d389166d95987e02))
+* sync OpenAPI spec from stigg-api ([c3b87dd](https://github.com/stiggio/stigg-typescript/commit/c3b87dd74f9f5f2b59118fea779b1ac7041076ea))
+* sync OpenAPI spec from stigg-api ([88d44ae](https://github.com/stiggio/stigg-typescript/commit/88d44ae1dff52e1c1a324f4c2b98ac43efad62b9))
+
 ## [0.1.0-beta.68](https://github.com/stiggio/stigg-typescript/compare/v0.1.0-beta.67...v0.1.0-beta.68) (2026-11-25)
 
 
