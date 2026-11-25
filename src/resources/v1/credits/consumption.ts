@@ -174,9 +174,17 @@ export namespace ConsumptionConsumeResponse {
      */
     export interface Entity {
       /**
-       * The absolute usage counted against the entitlement
+       * The usage counted against the entitlement, rounded up to a whole number and
+       * never below zero (readable by older SDKs). See currentUsageExact for the exact
+       * value
        */
       currentUsage: number;
+
+      /**
+       * The exact usage counted against the entitlement, to the millionth; negative
+       * after a negative usage report takes it below zero
+       */
+      currentUsageExact: number;
 
       /**
        * The customer whose usage counted towards the entitlement

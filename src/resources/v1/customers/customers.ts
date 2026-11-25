@@ -3512,7 +3512,7 @@ export interface CustomerCheckEntitlementParams {
 
   /**
    * Query param: Requested usage amount to evaluate against the entitlement limit
-   * (numeric features only)
+   * (numeric features only); negative for usage given back
    */
   requestedUsage?: number;
 

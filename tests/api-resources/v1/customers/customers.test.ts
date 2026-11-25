@@ -127,7 +127,7 @@ describe('resource customers', () => {
           currencyId: 'x',
           dimensions: { foo: 'string' },
           featureId: 'x',
-          requestedUsage: 0,
+          requestedUsage: -9007199254740991,
           requestedValues: ['string'],
           reservationExpiresAt: '2019-12-27T18:11:19.117Z',
           reservationId: 'x',

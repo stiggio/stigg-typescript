@@ -30,7 +30,7 @@ describe('resource entitlements', () => {
           currencyId: 'x',
           dimensions: { foo: 'string' },
           featureId: 'x',
-          requestedUsage: 0,
+          requestedUsage: -9007199254740991,
           requestedValues: ['string'],
           resourceId: 'x',
           'X-ACCOUNT-ID': 'X-ACCOUNT-ID',
